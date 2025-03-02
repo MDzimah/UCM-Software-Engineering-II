@@ -1,11 +1,10 @@
-# Java related
-target/**
+*target*
 *.jar
 *.war
 *.ear
 *.class
 
-# eclipse specific
+# eclipse specific git ignore
 *.pydevproject
 .project
 .metadata
@@ -26,4 +25,3 @@ local.properties
 
 # Locally stored "Eclipse launch configurations"
 *.launch
-/bin/
