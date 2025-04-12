@@ -12,6 +12,9 @@ public class FactoriaIntegracion extends FactoriaAbstractaIntegracion {
 
 	@Override
 	public DAOFactura crearDAOFactura() { return new DAOFacturaImp(); }
+	
+	@Override
+	public DAOLineaFactura crearDAOLineaFactura() { return new DAOLineaFacturaImp(); }
 
 	@Override
 	public DAOCliente crearDAOCliente() { return new DAOClienteImp(); }

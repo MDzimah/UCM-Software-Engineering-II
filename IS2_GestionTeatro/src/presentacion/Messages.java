@@ -9,5 +9,11 @@ public class Messages {
 	
 	//Errores de escritura
 	public static final String ERROR_CAMPOS_INCORRECTOS = "Campos incorrectos. Por favor, complete todos los campos.";
+	
+	// Venta realizada con éxito
+	public static final String EX_VENTA_CERRADA = "Se ha cerrado la venta correctamente";
+	
+	// No se ha conseguido cerrar la venta
+	public static final String X_VENTA_CERRADA = "No se ha podido realizar la venta";
 
 }

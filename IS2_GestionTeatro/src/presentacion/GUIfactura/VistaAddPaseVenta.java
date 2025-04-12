@@ -10,14 +10,14 @@ import presentacion.*;
 import presentacion.controlador.Controlador;
 
 @SuppressWarnings("serial")
-public class VistaAPaVenta extends JFrame implements IGUI {
+public class VistaAddPaseVenta extends JFrame implements IGUI {
 	private JTextField tNombre;
 	private JSpinner sFecha;
 	private JTextField tCtdad;
 	private JButton ok;
 	private JButton cancel;
 	
-	public VistaAPaVenta() {
+	public VistaAddPaseVenta() {
 		super("AÑADIR PASE A VENTA");
 		JPanel mainPanel = new JPanel(new BorderLayout());
 		mainPanel.setSize(Constants.getScaledScreenDimension(2, 2));
@@ -65,7 +65,7 @@ public class VistaAPaVenta extends JFrame implements IGUI {
 					Controlador.getInstance().accion(Evento.ANYADIR_PASE_A_VENTA.getind(), tPase);
 				}
 				catch(ArithmeticException ex) {
-					PanelUtils.panelCamposIncorrectos(VistaAPaVenta.this);
+					PanelUtils.panelCamposIncorrectos(VistaAddPaseVenta.this);
 				}
 			}
 			
