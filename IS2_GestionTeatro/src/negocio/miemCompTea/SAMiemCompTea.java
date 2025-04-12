@@ -1,11 +1,11 @@
-package negocio.mieCompTeatral;
+package negocio.miemCompTea;
 
 import java.util.Collection;
 
-public interface SAMieCompTeatral {
-	public int create(TMieCompTeatral tMieCT);
-	public TMieCompTeatral read(int id);
-	public int update(TMieCompTeatral tMieCT);
+public interface SAMiemCompTea {
+	public int create(TMiemCompTea tMieCT);
+	public TMiemCompTea read(int id);
+	public int update(TMiemCompTea tMieCT);
 	public int delete (int id);
-	public Collection<TMieCompTeatral> readAll();
+	public Collection<TMiemCompTea> readAll();
 }

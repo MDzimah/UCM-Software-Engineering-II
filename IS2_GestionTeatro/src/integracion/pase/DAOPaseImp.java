@@ -1,10 +1,10 @@
-package integracion.actuacion;
+package integracion.pase;
 
 import java.util.Collection;
 
 import negocio.obra.TObra;
 
-public class DAOActuacionImp implements DAOActuacion {
+public class DAOPaseImp implements DAOPase {
 
 	@Override
 	public int create(TObra tCliente) {

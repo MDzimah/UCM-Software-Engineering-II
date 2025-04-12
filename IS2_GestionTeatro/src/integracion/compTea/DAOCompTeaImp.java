@@ -1,13 +1,13 @@
-package integracion.compTeatral;
+package integracion.compTea;
 
 import java.util.Collection;
 
-import negocio.compTeatral.TCompTeatral;
+import negocio.compTea.TCompTea;
 
-public class DAOCompTeatralImp implements DAOCompTeatral {
+public class DAOCompTeaImp implements DAOCompTea {
 
 	@Override
-	public int create(TCompTeatral tCompTeatral) {
+	public int create(TCompTea tCompTea) {
 		// TODO Auto-generated method stub
 		return 0;
 	}
@@ -19,19 +19,19 @@ public class DAOCompTeatralImp implements DAOCompTeatral {
 	}
 
 	@Override
-	public TCompTeatral read(int id) {
+	public TCompTea read(int id) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public Collection<TCompTeatral> readAll() {
+	public Collection<TCompTea> readAll() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public int update(TCompTeatral tCompTeatral) {
+	public int update(TCompTea tCompTea) {
 		// TODO Auto-generated method stub
 		return 0;
 	}

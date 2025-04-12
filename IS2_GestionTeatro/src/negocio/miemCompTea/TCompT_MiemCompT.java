@@ -1,5 +1,5 @@
-package negocio.mieCompTeatral;
+package negocio.miemCompTea;
 
-public class TCompT_MieCompT {
+public class TCompT_MiemCompT {
 
 }

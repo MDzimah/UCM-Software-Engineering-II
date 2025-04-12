@@ -1,23 +1,23 @@
-package negocio.mieCompTeatral;
+package negocio.miemCompTea;
 
 import java.util.Collection;
 
-public class SAMieCompTeatralImp implements SAMieCompTeatral {
+public class SAMiemCompTeaImp implements SAMiemCompTea {
 
 	@Override
-	public int create(TMieCompTeatral tMieCT) {
+	public int create(TMiemCompTea tMieCT) {
 		// TODO Auto-generated method stub
 		return 0;
 	}
 
 	@Override
-	public TMieCompTeatral read(int id) {
+	public TMiemCompTea read(int id) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public int update(TMieCompTeatral tMieCT) {
+	public int update(TMiemCompTea tMieCT) {
 		// TODO Auto-generated method stub
 		return 0;
 	}
@@ -29,7 +29,7 @@ public class SAMieCompTeatralImp implements SAMieCompTeatral {
 	}
 
 	@Override
-	public Collection<TMieCompTeatral> readAll() {
+	public Collection<TMiemCompTea> readAll() {
 		// TODO Auto-generated method stub
 		return null;
 	}

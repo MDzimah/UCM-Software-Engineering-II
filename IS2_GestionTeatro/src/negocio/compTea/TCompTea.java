@@ -1,5 +1,5 @@
-package negocio.compTeatral;
+package negocio.compTea;
 
-public class TCompTeatral {
+public class TCompTea {
 
 }

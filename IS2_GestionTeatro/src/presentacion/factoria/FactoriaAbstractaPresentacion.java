@@ -10,5 +10,5 @@ public abstract class FactoriaAbstractaPresentacion {
 		return instancia;
 	}
 	
-	public abstract IGUI createVista(int id);
+	public abstract IGUI createVista(int idEvento);
 }

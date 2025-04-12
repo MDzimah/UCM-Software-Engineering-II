@@ -1,13 +1,13 @@
-package integracion.factura;
+package integracion.taquillero;
 
 import java.util.Collection;
 
-import negocio.factura.TLineaFactura;
+import negocio.taquillero.TTaquillero;
 
-public class DAOLineaFacturaImp implements DAOLineaFactura {
+public class DAOTaquilleroImp implements DAOTaquillero {
 
 	@Override
-	public int create(TLineaFactura tLineaFac) {
+	public int create(TTaquillero tCliente) {
 		// TODO Auto-generated method stub
 		return 0;
 	}
@@ -19,20 +19,22 @@ public class DAOLineaFacturaImp implements DAOLineaFactura {
 	}
 
 	@Override
-	public TLineaFactura read(int id) {
+	public TTaquillero read(int id) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public Collection<TLineaFactura> readAll() {
+	public Collection<TTaquillero> readAll() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public int update(TLineaFactura tLineaFac) {
+	public int update(TTaquillero tCliente) {
 		// TODO Auto-generated method stub
 		return 0;
 	}
+
+	
 }

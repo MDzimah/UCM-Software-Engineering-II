@@ -1,5 +1,5 @@
-package negocio.empleado;
+package negocio.taquillero;
 
-public class TEmpleado {
+public class TTaquillero {
 
 }

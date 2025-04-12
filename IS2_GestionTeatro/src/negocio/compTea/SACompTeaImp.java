@@ -1,23 +1,23 @@
-package negocio.compTeatral;
+package negocio.compTea;
 
 import java.util.Collection;
 
-public class SACompTeatralImp implements SACompTeatral {
+public class SACompTeaImp implements SACompTea {
 
 	@Override
-	public int create(TCompTeatral ct) {
+	public int create(TCompTea ct) {
 		// TODO Auto-generated method stub
 		return 0;
 	}
 
 	@Override
-	public TCompTeatral read(int id) {
+	public TCompTea read(int id) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public int update(TCompTeatral ct) {
+	public int update(TCompTea ct) {
 		// TODO Auto-generated method stub
 		return 0;
 	}
@@ -29,7 +29,7 @@ public class SACompTeatralImp implements SACompTeatral {
 	}
 
 	@Override
-	public Collection<TCompTeatral> readAll() {
+	public Collection<TCompTea> readAll() {
 		// TODO Auto-generated method stub
 		return null;
 	}

@@ -1,13 +1,13 @@
-package integracion.facturas;
+package integracion.factura;
 
 import java.util.Collection;
 
-import negocio.facturas.TFacturas;
+import negocio.factura.TFactura;
 
-public interface DAOFacturas {
-	public int create(TFacturas tFac);
+public interface DAOFactura {
+	public int create(TFactura tFac);
 	public int delete(int id);
-	public TFacturas read(int id);
-	public Collection<TFacturas> readAll();
-	public int update(TFacturas tFac);
+	public TFactura read(int id);
+	public Collection<TFactura> readAll();
+	public int update(TFactura tFac);
 }

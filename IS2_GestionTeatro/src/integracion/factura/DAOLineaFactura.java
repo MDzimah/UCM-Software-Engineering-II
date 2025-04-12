@@ -1,8 +1,8 @@
-package integracion.facturas;
+package integracion.factura;
 
 import java.util.Collection;
 
-import negocio.facturas.TLineaFactura;
+import negocio.factura.TLineaFactura;
 
 public interface DAOLineaFactura {
 	public int create(TLineaFactura tLineaFac);

@@ -1,23 +1,23 @@
-package negocio.facturas;
+package negocio.factura;
 
 import java.util.Collection;
 
-public class SAFacturasImp implements SAFacturas {
+public class SAFacturaImp implements SAFactura {
 	
 	@Override
-	public int create(TFacturas tFac) {
+	public int create(TFactura tFac) {
 		// TODO Auto-generated method stub
 		return 0;
 	}
 
 	@Override
-	public TFacturas read(int id) {
+	public TFactura read(int id) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public int update(TFacturas tFac) {
+	public int update(TFactura tFac) {
 		// TODO Auto-generated method stub
 		return 0;
 	}
@@ -29,7 +29,7 @@ public class SAFacturasImp implements SAFacturas {
 	}
 
 	@Override
-	public Collection<TFacturas> readAll() {
+	public Collection<TFactura> readAll() {
 		// TODO Auto-generated method stub
 		return null;
 	}

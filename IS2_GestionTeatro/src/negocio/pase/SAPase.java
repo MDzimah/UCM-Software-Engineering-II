@@ -1,11 +1,11 @@
-package negocio.actuacion;
+package negocio.pase;
 
 import java.util.Collection;
 
-public interface SAActuacion {
-	public int create(TActuacion a);
-	public TActuacion read(int id);
-	public int update(TActuacion a);
+public interface SAPase {
+	public int create(TPase a);
+	public TPase read(int id);
+	public int update(TPase a);
 	public int delete (int id);
-	public Collection<TActuacion> readAll();
+	public Collection<TPase> readAll();
 }

@@ -1,11 +1,11 @@
-package negocio.compTeatral;
+package negocio.compTea;
 
 import java.util.Collection;
 
-public interface SACompTeatral {
-	public int create(TCompTeatral ct);
-	public TCompTeatral read(int id);
-	public int update(TCompTeatral ct);
+public interface SACompTea {
+	public int create(TCompTea ct);
+	public TCompTea read(int id);
+	public int update(TCompTea ct);
 	public int delete (int id);
-	public Collection<TCompTeatral> readAll();
+	public Collection<TCompTea> readAll();
 }

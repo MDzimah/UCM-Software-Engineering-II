@@ -1,11 +1,11 @@
-package negocio.empleado;
+package negocio.taquillero;
 
 import java.util.Collection;
 
-public interface SAEmpleado {
-	public int create(TEmpleado emp);
-	public TEmpleado read(int id);
-	public int update(TEmpleado emp);
+public interface SATaquillero {
+	public int create(TTaquillero emp);
+	public TTaquillero read(int id);
+	public int update(TTaquillero emp);
 	public int delete (int id);
-	public Collection<TEmpleado> readAll();
+	public Collection<TTaquillero> readAll();
 }

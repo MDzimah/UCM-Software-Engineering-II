@@ -1,13 +1,13 @@
-package integracion.facturas;
+package integracion.factura;
 
 import java.util.Collection;
 
-import negocio.facturas.TFacturas;
+import negocio.factura.TFactura;
 
-public class DAOFacturasImp implements DAOFacturas {
+public class DAOFacturaImp implements DAOFactura {
 
 	@Override
-	public int create(TFacturas tFac) {
+	public int create(TFactura tFac) {
 		// TODO Auto-generated method stub
 		return 0;
 	}
@@ -19,19 +19,19 @@ public class DAOFacturasImp implements DAOFacturas {
 	}
 
 	@Override
-	public TFacturas read(int id) {
+	public TFactura read(int id) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public Collection<TFacturas> readAll() {
+	public Collection<TFactura> readAll() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public int update(TFacturas tFac) {
+	public int update(TFactura tFac) {
 		// TODO Auto-generated method stub
 		return 0;
 	}

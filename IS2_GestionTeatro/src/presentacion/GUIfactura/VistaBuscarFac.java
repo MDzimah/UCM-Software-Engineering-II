@@ -1,11 +1,11 @@
-package presentacion.GUIfacturas;
+package presentacion.GUIfactura;
 
 import javax.swing.JFrame;
 
 import presentacion.IGUI;
 
 @SuppressWarnings("serial")
-public class VistaBuscarFactura extends JFrame implements IGUI {
+public class VistaBuscarFac extends JFrame implements IGUI {
 
 	@Override
 	public void actualizar(int evento, Object datos) {

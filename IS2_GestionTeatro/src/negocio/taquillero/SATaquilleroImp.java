@@ -1,23 +1,23 @@
-package negocio.empleado;
+package negocio.taquillero;
 
 import java.util.Collection;
 
-public class SAEmpleadoImp implements SAEmpleado {
+public class SATaquilleroImp implements SATaquillero {
 
 	@Override
-	public int create(TEmpleado emp) {
+	public int create(TTaquillero emp) {
 		// TODO Auto-generated method stub
 		return 0;
 	}
 
 	@Override
-	public TEmpleado read(int id) {
+	public TTaquillero read(int id) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public int update(TEmpleado emp) {
+	public int update(TTaquillero emp) {
 		// TODO Auto-generated method stub
 		return 0;
 	}
@@ -29,7 +29,7 @@ public class SAEmpleadoImp implements SAEmpleado {
 	}
 
 	@Override
-	public Collection<TEmpleado> readAll() {
+	public Collection<TTaquillero> readAll() {
 		// TODO Auto-generated method stub
 		return null;
 	}

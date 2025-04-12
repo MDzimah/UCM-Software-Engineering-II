@@ -1,13 +1,13 @@
-package integracion.mieCompTeatral;
+package integracion.miemCompTea;
 
 import java.util.Collection;
 
-import negocio.mieCompTeatral.TMieCompTeatral;
+import negocio.miemCompTea.TMiemCompTea;
 
-public interface DAOMieCompTeatral {
-	public int create(TMieCompTeatral tMieCT);
+public interface DAOMiemCompTea {
+	public int create(TMiemCompTea tMieCT);
 	public int delete(int id);
-	public TMieCompTeatral read(int id);
-	public Collection<TMieCompTeatral> readAll();
-	public int update(TMieCompTeatral tMieCT);
+	public TMiemCompTea read(int id);
+	public Collection<TMiemCompTea> readAll();
+	public int update(TMiemCompTea tMieCT);
 }

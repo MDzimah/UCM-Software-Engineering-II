@@ -1,13 +1,13 @@
-package integracion.compTeatral;
+package integracion.compTea;
 
 import java.util.Collection;
 
-import negocio.compTeatral.TCompTeatral;
+import negocio.compTea.TCompTea;
 
-public interface DAOCompTeatral {
-	public int create(TCompTeatral tCompTeatral);
+public interface DAOCompTea {
+	public int create(TCompTea tCompTea);
 	public int delete(int id);
-	public TCompTeatral read(int id);
-	public Collection<TCompTeatral> readAll();
-	public int update(TCompTeatral tCompTeatral);
+	public TCompTea read(int id);
+	public Collection<TCompTea> readAll();
+	public int update(TCompTea tCompTea);
 }

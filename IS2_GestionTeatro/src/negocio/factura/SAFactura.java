@@ -1,11 +1,11 @@
-package negocio.facturas;
+package negocio.factura;
 
 import java.util.Collection;
 
-public interface SAFacturas {
-	public int create(TFacturas tFac);
-	public TFacturas read(int id);
-	public int update(TFacturas tFac);
+public interface SAFactura {
+	public int create(TFactura tFac);
+	public TFactura read(int id);
+	public int update(TFactura tFac);
 	public int delete (int id);
-	public Collection<TFacturas> readAll();
+	public Collection<TFactura> readAll();
 }

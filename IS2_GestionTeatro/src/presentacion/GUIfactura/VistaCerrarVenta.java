@@ -1,4 +1,4 @@
-package presentacion.GUIfacturas;
+package presentacion.GUIfactura;
 
 import javax.swing.JFrame;
 

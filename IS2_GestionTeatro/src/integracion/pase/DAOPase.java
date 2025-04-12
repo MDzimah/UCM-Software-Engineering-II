@@ -1,10 +1,10 @@
-package integracion.actuacion;
+package integracion.pase;
 
 import java.util.Collection;
 
 import negocio.obra.TObra;
 
-public interface DAOActuacion {
+public interface DAOPase {
 	public int create(TObra tObra);
 	public int delete(int id);
 	public TObra read(int id);
