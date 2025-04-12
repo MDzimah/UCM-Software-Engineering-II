@@ -9,14 +9,14 @@ public class PanelUtils {
      * Creates a JPanel containing a JLabel and any type of JComponent arranged horizontally.
      * Adds a horizontal strut for spacing between the label and the component.
      *
-     * @param labelText the text to display on the label
+     * @param label the JLabel to be placed next to the comonent
      * @param component the JComponent to be placed next to the label (could be JTextField, JButton, etc.)
      * @return JPanel containing the JLabel and the JComponent
      */
-    public static JPanel createLabelFieldPair(String labelText, JComponent component) {
+    public static JPanel createLabelFieldPair(JLabel label, JComponent component) {
         JPanel pair = new JPanel();
         pair.setLayout(new BoxLayout(pair, BoxLayout.X_AXIS));
-        pair.add(new JLabel(labelText));
+        pair.add(label);
         pair.add(Box.createHorizontalStrut(10));
         pair.add(component);
         return pair;

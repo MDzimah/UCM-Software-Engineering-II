@@ -38,7 +38,7 @@ public class VistaCerrarVenta extends JFrame implements IGUI {
 	private Collection<TLineaFactura> carrito;
 	
 	public VistaCerrarVenta(TFactura tFactura) {
-		super("Cerrar venta");
+		super("CERRAR VENTA");
 		
 		this.carrito = tFactura.getCarrito();
 		
@@ -68,7 +68,7 @@ public class VistaCerrarVenta extends JFrame implements IGUI {
 				String cliente = tfCliente.getText();
 				String taquillero = tfTaquillero.getText();
 				TFactura factura = new TFactura(cliente, taquillero, carrito);
-				Controlador.getInstance().accion(Evento.CERRAR_VENTA, factura);
+				Controlador.getInstance().accion(Evento.CERRAR_VENTA.getind(), factura);
 			}
 		});
 		botones.add(aceptar);

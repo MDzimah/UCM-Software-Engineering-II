@@ -4,22 +4,19 @@ import java.time.LocalDateTime;
 
 public class TLineaFactura {
 
-	private Integer idLineaFactura;
+	private int idLineaFactura;
 	
-	private Integer idFactura;
-	private Integer idPase;
+	private int idFactura;
+	private int idPase;
 	
 	private String tituloObra;
 	private LocalDateTime fechaPase;
-	private Integer cantidad;
+	private int cantidad;
 	private float precioVenta;
 	
-	public TLineaFactura() {
-		
-		this.cantidad = null;
-	}
+	public TLineaFactura() {}
 	
-	public TLineaFactura(Integer idPase, int cantidad) {
+	public TLineaFactura(int idPase, int cantidad) {
 		this.idPase = idPase;
 		this.cantidad = cantidad;
 	}
@@ -27,7 +24,7 @@ public class TLineaFactura {
 	
 	// - GETTERS AND SETTERS -
 	
-	public void setIdPase(Integer idPase) {
+	public void setIdPase(int idPase) {
 		this.idPase = idPase;
 	}
 	
@@ -51,15 +48,15 @@ public class TLineaFactura {
 	
 	
 
-	public Integer getIdLineaFactura() {
+	public int getIdLineaFactura() {
 		return this.idLineaFactura;
 	}
 	
-	public Integer getIdFactura() {
+	public int getIdFactura() {
 		return this.idFactura;
 	}
 	
-	public Integer getIdPase() {
+	public int getIdPase() {
 		return this.idPase;
 	}
 	

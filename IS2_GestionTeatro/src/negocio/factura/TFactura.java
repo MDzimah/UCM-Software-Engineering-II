@@ -6,37 +6,30 @@ import java.util.Collections;
 
 public class TFactura {
 	
-	private Integer idFactura;
+	private int idFactura;
 	private boolean activo;
 	
-	private Integer idCliente;
-	private Integer idTaquillero;
+	private int idCliente;
+	private int idTaquillero;
 	private LocalDateTime fecha;
 	private Collection<TLineaFactura> carrito;
 	private float importe;
 	
 	
-	public TFactura() {
-		this.idFactura = null;
-		this.activo = false;
-		
-		this.idCliente = null;
-		this.idTaquillero = null;
-		this.fecha = null;
-		this.carrito = null;
+	public TFactura(int idFac) {
+		this.idFactura = idFac;
 	}
 	
-	
-	public TFactura(Integer dniCliente, Integer dniTaquillero, Collection<TLineaFactura> carrito) {
+	//Una factura tiene el dni o el id o ambos???
+	public TFactura(int dniCliente, int dniTaquillero, Collection<TLineaFactura> carrito) {
 		this.idCliente = idCliente;
 		this.idTaquillero = idTaquillero;
 		this.carrito = carrito;
-		
 		this.fecha = LocalDateTime.now();
 	}
 	
 	
-	public void setIdFactura(Integer idFactura) {
+	public void setIdFactura(int idFactura) {
 		this.idFactura = idFactura;
 	}
 	
@@ -46,11 +39,11 @@ public class TFactura {
 	
 	
 	
-	public void setIdCliente(Integer idCliente) {
+	public void setIdCliente(int idCliente) {
 		this.idCliente = idCliente;
 	}
 	
-	public void setIdTaquillero(Integer idTaquillero) {
+	public void setIdTaquillero(int idTaquillero) {
 		this.idTaquillero = idTaquillero;
 	}
 	
@@ -67,7 +60,7 @@ public class TFactura {
 	}
 	
 	
-	public Integer getIdFactura() {
+	public int getIdFactura() {
 		return this.idFactura;
 	}
 	
@@ -75,11 +68,11 @@ public class TFactura {
 		return this.activo;
 	}
 	
-	public Integer getIdCliente() {
+	public int getIdCliente() {
 		return this.idCliente;
 	}
 	
-	public Integer getIdTaquillero() {
+	public int getIdTaquillero() {
 		return this.idTaquillero;
 	}
 	

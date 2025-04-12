@@ -7,8 +7,8 @@ import presentacion.GUIcliente.*;
 public class FactoriaPresentacion extends FactoriaAbstractaPresentacion {
 
 	@Override
-	public IGUI createVista(int idEvento) {
-		switch(Evento.intAEvento(idEvento)) {
+	public IGUI createVista(int id) {
+		switch(Evento.intAEvento(id)) {
 		//Factura
 		case ANYADIR_PASE_A_VENTA: return new VistaAddPaseVenta();
 		case BUSCAR_FACTURA: return new VistaBuscarFac();
