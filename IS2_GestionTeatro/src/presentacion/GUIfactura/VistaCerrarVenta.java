@@ -19,6 +19,7 @@ import negocio.factura.TFactura;
 import negocio.factura.TLineaFactura;
 import presentacion.Evento;
 import presentacion.IGUI;
+import presentacion.Messages;
 import presentacion.controlador.Controlador;
 
 @SuppressWarnings("serial")
@@ -89,10 +90,10 @@ public class VistaCerrarVenta extends JFrame implements IGUI {
 	public void actualizar(int evento, Object datos) {
 		Evento e = Evento.intAEvento(evento);
 		if (e == Evento.RES_CERRAR_VENTA_OK) {
-			JOptionPane.showMessageDialog(this, "Se ha realizado exitosamente la reserva de " + (Integer) datos);
+			JOptionPane.showMessageDialog(this, Messages.EX_VENTA_CERRADA);
 		}
 		else if (e == Evento.RES_CERRAR_VENTA_KO) {
-			JOptionPane.showMessageDialog(this, "NO se ha podido realizar la reserva");
+			JOptionPane.showMessageDialog(this, Messages.X_VENTA_CERRADA);
 		}
 	}
 
