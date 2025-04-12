@@ -1,9 +1,9 @@
 package presentacion.controlador;
 
 public abstract class Controlador {
-	static Controlador instancia = null;
+	private static Controlador instancia = null;
 	
-	static Controlador getInstance() {
+	public static Controlador getInstance() {
 		if (instancia == null) instancia = new ControladorImp();
 		return instancia;
 	}

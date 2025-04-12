@@ -1,0 +1,50 @@
+package presentacion;
+
+import java.awt.FlowLayout;
+
+import javax.swing.*;
+
+public class PanelUtils {
+	/**
+     * Creates a JPanel containing a JLabel and any type of JComponent arranged horizontally.
+     * Adds a horizontal strut for spacing between the label and the component.
+     *
+     * @param labelText the text to display on the label
+     * @param component the JComponent to be placed next to the label (could be JTextField, JButton, etc.)
+     * @return JPanel containing the JLabel and the JComponent
+     */
+    public static JPanel createLabelFieldPair(String labelText, JComponent component) {
+        JPanel pair = new JPanel();
+        pair.setLayout(new BoxLayout(pair, BoxLayout.X_AXIS));
+        pair.add(new JLabel(labelText));
+        pair.add(Box.createHorizontalStrut(10));
+        pair.add(component);
+        return pair;
+    }
+	
+	/**
+	 * Creates a JPanel containing two JButton components arranged horizontally at the center.
+	 * 
+	 * @param button1 the first JButton to be added to the panel
+	 * @param button2 the second JButton to be added to the panel
+	 * @return JPanel containing the two buttons arranged in the center
+	 */
+	public static JPanel createResponsePair(JButton button1, JButton button2) {
+        JPanel pair = new JPanel();
+        pair.setLayout(new FlowLayout(FlowLayout.CENTER));
+        pair.add(button1);
+        pair.add(button2);
+        return pair;
+    }
+	
+	/**
+	 * Displays an error message dialog indicating that some fields are incorrect.
+	 * The dialog will notify the user to complete all fields.
+	 *
+	 * @param parent the parent frame for the dialog, used to center the dialog relative to the parent frame
+	 *               (can be {@code null} if no parent is needed).
+	 */
+	public static void panelCamposIncorrectos(JFrame parent) {
+	    JOptionPane.showMessageDialog(parent, Messages.ERROR_CAMPOS_INCORRECTOS, "Error", JOptionPane.ERROR_MESSAGE);
+	}
+}
