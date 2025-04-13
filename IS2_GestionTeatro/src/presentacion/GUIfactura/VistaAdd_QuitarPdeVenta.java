@@ -8,9 +8,9 @@ import javax.swing.*;
 import eventos.Evento;
 import misc.Pair;
 import misc.PanelUtils;
-import misc.VistaDefault;
 import negocio.factura.TLineaFactura;
 import presentacion.controlador.Controlador;
+import presentacion.superClases.VistaDefault;
 
 @SuppressWarnings("serial")
 public abstract class VistaAdd_QuitarPdeVenta extends VistaDefault {

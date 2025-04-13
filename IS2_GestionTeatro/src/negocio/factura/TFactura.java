@@ -4,6 +4,8 @@ import java.time.LocalDateTime;
 import java.util.Collection;
 import java.util.Collections;
 
+import presentacion.superClases.TablaDefault;
+
 public class TFactura {
 	
 	private int idFactura;
@@ -87,4 +89,7 @@ public class TFactura {
 	public float getImporte() {
 		return this.importe;
 	}
+	
+	@Override
+	public String toString() { return Integer.toString(this.idFactura); }
 }

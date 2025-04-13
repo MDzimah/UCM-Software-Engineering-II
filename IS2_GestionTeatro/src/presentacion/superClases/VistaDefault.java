@@ -1,9 +1,13 @@
-package misc;
+package presentacion.superClases;
 
 import java.awt.BorderLayout;
 import java.util.ArrayList;
 
 import javax.swing.*;
+
+import misc.Constants;
+import misc.Pair;
+import misc.PanelUtils;
 
 
 @SuppressWarnings("serial")
