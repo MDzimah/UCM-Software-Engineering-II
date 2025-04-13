@@ -14,11 +14,16 @@ import presentacion.controlador.Controlador;
 
 @SuppressWarnings("serial")
 public abstract class VistaAdd_QuitarPdeVenta extends VistaDefault {
-	void initComps(JLabel lTituloObra, JTextField tTituloObra, 
-				   JLabel lFecha, JSpinner sFecha,
-				   JLabel lCtdad, JTextField tCtdad,
-				   JButton ok, JButton cancel) 
-	{
+	private JLabel lTituloObra;
+	private JTextField tTituloObra;
+	private JLabel lFecha;
+	private JSpinner sFecha;
+	private JLabel lCtdad;
+	private JTextField tCtdad;
+	private JButton ok;
+	private JButton cancel;
+	
+	void initComps() {
 		lTituloObra = new JLabel("Nombre:");
 		tTituloObra = new JTextField(20);
 		lFecha = new JLabel("Fecha (DD/MM/AAAA) Hora (HH:MM):");
@@ -35,15 +40,15 @@ public abstract class VistaAdd_QuitarPdeVenta extends VistaDefault {
 		labeledComponents.add(new Pair<>(lCtdad, tCtdad));
 		super.initComps(labeledComponents, ok, cancel);
 	}
-	void okAndCancelListener(JTextField tTituloObra, JSpinner sFecha, JTextField tCtdad,
-			   			     JButton ok, JButton cancel, Evento evento) 
+	
+	void okAndCancelListener(Evento evento) 
 	{
 		ok.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				setVisible(false);
 				try {
-					//Nombre
+					//Titulo obra
 					String titObra = tTituloObra.getText();
 					
 					//Fecha

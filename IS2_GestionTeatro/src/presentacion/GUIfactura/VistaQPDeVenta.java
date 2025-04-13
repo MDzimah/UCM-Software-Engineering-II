@@ -1,10 +1,6 @@
 package presentacion.GUIfactura;
 
-import javax.swing.JButton;
-import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-import javax.swing.JSpinner;
-import javax.swing.JTextField;
 
 import eventos.Evento;
 import misc.Messages;
@@ -12,29 +8,12 @@ import presentacion.IGUI;
 
 @SuppressWarnings("serial")
 public class VistaQPDeVenta extends VistaAdd_QuitarPdeVenta implements IGUI {
-	private JLabel lTituloObra;
-	private JTextField tTituloObra;
-	private JLabel lFecha;
-	private JSpinner sFecha;
-	private JLabel lCtdad;
-	private JTextField tCtdad;
-	private JButton ok;
-	private JButton cancel;
-	
 	public VistaQPDeVenta() {
 		this.setTitle("QUITAR PASE DE VENTA");
 		
-		super.initComps(this.lTituloObra, this.tTituloObra, 
-				this.lFecha, this.sFecha, 
-				this.lCtdad, this.tCtdad, 
-				this.ok, this.cancel);
+		super.initComps();
 		
-		super.okAndCancelListener(this.tTituloObra, 
-				this.sFecha, 
-				this.tCtdad, 
-				this.ok, 
-				this.cancel, 
-				Evento.QUITAR_PASE_DE_VENTA);
+		super.okAndCancelListener(Evento.QUITAR_PASE_DE_VENTA);
 		
 		this.setVisible(true);
 		this.setLocationRelativeTo(null);
