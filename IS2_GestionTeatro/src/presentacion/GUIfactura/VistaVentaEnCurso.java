@@ -13,9 +13,9 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
+import eventos.Evento;
 import negocio.factura.TFactura;
 import negocio.factura.TLineaFactura;
-import presentacion.Evento;
 import presentacion.IGUI;
 
 //VENATANA QUE MUESTRA EL CARRITO + 3 BOTONES

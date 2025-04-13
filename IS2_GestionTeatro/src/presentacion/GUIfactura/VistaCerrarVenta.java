@@ -15,11 +15,11 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import eventos.Evento;
+import misc.Messages;
 import negocio.factura.TFactura;
 import negocio.factura.TLineaFactura;
-import presentacion.Evento;
 import presentacion.IGUI;
-import presentacion.Messages;
 import presentacion.controlador.Controlador;
 
 @SuppressWarnings("serial")

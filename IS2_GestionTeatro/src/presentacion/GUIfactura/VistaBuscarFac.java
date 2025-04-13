@@ -5,12 +5,12 @@ import java.awt.event.*;
 
 import javax.swing.*;
 
+import eventos.Evento;
+import misc.Constants;
+import misc.Messages;
+import misc.PanelUtils;
 import negocio.factura.TFactura;
-import presentacion.Constants;
-import presentacion.Evento;
 import presentacion.IGUI;
-import presentacion.Messages;
-import presentacion.PanelUtils;
 import presentacion.controlador.Controlador;
 
 @SuppressWarnings("serial")

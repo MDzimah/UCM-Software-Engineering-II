@@ -1,4 +1,4 @@
-package presentacion;
+package misc;
 
 public class Messages {
 	//Ops. realizadas con éxito

@@ -1,6 +1,6 @@
 package presentacion.controlador;
 
-import presentacion.Evento;
+import eventos.Evento;
 
 public class ControladorImp extends Controlador {
 

@@ -5,8 +5,11 @@ import java.util.*;
 
 import javax.swing.*;
 
+import eventos.Evento;
+import misc.Pair;
+import misc.PanelUtils;
+import misc.VistaDefault;
 import negocio.factura.TLineaFactura;
-import presentacion.*;
 import presentacion.controlador.Controlador;
 
 @SuppressWarnings("serial")
@@ -26,8 +29,11 @@ public abstract class VistaAdd_QuitarPdeVenta extends VistaDefault {
 		ok = new JButton("Aceptar");
 		cancel = new JButton("Cancelar");
 		
-		JPanel infoPanel = super.initComps(lFecha, sFecha, lCtdad, tCtdad, ok, cancel);
-		infoPanel.add(PanelUtils.createLabelComponentPair(lCtdad, tCtdad));
+		ArrayList<Pair<JLabel, JComponent>> labeledComponents = new ArrayList<>();
+		labeledComponents.add(new Pair<>(lTituloObra, tTituloObra));
+		labeledComponents.add(new Pair<>(lFecha, sFecha));
+		labeledComponents.add(new Pair<>(lCtdad, tCtdad));
+		super.initComps(labeledComponents, ok, cancel);
 	}
 	void okAndCancelListener(JTextField tTituloObra, JSpinner sFecha, JTextField tCtdad,
 			   			     JButton ok, JButton cancel, Evento evento) 

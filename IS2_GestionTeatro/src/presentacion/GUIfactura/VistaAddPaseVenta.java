@@ -2,6 +2,8 @@ package presentacion.GUIfactura;
 
 import javax.swing.*;
 
+import eventos.Evento;
+import misc.Messages;
 import presentacion.*;
 
 @SuppressWarnings("serial")

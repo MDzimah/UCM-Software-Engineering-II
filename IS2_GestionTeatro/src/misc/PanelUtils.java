@@ -1,4 +1,4 @@
-package presentacion;
+package misc;
 
 import java.awt.Component;
 import java.awt.FlowLayout;

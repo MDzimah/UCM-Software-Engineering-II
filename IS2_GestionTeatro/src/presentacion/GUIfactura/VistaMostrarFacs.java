@@ -8,11 +8,11 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
-import presentacion.Constants;
-import presentacion.Evento;
+import eventos.Evento;
+import misc.Constants;
+import misc.Messages;
+import misc.PanelUtils;
 import presentacion.IGUI;
-import presentacion.Messages;
-import presentacion.PanelUtils;
 import presentacion.controlador.Controlador;
 
 

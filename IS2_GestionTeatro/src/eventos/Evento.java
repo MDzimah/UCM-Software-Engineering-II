@@ -1,4 +1,4 @@
-package presentacion;
+package eventos;
 
 import java.util.HashMap;
 import java.util.Map;

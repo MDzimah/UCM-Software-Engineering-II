@@ -1,5 +1,6 @@
 package presentacion.factoria;
 
+import eventos.Evento;
 import presentacion.*;
 import presentacion.GUIfactura.*;
 import presentacion.GUIcliente.*;
