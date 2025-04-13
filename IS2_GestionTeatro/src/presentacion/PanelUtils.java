@@ -1,21 +1,25 @@
 package presentacion;
 
+import java.awt.Component;
 import java.awt.FlowLayout;
 
 import javax.swing.*;
 
 public class PanelUtils {
 	/**
-     * Creates a JPanel containing a JLabel and any type of JComponent arranged horizontally.
-     * Adds a horizontal strut for spacing between the label and the component.
-     *
-     * @param label the JLabel to be placed next to the comonent
-     * @param component the JComponent to be placed next to the label (could be JTextField, JButton, etc.)
-     * @return JPanel containing the JLabel and the JComponent
-     */
-    public static JPanel createLabelFieldPair(JLabel label, JComponent component) {
+	 * Creates a JPanel containing a JLabel and any type of JComponent arranged horizontally.
+	 * Adds a horizontal strut for spacing between the label and the component.
+	 * The resulting panel is horizontally centered within any vertically stacked layout (e.g., BoxLayout.Y_AXIS),
+	 * making it suitable for use in vertically structured forms where each row is centered.
+	 *
+	 * @param label the JLabel to be placed next to the component
+	 * @param component the JComponent to be placed next to the label (e.g., JTextField, JButton, etc.)
+	 * @return JPanel containing the horizontally aligned JLabel and JComponent, with center alignment
+	 */
+    public static JPanel createLabelComponentPair(JLabel label, JComponent component) {
         JPanel pair = new JPanel();
         pair.setLayout(new BoxLayout(pair, BoxLayout.X_AXIS));
+        pair.setAlignmentX(Component.CENTER_ALIGNMENT);
         pair.add(label);
         pair.add(Box.createHorizontalStrut(10));
         pair.add(component);

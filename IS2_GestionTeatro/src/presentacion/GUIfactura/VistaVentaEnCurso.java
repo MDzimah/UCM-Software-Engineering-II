@@ -42,6 +42,13 @@ public class VistaVentaEnCurso extends JFrame implements IGUI {
 		super("Nueva venta");
 		this.setLayout(new BoxLayout(vistaCarrito, BoxLayout.Y_AXIS));
 		
+		//Aquí no se pasa al controlador un TFactura, tengo apuntado q hay q pasar un TDatosVenta (un transfer q no se ha creado todavía)
+		/*
+		TDatosVenta tiene:
+		- idCliente
+		- idVenta
+		- Colleción de TLineaFactura
+		*/
 		this.tFactura = new TFactura();
 		
 		anyadirPase = new JButton("Añadir pase");

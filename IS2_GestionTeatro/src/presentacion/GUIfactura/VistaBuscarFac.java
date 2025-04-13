@@ -31,7 +31,7 @@ public class VistaBuscarFac extends JFrame implements IGUI {
 		
 		JPanel infoPanel = new JPanel();
 		infoPanel.setLayout(new BoxLayout(infoPanel, BoxLayout.Y_AXIS));
-		infoPanel.add(PanelUtils.createLabelFieldPair(this.lIdFac, this.tIdFac));
+		infoPanel.add(PanelUtils.createLabelComponentPair(this.lIdFac, this.tIdFac));
 		mainPanel.add(infoPanel, BorderLayout.CENTER);
 		
 		JPanel responsePanel = PanelUtils.createResponsePair(buscar, cancel);

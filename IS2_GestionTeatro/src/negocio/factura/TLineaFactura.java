@@ -24,6 +24,12 @@ public class TLineaFactura {
 	
 	// - GETTERS AND SETTERS -
 	
+	public TLineaFactura(String titObra, LocalDateTime fechaPase, int ctdad) {
+		this.tituloObra = titObra;
+		this.fechaPase = fechaPase;
+		this.cantidad = ctdad;
+	}
+
 	public void setIdPase(int idPase) {
 		this.idPase = idPase;
 	}

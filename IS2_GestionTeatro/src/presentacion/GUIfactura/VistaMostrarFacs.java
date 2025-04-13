@@ -1,6 +1,5 @@
 package presentacion.GUIfactura;
 
-import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -13,6 +12,7 @@ import presentacion.Constants;
 import presentacion.Evento;
 import presentacion.IGUI;
 import presentacion.Messages;
+import presentacion.PanelUtils;
 import presentacion.controlador.Controlador;
 
 
@@ -25,15 +25,16 @@ public class VistaMostrarFacs extends JFrame implements IGUI {
 	
 	public VistaMostrarFacs() {
 		super("MOSTRAR FACTURAS");
-		JPanel responsePanel = new JPanel(new BorderLayout());
-		responsePanel.setSize(Constants.getScaledScreenDimension(2, 2));
 		this.mostrar = new JButton("Mostrar");
 		this.cancel = new JButton("Cancelar");
+		JPanel responsePanel = PanelUtils.createResponsePair(this.mostrar, this.cancel);
+		responsePanel.setSize(Constants.getScaledScreenDimension(2, 2));
 		
 		mostrar.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				Controlador.getInstance().accion(Evento.MOSTRAR_FACTURAS.getind(), ...);
+				Controlador.getInstance().accion(Evento.MOSTRAR_FACTURAS.getind(), null);
+				dispose();
 			}
 		});
 		
