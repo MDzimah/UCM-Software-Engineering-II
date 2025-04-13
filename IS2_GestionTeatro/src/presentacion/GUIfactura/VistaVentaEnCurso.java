@@ -42,13 +42,6 @@ public class VistaVentaEnCurso extends JFrame implements IGUI {
 		super("Nueva venta");
 		this.setLayout(new BoxLayout(vistaCarrito, BoxLayout.Y_AXIS));
 		
-		//Aquí no se pasa al controlador un TFactura, tengo apuntado q hay q pasar un TDatosVenta (un transfer q no se ha creado todavía)
-		/*
-		TDatosVenta tiene:
-		- idCliente
-		- idVenta
-		- Colleción de TLineaFactura
-		*/
 		this.tFactura = new TFactura();
 		
 		anyadirPase = new JButton("Añadir pase");
@@ -96,9 +89,8 @@ public class VistaVentaEnCurso extends JFrame implements IGUI {
 	}
 
 	@Override
-	public void actualizar(int evento, Object datos) {
-		Evento e = Evento.intAEvento(evento);
-		if (e == Evento.RES_ANYADIR_PASE_A_VENTA_OK) {
+	public void actualizar(Evento evento, Object datos) {
+		if (evento == Evento.RES_ANYADIR_PASE_A_VENTA_OK) {
 			cargarVistaCarrito();
 		}
 	}
@@ -114,7 +106,7 @@ public class VistaVentaEnCurso extends JFrame implements IGUI {
 	
 	private JLabel crearVistaPase(TLineaFactura tLineaFactura) {
 		JLabel label = new JLabel();
-		LocalDateTime date = tLineaFactura.getFecha();
+		LocalDateTime date = tLineaFactura.getFechaPase();
 		String fecha = date.getHour() + ":" + date.getMinute() + " - " + date.getDayOfMonth() + "/" + date.getMonthValue() + "/" + date.getYear();
 		label.setText(tLineaFactura.getCantidad() + " X " + tLineaFactura.getTituloObra() + " | " + fecha);
 		return label;

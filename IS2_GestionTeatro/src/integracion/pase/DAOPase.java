@@ -2,12 +2,12 @@ package integracion.pase;
 
 import java.util.Collection;
 
-import negocio.obra.TObra;
+import negocio.pase.TPase;
 
 public interface DAOPase {
-	public int create(TObra tObra);
+	public int create(TPase tObra);
 	public int delete(int id);
-	public TObra read(int id);
-	public Collection<TObra> readAll();
-	public int update(TObra tObra);
+	public TPase read(int id);
+	public Collection<TPase> readAll();
+	public int update(TPase tObra);
 }

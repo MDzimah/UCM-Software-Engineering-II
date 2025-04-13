@@ -14,71 +14,49 @@ public class TLineaFactura {
 	private int cantidad;
 	private float precioVenta;
 	
-	public TLineaFactura() {}
 	
 	public TLineaFactura(int idPase, int cantidad) {
 		this.idPase = idPase;
 		this.cantidad = cantidad;
 	}
 	
-	
-	// - GETTERS AND SETTERS -
-	
 	public TLineaFactura(String titObra, LocalDateTime fechaPase, int ctdad) {
 		this.tituloObra = titObra;
 		this.fechaPase = fechaPase;
 		this.cantidad = ctdad;
 	}
+	
+	
+	/*--GETTERS--*/
 
-	public void setIdPase(int idPase) {
-		this.idPase = idPase;
-	}
+	public int getIdLineaFactura() { return this.idLineaFactura; }
+	
+	public int getIdFactura() {	return this.idFactura; }
+	
+	public int getIdPase() { return this.idPase; }
+	
+	public String getTituloObra() {	return this.tituloObra; }
+	
+	public LocalDateTime getFechaPase() { return this.fechaPase; }
+	
+	public int getCantidad() { return this.cantidad; }
+	
+	public float getPrecioVenta() {	return this.precioVenta; }
 	
 	
+	/*--SETTERS--*/
 	
-	public void setTituloObra(String titulo) {
-		this.tituloObra = titulo;
-	}
+	public void setIdLineaFactura(int idLineaFactura) { this.idLineaFactura = idLineaFactura; }
 	
-	public void setFechaPase(LocalDateTime fecha) {
-		this.fechaPase = fecha;
-	}
+	public void setIdFactura(int idFactura) { this.idFactura = idFactura; }
 	
-	public void setCantidad(int cantidad) {
-		this.cantidad = cantidad;
-	}
+	public void setIdPase(int idPase) {	this.idPase = idPase; }
 	
-	public void setPrecioVenta(float importe) {
-		this.precioVenta = importe;
-	}
+	public void setTituloObra(String titulo) { this.tituloObra = titulo; }
 	
+	public void setFechaPase(LocalDateTime fecha) {	this.fechaPase = fecha;	}
 	
-
-	public int getIdLineaFactura() {
-		return this.idLineaFactura;
-	}
+	public void setCantidad(int cantidad) {	this.cantidad = cantidad; }
 	
-	public int getIdFactura() {
-		return this.idFactura;
-	}
-	
-	public int getIdPase() {
-		return this.idPase;
-	}
-	
-	public String getTituloObra() {
-		return this.tituloObra;
-	}
-	
-	public LocalDateTime getFechaPase() {
-		return this.fechaPase;
-	}
-	
-	public int getCantidad() {
-		return this.cantidad;
-	}
-	
-	public float getPrecioVenta() {
-		return this.precioVenta;
-	}
+	public void setPrecioVenta(float importe) {	this.precioVenta = importe;	}
 }

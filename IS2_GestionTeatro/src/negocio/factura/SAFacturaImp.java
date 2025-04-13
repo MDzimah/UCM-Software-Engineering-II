@@ -27,9 +27,10 @@ public class SAFacturaImp implements SAFactura {
 		List<TLineaFactura> carritoFinal = new ArrayList<>();
 		
 		DAOCliente daoCliente = FactoriaAbstractaIntegracion.getInstance().crearDAOCliente();
-		TCliente leidoCliente = daoCliente.readByDNI(tFactura.getCliente());
+		
+		TCliente leidoCliente = daoCliente.read(tFactura.getIdCliente());
 		DAOTaquillero daoTaquillero = FactoriaAbstractaIntegracion.getInstance().crearDAOTaquillero();
-		TTaquillero leidoTaquillero = daoTaquillero.readById(tFactura.getTaquillero());
+		TTaquillero leidoTaquillero = daoTaquillero.read(tFactura.getIdTaquillero());
 		
 		// Comprobamos excepciones
 		if (leidoCliente == null) {
@@ -44,7 +45,7 @@ public class SAFacturaImp implements SAFactura {
 		// Cliente y Taquillero existen
 		if (leidoCliente.getActivo()) {
 			for (TLineaFactura tLinea : tFactura.getCarrito()) {
-				TPase tPase = daoPase.read(tLinea.getPase());
+				TPase tPase = daoPase.read(tLinea.getIdPase());
 				if (tPase != null) {
 					SAPase saPase = FactoriaAbstractaNegocio.getInstance().crearSAPase();
 					int cantidadVendida = saPase.comprar(tPase, tLinea);
@@ -57,8 +58,8 @@ public class SAFacturaImp implements SAFactura {
 			}
 			if (carritoFinal.size() > 0) {
 				tFactura.setCarrito(carritoFinal);
-				DAOFactura daoFactura = FactoriaAbstractaIntegracion.getInstance().crearDAOFactura();
-				id = daoFactura.create(tFactura);
+				DAOFactura daoFac = FactoriaAbstractaIntegracion.getInstance().crearDAOFactura();
+				id = daoFac.create(tFactura);
 			}
 		}
 		
@@ -67,8 +68,8 @@ public class SAFacturaImp implements SAFactura {
 
 	@Override
 	public TFactura read(int id) {
-		DAOFactura daoFactura = FactoriaAbstractaIntegracion.getInstance().crearDAOFactura();
-		return daoFactura.read(id);
+		DAOFactura daoFac = FactoriaAbstractaIntegracion.getInstance().crearDAOFactura();
+		return daoFac.read(id);
 	}
 
 	@Override
@@ -79,14 +80,14 @@ public class SAFacturaImp implements SAFactura {
 
 	@Override
 	public int delete(int id) {
-		// TODO Auto-generated method stub
-		return 0;
+		DAOFactura daoFac = FactoriaAbstractaIntegracion.getInstance().crearDAOFactura();
+		return daoFac.delete(id);
 	}
 
 	@Override
 	public Collection<TFactura> readAll() {
-		DAOFactura daoFactura = FactoriaAbstractaIntegracion.getInstance().crearDAOFactura();
-		return daoFactura.readAll();
+		DAOFactura daoFac = FactoriaAbstractaIntegracion.getInstance().crearDAOFactura();
+		return daoFac.readAll();
 	}
 
 }

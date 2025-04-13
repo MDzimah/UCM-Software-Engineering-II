@@ -8,6 +8,7 @@ import javax.swing.*;
 import eventos.Evento;
 import misc.Pair;
 import misc.PanelUtils;
+import negocio.factura.TFactura;
 import negocio.factura.TLineaFactura;
 import presentacion.controlador.Controlador;
 import presentacion.superClases.VistaDefault;
@@ -41,7 +42,7 @@ public abstract class VistaAdd_QuitarPdeVenta extends VistaDefault {
 		super.initComps(labeledComponents, ok, cancel);
 	}
 	
-	void okAndCancelListener(Evento evento) 
+	void okAndCancelListener(TFactura tFac, Evento evento) 
 	{
 		ok.addActionListener(new ActionListener() {
 			@Override
@@ -59,9 +60,11 @@ public abstract class VistaAdd_QuitarPdeVenta extends VistaDefault {
 					int ctdad = Integer.valueOf(tCtdad.getText());
 					if (ctdad <= 0) throw new ArithmeticException();
 					
-					TLineaFactura tLf= new TLineaFactura(titObra, fechaPase, ctdad);
 					
-					Controlador.getInstance().accion(evento.getind(), tLf);
+					TLineaFactura nuevatLf= new TLineaFactura(titObra, fechaPase, ctdad);
+					
+					Pair<TFactura, TLineaFactura> facYNuevaLinea = new Pair<TFactura, TLineaFactura>(tFac, nuevatLf);
+					Controlador.getInstance().accion(evento, facYNuevaLinea);
 				}
 				catch(ArithmeticException ex) {
 					PanelUtils.panelCamposIncorrectos(VistaAdd_QuitarPdeVenta.this);

@@ -42,7 +42,7 @@ public class VistaBuscarFac extends JFrame implements IGUI {
 			public void actionPerformed(ActionEvent e) {
 				try {
 					TFactura tFac = new TFactura(Integer.valueOf(tIdFac.getText()));
-					Controlador.getInstance().accion(Evento.BUSCAR_FACTURA.getind(), tFac);
+					Controlador.getInstance().accion(Evento.BUSCAR_FACTURA, tFac);
 				}
 				catch(ArithmeticException ex) {
 					PanelUtils.panelCamposIncorrectos(VistaBuscarFac.this);
@@ -60,12 +60,13 @@ public class VistaBuscarFac extends JFrame implements IGUI {
 		this.setLocationRelativeTo(null);
 	}
 	@Override
-	public void actualizar(int evento, Object datos) {
-		Evento e = Evento.intAEvento(evento);
-		if (e == Evento.RES_BUSCAR_FACTURA_OK) {
-			//Muestra la factura buscada supongo
+	public void actualizar(Evento evento, Object datos) {
+		if (evento == Evento.RES_BUSCAR_FACTURA_OK) {
+			//Mostrar factura buscada
 		}
-		else if(e == Evento.RES_BUSCAR_FACTURA_KO) JOptionPane.showMessageDialog(this, Messages.X_BUSCAR_FACTURA);
+		else if(evento == Evento.RES_BUSCAR_FACTURA_KO) {
+			JOptionPane.showMessageDialog(this, Messages.X_BUSCAR_FACTURA.formatted((String) datos));
+		}
 	}
 
 }

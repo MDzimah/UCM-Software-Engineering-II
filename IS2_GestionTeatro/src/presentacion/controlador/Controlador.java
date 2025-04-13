@@ -1,5 +1,7 @@
 package presentacion.controlador;
 
+import eventos.Evento;
+
 public abstract class Controlador {
 	private static Controlador instancia = null;
 	
@@ -8,5 +10,5 @@ public abstract class Controlador {
 		return instancia;
 	}
 	
-	public abstract void accion(int evento, Object datos);
+	public abstract void accion(Evento evento, Object datos);
 }

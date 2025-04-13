@@ -71,7 +71,7 @@ public class VistaCerrarVenta extends JFrame implements IGUI {
 				String cliente = tfCliente.getText();
 				String taquillero = tfTaquillero.getText();
 				TFactura factura = new TFactura(cliente, taquillero, carrito);
-				Controlador.getInstance().accion(Evento.CERRAR_VENTA.getind(), factura);
+				Controlador.getInstance().accion(Evento.CERRAR_VENTA, factura);
 			}
 		});
 		botones.add(aceptar);
@@ -90,12 +90,11 @@ public class VistaCerrarVenta extends JFrame implements IGUI {
 	}
 	
 	@Override
-	public void actualizar(int evento, Object datos) {
-		Evento e = Evento.intAEvento(evento);
-		if (e == Evento.RES_CERRAR_VENTA_OK) {
+	public void actualizar(Evento evento, Object datos) {
+		if (evento == Evento.RES_CERRAR_VENTA_OK) {
 			JOptionPane.showMessageDialog(this, Messages.EX_VENTA_CERRADA);
 		}
-		else if (e == Evento.RES_CERRAR_VENTA_KO) {
+		else if (evento == Evento.RES_CERRAR_VENTA_KO) {
 			JOptionPane.showMessageDialog(this, Messages.X_VENTA_CERRADA);
 		}
 	}

@@ -2,7 +2,6 @@ package presentacion.GUIfactura;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.Collection;
 import java.util.List;
 
 import javax.swing.JButton;
@@ -14,7 +13,6 @@ import eventos.Evento;
 import misc.Constants;
 import misc.Messages;
 import misc.PanelUtils;
-import negocio.factura.TFactura;
 import presentacion.IGUI;
 import presentacion.controlador.Controlador;
 import presentacion.superClases.TablaDefault;
@@ -37,7 +35,7 @@ public class VistaMostrarFacs extends JFrame implements IGUI {
 		mostrar.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				Controlador.getInstance().accion(Evento.MOSTRAR_FACTURAS.getind(), null);
+				Controlador.getInstance().accion(Evento.MOSTRAR_FACTURAS, null);
 				dispose();
 			}
 		});
@@ -49,14 +47,15 @@ public class VistaMostrarFacs extends JFrame implements IGUI {
 	}
 	
 	@Override
-	public void actualizar(int evento, Object datos) {
-		Evento e = Evento.intAEvento(evento);
-		if (e == Evento.RES_MOSTRAR_FACTURAS_OK) {
+	public void actualizar(Evento evento, Object datos) {
+		if (evento == Evento.RES_MOSTRAR_FACTURAS_OK) {
+			@SuppressWarnings("unchecked")
 			List<Object[]> data = (List<Object[]>)datos;
-			String[] nomCols = {"ID", "TAQUILLERO", "PASES"};
+			String[] nomCols = {"ID", "TAQUILLERO", "PASES"}; //MÁS COSAS CREO
 			TablaDefault tb = new TablaDefault(nomCols, data, "FACTURAS");
+			tb.setVisible(true);
 		}
-		else if(e == Evento.RES_MOSTRAR_FACTURAS_KO) JOptionPane.showMessageDialog(this, Messages.X_MOSTRAR_FACTURAS);
+		else if(evento == Evento.RES_MOSTRAR_FACTURAS_KO) JOptionPane.showMessageDialog(this, Messages.X_MOSTRAR_FACTURAS);
 	}
 
 }

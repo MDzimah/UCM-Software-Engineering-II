@@ -1,87 +1,68 @@
 package eventos;
 
-import java.util.HashMap;
-import java.util.Map;
-
 public enum Evento {
+	//ORDEN ALFABÉTICO
 	
-
-	//Orden alfabético
-	//Se hace en rangos para que la inserción de cosas nuevas se pueda realizar preservando orden alfabético
+	/*--MÉTODOS--*/
 	
-	/*----MÉTODOS----*/
+	//Factura
 	
-	//Factura [0 - 100)
-	
-	ANYADIR_PASE_A_VENTA(0), 
-	BUSCAR_FACTURA(10),
-	CERRAR_VENTA(20), 
-	MOSTRAR_FACTURAS(30), 
-	QUITAR_PASE_DE_VENTA(40),
+	ANYADIR_PASE_A_VENTA, 
+	BUSCAR_FACTURA,
+	CERRAR_VENTA, 
+	MOSTRAR_FACTURAS, 
+	QUITAR_PASE_DE_VENTA,
 	
 	
-	//Cliente [100 - 200)
+	//Cliente
 	
-	ALTA_CLIENTE(100), 
-	BUSCAR_CLIENTE(110), 
-	ELIMINAR_CLIENTE(120), 
-	MOSTRAR_CLIENTE(130), 
-	ACTUALIZAR_CLIENTE(140),
+	ALTA_CLIENTE, 
+	BUSCAR_CLIENTE, 
+	ELIMINAR_CLIENTE, 
+	MOSTRAR_CLIENTE, 
+	ACTUALIZAR_CLIENTE,
 	
-	//Taquillero [200 - 300)
-	
-	
-	//Obra [300 - 400)
+	//Taquillero
 	
 	
-	//CompTea [400 - 500)
+	//Obra
 	
 	
-	//MiemCompTea [500 - 600)
+	//CompTea
+	
+	
+	//MiemCompTea
 	
 	
 	
-	/*----RESPUESTAS----*/
+	/*--RESPUESTAS--*/
 	
-	//Factura [700 - 800)
+	//Factura
 	
-	RES_ANYADIR_PASE_A_VENTA_OK(700), 
-	RES_ANYADIR_PASE_A_VENTA_KO(710),
-	RES_BUSCAR_FACTURA_OK(720), 
-	RES_BUSCAR_FACTURA_KO(730),
-	RES_CERRAR_VENTA_OK(740), 
-	RES_CERRAR_VENTA_KO(750),
-	RES_MOSTRAR_FACTURAS_OK(760), 
-	RES_MOSTRAR_FACTURAS_KO(770),
-	RES_QUITAR_PASE_DE_VENTA_OK(780), 
-	RES_QUITAR_PASE_DE_VENTA_KO(790),
+	RES_ANYADIR_PASE_A_VENTA_OK, 
+	RES_ANYADIR_PASE_A_VENTA_KO,
+	RES_BUSCAR_FACTURA_OK, 
+	RES_BUSCAR_FACTURA_KO,
+	RES_CERRAR_VENTA_OK, 
+	RES_CERRAR_VENTA_KO,
+	RES_MOSTRAR_FACTURAS_OK, 
+	RES_MOSTRAR_FACTURAS_KO,
+	RES_QUITAR_PASE_DE_VENTA_OK, 
+	RES_QUITAR_PASE_DE_VENTA_KO,
 	
-	//Cliente [800 - 900)
+	//Cliente
 	
-	RES_ALTA_CLIENTE_OK(800), 
-	RES_ALTA_CLIENTE_KO(810);
+	RES_ALTA_CLIENTE_OK, 
+	RES_ALTA_CLIENTE_KO;
 	
-	//Taquillero [900 - 1000)
-	
-	
-	//Obra [1000 - 1200)
+	//Taquillero
 	
 	
-	//CompTea [1200 - 1300)
+	//Obra
 	
 	
-	//MiemCompTea [1300 - 1400)
+	//CompTea
 	
-	private final int indEvento;
 	
-	private static final Map<Integer, Evento> map = new HashMap<>();
-	
-	//Cuando se llama al class load de Evento, meter todos los valores en el mapa
-	static { for (Evento e : Evento.values()) map.put(e.indEvento, e); }
-	
-	Evento(int ind) { this.indEvento = ind; }
-	
-	public int getind() { return indEvento; }
-	
-	public static Evento intAEvento(int indEvento) { return map.get(indEvento); }
+	//MiemCompTea
 }

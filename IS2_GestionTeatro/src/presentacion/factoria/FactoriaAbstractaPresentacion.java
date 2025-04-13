@@ -1,5 +1,6 @@
 package presentacion.factoria;
 
+import eventos.Evento;
 import presentacion.IGUI;
 
 public abstract class FactoriaAbstractaPresentacion {
@@ -10,5 +11,5 @@ public abstract class FactoriaAbstractaPresentacion {
 		return instancia;
 	}
 	
-	public abstract IGUI createVista(int idEvento);
+	public abstract IGUI createVista(Evento evento);
 }
