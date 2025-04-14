@@ -1,40 +1,28 @@
-# Proyecto IS2
+# IS2 Project
 
-## Descripción General
+## General Description
 
-El objetivo de este proyecto es construir una aplicación de gestión de la
-información con una arquitectura de 3 capas: Presentación, Negocio e
-Integración.
+The goal of this project is to build an information management application using a 3-layer architecture: Presentation, Business, and Integration.
 
+## Constraints
 
-## Restricciones
+- It is mandatory to implement the project using the architectural and design patterns explained in class, applied correctly.
+- The language used to describe the application's design must be *UML 2.x*, and the modeling tool must be *Modelio 5.*
+- The application must be a *desktop* application (not web-based).
+- The implementation language must be *Java*, and the development environment must be *Eclipse.*
+- Data persistence must be done in *JSON* format.
+- The code must include *JUnit* tests.
+- It is recommended to use a version control system for development. If used, it should be *Git and GitHub.*
 
-- Es obligatorio realizar el proyecto con los patrones arquitectónicos y de
-    diseño explicados en clase correctamente aplicados.
-- El lenguaje para caracterizar el diseño de la aplicación debe ser *UML 2.x*.
-    y la herramienta para el modelado *Modelio 5.*
-- La aplicación debe ser de *escritorio* (no web).
-- El lenguaje de implementación debe ser *Java* y el entorno de programación
-    *Eclipse.*
-- La persistencia de los datos debe hacerse en formato *JSON.*
-- El código debe incluir pruebas *JUnit.*
-- Es recomendable usar un sistema de control de versiones para
-    desarrolladores. Si lo usáis utilizad *Git y GitHub.*
+## Starting the Project
 
+- Choose a type of billing (or ticket-generating) management project.  
+  Example: Bakery Management.
+- Domain model with class diagram.
+- Identified subsystems (all projects must include the Invoices subsystem).
+- For the subsystems indicated in class, include their U.C.D. and specify each U.C. with an activity diagram (in Modelio 5.4).
+- Throughout the course, additional diagrams related to the IS2 course will be required: class diagrams, sequence diagrams...
 
-## Iniciando el proyecto
+## Package Hierarchy
 
-- Elegir tipo proyecto de gestión que facture (o que genere un ticket).
-    Ejemplo: Gestión Pastelería.
-- Modelo del dominio con diagrama de clases.
-- Subsistemas identificados (todos los proyectos tienen que tener el
-    subsistema Facturas).
-- Para los subsistemas que se indiquen en clase, su D.C.U. y cada C.U.
-    especificarlo con diagrama de actividades (en Modelio 5.4).
-- A lo largo del curso se pedirán más diagramas ya correspondientes a
-    la asignatura IS2: diagramas de clase, secuencia...
-
-
-## Jerarquía de paquetes
-
-Los subsistemas se subdividen y se organizan en *3 capas/paquetes: integración, negocio y presentación.*
+Subsystems must be subdivided and organized into *3 layers/packages: integration, business, and presentation.*
