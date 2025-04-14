@@ -33,6 +33,7 @@ public class ControladorImp extends Controlador {
 				TFactura tFac = facYNuevaLinea.getFirst();
 				
 				//SET ID FACTURA?????? No se hace lo de la fac nueva al cerrarVenta??? newTlf.setIdFactura(...)
+				//Quizás JAIME (PARA QUE LO VEAS) cuando cierras venta tienes q hacer un método q recorra el carrito y de a todos los TLineaFactura los id de su factura
 				newTlf.setIdLineaFactura(tFac.addToCarrito(newTlf));
 				
 				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_ANYADIR_PASE_A_VENTA_OK, null);

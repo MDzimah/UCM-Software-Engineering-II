@@ -1,7 +1,7 @@
 package eventos;
 
 public enum Evento {
-	//ORDEN ALFABÉTICO
+	//ORDEN ALFABÉTICO EN MÉTODOS/RESPUESTAS
 	
 	/*--MÉTODOS--*/
 	
@@ -21,6 +21,10 @@ public enum Evento {
 	ELIMINAR_CLIENTE, 
 	MOSTRAR_CLIENTE, 
 	ACTUALIZAR_CLIENTE,
+	
+	
+	//Pase
+	
 	
 	//Taquillero
 	
@@ -50,10 +54,15 @@ public enum Evento {
 	RES_QUITAR_PASE_DE_VENTA_OK, 
 	RES_QUITAR_PASE_DE_VENTA_KO,
 	
+	
 	//Cliente
 	
 	RES_ALTA_CLIENTE_OK, 
 	RES_ALTA_CLIENTE_KO;
+	
+	
+	//Pase
+	
 	
 	//Taquillero
 	

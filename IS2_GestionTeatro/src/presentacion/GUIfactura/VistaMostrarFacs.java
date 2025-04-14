@@ -2,7 +2,7 @@ package presentacion.GUIfactura;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.List;
+import java.util.Collection;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -17,8 +17,6 @@ import presentacion.IGUI;
 import presentacion.controlador.Controlador;
 import presentacion.superClases.TablaDefault;
 
-
-//TABLA CON TODOS LOS DATOS EN UNA TABLA DE CADA FACTURA (id, fecha, importe, etc.)
 
 @SuppressWarnings("serial")
 public class VistaMostrarFacs extends JFrame implements IGUI {
@@ -50,9 +48,9 @@ public class VistaMostrarFacs extends JFrame implements IGUI {
 	public void actualizar(Evento evento, Object datos) {
 		if (evento == Evento.RES_MOSTRAR_FACTURAS_OK) {
 			@SuppressWarnings("unchecked")
-			List<Object[]> data = (List<Object[]>)datos;
-			String[] nomCols = {"ID", "TAQUILLERO", "PASES"}; //MÁS COSAS CREO
-			TablaDefault tb = new TablaDefault(nomCols, data, "FACTURAS");
+			Collection<Object> castedData = (Collection<Object>)datos;
+			String[] nomCols = {"ID","ID CLIENTE", "ID TAQUILLERO", "FECHA", "PASES COMPRADOS", "IMPORTE"}; //MÁS COSAS CREO
+			TablaDefault tb = new TablaDefault(nomCols, castedData, "MOSTRAR FACTURAS");
 			tb.setVisible(true);
 		}
 		else if(evento == Evento.RES_MOSTRAR_FACTURAS_KO) JOptionPane.showMessageDialog(this, Messages.X_MOSTRAR_FACTURAS);
