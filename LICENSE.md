@@ -12,8 +12,7 @@ Permission is hereby granted, free of charge, to use, copy, modify, merge, publi
 2. The Software may **not** be used for commercial purposes.  
    _"Commercial use"_ means any use that is intended for or directed towards commercial advantage or monetary compensation.
 
-3. If you wish to use the Software for commercial purposes, you must obtain explicit permission from the copyright holder,  
-   **UCM Software Engineering II Team**, and negotiate the terms of such use.
+3. If you wish to use the Software for commercial purposes, you must obtain explicit permission from the copyright holder, **UCM Software Engineering II Team**, and negotiate the terms of such use.
 
 ---
 
