@@ -1,7 +1,5 @@
 package integracion.factura;
 
-import java.util.Collection;
-
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -34,7 +32,7 @@ public class DAOLineaFacturaImp implements DAOLineaFactura {
 		
 		return newId;
 	}
-
+	
 	@Override
 	public int delete(int id) {
 		// TODO Auto-generated method stub
@@ -46,13 +44,7 @@ public class DAOLineaFacturaImp implements DAOLineaFactura {
 		// TODO Auto-generated method stub
 		return null;
 	}
-
-	@Override
-	public Collection<TLineaFactura> readAll() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
+	
 	@Override
 	public int update(TLineaFactura tLineaFac) {
 		// TODO Auto-generated method stub

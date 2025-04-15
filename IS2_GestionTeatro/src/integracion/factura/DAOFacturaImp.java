@@ -8,6 +8,7 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import integracion.factoria.FactoriaAbstractaIntegracion;
+import misc.OpsBBDD;
 import negocio.factura.TFactura;
 import negocio.factura.TLineaFactura;
 
@@ -15,10 +16,7 @@ public class DAOFacturaImp implements DAOFactura {
 
 	@Override
 	public int create(TFactura tFactura) {
-		JSONObject bdFactura = new JSONObject(); // cambiar: crear metodo que devuelva un JSON de la BD
-		if (bdFactura == null) {
-			// HACER ALGO
-		}
+		JSONObject bdFactura = OpsBBDD.read("BDFactura.json");
 		JSONArray facturas = new JSONArray(bdFactura.get("facturas"));
 		
 		int newId = bdFactura.getInt("lastId") + 1;
@@ -46,7 +44,7 @@ public class DAOFacturaImp implements DAOFactura {
 		
 		facturas.put(nuevaFactura);
 		bdFactura.put("facturas", facturas);
-		DataBase.write(bdFactura); // implementar metodo write
+		OpsBBDD.write(bdFactura, "BDFactura.json");
 		
 		return newId;
 	}
@@ -58,7 +56,7 @@ public class DAOFacturaImp implements DAOFactura {
 
 	@Override
 	public TFactura read(int id) {
-		JSONObject bdFactura = DataBase.read("BDFactura.json");
+		JSONObject bdFactura = OpsBBDD.read("BDFactura.json");
 
 		JSONArray facturas = new JSONArray(bdFactura.getJSONArray("facturas"));
 		
@@ -68,11 +66,13 @@ public class DAOFacturaImp implements DAOFactura {
 				return read(factura);
 			}
 		}
+		
+		return null;
 	}
 
 	@Override
 	public Collection<TFactura> readAll() {
-		JSONObject bdFactura = DataBase.read("BDFactura.json");
+		JSONObject bdFactura = OpsBBDD.read("BDFactura.json");
 		
 		Collection<TFactura> facturasValidas = new ArrayList<>();
 		
@@ -93,29 +93,25 @@ public class DAOFacturaImp implements DAOFactura {
 		return 0;
 	}
 	
-	private TFactura read(JSONObject jsonFactura) {
-		TFactura tFactura = new TFactura();
-		
-		tFactura.setIdFactura(jsonFactura.getInt("idFactura"));
-		tFactura.setActivo(jsonFactura.getBoolean("activo"));
-		
-		tFactura.setIdCliente(jsonFactura.getInt("idCliente"));
-		tFactura.setIdTaquillero(jsonFactura.getInt("idTaquillero"));
-		tFactura.setFecha(LocalDateTime.parse(jsonFactura.getString("fecha")));
-		
+	
+	private TFactura read(JSONObject jsonFac) {
 		Collection<TLineaFactura> carrito = new ArrayList<>();
 		DAOLineaFactura daoLineaFactura = FactoriaAbstractaIntegracion.getInstance().crearDAOLineaFactura();
-		JSONArray lineas = jsonFactura.getJSONArray("carrito");
+		
+		JSONArray lineas = jsonFac.getJSONArray("carrito");
 		for (int i = 0; i < lineas.length(); i++) {
 			int idLineaFactura = lineas.getInt(i);
 			TLineaFactura tLineaFactura = daoLineaFactura.read(idLineaFactura);
 			carrito.add(tLineaFactura);
 		}
-		tFactura.setCarrito(carrito);
 		
-		tFactura.setImporte(jsonFactura.getInt("importe"));
-		
-		return tFactura;
+		return new TFactura(
+				jsonFac.getInt("idFactura"), 
+				jsonFac.getInt("idCliente"), 
+				jsonFac.getInt("idTaquillero"),
+				jsonFac.getBoolean("activo"),
+				LocalDateTime.parse(jsonFac.getString("fecha")),
+				carrito,
+				jsonFac.getInt("importe"));
 	}
-	
 }

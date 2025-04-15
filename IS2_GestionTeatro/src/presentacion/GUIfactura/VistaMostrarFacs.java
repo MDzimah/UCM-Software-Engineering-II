@@ -49,7 +49,7 @@ public class VistaMostrarFacs extends JFrame implements IGUI {
 		if (evento == Evento.RES_MOSTRAR_FACTURAS_OK) {
 			@SuppressWarnings("unchecked")
 			Collection<Object> castedData = (Collection<Object>)datos;
-			String[] nomCols = {"ID","ID CLIENTE", "ID TAQUILLERO", "FECHA", "PASES COMPRADOS", "IMPORTE"}; //MÁS COSAS CREO
+			String[] nomCols = {"ID","ID CLIENTE", "ID TAQUILLERO", "FECHA", "PASES COMPRADOS", "IMPORTE"};
 			TablaDefault tb = new TablaDefault(nomCols, castedData, "MOSTRAR FACTURAS");
 			tb.setVisible(true);
 		}

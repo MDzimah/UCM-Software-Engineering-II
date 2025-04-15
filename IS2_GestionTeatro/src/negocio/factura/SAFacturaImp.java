@@ -24,7 +24,7 @@ public class SAFacturaImp implements SAFactura {
 	public int create(TFactura tFactura) {
 		int id = -1;
 		
-		List<TLineaFactura> carritoFinal = new ArrayList<>();
+		Collection<TLineaFactura> carritoFinal = new ArrayList<>();
 		
 		DAOCliente daoCliente = FactoriaAbstractaIntegracion.getInstance().crearDAOCliente();
 		

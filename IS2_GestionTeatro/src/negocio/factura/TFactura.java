@@ -16,8 +16,9 @@ public class TFactura {
 	private Collection<TLineaFactura> carrito;
 	private float importe;
 	
-	
-	public TFactura (int idFac, int idCl, int idTaq, boolean act, LocalDateTime fecha, Collection<TLineaFactura> carrito, float importe) {
+	public TFactura (int idFac, int idCl, int idTaq, boolean act, 
+			LocalDateTime fecha, Collection<TLineaFactura> carrito, float importe) 
+	{
 		this.idFactura = idFac;
 		this.idCliente = idCl;
 		this.activo = act;

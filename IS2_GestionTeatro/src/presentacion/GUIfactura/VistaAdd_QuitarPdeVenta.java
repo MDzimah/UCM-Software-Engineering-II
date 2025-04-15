@@ -6,10 +6,8 @@ import java.util.*;
 import javax.swing.*;
 
 import eventos.Evento;
-import misc.Pair;
-import misc.PanelUtils;
-import negocio.factura.TFactura;
-import negocio.factura.TLineaFactura;
+import misc.*;
+import negocio.factura.*;
 import presentacion.controlador.Controlador;
 import presentacion.superClases.VistaDefault;
 
@@ -25,7 +23,7 @@ public abstract class VistaAdd_QuitarPdeVenta extends VistaDefault {
 	private JButton cancel;
 	
 	void initComps() {
-		lTituloObra = new JLabel("Nombre:");
+		lTituloObra = new JLabel("Título de la obra:");
 		tTituloObra = new JTextField(20);
 		lFecha = new JLabel("Fecha (DD/MM/AAAA) Hora (HH:MM):");
 		SpinnerDateModel model = new SpinnerDateModel(Calendar.getInstance().getTime(), null, null, Calendar.HOUR_OF_DAY);
@@ -42,8 +40,7 @@ public abstract class VistaAdd_QuitarPdeVenta extends VistaDefault {
 		super.initComps(labeledComponents, ok, cancel);
 	}
 	
-	void okAndCancelListener(TFactura tFac, Evento evento) 
-	{
+	void okAndCancelListener(TFactura tFac, Evento evento) {
 		ok.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
