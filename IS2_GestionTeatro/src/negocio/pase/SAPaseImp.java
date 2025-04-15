@@ -40,7 +40,7 @@ public class SAPaseImp implements SAPase {
 	}
 
 	@Override
-	public int update(TPase a) {
+	public int update(TPase tPase) {
 		// TODO Auto-generated method stub
 		return 0;
 	}
