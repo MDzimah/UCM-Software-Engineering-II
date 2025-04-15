@@ -25,7 +25,7 @@ public class SAMiemCompTeaImp implements SAMiemCompTea {
 	@Override
 	public int delete(int id) {
 		// TODO Auto-generated method stub
-		return 0;
+		return 1;
 	}
 
 	@Override
