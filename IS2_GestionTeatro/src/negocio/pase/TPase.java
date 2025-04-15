@@ -11,6 +11,17 @@ public class TPase {
 	private LocalDateTime fecha;
 	private Integer stock;
 	private float precio;
+	public TPase(Integer idPase, Integer idCompanyaTeatral, Integer idObra, String nombre, boolean activo,
+			LocalDateTime fecha, Integer stock, float precio) {
+		this.idPase = idPase;
+		this.idCompanyaTeatral = idCompanyaTeatral;
+		this.idObra = idObra;
+		this.nombre = nombre;
+		this.activo = activo;
+		this.fecha = fecha;
+		this.stock = stock;
+		this.precio = precio;
+	}
 	public Integer getIdPase() {
 		return idPase;
 	}
@@ -59,19 +70,6 @@ public class TPase {
 	public void setPrecio(float precio) {
 		this.precio = precio;
 	}
-	public TPase(Integer idPase, Integer idCompanyaTeatral, Integer idObra, String nombre, boolean activo,
-			LocalDateTime fecha, Integer stock, float precio) {
-		super();
-		this.idPase = idPase;
-		this.idCompanyaTeatral = idCompanyaTeatral;
-		this.idObra = idObra;
-		this.nombre = nombre;
-		this.activo = activo;
-		this.fecha = fecha;
-		this.stock = stock;
-		this.precio = precio;
-	}
-	
 	@Override
 	public String toString() { return this.nombre + ' ' + this.fecha.toString() + ' ' + this.precio; }
 }

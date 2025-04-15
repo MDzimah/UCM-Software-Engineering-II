@@ -3,18 +3,40 @@ package negocio.pase;
 import java.time.LocalDateTime;
 import java.util.Collection;
 
+import exceptions.UnknownClienteException;
+import exceptions.UnknownTaquilleroException;
+import integracion.factoria.FactoriaAbstractaIntegracion;
+import integracion.obra.DAOObra;
+import integracion.compTea.*;
+import integracion.pase.DAOPase;
+import negocio.compTea.TCompTea;
+import negocio.obra.TObra;
+
 public class SAPaseImp implements SAPase {
 
 	@Override
-	public int create(TPase a) {
-		// TODO Auto-generated method stub
-		return 0;
+	public int create(TPase tPase) {
+		int id = -1;
+		
+		DAOObra daoObra = FactoriaAbstractaIntegracion.getInstance().crearDAOObra();
+		TObra lecturaObra = daoObra.read(tPase.getIdObra());
+		DAOCompTea daoCompTea = FactoriaAbstractaIntegracion.getInstance().crearDAOCompTea();
+		TCompTea lecturaCompTea = daoCompTea.read(tPase.getIdCompanyaTeatral());
+		
+		if (lecturaObra == null) {
+			throw new UnknownObraException();
+		}
+		if (lecturaCompTea == null) {
+			throw new UnknownCompTeaException();
+		}
+		
+		return id;
 	}
 
 	@Override
 	public TPase read(int id) {
-		// TODO Auto-generated method stub
-		return null;
+		DAOPase daoPas = FactoriaAbstractaIntegracion.getInstance().crearDAOPase();
+		return daoPas.read(id);
 	}
 
 	@Override
@@ -25,14 +47,14 @@ public class SAPaseImp implements SAPase {
 
 	@Override
 	public int delete(int id) {
-		// TODO Auto-generated method stub
-		return 0;
+		DAOPase daoPas = FactoriaAbstractaIntegracion.getInstance().crearDAOPase();
+		return daoPas.delete(id);
 	}
 
 	@Override
 	public Collection<TPase> readAll() {
-		// TODO Auto-generated method stub
-		return null;
+		DAOPase daoPas = FactoriaAbstractaIntegracion.getInstance().crearDAOPase();
+		return daoPas.readAll();
 	}
 
 	@Override
