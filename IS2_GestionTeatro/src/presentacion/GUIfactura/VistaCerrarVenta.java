@@ -52,8 +52,9 @@ public class VistaCerrarVenta extends JFrame implements IGUI {
 		panel.add(tfCliente);
 		
 		//Creo q hacer esto no hace falta. Swing te lo gestiona automáticamente
-		//Por eso cree en PanelUtils un método q te crea un panel Label-component
-		//para uso general
+		//Por eso creé en PanelUtils un método q te crea un panel Label-component
+		//para uso general, por si te interesa utilizarlo o modificarlo así todos
+		//tenemos el mismo panel "default"
 		panel.add(Box.createVerticalStrut(10));
 		
 		labelTaquillero = new JLabel("DNI del taquillero:");
