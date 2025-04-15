@@ -31,6 +31,12 @@ public enum Evento {
 	
 	//Obra
 	
+	CREAR_OBRA,
+	ELIMINAR_OBRA,
+	MODIFICAR_OBRA,
+	CONSULTAR_OBRA,
+	BUSCAR_OBRA,
+	LISTAR_OBRAS,
 	
 	//CompTea
 	
