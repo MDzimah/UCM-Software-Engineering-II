@@ -1,5 +1,6 @@
 package negocio.pase;
 
+import java.time.LocalDateTime;
 import java.util.Collection;
 
 public class SAPaseImp implements SAPase {
@@ -30,6 +31,12 @@ public class SAPaseImp implements SAPase {
 
 	@Override
 	public Collection<TPase> readAll() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public TPase readByTitleAndDate(String title, LocalDateTime t) {
 		// TODO Auto-generated method stub
 		return null;
 	}
