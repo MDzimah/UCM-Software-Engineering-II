@@ -1,8 +1,18 @@
 package integracion.pase;
 
+import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.Collection;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+import integracion.factoria.FactoriaAbstractaIntegracion;
+import integracion.factura.DAOLineaFactura;
+import negocio.factura.TFactura;
+import negocio.factura.TLineaFactura;
 import negocio.obra.TObra;
+import negocio.pase.TPase;
 
 public class DAOPaseImp implements DAOPase {
 
