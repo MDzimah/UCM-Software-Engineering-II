@@ -9,6 +9,9 @@ import presentacion.IGUI;
 
 @SuppressWarnings("serial")
 public class VistaQPDeVenta extends VistaAdd_QuitarPdeVenta implements IGUI {
+	
+	public VistaQPDeVenta() {}
+	
 	public VistaQPDeVenta(TFactura tFac) {
 		this.setTitle("QUITAR PASE DE VENTA");
 		

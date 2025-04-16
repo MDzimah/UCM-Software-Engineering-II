@@ -23,6 +23,8 @@ public class VistaMostrarFacs extends JFrame implements IGUI {
 	private JButton mostrar;
 	private JButton cancel;
 	
+	public VistaMostrarFacs(boolean paraDiferenciarConConstructorPorDefecto) {}
+	
 	public VistaMostrarFacs() {
 		super("MOSTRAR FACTURAS");
 		this.mostrar = new JButton("Mostrar");

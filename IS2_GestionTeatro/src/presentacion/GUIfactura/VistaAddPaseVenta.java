@@ -9,6 +9,9 @@ import presentacion.*;
 
 @SuppressWarnings("serial")
 public class VistaAddPaseVenta extends VistaAdd_QuitarPdeVenta implements IGUI {
+	
+	public VistaAddPaseVenta() {}
+	
 	public VistaAddPaseVenta(TFactura tFac) {
 		this.setTitle("AÑADIR PASE A VENTA");
 		

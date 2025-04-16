@@ -7,8 +7,11 @@ import java.util.Collection;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import exceptions.BBDDReadException;
+import exceptions.BBDDWriteException;
 import integracion.factoria.FactoriaAbstractaIntegracion;
 import misc.OpsBBDD;
+import misc.PanelUtils;
 import negocio.factura.TFactura;
 import negocio.factura.TLineaFactura;
 
@@ -16,37 +19,50 @@ public class DAOFacturaImp implements DAOFactura {
 
 	@Override
 	public int create(TFactura tFactura) {
-		JSONObject bdFactura = OpsBBDD.read("BDFactura.json");
-		JSONArray facturas = new JSONArray(bdFactura.get("facturas"));
+		JSONObject bdFactura;
+		try {
+			bdFactura = OpsBBDD.read("BDFactura.json");
 		
-		int newId = bdFactura.getInt("lastId") + 1;
-		bdFactura.put("lastId", newId);
-		
-		JSONObject nuevaFactura = new JSONObject();
-		
-		nuevaFactura.put("idFactura", newId);
-		nuevaFactura.put("activo", tFactura.getActivo());
-		
-		nuevaFactura.put("idCliente", tFactura.getIdCliente());
-		nuevaFactura.put("idTaquillero", tFactura.getIdTaquillero());
-		nuevaFactura.put("fecha", tFactura.getFecha().toString());
-		
-		DAOLineaFactura daoLineaFactura = FactoriaAbstractaIntegracion.getInstance().crearDAOLineaFactura();
-		JSONArray carrito = new JSONArray();
-		for (TLineaFactura tLineaFactura : tFactura.getCarrito()) {
-			int idLineaFactura = daoLineaFactura.create(tLineaFactura);
-			carrito.put(idLineaFactura);
+			JSONArray facturas = new JSONArray(bdFactura.get("facturas"));
+			
+			int newId = bdFactura.getInt("lastId") + 1;
+			bdFactura.put("lastId", newId);
+			
+			JSONObject nuevaFactura = new JSONObject();
+			
+			nuevaFactura.put("idFactura", newId);
+			nuevaFactura.put("activo", tFactura.getActivo());
+			
+			nuevaFactura.put("idCliente", tFactura.getIdCliente());
+			nuevaFactura.put("idTaquillero", tFactura.getIdTaquillero());
+			nuevaFactura.put("fecha", tFactura.getFecha().toString());
+			
+			DAOLineaFactura daoLineaFactura = FactoriaAbstractaIntegracion.getInstance().crearDAOLineaFactura();
+			JSONArray carrito = new JSONArray();
+			for (TLineaFactura tLineaFactura : tFactura.getCarrito()) {
+				int idLineaFactura = daoLineaFactura.create(tLineaFactura);
+				carrito.put(idLineaFactura);
+			}
+			nuevaFactura.put("carrito", carrito);
+			
+			nuevaFactura.put("importe", tFactura.getImporte());
+			
+			
+			facturas.put(nuevaFactura);
+			bdFactura.put("facturas", facturas);
+			
+			OpsBBDD.write(bdFactura, "BDFactura.json");
+			
+			return newId;
+		} 
+		catch (BBDDReadException e) {
+			PanelUtils.panelBBDDReadError(null, "BDFactura.json", e.getMessage());
+			return -1;
 		}
-		nuevaFactura.put("carrito", carrito);
-		
-		nuevaFactura.put("importe", tFactura.getImporte());
-		
-		
-		facturas.put(nuevaFactura);
-		bdFactura.put("facturas", facturas);
-		OpsBBDD.write(bdFactura, "BDFactura.json");
-		
-		return newId;
+		catch (BBDDWriteException e) {
+			PanelUtils.panelBBDDWriteError(null, "BDFactura.json", e.getMessage());
+			return -1;
+		}
 	}
 
 	@Override
@@ -56,35 +72,46 @@ public class DAOFacturaImp implements DAOFactura {
 
 	@Override
 	public TFactura read(int id) {
-		JSONObject bdFactura = OpsBBDD.read("BDFactura.json");
-
-		JSONArray facturas = new JSONArray(bdFactura.getJSONArray("facturas"));
-		
-		for (int i = 0; i < facturas.length(); i++) {
-			JSONObject factura = facturas.getJSONObject(i);
-			if (factura.getInt("idFactura") == id) {
-				return read(factura);
+		try {
+			JSONObject bdFactura = OpsBBDD.read("BDFactura.json");
+	
+			JSONArray facturas = new JSONArray(bdFactura.getJSONArray("facturas"));
+			
+			for (int i = 0; i < facturas.length(); i++) {
+				JSONObject factura = facturas.getJSONObject(i);
+				if (factura.getInt("idFactura") == id) {
+					return read(factura);
+				}
 			}
+			
+		} 
+		catch (BBDDReadException e) {
+			PanelUtils.panelBBDDReadError(null, "BDFactura.json", e.getMessage());
 		}
-		
 		return null;
 	}
 
 	@Override
 	public Collection<TFactura> readAll() {
-		JSONObject bdFactura = OpsBBDD.read("BDFactura.json");
-		
-		Collection<TFactura> facturasValidas = new ArrayList<>();
-		
-		JSONArray facturas = new JSONArray(bdFactura.getJSONArray("facturas"));
-		for (int i = 0; i < facturas.length(); i++) {
-			JSONObject factura = facturas.getJSONObject(i);
-			if (factura.getBoolean("activo")) {
-				facturasValidas.add(read(factura));
+		try {
+			JSONObject bdFactura = OpsBBDD.read("BDFactura.json");
+			
+			Collection<TFactura> facturasValidas = new ArrayList<>();
+			
+			JSONArray facturas = new JSONArray(bdFactura.getJSONArray("facturas"));
+			for (int i = 0; i < facturas.length(); i++) {
+				JSONObject factura = facturas.getJSONObject(i);
+				if (factura.getBoolean("activo")) {
+					facturasValidas.add(read(factura));
+				}
 			}
-		}
 		
-		return facturasValidas;
+			return facturasValidas;
+		} 
+		catch (BBDDReadException e) {
+			PanelUtils.panelBBDDReadError(null, "BDFactura.json", e.getMessage());
+			return null;
+		}
 	}
 
 	@Override
