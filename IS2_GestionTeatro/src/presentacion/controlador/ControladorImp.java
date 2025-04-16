@@ -8,6 +8,7 @@ import negocio.factoria.FactoriaAbstractaNegocio;
 import negocio.factura.SAFactura;
 import negocio.factura.TFactura;
 import negocio.factura.TLineaFactura;
+import negocio.obra.SAObra;
 import negocio.pase.SAPase;
 import negocio.pase.TPase;
 import presentacion.factoria.FactoriaAbstractaPresentacion;
@@ -24,7 +25,9 @@ public class ControladorImp extends Controlador {
 			Pair<TFactura, TLineaFactura> facYNuevaLinea = (Pair<TFactura, TLineaFactura>)datos;
 			TLineaFactura newTlf = facYNuevaLinea.getSecond();
 			SAPase saP = FactoriaAbstractaNegocio.getInstance().crearSAPase();
-			TPase tPase = saP.readByTitleAndDate(newTlf.getTituloObra(), newTlf.getFechaPase());
+			FactoriaAbstractaNegocio.getInstance().crearSAObra().readByName().getId();
+			
+			TPase tPase = saP.readByTitleAndDate();
 			
 			if (tPase != null) {
 				newTlf.setPrecioVenta(tPase.getPrecio());

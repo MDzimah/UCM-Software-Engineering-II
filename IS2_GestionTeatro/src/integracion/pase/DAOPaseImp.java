@@ -2,12 +2,12 @@ package integracion.pase;
 
 import java.util.Collection;
 
-import negocio.obra.TObra;
+import negocio.pase.TPase;
 
 public class DAOPaseImp implements DAOPase {
 
 	@Override
-	public int create(TObra tCliente) {
+	public int create(TPase tPase) {
 		// TODO Auto-generated method stub
 		return 0;
 	}
@@ -19,19 +19,19 @@ public class DAOPaseImp implements DAOPase {
 	}
 
 	@Override
-	public TObra read(int id) {
+	public TPase read(int id) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public Collection<TObra> readAll() {
+	public Collection<TPase> readAll() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public int update(TObra tCliente) {
+	public int update(TPase tPase) {
 		// TODO Auto-generated method stub
 		return 0;
 	}

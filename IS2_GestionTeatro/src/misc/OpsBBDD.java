@@ -9,32 +9,28 @@ import javax.swing.JOptionPane;
 
 import org.json.JSONObject;
 
+import exceptions.BBDDReadException;
+import exceptions.BBDDWriteException;
+
 public class OpsBBDD {
-	public static JSONObject read(String BBDD) {
-		String contenidos = "";
+	public static JSONObject read(String BBDD) throws BBDDReadException {
 		try {
-			contenidos = new String(Files.readAllBytes(Paths.get(BBDD)));
-		} 
-		catch (IOException e) {
-			 JOptionPane.showMessageDialog(null,
-		                Messages.ERROR_LECTURA_BBDD.formatted(BBDD),
-		                "Error Lectura",
-		                JOptionPane.ERROR_MESSAGE);
+			String contenidos = new String(Files.readAllBytes(Paths.get(BBDD)));
+			return new JSONObject(contenidos);
 		}
-		return new JSONObject(contenidos);
+		catch(IOException e) {
+			throw new BBDDReadException(Messages.ERROR_ESCRITURA_BBDD, e);
+		}
 	}
 	
-	public static void write(JSONObject bdInfo, String BBDD) {
-		try (FileWriter file = new FileWriter(BBDD)) {
-            file.write(bdInfo.toString()); 
-            file.flush(); //Para asegurar que el buffer se quede vacío
-            JOptionPane.showMessageDialog(null, Messages.EX_ESCRITURA_BBDD.formatted(BBDD));
-        } 
-		catch (IOException e) {
-            JOptionPane.showMessageDialog(null,
-                    Messages.ERROR_ESCRITURA_BBDD.formatted(BBDD),
-                    "Error Escritura",
-                    JOptionPane.ERROR_MESSAGE);
-        }
+	public static void write(JSONObject info, String BBDD) throws BBDDWriteException {
+		try(FileWriter file = new FileWriter(BBDD)){
+	        file.write(info.toString()); 
+	        file.flush(); //Para asegurar que el buffer se quede vacío
+	        JOptionPane.showMessageDialog(null, Messages.EX_ESCRITURA_BBDD.formatted(BBDD));
+		}
+		catch(IOException e) {
+			throw new BBDDWriteException(Messages.ERROR_LECTURA_BBDD, e);
+		}
 	}
 }

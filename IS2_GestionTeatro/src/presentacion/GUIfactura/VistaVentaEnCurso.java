@@ -39,7 +39,7 @@ public class VistaVentaEnCurso extends JFrame implements IGUI {
 	private TFactura tFactura;
 	
 	public VistaVentaEnCurso() {
-		super("Nueva venta");
+		super("NUEVA VENTA");
 		this.setLayout(new BoxLayout(vistaCarrito, BoxLayout.Y_AXIS));
 		
 		this.tFactura = new TFactura();
