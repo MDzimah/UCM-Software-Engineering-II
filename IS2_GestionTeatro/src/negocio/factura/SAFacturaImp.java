@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
+import exceptions.BBDDReadException;
+import exceptions.BBDDWriteException;
 import exceptions.UnknownClienteException;
 import exceptions.UnknownTaquilleroException;
 import integracion.cliente.DAOCliente;
@@ -63,29 +65,29 @@ public class SAFacturaImp implements SAFactura {
 			}
 		}
 		
-		
+		return id;
 	}
 
 	@Override
-	public TFactura read(int id) {
+	public TFactura read(int id) throws BBDDReadException {
 		DAOFactura daoFac = FactoriaAbstractaIntegracion.getInstance().crearDAOFactura();
 		return daoFac.read(id);
 	}
 
 	@Override
-	public int update(TFactura tFac) {
-		// TODO Auto-generated method stub
-		return 0;
+	public int update(TFactura tFac) throws BBDDReadException, BBDDWriteException {
+		DAOFactura daoFac = FactoriaAbstractaIntegracion.getInstance().crearDAOFactura();
+		return daoFac.update(tFac);
 	}
 
 	@Override
-	public int delete(int id) {
+	public int delete(int id) throws BBDDReadException, BBDDWriteException {
 		DAOFactura daoFac = FactoriaAbstractaIntegracion.getInstance().crearDAOFactura();
 		return daoFac.delete(id);
 	}
 
 	@Override
-	public Collection<TFactura> readAll() {
+	public Collection<TFactura> readAll() throws BBDDReadException {
 		DAOFactura daoFac = FactoriaAbstractaIntegracion.getInstance().crearDAOFactura();
 		return daoFac.readAll();
 	}

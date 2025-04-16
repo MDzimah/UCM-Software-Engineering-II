@@ -1,7 +1,5 @@
 package presentacion.GUIfactura;
 
-import javax.swing.*;
-
 import eventos.Evento;
 import misc.Messages;
 import misc.PanelUtils;

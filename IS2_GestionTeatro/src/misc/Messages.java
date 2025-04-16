@@ -28,28 +28,35 @@ public class Messages {
 	public static final String ERROR_LECTURA_BBDD = "Error al leer la BBDD de %s";
 	public static final String ERROR_ESCRITURA_BBDD = "Error al escribr en la BBDD de %s";
 	
+	//Path a file
+	public static final String PATH_TO_BBDD = "resources/BBDD/%s";
+	
 	//Nombres de BBDD
-	public static final String BDCli = "BDCliente.json";
-	public static final String BDCliNorm = "BDClienteNormal.json";
-	public static final String BDCliVIP = "BDClienteVIP.json";
-	public static final String BDCT = "BDCompTea.json";
-	public static final String BDMCT = "BDMiemCompTea.json";
-	public static final String BDOb = "BDObra.json";
-	public static final String BDFac = "BDFactura.json";
-	public static final String BDPase = "BDPase.json";
-	public static final String BDTaq = "BDTaquillero.json";
+	public static final String BDCliNorm = "ClienteNormal.json";
+	public static final String BDCliVIP = "ClienteVIP.json";
+	public static final String BDCT = "CompTea.json";
+	public static final String BDMCT = "MiemCompTea.json";
+	public static final String BDOb = "Obra.json";
+	public static final String BDFac = "Factura.json";
+	public static final String BDLFac = "LineaFactura.json";
+	public static final String BDPase = "Pase.json";
+	public static final String BDTaq = "Taquillero.json";
 	
 	//Claves para acceder BBDD
-	public static final String KEY_lastId = "lastId";
-	public static final String KEY_fecha = "fecha";
-	public static final String KEY_act = "activo";
 	public static final String KEY_idCli = "idCliente";
 	public static final String KEY_idFac = "idFactura";
+	public static final String KEY_idLinFac = "idLineaFactura";
 	public static final String KEY_idTaq = "idTaquillero";
 	public static final String KEY_idPase = "idPase";
+	public static final String KEY_lastId = "lastId";
+	
 	public static final String KEY_facs = "facturas";
+	public static final String KEY_facL = "lineas";
+	
+	public static final String KEY_fecha = "fecha";
+	public static final String KEY_act = "activo";
 	public static final String KEY_carrito = "carrito";
 	public static final String KEY_importe = "importe";
-	public static final String KEY_LINFAC_precio = "precioVenta";
-	
+	public static final String KEY_LF_precio = "precioVenta";
+	public static final String KEY_ctdad = "cantidad";
 }

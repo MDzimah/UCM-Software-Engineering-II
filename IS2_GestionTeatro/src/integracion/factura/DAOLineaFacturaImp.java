@@ -3,33 +3,31 @@ package integracion.factura;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import misc.Messages;
+import misc.OpsBBDD;
 import negocio.factura.TLineaFactura;
 
 public class DAOLineaFacturaImp implements DAOLineaFactura {
 
 	@Override
 	public int create(TLineaFactura tLineaFactura) {
-		JSONObject bdFactura = new JSONObject();
+		JSONObject bdLinFac = OpsBBDD.read(Messages.BDLFac);
 		
-		JSONArray lineasFactura = bdFactura.getJSONArray("lineas");
+		JSONArray lineasFactura = bdLinFac.getJSONArray("lineas");
 		
 		int newId = bdFactura.getInt("lastId") + 1;
 		bdFactura.put("lastId", newId);
 		
 		JSONObject nuevaLinea = new JSONObject();
 		
-		nuevaLinea.put("idLineaFactura", newId);
-		nuevaLinea.put("idFactura", tLineaFactura.getIdFactura());
-		nuevaLinea.put("idPase", tLineaFactura.getIdPase());
-		
-		nuevaLinea.put("tituloObra", tLineaFactura.getTituloObra());
-		nuevaLinea.put("fecha", tLineaFactura.getFechaPase().toString());
-		nuevaLinea.put("cantidad", tLineaFactura.getCantidad());
-		nuevaLinea.put("precioVenta", tLineaFactura.getPrecioVenta());
+		nuevaLinea.put(Messages.KEY_idLinFac, newId);
+		nuevaLinea.put(Messages.KEY_idFac, tLineaFactura.getIdFactura());
+		nuevaLinea.put(Messages.KEY_idPase, tLineaFactura.getIdPase());
+		nuevaLinea.put(Messages.KEY_fecha, tLineaFactura.getFechaPase().toString());
+		nuevaLinea.put(Messages.KEY_ctdad, tLineaFactura.getCantidad());
+		nuevaLinea.put(Messages.KEY_LF_precio, tLineaFactura.getPrecioVenta());
 		
 		lineasFactura.put(nuevaLinea);
-		bdFactura.put("lineas", lineasFactura);
-		
 		return newId;
 	}
 	

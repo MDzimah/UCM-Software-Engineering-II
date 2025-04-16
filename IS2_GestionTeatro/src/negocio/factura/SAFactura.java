@@ -2,10 +2,13 @@ package negocio.factura;
 
 import java.util.Collection;
 
+import exceptions.BBDDReadException;
+import exceptions.BBDDWriteException;
+
 public interface SAFactura {
 	public int create(TFactura tFac);
-	public TFactura read(int id);
-	public int update(TFactura tFac);
-	public int delete (int id);
-	public Collection<TFactura> readAll();
+	public TFactura read(int id) throws BBDDReadException;
+	public int update(TFactura tFac) throws BBDDReadException, BBDDWriteException;
+	public int delete (int id) throws BBDDReadException, BBDDWriteException;
+	public Collection<TFactura> readAll() throws BBDDReadException;
 }
