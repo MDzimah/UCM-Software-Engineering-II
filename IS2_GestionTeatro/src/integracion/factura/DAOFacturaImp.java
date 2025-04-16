@@ -1,5 +1,6 @@
 package integracion.factura;
 
+import java.nio.*;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -7,12 +8,9 @@ import java.util.Collection;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import exceptions.BBDDReadException;
-import exceptions.BBDDWriteException;
+import exceptions.*;
 import integracion.factoria.FactoriaAbstractaIntegracion;
-import misc.Messages;
-import misc.OpsBBDD;
-import misc.PanelUtils;
+import misc.*;
 import negocio.factura.TFactura;
 import negocio.factura.TLineaFactura;
 
@@ -58,12 +56,11 @@ public class DAOFacturaImp implements DAOFactura {
 		} 
 		catch (BBDDReadException e) {
 			PanelUtils.panelBBDDReadError(null, Messages.BDFac, e.getMessage());
-			return -1;
 		}
 		catch (BBDDWriteException e) {
 			PanelUtils.panelBBDDWriteError(null, Messages.BDFac, e.getMessage());
-			return -1;
 		}
+		return -1;
 	}
 
 	@Override
