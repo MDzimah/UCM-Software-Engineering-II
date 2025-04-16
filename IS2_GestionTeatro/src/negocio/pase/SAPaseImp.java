@@ -4,6 +4,8 @@ import java.time.LocalDateTime;
 import java.util.Collection;
 
 import exceptions.UnknownClienteException;
+import exceptions.UnknownCompTeaException;
+import exceptions.UnknownObraException;
 import exceptions.UnknownTaquilleroException;
 import integracion.factoria.FactoriaAbstractaIntegracion;
 import integracion.obra.DAOObra;
@@ -30,6 +32,9 @@ public class SAPaseImp implements SAPase {
 			throw new UnknownCompTeaException();
 		}
 		
+		DAOPase daoPas = FactoriaAbstractaIntegracion.getInstance().crearDAOPase();
+		id = daoPas.create(tPase);
+		
 		return id;
 	}
 
@@ -40,7 +45,7 @@ public class SAPaseImp implements SAPase {
 	}
 
 	@Override
-	public int update(TPase a) {
+	public int update(TPase tPase) {
 		// TODO Auto-generated method stub
 		return 0;
 	}
@@ -56,11 +61,4 @@ public class SAPaseImp implements SAPase {
 		DAOPase daoPas = FactoriaAbstractaIntegracion.getInstance().crearDAOPase();
 		return daoPas.readAll();
 	}
-
-	@Override
-	public TPase readByTitleAndDate(String title, LocalDateTime t) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
 }
