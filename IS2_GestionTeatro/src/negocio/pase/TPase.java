@@ -3,15 +3,15 @@ package negocio.pase;
 import java.time.LocalDateTime;
 
 public class TPase {
-	private Integer idPase;
-	private Integer idCompanyaTeatral;
-	private Integer idObra;
+	private int idPase;
+	private int idCompanyaTeatral;
+	private int idObra;
 	private boolean activo;
 	private LocalDateTime fecha;
-	private Integer stock;
+	private int stock;
 	private float precio;
-	public TPase(Integer idPase, Integer idCompanyaTeatral, Integer idObra, String nombre, boolean activo,
-			LocalDateTime fecha, Integer stock, float precio) {
+	public TPase(int idPase, int idCompanyaTeatral, int idObra, boolean activo,
+			LocalDateTime fecha, int stock, float precio) {
 		this.idPase = idPase;
 		this.idCompanyaTeatral = idCompanyaTeatral;
 		this.idObra = idObra;
