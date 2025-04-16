@@ -1,7 +1,5 @@
 package negocio.factura;
 
-import java.time.LocalDateTime;
-
 public class TLineaFactura {
 
 	private int idLineaFactura;
@@ -9,21 +7,16 @@ public class TLineaFactura {
 	private int idFactura;
 	private int idPase;
 	
-	private String tituloObra;
-	private LocalDateTime fechaPase;
 	private int cantidad;
 	private float precioVenta;
 	
-	
-	public TLineaFactura(int idPase, int cantidad) {
+	public TLineaFactura(int idLineaFactura, int idFactura, int idPase,
+			int cantidad, float precioVenta) {
+		this.idLineaFactura = idLineaFactura;
+		this.idFactura = idFactura;
 		this.idPase = idPase;
 		this.cantidad = cantidad;
-	}
-	
-	public TLineaFactura(String titObra, LocalDateTime fechaPase, int ctdad) {
-		this.tituloObra = titObra;
-		this.fechaPase = fechaPase;
-		this.cantidad = ctdad;
+		this.precioVenta = precioVenta;
 	}
 	
 	
@@ -34,10 +27,6 @@ public class TLineaFactura {
 	public int getIdFactura() {	return this.idFactura; }
 	
 	public int getIdPase() { return this.idPase; }
-	
-	public String getTituloObra() {	return this.tituloObra; }
-	
-	public LocalDateTime getFechaPase() { return this.fechaPase; }
 	
 	public int getCantidad() { return this.cantidad; }
 	
@@ -51,10 +40,6 @@ public class TLineaFactura {
 	public void setIdFactura(int idFactura) { this.idFactura = idFactura; }
 	
 	public void setIdPase(int idPase) {	this.idPase = idPase; }
-	
-	public void setTituloObra(String titulo) { this.tituloObra = titulo; }
-	
-	public void setFechaPase(LocalDateTime fecha) {	this.fechaPase = fecha;	}
 	
 	public void setCantidad(int cantidad) {	this.cantidad = cantidad; }
 	

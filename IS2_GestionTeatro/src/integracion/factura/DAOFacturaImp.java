@@ -32,6 +32,7 @@ public class DAOFacturaImp implements DAOFactura {
 		
 		DAOLineaFactura daoLineaFactura = FactoriaAbstractaIntegracion.getInstance().crearDAOLineaFactura();
 		JSONArray carrito = new JSONArray();
+		
 		for (TLineaFactura tLineaFactura : tFactura.getCarrito()) {
 			int idLineaFactura = daoLineaFactura.create(tLineaFactura);
 			carrito.put(idLineaFactura);
@@ -62,7 +63,7 @@ public class DAOFacturaImp implements DAOFactura {
         	fac.put(Messages.KEY_act, false);
         	return id;
         }
-        return -1; //No se ha encontrado la factura pasada por parámetro
+        return -1; //No se ha encontrado la factura con dicho id
 	}
 
 	@Override
@@ -71,7 +72,7 @@ public class DAOFacturaImp implements DAOFactura {
 		
 		JSONObject fac = facturas.getJSONObject(Integer.toString(id));
 		
-		return fac == null ? null : read(fac);
+		return fac == null ? null : readAux(fac, id);
 	}
 
 	@Override
@@ -84,7 +85,7 @@ public class DAOFacturaImp implements DAOFactura {
 		for (int i = 0; i < facturas.length(); i++) {
 			JSONObject factura = facturas.getJSONObject(Integer.toString(i));
 			if (factura.getBoolean(Messages.KEY_act)) { //Cojo solo las facturas activas
-				facturasValidas.add(read(factura));
+				facturasValidas.add(this.readAux(factura, i));
 			}
 		}
 	
@@ -110,7 +111,7 @@ public class DAOFacturaImp implements DAOFactura {
 	}
 	
 	
-	private TFactura read(JSONObject jsonFac) {
+	private TFactura readAux(JSONObject jsonFac, int idFac) throws BBDDReadException {
 		Collection<TLineaFactura> carrito = new ArrayList<>();
 		DAOLineaFactura daoLineaFactura = FactoriaAbstractaIntegracion.getInstance().crearDAOLineaFactura();
 		
@@ -122,7 +123,7 @@ public class DAOFacturaImp implements DAOFactura {
 		}
 		
 		return new TFactura(
-				jsonFac.getInt(Messages.KEY_idFac), 
+				idFac, 
 				jsonFac.getInt(Messages.KEY_idCli), 
 				jsonFac.getInt(Messages.KEY_idTaq),
 				jsonFac.getBoolean(Messages.KEY_act),

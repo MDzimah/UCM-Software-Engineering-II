@@ -38,7 +38,7 @@ public class Messages {
 	public static final String BDMCT = "MiemCompTea.json";
 	public static final String BDOb = "Obra.json";
 	public static final String BDFac = "Factura.json";
-	public static final String BDLFac = "LineaFactura.json";
+	public static final String BDLinFac = "LineaFactura.json";
 	public static final String BDPase = "Pase.json";
 	public static final String BDTaq = "Taquillero.json";
 	
@@ -51,7 +51,7 @@ public class Messages {
 	public static final String KEY_lastId = "lastId";
 	
 	public static final String KEY_facs = "facturas";
-	public static final String KEY_facL = "lineas";
+	public static final String KEY_LineasFac = "lineas";
 	
 	public static final String KEY_fecha = "fecha";
 	public static final String KEY_act = "activo";
