@@ -23,6 +23,8 @@ public class VistaBuscarFac extends JFrame implements IGUI {
 	private JButton buscar;
 	private JButton cancel;
 	
+	public VistaBuscarFac(boolean paraDiferenciarConConstructorPorDefecto) {}
+	
 	public VistaBuscarFac() {
 		super("BUSCAR FACTURA");
 		JPanel mainPanel = new JPanel(new BorderLayout());
@@ -62,6 +64,7 @@ public class VistaBuscarFac extends JFrame implements IGUI {
 		this.setVisible(true);
 		this.setLocationRelativeTo(null);
 	}
+	
 	@Override
 	public void actualizar(Evento evento, Object datos) {
 		if (evento == Evento.RES_BUSCAR_FACTURA_OK) {

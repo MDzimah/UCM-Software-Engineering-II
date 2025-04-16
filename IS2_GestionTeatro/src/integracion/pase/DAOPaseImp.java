@@ -2,7 +2,7 @@ package integracion.pase;
 
 import java.util.Collection;
 
-import negocio.obra.TObra;
+import negocio.pase.TPase;
 
 public class DAOPaseImp implements DAOPase {
 
