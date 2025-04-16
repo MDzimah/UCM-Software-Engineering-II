@@ -2,6 +2,9 @@ package negocio.miemCompTea;
 
 import java.util.Collection;
 
+import integracion.factoria.FactoriaAbstractaIntegracion;
+import integracion.miemCompTea.DAOMiemCompTea;
+
 public class SAMiemCompTeaImp implements SAMiemCompTea {
 
 	@Override
@@ -12,8 +15,8 @@ public class SAMiemCompTeaImp implements SAMiemCompTea {
 
 	@Override
 	public TMiemCompTea read(int id) {
-		// TODO Auto-generated method stub
-		return null;
+		DAOMiemCompTea daoMiem = FactoriaAbstractaIntegracion.getInstance().crearDAOMiemCompTea();
+		return daoMiem.read(id);
 	}
 
 	@Override
@@ -24,14 +27,14 @@ public class SAMiemCompTeaImp implements SAMiemCompTea {
 
 	@Override
 	public int delete(int id) {
-		// TODO Auto-generated method stub
-		return 1;
+		DAOMiemCompTea daoMiem = FactoriaAbstractaIntegracion.getInstance().crearDAOMiemCompTea();
+		return daoMiem.delete(id);
 	}
 
 	@Override
 	public Collection<TMiemCompTea> readAll() {
-		// TODO Auto-generated method stub
-		return null;
+		DAOMiemCompTea daoMiem = FactoriaAbstractaIntegracion.getInstance().crearDAOMiemCompTea();
+		return daoMiem.readAll();
 	}
 
 }
