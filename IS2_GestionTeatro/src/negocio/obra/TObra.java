@@ -68,6 +68,28 @@ public class TObra {
 		return activa;
 	}
 	
+	public String getSinopsis() {
+		return sinopsis;
+	}
+	
+	public Object genericGetter(String key) {
+		switch(key) {
+		case "IdObra":
+			return Integer.valueOf(IdObra);
+		case "Autor":
+			return autor;
+		case "Titulo":
+			return titulo;
+		case "Genero":
+			return genero;
+		case "Sinopsis":
+			return sinopsis;
+		case "Activo":
+			return activa;
+		}
+		return null;
+	}
+	
 	//Setters	
 	public void setIdObra(int id) {
 		this.IdObra=id;
@@ -82,10 +104,6 @@ public class TObra {
 
 	public void setGenero(String genero) {
 		this.genero = genero;
-	}
-
-	public String getSinopsis() {
-		return sinopsis;
 	}
 
 	public void setSinopsis(String sinopsis) {

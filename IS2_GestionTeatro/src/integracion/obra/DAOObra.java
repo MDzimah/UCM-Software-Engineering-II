@@ -11,5 +11,5 @@ public interface DAOObra {
 	public TObra read(int id);
 	public Collection<TObra> readActive();
 	public int update(TObra tObra);
-	public List<TObra> search(String titulo, String autor, String genero, boolean activo);
+	public List<TObra> search(Integer Id, String titulo, String autor, String genero, Boolean activo);
 }
