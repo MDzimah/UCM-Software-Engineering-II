@@ -14,6 +14,7 @@ import javax.swing.JTextField;
 import eventos.Evento;
 import misc.Messages;
 import misc.Pair;
+import misc.PanelUtils;
 import negocio.factura.TFactura;
 import negocio.factura.TLineaFactura;
 import presentacion.IGUI;
@@ -74,9 +75,9 @@ public class VistaCerrarVenta extends VistaDefault implements IGUI {
 	@Override
 	public void actualizar(Evento evento, Object datos) {
 		if (evento == Evento.RES_CERRAR_VENTA_OK) {
-			JOptionPane.showMessageDialog(this, Messages.EX_VENTA_CERRADA);
+			PanelUtils.panelMessage(this, Messages.EX_VENTA_CERRADA);
 		} else if (evento == Evento.RES_CERRAR_VENTA_KO) {
-			JOptionPane.showMessageDialog(this, Messages.X_VENTA_CERRADA);
+			PanelUtils.panelMessage(this, Messages.X_VENTA_CERRADA);
 		}
 	}
 }

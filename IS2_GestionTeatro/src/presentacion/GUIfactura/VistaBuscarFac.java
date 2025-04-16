@@ -75,7 +75,7 @@ public class VistaBuscarFac extends JFrame implements IGUI {
 			tb.setVisible(true);
 		}
 		else if(evento == Evento.RES_BUSCAR_FACTURA_KO) {
-			JOptionPane.showMessageDialog(this, Messages.X_BUSCAR_FACTURA.formatted((String) datos));
+			PanelUtils.panelMessage(this, Messages.X_BUSCAR_FACTURA.formatted((String) datos));
 		}
 	}
 

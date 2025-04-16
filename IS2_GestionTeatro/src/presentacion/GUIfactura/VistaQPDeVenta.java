@@ -4,6 +4,7 @@ import javax.swing.JOptionPane;
 
 import eventos.Evento;
 import misc.Messages;
+import misc.PanelUtils;
 import negocio.factura.TFactura;
 import presentacion.IGUI;
 
@@ -26,9 +27,9 @@ public class VistaQPDeVenta extends VistaAdd_QuitarPdeVenta implements IGUI {
 	@Override
 	public void actualizar(Evento evento, Object datos) {
 		if (evento == Evento.RES_QUITAR_PASE_DE_VENTA_OK) {
-			JOptionPane.showMessageDialog(this, Messages.EX_PASE_QUITADO_DE_VENTA);
+			PanelUtils.panelMessage(this, Messages.EX_PASE_QUITADO_DE_VENTA);
 			//... Cómo hacer repintar el carrito??? 
 		}
-		else if(evento == Evento.RES_QUITAR_PASE_DE_VENTA_KO) JOptionPane.showMessageDialog(this, Messages.X_PASE_QUITADO_DE_VENTA);
+		else if(evento == Evento.RES_QUITAR_PASE_DE_VENTA_KO) PanelUtils.panelMessage(this, Messages.X_PASE_QUITADO_DE_VENTA);
 	}
 }

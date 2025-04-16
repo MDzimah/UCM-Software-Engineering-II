@@ -55,7 +55,7 @@ public class VistaMostrarFacs extends JFrame implements IGUI {
 			TablaDefault tb = new TablaDefault(nomCols, castedData, "MOSTRAR FACTURAS");
 			tb.setVisible(true);
 		}
-		else if(evento == Evento.RES_MOSTRAR_FACTURAS_KO) JOptionPane.showMessageDialog(this, Messages.X_MOSTRAR_FACTURAS);
+		else if(evento == Evento.RES_MOSTRAR_FACTURAS_KO) PanelUtils.panelMessage(this, Messages.X_MOSTRAR_FACTURAS);
 	}
 
 }
