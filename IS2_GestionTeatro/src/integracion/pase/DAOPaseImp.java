@@ -63,7 +63,7 @@ public class DAOPaseImp implements DAOPase {
 		} catch (BBDDReadException e) {
 			PanelUtils.panelBBDDReadError(null, "BDFactura.json", e.getMessage());
 		}
-		return 0; //no se ha borrado pase porque no se ha encontrado
+		return -1; //no se ha borrado pase porque no se ha encontrado
 	}
 
 	@Override
@@ -103,7 +103,28 @@ public class DAOPaseImp implements DAOPase {
 
 	@Override
 	public int update(TPase tPase) {
-		return 0;
+		try {
+			JSONObject bdPase = OpsBBDD.read("BDPase.json");
+			if(bdPase.has(String.valueOf(tPase.getIdObra()))) {
+				
+				JSONObject nuevoPase = new JSONObject();
+				nuevoPase.put("idPase", tPase.getIdPase());
+				nuevoPase.put("idCompanyaTeatral", tPase.getIdCompanyaTeatral());
+				nuevoPase.put("idObra", tPase.getIdObra());
+				nuevoPase.put("activo", tPase.isActivo());
+				nuevoPase.put("fecha", tPase.getFecha().toString());
+				nuevoPase.put("stock", tPase.getStock());
+				nuevoPase.put("precio", tPase.getPrecio());
+				
+				bdPase.put(String.valueOf(tPase.getIdObra()), nuevoPase);
+				return 1;
+			}
+			else
+				return -1;
+		} catch (BBDDReadException e) {
+			PanelUtils.panelBBDDReadError(null, "BDFactura.json", e.getMessage());
+			return -1;
+		}
 	}
 	
 	private TPase read(JSONObject jsonPas) {
