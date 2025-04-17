@@ -26,7 +26,10 @@ public class VistaQPDeVenta extends VistaAdd_QuitarPdeVenta implements IGUI {
 		if (evento == Evento.RES_QUITAR_PASE_DE_VENTA_OK) {
 			PanelUtils.panelMessage(this, Messages.EX_PASE_QUITADO_DE_VENTA);
 			//... Cómo hacer repintar el carrito??? 
+			this.dispose();
 		}
-		else if(evento == Evento.RES_QUITAR_PASE_DE_VENTA_KO) PanelUtils.panelMessage(this, Messages.X_PASE_QUITADO_DE_VENTA);
+		else if(evento == Evento.RES_QUITAR_PASE_DE_VENTA_KO) {
+			PanelUtils.panelMessage(this, Messages.X_PASE_QUITADO_DE_VENTA);
+		}
 	}
 }

@@ -44,7 +44,6 @@ public abstract class VistaAdd_QuitarPdeVenta extends VistaDefault {
 		ok.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				setVisible(false);
 				try {
 					//Id pase
 					int idPase = Integer.valueOf(tIdPase.getText());

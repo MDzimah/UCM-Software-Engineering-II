@@ -25,9 +25,11 @@ public class VistaAddPaseVenta extends VistaAdd_QuitarPdeVenta implements IGUI {
 	public void actualizar(Evento evento, Object datos) {
 		if (evento == Evento.RES_ANYADIR_PASE_A_VENTA_OK) {
 			PanelUtils.panelMessage(this, Messages.EX_PASE_ANYADIDO_A_VENTA);
-			//... Cómo hacer repintar el carrito??? 
+			//Actualizar carrito????
+			this.dispose();
 		}
-		else if(evento == Evento.RES_ANYADIR_PASE_A_VENTA_KO) 
+		else if(evento == Evento.RES_ANYADIR_PASE_A_VENTA_KO) { 
 			PanelUtils.panelMessage(this, Messages.X_PASE_ANYADIDO_A_VENTA.formatted((String)datos));
+		}
 	}
 }
