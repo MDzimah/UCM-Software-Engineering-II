@@ -13,44 +13,66 @@ import misc.PanelUtils;
 @SuppressWarnings("serial")
 public abstract class VistaDefault extends JFrame {
 	/**
-	 * Initializes and constructs a default GUI layout consisting of label-component pairs
-	 * and two response buttons (positive and negative). The visual layout is structured as follows:
+	 * Initializes and constructs a default GUI layout consisting of vertically stacked pairs of UI components,
+	 * followed by a row of two response buttons (positive and negative) at the bottom. Optionally, the layout can 
+	 * occupy the full screen.
 	 *
+	 * <p>The layout is visually structured as follows:</p>
 	 * <pre>
-	 * +--------------------------------------------------+
-	 * |                                                  |
-	 * |           [Label 1]     [Component 1]            |
-	 * |           [Label 2]     [Component 2]            |
-	 * |                     ...                          |
-	 * |           [Label n]     [Component n]            |						
-	 * |                                                  |
-	 * |                                                  |
-	 * |      [Positive Button]  [Negative Button]        |
-	 * +--------------------------------------------------+
+	 * +---------------------------------------------------+
+	 * |                                                   |
+	 * |         [Component 1A]     [Component 1B]         |
+	 * |         [Component 2A]     [Component 2B]         |
+	 * |                        ...                        |
+	 * |         [Component nA]     [Component nB]         |
+	 * |                                                   |
+	 * |                                                   |
+	 * |       [Positive Button]   [Negative Button]       |
+	 * +---------------------------------------------------+
 	 * </pre>
+	 * 
+	 * <p>If {@code fullScreen} is set to {@code true}, the layout will maximize the window to occupy the entire screen.
+	 * Otherwise, it will scale based on the given screen size. The components in the {@code pairComponents} list are 
+	 * placed in a vertically stacked layout, and only the non-null elements of each pair are added to the layout. 
+	 * The response buttons are added if either button is non-null.</p>
 	 *
-	 * @param labeledComponents an {@code ArrayList} of {@code Pair<JLabel, JComponent>} objects,
-	 *                          where each pair represents a label and its associated UI component (e.g., a text field)
-	 * @param positiveResponse the {@code JButton} that triggers a positive action (e.g., OK, Submit)
-	 * @param negativeResponse the {@code JButton} that triggers a negative or cancel action (e.g., Cancel, Back)
-	 * @return the {@code JPanel} containing the vertical list of label-component pairs (the central info panel)
+	 * @param pairComponents an {@code ArrayList} of {@code Pair<JComponent, JComponent>} objects,
+	 *                       where each pair represents two horizontally aligned components (e.g., label and field,
+	 *                       or icon and input). Only the non-null element of the pair is added.
+	 * @param positiveResponse the {@code JButton} that triggers a positive action (e.g., OK, Submit). Only added if not null.
+	 * @param negativeResponse the {@code JButton} that triggers a negative or cancel action (e.g., Cancel, Back). Only added if not null.
+	 * @param fullScreen if {@code true}, the window will be maximized to occupy the entire screen; otherwise, it will scale 
+	 *                   based on a defined screen dimension.
+	 * @return the {@code JPanel} containing the entire layout, including the vertical list of component pairs and the row 
+	 *         of response buttons at the bottom.
 	 */
-
-	public JPanel initComps(ArrayList<Pair<JLabel, JComponent>> labeledComponents,
-			   JButton postiveResponse, JButton negativeResponse) 
+	public JPanel initComps(ArrayList<Pair<JComponent, JComponent>> pairComponents,
+	                        JButton positiveResponse, JButton negativeResponse, boolean fullScreen) 
 	{
 		JPanel mainPanel = new JPanel(new BorderLayout());
-		mainPanel.setSize(Constants.getScaledScreenDimension(2, 2));
 		
-		JPanel infoPanel = new JPanel();
-		infoPanel.setLayout(new BoxLayout(infoPanel, BoxLayout.Y_AXIS));
-		for (Pair<JLabel, JComponent> p : labeledComponents) {
-			infoPanel.add(PanelUtils.createLabelComponentPair(p.getFirst(), p.getSecond()));
+		if (fullScreen) {
+			this.setExtendedState(JFrame.MAXIMIZED_BOTH);
+	        this.setVisible(true);
 		}
-		mainPanel.add(infoPanel, BorderLayout.CENTER);
-		
-		JPanel responsePanel = PanelUtils.createResponsePair(postiveResponse, negativeResponse);
-		mainPanel.add(responsePanel, BorderLayout.SOUTH);
-		return infoPanel;
+		mainPanel.setSize(Constants.getScaledScreenDimension(2, 2));
+	
+		if (!pairComponents.isEmpty()) {
+		    JPanel infoPanel = new JPanel();
+		    infoPanel.setLayout(new BoxLayout(infoPanel, BoxLayout.Y_AXIS));
+		    for (Pair<JComponent, JComponent> p : pairComponents) {
+		        infoPanel.add(PanelUtils.createComponentPair(p.getFirst(), p.getSecond()));
+		    }
+	
+		    mainPanel.add(infoPanel, BorderLayout.CENTER);
+	    }
+	    
+		if (positiveResponse != null || negativeResponse != null) {
+		    JPanel responsePanel = PanelUtils.createResponsePair(positiveResponse, negativeResponse);
+		    responsePanel.setBorder(BorderFactory.createEmptyBorder(30, 0, 10, 0));
+		    mainPanel.add(responsePanel, BorderLayout.SOUTH);
+		}
+	    
+	    return mainPanel;
 	}
 }

@@ -64,7 +64,7 @@ public enum Evento {
 	//Cliente
 	
 	RES_ALTA_CLIENTE_OK, 
-	RES_ALTA_CLIENTE_KO;
+	RES_ALTA_CLIENTE_KO,
 	
 	
 	//Pase
@@ -80,4 +80,9 @@ public enum Evento {
 	
 	
 	//MiemCompTea
+	
+	
+	//MainWindow
+	FACTURA,
+	
 }

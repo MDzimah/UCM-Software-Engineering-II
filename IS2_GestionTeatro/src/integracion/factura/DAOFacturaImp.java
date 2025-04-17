@@ -44,6 +44,7 @@ public class DAOFacturaImp implements DAOFactura {
 			carrito.put(idLineaFactura);
 		}
 		nuevaFactura.put(Messages.KEY_carrito, carrito);
+		nuevaFactura.put(Messages.KEY_subtotal, tFactura.getSubtotal());
 		nuevaFactura.put(Messages.KEY_importe, tFactura.getImporte());
 		
 		//La insertamos en la bd de facturas, su clave es su id
@@ -126,6 +127,7 @@ public class DAOFacturaImp implements DAOFactura {
         			daoLineaFactura.update(tLineaFactura);
         		}
         		fac.put(Messages.KEY_carrito, carrito);
+        		fac.put(Messages.KEY_subtotal, tFactura.getSubtotal());
         		fac.put(Messages.KEY_importe, tFactura.getImporte());
             	
             	OpsBBDD.write(bdFactura, Messages.BDFac);
@@ -153,6 +155,7 @@ public class DAOFacturaImp implements DAOFactura {
 				jsonFac.getBoolean(Messages.KEY_act),
 				LocalDateTime.parse(jsonFac.getString(Messages.KEY_fecha)),
 				carrito,
-				jsonFac.getInt(Messages.KEY_importe));
+				jsonFac.getFloat(Messages.KEY_subtotal),
+				jsonFac.getFloat(Messages.KEY_importe));
 	}
 }

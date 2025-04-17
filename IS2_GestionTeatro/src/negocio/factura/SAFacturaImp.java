@@ -14,6 +14,7 @@ import integracion.factoria.FactoriaAbstractaIntegracion;
 import integracion.factura.DAOFactura;
 import integracion.pase.DAOPase;
 import integracion.taquillero.DAOTaquillero;
+import negocio.cliente.SACliente;
 import negocio.cliente.TCliente;
 import negocio.factoria.FactoriaAbstractaNegocio;
 import negocio.obra.TObra;
@@ -62,11 +63,14 @@ public class SAFacturaImp implements SAFactura {
 				}
 			}
 			if (carritoFinal.size() > 0) {
+				SACliente saCl = FactoriaAbstractaNegocio.getInstance().crearSACliente();
+				float subTotal = saCl.aplicarDescuento(tDv.getIdCliente(), importeFinal); 
 				TFactura tFacFinal = new TFactura(tDv.getIdCliente(), 
 						tDv.getIdTaquillero(), 
 						true, 
 						LocalDateTime.now(),
 						carritoFinal,
+						subTotal,
 						importeFinal);
 				DAOFactura daoFac = FactoriaAbstractaIntegracion.getInstance().crearDAOFactura();
 				idFacNueva = daoFac.create(tFacFinal); //Internamente usa DAOLineaFactura y da el id de la factura a las líneas

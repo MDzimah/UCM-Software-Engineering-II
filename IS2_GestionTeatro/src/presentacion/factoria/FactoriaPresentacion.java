@@ -15,7 +15,7 @@ public class FactoriaPresentacion extends FactoriaAbstractaPresentacion {
 		case BUSCAR_FACTURA: return new VistaBuscarFac(false);
 		case CERRAR_VENTA: return new VistaCerrarVenta();
 		case MOSTRAR_FACTURAS: return new VistaMostrarFacs(false);
-		case QUITAR_PASE_DE_VENTA: return new VistaQPDeVenta();
+		case QUITAR_PASE_DE_VENTA: return new VistaQPDeVenta(false);
 		
 		
 		//Cliente
@@ -37,6 +37,10 @@ public class FactoriaPresentacion extends FactoriaAbstractaPresentacion {
 		
 		//MiemCompTea
 		
+		//MainWindow
+		
+		case FACTURA: //Ventana de Jaime para nuestro subs
+			
 		default: 
 		
 		}

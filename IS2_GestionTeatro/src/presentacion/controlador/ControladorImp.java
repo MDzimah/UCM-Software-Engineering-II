@@ -131,6 +131,10 @@ public class ControladorImp extends Controlador {
 		
 		//MiemCompTea
 		
+			
+		//MainWindow
+		case FACTURA: FactoriaAbstractaPresentacion.getInstance().createVista(evento);
+			
 		default: 
 		
 		}

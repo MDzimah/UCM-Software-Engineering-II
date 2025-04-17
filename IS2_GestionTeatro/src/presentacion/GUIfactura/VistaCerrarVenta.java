@@ -48,11 +48,11 @@ public class VistaCerrarVenta extends VistaDefault implements IGUI {
 		this.aceptar = new JButton("Aceptar");
 		this.cancelar = new JButton("Cancelar");
 
-		ArrayList<Pair<JLabel, JComponent>> labeledComponents = new ArrayList<>();
+		ArrayList<Pair<JComponent, JComponent>> labeledComponents = new ArrayList<>();
 		labeledComponents.add(new Pair<>(labelCliente, tfCliente));
 		labeledComponents.add(new Pair<>(labelTaquillero, tfTaquillero));
 
-		super.initComps(labeledComponents, aceptar, cancelar);
+		super.initComps(labeledComponents, aceptar, cancelar, false);
 		
 		aceptar.addActionListener(new ActionListener() {
 			@Override

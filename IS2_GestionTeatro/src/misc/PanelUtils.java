@@ -1,7 +1,10 @@
 package misc;
 
 import java.awt.Component;
+import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.awt.event.ComponentAdapter;
+import java.awt.event.ComponentEvent;
 
 import javax.swing.*;
 
@@ -66,32 +69,54 @@ public class PanelUtils {
 	}
 	
 	/**
-	 * Creates a JPanel containing a JLabel and any type of JComponent arranged horizontally.
-	 * Adds a horizontal strut for spacing between the label and the component.
-	 * The resulting panel is horizontally centered within any vertically stacked layout (e.g., BoxLayout.Y_AXIS),
-	 * making it suitable for use in vertically structured forms where each row is centered.
-	 * Adds vertical padding above and below the row for consistent spacing between multiple pairs.
+	 * Creates a horizontally aligned {@code JPanel} containing two {@code JComponent}s with adjustable spacing between them.
+	 * <p>
+	 * The panel uses a horizontal {@code BoxLayout} and includes a fixed horizontal strut for consistent spacing between the
+	 * two components. The entire panel is center-aligned and includes vertical padding, making it ideal for use in vertically
+	 * stacked layouts such as {@code BoxLayout.Y_AXIS}, where each row should be centered and evenly spaced. The spacing
+	 * between the components is dynamically adjustable based on the panel's size, making it responsive to changes in the window
+	 * or container size. The spacing is only applied when both components are present.
+	 * </p>
 	 *
-	 * @param label the JLabel to be placed next to the component
-	 * @param component the JComponent to be placed next to the label (e.g., JTextField, JButton, etc.)
-	 * @return JPanel containing the horizontally aligned JLabel and JComponent, with center alignment and padding
+	 * @param component1 the first {@code JComponent} to be added (e.g., {@code JLabel}, {@code JTextField}, etc.)
+	 * @param component2 the second {@code JComponent} to be added (e.g., {@code JTextField}, {@code JButton}, etc.)
+	 * @return a {@code JPanel} containing the two components arranged horizontally with adjustable spacing and vertical padding.
+	 *         If either component is {@code null}, only the non-null component will be added, with spacing adjusted accordingly.
 	 */
-	public static JPanel createLabelComponentPair(JLabel label, JComponent component) {
+	public static JPanel createComponentPair(JComponent component1, JComponent component2) {
 	    JPanel pair = new JPanel();
 	    pair.setLayout(new BoxLayout(pair, BoxLayout.X_AXIS));
 	    pair.setAlignmentX(Component.CENTER_ALIGNMENT);
 	    pair.setBorder(BorderFactory.createEmptyBorder(10, 0, 10, 0));
-	    
-	    pair.add(label);
-	    pair.add(Box.createHorizontalStrut(10));
-	    pair.add(component);
+
+	    if (component1 != null) pair.add(component1);
+	    Box strut;
+	    if (component2 != null) {
+	    	pair.add(component2);
+	    	if (component1 != null) {
+	    		strut = (Box) Box.createHorizontalStrut(10);
+		    	pair.add(strut);
+		    	
+		    	//Para que el espacio entre botones del panel se redimensione dinámicamente
+			    pair.addComponentListener(new ComponentAdapter() {
+			        @Override
+			        public void componentResized(ComponentEvent e) {
+			            int width = pair.getWidth();
+			            //Ajusta el espaciado basado en el panel
+			            int spacing = Math.max(10, width / 50);
+			            strut.setPreferredSize(new Dimension(spacing, 0));
+			            pair.revalidate();
+			        }
+			    });
+	    	}
+	    }
 	    
 	    return pair;
 	}
 	
 	/**
-	 * Creates a JPanel containing two JButton components arranged horizontally at the center.
-	 * 
+	 * Creates a JPanel containing two JButton components arranged horizontally at the center. Only the non-null are added.
+	 *  
 	 * @param button1 the first JButton to be added to the panel
 	 * @param button2 the second JButton to be added to the panel
 	 * @return JPanel containing the two buttons arranged in the center
@@ -99,8 +124,8 @@ public class PanelUtils {
 	public static JPanel createResponsePair(JButton button1, JButton button2) {
         JPanel pair = new JPanel();
         pair.setLayout(new FlowLayout(FlowLayout.CENTER));
-        pair.add(button1);
-        pair.add(button2);
+        if (button1 != null) pair.add(button1);
+        if (button2 != null) pair.add(button2);
         return pair;
     }
 }

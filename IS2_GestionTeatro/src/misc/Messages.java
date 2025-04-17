@@ -56,6 +56,7 @@ public class Messages {
 	public static final String KEY_fecha = "fecha";
 	public static final String KEY_act = "activo";
 	public static final String KEY_carrito = "carrito";
+	public static final String KEY_subtotal = "subtotal";
 	public static final String KEY_importe = "importe";
 	public static final String KEY_LF_precio = "precioVenta";
 	public static final String KEY_ctdad = "cantidad";

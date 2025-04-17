@@ -8,4 +8,5 @@ public interface SACliente {
 	public int update(TCliente cl);
 	public int delete (int id);
 	public Collection<TCliente> readAll();
+	public float aplicarDescuento(int idCliente, float importe); //Lo que hablamos para factura (mira SAFactura create para verlo)
 }

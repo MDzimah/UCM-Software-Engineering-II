@@ -34,10 +34,10 @@ public abstract class VistaAdd_QuitarPdeVenta extends VistaDefault {
 		ok = new JButton("Aceptar");
 		cancel = new JButton("Cancelar");
 		
-		ArrayList<Pair<JLabel, JComponent>> labeledComponents = new ArrayList<>();
+		ArrayList<Pair<JComponent, JComponent>> labeledComponents = new ArrayList<>();
 		labeledComponents.add(new Pair<>(lIdPase, tIdPase));
 		labeledComponents.add(new Pair<>(lCtdad, sCtdad));
-		super.initComps(labeledComponents, ok, cancel);
+		super.initComps(labeledComponents, ok, cancel, false);
 	}
 	
 	void okAndCancelListener(Evento evento) {
