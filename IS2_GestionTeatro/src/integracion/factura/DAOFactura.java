@@ -2,8 +2,7 @@ package integracion.factura;
 
 import java.util.Collection;
 
-import exceptions.BBDDReadException;
-import exceptions.BBDDWriteException;
+import exceptions.*;
 import negocio.factura.TFactura;
 
 public interface DAOFactura {

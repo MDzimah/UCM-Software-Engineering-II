@@ -1,6 +1,5 @@
 package integracion.obra;
 
-import java.util.Collection;
 import java.util.LinkedList;
 import java.util.List;
 

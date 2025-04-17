@@ -40,10 +40,10 @@ public class VistaCerrarVenta extends VistaDefault implements IGUI {
 		this.setTitle("CERRAR VENTA");
 		this.carrito = tFactura.getCarrito();
 		this.labelCliente = new JLabel("DNI del cliente:");
-		this.tfCliente = new JTextField(50);
+		this.tfCliente = new JTextField(20);
 
 		this.labelTaquillero = new JLabel("DNI del taquillero:");
-		this.tfTaquillero = new JTextField(50);
+		this.tfTaquillero = new JTextField(20);
 
 		this.aceptar = new JButton("Aceptar");
 		this.cancelar = new JButton("Cancelar");

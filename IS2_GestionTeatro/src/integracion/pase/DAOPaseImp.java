@@ -7,8 +7,8 @@ import java.util.Collection;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import exceptions.BBDDReadException;
-import exceptions.BBDDWriteException;
+import exceptions.BBDDFacReadException;
+import exceptions.BBDDFacWriteException;
 import integracion.factoria.FactoriaAbstractaIntegracion;
 import integracion.factura.DAOLineaFactura;
 import misc.OpsBBDD;
@@ -38,11 +38,11 @@ public class DAOPaseImp implements DAOPase {
 			OpsBBDD.write(bdPase, "BDPase.json");
 			return newID;
 		} 
-		catch (BBDDReadException e) {
+		catch (BBDDFacReadException e) {
 			PanelUtils.panelBBDDReadError(null, "BDPase.json", e.getMessage());
 			return -1;
 		}
-		catch (BBDDWriteException e) {
+		catch (BBDDFacWriteException e) {
 			PanelUtils.panelBBDDWriteError(null, "BDPase.json", e.getMessage());
 			return -1;
 		}
@@ -60,7 +60,7 @@ public class DAOPaseImp implements DAOPase {
 					return 1; //se ha borrado exitosamente el usuario
 				}
 			}
-		} catch (BBDDReadException e) {
+		} catch (BBDDFacReadException e) {
 			PanelUtils.panelBBDDReadError(null, "BDFactura.json", e.getMessage());
 		}
 		return -1; //no se ha borrado pase porque no se ha encontrado
@@ -77,7 +77,7 @@ public class DAOPaseImp implements DAOPase {
 					return read(pase);
 				}
 			}
-		} catch (BBDDReadException e) {
+		} catch (BBDDFacReadException e) {
 			PanelUtils.panelBBDDReadError(null, "BDFactura.json", e.getMessage());
 		}
 		return null;
@@ -95,7 +95,7 @@ public class DAOPaseImp implements DAOPase {
 					pasesADevolver.add(read(pase));
 				}
 			}
-		} catch (BBDDReadException e) {
+		} catch (BBDDFacReadException e) {
 			PanelUtils.panelBBDDReadError(null, "BDFactura.json", e.getMessage());
 		}
 		return null;

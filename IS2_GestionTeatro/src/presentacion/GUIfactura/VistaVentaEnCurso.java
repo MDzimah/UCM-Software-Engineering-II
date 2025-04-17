@@ -4,6 +4,7 @@ import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.Collection;
 
 import javax.swing.BoxLayout;
@@ -29,7 +30,7 @@ public class VistaVentaEnCurso extends JFrame implements IGUI {
 	
 	private JButton anyadirPase;
 	
-	private Collection<TLineaFactura> carrito;
+	private static Collection<TLineaFactura> carrito = new ArrayList<TLineaFactura>();
 	
 	private JScrollPane vistaCarrito;
 	
@@ -48,7 +49,7 @@ public class VistaVentaEnCurso extends JFrame implements IGUI {
 		anyadirPase.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				new VistaAddPaseVenta();
+				new VistaAddPaseVenta(tFactura);
 			}
 		});
 		this.add(anyadirPase);
@@ -94,6 +95,10 @@ public class VistaVentaEnCurso extends JFrame implements IGUI {
 			cargarVistaCarrito();
 		}
 	}
+	
+	public static Collection<TLineaFactura> getCarrito() { return carrito; } 
+	
+	public static void removeFromCarrito(TLineaFactura tLf) { if(carrito.size() != 0) carrito.remove(tLf); } 
 	
 	private void cargarVistaCarrito() {
 		vistaCarrito.removeAll();

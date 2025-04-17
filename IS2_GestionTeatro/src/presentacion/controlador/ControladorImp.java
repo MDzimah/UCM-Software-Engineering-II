@@ -1,57 +1,78 @@
 package presentacion.controlador;
 
+import java.util.ArrayList;
 import java.util.Collection;
 
 import eventos.Evento;
-import misc.Pair;
+import exceptions.BBDDReadException;
+import misc.PanelUtils;
 import negocio.factoria.FactoriaAbstractaNegocio;
 import negocio.factura.SAFactura;
 import negocio.factura.TFactura;
 import negocio.factura.TLineaFactura;
-import negocio.obra.SAObra;
 import negocio.pase.SAPase;
 import negocio.pase.TPase;
+import presentacion.GUIfactura.VistaVentaEnCurso;
 import presentacion.factoria.FactoriaAbstractaPresentacion;
 
 public class ControladorImp extends Controlador {
 
-	@SuppressWarnings("unchecked")
 	@Override
 	public void accion(Evento evento, Object datos) {
 		switch(evento) {
 		
 		//Factura
 		case ANYADIR_PASE_A_VENTA: {
-			Pair<TFactura, TLineaFactura> facYNuevaLinea = (Pair<TFactura, TLineaFactura>)datos;
-			TLineaFactura newTlf = facYNuevaLinea.getSecond();
+			TLineaFactura newTLf = (TLineaFactura)datos;
 			SAPase saP = FactoriaAbstractaNegocio.getInstance().crearSAPase();
-			FactoriaAbstractaNegocio.getInstance().crearSAObra().readByName().getId();
 			
-			TPase tPase = saP.readByTitleAndDate();
+			TPase tPase = saP.read(newTLf.getIdPase());
+			
 			
 			if (tPase != null) {
-				newTlf.setPrecioVenta(tPase.getPrecio());
-				newTlf.setFechaPase(tPase.getFecha());
-				newTlf.setIdPase(tPase.getIdPase());
-				TFactura tFac = facYNuevaLinea.getFirst();
+				Collection<TLineaFactura> carr = VistaVentaEnCurso.getCarrito();
 				
-				//SET ID FACTURA?????? No se hace lo de la fac nueva al cerrarVenta??? newTlf.setIdFactura(...)
-				//Quizás JAIME (PARA QUE LO VEAS) cuando cierras venta tienes q hacer un método q recorra el carrito y de a todos los TLineaFactura los id de su factura
-				newTlf.setIdLineaFactura(tFac.addToCarrito(newTlf));
+				float precioPase = tPase.getPrecio();
+				
+				boolean estaba = false;
+				
+				//Recorremos el carrito para ver si ya hay una instancia de la línea factura
+				//Si sí, entonces sumamos a la cantidad y al precio de venta de dicha línea
+				for(TLineaFactura tLf : carr) {
+					if (tLf.getIdPase() == newTLf.getIdPase()) {
+						int ctdadComprada = saP.comprar(newTLf.getIdPase(), newTLf.getCantidad());
+						tLf.setCantidad(tLf.getCantidad() + ctdadComprada);
+						tLf.setPrecioVenta(tLf.getPrecioVenta() + precioPase*ctdadComprada);
+						estaba = true;
+						break;
+					}
+				}
+				
+				//No hay instancia previa de newTLf en el carrito
+				if (!estaba) {
+					int ctdadComprada = saP.comprar(newTLf.getIdPase(), newTLf.getCantidad());
+					newTLf.setCantidad(ctdadComprada);
+					newTLf.setPrecioVenta(precioPase*ctdadComprada);
+					carr.add(newTLf);
+				}	
 				
 				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_ANYADIR_PASE_A_VENTA_OK, null);
 			}
-			else FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_ANYADIR_PASE_A_VENTA_KO, newTlf.getTituloObra() + ' ' + newTlf.getFechaPase());
+			else FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_ANYADIR_PASE_A_VENTA_KO, newTLf.getIdPase());
 			break;
 		}
 		case BUSCAR_FACTURA: {
 			int idFac = (int)datos;
-			
 			SAFactura saFac = FactoriaAbstractaNegocio.getInstance().crearSAFactura();
-			TFactura tFacBuscada = saFac.read(idFac);
+			try {
+				TFactura tFacBuscada = saFac.read(idFac);
 			
-			if(tFacBuscada != null)	FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_BUSCAR_FACTURA_OK, tFacBuscada);
-			else FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_BUSCAR_FACTURA_KO, idFac);
+				if(tFacBuscada != null)	FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_BUSCAR_FACTURA_OK, tFacBuscada);
+				else FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_BUSCAR_FACTURA_KO, idFac);
+			}
+			catch(BBDDReadException e) {
+				PanelUtils.panelBBDDReadError(null, e.getMessage());
+			}
 			
 			break;
 		}
@@ -62,25 +83,42 @@ public class ControladorImp extends Controlador {
 		}
 		case MOSTRAR_FACTURAS: {
 			SAFactura saFac = FactoriaAbstractaNegocio.getInstance().crearSAFactura();
-			Collection<TFactura> allFacturas = saFac.readAll();
-			
-			if (!allFacturas.isEmpty()) FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_MOSTRAR_FACTURAS_OK, allFacturas); 
-			else  FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_MOSTRAR_FACTURAS_KO, null); 
+			try {
+				Collection<TFactura> allFacturas = saFac.readAll();
+				
+				if (!allFacturas.isEmpty()) FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_MOSTRAR_FACTURAS_OK, allFacturas); 
+				else  FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_MOSTRAR_FACTURAS_KO, null); 
+			}
+			catch(BBDDReadException e) {
+				PanelUtils.panelBBDDReadError(null, e.getMessage());
+			}
 			break;
 		}
 		case QUITAR_PASE_DE_VENTA: {
-			Pair<TFactura, TLineaFactura> facYLineaParaQuitar = (Pair<TFactura, TLineaFactura>)datos;
-			TLineaFactura tLf = facYLineaParaQuitar.getSecond();
-			SAFactura saFac = FactoriaAbstractaNegocio.getInstance().crearSAFactura();
+			TLineaFactura tLfAQuitar = (TLineaFactura)datos;
+			SAPase saP = FactoriaAbstractaNegocio.getInstance().crearSAPase();
 			
-			//if (/*EXiste TLineaFactura en la Factura*/) {
-				//...
-				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_ANYADIR_PASE_A_VENTA_OK, null);
-			//}
-			//else 
-				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_ANYADIR_PASE_A_VENTA_KO, tLf.getTituloObra() + ' ' + tLf.getFechaPase());
+			TPase tPase = saP.read(tLfAQuitar.getIdPase());
 			
-			
+			if (tPase != null) {
+				ArrayList<TLineaFactura> carr = (ArrayList<TLineaFactura>) VistaVentaEnCurso.getCarrito();
+				
+				boolean estaba = false;
+				for(int i = 0; i < carr.size(); ++i) {
+					TLineaFactura tLf = carr.get(i);
+					if (tLf.getIdPase() == tLfAQuitar.getIdPase()) {
+						//Se restaura el stock del almacén y se quita la cantidad a quitar de la línea de factura que corresponda
+						saP.restaurarStock(tLfAQuitar.getIdPase(), tLfAQuitar.getCantidad());
+						tLf.setCantidad(tLf.getCantidad() - tLfAQuitar.getCantidad());
+						if (carr.get(i).getCantidad() <= 0) carr.remove(i);
+						estaba = true;
+						break;
+					}
+				}
+				
+				if (!estaba) FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_QUITAR_PASE_DE_VENTA_OK, null);
+			}
+			FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_QUITAR_PASE_DE_VENTA_KO, tLfAQuitar.getIdPase());
 			break;
 		}
 		

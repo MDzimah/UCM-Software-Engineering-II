@@ -1,12 +1,10 @@
 package misc;
 
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
 import org.json.JSONObject;
-
 import exceptions.BBDDReadException;
 import exceptions.BBDDWriteException;
 
@@ -17,7 +15,7 @@ public class OpsBBDD {
 			return new JSONObject(contenidos);
 		}
 		catch(IOException e) {
-			throw new BBDDReadException(Messages.ERROR_ESCRITURA_BBDD, e);
+			throw new BBDDReadException(Messages.ERROR_LECTURA_BBDD.formatted(BBDD), e);
 		}
 	}
 	
@@ -27,7 +25,7 @@ public class OpsBBDD {
 	        file.flush(); //Para asegurar que el buffer se quede vacío
 		}
 		catch(IOException e) {
-			throw new BBDDWriteException(Messages.ERROR_LECTURA_BBDD, e);
+			throw new BBDDWriteException(Messages.ERROR_ESCRITURA_BBDD.formatted(BBDD), e);
 		}
 	}
 }

@@ -2,8 +2,7 @@ package negocio.factura;
 
 import java.util.Collection;
 
-import exceptions.BBDDReadException;
-import exceptions.BBDDWriteException;
+import exceptions.*;
 
 public interface SAFactura {
 	public int create(TFactura tFac);

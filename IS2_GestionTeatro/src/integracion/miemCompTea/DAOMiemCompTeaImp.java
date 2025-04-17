@@ -6,8 +6,8 @@ import java.util.Collection;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import exceptions.BBDDReadException;
-import exceptions.BBDDWriteException;
+import exceptions.BBDDFacReadException;
+import exceptions.BBDDFacWriteException;
 import misc.OpsBBDD;
 import misc.PanelUtils;
 import negocio.miemCompTea.TMiemCompTea;
@@ -40,11 +40,11 @@ public class DAOMiemCompTeaImp implements DAOMiemCompTea {
 			
 			return newId;
 		} 
-		catch (BBDDReadException e) {
+		catch (BBDDFacReadException e) {
 			PanelUtils.panelBBDDReadError(null, "BDMiemCompTea.json", e.getMessage());
 			return -1;
 		}
-		catch (BBDDWriteException e) {
+		catch (BBDDFacWriteException e) {
 			PanelUtils.panelBBDDWriteError(null, "BDMiemCompTea.json", e.getMessage());
 			return -1;
 		}
@@ -69,7 +69,7 @@ public class DAOMiemCompTeaImp implements DAOMiemCompTea {
 				}
 			}
 		} 
-		catch (BBDDReadException e) {
+		catch (BBDDFacReadException e) {
 			PanelUtils.panelBBDDReadError(null, "BDMiemCompTea.json", e.getMessage());
 		}
 		return null;
@@ -87,7 +87,7 @@ public class DAOMiemCompTeaImp implements DAOMiemCompTea {
 			}
 			return miembrosCollection;
 		} 
-		catch (BBDDReadException e) {
+		catch (BBDDFacReadException e) {
 			PanelUtils.panelBBDDReadError(null, "BDMiemCompTea.json", e.getMessage());
 			return null;
 		}
@@ -112,7 +112,7 @@ public class DAOMiemCompTeaImp implements DAOMiemCompTea {
 				}
 			}
 		} 
-		catch (BBDDReadException e) {
+		catch (BBDDFacReadException e) {
 			PanelUtils.panelBBDDReadError(null, "BDMiemCompTea.json", e.getMessage());
 		}
 		return null;
