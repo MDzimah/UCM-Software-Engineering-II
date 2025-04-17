@@ -32,29 +32,20 @@ public class ControladorImp extends Controlador {
 			if (tPase != null) {
 				Collection<TLineaFactura> carr = VistaVentaEnCurso.getCarrito();
 				
-				float precioPase = tPase.getPrecio();
-				
 				boolean estaba = false;
 				
 				//Recorremos el carrito para ver si ya hay una instancia de la línea factura
-				//Si sí, entonces sumamos a la cantidad y al precio de venta de dicha línea
+				//Si sí, entonces sumamos a la cantidad que ya había
 				for(TLineaFactura tLf : carr) {
 					if (tLf.getIdPase() == newTLf.getIdPase()) {
-						int ctdadComprada = saP.comprar(newTLf.getIdPase(), newTLf.getCantidad());
-						tLf.setCantidad(tLf.getCantidad() + ctdadComprada);
-						tLf.setPrecioVenta(tLf.getPrecioVenta() + precioPase*ctdadComprada);
+						tLf.setCantidad(tLf.getCantidad() + newTLf.getCantidad());
 						estaba = true;
 						break;
 					}
 				}
 				
 				//No hay instancia previa de newTLf en el carrito
-				if (!estaba) {
-					int ctdadComprada = saP.comprar(newTLf.getIdPase(), newTLf.getCantidad());
-					newTLf.setCantidad(ctdadComprada);
-					newTLf.setPrecioVenta(precioPase*ctdadComprada);
-					carr.add(newTLf);
-				}	
+				if (!estaba) carr.add(newTLf);	
 				
 				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_ANYADIR_PASE_A_VENTA_OK, null);
 			}
@@ -87,7 +78,7 @@ public class ControladorImp extends Controlador {
 				Collection<TFactura> allFacturas = saFac.readAll();
 				
 				if (!allFacturas.isEmpty()) FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_MOSTRAR_FACTURAS_OK, allFacturas); 
-				else  FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_MOSTRAR_FACTURAS_KO, null); 
+				else FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_MOSTRAR_FACTURAS_KO, null); 
 			}
 			catch(BBDDReadException e) {
 				PanelUtils.panelBBDDReadError(null, e.getMessage());
@@ -107,8 +98,6 @@ public class ControladorImp extends Controlador {
 				for(int i = 0; i < carr.size(); ++i) {
 					TLineaFactura tLf = carr.get(i);
 					if (tLf.getIdPase() == tLfAQuitar.getIdPase()) {
-						//Se restaura el stock del almacén y se quita la cantidad a quitar de la línea de factura que corresponda
-						saP.restaurarStock(tLfAQuitar.getIdPase(), tLfAQuitar.getCantidad());
 						tLf.setCantidad(tLf.getCantidad() - tLfAQuitar.getCantidad());
 						if (carr.get(i).getCantidad() <= 0) carr.remove(i);
 						estaba = true;

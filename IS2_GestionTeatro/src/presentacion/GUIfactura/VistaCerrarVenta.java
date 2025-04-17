@@ -8,13 +8,13 @@ import java.util.Collection;
 import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
 import eventos.Evento;
 import misc.Messages;
 import misc.Pair;
 import misc.PanelUtils;
+import negocio.factura.TDatosVenta;
 import negocio.factura.TFactura;
 import negocio.factura.TLineaFactura;
 import presentacion.IGUI;
@@ -57,10 +57,15 @@ public class VistaCerrarVenta extends VistaDefault implements IGUI {
 		aceptar.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				String cliente = tfCliente.getText();
-				String taquillero = tfTaquillero.getText();
-				TFactura factura = new TFactura(cliente, taquillero, carrito);
-				Controlador.getInstance().accion(Evento.CERRAR_VENTA, factura);
+				try {
+					int cliente = Integer.valueOf(tfCliente.getText());
+					int taquillero = Integer.valueOf(tfTaquillero.getText());
+					TDatosVenta tDv = new TDatosVenta(cliente, taquillero, carrito);
+					Controlador.getInstance().accion(Evento.CERRAR_VENTA, tDv);
+				}
+				catch(ArithmeticException ex) {
+					PanelUtils.panelCamposIncorrectos(VistaCerrarVenta.this);
+				}
 			}
 		});
 

@@ -19,6 +19,11 @@ public class TLineaFactura {
 		this.precioVenta = precioVenta;
 	}
 	
+	public TLineaFactura(int idPase, int cantidad) {
+		this.idPase = idPase;
+		this.cantidad = cantidad;
+	}
+	
 	
 	/*--GETTERS--*/
 

@@ -11,10 +11,10 @@ public class FactoriaPresentacion extends FactoriaAbstractaPresentacion {
 	public IGUI createVista(Evento e) {
 		switch(e) {
 		//Factura
-		case ANYADIR_PASE_A_VENTA: return new VistaAddPaseVenta();
-		case BUSCAR_FACTURA: return new VistaBuscarFac(true);
+		case ANYADIR_PASE_A_VENTA: return new VistaAddPaseVenta(false);
+		case BUSCAR_FACTURA: return new VistaBuscarFac(false);
 		case CERRAR_VENTA: return new VistaCerrarVenta();
-		case MOSTRAR_FACTURAS: return new VistaMostrarFacs(true);
+		case MOSTRAR_FACTURAS: return new VistaMostrarFacs(false);
 		case QUITAR_PASE_DE_VENTA: return new VistaQPDeVenta();
 		
 		

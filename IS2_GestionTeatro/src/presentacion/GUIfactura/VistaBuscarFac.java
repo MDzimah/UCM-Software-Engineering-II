@@ -23,46 +23,46 @@ public class VistaBuscarFac extends JFrame implements IGUI {
 	private JButton buscar;
 	private JButton cancel;
 	
-	public VistaBuscarFac(boolean paraDiferenciarConConstructorPorDefecto) {}
-	
-	public VistaBuscarFac() {
+	public VistaBuscarFac(boolean primeraVez) {
 		super("BUSCAR FACTURA");
-		JPanel mainPanel = new JPanel(new BorderLayout());
-		mainPanel.setSize(Constants.getScaledScreenDimension(2, 2));
-		this.lIdFac = new JLabel("Id factura:");
-		this.tIdFac = new JTextField(20);
-		this.buscar = new JButton("Aceptar");
-		this.cancel = new JButton("Cancelar");
-		
-		JPanel infoPanel = new JPanel();
-		infoPanel.setLayout(new BoxLayout(infoPanel, BoxLayout.Y_AXIS));
-		infoPanel.add(PanelUtils.createLabelComponentPair(this.lIdFac, this.tIdFac));
-		mainPanel.add(infoPanel, BorderLayout.CENTER);
-		
-		JPanel responsePanel = PanelUtils.createResponsePair(buscar, cancel);
-		mainPanel.add(responsePanel, BorderLayout.SOUTH);
-		
-		buscar.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				try {
-					TFactura tFac = new TFactura(Integer.valueOf(tIdFac.getText()));
-					Controlador.getInstance().accion(Evento.BUSCAR_FACTURA, tFac);
-				}
-				catch(ArithmeticException ex) {
-					PanelUtils.panelCamposIncorrectos(VistaBuscarFac.this);
-				}
-			}
+			if(primeraVez) {
+			JPanel mainPanel = new JPanel(new BorderLayout());
+			mainPanel.setSize(Constants.getScaledScreenDimension(2, 2));
+			this.lIdFac = new JLabel("Id factura:");
+			this.tIdFac = new JTextField(20);
+			this.buscar = new JButton("Aceptar");
+			this.cancel = new JButton("Cancelar");
 			
-		});
-		
-		cancel.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) { dispose(); }
-		});
-		
-		this.setVisible(true);
-		this.setLocationRelativeTo(null);
+			JPanel infoPanel = new JPanel();
+			infoPanel.setLayout(new BoxLayout(infoPanel, BoxLayout.Y_AXIS));
+			infoPanel.add(PanelUtils.createLabelComponentPair(this.lIdFac, this.tIdFac));
+			mainPanel.add(infoPanel, BorderLayout.CENTER);
+			
+			JPanel responsePanel = PanelUtils.createResponsePair(buscar, cancel);
+			mainPanel.add(responsePanel, BorderLayout.SOUTH);
+			
+			buscar.addActionListener(new ActionListener() {
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					try {
+						TFactura tFac = new TFactura(Integer.valueOf(tIdFac.getText()));
+						Controlador.getInstance().accion(Evento.BUSCAR_FACTURA, tFac);
+					}
+					catch(ArithmeticException ex) {
+						PanelUtils.panelCamposIncorrectos(VistaBuscarFac.this);
+					}
+				}
+				
+			});
+			
+			cancel.addActionListener(new ActionListener() {
+				@Override
+				public void actionPerformed(ActionEvent e) { dispose(); }
+			});
+			
+			this.setVisible(true);
+			this.setLocationRelativeTo(null);
+		}
 	}
 	
 	@Override

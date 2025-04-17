@@ -29,6 +29,7 @@ import presentacion.IGUI;
 public class VistaVentaEnCurso extends JFrame implements IGUI {
 	
 	private JButton anyadirPase;
+	private JButton quitarPase;
 	
 	private static Collection<TLineaFactura> carrito = new ArrayList<TLineaFactura>();
 	
@@ -37,23 +38,27 @@ public class VistaVentaEnCurso extends JFrame implements IGUI {
 	private JButton aceptar;
 	private JButton cancelar;
 	
-	private TFactura tFactura;
-	
 	public VistaVentaEnCurso() {
 		super("NUEVA VENTA");
 		this.setLayout(new BoxLayout(vistaCarrito, BoxLayout.Y_AXIS));
-		
-		this.tFactura = new TFactura();
 		
 		anyadirPase = new JButton("Añadir pase");
 		anyadirPase.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				new VistaAddPaseVenta(tFactura);
+				new VistaAddPaseVenta(true);
 			}
 		});
 		this.add(anyadirPase);
 		
+		quitarPase = new JButton("Quitar pase");
+		quitarPase.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				new VistaQPDeVenta(true);
+			}
+		});
+		this.add(quitarPase);
 		
 		this.add(new JLabel("Mi carrito"));
 		
@@ -67,7 +72,7 @@ public class VistaVentaEnCurso extends JFrame implements IGUI {
 		aceptar.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				new VistaCerrarVenta(tFactura);
+				new VistaCerrarVenta();
 			}
 		});
 		
@@ -97,8 +102,6 @@ public class VistaVentaEnCurso extends JFrame implements IGUI {
 	}
 	
 	public static Collection<TLineaFactura> getCarrito() { return carrito; } 
-	
-	public static void removeFromCarrito(TLineaFactura tLf) { if(carrito.size() != 0) carrito.remove(tLf); } 
 	
 	private void cargarVistaCarrito() {
 		vistaCarrito.removeAll();

@@ -3,23 +3,22 @@ package presentacion.GUIfactura;
 import eventos.Evento;
 import misc.Messages;
 import misc.PanelUtils;
-import negocio.factura.TFactura;
 import presentacion.*;
 
 @SuppressWarnings("serial")
 public class VistaAddPaseVenta extends VistaAdd_QuitarPdeVenta implements IGUI {
 	
-	public VistaAddPaseVenta() {}
-	
-	public VistaAddPaseVenta(TFactura tFac) {
-		this.setTitle("AÑADIR PASE A VENTA");
-		
-		super.initComps();
-		
-		super.okAndCancelListener(tFac, Evento.ANYADIR_PASE_A_VENTA);
-		
-		this.setVisible(true);
-		this.setLocationRelativeTo(null);
+	public VistaAddPaseVenta(boolean primeraVez) {
+		if (primeraVez) {
+			this.setTitle("AÑADIR PASE A VENTA");
+			
+			super.initComps();
+			
+			super.okAndCancelListener(Evento.ANYADIR_PASE_A_VENTA);
+			
+			this.setVisible(true);
+			this.setLocationRelativeTo(null);
+		}
 	}
 	
 	@Override

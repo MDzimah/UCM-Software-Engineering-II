@@ -1,11 +1,10 @@
 package negocio.factura;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-import exceptions.BBDDFacReadException;
-import exceptions.BBDDFacWriteException;
 import exceptions.BBDDReadException;
 import exceptions.BBDDWriteException;
 import exceptions.UnknownClienteException;
@@ -25,18 +24,18 @@ import negocio.taquillero.TTaquillero;
 public class SAFacturaImp implements SAFactura {
 	
 	@Override
-	public int create(TFactura tFactura) {
-		int id = -1;
+	public int create(TDatosVenta tDv) {
+		int idFacNueva = -1;
 		
-		Collection<TLineaFactura> carritoFinal = new ArrayList<>();
+		Collection<TLineaFactura> carritoFinal = new ArrayList<TLineaFactura>();
 		
 		DAOCliente daoCliente = FactoriaAbstractaIntegracion.getInstance().crearDAOCliente();
 		
-		TCliente leidoCliente = daoCliente.read(tFactura.getIdCliente());
+		TCliente leidoCliente = daoCliente.read(tDv.getIdCliente());
 		DAOTaquillero daoTaquillero = FactoriaAbstractaIntegracion.getInstance().crearDAOTaquillero();
-		TTaquillero leidoTaquillero = daoTaquillero.read(tFactura.getIdTaquillero());
+		TTaquillero leidoTaquillero = daoTaquillero.read(tDv.getIdTaquillero());
 		
-		// Comprobamos excepciones
+		//Comprobamos excepciones
 		if (leidoCliente == null) {
 			throw new UnknownClienteException();
 		}
@@ -46,45 +45,35 @@ public class SAFacturaImp implements SAFactura {
 		
 		DAOPase daoPase = FactoriaAbstractaIntegracion.getInstance().crearDAOPase();
 		
-		// Cliente y Taquillero existen
+		//Cliente y Taquillero existen, preparamos la nueva factura
 		if (leidoCliente.getActivo()) {
-			for (TLineaFactura tLinea : tFactura.getCarrito()) {
+			float importeFinal = 0;
+			for (TLineaFactura tLinea : tDv.getCarrito()) {
 				TPase tPase = daoPase.read(tLinea.getIdPase());
-				if (tPase != null) {
-					
-					/*
-					 * 
-					 * 
-					 * 
-					 * 
-					 * 
-					 * ESTO LO HACEMOS 2 VECES, LO DE COMPRAR (YO AL AÑADIR/QUITAR AL CARRITO Y AQUÍ OTRA)
-					 * 
-					 * 
-					 * 
-					 * 
-					 * 
-					 * 
-					 * 
-					 * */
-					
+				if (tPase != null) {					
 					SAPase saPase = FactoriaAbstractaNegocio.getInstance().crearSAPase();
-					int cantidadVendida = saPase.comprar(tPase, tLinea);
-					saPase.update(tPase);
-					tLinea.setCantidad(tLinea.getCantidad() - cantidadVendida);
+					int cantidadVendida = saPase.comprar(tPase.getIdPase(), tLinea.getCantidad());
 					if (cantidadVendida > 0) {
+						tLinea.setCantidad(cantidadVendida);
+						tLinea.setPrecioVenta(tPase.getPrecio()*cantidadVendida);
+						importeFinal += tLinea.getPrecioVenta();
 						carritoFinal.add(tLinea);
 					}
 				}
 			}
 			if (carritoFinal.size() > 0) {
-				tFactura.setCarrito(carritoFinal);
+				TFactura tFacFinal = new TFactura(tDv.getIdCliente(), 
+						tDv.getIdTaquillero(), 
+						true, 
+						LocalDateTime.now(),
+						carritoFinal,
+						importeFinal);
 				DAOFactura daoFac = FactoriaAbstractaIntegracion.getInstance().crearDAOFactura();
-				id = daoFac.create(tFactura);
+				idFacNueva = daoFac.create(tFacFinal); //Internamente usa DAOLineaFactura y da el id de la factura a las líneas
 			}
 		}
 		
-		return id;
+		return idFacNueva;
 	}
 
 	@Override

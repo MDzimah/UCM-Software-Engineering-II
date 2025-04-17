@@ -6,7 +6,6 @@ import java.util.Collection;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import eventos.Evento;
@@ -23,27 +22,30 @@ public class VistaMostrarFacs extends JFrame implements IGUI {
 	private JButton mostrar;
 	private JButton cancel;
 	
-	public VistaMostrarFacs(boolean paraDiferenciarConConstructorPorDefecto) {}
-	
-	public VistaMostrarFacs() {
+	public VistaMostrarFacs(boolean primeraVez) {
 		super("MOSTRAR FACTURAS");
-		this.mostrar = new JButton("Mostrar");
-		this.cancel = new JButton("Cancelar");
-		JPanel responsePanel = PanelUtils.createResponsePair(this.mostrar, this.cancel);
-		responsePanel.setSize(Constants.getScaledScreenDimension(2, 2));
-		
-		mostrar.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				Controlador.getInstance().accion(Evento.MOSTRAR_FACTURAS, null);
-				dispose();
-			}
-		});
-		
-		cancel.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) { dispose(); }
-		});
+		if(primeraVez) {
+			this.mostrar = new JButton("Mostrar");
+			this.cancel = new JButton("Cancelar");
+			JPanel responsePanel = PanelUtils.createResponsePair(this.mostrar, this.cancel);
+			responsePanel.setSize(Constants.getScaledScreenDimension(2, 2));
+			
+			mostrar.addActionListener(new ActionListener() {
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					Controlador.getInstance().accion(Evento.MOSTRAR_FACTURAS, null);
+					dispose();
+				}
+			});
+			
+			cancel.addActionListener(new ActionListener() {
+				@Override
+				public void actionPerformed(ActionEvent e) { dispose(); }
+			});
+			
+			this.setVisible(true);
+			this.setLocationRelativeTo(null);
+		}
 	}
 	
 	@Override

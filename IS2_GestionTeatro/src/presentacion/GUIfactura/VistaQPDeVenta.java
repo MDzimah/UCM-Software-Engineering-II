@@ -1,27 +1,24 @@
 package presentacion.GUIfactura;
 
-import javax.swing.JOptionPane;
-
 import eventos.Evento;
 import misc.Messages;
 import misc.PanelUtils;
-import negocio.factura.TFactura;
 import presentacion.IGUI;
 
 @SuppressWarnings("serial")
 public class VistaQPDeVenta extends VistaAdd_QuitarPdeVenta implements IGUI {
 	
-	public VistaQPDeVenta() {}
-	
-	public VistaQPDeVenta(TFactura tFac) {
-		this.setTitle("QUITAR PASE DE VENTA");
-		
-		super.initComps();
-		
-		super.okAndCancelListener(tFac, Evento.QUITAR_PASE_DE_VENTA);
-		
-		this.setVisible(true);
-		this.setLocationRelativeTo(null);
+	public VistaQPDeVenta(boolean primeraVez) {
+		if(primeraVez) {
+			this.setTitle("QUITAR PASE DE VENTA");
+			
+			super.initComps();
+			
+			super.okAndCancelListener(Evento.QUITAR_PASE_DE_VENTA);
+			
+			this.setVisible(true);
+			this.setLocationRelativeTo(null);
+		}
 	}
 	
 	@Override
