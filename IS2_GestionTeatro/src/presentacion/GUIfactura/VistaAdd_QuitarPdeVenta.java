@@ -1,6 +1,5 @@
 package presentacion.GUIfactura;
 import java.awt.event.*;
-import java.time.*;
 import java.util.*;
 
 import javax.swing.*;
@@ -13,55 +12,53 @@ import presentacion.superClases.VistaDefault;
 
 @SuppressWarnings("serial")
 public abstract class VistaAdd_QuitarPdeVenta extends VistaDefault {
-	private JLabel lTituloObra;
-	private JTextField tTituloObra;
-	private JLabel lFecha;
-	private JSpinner sFecha;
+	private JLabel lIdPase;
+	private JTextField tIdPase;
 	private JLabel lCtdad;
 	private JTextField tCtdad;
 	private JButton ok;
 	private JButton cancel;
 	
 	void initComps() {
-		lTituloObra = new JLabel("Título de la obra:");
-		tTituloObra = new JTextField(20);
+		lIdPase = new JLabel("Id pase:");
+		tIdPase = new JTextField(20);
+		/*
 		lFecha = new JLabel("Fecha (DD/MM/AAAA) Hora (HH:MM):");
 		SpinnerDateModel model = new SpinnerDateModel(Calendar.getInstance().getTime(), null, null, Calendar.HOUR_OF_DAY);
         sFecha = new JSpinner(model);
+        */
 		lCtdad = new JLabel("Cantidad:");
 		tCtdad = new JTextField(20);
 		ok = new JButton("Aceptar");
 		cancel = new JButton("Cancelar");
 		
 		ArrayList<Pair<JLabel, JComponent>> labeledComponents = new ArrayList<>();
-		labeledComponents.add(new Pair<>(lTituloObra, tTituloObra));
-		labeledComponents.add(new Pair<>(lFecha, sFecha));
+		labeledComponents.add(new Pair<>(lIdPase, tIdPase));
 		labeledComponents.add(new Pair<>(lCtdad, tCtdad));
 		super.initComps(labeledComponents, ok, cancel);
 	}
 	
-	void okAndCancelListener(TFactura tFac, Evento evento) {
+	void okAndCancelListener(Evento evento) {
 		ok.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				setVisible(false);
 				try {
-					//Titulo obra
-					String titObra = tTituloObra.getText();
+					//Id pase
+					int idPase = Integer.valueOf(tIdPase.getText());
 					
 					//Fecha
+					/*
 					Date fechaSeleccionada = (Date) sFecha.getValue();
 					LocalDateTime fechaPase = fechaSeleccionada.toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime();
+					*/
 					
 					//Cantidad
 					int ctdad = Integer.valueOf(tCtdad.getText());
 					if (ctdad <= 0) throw new ArithmeticException();
 					
-					
-					TLineaFactura nuevatLf= new TLineaFactura(titObra, fechaPase, ctdad);
-					
-					Pair<TFactura, TLineaFactura> facYNuevaLinea = new Pair<TFactura, TLineaFactura>(tFac, nuevatLf);
-					Controlador.getInstance().accion(evento, facYNuevaLinea);
+					TLineaFactura tLf = new TLineaFactura(-1, -1, idPase, ctdad, -1);
+					Controlador.getInstance().accion(evento, tLf);
 				}
 				catch(ArithmeticException ex) {
 					PanelUtils.panelCamposIncorrectos(VistaAdd_QuitarPdeVenta.this);

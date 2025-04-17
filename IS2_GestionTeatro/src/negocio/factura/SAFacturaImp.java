@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
+import exceptions.BBDDFacReadException;
+import exceptions.BBDDFacWriteException;
 import exceptions.BBDDReadException;
 import exceptions.BBDDWriteException;
 import exceptions.UnknownClienteException;
@@ -49,6 +51,23 @@ public class SAFacturaImp implements SAFactura {
 			for (TLineaFactura tLinea : tFactura.getCarrito()) {
 				TPase tPase = daoPase.read(tLinea.getIdPase());
 				if (tPase != null) {
+					
+					/*
+					 * 
+					 * 
+					 * 
+					 * 
+					 * 
+					 * ESTO LO HACEMOS 2 VECES, LO DE COMPRAR (YO AL AÑADIR/QUITAR AL CARRITO Y AQUÍ OTRA)
+					 * 
+					 * 
+					 * 
+					 * 
+					 * 
+					 * 
+					 * 
+					 * */
+					
 					SAPase saPase = FactoriaAbstractaNegocio.getInstance().crearSAPase();
 					int cantidadVendida = saPase.comprar(tPase, tLinea);
 					saPase.update(tPase);

@@ -21,17 +21,18 @@ public class PanelUtils {
 	}
 	
 	/**
-	 * Displays an error message dialog indicating that a problem occurred while reading from the database file.
-	 * The dialog will notify the user that the database could not be read properly.
+	 * Shows an error dialog when a problem occurs while reading from a database file.
+	 * <p>
+	 * This dialog alerts the user that the specified database could not be read correctly.
+	 * The message can be customized and typically includes the database name or path.
 	 *
-	 * @param parent the parent frame for the dialog, used to center the dialog relative to the parent frame
-	 *               (can be {@code null} if no parent is needed).
-	 * @param BBDD   the name or path of the database file involved in the read error.
-	 * @param message the message template to display, typically with a placeholder for the database name.
+	 * @param parent       the parent frame for the dialog, used to position it relative to the parent;
+	 *                     can be {@code null} if there is no parent frame.
+	 * @param BBDDMessage  the error message to display, usually including the database name or description.
 	 */
-	public static void panelBBDDReadError(JFrame parent, String BBDD, String message) {
-		JOptionPane.showMessageDialog(null,
-                message.formatted(BBDD),
+	public static void panelBBDDReadError(JFrame parent, String BBDDMessage) {
+		JOptionPane.showMessageDialog(parent,
+				BBDDMessage,
                 "Error Lectura",
                 JOptionPane.ERROR_MESSAGE);
 	}
@@ -46,7 +47,7 @@ public class PanelUtils {
 	 * @param message the message template to display, typically with a placeholder for the database name.
 	 */
 	public static void panelBBDDWriteError(JFrame parent, String BBDD, String message) {
-		JOptionPane.showMessageDialog(null,
+		JOptionPane.showMessageDialog(parent,
                 message.formatted(BBDD),
                 "Error Escritura",
                 JOptionPane.ERROR_MESSAGE);
