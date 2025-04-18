@@ -74,8 +74,7 @@ public class PanelUtils {
 	 * The panel uses a horizontal {@code BoxLayout} and includes a fixed horizontal strut for consistent spacing between the
 	 * two components. The entire panel is center-aligned and includes vertical padding, making it ideal for use in vertically
 	 * stacked layouts such as {@code BoxLayout.Y_AXIS}, where each row should be centered and evenly spaced. The spacing
-	 * between the components is dynamically adjustable based on the panel's size, making it responsive to changes in the window
-	 * or container size. The spacing is only applied when both components are present.
+	 * between the components is only applied when both components are present.
 	 * </p>
 	 *
 	 * @param component1 the first {@code JComponent} to be added (e.g., {@code JLabel}, {@code JTextField}, etc.)
@@ -90,26 +89,8 @@ public class PanelUtils {
 	    pair.setBorder(BorderFactory.createEmptyBorder(10, 0, 10, 0));
 
 	    if (component1 != null) pair.add(component1);
-	    Box strut;
-	    if (component2 != null) {
-	    	pair.add(component2);
-	    	if (component1 != null) {
-	    		strut = (Box) Box.createHorizontalStrut(10);
-		    	pair.add(strut);
-		    	
-		    	//Para que el espacio entre botones del panel se redimensione dinámicamente
-			    pair.addComponentListener(new ComponentAdapter() {
-			        @Override
-			        public void componentResized(ComponentEvent e) {
-			            int width = pair.getWidth();
-			            //Ajusta el espaciado basado en el panel
-			            int spacing = Math.max(10, width / 50);
-			            strut.setPreferredSize(new Dimension(spacing, 0));
-			            pair.revalidate();
-			        }
-			    });
-	    	}
-	    }
+	  	if (component1 != null && component2 != null) pair.add(Box.createHorizontalStrut(30));
+	  	if (component2 != null) pair.add(component2);
 	    
 	    return pair;
 	}

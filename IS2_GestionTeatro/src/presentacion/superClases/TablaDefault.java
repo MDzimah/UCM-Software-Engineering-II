@@ -2,6 +2,7 @@ package presentacion.superClases;
 
 import javax.swing.*;
 import javax.swing.table.AbstractTableModel;
+import javax.swing.table.JTableHeader;
 import javax.swing.table.TableCellRenderer;
 
 import misc.Constants;
@@ -45,7 +46,15 @@ public class TablaDefault extends JFrame {
     //MultiLineTableCellRenderer inspirado por Channa Jayamuni en Stack Overflow
     //https://stackoverflow.com/questions/9955595/how-to-display-multiple-lines-in-a-jtable-cell
     private class MultiLineTableCellRenderer extends JList<String> implements TableCellRenderer {
-
+    	
+    	//Para una apariencia más vistosa de la tabla
+    	public MultiLineTableCellRenderer() {
+    	    setOpaque(true);
+    	    setFont(Constants.FontTablaDefaultCuerpo());
+    	    setFixedCellHeight(-1); //Ajuste dinámico del tamaño de las células
+    	    setBorder(BorderFactory.createEmptyBorder(2, 5, 2, 5));
+    	}
+    	
         @Override
         public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
             
@@ -53,12 +62,18 @@ public class TablaDefault extends JFrame {
         	//En caso contrario renderizamos la casilla con el toString() del Objeto
             if (value == null) this.setListData(new String[] {""});
             else {
-                if (value instanceof Collection) {
-                	Collection<?> list = (Collection<?>) value;
-                    this.setListData(list.toArray(new String[0]));
-                } 
-                else if (value.getClass().isArray()) this.setListData((String[]) value);
-                else setListData(new String[] { value.toString() });
+                if (!(value instanceof Collection) && !value.getClass().isArray()) setListData(new String[] { value.toString() });
+                else {
+                	Object[] paramData;
+                	if (value.getClass().isArray()) paramData = (Object[]) value;
+                	else paramData = ((Collection<?>) value).toArray();
+                	
+                	String[] data = new String[paramData.length];
+                	for (int i = 0; i < data.length; ++i) {
+                		data[i] = paramData[i].toString();
+                	}
+                    this.setListData(data);
+                }
             }
 
             //Para la interacción con las celdas
@@ -74,18 +89,20 @@ public class TablaDefault extends JFrame {
         }
     }
     
-    //Para construir la matriz de información a partir de un vector de TFacturas, TClientes, etc.
+    //Se asume una colección no vacía
+    private boolean containsType(Collection<?> data, Class<?> clazz) {
+        return clazz.isInstance(data.iterator().next());
+    }
+    
+    //Convierte colección de TFacturas, TClientes, etc. a una matriz de información para la tabla
     private List<Object[]> convert(Collection<Object> data, int numCols){
     	List<Object[]> matInfo = new ArrayList<Object[]>();
     	if (data.isEmpty()) return matInfo;
     	else {
-    		
-    		Object[] aux = data.toArray();
-    		
     		//Vemos de que tipo es la colección de objetos
-    		if (aux[0] instanceof TFactura) {
-    			for (TFactura tFac : (TFactura[])aux) {
-    				Object[] fila = new TFactura[numCols];
+    		if (this.containsType(data, TFactura.class)) {
+    			for (TFactura tFac : data.toArray(new TFactura[0])) {
+    				Object[] fila = new Object[numCols];
     				
     				fila[0] = tFac.getIdFactura();
     				fila[1] = tFac.getIdCliente();
@@ -97,7 +114,7 @@ public class TablaDefault extends JFrame {
     				matInfo.add(fila);
     			}
     		}
-    		else if (aux[0] instanceof TCliente) {
+    		else if (this.containsType(data, TCliente.class)) {
     			
     		}
     		/* Luis tendrá método "mostrar clientes VIP/Normales"???
@@ -108,16 +125,16 @@ public class TablaDefault extends JFrame {
 				
 			}
 			*/
-			else if (aux[0] instanceof TPase) {
+			else if (this.containsType(data, TPase.class)) {
 			    			
 			    		}
-			else if (aux[0] instanceof TTaquillero) {
+			else if (this.containsType(data, TTaquillero.class)) {
 				
 			}
-			else if (aux[0] instanceof TObra) {
+			else if (this.containsType(data, TObra.class)) {
 				
 			}
-			else if (aux[0] instanceof TCompTea) {
+			else if (this.containsType(data, TCompTea.class)) {
 				
 			}
 			else { //Instancia de TMiemCompTea
@@ -129,22 +146,23 @@ public class TablaDefault extends JFrame {
     }
 
     /**
-     * Constructs a new {@code TablaDefault} frame displaying a table with the specified column names and data.
+     * Constructs a new {@code TablaDefault} window displaying a dynamically sized table with custom rendering.
      * <p>
-     * The table is created using a custom model based on {@code AbstractTableModel}, and it is displayed
-     * within a scrollable pane. The frame is automatically sized relative to the screen dimensions, with a margin.
-     * The constructor also configures a custom {@code TableCellRenderer} that supports multiline display for cells
-     * containing {@code Collection} instances or arrays, rendering each element on a separate line.
-     * </p>
-     * <p>
-     * The {@code data} collection is internally converted into a list of {@code Object[]} rows using the
-     * {@code convert} method, which checks the type of elements and extracts relevant fields to populate the table.
+     * This table is designed to display various business objects (e.g., {@code TFactura}, {@code TCliente}, etc.)
+     * by converting them into rows of data. It uses a custom {@code AbstractTableModel} for data binding and a
+     * specialized {@code TableCellRenderer} that supports multiline rendering of {@code Collection} or array elements
+     * within individual cells.
      * </p>
      *
-     * @param columnNames an array of {@code String} representing the column headers of the table
-     * @param data a {@code Collection<Object>} containing business objects such as {@code TFactura}, {@code TCliente}, etc.
-     *             which will be processed and displayed in the table
-     * @param nombreTabla the title to be displayed in the window frame
+     * <p>
+     * Column headers are automatically converted to uppercase and styled with a custom font. Cells are rendered
+     * with padding, custom font, and support for vertical resizing based on content height. If the cell contains
+     * a list or array, its elements are displayed on separate lines for clarity.
+     * </p>
+     *
+     * @param columnNames an array of {@code String} representing the column headers; headers are converted to uppercase
+     * @param data a {@code Collection<Object>} containing entities to be rendered, such as {@code TFactura}, {@code TCliente}, etc.
+     * @param nombreTabla the title of the window displayed in the frame’s title bar
      */
     public TablaDefault(String[] columnNames, Collection<Object> data, String nombreTabla) {
         this.setTitle(nombreTabla);
@@ -154,17 +172,73 @@ public class TablaDefault extends JFrame {
         int height = sd.height - sd.height / 12;
         this.setSize(new Dimension(width, height));
         
+        for (int i = 0; i < columnNames.length; ++i) {
+        	columnNames[i] = columnNames[i].toUpperCase();
+        }
         
         DefaultTableModel model = new DefaultTableModel(columnNames, this.convert(data, columnNames.length));
         JTable table = new JTable(model);
+        
+        //Cambiar apariencia del header de la tabla
+        JTableHeader header = table.getTableHeader();
+        header.setFont(Constants.FontTablaDefaultCabecera());
 
         //Las celdas de la tabla pueden contener listas, luego para mostrar los elementos uno debajo del otro, hace falta
         //cambiar la forma de renderizarlas
-        for (int colIndex = 0; colIndex < columnNames.length; ++colIndex) {
-            table.getColumnModel().getColumn(colIndex).setCellRenderer(new MultiLineTableCellRenderer());
+        MultiLineTableCellRenderer renderer = new MultiLineTableCellRenderer(); 
+        table.setDefaultRenderer(String[].class, renderer);
+        for (int i = 0; i < columnNames.length; ++i) {
+        	table.getColumnModel().getColumn(i).setCellRenderer(renderer);
+        }
+        
+        for (int row = 0; row < table.getRowCount(); row++) {
+            int maxHeight = table.getRowHeight();
+            for (int col = 0; col < table.getColumnCount(); col++) {
+                Component comp = table.prepareRenderer(renderer, row, col);
+                maxHeight = Math.max(maxHeight, comp.getPreferredSize().height);
+            }
+            table.setRowHeight(row, maxHeight);
         }
 
         this.add(new JScrollPane(table), BorderLayout.CENTER);
+        this.setLocationRelativeTo(null);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
+    
+    
+    /* PRUEBA DE LA TABLA
+    public static void main(String[] args) {
+        SwingUtilities.invokeLater(() -> {
+            String[] columnNames = {
+                "ID Factura", "ID Cliente", "ID Taquillero", "Fecha", "Carrito", "Importe"
+            };
+
+            Collection<Object> facturas = new ArrayList<>();
+
+            for (int i = 1; i <= 3; i++) {
+                Collection<TLineaFactura> carrito = new ArrayList<>();
+                carrito.add(new TLineaFactura(100 + i, 2));
+                carrito.add(new TLineaFactura(200 + i, 1));
+                carrito.add(new TLineaFactura(300 + i, 20));
+                for (TLineaFactura lf : carrito) {
+                    lf.setPrecioVenta(9.99f + i);
+                }
+
+                TFactura factura = new TFactura(
+                        1000 + i, 2000 + i, true,
+                        LocalDateTime.now().minusDays(i),
+                        carrito,
+                        50.0f + i,
+                        60.0f + i
+                );
+                factura.setIdFactura(i);
+                factura.setIdTaquillero(3000 + i);
+
+                facturas.add(factura);
+            }
+
+            new TablaDefault(columnNames, facturas, "Tabla de Facturas").setVisible(true);
+        });
+    }
+    */
 }

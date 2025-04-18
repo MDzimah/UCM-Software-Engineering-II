@@ -51,11 +51,9 @@ public abstract class VistaDefault extends JFrame {
 	{
 		JPanel mainPanel = new JPanel(new BorderLayout());
 		
-		if (fullScreen) {
-			this.setExtendedState(JFrame.MAXIMIZED_BOTH);
-	        this.setVisible(true);
-		}
-		mainPanel.setSize(Constants.getScaledScreenDimension(2, 2));
+		this.setSize(Constants.getScaledScreenDimension(2, 2));
+		if (fullScreen) this.setExtendedState(JFrame.MAXIMIZED_BOTH);
+		
 	
 		if (!pairComponents.isEmpty()) {
 		    JPanel infoPanel = new JPanel();
@@ -72,6 +70,7 @@ public abstract class VistaDefault extends JFrame {
 		    responsePanel.setBorder(BorderFactory.createEmptyBorder(30, 0, 10, 0));
 		    mainPanel.add(responsePanel, BorderLayout.SOUTH);
 		}
+		this.add(mainPanel);
 	    
 	    return mainPanel;
 	}

@@ -49,4 +49,9 @@ public class TLineaFactura {
 	public void setCantidad(int cantidad) {	this.cantidad = cantidad; }
 	
 	public void setPrecioVenta(float importe) {	this.precioVenta = importe;	}
+	
+	@Override
+	public String toString() {
+	    return "Pase ID: " + idPase + ", Cantidad: " + cantidad + ", Precio: " + precioVenta;
+	}
 }

@@ -23,7 +23,7 @@ public class TDatosVenta {
 	
 	public int getIdTaquillero() {	return this.idTaquillero; }
 	
-	public Collection<TLineaFactura> getCarrito() { return Collections.unmodifiableCollection(this.carrito); }
+	public Collection<TLineaFactura> getCarrito() { return Collections.unmodifiableCollection(carrito); }
 	
 	
 	/*--SETTERS--*/
