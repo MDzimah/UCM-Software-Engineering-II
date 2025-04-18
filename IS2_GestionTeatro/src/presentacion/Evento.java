@@ -30,7 +30,7 @@ public enum Evento {
 	
 	
 	//Obra
-	
+	OBRA,
 	CREAR_OBRA,
 	ELIMINAR_OBRA,
 	MODIFICAR_OBRA,

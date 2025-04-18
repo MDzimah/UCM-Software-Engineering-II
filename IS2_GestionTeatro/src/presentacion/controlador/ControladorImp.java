@@ -129,7 +129,12 @@ public class ControladorImp extends Controlador {
 		
 		
 		//Obra
-		
+		case CREAR_OBRA:
+		case ELIMINAR_OBRA:
+		case MODIFICAR_OBRA:
+		case CONSULTAR_OBRA:
+		case BUSCAR_OBRA:
+		case LISTAR_OBRAS:
 		
 		//CompTea
 		
