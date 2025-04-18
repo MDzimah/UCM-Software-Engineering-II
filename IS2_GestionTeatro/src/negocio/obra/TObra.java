@@ -28,6 +28,9 @@ public class TObra {
 		this.sinopsis = sinopsis;
 		this.pases = new LinkedList<Integer>();
 	}
+	public TObra (String titulo, String autor, String genero, String sinopsis) {
+		this(-1,titulo, autor, genero, sinopsis);
+	}
 	
 	public TObra (int idObra, String titulo, String autor, String genero, String sinopsis, List<Integer> pases) 
 	{

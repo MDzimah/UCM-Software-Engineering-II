@@ -5,12 +5,10 @@ import java.util.ArrayList;
 import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JLabel;
-import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-import eventos.Evento;
+import presentacion.Evento;
 import misc.Pair;
-import negocio.obra.TObra;
 import presentacion.IGUI;
 import presentacion.controlador.Controlador;
 import presentacion.VistaDefault;
