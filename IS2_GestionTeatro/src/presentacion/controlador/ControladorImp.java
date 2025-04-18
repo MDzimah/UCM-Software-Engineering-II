@@ -24,7 +24,7 @@ public class ControladorImp extends Controlador {
 		
 		//Factura
 		case FACTURA: {
-			//Abrir ventana de JAIME para accedder a nuestro subs
+			//Actualizar la ventana de Jaime de Factura (se pulsa un botón de abrir venta, buscar factura, mostrar facturas, etc.)
 		}
 		case ANYADIR_PASE_A_VENTA: {
 			TLineaFactura newTLf = (TLineaFactura)datos;
@@ -73,6 +73,7 @@ public class ControladorImp extends Controlador {
 		}
 		case CERRAR_VENTA: {
 			
+			//Creación de la factura, tratamiento de las 4 excepciones
 			
 			break;
 		}
