@@ -14,7 +14,7 @@ import misc.PanelUtils;
 import negocio.factura.TFactura;
 import presentacion.IGUI;
 import presentacion.controlador.Controlador;
-import presentacion.superClases.TablaDefault;
+import presentacion.factoria.FactoriaAbstractaPresentacion;
 
 @SuppressWarnings("serial")
 public class VistaBuscarFac extends JFrame implements IGUI {
@@ -49,7 +49,7 @@ public class VistaBuscarFac extends JFrame implements IGUI {
 						Controlador.getInstance().accion(Evento.BUSCAR_FACTURA, tFac);
 					}
 					catch(ArithmeticException ex) {
-						PanelUtils.panelCamposIncorrectos(VistaBuscarFac.this);
+						FactoriaAbstractaPresentacion.getInstance().createOtrasVistas(Evento.X_CAMPOS_INCORRECTOS, null);
 					}
 				}
 				
@@ -71,11 +71,16 @@ public class VistaBuscarFac extends JFrame implements IGUI {
 			Collection<Object> fac = new ArrayList<Object>();
 			fac.add((TFactura)datos);
 			String[] nomCols = {"ID","ID CLIENTE", "ID TAQUILLERO", "FECHA", "PASES COMPRADOS", "IMPORTE"};
-			TablaDefault tb = new TablaDefault(nomCols, fac, "BUSCAR FACTURA");
-			tb.setVisible(true);
+			
+			Object[] datosParaTabla = new Object[3];
+			datosParaTabla[0] = nomCols;
+			datosParaTabla[1] = fac;
+			datosParaTabla[2] = "BUSCAR FACTURA";
+			
+			FactoriaAbstractaPresentacion.getInstance().createOtrasVistas(Evento.TABLA_DEFAULT, datosParaTabla);
 		}
 		else if(evento == Evento.RES_BUSCAR_FACTURA_KO) {
-			PanelUtils.panelMessage(this, Messages.X_BUSCAR_FACTURA.formatted((String) datos));
+			FactoriaAbstractaPresentacion.getInstance().createOtrasVistas(Evento.MESSAGE_DIALOG, Messages.X_BUSCAR_FACTURA.formatted((String) datos));
 		}
 	}
 

@@ -22,6 +22,9 @@ public class ControladorImp extends Controlador {
 		switch(evento) {
 		
 		//Factura
+		case FACTURA: {
+			//Abrir ventan de JAIME para accedder a nuestro subs
+		}
 		case ANYADIR_PASE_A_VENTA: {
 			TLineaFactura newTLf = (TLineaFactura)datos;
 			SAPase saP = FactoriaAbstractaNegocio.getInstance().crearSAPase();
@@ -81,7 +84,7 @@ public class ControladorImp extends Controlador {
 				else FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_MOSTRAR_FACTURAS_KO, null); 
 			}
 			catch(BBDDReadException e) {
-				PanelUtils.panelBBDDReadError(null, e.getMessage());
+				FactoriaAbstractaPresentacion.getInstance().c
 			}
 			break;
 		}
@@ -112,6 +115,7 @@ public class ControladorImp extends Controlador {
 		}
 		
 		
+		
 		//Cliente
 		
 		case ALTA_CLIENTE: 
@@ -130,13 +134,8 @@ public class ControladorImp extends Controlador {
 		
 		
 		//MiemCompTea
-		
+
 			
-		//MainWindow
-		case FACTURA: FactoriaAbstractaPresentacion.getInstance().createVista(evento);
-			
-		default: 
-		
 		}
 	}
 

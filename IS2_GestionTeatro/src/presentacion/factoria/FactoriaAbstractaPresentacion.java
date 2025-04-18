@@ -12,4 +12,5 @@ public abstract class FactoriaAbstractaPresentacion {
 	}
 	
 	public abstract IGUI createVista(Evento evento);
+	public abstract void createOtrasVistas(Evento evento, Object datos);
 }

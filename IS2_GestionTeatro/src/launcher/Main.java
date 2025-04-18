@@ -4,7 +4,8 @@ import javax.swing.SwingUtilities;
 
 import com.formdev.flatlaf.FlatIntelliJLaf;
 
-import presentacion.MainWindow;
+import eventos.Evento;
+import presentacion.factoria.FactoriaAbstractaPresentacion;
 
 public class Main {
 	
@@ -13,7 +14,7 @@ public class Main {
 		SwingUtilities.invokeLater(new Runnable() {
             @Override
             public void run() {
-                new MainWindow();
+                FactoriaAbstractaPresentacion.getInstance().createOtrasVistas(Evento.MAINWINDOW, null);
             }
         });
 	}

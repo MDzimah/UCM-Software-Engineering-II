@@ -1,4 +1,4 @@
-package presentacion.superClases;
+package presentacion;
 
 import java.awt.BorderLayout;
 import java.util.ArrayList;
@@ -11,7 +11,7 @@ import misc.PanelUtils;
 
 
 @SuppressWarnings("serial")
-public abstract class VistaDefault extends JFrame {
+public abstract class VistaDefault extends JFrame implements IGUI {
 	/**
 	 * Initializes and constructs a default GUI layout consisting of vertically stacked pairs of UI components,
 	 * followed by a row of two response buttons (positive and negative) at the bottom. Optionally, the layout can 
