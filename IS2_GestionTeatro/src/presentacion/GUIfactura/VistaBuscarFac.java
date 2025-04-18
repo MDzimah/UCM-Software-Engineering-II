@@ -7,11 +7,11 @@ import java.util.Collection;
 
 import javax.swing.*;
 
-import eventos.Evento;
 import misc.Constants;
 import misc.Messages;
 import misc.PanelUtils;
 import negocio.factura.TFactura;
+import presentacion.Evento;
 import presentacion.IGUI;
 import presentacion.controlador.Controlador;
 import presentacion.factoria.FactoriaAbstractaPresentacion;
@@ -23,46 +23,45 @@ public class VistaBuscarFac extends JFrame implements IGUI {
 	private JButton buscar;
 	private JButton cancel;
 	
-	public VistaBuscarFac(boolean primeraVez) {
+	public VistaBuscarFac() {
 		super("BUSCAR FACTURA");
-			if(primeraVez) {
-			JPanel mainPanel = new JPanel(new BorderLayout());
-			mainPanel.setSize(Constants.getScaledScreenDimension(2, 2));
-			this.lIdFac = new JLabel("Id factura:");
-			this.tIdFac = new JTextField(20);
-			this.buscar = new JButton("Aceptar");
-			this.cancel = new JButton("Cancelar");
-			
-			JPanel infoPanel = new JPanel();
-			infoPanel.setLayout(new BoxLayout(infoPanel, BoxLayout.Y_AXIS));
-			infoPanel.add(PanelUtils.createComponentPair(this.lIdFac, this.tIdFac));
-			mainPanel.add(infoPanel, BorderLayout.CENTER);
-			
-			JPanel responsePanel = PanelUtils.createResponsePair(buscar, cancel);
-			mainPanel.add(responsePanel, BorderLayout.SOUTH);
-			
-			buscar.addActionListener(new ActionListener() {
-				@Override
-				public void actionPerformed(ActionEvent e) {
-					try {
-						TFactura tFac = new TFactura(Integer.valueOf(tIdFac.getText()));
-						Controlador.getInstance().accion(Evento.BUSCAR_FACTURA, tFac);
-					}
-					catch(ArithmeticException ex) {
-						FactoriaAbstractaPresentacion.getInstance().createOtrasVistas(Evento.X_CAMPOS_INCORRECTOS, null);
-					}
+		JPanel mainPanel = new JPanel(new BorderLayout());
+		mainPanel.setSize(Constants.getScaledScreenDimension(2, 2));
+		this.lIdFac = new JLabel("Id factura:");
+		this.tIdFac = new JTextField(20);
+		this.buscar = new JButton("Aceptar");
+		this.cancel = new JButton("Cancelar");
+		
+		JPanel infoPanel = new JPanel();
+		infoPanel.setLayout(new BoxLayout(infoPanel, BoxLayout.Y_AXIS));
+		infoPanel.add(PanelUtils.createComponentPair(this.lIdFac, this.tIdFac));
+		mainPanel.add(infoPanel, BorderLayout.CENTER);
+		
+		JPanel responsePanel = PanelUtils.createResponsePair(buscar, cancel);
+		mainPanel.add(responsePanel, BorderLayout.SOUTH);
+		
+		buscar.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				try {
+					TFactura tFac = new TFactura(Integer.valueOf(tIdFac.getText()));
+					Controlador.getInstance().accion(Evento.BUSCAR_FACTURA, tFac);
+					dispose();
 				}
-				
-			});
+				catch(ArithmeticException ex) {
+					FactoriaAbstractaPresentacion.getInstance().createNonIGUIVistas(Evento.X_CAMPOS_INCORRECTOS, null);
+				}
+			}
 			
-			cancel.addActionListener(new ActionListener() {
-				@Override
-				public void actionPerformed(ActionEvent e) { dispose(); }
-			});
-			
-			this.setVisible(true);
-			this.setLocationRelativeTo(null);
-		}
+		});
+		
+		cancel.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) { dispose(); }
+		});
+		
+		this.setVisible(true);
+		this.setLocationRelativeTo(null);
 	}
 	
 	@Override
@@ -77,10 +76,10 @@ public class VistaBuscarFac extends JFrame implements IGUI {
 			datosParaTabla[1] = fac;
 			datosParaTabla[2] = "BUSCAR FACTURA";
 			
-			FactoriaAbstractaPresentacion.getInstance().createOtrasVistas(Evento.TABLA_DEFAULT, datosParaTabla);
+			FactoriaAbstractaPresentacion.getInstance().createNonIGUIVistas(Evento.TABLA_DEFAULT, datosParaTabla);
 		}
 		else if(evento == Evento.RES_BUSCAR_FACTURA_KO) {
-			FactoriaAbstractaPresentacion.getInstance().createOtrasVistas(Evento.MESSAGE_DIALOG, Messages.X_BUSCAR_FACTURA.formatted((String) datos));
+			FactoriaAbstractaPresentacion.getInstance().createNonIGUIVistas(Evento.MESSAGE_DIALOG, Messages.X_BUSCAR_FACTURA.formatted((String) datos));
 		}
 	}
 

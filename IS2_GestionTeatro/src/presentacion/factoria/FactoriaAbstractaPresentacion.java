@@ -1,6 +1,6 @@
 package presentacion.factoria;
 
-import eventos.Evento;
+import presentacion.Evento;
 import presentacion.IGUI;
 
 public abstract class FactoriaAbstractaPresentacion {
@@ -12,5 +12,7 @@ public abstract class FactoriaAbstractaPresentacion {
 	}
 	
 	public abstract IGUI createVista(Evento evento);
-	public abstract void createOtrasVistas(Evento evento, Object datos);
+	
+	//Para ventanas que son meramente informativas o que no van a admitir input del usuario
+	public abstract void createNonIGUIVistas(Evento evento, Object datos);
 }

@@ -14,10 +14,12 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
-import eventos.Evento;
 import negocio.factura.TFactura;
 import negocio.factura.TLineaFactura;
+import presentacion.Evento;
 import presentacion.IGUI;
+import presentacion.controlador.Controlador;
+import presentacion.factoria.FactoriaAbstractaPresentacion;
 
 //VENATANA QUE MUESTRA EL CARRITO + 3 BOTONES
 
@@ -46,7 +48,7 @@ public class VistaVentaEnCurso extends JFrame implements IGUI {
 		anyadirPase.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				new VistaAddPaseVenta(true);
+				FactoriaAbstractaPresentacion.getInstance().createVista(Evento.ANYADIR_PASE_A_VENTA);
 			}
 		});
 		this.add(anyadirPase);
@@ -55,7 +57,7 @@ public class VistaVentaEnCurso extends JFrame implements IGUI {
 		quitarPase.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				new VistaQPDeVenta(true);
+				FactoriaAbstractaPresentacion.getInstance().createVista(Evento.QUITAR_PASE_DE_VENTA);
 			}
 		});
 		this.add(quitarPase);
@@ -72,7 +74,7 @@ public class VistaVentaEnCurso extends JFrame implements IGUI {
 		aceptar.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				new VistaCerrarVenta();
+				FactoriaAbstractaPresentacion.getInstance().createVista(Evento.CERRAR_VENTA);
 			}
 		});
 		
@@ -96,7 +98,7 @@ public class VistaVentaEnCurso extends JFrame implements IGUI {
 
 	@Override
 	public void actualizar(Evento evento, Object datos) {
-		if (evento == Evento.RES_ANYADIR_PASE_A_VENTA_OK) {
+		if (evento == Evento.RES_ANYADIR_PASE_A_VENTA_OK || evento == Evento.RES_QUITAR_PASE_DE_VENTA_OK) {
 			cargarVistaCarrito();
 		}
 	}

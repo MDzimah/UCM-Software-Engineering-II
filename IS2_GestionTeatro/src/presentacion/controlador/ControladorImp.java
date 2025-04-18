@@ -3,27 +3,28 @@ package presentacion.controlador;
 import java.util.ArrayList;
 import java.util.Collection;
 
-import eventos.Evento;
 import exceptions.BBDDReadException;
-import misc.PanelUtils;
 import negocio.factoria.FactoriaAbstractaNegocio;
 import negocio.factura.SAFactura;
 import negocio.factura.TFactura;
 import negocio.factura.TLineaFactura;
 import negocio.pase.SAPase;
 import negocio.pase.TPase;
+import presentacion.Evento;
 import presentacion.GUIfactura.VistaVentaEnCurso;
 import presentacion.factoria.FactoriaAbstractaPresentacion;
 
 public class ControladorImp extends Controlador {
-
+	
+	//Solo se crean vistas aquí a raíz de un error con la acción que pide el controlador al modelo (SA + DAO) pero nunca genera vistas 
+	//por el evento recibido
 	@Override
 	public void accion(Evento evento, Object datos) {
 		switch(evento) {
 		
 		//Factura
 		case FACTURA: {
-			//Abrir ventan de JAIME para accedder a nuestro subs
+			//Abrir ventana de JAIME para accedder a nuestro subs
 		}
 		case ANYADIR_PASE_A_VENTA: {
 			TLineaFactura newTLf = (TLineaFactura)datos;
@@ -65,7 +66,7 @@ public class ControladorImp extends Controlador {
 				else FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_BUSCAR_FACTURA_KO, idFac);
 			}
 			catch(BBDDReadException e) {
-				PanelUtils.panelBBDDReadError(null, e.getMessage());
+				FactoriaAbstractaPresentacion.getInstance().createNonIGUIVistas(Evento.X_BBDD_READ, e.getMessage());
 			}
 			
 			break;
@@ -84,7 +85,7 @@ public class ControladorImp extends Controlador {
 				else FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_MOSTRAR_FACTURAS_KO, null); 
 			}
 			catch(BBDDReadException e) {
-				FactoriaAbstractaPresentacion.getInstance().c
+				FactoriaAbstractaPresentacion.getInstance().createNonIGUIVistas(Evento.X_BBDD_READ, e.getMessage());
 			}
 			break;
 		}

@@ -1,4 +1,4 @@
-package eventos;
+package presentacion;
 
 public enum Evento {
 	//ORDEN ALFABÉTICO EN MÉTODOS/RESPUESTAS

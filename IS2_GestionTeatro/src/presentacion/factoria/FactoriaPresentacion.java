@@ -8,7 +8,6 @@ import java.util.List;
 import javax.swing.*;
 import javax.swing.table.*;
 
-import eventos.Evento;
 import misc.Constants;
 import misc.Messages;
 import negocio.cliente.TCliente;
@@ -19,29 +18,30 @@ import negocio.pase.TPase;
 import negocio.taquillero.TTaquillero;
 import presentacion.*;
 import presentacion.GUIfactura.*;
-import presentacion.controlador.Controlador;
 
 public class FactoriaPresentacion extends FactoriaAbstractaPresentacion {
 
-	//PARA LOS Q IMPLEMENTEN IGUI
+	//PARA LOS Q IMPLEMENTEN IGUI, es decir, actualizan su vista mediante user input
 	@Override
 	public IGUI createVista(Evento e) {
 		switch(e) {
+		case MAINWINDOW: return new MainWindow();
 		//Factura
-		case ANYADIR_PASE_A_VENTA: return new VistaAddPaseVenta(false);
-		case BUSCAR_FACTURA: return new VistaBuscarFac(false);
+		case FACTURA: //Vista de Jaime q enseña nuestro subs
+		case ANYADIR_PASE_A_VENTA: return new VistaAddPaseVenta();
+		case BUSCAR_FACTURA: return new VistaBuscarFac();
 		case CERRAR_VENTA: return new VistaCerrarVenta();
-		case MOSTRAR_FACTURAS: return new VistaMostrarFacs(false);
-		case QUITAR_PASE_DE_VENTA: return new VistaQPDeVenta(false);
+		case MOSTRAR_FACTURAS: return new VistaMostrarFacs();
+		case QUITAR_PASE_DE_VENTA: return new VistaQPDeVenta();
 		
 		
 		//Cliente
 		
-		case ALTA_CLIENTE: 
-		case BUSCAR_CLIENTE: 
-		case ELIMINAR_CLIENTE:
-		case MOSTRAR_CLIENTE: 
-		case ACTUALIZAR_CLIENTE: 
+		case ALTA_CLIENTE: return null;
+		case BUSCAR_CLIENTE: return null;
+		case ELIMINAR_CLIENTE: return null;
+		case MOSTRAR_CLIENTE: return null;
+		case ACTUALIZAR_CLIENTE:  return null;
 		
 		//Taquillero
 		
@@ -53,19 +53,15 @@ public class FactoriaPresentacion extends FactoriaAbstractaPresentacion {
 		
 		
 		//MiemCompTea
-		
-		//MainWindow
-		case FACTURA: //Ventana de Jaime para nuestro subs
 			
-		default: 
+		default: return null;
 		
 		}
 	}
 	
 	@Override
-	public void createOtrasVistas(Evento evento, Object datos) {
+	public void createNonIGUIVistas(Evento evento, Object datos) {
 		switch(evento) {
-		case MAINWINDOW: new MainWindow();
 		case X_CAMPOS_INCORRECTOS: {
 			JOptionPane.showMessageDialog(null, 
 		    		Messages.ERROR_CAMPOS_INCORRECTOS, 
@@ -100,7 +96,7 @@ public class FactoriaPresentacion extends FactoriaAbstractaPresentacion {
 	}
 	
 	@SuppressWarnings("serial")
-	private class MainWindow extends VistaDefault implements IGUI {
+	private class MainWindow extends JFrame implements IGUI {
 		
 		private JButton subsFactura;
 		private JButton subsCliente;
@@ -145,7 +141,7 @@ public class FactoriaPresentacion extends FactoriaAbstractaPresentacion {
 	        subsFactura.addActionListener(new ActionListener() {
 	            @Override
 	            public void actionPerformed(ActionEvent e) {
-	            	Controlador.getInstance().accion(null, Evento.FACTURA);
+	            	FactoriaAbstractaPresentacion.getInstance().createVista(Evento.FACTURA);
 	            }
 	        });
 

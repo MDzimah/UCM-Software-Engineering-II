@@ -4,9 +4,9 @@ import java.util.*;
 
 import javax.swing.*;
 
-import eventos.Evento;
 import misc.*;
 import negocio.factura.*;
+import presentacion.Evento;
 import presentacion.VistaDefault;
 import presentacion.controlador.Controlador;
 import presentacion.factoria.FactoriaAbstractaPresentacion;
@@ -62,9 +62,11 @@ public abstract class VistaAdd_QuitarPdeVenta extends VistaDefault {
 				
 					TLineaFactura tLf = new TLineaFactura(idPase, ctdad);
 					Controlador.getInstance().accion(evento, tLf);
+					dispose();
 				}
 				catch (Exception ex) {
-					FactoriaAbstractaPresentacion.getInstance().createOtrasVistas(Evento.X_CAMPOS_INCORRECTOS, null);
+					FactoriaAbstractaPresentacion.getInstance().createNonIGUIVistas(Evento.X_CAMPOS_INCORRECTOS, null);
+					setVisible(true);
 				}
 			}
 		});

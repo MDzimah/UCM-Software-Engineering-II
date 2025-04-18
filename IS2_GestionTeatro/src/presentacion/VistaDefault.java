@@ -1,6 +1,8 @@
 package presentacion;
 
 import java.awt.BorderLayout;
+import java.awt.GridBagLayout;
+import java.awt.GridLayout;
 import java.util.ArrayList;
 
 import javax.swing.*;
@@ -51,9 +53,9 @@ public abstract class VistaDefault extends JFrame implements IGUI {
 	{
 		JPanel mainPanel = new JPanel(new BorderLayout());
 		
-		this.setSize(Constants.getScaledScreenDimension(2, 2));
+		this.setSize(Constants.getScaledScreenDimension(4, 4));
 		if (fullScreen) this.setExtendedState(JFrame.MAXIMIZED_BOTH);
-		
+		else this.setResizable(false);
 	
 		if (!pairComponents.isEmpty()) {
 		    JPanel infoPanel = new JPanel();
@@ -62,7 +64,7 @@ public abstract class VistaDefault extends JFrame implements IGUI {
 		        infoPanel.add(PanelUtils.createComponentPair(p.getFirst(), p.getSecond()));
 		    }
 	
-		    mainPanel.add(infoPanel, BorderLayout.CENTER);
+		    mainPanel.add(infoPanel, BorderLayout.NORTH);
 	    }
 	    
 		if (positiveResponse != null || negativeResponse != null) {
