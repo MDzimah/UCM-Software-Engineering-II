@@ -75,14 +75,10 @@ public class Messages {
 	public static final String KEY_edad = "edad";
 	public static final String KEY_genero = "genero";
 =======
-	
-	public static final String KEY_nombre = "nombre";
-	public static final String KEY_apellido = "apellido";
 	public static final String KEY_cuentaBancaria = "cuenta";
 	public static final String KEY_facturasCliente = "facturas";
 	public static final String KEY_puntosAcum = "puntos";
 	public static final String KEY_nivelVIP = "nivel";
 	public static final String KEY_costeMensual = "mensualidad";
-	public static final String KEY_DNI = "dni";
 >>>>>>> refs/heads/luis_mod1
 }
