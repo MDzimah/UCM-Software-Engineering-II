@@ -41,14 +41,6 @@ public class TablaDefault extends JFrame {
 
         @Override
         public String getColumnName(int columnIndex) { return columnNames[columnIndex]; }
-        
-        @Override
-        public Class<?> getColumnClass(int columnIndex) {
-            if (getRowCount() > 0 && getValueAt(0, columnIndex) != null) {
-                return getValueAt(0, columnIndex).getClass();
-            }
-            return Object.class;
-        }
     }
 
     //MultiLineTableCellRenderer inspirado por Channa Jayamuni en Stack Overflow
