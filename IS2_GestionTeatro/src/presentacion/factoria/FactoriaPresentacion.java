@@ -27,7 +27,7 @@ public class FactoriaPresentacion extends FactoriaAbstractaPresentacion {
 		switch(e) {
 		case MAINWINDOW: return new MainWindow();
 		//Factura
-		case FACTURA: //Vista de Jaime q enseña nuestro subs
+		case FACTURA: //Devolver vista de Jaime q enseña nuestro subs
 		case ANYADIR_PASE_A_VENTA: return new VistaAddPaseVenta();
 		case BUSCAR_FACTURA: return new VistaBuscarFac();
 		case CERRAR_VENTA: return new VistaCerrarVenta();
@@ -59,6 +59,7 @@ public class FactoriaPresentacion extends FactoriaAbstractaPresentacion {
 		}
 	}
 	
+	@SuppressWarnings("unchecked")
 	@Override
 	public void createNonIGUIVistas(Evento evento, Object datos) {
 		switch(evento) {
