@@ -2,11 +2,10 @@ package presentacion.GUIfactura;
 
 import eventos.Evento;
 import misc.Messages;
-import misc.PanelUtils;
-import presentacion.IGUI;
+import presentacion.factoria.FactoriaAbstractaPresentacion;
 
 @SuppressWarnings("serial")
-public class VistaQPDeVenta extends VistaAdd_QuitarPdeVenta implements IGUI {
+public class VistaQPDeVenta extends VistaAdd_QuitarPdeVenta {
 	
 	public VistaQPDeVenta(boolean primeraVez) {
 		if(primeraVez) {
@@ -24,12 +23,12 @@ public class VistaQPDeVenta extends VistaAdd_QuitarPdeVenta implements IGUI {
 	@Override
 	public void actualizar(Evento evento, Object datos) {
 		if (evento == Evento.RES_QUITAR_PASE_DE_VENTA_OK) {
-			PanelUtils.panelMessage(this, Messages.EX_PASE_QUITADO_DE_VENTA);
+			FactoriaAbstractaPresentacion.getInstance().createOtrasVistas(Evento.MESSAGE_DIALOG, Messages.EX_PASE_QUITADO_DE_VENTA);
 			//... Cómo hacer repintar el carrito??? 
 			this.dispose();
 		}
 		else if(evento == Evento.RES_QUITAR_PASE_DE_VENTA_KO) {
-			PanelUtils.panelMessage(this, Messages.X_PASE_QUITADO_DE_VENTA);
+			FactoriaAbstractaPresentacion.getInstance().createOtrasVistas(Evento.MESSAGE_DIALOG, Messages.X_PASE_QUITADO_DE_VENTA);
 		}
 	}
 }

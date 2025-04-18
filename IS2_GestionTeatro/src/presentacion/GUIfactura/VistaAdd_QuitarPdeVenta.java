@@ -7,8 +7,9 @@ import javax.swing.*;
 import eventos.Evento;
 import misc.*;
 import negocio.factura.*;
+import presentacion.VistaDefault;
 import presentacion.controlador.Controlador;
-import presentacion.superClases.VistaDefault;
+import presentacion.factoria.FactoriaAbstractaPresentacion;
 
 @SuppressWarnings("serial")
 public abstract class VistaAdd_QuitarPdeVenta extends VistaDefault {
@@ -63,7 +64,7 @@ public abstract class VistaAdd_QuitarPdeVenta extends VistaDefault {
 					Controlador.getInstance().accion(evento, tLf);
 				}
 				catch (Exception ex) {
-					PanelUtils.panelCamposIncorrectos(VistaAdd_QuitarPdeVenta.this);
+					FactoriaAbstractaPresentacion.getInstance().createOtrasVistas(Evento.X_CAMPOS_INCORRECTOS, null);
 				}
 			}
 		});

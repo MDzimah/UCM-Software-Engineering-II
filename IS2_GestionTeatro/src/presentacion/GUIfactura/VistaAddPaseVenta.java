@@ -2,11 +2,10 @@ package presentacion.GUIfactura;
 
 import eventos.Evento;
 import misc.Messages;
-import misc.PanelUtils;
-import presentacion.*;
+import presentacion.factoria.FactoriaAbstractaPresentacion;
 
 @SuppressWarnings("serial")
-public class VistaAddPaseVenta extends VistaAdd_QuitarPdeVenta implements IGUI {
+public class VistaAddPaseVenta extends VistaAdd_QuitarPdeVenta {
 	
 	public VistaAddPaseVenta(boolean primeraVez) {
 		if (primeraVez) {
@@ -24,12 +23,11 @@ public class VistaAddPaseVenta extends VistaAdd_QuitarPdeVenta implements IGUI {
 	@Override
 	public void actualizar(Evento evento, Object datos) {
 		if (evento == Evento.RES_ANYADIR_PASE_A_VENTA_OK) {
-			PanelUtils.panelMessage(this, Messages.EX_PASE_ANYADIDO_A_VENTA);
-			//Actualizar carrito????
+			FactoriaAbstractaPresentacion.getInstance().createOtrasVistas(Evento.MESSAGE_DIALOG, Messages.EX_PASE_ANYADIDO_A_VENTA);
 			this.dispose();
 		}
 		else if(evento == Evento.RES_ANYADIR_PASE_A_VENTA_KO) { 
-			PanelUtils.panelMessage(this, Messages.X_PASE_ANYADIDO_A_VENTA.formatted((String)datos));
+			FactoriaAbstractaPresentacion.getInstance().createOtrasVistas(Evento.MESSAGE_DIALOG, Messages.X_PASE_ANYADIDO_A_VENTA.formatted((String)datos));
 		}
 	}
 }

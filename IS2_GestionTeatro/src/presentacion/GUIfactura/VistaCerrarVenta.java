@@ -13,16 +13,15 @@ import javax.swing.JTextField;
 import eventos.Evento;
 import misc.Messages;
 import misc.Pair;
-import misc.PanelUtils;
 import negocio.factura.TDatosVenta;
 import negocio.factura.TFactura;
 import negocio.factura.TLineaFactura;
-import presentacion.IGUI;
+import presentacion.VistaDefault;
 import presentacion.controlador.Controlador;
-import presentacion.superClases.VistaDefault;
+import presentacion.factoria.FactoriaAbstractaPresentacion;
 
 @SuppressWarnings("serial")
-public class VistaCerrarVenta extends VistaDefault implements IGUI {
+public class VistaCerrarVenta extends VistaDefault {
 
 	private JLabel labelCliente;
 	private JTextField tfCliente;
@@ -64,7 +63,7 @@ public class VistaCerrarVenta extends VistaDefault implements IGUI {
 					Controlador.getInstance().accion(Evento.CERRAR_VENTA, tDv);
 				}
 				catch(ArithmeticException ex) {
-					PanelUtils.panelCamposIncorrectos(VistaCerrarVenta.this);
+					FactoriaAbstractaPresentacion.getInstance().createOtrasVistas(Evento.X_CAMPOS_INCORRECTOS, null);
 				}
 			}
 		});
@@ -80,9 +79,9 @@ public class VistaCerrarVenta extends VistaDefault implements IGUI {
 	@Override
 	public void actualizar(Evento evento, Object datos) {
 		if (evento == Evento.RES_CERRAR_VENTA_OK) {
-			PanelUtils.panelMessage(this, Messages.EX_VENTA_CERRADA);
+			FactoriaAbstractaPresentacion.getInstance().createOtrasVistas(Evento.MESSAGE_DIALOG, Messages.EX_VENTA_CERRADA);
 		} else if (evento == Evento.RES_CERRAR_VENTA_KO) {
-			PanelUtils.panelMessage(this, Messages.X_VENTA_CERRADA);
+			FactoriaAbstractaPresentacion.getInstance().createOtrasVistas(Evento.MESSAGE_DIALOG, Messages.X_VENTA_CERRADA);
 		}
 	}
 }
