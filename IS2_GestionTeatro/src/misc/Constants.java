@@ -22,4 +22,9 @@ public class Constants {
 		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 		return new Dimension(screenSize.width/factorH, screenSize.height/factorH);
 	}
+	
+	//Fonts
+	public static Font FontTablaDefaultCabecera() { return new Font("SansSerif", Font.BOLD, 16); }
+	
+	public static Font FontTablaDefaultCuerpo () { return new Font("SansSerif", Font.PLAIN, 15); }
 }

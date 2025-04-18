@@ -1,12 +1,7 @@
 package presentacion;
 
-import java.awt.BorderLayout;
-import java.awt.Component;
-import java.awt.Dimension;
-import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.event.*;
-import java.util.ArrayList;
 
 import javax.swing.*;
 
@@ -28,13 +23,13 @@ public class MainWindow extends VistaDefault {
 	
 	
 	public MainWindow() {
-		subsFactura = new JButton("Factura");
-        subsCliente = new JButton("Cliente");
-        subsPase = new JButton("Pase");
-        subsTaquillero = new JButton("Taquillero");
-        subsObra = new JButton("Obra");
-        subsCompTea = new JButton("Compañía teatral");
-        subsMiemCompTea = new JButton("Miembros de las compañías teatrales");
+		subsFactura = new JButton("FACTURA");
+        subsCliente = new JButton("CLIENTE");
+        subsPase = new JButton("PASE");
+        subsTaquillero = new JButton("TAQUILLERO");
+        subsObra = new JButton("OBRA");
+        subsCompTea = new JButton("COMPAÑÍA TEATRAL");
+        subsMiemCompTea = new JButton("MIEMBROS DE LA COMPAÑÍAS TEATRALES");
         addActionListeners();
         
         this.setLayout(new GridLayout(1,2));
