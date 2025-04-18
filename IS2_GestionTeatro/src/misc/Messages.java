@@ -48,10 +48,12 @@ public class Messages {
 	public static final String KEY_idLinFac = "idLineaFactura";
 	public static final String KEY_idTaq = "idTaquillero";
 	public static final String KEY_idPase = "idPase";
+	public static final String KEY_idMiemComp = "idMiemComp";
 	public static final String KEY_lastId = "lastId";
 	
 	public static final String KEY_facs = "facturas";
 	public static final String KEY_LineasFac = "lineas";
+	public static final String KEY_MiembCompTea = "miembros de la compania teatral";
 	
 	public static final String KEY_fecha = "fecha";
 	public static final String KEY_act = "activo";
@@ -60,4 +62,10 @@ public class Messages {
 	public static final String KEY_importe = "importe";
 	public static final String KEY_LF_precio = "precioVenta";
 	public static final String KEY_ctdad = "cantidad";
+	public static final String KEY_DNI = "DNI";
+	public static final String KEY_nombre = "nombre";
+	public static final String KEY_apellido = "apellido";
+	public static final String KEY_email = "email";
+	public static final String KEY_edad = "edad";
+	public static final String KEY_genero = "genero";
 }

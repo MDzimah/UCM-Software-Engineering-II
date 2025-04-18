@@ -10,10 +10,10 @@ public class TMiemCompTea {
 	private int edad;
 	private boolean activo;
 	
-	public enum Genero {HOMBRE,MUJER}; //?
+	public enum Genero {HOMBRE,MUJER};
 	private Genero genero;
 	
-	public TMiemCompTea(int idMiem, String dni, String nom, String apell, String mail, int ed, boolean act, String gen) {
+	public TMiemCompTea(int idMiem, String dni, String nom, String apell, String mail, int ed, boolean act, Genero gen) {
 		this.idMiemComp = idMiem;
 		this.DNI = dni;
 		this.nombre = nom;
@@ -21,13 +21,7 @@ public class TMiemCompTea {
 		this.email = mail;
 		this.edad = ed;
 		this.activo = act;
-		String gene = gen.toLowerCase();
-		if(gene.equals("hombre")) {
-			genero = Genero.HOMBRE;
-		}
-		else {
-			genero = Genero.MUJER;
-		}
+		this.genero = gen;
 	}
 	
 	public TMiemCompTea(int idMiem) { //?
@@ -71,5 +65,5 @@ public class TMiemCompTea {
 	public void setGenero(Genero gen) { this.genero = gen; }
 	
 	@Override
-	public String toString() { return Integer.toString(this.idMiemComp) } //?
+	public String toString() { return Integer.toString(this.idMiemComp); }
 }
