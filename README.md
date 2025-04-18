@@ -1,4 +1,4 @@
-# SEII Project
+# SE2 Project
 
 ## General Description
 
