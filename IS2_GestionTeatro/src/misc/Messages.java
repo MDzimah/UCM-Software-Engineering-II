@@ -53,12 +53,9 @@ public class Messages {
 	
 	public static final String KEY_facs = "facturas";
 	public static final String KEY_LineasFac = "lineas";
-<<<<<<< HEAD
 	public static final String KEY_MiembCompTea = "miembros de la compania teatral";
-=======
 	public static final String KEY_CliNorms = "clientes";
 	public static final String KEY_CliVIPs = "clientes";
->>>>>>> refs/heads/luis_mod1
 	
 	public static final String KEY_fecha = "fecha";
 	public static final String KEY_act = "activo";
@@ -67,18 +64,16 @@ public class Messages {
 	public static final String KEY_importe = "importe";
 	public static final String KEY_LF_precio = "precioVenta";
 	public static final String KEY_ctdad = "cantidad";
-<<<<<<< HEAD
 	public static final String KEY_DNI = "DNI";
 	public static final String KEY_nombre = "nombre";
 	public static final String KEY_apellido = "apellido";
 	public static final String KEY_email = "email";
 	public static final String KEY_edad = "edad";
 	public static final String KEY_genero = "genero";
-=======
+	
 	public static final String KEY_cuentaBancaria = "cuenta";
 	public static final String KEY_facturasCliente = "facturas";
 	public static final String KEY_puntosAcum = "puntos";
 	public static final String KEY_nivelVIP = "nivel";
 	public static final String KEY_costeMensual = "mensualidad";
->>>>>>> refs/heads/luis_mod1
 }
