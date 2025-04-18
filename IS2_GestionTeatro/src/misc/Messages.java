@@ -76,4 +76,12 @@ public class Messages {
 	public static final String KEY_puntosAcum = "puntos";
 	public static final String KEY_nivelVIP = "nivel";
 	public static final String KEY_costeMensual = "mensualidad";
+
+	public static final String KEY_idObra = "IdObra"; 
+	public static final String KEY_titulo = "Titulo"; 
+	public static final String KEY_autor = "Autor"; 
+	public static final String KEY_Genero = "Genero"; 
+	public static final String KEY_ListaPases = "ListPases"; 
+	public static final String KEY_sinopsis = "Sinopsis"; 
+	public static final String KEY_Activo = "Activo"; 
 }
