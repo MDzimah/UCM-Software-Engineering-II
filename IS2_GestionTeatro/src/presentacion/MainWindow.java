@@ -1,13 +1,17 @@
 package presentacion;
 
 import java.awt.BorderLayout;
+import java.awt.Component;
+import java.awt.Dimension;
+import java.awt.FlowLayout;
+import java.awt.GridLayout;
 import java.awt.event.*;
 import java.util.ArrayList;
 
 import javax.swing.*;
 
 import eventos.Evento;
-import misc.Pair;
+import misc.Constants;
 import presentacion.controlador.Controlador;
 import presentacion.superClases.VistaDefault;
 
@@ -33,14 +37,24 @@ public class MainWindow extends VistaDefault {
         subsMiemCompTea = new JButton("Miembros de las compañías teatrales");
         addActionListeners();
         
-		ArrayList<Pair<JComponent, JComponent>> buttonPairs = new ArrayList<>();
-		buttonPairs.add(new Pair<>(subsFactura, subsCliente));
-		buttonPairs.add(new Pair<>(subsPase, subsTaquillero));
-		buttonPairs.add(new Pair<>(subsObra, subsCompTea));
-		buttonPairs.add(new Pair<>(subsMiemCompTea, null));
-		JPanel mainPanel = super.initComps(buttonPairs, null, null, true);
-		mainPanel.add(new JLabel(new ImageIcon("resources/theaterMainWindow.png")), BorderLayout.NORTH);
+        this.setLayout(new GridLayout(1,2));
+        this.add(new JLabel(new ImageIcon("resources/imagenes/theaterMainWindow.png")));
+      
+        JPanel buttonsPanel = new JPanel();
+        buttonsPanel.setLayout(new GridLayout(4,2));
+        buttonsPanel.add(subsFactura);
+        buttonsPanel.add(subsCliente);
+        buttonsPanel.add(subsPase);
+        buttonsPanel.add(subsTaquillero);
+        buttonsPanel.add(subsObra);
+        buttonsPanel.add(subsCompTea);
+        buttonsPanel.add(subsMiemCompTea);
+        this.add(buttonsPanel);
+		
+        this.setSize(Constants.getScaledScreenDimension(2, 2));
+        this.setExtendedState(JFrame.MAXIMIZED_BOTH);
 		this.setVisible(true);		
+		this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 	}
 
 	private void addActionListeners() {

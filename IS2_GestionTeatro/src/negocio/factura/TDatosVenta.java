@@ -1,7 +1,6 @@
 package negocio.factura;
 
 import java.util.Collection;
-import java.util.Collections;
 
 public class TDatosVenta {
 	
@@ -23,7 +22,7 @@ public class TDatosVenta {
 	
 	public int getIdTaquillero() {	return this.idTaquillero; }
 	
-	public Collection<TLineaFactura> getCarrito() { return Collections.unmodifiableCollection(this.carrito); }
+	public Collection<TLineaFactura> getCarrito() { Collections.unmodifiableCollection(carrito); }
 	
 	
 	/*--SETTERS--*/

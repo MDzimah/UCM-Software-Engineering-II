@@ -2,7 +2,6 @@ package negocio.factura;
 
 import java.time.LocalDateTime;
 import java.util.Collection;
-import java.util.Collections;
 
 public class TFactura {
 	
