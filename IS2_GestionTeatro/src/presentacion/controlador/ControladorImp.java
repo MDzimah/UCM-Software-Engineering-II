@@ -136,7 +136,11 @@ public class ControladorImp extends Controlador {
 		
 		
 		//MiemCompTea
-
+		case ACTUALIZAR_MIEMBRO_COMPANIA:
+		case BUSCAR_MIEMBRO_COMPANIA:
+		case CONTRATAR_MIEMBRO_COMPANIA:
+		case DESPEDIR_MIEMBRO_COMPANIA:
+		case LISTAR_MIEMBRO_COMPANIA:
 			
 		}
 	}
