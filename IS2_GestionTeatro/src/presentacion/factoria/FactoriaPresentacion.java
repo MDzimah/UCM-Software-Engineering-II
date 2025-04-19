@@ -2,10 +2,14 @@ package presentacion.factoria;
 
 import java.awt.*;
 import java.awt.event.*;
+import java.awt.geom.Point2D;
 import java.util.*;
 import java.util.List;
 
 import javax.swing.*;
+import javax.swing.border.AbstractBorder;
+import javax.swing.border.BevelBorder;
+import javax.swing.border.Border;
 import javax.swing.table.*;
 
 import misc.Constants;
@@ -101,48 +105,143 @@ public class FactoriaPresentacion extends FactoriaAbstractaPresentacion {
 		}
 		}
 	}
-	
+
 	@SuppressWarnings("serial")
-	private class MainWindow extends JFrame implements IGUI {
-		
-		private JButton subsFactura;
-		private JButton subsCliente;
-		private JButton subsPase;
-		private JButton subsTaquillero;
-		private JButton subsObra;
-		private JButton subsCompTea;
-		private JButton subsMiemCompTea;
-		
-		
-		public MainWindow() {
-			subsFactura = new JButton("FACTURA");
+	public class MainWindow extends JFrame implements IGUI {
+
+	    private JButton subsFactura;
+	    private JButton subsCliente;
+	    private JButton subsPase;
+	    private JButton subsTaquillero;
+	    private JButton subsObra;
+	    private JButton subsCompTea;
+	    private JButton subsMiemCompTea;
+
+	    public MainWindow() {
+	        subsFactura = new JButton("FACTURA");
 	        subsCliente = new JButton("CLIENTE");
 	        subsPase = new JButton("PASE");
 	        subsTaquillero = new JButton("TAQUILLERO");
 	        subsObra = new JButton("OBRA");
-	        subsCompTea = new JButton("COMPAÑÍA TEATRAL");
-	        subsMiemCompTea = new JButton("MIEMBROS DE LA COMPAÑÍAS TEATRALES");
-	        addActionListeners();
+	        subsCompTea = new JButton("<html><p style=\"text-align:center;\"> COMPAÑÍA TEATRAL </p></html>");
+	        subsMiemCompTea = new JButton("<html><p style=\"text-align:center;\"> MIEMBROS DE LAS COMPAÑÍAS TEATRALES </p></html>");
+
+	        estiloBoton(subsFactura);
+	        estiloBoton(subsCliente);
+	        estiloBoton(subsPase);
+	        estiloBoton(subsTaquillero);
+	        estiloBoton(subsObra);
+	        estiloBoton(subsCompTea);
+	        estiloBoton(subsMiemCompTea);
+
+	        this.setLayout(new GridLayout(1, 2));
+	        this.add(createPanelTeatro());
+	        this.add(createPanelBotones());
 	        
-	        this.setLayout(new GridLayout(1,2));
-	        this.add(new JLabel(new ImageIcon("resources/imagenes/theaterMainWindow.png")));
-	      
-	        JPanel buttonsPanel = new JPanel();
-	        buttonsPanel.setLayout(new GridLayout(4,2));
-	        buttonsPanel.add(subsFactura);
-	        buttonsPanel.add(subsCliente);
-	        buttonsPanel.add(subsPase);
-	        buttonsPanel.add(subsTaquillero);
-	        buttonsPanel.add(subsObra);
-	        buttonsPanel.add(subsCompTea);
-	        buttonsPanel.add(subsMiemCompTea);
-	        this.add(buttonsPanel);
-			
-	        this.setSize(Constants.getScaledScreenDimension(2, 2));
+	        this.addActionListeners();
+
+	        this.setTitle("TEATRET");
+	        this.setIconImage(new ImageIcon("resources/imagenes/teatretLogo.png").getImage());
+	        this.setSize(1400, 800);
 	        this.setExtendedState(JFrame.MAXIMIZED_BOTH);
-			this.setVisible(true);		
-			this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+	        this.setVisible(true);
+	        this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+	    }
+
+	    private JPanel createPanelTeatro() {
+	        JPanel panel = new JPanel(new BorderLayout()) {
+	            @Override
+	            //Para que la imagen quepa en la parte izquierda del panel
+	            protected void paintComponent(Graphics g) {
+	                super.paintComponent(g);
+	                Image image = new ImageIcon("resources/imagenes/teatretLogo.png").getImage();
+	                int x = (getWidth() - image.getWidth(null)) / 2;
+	                int y = (getHeight() - image.getHeight(null)) / 2;
+	                g.drawImage(image, x, y, this);
+	            }
+	        };
+
+	        return panel;
+	    }
+	    
+	   
+	    private JPanel createPanelBotones() {
+	    	JPanel panelBotones = new JPanel(new BorderLayout()) {
+    	        @Override
+    	        protected void paintComponent(Graphics g) {
+    	            super.paintComponent(g);
+    	            Image image = new ImageIcon("resources/imagenes/marcoOro.png").getImage();
+    	            g.drawImage(image, 0, 0, getWidth(), getHeight(), this);
+    	        }
+    	    };
+
+    	    panelBotones.setOpaque(false);
+    	    panelBotones.setLayout(new BorderLayout());
+
+    	    JPanel gridPanel = new JPanel(new GridLayout(3, 2, 20, 20));
+    	    gridPanel.setOpaque(false);
+    	    gridPanel.setBorder(BorderFactory.createEmptyBorder(40, 40, 20, 40));
+
+    	    gridPanel.add(subsFactura);
+    	    gridPanel.add(subsCliente);
+    	    gridPanel.add(subsPase);
+    	    gridPanel.add(subsTaquillero);
+    	    gridPanel.add(subsObra);
+    	    gridPanel.add(subsCompTea);
+
+    	    panelBotones.add(gridPanel, BorderLayout.CENTER);
+
+    	    JPanel ultimoBotonPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 0, 0));
+    	    ultimoBotonPanel.setOpaque(false);
+    	    ultimoBotonPanel.setBorder(BorderFactory.createEmptyBorder(0, 40, 30, 40));
+
+    	    Dimension scDim = Constants.screenDimension();
+    	    subsMiemCompTea.setPreferredSize(new Dimension(scDim.width / 4, scDim.height / 5));
+    	    ultimoBotonPanel.add(subsMiemCompTea);
+
+    	    panelBotones.add(ultimoBotonPanel, BorderLayout.SOUTH);
+
+    	    return panelBotones;
+	    }
+
+	    private void estiloBoton(JButton button) {
+		    button.setBackground(new Color(111, 0, 0));
+		    button.setForeground(new Color(255, 215, 0)); //Color botón
+		    button.setFont(new Font("Georgia", Font.BOLD, 24));
+		    button.setFocusPainted(false);
+		
+		    Border outerBevel = BorderFactory.createBevelBorder(
+		        BevelBorder.LOWERED, 
+		        new Color(255, 100, 100),
+		        new Color(111, 0, 0)
+		    );
+		
+		    Border innerBevel = BorderFactory.createBevelBorder(
+		        BevelBorder.LOWERED, 
+		        new Color(200, 50, 50), 
+		        new Color(80, 0, 0)
+		    );
+		
+		    Border padding = BorderFactory.createEmptyBorder(18, 26, 18, 26);
+		
+		    button.setBorder(BorderFactory.createCompoundBorder(
+		        outerBevel,
+		        BorderFactory.createCompoundBorder(innerBevel, padding)
+		    ));
+		
+		    // Optional: Hover effects
+		    button.addMouseListener(new MouseAdapter() {
+		        public void mouseEntered(MouseEvent evt) {
+		            button.setBackground(new Color(139, 0, 0));
+		            button.setCursor(new Cursor(Cursor.HAND_CURSOR));
+		        }
+		        
+		        public void mouseExited(MouseEvent evt) {
+		        	button.setBackground(new Color(111, 0, 0));
+		        }
+		    });
 		}
+
 
 		private void addActionListeners() {
 	        subsFactura.addActionListener(new ActionListener() {
@@ -194,7 +293,8 @@ public class FactoriaPresentacion extends FactoriaAbstractaPresentacion {
 	            }
 	        });
 	    }
-}
+	}
+
 	@SuppressWarnings("serial")
 	private class TablaDefault extends JFrame {
 
