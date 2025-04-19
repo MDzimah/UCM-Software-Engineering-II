@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import org.json.JSONObject;
 import org.junit.jupiter.api.*;
 
+import integracion.factoria.FactoriaAbstractaIntegracion;
 import misc.Messages;
 import misc.OpsBBDD;
 import negocio.factura.TFactura;
@@ -15,12 +16,7 @@ import java.util.*;
 
 public class DAOFacturaImpTests {
 
-    private DAOFacturaImp dao;
-
-    @BeforeEach
-    public void setUp() {
-        dao = new DAOFacturaImp();
-    }
+    private DAOFactura daoFac = FactoriaAbstractaIntegracion.getInstance().crearDAOFactura();
 
     @Test
     public void testFullLifecycle_CreateReadUpdateDelete() throws Exception {
@@ -32,11 +28,11 @@ public class DAOFacturaImpTests {
         lineas.add(linea);
 
         TFactura factura = new TFactura(10, 20, true, LocalDateTime.now(), lineas, 25.5f, 30f);
-        int id = dao.create(factura);
+        int id = daoFac.create(factura);
         assertTrue(id > 0, "Created ID should be positive.");
 
         // 2. READ
-        TFactura fetched = dao.read(id);
+        TFactura fetched = daoFac.read(id);
         assertNotNull(fetched);
         assertEquals(10, fetched.getIdCliente());
         assertEquals(20, fetched.getIdTaquillero());
@@ -51,10 +47,10 @@ public class DAOFacturaImpTests {
         fetched.setSubtotal(100f);
         fetched.setImporte(120f);
 
-        int updatedId = dao.update(fetched);
+        int updatedId = daoFac.update(fetched);
         assertEquals(id, updatedId);
 
-        TFactura updated = dao.read(id);
+        TFactura updated = daoFac.read(id);
         assertEquals(200, updated.getIdCliente());
         assertEquals(300, updated.getIdTaquillero());
         assertFalse(updated.getActivo());
@@ -62,11 +58,11 @@ public class DAOFacturaImpTests {
         assertEquals(120f, updated.getImporte(), 0.01f);
 
         // 4. DELETE
-        int deletedId = dao.delete(id);
+        int deletedId = daoFac.delete(id);
         assertEquals(id, deletedId);
 
         // 5. READ DELETED
-        TFactura deleted = dao.read(id);
+        TFactura deleted = daoFac.read(id);
         assertNull(deleted, "Deleted factura should be null or marked as inactive.");
     }
 
@@ -80,7 +76,7 @@ public class DAOFacturaImpTests {
         OpsBBDD.write(db, Messages.BDFac);
 
         // Attempt to read it
-        TFactura result = dao.read(nonExistentId);
+        TFactura result = daoFac.read(nonExistentId);
         assertNull(result, "Should return null for non-existent ID.");
     }
 
@@ -94,7 +90,7 @@ public class DAOFacturaImpTests {
         lineas.add(linea);
 
         TFactura factura = new TFactura(10, 20, true, LocalDateTime.now(), lineas, 10f, 12f);
-        int id = dao.create(factura);
+        int id = daoFac.create(factura);
 
         // Change values and update
         factura.setIdFactura(id);
@@ -104,7 +100,7 @@ public class DAOFacturaImpTests {
         factura.setImporte(18f);
         factura.setActivo(false);
 
-        int resultId = dao.update(factura);
+        int resultId = daoFac.update(factura);
         assertEquals(id, resultId);
 
         // Make sure only one entry exists in the DB (i.e., no duplicate created)
