@@ -169,7 +169,7 @@ public class FactoriaPresentacion extends FactoriaAbstractaPresentacion {
 	        subsObra.addActionListener(new ActionListener() {
 	            @Override
 	            public void actionPerformed(ActionEvent e) {
-	           
+	            	FactoriaAbstractaPresentacion.getInstance().createVista(Evento.OBRA);
 	            }
 	        });
 

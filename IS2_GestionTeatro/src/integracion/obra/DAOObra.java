@@ -13,5 +13,5 @@ public interface DAOObra {
 	public TObra read(int id)throws BBDDReadException;
 	public Collection<TObra> readActive()throws BBDDReadException;
 	public int update(TObra tObra)throws BBDDReadException, BBDDWriteException;
-	public List<TObra> search(Integer Id, String titulo, String autor, String genero, Boolean activo)throws BBDDReadException;
+	public List<TObra> search(List<String> params)throws BBDDReadException;
 }

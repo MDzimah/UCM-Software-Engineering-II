@@ -2,12 +2,17 @@ package presentacion.controlador;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 import exceptions.BBDDReadException;
+import exceptions.BBDDWriteException;
+import exceptions.UnknownObraException;
 import negocio.factoria.FactoriaAbstractaNegocio;
 import negocio.factura.SAFactura;
 import negocio.factura.TFactura;
 import negocio.factura.TLineaFactura;
+import negocio.obra.SAObra;
+import negocio.obra.TObra;
 import negocio.pase.SAPase;
 import negocio.pase.TPase;
 import presentacion.Evento;
@@ -129,12 +134,114 @@ public class ControladorImp extends Controlador {
 		
 		
 		//Obra
-		case CREAR_OBRA:
-		case ELIMINAR_OBRA:
+		case CREAR_OBRA:{
+			try{
+				SAObra saObra = FactoriaAbstractaNegocio.getInstance().crearSAObra();
+				int val = saObra.create((TObra)datos);
+				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_ALTA_OBRA_OK, val);
+			}
+			catch(BBDDReadException e) {
+				FactoriaAbstractaPresentacion.getInstance().createNonIGUIVistas(Evento.X_BBDD_READ, null);
+				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_ALTA_OBRA_KO, null);
+			}
+			catch(BBDDWriteException e) {
+				FactoriaAbstractaPresentacion.getInstance().createNonIGUIVistas(Evento.X_BBDD_WRITE, null);
+				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_ALTA_OBRA_KO, (TObra)datos);
+			}
+			break;
+		}
+		case ELIMINAR_OBRA:{
+			try {
+				SAObra saObra = FactoriaAbstractaNegocio.getInstance().crearSAObra();
+				saObra.delete((int)datos);
+				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_ELIMINAR_OBRA_OK, (int)datos);
+			}
+			catch(BBDDReadException e) {
+				FactoriaAbstractaPresentacion.getInstance().createNonIGUIVistas(Evento.X_BBDD_READ, null);
+				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_ELIMINAR_OBRA_KO, null);
+			}
+			catch(BBDDWriteException e) {
+				FactoriaAbstractaPresentacion.getInstance().createNonIGUIVistas(Evento.X_BBDD_WRITE, null);
+				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_ELIMINAR_OBRA_KO, null);
+			}
+			catch(UnknownObraException e) {
+				FactoriaAbstractaPresentacion.getInstance().createNonIGUIVistas(Evento.UNKNOWN_OBRA, null);
+				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_ELIMINAR_OBRA_KO, (int)datos);
+			}
+			break;
+		}
 		case MODIFICAR_OBRA:
+		{
+			try {
+				SAObra saObra = FactoriaAbstractaNegocio.getInstance().crearSAObra();
+				saObra.update((TObra)datos);
+				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_ACTUALIZAR_OBRA_OK, (TObra)datos);
+			}
+			catch(BBDDReadException e) {
+				FactoriaAbstractaPresentacion.getInstance().createNonIGUIVistas(Evento.X_BBDD_READ, null);
+				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_ACTUALIZAR_OBRA_KO, null);
+			}
+			catch(BBDDWriteException e) {
+				FactoriaAbstractaPresentacion.getInstance().createNonIGUIVistas(Evento.X_BBDD_WRITE, null);
+				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_ACTUALIZAR_OBRA_KO, null);
+			}
+			catch(UnknownObraException e) {
+				FactoriaAbstractaPresentacion.getInstance().createNonIGUIVistas(Evento.UNKNOWN_OBRA, null);
+				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_ACTUALIZAR_OBRA_KO, (TObra)datos);
+			}
+			break;
+		}
 		case CONSULTAR_OBRA:
+		{
+			try {
+				SAObra saObra = FactoriaAbstractaNegocio.getInstance().crearSAObra();
+				TObra obra = saObra.read((int)datos);
+				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_CONSULTAR_OBRA_OK, obra);
+			}
+			catch(BBDDReadException e) {
+				FactoriaAbstractaPresentacion.getInstance().createNonIGUIVistas(Evento.X_BBDD_READ, null);
+				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_CONSULTAR_OBRA_KO, null);
+			}
+			catch(UnknownObraException e) {
+				FactoriaAbstractaPresentacion.getInstance().createNonIGUIVistas(Evento.UNKNOWN_OBRA, null);
+				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_CONSULTAR_OBRA_KO, (int)datos);
+			}
+			break;
+		}
 		case BUSCAR_OBRA:
+		{
+			try {
+				SAObra saObra = FactoriaAbstractaNegocio.getInstance().crearSAObra();
+				List<TObra> obras = (List<TObra>) saObra.search((List<String>)datos);
+				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_BUSCAR_OBRA_OK, obras);
+			}
+			catch(BBDDReadException e) {
+				FactoriaAbstractaPresentacion.getInstance().createNonIGUIVistas(Evento.X_BBDD_READ, null);
+				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_BUSCAR_OBRA_KO, null);
+			}
+			catch(UnknownObraException e) {
+				FactoriaAbstractaPresentacion.getInstance().createNonIGUIVistas(Evento.UNKNOWN_OBRA, null);
+				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_BUSCAR_OBRA_KO, (List<String>)datos);
+			}
+			break;
+		}
 		case LISTAR_OBRAS:
+		{
+			try {
+				SAObra saObra = FactoriaAbstractaNegocio.getInstance().crearSAObra();
+				List<TObra> obras = (List<TObra>) saObra.readActive();
+				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_LISTAR_OBRAS_OK, obras);
+			}
+			catch(BBDDReadException e) {
+				FactoriaAbstractaPresentacion.getInstance().createNonIGUIVistas(Evento.X_BBDD_READ, null);
+				//FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_BUSCAR_OBRA_KO, null); no existe la vista porque no hay que introducir nada
+			}
+			catch(UnknownObraException e) {
+				FactoriaAbstractaPresentacion.getInstance().createNonIGUIVistas(Evento.UNKNOWN_OBRA, null);
+				//FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_BUSCAR_OBRA_KO, null);
+			}
+			break;
+		}
 		
 		//CompTea
 		
