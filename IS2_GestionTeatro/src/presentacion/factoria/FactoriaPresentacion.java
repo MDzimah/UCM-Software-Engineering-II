@@ -2,18 +2,14 @@ package presentacion.factoria;
 
 import java.awt.*;
 import java.awt.event.*;
-import java.awt.geom.Point2D;
 import java.util.*;
 import java.util.List;
 
 import javax.swing.*;
-import javax.swing.border.AbstractBorder;
-import javax.swing.border.BevelBorder;
-import javax.swing.border.Border;
+import javax.swing.border.*;
 import javax.swing.table.*;
 
-import misc.Constants;
-import misc.Messages;
+import misc.*;
 import negocio.cliente.TCliente;
 import negocio.compTea.TCompTea;
 import negocio.factura.TFactura;
@@ -23,15 +19,17 @@ import negocio.taquillero.TTaquillero;
 import presentacion.*;
 import presentacion.GUIfactura.*;
 
+/* Hay que hacer alguna forma para que la FactoriaPresentación se encargue solamente de crear
+vistas y que sea el controlador solamente el que se encargue de pedir que se creen. Si no, estamos
+mezcando FactoriaPresentación con el Controlador y eso hace que la arquitectura sea más sucia. Lo de 
+create "NonIGUIVistas" tiene que desaparecer completamente y solamente ha de haber createVista con IGUI
+*/
 public class FactoriaPresentacion extends FactoriaAbstractaPresentacion {
 
-	//PARA LOS Q IMPLEMENTEN IGUI, es decir, actualizan su vista mediante user input
 	@Override
 	public IGUI createVista(Evento e) {
 		switch(e) {
-		case MAINWINDOW: return new MainWindow();
 		//Factura
-		case FACTURA: //Devolver vista de Jaime q enseña nuestro subs
 		case ANYADIR_PASE_A_VENTA: return new VistaAddPaseVenta();
 		case BUSCAR_FACTURA: return new VistaBuscarFac();
 		case CERRAR_VENTA: return new VistaCerrarVenta();
@@ -73,6 +71,15 @@ public class FactoriaPresentacion extends FactoriaAbstractaPresentacion {
 	@Override
 	public void createNonIGUIVistas(Evento evento, Object datos) {
 		switch(evento) {
+		case MAINWINDOW: new MainWindow(); break;
+		case FACTURA: //ventana de Jaime
+			/*
+			 * 
+			 * 
+			 * 
+			 * 
+			 * 
+			 * */
 		case X_CAMPOS_INCORRECTOS: {
 			JOptionPane.showMessageDialog(null, 
 		    		Messages.ERROR_CAMPOS_INCORRECTOS, 
@@ -100,7 +107,7 @@ public class FactoriaPresentacion extends FactoriaAbstractaPresentacion {
         	if (datos.getClass().isArray()) aux = (Object[]) datos;
         	else aux = ((Collection<?>) datos).toArray();
 			
-			new TablaDefault((String[])aux[0], (Collection<Object>) aux[1], (String)aux[2]).setVisible(true);
+			new TablaDefault((String[])aux[0], (Collection<Object>) aux[1], (String)aux[2]);
 			break;
 		}
 		}
@@ -126,13 +133,13 @@ public class FactoriaPresentacion extends FactoriaAbstractaPresentacion {
 	        subsCompTea = new JButton("<html><p style=\"text-align:center;\"> COMPAÑÍA TEATRAL </p></html>");
 	        subsMiemCompTea = new JButton("<html><p style=\"text-align:center;\"> MIEMBROS DE LAS COMPAÑÍAS TEATRALES </p></html>");
 
-	        estiloBoton(subsFactura);
-	        estiloBoton(subsCliente);
-	        estiloBoton(subsPase);
-	        estiloBoton(subsTaquillero);
-	        estiloBoton(subsObra);
-	        estiloBoton(subsCompTea);
-	        estiloBoton(subsMiemCompTea);
+	        this.estiloBoton(subsFactura);
+	        this.estiloBoton(subsCliente);
+	        this.estiloBoton(subsPase);
+	        this.estiloBoton(subsTaquillero);
+	        this.estiloBoton(subsObra);
+	        this.estiloBoton(subsCompTea);
+	        this.estiloBoton(subsMiemCompTea);
 
 	        this.setLayout(new GridLayout(1, 2));
 	        this.add(createPanelTeatro());
@@ -145,7 +152,7 @@ public class FactoriaPresentacion extends FactoriaAbstractaPresentacion {
 	        this.setSize(1400, 800);
 	        this.setExtendedState(JFrame.MAXIMIZED_BOTH);
 	        this.setVisible(true);
-	        this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+	        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	    }
 
 	    private JPanel createPanelTeatro() {
@@ -206,10 +213,11 @@ public class FactoriaPresentacion extends FactoriaAbstractaPresentacion {
 
 	    private void estiloBoton(JButton button) {
 		    button.setBackground(new Color(111, 0, 0));
-		    button.setForeground(new Color(255, 215, 0)); //Color botón
+		    button.setForeground(new Color(255, 215, 0));
 		    button.setFont(new Font("Georgia", Font.BOLD, 24));
 		    button.setFocusPainted(false);
 		
+		    //Para la apariencia 3d del botón. Lo de "lowered" pone el efecto abajo a la derecha
 		    Border outerBevel = BorderFactory.createBevelBorder(
 		        BevelBorder.LOWERED, 
 		        new Color(255, 100, 100),
@@ -229,14 +237,14 @@ public class FactoriaPresentacion extends FactoriaAbstractaPresentacion {
 		        BorderFactory.createCompoundBorder(innerBevel, padding)
 		    ));
 		
-		    // Optional: Hover effects
+		    //Efecto al entrar/salir del botón
 		    button.addMouseListener(new MouseAdapter() {
-		        public void mouseEntered(MouseEvent evt) {
+		        public void mouseEntered(MouseEvent e) {
 		            button.setBackground(new Color(139, 0, 0));
 		            button.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		        }
 		        
-		        public void mouseExited(MouseEvent evt) {
+		        public void mouseExited(MouseEvent e) {
 		        	button.setBackground(new Color(111, 0, 0));
 		        }
 		    });
@@ -246,8 +254,8 @@ public class FactoriaPresentacion extends FactoriaAbstractaPresentacion {
 		private void addActionListeners() {
 	        subsFactura.addActionListener(new ActionListener() {
 	            @Override
-	            public void actionPerformed(ActionEvent e) {
-	            	FactoriaAbstractaPresentacion.getInstance().createVista(Evento.FACTURA);
+	            public void actionPerformed(ActionEvent e) { 
+	            	FactoriaAbstractaPresentacion.getInstance().createNonIGUIVistas(Evento.FACTURA, null);
 	            }
 	        });
 
@@ -441,7 +449,6 @@ public class FactoriaPresentacion extends FactoriaAbstractaPresentacion {
 	     * @param data a {@code Collection<Object>} containing entities to be rendered, such as {@code TFactura}, {@code TCliente}, etc.
 	     * @param nombreTabla the title of the window displayed in the frame’s title bar
 	     */
-
 		public TablaDefault(String[] columnNames, Collection<Object> data, String nombreTabla) {
 	        this.setTitle(nombreTabla);
 	        this.setLayout(new BorderLayout());
@@ -481,6 +488,7 @@ public class FactoriaPresentacion extends FactoriaAbstractaPresentacion {
 	        this.add(new JScrollPane(table), BorderLayout.CENTER);
 	        this.setLocationRelativeTo(null);
 	        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	        this.setVisible(true);
 	    }
 	    
 	    

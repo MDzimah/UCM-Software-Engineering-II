@@ -16,14 +16,18 @@ import presentacion.factoria.FactoriaAbstractaPresentacion;
 
 public class ControladorImp extends Controlador {
 	
-	//Solo se crean vistas aquí a raíz de un error con la acción que pide el controlador al modelo (SA + DAO) pero nunca genera vistas 
-	//por el evento recibido
+	/* Hay que hacer alguna forma para que la FactoriaPresentación se encargue solamente de crear
+	vistas y que sea el controlador solamente el que se encargue de pedir que se creen. Si no, estamos
+	mezcando FactoriaPresentación con el Controlador y eso hace que la arquitectura sea más sucia. Lo de 
+	create "NonIGUIVistas" tiene que desaparecer completamente y solamente ha de haber createVista con IGUI
+	*/
 	@Override
 	public void accion(Evento evento, Object datos) {
 		switch(evento) {
 		
 		//Factura
 		case FACTURA: {
+			FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(evento, datos);
 			//Actualizar la ventana de Jaime de Factura (se pulsa un botón de abrir venta, buscar factura, mostrar facturas, etc.)
 		}
 		case ANYADIR_PASE_A_VENTA: {

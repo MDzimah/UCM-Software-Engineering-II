@@ -14,7 +14,7 @@ public class Main {
 		SwingUtilities.invokeLater(new Runnable() {
             @Override
             public void run() {
-               ((JFrame)FactoriaAbstractaPresentacion.getInstance().createVista(Evento.MAINWINDOW)).setVisible(true);;
+               FactoriaAbstractaPresentacion.getInstance().createNonIGUIVistas(Evento.MAINWINDOW, null);
             }
         });
 	}
