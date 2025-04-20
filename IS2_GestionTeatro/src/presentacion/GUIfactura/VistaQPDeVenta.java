@@ -22,12 +22,12 @@ public class VistaQPDeVenta extends VistaAdd_QuitarPdeVenta {
 	@Override
 	public void actualizar(Evento evento, Object datos) {
 		if (evento == Evento.RES_QUITAR_PASE_DE_VENTA_OK) {
-			FactoriaAbstractaPresentacion.getInstance().messageDialog(Messages.EX_PASE_QUITADO_DE_VENTA);
+			FactoriaAbstractaPresentacion.getInstance().createDialogMessage(Messages.EX_PASE_QUITADO_DE_VENTA);
 			//... Cómo hacer repintar el carrito??? 
 			this.dispose();
 		}
 		else if(evento == Evento.RES_QUITAR_PASE_DE_VENTA_KO) {
-			FactoriaAbstractaPresentacion.getInstance().messageDialog(Messages.X_PASE_QUITADO_DE_VENTA);
+			FactoriaAbstractaPresentacion.getInstance().createDialogMessage(Messages.X_PASE_QUITADO_DE_VENTA);
 		}
 	}
 }

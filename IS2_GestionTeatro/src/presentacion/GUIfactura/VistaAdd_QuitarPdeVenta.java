@@ -65,7 +65,7 @@ public abstract class VistaAdd_QuitarPdeVenta extends VistaDefault {
 					dispose();
 				}
 				catch (Exception ex) {
-					FactoriaAbstractaPresentacion.getInstance().camposIncorrectos();
+					FactoriaAbstractaPresentacion.getInstance().createDialogoCamposIncorrectos();
 				}
 			}
 		});

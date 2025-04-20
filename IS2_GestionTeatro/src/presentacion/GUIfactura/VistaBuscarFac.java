@@ -50,7 +50,7 @@ public class VistaBuscarFac extends JFrame implements IGUI {
 					dispose();
 				}
 				catch(ArithmeticException ex) {
-					FactoriaAbstractaPresentacion.getInstance().camposIncorrectos();
+					FactoriaAbstractaPresentacion.getInstance().createDialogoCamposIncorrectos();
 				}
 			}
 			
@@ -68,22 +68,14 @@ public class VistaBuscarFac extends JFrame implements IGUI {
 	@Override
 	public void actualizar(Evento evento, Object datos) {
 		if (evento == Evento.RES_BUSCAR_FACTURA_OK) {
-			/*
 			Collection<Object> fac = new ArrayList<Object>();
 			fac.add((TFactura)datos);
 			String[] nomCols = {"ID","ID CLIENTE", "ID TAQUILLERO", "FECHA", "PASES COMPRADOS", "IMPORTE"};
 			
-			Object[] datosParaTabla = new Object[3];
-			datosParaTabla[0] = nomCols;
-			datosParaTabla[1] = fac;
-			datosParaTabla[2] = "BUSCAR FACTURA";
-			
-			FactoriaAbstractaPresentacion.getInstance().createNonIGUIVistas(Evento.TABLA_DEFAULT, datosParaTabla);
-			*/
-			//QUIZÁS HAGA ALGO GENÉRICO PERSONALIZADO PARA TODO EL MUNDO
+			FactoriaAbstractaPresentacion.getInstance().createTabla("BUSCAR FACTURA", nomCols, fac);
 		}
 		else if(evento == Evento.RES_BUSCAR_FACTURA_KO) {
-			FactoriaAbstractaPresentacion.getInstance().messageDialog(Messages.X_BUSCAR_FACTURA.formatted((String) datos));
+			FactoriaAbstractaPresentacion.getInstance().createDialogMessage(Messages.X_BUSCAR_FACTURA.formatted((String) datos));
 		}
 	}
 

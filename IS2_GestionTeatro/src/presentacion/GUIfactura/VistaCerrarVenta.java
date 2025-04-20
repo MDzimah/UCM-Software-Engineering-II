@@ -66,7 +66,7 @@ public class VistaCerrarVenta extends VistaDefault {
 				}
 				catch(ArithmeticException ex) {
 					
-					FactoriaAbstractaPresentacion.getInstance().camposIncorrectos();;
+					FactoriaAbstractaPresentacion.getInstance().createDialogoCamposIncorrectos();;
 				}
 			}
 		});
@@ -82,9 +82,9 @@ public class VistaCerrarVenta extends VistaDefault {
 	@Override
 	public void actualizar(Evento evento, Object datos) {
 		if (evento == Evento.RES_CERRAR_VENTA_OK) {
-			FactoriaAbstractaPresentacion.getInstance().messageDialog(Messages.EX_VENTA_CERRADA);
+			FactoriaAbstractaPresentacion.getInstance().createDialogMessage(Messages.EX_VENTA_CERRADA);
 		} else if (evento == Evento.RES_CERRAR_VENTA_KO) {
-			FactoriaAbstractaPresentacion.getInstance().messageDialog(Messages.X_VENTA_CERRADA);
+			FactoriaAbstractaPresentacion.getInstance().createDialogMessage(Messages.X_VENTA_CERRADA);
 		}
 	}
 }

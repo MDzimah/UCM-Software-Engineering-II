@@ -33,33 +33,59 @@ public abstract class FactoriaAbstractaPresentacion {
 	public abstract IGUI createVista(Evento evento);
 	
 	//Tabla
-	public void tabla(String tituloTabla, String[] nomCols, Collection<Object> datos) {
+    /**
+     * Creates and displays a window with a table populated with business entity data.
+     * <p>
+     * The table supports dynamic rendering of objects such as {@code TFactura}, {@code TCliente},
+     * {@code TPase}, etc., depending on the type of objects in the {@code datos} collection.
+     * It uses a custom table model and a multiline cell renderer that formats arrays or
+     * collections by displaying each element on a new line.
+     * </p>
+     *
+     * <p>
+     * Column headers are automatically capitalized and styled. Each cell in the table adapts
+     * its height to fit the content, and lists or arrays are rendered using a vertical layout
+     * inside the cell.
+     * </p>
+     *
+     * <p>
+     * This method is designed for general-purpose viewing of business data in tabular form and
+     * automatically adapts to the structure of the data passed in.
+     * </p>
+     *
+     * @param tituloTabla the title of the window and the table view
+     * @param nomCols an array of column names (headers) to be displayed
+     * @param datos a collection of business objects to be shown in the table; supported types
+     *              include {@code TFactura}, {@code TCliente}, {@code TPase}, {@code TTaquillero},
+     *              {@code TObra}, {@code TCompTea}, and others
+     */
+	public void createTabla(String tituloTabla, String[] nomCols, Collection<Object> datos) {
 		new TablaDefault(nomCols, datos, tituloTabla).setVisible(true);
 	}
 	
 	//Diálogos de errores
-	public void camposIncorrectos() {
+	public void createDialogoCamposIncorrectos() {
 		JOptionPane.showMessageDialog(null, 
 	    		Messages.ERROR_CAMPOS_INCORRECTOS, 
 	    		"Error", 
 	    		JOptionPane.ERROR_MESSAGE);
 	}
 	
-	public void lecturaBBDDincorrecta(String BBDDMessages) {
+	public void createDialogoLecturaBBDDincorrecta(String BBDDMessages) {
 		JOptionPane.showMessageDialog(null,
 				BBDDMessages,
 	            "Error Lectura",
 	            JOptionPane.ERROR_MESSAGE);
 	}
 	
-	public void escrituraBBDDincorrecta(String BBDDMessages) {
+	public void createDialogoEscrituraBBDDincorrecta(String BBDDMessages) {
 		JOptionPane.showMessageDialog(null,
 				BBDDMessages,
 	            "Error Escritura",
 	            JOptionPane.ERROR_MESSAGE);
 	}
 	
-	public void messageDialog(String message) {
+	public void createDialogMessage(String message) {
 		JOptionPane.showMessageDialog(null, message);
 	}
 
@@ -190,25 +216,6 @@ public abstract class FactoriaAbstractaPresentacion {
 	    	}
 	    }
 
-	    /**
-	     * Constructs a new {@code TablaDefault} window displaying a dynamically sized table with custom rendering.
-	     * <p>
-	     * This table is designed to display various business objects (e.g., {@code TFactura}, {@code TCliente}, etc.)
-	     * by converting them into rows of data. It uses a custom {@code AbstractTableModel} for data binding and a
-	     * specialized {@code TableCellRenderer} that supports multiline rendering of {@code Collection} or array elements
-	     * within individual cells.
-	     * </p>
-	     *
-	     * <p>
-	     * Column headers are automatically converted to uppercase and styled with a custom font. Cells are rendered
-	     * with padding, custom font, and support for vertical resizing based on content height. If the cell contains
-	     * a list or array, its elements are displayed on separate lines for clarity.
-	     * </p>
-	     *
-	     * @param columnNames an array of {@code String} representing the column headers; headers are converted to uppercase
-	     * @param data a {@code Collection<Object>} containing entities to be rendered, such as {@code TFactura}, {@code TCliente}, etc.
-	     * @param nombreTabla the title of the window displayed in the frame’s title bar
-	     */
 		public TablaDefault(String[] columnNames, Collection<Object> data, String nombreTabla) {
 	        this.setTitle(nombreTabla);
 	        this.setLayout(new BorderLayout());

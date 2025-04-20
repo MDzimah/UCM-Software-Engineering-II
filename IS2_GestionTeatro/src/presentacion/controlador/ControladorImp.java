@@ -69,7 +69,7 @@ public class ControladorImp extends Controlador {
 				else FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_BUSCAR_FACTURA_KO, idFac);
 			}
 			catch(BBDDReadException e) {
-				 FactoriaAbstractaPresentacion.getInstance().lecturaBBDDincorrecta(e.getMessage());
+				 FactoriaAbstractaPresentacion.getInstance().createDialogoLecturaBBDDincorrecta(e.getMessage());
 			}
 			
 			break;
@@ -89,7 +89,7 @@ public class ControladorImp extends Controlador {
 				else FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_MOSTRAR_FACTURAS_KO, null); 
 			}
 			catch(BBDDReadException e) {
-				 FactoriaAbstractaPresentacion.getInstance().lecturaBBDDincorrecta(e.getMessage());
+				 FactoriaAbstractaPresentacion.getInstance().createDialogoLecturaBBDDincorrecta(e.getMessage());
 			}
 			break;
 		}
