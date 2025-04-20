@@ -3,18 +3,16 @@ package integracion.pase;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Set;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
 
 import exceptions.BBDDReadException;
 import exceptions.BBDDWriteException;
-import integracion.factoria.FactoriaAbstractaIntegracion;
-import integracion.factura.DAOLineaFactura;
+
 import misc.Messages;
 import misc.OpsBBDD;
-import misc.SwingUtils;
-import negocio.factura.TLineaFactura;
 import negocio.pase.TPase;
 
 public class DAOPaseImp implements DAOPase {
@@ -66,58 +64,50 @@ public class DAOPaseImp implements DAOPase {
 	}
 
 	@Override
-	public Collection<TPase> readAll() {
-		try {
-			JSONObject bdPase = OpsBBDD.read("BDPase.json");
-			JSONArray pases = new JSONArray(bdPase.getJSONArray("pases"));
-			Collection<TPase> pasesADevolver = new ArrayList();
-			for (int i = 0; i < pases.length();i++) {
-				JSONObject pase = pases.getJSONObject(i);
-				if (pase.getBoolean("activo")) {
-					pasesADevolver.add(read(pase));
-				}
+	public Collection<TPase> readAll() throws BBDDReadException {
+		JSONObject bdPase = OpsBBDD.read(Messages.BDPase);
+		JSONObject pases = new JSONObject(bdPase.getJSONArray(Messages.KEY_pases));
+		Collection<TPase> pasesADevolver = new ArrayList<>();
+		Set<String> idSetPases = pases.keySet();
+		for (String idPase : idSetPases) {
+			JSONObject pase = pases.getJSONObject(idPase);
+			if (pase.getBoolean(Messages.KEY_act)) {
+				TPase tPase = read(pase);
+				tPase.setIdPase(Integer.valueOf(idPase));
+				pasesADevolver.add(tPase);
 			}
-		} catch (BBDDReadException e) {
-			SwingUtils.panelBBDDReadError(null, "BDFactura.json", e.getMessage());
 		}
-		return null;
+		return pasesADevolver;
 	}
 
 	@Override
-	public int update(TPase tPase) {
-		try {
-			JSONObject bdPase = OpsBBDD.read("BDPase.json");
-			if(bdPase.has(String.valueOf(tPase.getIdObra()))) {
-				
-				JSONObject nuevoPase = new JSONObject();
-				nuevoPase.put("idPase", tPase.getIdPase());
-				nuevoPase.put("idCompanyaTeatral", tPase.getIdCompanyaTeatral());
-				nuevoPase.put("idObra", tPase.getIdObra());
-				nuevoPase.put("activo", tPase.isActivo());
-				nuevoPase.put("fecha", tPase.getFecha().toString());
-				nuevoPase.put("stock", tPase.getStock());
-				nuevoPase.put("precio", tPase.getPrecio());
-				
-				bdPase.put(String.valueOf(tPase.getIdObra()), nuevoPase);
-				return 1;
-			}
-			else
-				return -1;
-		} catch (BBDDReadException e) {
-			SwingUtils.panelBBDDReadError(null, "BDFactura.json", e.getMessage());
-			return -1;
+	public int update(TPase tPase) throws BBDDReadException, BBDDWriteException {
+		JSONObject bdPase = OpsBBDD.read("BDPase.json");
+		if(bdPase.has(String.valueOf(tPase.getIdObra()))) {
+			
+			JSONObject nuevoPase = new JSONObject();
+			nuevoPase.put(Messages.KEY_idPase, tPase.getIdPase());
+			nuevoPase.put(Messages.KEY_idCompTea, tPase.getIdCompanyaTeatral());
+			nuevoPase.put(Messages.KEY_idObra, tPase.getIdObra());
+			nuevoPase.put(Messages.KEY_act, tPase.isActivo());
+			nuevoPase.put(Messages.KEY_fecha, tPase.getFecha().toString());
+			nuevoPase.put(Messages.KEY_stock, tPase.getStock());
+			nuevoPase.put(Messages.KEY_precioPase, tPase.getPrecio());
+			
+			bdPase.put(String.valueOf(tPase.getIdObra()), nuevoPase);
+			return 1;
 		}
+		return -1;
 	}
 	
 	private TPase read(JSONObject jsonPas) {
 		return new TPase(
-				jsonPas.getInt("idPase"), 
-				jsonPas.getInt("idCompanyaTeatral"), 
-				jsonPas.getInt("idObra"),
-				jsonPas.getBoolean("activo"),
-				LocalDateTime.parse(jsonPas.getString("fecha")),
-				jsonPas.getInt("stock"),
-				jsonPas.getFloat("precio"));
+				jsonPas.getInt(Messages.KEY_idPase), 
+				jsonPas.getInt(Messages.KEY_idCompTea), 
+				jsonPas.getInt(Messages.KEY_idObra),
+				jsonPas.getBoolean(Messages.KEY_act),
+				LocalDateTime.parse(jsonPas.getString(Messages.KEY_fecha)),
+				jsonPas.getInt(Messages.KEY_stock),
+				jsonPas.getFloat(Messages.KEY_precioPase));
 		}
-	
 }
