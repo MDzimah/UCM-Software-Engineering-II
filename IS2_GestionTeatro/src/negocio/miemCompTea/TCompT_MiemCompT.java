@@ -2,6 +2,8 @@ package negocio.miemCompTea;
 
 public class TCompT_MiemCompT {
 	
+	private int idRelacionMiemComp;
+	
 	private int idCompania;
 	private int idMiembroComp;
 	
@@ -12,11 +14,15 @@ public class TCompT_MiemCompT {
 	
 	//GETTERS
 	
+	public int getidRelacionMiemComp() { return this.idRelacionMiemComp; }
+	
 	public int getIdCompania() { return this.idCompania; }
 	
 	public int getIdMiembroComp() { return this.idMiembroComp; }
 	
 	//SETTERS
+	
+	public void setidRelacionMiemComp(int idRela) { this.idRelacionMiemComp = idRela; }
 	
 	public void setIdCompania(int idComp) { this.idCompania = idComp; }
 	

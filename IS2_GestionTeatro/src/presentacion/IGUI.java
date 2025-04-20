@@ -1,7 +1,7 @@
 package presentacion;
 
-import eventos.Evento;
+import misc.Evento;
 
 public interface IGUI {
-	public default void  actualizar(Evento evento, Object datos) {}
+	public void actualizar(Evento evento, Object datos);
 }

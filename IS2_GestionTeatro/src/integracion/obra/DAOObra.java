@@ -3,13 +3,15 @@ package integracion.obra;
 import java.util.Collection;
 import java.util.List;
 
+import exceptions.BBDDReadException;
+import exceptions.BBDDWriteException;
 import negocio.obra.TObra;
 
 public interface DAOObra {
-	public int create(TObra tObra);
-	public int delete(int id);
-	public TObra read(int id);
-	public Collection<TObra> readActive();
-	public int update(TObra tObra);
-	public List<TObra> search(Integer Id, String titulo, String autor, String genero, Boolean activo);
+	public int create(TObra tObra)throws BBDDReadException, BBDDWriteException;
+	public int delete(int id) throws BBDDReadException, BBDDWriteException;
+	public TObra read(int id)throws BBDDReadException;
+	public Collection<TObra> readActive()throws BBDDReadException;
+	public int update(TObra tObra)throws BBDDReadException, BBDDWriteException;
+	public List<TObra> search(Integer Id, String titulo, String autor, String genero, Boolean activo)throws BBDDReadException;
 }

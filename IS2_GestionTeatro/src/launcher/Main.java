@@ -1,10 +1,10 @@
 package launcher;
 
-import javax.swing.SwingUtilities;
+import javax.swing.*;
 
 import com.formdev.flatlaf.FlatIntelliJLaf;
 
-import eventos.Evento;
+import misc.Evento;
 import presentacion.factoria.FactoriaAbstractaPresentacion;
 
 public class Main {
@@ -14,7 +14,7 @@ public class Main {
 		SwingUtilities.invokeLater(new Runnable() {
             @Override
             public void run() {
-                FactoriaAbstractaPresentacion.getInstance().createOtrasVistas(Evento.MAINWINDOW, null);
+               FactoriaAbstractaPresentacion.getInstance().createVista(Evento.MAINWINDOW);
             }
         });
 	}

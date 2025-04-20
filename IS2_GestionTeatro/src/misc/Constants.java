@@ -2,6 +2,8 @@ package misc;
 
 import java.awt.*;
 
+import javax.swing.ImageIcon;
+
 public class Constants {
 	/**
 	 * Returns the scaled screen dimensions.
@@ -22,6 +24,11 @@ public class Constants {
 		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 		return new Dimension(screenSize.width/factorH, screenSize.height/factorH);
 	}
+	
+	//Imagenes
+	public static Image logoTeatret() { return new ImageIcon("resources/imagenes/teatretLogo.png").getImage(); }
+	
+	public static Image marcoOro() { return new ImageIcon("resources/imagenes/marcoOro.png").getImage(); }
 	
 	//Fonts
 	public static Font FontTablaDefaultCabecera() { return new Font("SansSerif", Font.BOLD, 16); }

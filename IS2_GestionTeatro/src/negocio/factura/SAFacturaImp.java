@@ -3,7 +3,6 @@ package negocio.factura;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.List;
 
 import exceptions.BBDDReadException;
 import exceptions.BBDDWriteException;
@@ -17,7 +16,6 @@ import integracion.taquillero.DAOTaquillero;
 import negocio.cliente.SACliente;
 import negocio.cliente.TCliente;
 import negocio.factoria.FactoriaAbstractaNegocio;
-import negocio.obra.TObra;
 import negocio.pase.SAPase;
 import negocio.pase.TPase;
 import negocio.taquillero.TTaquillero;
@@ -25,7 +23,7 @@ import negocio.taquillero.TTaquillero;
 public class SAFacturaImp implements SAFactura {
 	
 	@Override
-	public int create(TDatosVenta tDv) {
+	public int create(TDatosVenta tDv) throws UnknownClienteException, UnknownTaquilleroException, BBDDReadException, BBDDWriteException  {
 		int idFacNueva = -1;
 		
 		Collection<TLineaFactura> carritoFinal = new ArrayList<TLineaFactura>();
@@ -74,6 +72,7 @@ public class SAFacturaImp implements SAFactura {
 						importeFinal);
 				DAOFactura daoFac = FactoriaAbstractaIntegracion.getInstance().crearDAOFactura();
 				idFacNueva = daoFac.create(tFacFinal); //Internamente usa DAOLineaFactura y da el id de la factura a las líneas
+				//TAQUILLERO TIENE Q ACTUALIZARSE
 			}
 		}
 		

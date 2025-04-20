@@ -3,6 +3,7 @@ package negocio.miemCompTea;
 public class TMiemCompTea {
 	
 	private int idMiemComp;
+	
 	private String DNI;
 	private String nombre;
 	private String apellido;
@@ -13,8 +14,7 @@ public class TMiemCompTea {
 	public enum Genero {HOMBRE,MUJER};
 	private Genero genero;
 	
-	public TMiemCompTea(int idMiem, String dni, String nom, String apell, String mail, int ed, boolean act, Genero gen) {
-		this.idMiemComp = idMiem;
+	public TMiemCompTea(String dni, String nom, String apell, String mail, int ed, boolean act, Genero gen) {
 		this.DNI = dni;
 		this.nombre = nom;
 		this.apellido = apell;
@@ -22,10 +22,6 @@ public class TMiemCompTea {
 		this.edad = ed;
 		this.activo = act;
 		this.genero = gen;
-	}
-	
-	public TMiemCompTea(int idMiem) { //?
-		this.idMiemComp = idMiem
 	}
 	
 	//GETTERS

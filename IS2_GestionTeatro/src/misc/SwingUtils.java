@@ -4,7 +4,11 @@ import java.awt.*;
 
 import javax.swing.*;
 
-public class PanelUtils {
+public class SwingUtils {
+	
+	 public static void setAppIcon(JFrame window) {
+		 window.setIconImage(Constants.logoTeatret());
+	 } 
 	
 	/**
 	 * Creates a horizontally aligned {@code JPanel} containing two {@code JComponent}s with adjustable spacing between them.
@@ -24,7 +28,7 @@ public class PanelUtils {
 	    JPanel pair = new JPanel();
 	    pair.setLayout(new BoxLayout(pair, BoxLayout.X_AXIS));
 	    pair.setAlignmentX(Component.CENTER_ALIGNMENT);
-	    pair.setBorder(BorderFactory.createEmptyBorder(10, 0, 10, 0));
+	    pair.setBorder(BorderFactory.createEmptyBorder(10, 50, 10, 50));
 
 	    if (component1 != null) pair.add(component1);
 	  	if (component1 != null && component2 != null) pair.add(Box.createHorizontalStrut(30));

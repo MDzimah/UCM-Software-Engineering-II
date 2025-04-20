@@ -10,7 +10,6 @@ import org.json.JSONObject;
 import exceptions.*;
 import misc.Messages;
 import misc.OpsBBDD;
-import misc.PanelUtils;
 import negocio.miemCompTea.TMiemCompTea;
 import negocio.miemCompTea.TMiemCompTea.Genero;
 
@@ -43,7 +42,7 @@ public class DAOMiemCompTeaImp implements DAOMiemCompTea {
 	}
 
 	@Override
-	public int delete(int id) throws BBDDReadException, BBDDWriteException { //desactiva no elimina
+	public int delete(int id) throws BBDDReadException, BBDDWriteException {
 		JSONObject BDMiemComp = OpsBBDD.read(Messages.BDMCT);
 		JSONObject miembrosComp = BDMiemComp.getJSONObject(Messages.KEY_MiembCompTea);
         
@@ -64,6 +63,7 @@ public class DAOMiemCompTeaImp implements DAOMiemCompTea {
 		if (miembrosComp.has(Integer.toString(id))) {
 			JSONObject miemComp = miembrosComp.getJSONObject(Integer.toString(id));
 			tMiemComp = createTMiemCompTea(miemComp);
+			tMiemComp.setIdMiembComp(id);
 		}
 		return tMiemComp;
 	}
@@ -89,7 +89,6 @@ public class DAOMiemCompTeaImp implements DAOMiemCompTea {
 		for (String idMiemComp : allIdsMiemComp) {
 			if (Integer.valueOf(idMiemComp) == tMieCT.getIdMiembComp()) {
 				JSONObject miemComp = miembrosComp.getJSONObject(idMiemComp);
-				miemComp.put(Messages.KEY_idMiemComp, tMieCT.getIdMiembComp());
 				miemComp.put(Messages.KEY_DNI, tMieCT.getDNI());
 				miemComp.put(Messages.KEY_nombre, tMieCT.getNombre());
 				miemComp.put(Messages.KEY_apellido, tMieCT.getApellido());
@@ -122,7 +121,6 @@ public class DAOMiemCompTeaImp implements DAOMiemCompTea {
 
 	private TMiemCompTea createTMiemCompTea(JSONObject miembroComp) {
 		return new TMiemCompTea(
-				miembroComp.getInt(Messages.KEY_idMiemComp),
 				miembroComp.getString(Messages.KEY_DNI),
 				miembroComp.getString(Messages.KEY_nombre),
 				miembroComp.getString(Messages.KEY_apellido),

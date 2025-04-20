@@ -4,7 +4,6 @@ import java.util.*;
 
 import javax.swing.*;
 
-import eventos.Evento;
 import misc.*;
 import negocio.factura.*;
 import presentacion.VistaDefault;
@@ -21,6 +20,7 @@ public abstract class VistaAdd_QuitarPdeVenta extends VistaDefault {
 	private JButton cancel;
 	
 	void initComps() {
+		SwingUtils.setAppIcon(this);
 		lIdPase = new JLabel("Id pase:");
 		tIdPase = new JTextField(20);
 		/*
@@ -62,9 +62,10 @@ public abstract class VistaAdd_QuitarPdeVenta extends VistaDefault {
 				
 					TLineaFactura tLf = new TLineaFactura(idPase, ctdad);
 					Controlador.getInstance().accion(evento, tLf);
+					dispose();
 				}
 				catch (Exception ex) {
-					FactoriaAbstractaPresentacion.getInstance().createOtrasVistas(Evento.X_CAMPOS_INCORRECTOS, null);
+					FactoriaAbstractaPresentacion.getInstance().createDialogoCamposIncorrectos();
 				}
 			}
 		});

@@ -1,4 +1,4 @@
-# IS2 Project
+# SWE2 Project
 
 ## General Description
 

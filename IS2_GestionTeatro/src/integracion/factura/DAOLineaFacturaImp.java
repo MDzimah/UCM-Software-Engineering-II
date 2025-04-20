@@ -33,7 +33,6 @@ public class DAOLineaFacturaImp implements DAOLineaFactura {
 		return newId;
 	}
 	
-	/*POR SI ACASO
 	@Override
 	public int delete(int id) throws BBDDReadException, BBDDWriteException {
 		JSONObject bdLinFac = OpsBBDD.read(Messages.BDLinFac);
@@ -47,7 +46,6 @@ public class DAOLineaFacturaImp implements DAOLineaFactura {
 		}
         return -1; //No se ha encontrado la linea de factura con dicho id
 	}
-	*/
 
 	@Override
 	public TLineaFactura read(int id) throws BBDDReadException {

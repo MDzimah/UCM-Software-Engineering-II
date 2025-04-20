@@ -55,7 +55,12 @@ public class Messages {
 	public static final String KEY_facs = "facturas";
 	public static final String KEY_LineasFac = "lineas";
 	public static final String KEY_MiembCompTea = "miembros de la compania teatral";
+<<<<<<< HEAD
 	public static final String KEY_CompTea = "compania teatral";
+=======
+	public static final String KEY_CliNorms = "clientes";
+	public static final String KEY_CliVIPs = "clientes";
+>>>>>>> branch 'main' of https://github.com/MDzimah/UCM-Software-Engineering-II.git
 	
 	public static final String KEY_fecha = "fecha";
 	public static final String KEY_direccion = "direccion";
@@ -67,11 +72,29 @@ public class Messages {
 	public static final String KEY_importe = "importe";
 	public static final String KEY_LF_precio = "precioVenta";
 	public static final String KEY_ctdad = "cantidad";
+	
 	public static final String KEY_DNI = "DNI";
 	public static final String KEY_nombre = "nombre";
 	public static final String KEY_apellido = "apellido";
 	public static final String KEY_email = "email";
 	public static final String KEY_edad = "edad";
 	public static final String KEY_genero = "genero";
+<<<<<<< HEAD
 	public static final String KEY_pases = "pases";
+=======
+	
+	public static final String KEY_cuentaBancaria = "cuenta";
+	public static final String KEY_facturasCliente = "facturas";
+	public static final String KEY_puntosAcum = "puntos";
+	public static final String KEY_nivelVIP = "nivel";
+	public static final String KEY_costeMensual = "mensualidad";
+
+	public static final String KEY_idObra = "IdObra"; 
+	public static final String KEY_titulo = "Titulo"; 
+	public static final String KEY_autor = "Autor"; 
+	public static final String KEY_Genero = "Genero"; 
+	public static final String KEY_ListaPases = "ListPases"; 
+	public static final String KEY_sinopsis = "Sinopsis"; 
+	public static final String KEY_Activo = "Activo"; 
+>>>>>>> branch 'main' of https://github.com/MDzimah/UCM-Software-Engineering-II.git
 }

@@ -12,7 +12,7 @@ import exceptions.BBDDFacWriteException;
 import integracion.factoria.FactoriaAbstractaIntegracion;
 import integracion.factura.DAOLineaFactura;
 import misc.OpsBBDD;
-import misc.PanelUtils;
+import misc.SwingUtils;
 import negocio.factura.TLineaFactura;
 import negocio.pase.TPase;
 
@@ -39,11 +39,11 @@ public class DAOPaseImp implements DAOPase {
 			return newID;
 		} 
 		catch (BBDDFacReadException e) {
-			PanelUtils.panelBBDDReadError(null, "BDPase.json", e.getMessage());
+			SwingUtils.panelBBDDReadError(null, "BDPase.json", e.getMessage());
 			return -1;
 		}
 		catch (BBDDFacWriteException e) {
-			PanelUtils.panelBBDDWriteError(null, "BDPase.json", e.getMessage());
+			SwingUtils.panelBBDDWriteError(null, "BDPase.json", e.getMessage());
 			return -1;
 		}
 	}
@@ -61,7 +61,7 @@ public class DAOPaseImp implements DAOPase {
 				}
 			}
 		} catch (BBDDFacReadException e) {
-			PanelUtils.panelBBDDReadError(null, "BDFactura.json", e.getMessage());
+			SwingUtils.panelBBDDReadError(null, "BDFactura.json", e.getMessage());
 		}
 		return -1; //no se ha borrado pase porque no se ha encontrado
 	}
@@ -78,7 +78,7 @@ public class DAOPaseImp implements DAOPase {
 				}
 			}
 		} catch (BBDDFacReadException e) {
-			PanelUtils.panelBBDDReadError(null, "BDFactura.json", e.getMessage());
+			SwingUtils.panelBBDDReadError(null, "BDFactura.json", e.getMessage());
 		}
 		return null;
 	}
@@ -96,7 +96,7 @@ public class DAOPaseImp implements DAOPase {
 				}
 			}
 		} catch (BBDDFacReadException e) {
-			PanelUtils.panelBBDDReadError(null, "BDFactura.json", e.getMessage());
+			SwingUtils.panelBBDDReadError(null, "BDFactura.json", e.getMessage());
 		}
 		return null;
 	}
@@ -122,7 +122,7 @@ public class DAOPaseImp implements DAOPase {
 			else
 				return -1;
 		} catch (BBDDReadException e) {
-			PanelUtils.panelBBDDReadError(null, "BDFactura.json", e.getMessage());
+			SwingUtils.panelBBDDReadError(null, "BDFactura.json", e.getMessage());
 			return -1;
 		}
 	}
