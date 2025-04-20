@@ -72,6 +72,8 @@ public class Messages {
 	public static final String KEY_importe = "importe";
 	public static final String KEY_LF_precio = "precioVenta";
 	public static final String KEY_ctdad = "cantidad";
+	public static final String KEY_stock = "stock";
+	public static final String KEY_precioPase = "precio pase";
 	
 	public static final String KEY_DNI = "DNI";
 	public static final String KEY_nombre = "nombre";
