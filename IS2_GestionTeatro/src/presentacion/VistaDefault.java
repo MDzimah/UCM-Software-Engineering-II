@@ -7,7 +7,7 @@ import javax.swing.*;
 
 import misc.Constants;
 import misc.Pair;
-import misc.PanelUtils;
+import misc.SwingUtils;
 
 
 @SuppressWarnings("serial")
@@ -59,14 +59,14 @@ public abstract class VistaDefault extends JFrame implements IGUI {
 		    JPanel infoPanel = new JPanel();
 		    infoPanel.setLayout(new BoxLayout(infoPanel, BoxLayout.Y_AXIS));
 		    for (Pair<JComponent, JComponent> p : pairComponents) {
-		        infoPanel.add(PanelUtils.createComponentPair(p.getFirst(), p.getSecond()));
+		        infoPanel.add(SwingUtils.createComponentPair(p.getFirst(), p.getSecond()));
 		    }
 	
 		    mainPanel.add(infoPanel, BorderLayout.NORTH);
 	    }
 	    
 		if (positiveResponse != null || negativeResponse != null) {
-		    JPanel responsePanel = PanelUtils.createResponsePair(positiveResponse, negativeResponse);
+		    JPanel responsePanel = SwingUtils.createResponsePair(positiveResponse, negativeResponse);
 		    responsePanel.setBorder(BorderFactory.createEmptyBorder(30, 0, 10, 0));
 		    mainPanel.add(responsePanel, BorderLayout.SOUTH);
 		}

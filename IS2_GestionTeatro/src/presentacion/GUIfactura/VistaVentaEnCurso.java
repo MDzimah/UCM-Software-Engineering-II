@@ -14,6 +14,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
+import misc.SwingUtils;
 import negocio.factura.TFactura;
 import negocio.factura.TLineaFactura;
 import presentacion.Evento;
@@ -42,6 +43,7 @@ public class VistaVentaEnCurso extends JFrame implements IGUI {
 	
 	public VistaVentaEnCurso() {
 		super("NUEVA VENTA");
+		SwingUtils.setAppIcon(this);
 		this.setLayout(new BoxLayout(vistaCarrito, BoxLayout.Y_AXIS));
 		
 		anyadirPase = new JButton("Añadir pase");

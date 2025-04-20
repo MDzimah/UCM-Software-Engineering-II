@@ -4,7 +4,11 @@ import java.awt.*;
 
 import javax.swing.*;
 
-public class PanelUtils {
+public class SwingUtils {
+	
+	 public static void setAppIcon(Window window) {
+	        window.setIconImage(new ImageIcon("resources/imagenes/teatretLogo.png").getImage());
+	    } 
 	
 	/**
 	 * Creates a horizontally aligned {@code JPanel} containing two {@code JComponent}s with adjustable spacing between them.

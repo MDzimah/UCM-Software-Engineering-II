@@ -9,7 +9,7 @@ import javax.swing.*;
 
 import misc.Constants;
 import misc.Messages;
-import misc.PanelUtils;
+import misc.SwingUtils;
 import negocio.factura.TFactura;
 import presentacion.Evento;
 import presentacion.IGUI;
@@ -25,6 +25,7 @@ public class VistaBuscarFac extends JFrame implements IGUI {
 	
 	public VistaBuscarFac() {
 		super("BUSCAR FACTURA");
+		SwingUtils.setAppIcon(this);
 		JPanel mainPanel = new JPanel(new BorderLayout());
 		mainPanel.setSize(Constants.getScaledScreenDimension(2, 2));
 		this.lIdFac = new JLabel("Id factura:");
@@ -34,10 +35,10 @@ public class VistaBuscarFac extends JFrame implements IGUI {
 		
 		JPanel infoPanel = new JPanel();
 		infoPanel.setLayout(new BoxLayout(infoPanel, BoxLayout.Y_AXIS));
-		infoPanel.add(PanelUtils.createComponentPair(this.lIdFac, this.tIdFac));
+		infoPanel.add(SwingUtils.createComponentPair(this.lIdFac, this.tIdFac));
 		mainPanel.add(infoPanel, BorderLayout.CENTER);
 		
-		JPanel responsePanel = PanelUtils.createResponsePair(buscar, cancel);
+		JPanel responsePanel = SwingUtils.createResponsePair(buscar, cancel);
 		mainPanel.add(responsePanel, BorderLayout.SOUTH);
 		
 		buscar.addActionListener(new ActionListener() {

@@ -9,7 +9,7 @@ import javax.swing.JPanel;
 
 import misc.Constants;
 import misc.Messages;
-import misc.PanelUtils;
+import misc.SwingUtils;
 import presentacion.Evento;
 import presentacion.IGUI;
 import presentacion.controlador.Controlador;
@@ -23,9 +23,10 @@ public class VistaMostrarFacs extends JFrame implements IGUI {
 	
 	public VistaMostrarFacs() {
 		super("MOSTRAR FACTURAS");
+		SwingUtils.setAppIcon(this);
 		this.mostrar = new JButton("Mostrar");
 		this.cancel = new JButton("Cancelar");
-		JPanel responsePanel = PanelUtils.createResponsePair(this.mostrar, this.cancel);
+		JPanel responsePanel = SwingUtils.createResponsePair(this.mostrar, this.cancel);
 		responsePanel.setSize(Constants.getScaledScreenDimension(2, 2));
 		
 		mostrar.addActionListener(new ActionListener() {

@@ -21,6 +21,7 @@ public abstract class VistaAdd_QuitarPdeVenta extends VistaDefault {
 	private JButton cancel;
 	
 	void initComps() {
+		SwingUtils.setAppIcon(this);
 		lIdPase = new JLabel("Id pase:");
 		tIdPase = new JTextField(20);
 		/*
