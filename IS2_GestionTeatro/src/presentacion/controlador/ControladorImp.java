@@ -4,13 +4,14 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 import exceptions.BBDDReadException;
+import misc.Evento;
+import misc.SwingUtils;
 import negocio.factoria.FactoriaAbstractaNegocio;
 import negocio.factura.SAFactura;
 import negocio.factura.TFactura;
 import negocio.factura.TLineaFactura;
 import negocio.pase.SAPase;
 import negocio.pase.TPase;
-import presentacion.Evento;
 import presentacion.GUIfactura.VistaVentaEnCurso;
 import presentacion.factoria.FactoriaAbstractaPresentacion;
 
@@ -21,15 +22,13 @@ public class ControladorImp extends Controlador {
 	mezcando FactoriaPresentación con el Controlador y eso hace que la arquitectura sea más sucia. Lo de 
 	create "NonIGUIVistas" tiene que desaparecer completamente y solamente ha de haber createVista con IGUI
 	*/
+	//SOLUCIÓN: TODAS LAS VENTANAS TIENEN Q EXTENDER IGUI SALVO LAS Q SEAN DE ERRORES Y TAL, Q SERÁN MÉTODOS DE FACTORIAABSTRACTAPRESENTACIÓN.
+	//SE LLAMA AQUÍ CUANDO ALGO PASA EN DICHAS VENTANAS PARA SEGUIR LIMPIAMENTE LA ARQUITECTURA DEL SOFTWARE Q TENEMOS
 	@Override
 	public void accion(Evento evento, Object datos) {
 		switch(evento) {
-		
+		case MAINWINDOW: FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar((Evento)datos, null); break;
 		//Factura
-		case FACTURA: {
-			FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(evento, datos);
-			//Actualizar la ventana de Jaime de Factura (se pulsa un botón de abrir venta, buscar factura, mostrar facturas, etc.)
-		}
 		case ANYADIR_PASE_A_VENTA: {
 			TLineaFactura newTLf = (TLineaFactura)datos;
 			SAPase saP = FactoriaAbstractaNegocio.getInstance().crearSAPase();
@@ -70,7 +69,7 @@ public class ControladorImp extends Controlador {
 				else FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_BUSCAR_FACTURA_KO, idFac);
 			}
 			catch(BBDDReadException e) {
-				FactoriaAbstractaPresentacion.getInstance().createNonIGUIVistas(Evento.X_BBDD_READ, e.getMessage());
+				 FactoriaAbstractaPresentacion.getInstance().lecturaBBDDincorrecta(e.getMessage());
 			}
 			
 			break;
@@ -90,7 +89,7 @@ public class ControladorImp extends Controlador {
 				else FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_MOSTRAR_FACTURAS_KO, null); 
 			}
 			catch(BBDDReadException e) {
-				FactoriaAbstractaPresentacion.getInstance().createNonIGUIVistas(Evento.X_BBDD_READ, e.getMessage());
+				 FactoriaAbstractaPresentacion.getInstance().lecturaBBDDincorrecta(e.getMessage());
 			}
 			break;
 		}
@@ -145,7 +144,6 @@ public class ControladorImp extends Controlador {
 		case CONTRATAR_MIEMBRO_COMPANIA:
 		case DESPEDIR_MIEMBRO_COMPANIA:
 		case LISTAR_MIEMBRO_COMPANIA:
-			
 		}
 	}
 

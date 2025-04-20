@@ -1,7 +1,7 @@
 package presentacion.GUIfactura;
 
+import misc.Evento;
 import misc.Messages;
-import presentacion.Evento;
 import presentacion.factoria.FactoriaAbstractaPresentacion;
 
 @SuppressWarnings("serial")
@@ -21,11 +21,11 @@ public class VistaAddPaseVenta extends VistaAdd_QuitarPdeVenta {
 	@Override
 	public void actualizar(Evento evento, Object datos) {
 		if (evento == Evento.RES_ANYADIR_PASE_A_VENTA_OK) {
-			FactoriaAbstractaPresentacion.getInstance().createNonIGUIVistas(Evento.MESSAGE_DIALOG, Messages.EX_PASE_ANYADIDO_A_VENTA);
+			FactoriaAbstractaPresentacion.getInstance().messageDialog(Messages.EX_PASE_ANYADIDO_A_VENTA);
 			this.dispose();
 		}
 		else if(evento == Evento.RES_ANYADIR_PASE_A_VENTA_KO) { 
-			FactoriaAbstractaPresentacion.getInstance().createNonIGUIVistas(Evento.MESSAGE_DIALOG, Messages.X_PASE_ANYADIDO_A_VENTA.formatted((String)datos));
+			FactoriaAbstractaPresentacion.getInstance().messageDialog(Messages.X_PASE_ANYADIDO_A_VENTA.formatted((String)datos));
 		}
 	}
 }

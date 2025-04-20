@@ -6,7 +6,6 @@ import javax.swing.*;
 
 import misc.*;
 import negocio.factura.*;
-import presentacion.Evento;
 import presentacion.VistaDefault;
 import presentacion.controlador.Controlador;
 import presentacion.factoria.FactoriaAbstractaPresentacion;
@@ -66,8 +65,7 @@ public abstract class VistaAdd_QuitarPdeVenta extends VistaDefault {
 					dispose();
 				}
 				catch (Exception ex) {
-					FactoriaAbstractaPresentacion.getInstance().createNonIGUIVistas(Evento.X_CAMPOS_INCORRECTOS, null);
-					setVisible(true);
+					FactoriaAbstractaPresentacion.getInstance().camposIncorrectos();
 				}
 			}
 		});

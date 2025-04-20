@@ -1,12 +1,14 @@
-package presentacion;
+package misc;
 
 public enum Evento {
 	//ORDEN ALFABÉTICO EN MÉTODOS/RESPUESTAS
 	
+	MAINWINDOW,
+	
 	/*--MÉTODOS--*/
 	
 	//Factura
-	FACTURA,
+	MENU_FACTURA,
 	ANYADIR_PASE_A_VENTA, 
 	BUSCAR_FACTURA,
 	CERRAR_VENTA, 
@@ -85,13 +87,4 @@ public enum Evento {
 	
 	//MiemCompTea
 	
-	//Errores
-	X_CAMPOS_INCORRECTOS,
-	X_BBDD_READ,
-	X_BBDD_WRITE, 
-	
-	//Otras ventanas
-	MAINWINDOW,
-	TABLA_DEFAULT,
-	MESSAGE_DIALOG
 }

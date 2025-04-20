@@ -2,15 +2,16 @@ package presentacion.GUIfactura;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Collection;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 import misc.Constants;
+import misc.Evento;
 import misc.Messages;
 import misc.SwingUtils;
-import presentacion.Evento;
 import presentacion.IGUI;
 import presentacion.controlador.Controlador;
 import presentacion.factoria.FactoriaAbstractaPresentacion;
@@ -50,15 +51,14 @@ public class VistaMostrarFacs extends JFrame implements IGUI {
 	@Override
 	public void actualizar(Evento evento, Object datos) {
 		if (evento == Evento.RES_MOSTRAR_FACTURAS_OK) {
-			/*
 			@SuppressWarnings("unchecked")
 			Collection<Object> castedData = (Collection<Object>)datos;
 			String[] nomCols = {"ID","ID CLIENTE", "ID TAQUILLERO", "FECHA", "PASES COMPRADOS", "IMPORTE"};
-			TablaDefault tb = new TablaDefault(nomCols, castedData, "MOSTRAR FACTURAS");
-			tb.setVisible(true);
-			*/
+			FactoriaAbstractaPresentacion.getInstance().tabla("MOSTRAR FACTURAS", nomCols, castedData);
 		}
-		else if(evento == Evento.RES_MOSTRAR_FACTURAS_KO) FactoriaAbstractaPresentacion.getInstance().createNonIGUIVistas(Evento.MESSAGE_DIALOG, Messages.X_MOSTRAR_FACTURAS);
+		else if(evento == Evento.RES_MOSTRAR_FACTURAS_KO) {
+			 FactoriaAbstractaPresentacion.getInstance().messageDialog(Messages.X_MOSTRAR_FACTURAS);
+		}
 	}
 
 }

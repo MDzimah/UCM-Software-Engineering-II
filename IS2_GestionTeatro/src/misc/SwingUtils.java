@@ -6,9 +6,9 @@ import javax.swing.*;
 
 public class SwingUtils {
 	
-	 public static void setAppIcon(Window window) {
-	        window.setIconImage(new ImageIcon("resources/imagenes/teatretLogo.png").getImage());
-	    } 
+	 public static void setAppIcon(JFrame window) {
+		 window.setIconImage(Constants.logoTeatret());
+	 } 
 	
 	/**
 	 * Creates a horizontally aligned {@code JPanel} containing two {@code JComponent}s with adjustable spacing between them.

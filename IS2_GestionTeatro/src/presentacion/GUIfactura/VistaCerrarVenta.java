@@ -10,13 +10,13 @@ import javax.swing.JComponent;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 
+import misc.Evento;
 import misc.Messages;
 import misc.Pair;
 import misc.SwingUtils;
 import negocio.factura.TDatosVenta;
 import negocio.factura.TFactura;
 import negocio.factura.TLineaFactura;
-import presentacion.Evento;
 import presentacion.VistaDefault;
 import presentacion.controlador.Controlador;
 import presentacion.factoria.FactoriaAbstractaPresentacion;
@@ -65,7 +65,8 @@ public class VistaCerrarVenta extends VistaDefault {
 					Controlador.getInstance().accion(Evento.CERRAR_VENTA, tDv);
 				}
 				catch(ArithmeticException ex) {
-					FactoriaAbstractaPresentacion.getInstance().createNonIGUIVistas(Evento.X_CAMPOS_INCORRECTOS, null);
+					
+					FactoriaAbstractaPresentacion.getInstance().camposIncorrectos();;
 				}
 			}
 		});
@@ -81,9 +82,9 @@ public class VistaCerrarVenta extends VistaDefault {
 	@Override
 	public void actualizar(Evento evento, Object datos) {
 		if (evento == Evento.RES_CERRAR_VENTA_OK) {
-			FactoriaAbstractaPresentacion.getInstance().createNonIGUIVistas(Evento.MESSAGE_DIALOG, Messages.EX_VENTA_CERRADA);
+			FactoriaAbstractaPresentacion.getInstance().messageDialog(Messages.EX_VENTA_CERRADA);
 		} else if (evento == Evento.RES_CERRAR_VENTA_KO) {
-			FactoriaAbstractaPresentacion.getInstance().createNonIGUIVistas(Evento.MESSAGE_DIALOG, Messages.X_VENTA_CERRADA);
+			FactoriaAbstractaPresentacion.getInstance().messageDialog(Messages.X_VENTA_CERRADA);
 		}
 	}
 }

@@ -8,10 +8,10 @@ import java.util.Collection;
 import javax.swing.*;
 
 import misc.Constants;
+import misc.Evento;
 import misc.Messages;
 import misc.SwingUtils;
 import negocio.factura.TFactura;
-import presentacion.Evento;
 import presentacion.IGUI;
 import presentacion.controlador.Controlador;
 import presentacion.factoria.FactoriaAbstractaPresentacion;
@@ -50,7 +50,7 @@ public class VistaBuscarFac extends JFrame implements IGUI {
 					dispose();
 				}
 				catch(ArithmeticException ex) {
-					FactoriaAbstractaPresentacion.getInstance().createNonIGUIVistas(Evento.X_CAMPOS_INCORRECTOS, null);
+					FactoriaAbstractaPresentacion.getInstance().camposIncorrectos();
 				}
 			}
 			
@@ -68,6 +68,7 @@ public class VistaBuscarFac extends JFrame implements IGUI {
 	@Override
 	public void actualizar(Evento evento, Object datos) {
 		if (evento == Evento.RES_BUSCAR_FACTURA_OK) {
+			/*
 			Collection<Object> fac = new ArrayList<Object>();
 			fac.add((TFactura)datos);
 			String[] nomCols = {"ID","ID CLIENTE", "ID TAQUILLERO", "FECHA", "PASES COMPRADOS", "IMPORTE"};
@@ -78,9 +79,11 @@ public class VistaBuscarFac extends JFrame implements IGUI {
 			datosParaTabla[2] = "BUSCAR FACTURA";
 			
 			FactoriaAbstractaPresentacion.getInstance().createNonIGUIVistas(Evento.TABLA_DEFAULT, datosParaTabla);
+			*/
+			//QUIZÁS HAGA ALGO GENÉRICO PERSONALIZADO PARA TODO EL MUNDO
 		}
 		else if(evento == Evento.RES_BUSCAR_FACTURA_KO) {
-			FactoriaAbstractaPresentacion.getInstance().createNonIGUIVistas(Evento.MESSAGE_DIALOG, Messages.X_BUSCAR_FACTURA.formatted((String) datos));
+			FactoriaAbstractaPresentacion.getInstance().messageDialog(Messages.X_BUSCAR_FACTURA.formatted((String) datos));
 		}
 	}
 

@@ -1,6 +1,6 @@
 package presentacion.controlador;
 
-import presentacion.Evento;
+import misc.Evento;
 
 public abstract class Controlador {
 	private static Controlador instancia = null;
