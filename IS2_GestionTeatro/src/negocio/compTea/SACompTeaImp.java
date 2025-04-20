@@ -1,6 +1,8 @@
 package negocio.compTea;
 
 import java.util.Collection;
+
+import exceptions.BBDDReadException;
 import exceptions.UnknownCompTeaException;
 import exceptions.UnknownMiemCompTeaException;
 import integracion.compTea.DAOCompTea;
@@ -12,15 +14,10 @@ import negocio.compTea.TCompTea;
 public class SACompTeaImp implements SACompTea {
 
 	@Override
-	public int create(TCompTea ct) {
+	public int create(TCompTea ct)  {
 		if(ct==null)throw new UnknownCompTeaException();
 		DAOCompTea daoCT=FactoriaAbstractaIntegracion.getInstance().crearDAOCompTea();
 		Collection<TMiemCompTea> listaMiembros=ct.getMiembros();
-		for(TMiemCompTea mc: listaMiembros) {
-			DAOMiemCompTea daoMCT=FactoriaAbstractaIntegracion.getInstance().crearDAOMiemCompTea();
-			TMiemCompTea mc2= daoMCT.read(mc.getIdMiembComp());
-			if(mc2==null) throw new UnknownMiemCompTeaException();
-		}
 		return daoCT.create(ct);
 	}
 
