@@ -179,7 +179,6 @@ public abstract class FactoriaAbstractaPresentacion {
 	    				fila[1] = tFac.getIdCliente();
 	    				fila[2] = tFac.getIdTaquillero();
 	    				fila[3] = tFac.getFecha();
-	    				fila[4] = tFac.getCarrito();
 	    				fila[5] = tFac.getImporte();
 	    				
 	    				matInfo.add(fila);
