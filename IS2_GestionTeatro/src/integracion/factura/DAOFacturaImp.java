@@ -1,9 +1,7 @@
 package integracion.factura;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Set;
+import java.util.*;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -11,15 +9,20 @@ import org.json.JSONObject;
 import exceptions.*;
 import integracion.factoria.FactoriaAbstractaIntegracion;
 import misc.*;
-import negocio.factura.TFactura;
-import negocio.factura.TLineaFactura;
+import negocio.factura.*;
 
 public class DAOFacturaImp implements DAOFactura {
 
 	@Override
 	public int create(TFactura tFactura) throws BBDDReadException, BBDDWriteException {
-		JSONObject bdFactura;
-		bdFactura = OpsBBDD.read(Messages.BDFac);
+		JSONObject bdFactura = new JSONObject();
+		
+		//Inicializo la BD si no está ya inicializada
+		if (OpsBBDD.isEmpty(Messages.BDFac)) {
+			bdFactura.put(Messages.KEY_lastId, 0);
+			bdFactura.put(Messages.KEY_facs, new JSONObject());
+		}
+		else bdFactura = OpsBBDD.read(Messages.BDFac);
 	
 		JSONObject facturas = new JSONObject(bdFactura.get(Messages.KEY_facs));
 		
@@ -56,84 +59,100 @@ public class DAOFacturaImp implements DAOFactura {
 
 	@Override
 	public int delete(int id) throws BBDDReadException, BBDDWriteException {
-		JSONObject bdFactura = OpsBBDD.read(Messages.BDFac);
-		JSONObject facs = bdFactura.getJSONObject(Messages.KEY_facs);
-        
-		if (facs.has(Integer.toString(id))) {
-	        JSONObject fac = facs.getJSONObject(Integer.toString(id));
-	        fac.put(Messages.KEY_act, false);
-	        OpsBBDD.write(bdFactura, Messages.BDFac);
-	        return id;
+		if (!OpsBBDD.isEmpty(Messages.BDFac)) {
+			JSONObject bdFactura = OpsBBDD.read(Messages.BDFac);
+			JSONObject facs = bdFactura.getJSONObject(Messages.KEY_facs);
+	        
+			if (facs.has(Integer.toString(id))) {
+		        JSONObject fac = facs.getJSONObject(Integer.toString(id));
+		        fac.put(Messages.KEY_act, false);
+		        OpsBBDD.write(bdFactura, Messages.BDFac);
+		        return id;
+			}
 		}
         return -1; //No se ha encontrado la factura con dicho id
 	}
 
 	@Override
 	public TFactura read(int id) throws BBDDReadException {
-		JSONObject facs = OpsBBDD.read(Messages.BDFac).getJSONObject(Messages.KEY_facs);
-		
-		TFactura tFacRead = null;
-		if (facs.has(Integer.toString(id))) {
-			JSONObject fac = facs.getJSONObject(Integer.toString(id));
-			tFacRead = readAux(fac);
-			tFacRead.setIdFactura(id);
+		if (!OpsBBDD.isEmpty(Messages.BDFac)) {
+			JSONObject facs = OpsBBDD.read(Messages.BDFac).getJSONObject(Messages.KEY_facs);
+			
+			TFactura tFacRead = null;
+			String _id = Integer.toString(id);
+			
+			//Aseguramos que el id está en las facturas y que 
+			if (facs.has(_id) && facs.getJSONObject(_id).getBoolean(Messages.KEY_act)) {
+				JSONObject fac = facs.getJSONObject(Integer.toString(id));
+				tFacRead = readAux(fac);
+				tFacRead.setIdFactura(id);
+			}
+			
+			return tFacRead;
 		}
-		
-		return tFacRead;
+		else return null;
 	}
 
 	@Override
 	public Collection<TFactura> readAll() throws BBDDReadException {
-		JSONObject bdFactura = OpsBBDD.read(Messages.BDFac);
-		
-		Collection<TFactura> facturasValidas = new ArrayList<>();
-		
-		JSONObject facturas = new JSONObject(bdFactura.getJSONArray(Messages.KEY_facs));
-		
-		Set<String> allIdsFacs = facturas.keySet();
-		for (String idFactura : allIdsFacs) {
-			JSONObject factura = facturas.getJSONObject(idFactura);
+		if (!OpsBBDD.isEmpty(Messages.BDFac)) {
+			JSONObject bdFactura = OpsBBDD.read(Messages.BDFac);
 			
-			//Cojo solo las facturas activas
-			if (factura.getBoolean(Messages.KEY_act)) {
-				TFactura tFacVal = this.readAux(factura);
-				tFacVal.setIdFactura(Integer.valueOf(idFactura)); //No va a dar excepción porque a la BD llegan solo id con números
-				facturasValidas.add(tFacVal);
+			Collection<TFactura> facturasValidas = new ArrayList<>();
+			
+			JSONObject facturas = new JSONObject(bdFactura.getJSONArray(Messages.KEY_facs));
+			
+			Set<String> allIdsFacs = facturas.keySet();
+			for (String idFactura : allIdsFacs) {
+				JSONObject factura = facturas.getJSONObject(idFactura);
+				
+				//Cojo solo las facturas activas
+				if (factura.getBoolean(Messages.KEY_act)) {
+					TFactura tFacVal = this.readAux(factura);
+					tFacVal.setIdFactura(Integer.valueOf(idFactura)); //No va a dar excepción porque a la BD llegan solo id con números
+					facturasValidas.add(tFacVal);
+				}
 			}
+			
+			((ArrayList<TFactura>) facturasValidas).sort((a, b) -> Integer.compare(a.getIdFactura(), b.getIdFactura()));
+			return facturasValidas;
 		}
-	
-		return facturasValidas;
+		else return null;
 	}
 
 	@Override
 	public int update(TFactura tFactura) throws BBDDReadException, BBDDWriteException {
-		JSONObject bdFactura = OpsBBDD.read(Messages.BDFac);
-		JSONObject facs = bdFactura.getJSONObject(Messages.KEY_facs);
-		
-		Set<String> allIdsFacs = facs.keySet();
-		for (String idFactura : allIdsFacs) {
-            if (Integer.valueOf(idFactura) == tFactura.getIdFactura()) {
-            	JSONObject fac = facs.getJSONObject(idFactura);
-            	fac.put(Messages.KEY_act, tFactura.getActivo());
-            	fac.put(Messages.KEY_idCli, tFactura.getIdCliente());
-            	fac.put(Messages.KEY_idTaq, tFactura.getIdTaquillero());
-            	fac.put(Messages.KEY_fecha, tFactura.getFecha().toString());
-        	
-        		JSONArray carrito = new JSONArray();
-        		
-        		DAOLineaFactura daoLineaFactura = FactoriaAbstractaIntegracion.getInstance().crearDAOLineaFactura();
-        		for (TLineaFactura tLineaFactura : tFactura.getCarrito()) {
-        			carrito.put(tLineaFactura.getIdLineaFactura());
-        			daoLineaFactura.update(tLineaFactura);
-        		}
-        		fac.put(Messages.KEY_carrito, carrito);
-        		fac.put(Messages.KEY_subtotal, tFactura.getSubtotal());
-        		fac.put(Messages.KEY_importe, tFactura.getImporte());
-            	
-            	OpsBBDD.write(bdFactura, Messages.BDFac);
-                return Integer.valueOf(idFactura);
-            }
-        }
+		if (!OpsBBDD.isEmpty(Messages.BDFac)) {
+			JSONObject bdFactura = OpsBBDD.read(Messages.BDFac);
+			JSONObject facs = bdFactura.getJSONObject(Messages.KEY_facs);
+			
+			Set<String> allIdsFacs = facs.keySet();
+			for (String idFactura : allIdsFacs) {
+				JSONObject fac = facs.getJSONObject(idFactura);
+				
+				//Solo se actualiza la factura si coinciden los ids y está activa
+	            if (Integer.valueOf(idFactura) == tFactura.getIdFactura() && fac.getBoolean(Messages.KEY_act)) {
+	            	fac.put(Messages.KEY_act, tFactura.getActivo());
+	            	fac.put(Messages.KEY_idCli, tFactura.getIdCliente());
+	            	fac.put(Messages.KEY_idTaq, tFactura.getIdTaquillero());
+	            	fac.put(Messages.KEY_fecha, tFactura.getFecha().toString());
+	        	
+	        		JSONArray carrito = new JSONArray();
+	        		
+	        		DAOLineaFactura daoLineaFactura = FactoriaAbstractaIntegracion.getInstance().crearDAOLineaFactura();
+	        		for (TLineaFactura tLineaFactura : tFactura.getCarrito()) {
+	        			carrito.put(tLineaFactura.getIdLineaFactura());
+	        			daoLineaFactura.update(tLineaFactura);
+	        		}
+	        		fac.put(Messages.KEY_carrito, carrito);
+	        		fac.put(Messages.KEY_subtotal, tFactura.getSubtotal());
+	        		fac.put(Messages.KEY_importe, tFactura.getImporte());
+	            	
+	            	OpsBBDD.write(bdFactura, Messages.BDFac);
+	                return Integer.valueOf(idFactura);
+	            }
+	        }
+		}
         return -1; //No se ha encontrado la factura pasada por parámetro
 	}
 	
