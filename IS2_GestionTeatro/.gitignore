@@ -1,4 +1,4 @@
-Gitignore para Eclipse Java
+# Gitignore para Eclipse Java
 *target*
 *.war
 *.ear
