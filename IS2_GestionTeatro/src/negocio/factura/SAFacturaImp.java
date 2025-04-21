@@ -11,8 +11,10 @@ import exceptions.UnknownTaquilleroException;
 import integracion.cliente.DAOCliente;
 import integracion.factoria.FactoriaAbstractaIntegracion;
 import integracion.factura.DAOFactura;
+import integracion.factura.DAOLineaFactura;
 import integracion.pase.DAOPase;
 import integracion.taquillero.DAOTaquillero;
+import misc.Messages;
 import negocio.cliente.SACliente;
 import negocio.cliente.TCliente;
 import negocio.factoria.FactoriaAbstractaNegocio;
@@ -71,7 +73,18 @@ public class SAFacturaImp implements SAFactura {
 						subTotal,
 						importeFinal);
 				DAOFactura daoFac = FactoriaAbstractaIntegracion.getInstance().crearDAOFactura();
-				idFacNueva = daoFac.create(tFacFinal); //Internamente usa DAOLineaFactura y da el id de la factura a las líneas
+				idFacNueva = daoFac.create(tFacFinal); 
+				
+				
+				DAOLineaFactura daoLineaFactura = FactoriaAbstractaIntegracion.getInstance().crearDAOLineaFactura();
+				for (TLineaFactura tLineaFactura : tFactura.getCarrito()) {
+					//Damos el id de la factura a sus líneas
+					tLineaFactura.setIdFactura(newId);
+					int idLineaFactura = daoLineaFactura.create(tLineaFactura);
+					carrito.put(idLineaFactura);
+					
+				}
+				//Internamente usa DAOLineaFactura y da el id de la factura a las líneas
 				//TAQUILLERO TIENE Q ACTUALIZARSE
 			}
 		}

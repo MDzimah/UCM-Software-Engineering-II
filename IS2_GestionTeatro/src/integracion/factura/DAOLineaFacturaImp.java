@@ -1,5 +1,7 @@
 package integracion.factura;
 
+import java.util.Set;
+
 import org.json.JSONObject;
 
 import exceptions.BBDDReadException;
@@ -49,8 +51,11 @@ public class DAOLineaFacturaImp implements DAOLineaFactura {
 	        
 			if (lineasFactura.has(Integer.toString(id))) {
 		        JSONObject linea = lineasFactura.getJSONObject(Integer.toString(id));
-		    	linea.put(Messages.KEY_act, false);
-		    	return id;  
+		        
+		        if (linea.getBoolean(Messages.KEY_act)) {
+			    	linea.put(Messages.KEY_act, false);
+			    	return id;  
+		        }
 			}
 		}
         return -1; //No se ha encontrado la linea de factura con dicho id
@@ -66,11 +71,13 @@ public class DAOLineaFacturaImp implements DAOLineaFactura {
 			if (lineasFactura.has(Integer.toString(id))) {
 				JSONObject linea = lineasFactura.getJSONObject(Integer.toString(id));
 				
-				tLfRead = new TLineaFactura(id, 
-						linea.getInt(Messages.KEY_idFac), 
-						linea.getInt(Messages.KEY_idPase), 
-						linea.getInt(Messages.KEY_ctdad),
-						linea.getFloat(Messages.KEY_LF_precio));
+				if (linea.getBoolean(Messages.KEY_act)) {
+					tLfRead = new TLineaFactura(id, 
+							linea.getInt(Messages.KEY_idFac), 
+							linea.getInt(Messages.KEY_idPase), 
+							linea.getInt(Messages.KEY_ctdad),
+							linea.getFloat(Messages.KEY_LF_precio));
+				}
 			}
 			return tLfRead;
 		}
@@ -83,17 +90,18 @@ public class DAOLineaFacturaImp implements DAOLineaFactura {
 			JSONObject bdLinFac = OpsBBDD.read(Messages.BDLinFac);
 			JSONObject lineasFactura = bdLinFac.getJSONObject(Messages.KEY_facs);
 			
-			for (int i = 0; i < lineasFactura.length(); ++i) {
-				
-	        	JSONObject jObj = lineasFactura.getJSONObject(Integer.toString(i));
+			Set<String> allIdsLinFacs = lineasFactura.keySet();
+			for (String idLinFac : allIdsLinFacs) {
+	        	JSONObject linea = lineasFactura.getJSONObject(idLinFac);
 	        	
-	            if (jObj.getInt(Messages.KEY_idFac) == tLineaFac.getIdFactura()) {
-	            	lineasFactura.put(Integer.toString(i),tLineaFac);
+	        	//Solo se actualiza si coincide en id y si está activa
+	            if (linea.getInt(Messages.KEY_idFac) == tLineaFac.getIdFactura() && linea.getBoolean(Messages.KEY_act)) {
+	            	lineasFactura.put(idLinFac,tLineaFac);
 	            	OpsBBDD.write(bdLinFac, Messages.BDFac);
-	                return i;
+	                return Integer.valueOf(idLinFac);
 	            }
 	        }
 		}
-        return -1; //No se ha encontrado la factura pasada por parámetro
+        return -1; //No se ha actualizado la factura pasada por parámetro
 	}
 }

@@ -3,11 +3,9 @@ package integracion.factura;
 import java.time.LocalDateTime;
 import java.util.*;
 
-import org.json.JSONArray;
 import org.json.JSONObject;
 
 import exceptions.*;
-import integracion.factoria.FactoriaAbstractaIntegracion;
 import misc.*;
 import negocio.factura.*;
 
@@ -36,17 +34,14 @@ public class DAOFacturaImp implements DAOFactura {
 		nuevaFactura.put(Messages.KEY_idCli, tFactura.getIdCliente());
 		nuevaFactura.put(Messages.KEY_idTaq, tFactura.getIdTaquillero());
 		nuevaFactura.put(Messages.KEY_fecha, tFactura.getFecha().toString());
-		
+		/*
 		DAOLineaFactura daoLineaFactura = FactoriaAbstractaIntegracion.getInstance().crearDAOLineaFactura();
-		JSONArray carrito = new JSONArray();
-		
 		for (TLineaFactura tLineaFactura : tFactura.getCarrito()) {
 			//Damos el id de la factura a sus líneas
 			tLineaFactura.setIdFactura(newId);
 			int idLineaFactura = daoLineaFactura.create(tLineaFactura);
 			carrito.put(idLineaFactura);
-		}
-		nuevaFactura.put(Messages.KEY_carrito, carrito);
+			*/
 		nuevaFactura.put(Messages.KEY_subtotal, tFactura.getSubtotal());
 		nuevaFactura.put(Messages.KEY_importe, tFactura.getImporte());
 		
@@ -136,15 +131,6 @@ public class DAOFacturaImp implements DAOFactura {
 	            	fac.put(Messages.KEY_idCli, tFactura.getIdCliente());
 	            	fac.put(Messages.KEY_idTaq, tFactura.getIdTaquillero());
 	            	fac.put(Messages.KEY_fecha, tFactura.getFecha().toString());
-	        	
-	        		JSONArray carrito = new JSONArray();
-	        		
-	        		DAOLineaFactura daoLineaFactura = FactoriaAbstractaIntegracion.getInstance().crearDAOLineaFactura();
-	        		for (TLineaFactura tLineaFactura : tFactura.getCarrito()) {
-	        			carrito.put(tLineaFactura.getIdLineaFactura());
-	        			daoLineaFactura.update(tLineaFactura);
-	        		}
-	        		fac.put(Messages.KEY_carrito, carrito);
 	        		fac.put(Messages.KEY_subtotal, tFactura.getSubtotal());
 	        		fac.put(Messages.KEY_importe, tFactura.getImporte());
 	            	
@@ -157,6 +143,17 @@ public class DAOFacturaImp implements DAOFactura {
 	}
 	
 	
+	private TFactura readAux(JSONObject jsonFac) {
+		return new TFactura(
+				jsonFac.getInt(Messages.KEY_idCli), 
+				jsonFac.getInt(Messages.KEY_idTaq),
+				jsonFac.getBoolean(Messages.KEY_act),
+				LocalDateTime.parse(jsonFac.getString(Messages.KEY_fecha)),
+				jsonFac.getFloat(Messages.KEY_subtotal),
+				jsonFac.getFloat(Messages.KEY_importe));
+	}
+	
+	/* POR SI ACASO PERO ES INÚTIL SEGURAMENTE
 	private TFactura readAux(JSONObject jsonFac) throws BBDDReadException {
 		Collection<TLineaFactura> carrito = new ArrayList<TLineaFactura>();
 		DAOLineaFactura daoLineaFactura = FactoriaAbstractaIntegracion.getInstance().crearDAOLineaFactura();
@@ -177,4 +174,5 @@ public class DAOFacturaImp implements DAOFactura {
 				jsonFac.getFloat(Messages.KEY_subtotal),
 				jsonFac.getFloat(Messages.KEY_importe));
 	}
+	*/
 }
