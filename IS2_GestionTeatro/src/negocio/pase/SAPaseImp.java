@@ -19,7 +19,7 @@ import negocio.obra.TObra;
 public class SAPaseImp implements SAPase {
 
 	@Override
-	public int create(TPase tPase) throws UnknownObraException, UnknownCompTeaException, BBDDReadException {
+	public int create(TPase tPase) throws UnknownObraException, UnknownCompTeaException, BBDDReadException, BBDDWriteException {
 		int id = -1;
 		
 		DAOObra daoObra = FactoriaAbstractaIntegracion.getInstance().crearDAOObra();
@@ -65,7 +65,7 @@ public class SAPaseImp implements SAPase {
 	}
 
 	@Override
-	public int comprar(int idPase, int cantidad) throws BBDDReadException {
+	public int comprar(int idPase, int cantidad) throws BBDDReadException, BBDDWriteException {
 		DAOPase daoPas = FactoriaAbstractaIntegracion.getInstance().crearDAOPase();
 		TPase tPase = daoPas.read(idPase);
 		int stock = tPase.getStock();
