@@ -12,16 +12,13 @@ public class TCompTea {
 	private String direccion;
 	private boolean activo;
 	private float costecontratacion;
-	private Collection<TMiemCompTea> miembros;
-	private Collection<TPase> pases;
 
-	public TCompTea(int id, String nombre, String direccion, boolean act, float coste, Collection<TPase> object ){
+	public TCompTea(int id, String nombre, String direccion, boolean act, float coste ){
 		this.idCompTeat=id;
 		this.nombre=nombre;
 		this.direccion=direccion;
 		this.activo=act;
 		this.costecontratacion=coste;
-		this.pases= object;
 	}
 	public int getId() {
 	    return idCompTeat;

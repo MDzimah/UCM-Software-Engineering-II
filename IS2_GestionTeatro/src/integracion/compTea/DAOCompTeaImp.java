@@ -3,6 +3,7 @@ package integracion.compTea;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.Set;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -36,20 +37,6 @@ public class DAOCompTeaImp implements DAOCompTea {
 			nuevaCompania.put(Messages.KEY_direccion, tCompTea.getDireccion());
 			nuevaCompania.put(Messages.KEY_coste, tCompTea.getCosteContratacion());
 			nuevaCompania.put(Messages.KEY_act, tCompTea.isActivo());
-			JSONArray s= new JSONArray();
-			DAOPase daoPases=FactoriaAbstractaIntegracion.getInstance().crearDAOPase();
-			int i=0;
-			for(TPase pas: tCompTea.getPases()) {
-				//if(daoPases.readByDNI(mc.getDNI())==null) {
-				int id=daoPases.create(pas);
-				s.put(i,id);
-				//}
-			}//Comprobar esto porque no tengo ni idea de como se hace??? 
-			
-			nuevaCompania.put(Messages.KEY_pases, s);
-			
-		
-			
 			bdCompania.put(String.valueOf(lastPos+1), nuevaCompania);
 			bdCompania.put(Messages.KEY_lastId, lastPos+1);
 			
@@ -79,15 +66,16 @@ public class DAOCompTeaImp implements DAOCompTea {
 		
 		if (bdCompania.has(Integer.toString(id))) {
 			JSONObject compania = bdCompania.getJSONObject(Integer.toString(id));
-			Collection<TPase> paseslista = new ArrayList<TPase>();
-			DAOPase daoPase = FactoriaAbstractaIntegracion.getInstance().crearDAOPase();
+			
+		/*	Collection<TPase> paseslista = new ArrayList<TPase>();
+		 * DAOPase daoPase = FactoriaAbstractaIntegracion.getInstance().crearDAOPase();
 			
 			JSONArray pases = compania.getJSONArray(Messages.KEY_pases);
 			for (int i = 0; i < pases.length(); i++) {
 				int idPase = pases.getInt(i);
 				TPase tLineaFactura = daoPase.read(idPase);
-				paseslista.add(tLineaFactura);}
-			tCompTea = new TCompTea(id, compania.getString(Messages.KEY_CompTea), compania.getString(Messages.KEY_direccion),compania.getBoolean(Messages.KEY_act), compania.getFloat(Messages.KEY_coste), paseslista);
+				paseslista.add(tLineaFactura);}*/
+			tCompTea = new TCompTea(id, compania.getString(Messages.KEY_CompTea), compania.getString(Messages.KEY_direccion),compania.getBoolean(Messages.KEY_act), compania.getFloat(Messages.KEY_coste));
 		}
 		
 		return tCompTea;
@@ -96,13 +84,54 @@ public class DAOCompTeaImp implements DAOCompTea {
 
 	@Override
 	public Collection<TCompTea> readAll() {
-		// TODO Auto-generated method stub
-		return null;
+		Collection<TCompTea> companias = new ArrayList<>();
+		if (!OpsBBDD.isEmpty(Messages.BDCT)) {
+			JSONObject BDCompania = OpsBBDD.read(Messages.BDCT);
+			Set<String> idCompanias = BDCompania.keySet();
+			for (String id : idCompanias) {
+				
+				if(!id.equals(Messages.KEY_lastId)){//hay una clave que guarda lastid
+					JSONObject JSONcompania = BDCompania.getJSONObject(id);
+					if (JSONcompania.getBoolean(Messages.KEY_act)) {
+						TCompTea tCompTea = new TCompTea(Integer.parseInt(id), JSONcompania.getString(Messages.KEY_CompTea), JSONcompania.getString(Messages.KEY_direccion),JSONcompania.getBoolean(Messages.KEY_act), JSONcompania.getFloat(Messages.KEY_coste));
+						companias.add(tCompTea);
+					}
+		        }
+
+			
+			}
+			return companias;
+		}
+		else return null;
+	}
 	}
 
 	@Override
 	public int update(TCompTea tCompTea) {
-		// TODO Auto-generated method stub
+		if (!OpsBBDD.isEmpty(Messages.BDCT)) {
+			JSONObject BDCompania = OpsBBDD.read(Messages.BDCT);
+			
+			Set<String> ids = BDCompania.keySet();
+			for (String idCompania : ids) {
+				if(!ids.equals(Messages.KEY_lastId)) {
+				JSONObject Compania = BDCompania.getJSONObject(idCompania);
+				
+				
+	            if (Integer.valueOf(idCompania) == tCompTea.getId() && Compania.getBoolean(Messages.KEY_act)) {
+	            	Compania.put(Messages.KEY_act, tCompTea.isActivo());
+	    	        Compania.put(Messages.KEY_CompTea, tCompTea.getNombre());
+	    			Compania.put(Messages.KEY_direccion, tCompTea.getDireccion());
+	    			Compania.put(Messages.KEY_coste, tCompTea.getCosteContratacion());
+	    			Compania.put(Messages.KEY_act, tCompTea.isActivo());
+	            	
+	            	OpsBBDD.write(BDCompania, Messages.BDFac);
+	                return Integer.valueOf(idCompania);
+	            }
+	            }
+	        }
+		}
+        return -1; //No se ha encontrado la factura pasada por parámetro
+	}
 		return 0;
 	}
 
