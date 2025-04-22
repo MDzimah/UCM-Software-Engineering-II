@@ -27,6 +27,11 @@ public enum Evento {
 	
 	//Pase
 	
+	CREAR_PASE,
+	ELIMINAR_PASE,
+	CONSULTAR_PASE,
+	BUSCAR_PASE,
+	LISTAR_PASES,
 	
 	//Taquillero
 	

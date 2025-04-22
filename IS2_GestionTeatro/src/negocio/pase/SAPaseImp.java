@@ -3,6 +3,8 @@ package negocio.pase;
 import java.time.LocalDateTime;
 import java.util.Collection;
 
+import exceptions.BBDDReadException;
+import exceptions.BBDDWriteException;
 import exceptions.UnknownClienteException;
 import exceptions.UnknownCompTeaException;
 import exceptions.UnknownObraException;
@@ -17,7 +19,7 @@ import negocio.obra.TObra;
 public class SAPaseImp implements SAPase {
 
 	@Override
-	public int create(TPase tPase) {
+	public int create(TPase tPase) throws UnknownObraException, UnknownCompTeaException, BBDDReadException, BBDDWriteException {
 		int id = -1;
 		
 		DAOObra daoObra = FactoriaAbstractaIntegracion.getInstance().crearDAOObra();
@@ -39,26 +41,39 @@ public class SAPaseImp implements SAPase {
 	}
 
 	@Override
-	public TPase read(int id) {
+	public TPase read(int id) throws BBDDReadException {
 		DAOPase daoPas = FactoriaAbstractaIntegracion.getInstance().crearDAOPase();
 		return daoPas.read(id);
 	}
 
 	@Override
-	public int update(TPase tPase) {
-		// TODO Auto-generated method stub
-		return 0;
+	public int update(TPase tPase) throws BBDDReadException, BBDDWriteException {
+		DAOPase daoPas = FactoriaAbstractaIntegracion.getInstance().crearDAOPase();
+		return daoPas.update(tPase);
 	}
 
 	@Override
-	public int delete(int id) {
+	public int delete(int id) throws BBDDReadException, BBDDWriteException {
 		DAOPase daoPas = FactoriaAbstractaIntegracion.getInstance().crearDAOPase();
 		return daoPas.delete(id);
 	}
 
 	@Override
-	public Collection<TPase> readAll() {
+	public Collection<TPase> readAll() throws BBDDReadException {
 		DAOPase daoPas = FactoriaAbstractaIntegracion.getInstance().crearDAOPase();
 		return daoPas.readAll();
+	}
+
+	@Override
+	public int comprar(int idPase, int cantidad) throws BBDDReadException, BBDDWriteException {
+		DAOPase daoPas = FactoriaAbstractaIntegracion.getInstance().crearDAOPase();
+		TPase tPase = daoPas.read(idPase);
+		int stock = tPase.getStock();
+		int cantidadReal;
+		if (stock - cantidad < 0) cantidadReal = stock;
+		else cantidadReal = cantidad;
+		tPase.setStock(cantidadReal);
+		daoPas.update(tPase);
+		return cantidadReal;
 	}
 }
