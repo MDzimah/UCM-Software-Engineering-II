@@ -5,7 +5,7 @@ import java.util.Collection;
 
 import exceptions.BBDDReadException;
 import misc.Evento;
-import misc.SwingUtils;
+import misc.Messages;
 import negocio.factoria.FactoriaAbstractaNegocio;
 import negocio.factura.SAFactura;
 import negocio.factura.TFactura;
@@ -16,60 +16,66 @@ import presentacion.GUIfactura.VistaVentaEnCurso;
 import presentacion.factoria.FactoriaAbstractaPresentacion;
 
 public class ControladorImp extends Controlador {
-	
-	/* Hay que hacer alguna forma para que la FactoriaPresentación se encargue solamente de crear
-	vistas y que sea el controlador solamente el que se encargue de pedir que se creen. Si no, estamos
-	mezcando FactoriaPresentación con el Controlador y eso hace que la arquitectura sea más sucia. Lo de 
-	create "NonIGUIVistas" tiene que desaparecer completamente y solamente ha de haber createVista con IGUI
-	*/
-	//SOLUCIÓN: TODAS LAS VENTANAS TIENEN Q EXTENDER IGUI SALVO LAS Q SEAN DE ERRORES Y TAL, Q SERÁN MÉTODOS DE FACTORIAABSTRACTAPRESENTACIÓN.
-	//SE LLAMA AQUÍ CUANDO ALGO PASA EN DICHAS VENTANAS PARA SEGUIR LIMPIAMENTE LA ARQUITECTURA DEL SOFTWARE Q TENEMOS
 	@Override
 	public void accion(Evento evento, Object datos) {
 		switch(evento) {
-		case MAINWINDOW: FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar((Evento)datos, null); break;
 		//Factura
 		case ANYADIR_PASE_A_VENTA: {
-			TLineaFactura newTLf = (TLineaFactura)datos;
-			SAPase saP = FactoriaAbstractaNegocio.getInstance().crearSAPase();
-			
-			TPase tPase = saP.read(newTLf.getIdPase());
-			
-			
-			if (tPase != null) {
-				Collection<TLineaFactura> carr = VistaVentaEnCurso.getCarrito();
-				
-				boolean estaba = false;
-				
-				//Recorremos el carrito para ver si ya hay una instancia de la línea factura
-				//Si sí, entonces sumamos a la cantidad que ya había
-				for(TLineaFactura tLf : carr) {
-					if (tLf.getIdPase() == newTLf.getIdPase()) {
-						tLf.setCantidad(tLf.getCantidad() + newTLf.getCantidad());
-						estaba = true;
-						break;
-					}
-				}
-				
-				//No hay instancia previa de newTLf en el carrito
-				if (!estaba) carr.add(newTLf);	
-				
-				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_ANYADIR_PASE_A_VENTA_OK, null);
+			//Es un mensaje de error
+			if (datos instanceof String) {
+				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_KO, (String)datos);
+				break;
 			}
-			else FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_ANYADIR_PASE_A_VENTA_KO, newTLf.getIdPase());
+			
+			try {
+				TLineaFactura newTLf = (TLineaFactura)datos;
+				SAPase saP = FactoriaAbstractaNegocio.getInstance().crearSAPase();
+				
+				TPase tPase = saP.read(newTLf.getIdPase());
+				
+				
+				if (tPase != null) {
+					Collection<TLineaFactura> carr = VistaVentaEnCurso.getCarrito();
+					
+					boolean estaba = false;
+					
+					//Recorremos el carrito para ver si ya hay una instancia de la línea factura
+					//Si sí, entonces sumamos a la cantidad que ya había
+					for(TLineaFactura tLf : carr) {
+						if (tLf.getIdPase() == newTLf.getIdPase()) {
+							tLf.setCantidad(tLf.getCantidad() + newTLf.getCantidad());
+							estaba = true;
+							break;
+						}
+					}
+					
+					//No hay instancia previa de newTLf en el carrito
+					if (!estaba) carr.add(newTLf);	
+					
+					FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_OK, null);
+				}
+				else FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_KO, newTLf.getIdPase());
+			}
+			catch(BBDDReadException e) {
+				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_KO, e.getMessage());
+			}
 			break;
 		}
 		case BUSCAR_FACTURA: {
-			int idFac = (int)datos;
-			SAFactura saFac = FactoriaAbstractaNegocio.getInstance().crearSAFactura();
+			if (datos instanceof String) {
+				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_KO, (String)datos);
+				break;
+			}
 			try {
+				int idFac = (int)datos;
+				SAFactura saFac = FactoriaAbstractaNegocio.getInstance().crearSAFactura();
 				TFactura tFacBuscada = saFac.read(idFac);
 			
-				if(tFacBuscada != null)	FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_BUSCAR_FACTURA_OK, tFacBuscada);
-				else FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_BUSCAR_FACTURA_KO, idFac);
+				if(tFacBuscada != null)	FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_OK, tFacBuscada);
+				else FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_KO, Messages.ID_NO_ENCONTRADO.formatted(idFac));
 			}
 			catch(BBDDReadException e) {
-				 FactoriaAbstractaPresentacion.getInstance().createDialogoLecturaBBDDincorrecta(e.getMessage());
+				 FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_KO, e.getMessage());
 			}
 			
 			break;
@@ -81,41 +87,53 @@ public class ControladorImp extends Controlador {
 			break;
 		}
 		case MOSTRAR_FACTURAS: {
-			SAFactura saFac = FactoriaAbstractaNegocio.getInstance().crearSAFactura();
 			try {
+				SAFactura saFac = FactoriaAbstractaNegocio.getInstance().crearSAFactura();
 				Collection<TFactura> allFacturas = saFac.readAll();
 				
-				if (!allFacturas.isEmpty()) FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_MOSTRAR_FACTURAS_OK, allFacturas); 
-				else FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_MOSTRAR_FACTURAS_KO, null); 
+				if (!allFacturas.isEmpty()) FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_OK, allFacturas); 
+				else FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_KO, Messages.NO_HAY_DATOS); 
 			}
 			catch(BBDDReadException e) {
-				 FactoriaAbstractaPresentacion.getInstance().createDialogoLecturaBBDDincorrecta(e.getMessage());
+				 FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_KO, e.getMessage());
 			}
 			break;
 		}
 		case QUITAR_PASE_DE_VENTA: {
-			TLineaFactura tLfAQuitar = (TLineaFactura)datos;
-			SAPase saP = FactoriaAbstractaNegocio.getInstance().crearSAPase();
-			
-			TPase tPase = saP.read(tLfAQuitar.getIdPase());
-			
-			if (tPase != null) {
-				ArrayList<TLineaFactura> carr = (ArrayList<TLineaFactura>) VistaVentaEnCurso.getCarrito();
+			if (datos instanceof String) {
+				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_KO, (String)datos);
+				break;
+			}
+			try {
+				TLineaFactura tLfAQuitar = (TLineaFactura)datos;
+				SAPase saP = FactoriaAbstractaNegocio.getInstance().crearSAPase();
 				
-				boolean estaba = false;
-				for(int i = 0; i < carr.size(); ++i) {
-					TLineaFactura tLf = carr.get(i);
-					if (tLf.getIdPase() == tLfAQuitar.getIdPase()) {
-						tLf.setCantidad(tLf.getCantidad() - tLfAQuitar.getCantidad());
-						if (carr.get(i).getCantidad() <= 0) carr.remove(i);
-						estaba = true;
+				TPase tPase = saP.read(tLfAQuitar.getIdPase());
+				
+				if (tPase != null) {
+					ArrayList<TLineaFactura> carr = (ArrayList<TLineaFactura>) VistaVentaEnCurso.getCarrito();
+					
+					boolean estaba = false;
+					for(int i = 0; i < carr.size(); ++i) {
+						TLineaFactura tLf = carr.get(i);
+						if (tLf.getIdPase() == tLfAQuitar.getIdPase()) {
+							tLf.setCantidad(tLf.getCantidad() - tLfAQuitar.getCantidad());
+							if (carr.get(i).getCantidad() <= 0) carr.remove(i);
+							estaba = true;
+							break;
+						}
+					}
+						
+					if (!estaba) {
+						FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_OK, null);
 						break;
 					}
 				}
-				
-				if (!estaba) FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_QUITAR_PASE_DE_VENTA_OK, null);
+				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_KO, tLfAQuitar.getIdPase());
 			}
-			FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_QUITAR_PASE_DE_VENTA_KO, tLfAQuitar.getIdPase());
+			catch(BBDDReadException e) {
+				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_KO, e.getMessage());
+			}
 			break;
 		}
 		
@@ -144,6 +162,14 @@ public class ControladorImp extends Controlador {
 		case CONTRATAR_MIEMBRO_COMPANIA:
 		case DESPEDIR_MIEMBRO_COMPANIA:
 		case LISTAR_MIEMBRO_COMPANIA:
+		
+		//Todas las ventanas que abren a otras (las que no sean de CU)
+		default: 
+			switch((Evento) datos) {
+				case MENU_FACTURA: FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.MENU_FACTURA, null);
+				
+				default:
+			}
 		}
 	}
 

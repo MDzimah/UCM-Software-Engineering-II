@@ -4,7 +4,7 @@ import java.awt.*;
 
 import javax.swing.*;
 
-public class SwingUtils {
+public class JSwingUtils {
 	
 	 public static void setAppIcon(JFrame window) {
 		 window.setIconImage(Constants.logoTeatret());

@@ -15,7 +15,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
 import misc.Evento;
-import misc.SwingUtils;
+import misc.JSwingUtils;
 import negocio.factura.TFactura;
 import negocio.factura.TLineaFactura;
 import presentacion.IGUI;
@@ -43,7 +43,7 @@ public class VistaVentaEnCurso extends JFrame implements IGUI {
 	
 	public VistaVentaEnCurso() {
 		super("NUEVA VENTA");
-		SwingUtils.setAppIcon(this);
+		JSwingUtils.setAppIcon(this);
 		this.setLayout(new BoxLayout(vistaCarrito, BoxLayout.Y_AXIS));
 		
 		anyadirPase = new JButton("Añadir pase");
@@ -100,7 +100,7 @@ public class VistaVentaEnCurso extends JFrame implements IGUI {
 
 	@Override
 	public void actualizar(Evento evento, Object datos) {
-		if (evento == Evento.RES_ANYADIR_PASE_A_VENTA_OK || evento == Evento.RES_QUITAR_PASE_DE_VENTA_OK) {
+		if (evento == Evento.RES_OK || evento == Evento.RES_QUITAR_PASE_DE_VENTA_OK) {
 			cargarVistaCarrito();
 		}
 	}

@@ -8,10 +8,9 @@ import misc.*;
 import negocio.factura.*;
 import presentacion.VistaDefault;
 import presentacion.controlador.Controlador;
-import presentacion.factoria.FactoriaAbstractaPresentacion;
 
 @SuppressWarnings("serial")
-public abstract class VistaAdd_QuitarPdeVenta extends VistaDefault {
+public abstract class ModificacionPaseEnVenta extends VistaDefault {
 	private JLabel lIdPase;
 	private JTextField tIdPase;
 	private JLabel lCtdad;
@@ -20,7 +19,7 @@ public abstract class VistaAdd_QuitarPdeVenta extends VistaDefault {
 	private JButton cancel;
 	
 	void initComps() {
-		SwingUtils.setAppIcon(this);
+		JSwingUtils.setAppIcon(this);
 		lIdPase = new JLabel("Id pase:");
 		tIdPase = new JTextField(20);
 		/*
@@ -65,7 +64,7 @@ public abstract class VistaAdd_QuitarPdeVenta extends VistaDefault {
 					dispose();
 				}
 				catch (Exception ex) {
-					FactoriaAbstractaPresentacion.getInstance().createDialogoCamposIncorrectos();
+					Controlador.getInstance().accion(evento, Messages.ERROR_CAMPOS_INCORRECTOS);
 				}
 			}
 		});

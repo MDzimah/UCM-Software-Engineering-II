@@ -1,14 +1,10 @@
 package misc;
 
 public enum Evento {
-	//ORDEN ALFABÉTICO EN MÉTODOS/RESPUESTAS
 	
-	MAINWINDOW,
-	
-	/*--MÉTODOS--*/
+	/*--VENTANAS DE CU--*/
 	
 	//Factura
-	MENU_FACTURA,
 	ANYADIR_PASE_A_VENTA, 
 	BUSCAR_FACTURA,
 	CERRAR_VENTA, 
@@ -17,7 +13,6 @@ public enum Evento {
 	
 	
 	//Cliente
-	
 	ALTA_CLIENTE, 
 	BUSCAR_CLIENTE, 
 	ELIMINAR_CLIENTE, 
@@ -56,40 +51,11 @@ public enum Evento {
 	LISTAR_MIEMBRO_COMPANIA,
 	
 	
+	/*--OTRAS VENTANAS--*/
+	MAINWINDOW,
+	MENU_FACTURA,
+	
 	/*--RESPUESTAS--*/
-	
-	//Factura
-	
-	RES_ANYADIR_PASE_A_VENTA_OK, 
-	RES_ANYADIR_PASE_A_VENTA_KO,
-	RES_BUSCAR_FACTURA_OK, 
-	RES_BUSCAR_FACTURA_KO,
-	RES_CERRAR_VENTA_OK, 
-	RES_CERRAR_VENTA_KO,
-	RES_MOSTRAR_FACTURAS_OK, 
-	RES_MOSTRAR_FACTURAS_KO,
-	RES_QUITAR_PASE_DE_VENTA_OK, 
-	RES_QUITAR_PASE_DE_VENTA_KO,
-	
-	
-	//Cliente
-	
-	RES_ALTA_CLIENTE_OK, 
-	RES_ALTA_CLIENTE_KO,
-	
-	
-	//Pase
-	
-	
-	//Taquillero
-	
-	
-	//Obra
-	
-	
-	//CompTea
-	
-	
-	//MiemCompTea
-	
+	RES_OK, 
+	RES_KO,
 }

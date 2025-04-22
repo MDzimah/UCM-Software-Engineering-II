@@ -7,6 +7,7 @@ import exceptions.BBDDWriteException;
 import exceptions.UnknownCompTeaException;
 import exceptions.UnknownObraException;
 
+
 public interface SAPase {
 	public int create(TPase tPase) throws UnknownObraException, UnknownCompTeaException, BBDDReadException, BBDDWriteException;
 	public TPase read(int id) throws BBDDReadException;
