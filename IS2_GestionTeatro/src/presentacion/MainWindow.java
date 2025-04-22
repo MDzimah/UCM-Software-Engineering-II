@@ -8,7 +8,7 @@ import javax.swing.border.*;
 
 import misc.Constants;
 import misc.Evento;
-import misc.SwingUtils;
+import misc.JSwingUtils;
 import presentacion.controlador.Controlador;
 
 @SuppressWarnings("serial")
@@ -23,7 +23,7 @@ public class MainWindow extends JFrame implements IGUI {
     private JButton subsMiemCompTea;
 
     public MainWindow() {
-    	SwingUtils.setAppIcon(this);
+    	JSwingUtils.setAppIcon(this);
         subsFactura = new JButton("FACTURA");
         subsCliente = new JButton("CLIENTE");
         subsPase = new JButton("PASE");

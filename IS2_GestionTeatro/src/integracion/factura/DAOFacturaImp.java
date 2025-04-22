@@ -34,14 +34,6 @@ public class DAOFacturaImp implements DAOFactura {
 		nuevaFactura.put(Messages.KEY_idCli, tFactura.getIdCliente());
 		nuevaFactura.put(Messages.KEY_idTaq, tFactura.getIdTaquillero());
 		nuevaFactura.put(Messages.KEY_fecha, tFactura.getFecha().toString());
-		/*
-		DAOLineaFactura daoLineaFactura = FactoriaAbstractaIntegracion.getInstance().crearDAOLineaFactura();
-		for (TLineaFactura tLineaFactura : tFactura.getCarrito()) {
-			//Damos el id de la factura a sus líneas
-			tLineaFactura.setIdFactura(newId);
-			int idLineaFactura = daoLineaFactura.create(tLineaFactura);
-			carrito.put(idLineaFactura);
-			*/
 		nuevaFactura.put(Messages.KEY_subtotal, tFactura.getSubtotal());
 		nuevaFactura.put(Messages.KEY_importe, tFactura.getImporte());
 		
@@ -143,36 +135,13 @@ public class DAOFacturaImp implements DAOFactura {
 	}
 	
 	
-	private TFactura readAux(JSONObject jsonFac) {
+	private TFactura readAux(JSONObject fac) {
 		return new TFactura(
-				jsonFac.getInt(Messages.KEY_idCli), 
-				jsonFac.getInt(Messages.KEY_idTaq),
-				jsonFac.getBoolean(Messages.KEY_act),
-				LocalDateTime.parse(jsonFac.getString(Messages.KEY_fecha)),
-				jsonFac.getFloat(Messages.KEY_subtotal),
-				jsonFac.getFloat(Messages.KEY_importe));
+				fac.getInt(Messages.KEY_idCli), 
+				fac.getInt(Messages.KEY_idTaq),
+				fac.getBoolean(Messages.KEY_act),
+				LocalDateTime.parse(fac.getString(Messages.KEY_fecha)),
+				fac.getFloat(Messages.KEY_subtotal),
+				fac.getFloat(Messages.KEY_importe));
 	}
-	
-	/* POR SI ACASO PERO ES INÚTIL SEGURAMENTE
-	private TFactura readAux(JSONObject jsonFac) throws BBDDReadException {
-		Collection<TLineaFactura> carrito = new ArrayList<TLineaFactura>();
-		DAOLineaFactura daoLineaFactura = FactoriaAbstractaIntegracion.getInstance().crearDAOLineaFactura();
-		
-		JSONArray lineas = jsonFac.getJSONArray(Messages.KEY_carrito);
-		for (int i = 0; i < lineas.length(); i++) {
-			int idLineaFactura = lineas.getInt(i);
-			TLineaFactura tLineaFactura = daoLineaFactura.read(idLineaFactura);
-			carrito.add(tLineaFactura);
-		}
-		
-		return new TFactura(
-				jsonFac.getInt(Messages.KEY_idCli), 
-				jsonFac.getInt(Messages.KEY_idTaq),
-				jsonFac.getBoolean(Messages.KEY_act),
-				LocalDateTime.parse(jsonFac.getString(Messages.KEY_fecha)),
-				carrito,
-				jsonFac.getFloat(Messages.KEY_subtotal),
-				jsonFac.getFloat(Messages.KEY_importe));
-	}
-	*/
 }

@@ -3,6 +3,7 @@ package negocio.pase;
 import java.time.LocalDateTime;
 import java.util.Collection;
 
+import exceptions.BBDDReadException;
 import exceptions.UnknownClienteException;
 import exceptions.UnknownCompTeaException;
 import exceptions.UnknownObraException;
@@ -39,7 +40,7 @@ public class SAPaseImp implements SAPase {
 	}
 
 	@Override
-	public TPase read(int id) {
+	public TPase read(int id) throws BBDDReadException {
 		DAOPase daoPas = FactoriaAbstractaIntegracion.getInstance().crearDAOPase();
 		return daoPas.read(id);
 	}

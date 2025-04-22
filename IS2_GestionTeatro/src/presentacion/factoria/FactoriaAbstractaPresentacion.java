@@ -3,8 +3,6 @@ package presentacion.factoria;
 import java.util.Collection;
 
 import javax.swing.JOptionPane;
-
-import misc.Messages;
 import presentacion.IGUI;
 import java.awt.*;
 import java.util.*;
@@ -63,25 +61,11 @@ public abstract class FactoriaAbstractaPresentacion {
 		new TablaDefault(nomCols, datos, tituloTabla).setVisible(true);
 	}
 	
-	//Diálogos de errores
-	public void createDialogoCamposIncorrectos() {
-		JOptionPane.showMessageDialog(null, 
-	    		Messages.ERROR_CAMPOS_INCORRECTOS, 
-	    		"Error", 
-	    		JOptionPane.ERROR_MESSAGE);
-	}
-	
-	public void createDialogoLecturaBBDDincorrecta(String BBDDMessages) {
+	//Diálogos
+	public void createErrorDialogMessage(String message) {
 		JOptionPane.showMessageDialog(null,
-				BBDDMessages,
-	            "Error Lectura",
-	            JOptionPane.ERROR_MESSAGE);
-	}
-	
-	public void createDialogoEscrituraBBDDincorrecta(String BBDDMessages) {
-		JOptionPane.showMessageDialog(null,
-				BBDDMessages,
-	            "Error Escritura",
+				message,
+	            "Error",
 	            JOptionPane.ERROR_MESSAGE);
 	}
 	

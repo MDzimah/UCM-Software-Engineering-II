@@ -1,5 +1,7 @@
 package integracion.factura;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Set;
 
 import org.json.JSONObject;
@@ -69,17 +71,41 @@ public class DAOLineaFacturaImp implements DAOLineaFactura {
 			
 			TLineaFactura tLfRead = null;
 			if (lineasFactura.has(Integer.toString(id))) {
-				JSONObject linea = lineasFactura.getJSONObject(Integer.toString(id));
+				JSONObject lf = lineasFactura.getJSONObject(Integer.toString(id));
 				
-				if (linea.getBoolean(Messages.KEY_act)) {
-					tLfRead = new TLineaFactura(id, 
-							linea.getInt(Messages.KEY_idFac), 
-							linea.getInt(Messages.KEY_idPase), 
-							linea.getInt(Messages.KEY_ctdad),
-							linea.getFloat(Messages.KEY_LF_precio));
+				if (lf.getBoolean(Messages.KEY_act)) {
+					tLfRead = this.readAux(lf);
+					tLfRead.setIdFactura(id);
 				}
 			}
 			return tLfRead;
+		}
+		else return null;
+	}
+	
+	@Override
+	public Collection<TLineaFactura> readAll() throws BBDDReadException {
+		if (!OpsBBDD.isEmpty(Messages.BDLinFac)) {
+			JSONObject bdLinFac = OpsBBDD.read(Messages.BDFac);
+			
+			Collection<TLineaFactura> lfValidas = new ArrayList<>();
+			
+			JSONObject linFacs = new JSONObject(bdLinFac.getJSONArray(Messages.KEY_LineasFac));
+			
+			Set<String> allIdsLinFacs = linFacs.keySet();
+			for (String idLf : allIdsLinFacs) {
+				JSONObject lf = linFacs.getJSONObject(idLf);
+				
+				//Cojo solo las facturas activas
+				if (lf.getBoolean(Messages.KEY_act)) {
+					TLineaFactura tLfVal = this.readAux(lf);
+					tLfVal.setIdLineaFactura((Integer.valueOf(idLf)));
+					lfValidas.add(tLfVal);
+				}
+			}
+			
+			((ArrayList<TLineaFactura>) lfValidas).sort((a, b) -> Integer.compare(a.getIdLineaFactura(), b.getIdLineaFactura()));
+			return lfValidas;
 		}
 		else return null;
 	}
@@ -103,5 +129,13 @@ public class DAOLineaFacturaImp implements DAOLineaFactura {
 	        }
 		}
         return -1; //No se ha actualizado la factura pasada por parámetro
+	}
+	
+	private TLineaFactura readAux(JSONObject lf) {
+		return new TLineaFactura(
+				lf.getInt(Messages.KEY_idLinFac), 
+				lf.getInt(Messages.KEY_idPase),
+				lf.getInt(Messages.KEY_ctdad),
+				lf.getFloat(Messages.KEY_LF_precio));
 	}
 }

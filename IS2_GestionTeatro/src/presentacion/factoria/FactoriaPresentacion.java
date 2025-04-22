@@ -4,12 +4,6 @@ import misc.Evento;
 import presentacion.*;
 import presentacion.GUIfactura.*;
 
-/* Hay que hacer alguna forma para que la FactoriaPresentación se encargue solamente de crear
-vistas y que sea el controlador solamente el que se encargue de pedir que se creen. Si no, estamos
-mezcando FactoriaPresentación con el Controlador y eso hace que la arquitectura sea más sucia. Lo de 
-create "NonIGUIVistas" tiene que desaparecer completamente y solamente ha de haber createVista con IGUI
-*/
-//SOLUCIÓN: TODAS LAS VENTANAS TIENEN Q EXTENDER IGUI SALVO LAS Q SEAN DE ERRORES Y TAL, Q SERÁN MÉTODOS DE FACTORIAABSTRACTAPRESENTACIÓN.
 public class FactoriaPresentacion extends FactoriaAbstractaPresentacion {
 
 	@Override
@@ -21,7 +15,7 @@ public class FactoriaPresentacion extends FactoriaAbstractaPresentacion {
 		case BUSCAR_FACTURA: return new VistaBuscarFac();
 		case CERRAR_VENTA: return new VistaCerrarVenta();
 		case MOSTRAR_FACTURAS: return new VistaMostrarFacs();
-		case QUITAR_PASE_DE_VENTA: return new VistaQPDeVenta();
+		case QUITAR_PASE_DE_VENTA: return new VistaQuitarPaseDeVenta();
 		
 		
 		//Cliente

@@ -13,7 +13,7 @@ import javax.swing.JTextField;
 import misc.Evento;
 import misc.Messages;
 import misc.Pair;
-import misc.SwingUtils;
+import misc.JSwingUtils;
 import negocio.factura.TDatosVenta;
 import negocio.factura.TFactura;
 import negocio.factura.TLineaFactura;
@@ -38,7 +38,7 @@ public class VistaCerrarVenta extends VistaDefault {
 
 	public VistaCerrarVenta(TFactura tFactura) {
 		this.setTitle("CERRAR VENTA");
-		SwingUtils.setAppIcon(this);
+		JSwingUtils.setAppIcon(this);
 		this.carrito = tFactura.getCarrito();
 		this.labelCliente = new JLabel("DNI del cliente:");
 		this.tfCliente = new JTextField(20);

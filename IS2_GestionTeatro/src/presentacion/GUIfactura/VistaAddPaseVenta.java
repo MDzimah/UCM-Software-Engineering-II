@@ -5,7 +5,7 @@ import misc.Messages;
 import presentacion.factoria.FactoriaAbstractaPresentacion;
 
 @SuppressWarnings("serial")
-public class VistaAddPaseVenta extends VistaAdd_QuitarPdeVenta {
+public class VistaAddPaseVenta extends ModificacionPaseEnVenta {
 	
 	public VistaAddPaseVenta() {
 			this.setTitle("AÑADIR PASE A VENTA");
@@ -20,12 +20,11 @@ public class VistaAddPaseVenta extends VistaAdd_QuitarPdeVenta {
 	
 	@Override
 	public void actualizar(Evento evento, Object datos) {
-		if (evento == Evento.RES_ANYADIR_PASE_A_VENTA_OK) {
+		if (evento == Evento.RES_OK) {
 			FactoriaAbstractaPresentacion.getInstance().createDialogMessage(Messages.EX_PASE_ANYADIDO_A_VENTA);
-			this.dispose();
 		}
-		else if(evento == Evento.RES_ANYADIR_PASE_A_VENTA_KO) { 
-			FactoriaAbstractaPresentacion.getInstance().createDialogMessage(Messages.X_PASE_ANYADIDO_A_VENTA.formatted((String)datos));
+		else if(evento == Evento.RES_KO) { 
+			FactoriaAbstractaPresentacion.getInstance().createErrorDialogMessage(Messages.X_ANYADIR_PASE_A_VENTA + ' ' + Messages.MOTIVO.formatted((String)datos));
 		}
 	}
 }

@@ -2,9 +2,11 @@ package negocio.pase;
 
 import java.util.Collection;
 
+import exceptions.BBDDReadException;
+
 public interface SAPase {
 	public int create(TPase tPase);
-	public TPase read(int id);
+	public TPase read(int id) throws BBDDReadException;
 	public int update(TPase tPase);
 	public int delete (int id);
 	public Collection<TPase> readAll();

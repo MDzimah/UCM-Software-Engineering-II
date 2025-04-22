@@ -10,9 +10,8 @@ public class TLineaFactura {
 	private int cantidad;
 	private float precioVenta;
 	
-	public TLineaFactura(int idLineaFactura, int idFactura, int idPase,
+	public TLineaFactura(int idFactura, int idPase,
 			int cantidad, float precioVenta) {
-		this.idLineaFactura = idLineaFactura;
 		this.idFactura = idFactura;
 		this.idPase = idPase;
 		this.cantidad = cantidad;

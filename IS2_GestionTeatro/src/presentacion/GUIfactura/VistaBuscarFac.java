@@ -10,7 +10,7 @@ import javax.swing.*;
 import misc.Constants;
 import misc.Evento;
 import misc.Messages;
-import misc.SwingUtils;
+import misc.JSwingUtils;
 import negocio.factura.TFactura;
 import presentacion.IGUI;
 import presentacion.controlador.Controlador;
@@ -25,7 +25,7 @@ public class VistaBuscarFac extends JFrame implements IGUI {
 	
 	public VistaBuscarFac() {
 		super("BUSCAR FACTURA");
-		SwingUtils.setAppIcon(this);
+		JSwingUtils.setAppIcon(this);
 		JPanel mainPanel = new JPanel(new BorderLayout());
 		mainPanel.setSize(Constants.getScaledScreenDimension(2, 2));
 		this.lIdFac = new JLabel("Id factura:");
@@ -35,10 +35,10 @@ public class VistaBuscarFac extends JFrame implements IGUI {
 		
 		JPanel infoPanel = new JPanel();
 		infoPanel.setLayout(new BoxLayout(infoPanel, BoxLayout.Y_AXIS));
-		infoPanel.add(SwingUtils.createComponentPair(this.lIdFac, this.tIdFac));
+		infoPanel.add(JSwingUtils.createComponentPair(this.lIdFac, this.tIdFac));
 		mainPanel.add(infoPanel, BorderLayout.CENTER);
 		
-		JPanel responsePanel = SwingUtils.createResponsePair(buscar, cancel);
+		JPanel responsePanel = JSwingUtils.createResponsePair(buscar, cancel);
 		mainPanel.add(responsePanel, BorderLayout.SOUTH);
 		
 		buscar.addActionListener(new ActionListener() {
@@ -50,7 +50,7 @@ public class VistaBuscarFac extends JFrame implements IGUI {
 					dispose();
 				}
 				catch(ArithmeticException ex) {
-					FactoriaAbstractaPresentacion.getInstance().createDialogoCamposIncorrectos();
+					Controlador.getInstance().accion(Evento.BUSCAR_FACTURA, Messages.ERROR_CAMPOS_INCORRECTOS);
 				}
 			}
 			
@@ -67,15 +67,15 @@ public class VistaBuscarFac extends JFrame implements IGUI {
 	
 	@Override
 	public void actualizar(Evento evento, Object datos) {
-		if (evento == Evento.RES_BUSCAR_FACTURA_OK) {
+		if (evento == Evento.RES_OK) {
 			Collection<Object> fac = new ArrayList<Object>();
 			fac.add((TFactura)datos);
 			String[] nomCols = {"ID","ID CLIENTE", "ID TAQUILLERO", "FECHA", "PASES COMPRADOS", "IMPORTE"};
 			
 			FactoriaAbstractaPresentacion.getInstance().createTabla("BUSCAR FACTURA", nomCols, fac);
 		}
-		else if(evento == Evento.RES_BUSCAR_FACTURA_KO) {
-			FactoriaAbstractaPresentacion.getInstance().createDialogMessage(Messages.X_BUSCAR_FACTURA.formatted((String) datos));
+		else if(evento == Evento.RES_KO) {
+			FactoriaAbstractaPresentacion.getInstance().createErrorDialogMessage(Messages.X_BUSCAR_FACTURA + ' ' + Messages.MOTIVO.formatted((String)datos));
 		}
 	}
 
