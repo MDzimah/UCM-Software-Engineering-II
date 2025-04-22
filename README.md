@@ -1,4 +1,4 @@
-# SWE2 Project
+# SWE 2 Project
 
 ## General Description
 

@@ -1,5 +1,7 @@
 package integracion.factura;
 
+import java.util.Set;
+
 import org.json.JSONObject;
 
 import exceptions.BBDDReadException;
@@ -12,7 +14,15 @@ public class DAOLineaFacturaImp implements DAOLineaFactura {
 
 	@Override
 	public int create(TLineaFactura tLineaFactura) throws BBDDReadException, BBDDWriteException {
-		JSONObject bdLinFac = OpsBBDD.read(Messages.BDLinFac);
+		JSONObject bdLinFac = new JSONObject(); 
+		
+		//Inicializo la BD si no está ya inicializada
+		if (OpsBBDD.isEmpty(Messages.BDLinFac)) {
+			bdLinFac.put(Messages.KEY_lastId, 0);
+			bdLinFac.put(Messages.KEY_LineasFac, new JSONObject());
+		}
+		else bdLinFac = OpsBBDD.read(Messages.BDLinFac);
+		
 		JSONObject lineasFactura = bdLinFac.getJSONObject(Messages.KEY_LineasFac);
 		
 		//Aumentamos el último índice de la bd
@@ -35,51 +45,63 @@ public class DAOLineaFacturaImp implements DAOLineaFactura {
 	
 	@Override
 	public int delete(int id) throws BBDDReadException, BBDDWriteException {
-		JSONObject bdLinFac = OpsBBDD.read(Messages.BDLinFac);
-		JSONObject lineasFactura = bdLinFac.getJSONObject(Messages.KEY_facs);
-        
-		if (lineasFactura.has(Integer.toString(id))) {
-        JSONObject linea = lineasFactura.getJSONObject(Integer.toString(id));
-    	linea.put(Messages.KEY_act, false);
-    	return id;
-        
+		if (!OpsBBDD.isEmpty(Messages.BDLinFac)) {
+			JSONObject bdLinFac = OpsBBDD.read(Messages.BDLinFac);
+			JSONObject lineasFactura = bdLinFac.getJSONObject(Messages.KEY_facs);
+	        
+			if (lineasFactura.has(Integer.toString(id))) {
+		        JSONObject linea = lineasFactura.getJSONObject(Integer.toString(id));
+		        
+		        if (linea.getBoolean(Messages.KEY_act)) {
+			    	linea.put(Messages.KEY_act, false);
+			    	return id;  
+		        }
+			}
 		}
         return -1; //No se ha encontrado la linea de factura con dicho id
 	}
 
 	@Override
 	public TLineaFactura read(int id) throws BBDDReadException {
-		JSONObject bdLinFac = OpsBBDD.read(Messages.BDLinFac);
-		JSONObject lineasFactura = bdLinFac.getJSONObject(Messages.KEY_facs);
-		
-		TLineaFactura tLfRead = null;
-		if (lineasFactura.has(Integer.toString(id))) {
-			JSONObject linea = lineasFactura.getJSONObject(Integer.toString(id));
+		if (!OpsBBDD.isEmpty(Messages.BDLinFac)) {
+			JSONObject bdLinFac = OpsBBDD.read(Messages.BDLinFac);
+			JSONObject lineasFactura = bdLinFac.getJSONObject(Messages.KEY_facs);
 			
-			tLfRead = new TLineaFactura(id, 
-					linea.getInt(Messages.KEY_idFac), 
-					linea.getInt(Messages.KEY_idPase), 
-					linea.getInt(Messages.KEY_ctdad),
-					linea.getFloat(Messages.KEY_LF_precio));
+			TLineaFactura tLfRead = null;
+			if (lineasFactura.has(Integer.toString(id))) {
+				JSONObject linea = lineasFactura.getJSONObject(Integer.toString(id));
+				
+				if (linea.getBoolean(Messages.KEY_act)) {
+					tLfRead = new TLineaFactura(id, 
+							linea.getInt(Messages.KEY_idFac), 
+							linea.getInt(Messages.KEY_idPase), 
+							linea.getInt(Messages.KEY_ctdad),
+							linea.getFloat(Messages.KEY_LF_precio));
+				}
+			}
+			return tLfRead;
 		}
-		return tLfRead;
+		else return null;
 	}
 	
 	@Override
 	public int update(TLineaFactura tLineaFac) throws BBDDReadException, BBDDWriteException {
-		JSONObject bdLinFac = OpsBBDD.read(Messages.BDLinFac);
-		JSONObject lineasFactura = bdLinFac.getJSONObject(Messages.KEY_facs);
-		
-		for (int i = 0; i < lineasFactura.length(); ++i) {
+		if (!OpsBBDD.isEmpty(Messages.BDLinFac)) {
+			JSONObject bdLinFac = OpsBBDD.read(Messages.BDLinFac);
+			JSONObject lineasFactura = bdLinFac.getJSONObject(Messages.KEY_facs);
 			
-        	JSONObject jObj = lineasFactura.getJSONObject(Integer.toString(i));
-        	
-            if (jObj.getInt(Messages.KEY_idFac) == tLineaFac.getIdFactura()) {
-            	lineasFactura.put(Integer.toString(i),tLineaFac);
-            	OpsBBDD.write(bdLinFac, Messages.BDFac);
-                return i;
-            }
-        }
-        return -1; //No se ha encontrado la factura pasada por parámetro
+			Set<String> allIdsLinFacs = lineasFactura.keySet();
+			for (String idLinFac : allIdsLinFacs) {
+	        	JSONObject linea = lineasFactura.getJSONObject(idLinFac);
+	        	
+	        	//Solo se actualiza si coincide en id y si está activa
+	            if (linea.getInt(Messages.KEY_idFac) == tLineaFac.getIdFactura() && linea.getBoolean(Messages.KEY_act)) {
+	            	lineasFactura.put(idLinFac,tLineaFac);
+	            	OpsBBDD.write(bdLinFac, Messages.BDFac);
+	                return Integer.valueOf(idLinFac);
+	            }
+	        }
+		}
+        return -1; //No se ha actualizado la factura pasada por parámetro
 	}
 }

@@ -117,7 +117,7 @@ public class MainWindow extends JFrame implements IGUI {
     private void estiloBoton(JButton button) {
 	    button.setBackground(new Color(160, 0, 0));
 	    button.setForeground(new Color(255, 215, 0));
-	    button.setFont(new Font("Georgia", Font.BOLD, 35));
+	    button.setFont(new Font("Georgia", Font.BOLD, 30));
 	    button.setFocusPainted(false);
 	
 	    //Para la apariencia 3d del botón. Lo de "lowered" pone el efecto abajo a la derecha
