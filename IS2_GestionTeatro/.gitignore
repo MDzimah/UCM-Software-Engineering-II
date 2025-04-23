@@ -1,4 +1,3 @@
-/bin/
 # Gitignore para Eclipse Java
 *target*
 *.war
