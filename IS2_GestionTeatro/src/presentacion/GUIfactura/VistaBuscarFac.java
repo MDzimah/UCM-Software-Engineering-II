@@ -1,7 +1,6 @@
 package presentacion.GUIfactura;
 
 import java.awt.*;
-import java.awt.event.*;
 import java.util.ArrayList;
 import java.util.Collection;
 
@@ -41,25 +40,18 @@ public class VistaBuscarFac extends JFrame implements IGUI {
 		JPanel responsePanel = JSwingUtils.createResponsePair(buscar, cancel);
 		mainPanel.add(responsePanel, BorderLayout.SOUTH);
 		
-		buscar.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				try {
-					TFactura tFac = new TFactura(Integer.valueOf(tIdFac.getText()));
-					Controlador.getInstance().accion(Evento.BUSCAR_FACTURA, tFac);
-					dispose();
-				}
-				catch(ArithmeticException ex) {
-					Controlador.getInstance().accion(Evento.BUSCAR_FACTURA, Messages.ERROR_CAMPOS_INCORRECTOS);
-				}
+		buscar.addActionListener(e->{
+			try {
+				TFactura tFac = new TFactura(Integer.valueOf(tIdFac.getText()));
+				Controlador.getInstance().accion(Evento.BUSCAR_FACTURA, tFac);
+				dispose();
 			}
-			
+			catch(ArithmeticException ex) {
+				Controlador.getInstance().accion(Evento.BUSCAR_FACTURA, Messages.ERROR_CAMPOS_INCORRECTOS);
+			}
 		});
 		
-		cancel.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) { dispose(); }
-		});
+		cancel.addActionListener(e->{dispose();});
 		
 		this.setVisible(true);
 		this.setLocationRelativeTo(null);
@@ -70,7 +62,7 @@ public class VistaBuscarFac extends JFrame implements IGUI {
 		if (evento == Evento.RES_OK) {
 			Collection<Object> fac = new ArrayList<Object>();
 			fac.add((TFactura)datos);
-			String[] nomCols = {"ID","ID CLIENTE", "ID TAQUILLERO", "FECHA", "PASES COMPRADOS", "IMPORTE"};
+			String[] nomCols = {"ID","ID CLIENTE", "ID TAQUILLERO", "FECHA", "IMPORTE", "SUBTOTAL"};
 			
 			FactoriaAbstractaPresentacion.getInstance().createTabla("BUSCAR FACTURA", nomCols, fac);
 		}

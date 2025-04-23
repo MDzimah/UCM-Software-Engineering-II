@@ -21,7 +21,7 @@ public class OpsBBDD {
 	
 	public static void write(JSONObject info, String BDSubs) throws BBDDWriteException {
 		try(FileWriter file = new FileWriter(Messages.PATH_TO_BBDD.formatted(BDSubs))){
-	        file.write(info.toString()); 
+	        file.write(info.toString(4)); 
 	        file.flush(); //Para asegurar que el buffer se quede vacío
 		}
 		catch(IOException e) {

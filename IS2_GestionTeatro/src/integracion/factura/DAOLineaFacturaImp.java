@@ -36,7 +36,7 @@ public class DAOLineaFacturaImp implements DAOLineaFactura {
 		nuevaLinea.put(Messages.KEY_idFac, tLineaFactura.getIdFactura());
 		nuevaLinea.put(Messages.KEY_idPase, tLineaFactura.getIdPase());
 		nuevaLinea.put(Messages.KEY_ctdad, tLineaFactura.getCantidad());
-		nuevaLinea.put(Messages.KEY_LF_precio, tLineaFactura.getPrecioVenta());
+		nuevaLinea.put(Messages.KEY_precioVenta, tLineaFactura.getPrecioVenta());
 		
 		//La insertamos en la bd de facturas, su clave es su id
 		lineasFactura.put(Integer.toString(newId), nuevaLinea);
@@ -136,6 +136,6 @@ public class DAOLineaFacturaImp implements DAOLineaFactura {
 				lf.getInt(Messages.KEY_idLinFac), 
 				lf.getInt(Messages.KEY_idPase),
 				lf.getInt(Messages.KEY_ctdad),
-				lf.getFloat(Messages.KEY_LF_precio));
+				lf.getFloat(Messages.KEY_precioVenta));
 	}
 }
