@@ -1,5 +1,4 @@
 package presentacion.GUIfactura;
-import java.awt.event.*;
 import java.util.*;
 
 import javax.swing.*;
@@ -41,38 +40,32 @@ public abstract class ModificacionPaseEnVenta extends VistaDefault {
 	}
 	
 	void okAndCancelListener(Evento evento) {
-		ok.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				try {
-					//Id pase
-					int idPase = Integer.valueOf(tIdPase.getText());
-					
-					//Fecha
-					/*
-					Date fechaSeleccionada = (Date) sFecha.getValue();
-					LocalDateTime fechaPase = fechaSeleccionada.toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime();
-					*/
-					
-					//Cantidad
-					
-					sCtdad.commitEdit();
-					int ctdad = (Integer)sCtdad.getValue(); 
+		ok.addActionListener(e->{
+			try {
+				//Id pase
+				int idPase = Integer.valueOf(tIdPase.getText());
 				
-					TLineaFactura tLf = new TLineaFactura(idPase, ctdad);
-					Controlador.getInstance().accion(evento, tLf);
-					dispose();
-				}
-				catch (Exception ex) {
-					Controlador.getInstance().accion(evento, Messages.ERROR_CAMPOS_INCORRECTOS);
-				}
+				//Fecha
+				/*
+				Date fechaSeleccionada = (Date) sFecha.getValue();
+				LocalDateTime fechaPase = fechaSeleccionada.toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime();
+				*/
+				
+				//Cantidad
+				
+				sCtdad.commitEdit();
+				int ctdad = (Integer)sCtdad.getValue(); 
+			
+				TLineaFactura tLf = new TLineaFactura(idPase, ctdad);
+				Controlador.getInstance().accion(evento, tLf);
+				dispose();
+			}
+			catch (Exception ex) {
+				Controlador.getInstance().accion(evento, Messages.ERROR_CAMPOS_INCORRECTOS);
 			}
 		});
 		
-		cancel.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) { dispose(); }
-		});
+		cancel.addActionListener(e->{dispose();});
 	}
 	
 }

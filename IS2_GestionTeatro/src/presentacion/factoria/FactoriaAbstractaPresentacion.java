@@ -58,7 +58,7 @@ public abstract class FactoriaAbstractaPresentacion {
      *              {@code TObra}, {@code TCompTea}, and others
      */
 	public void createTabla(String tituloTabla, String[] nomCols, Collection<Object> datos) {
-		new TablaDefault(nomCols, datos, tituloTabla).setVisible(true);
+		new TablaDefault(tituloTabla, nomCols, datos).setVisible(true);
 	}
 	
 	//Diálogos
@@ -106,7 +106,7 @@ public abstract class FactoriaAbstractaPresentacion {
 	    	public MultiLineTableCellRenderer() {
 	    	    setOpaque(true);
 	    	    setFont(Constants.FontTablaDefaultCuerpo());
-	    	    setFixedCellHeight(-1); //Ajuste dinámico del tamaño de las células
+	    	    setFixedCellHeight(-1); //Para ajuste dinámico del tamaño de las células
 	    	    setBorder(BorderFactory.createEmptyBorder(2, 5, 2, 5));
 	    	}
 	    	
@@ -145,8 +145,8 @@ public abstract class FactoriaAbstractaPresentacion {
 	    }
 	    
 	    //Se asume una colección no vacía
-	    private boolean containsType(Collection<?> data, Class<?> clazz) {
-	        return clazz.isInstance(data.iterator().next());
+	    private boolean containsType(Collection<?> data, Class<?> clase) {
+	        return clase.isInstance(data.iterator().next());
 	    }
 	    
 	    //Convierte colección de TFacturas, TClientes, etc. a una matriz de información para la tabla
@@ -164,6 +164,7 @@ public abstract class FactoriaAbstractaPresentacion {
 	    				fila[2] = tFac.getIdTaquillero();
 	    				fila[3] = tFac.getFecha();
 	    				fila[5] = tFac.getImporte();
+	    				fila[6] = tFac.getSubtotal();
 	    				
 	    				matInfo.add(fila);
 	    			}
@@ -199,7 +200,26 @@ public abstract class FactoriaAbstractaPresentacion {
 	    	}
 	    }
 
-		public TablaDefault(String[] columnNames, Collection<Object> data, String nombreTabla) {
+	    private void setRender(JTable table, int numCols) {
+	        //Las celdas de la tabla pueden contener listas, luego para mostrar los elementos uno debajo del otro, hace falta
+	        //cambiar la forma de renderizarlas
+	        MultiLineTableCellRenderer renderer = new MultiLineTableCellRenderer(); 
+	        table.setDefaultRenderer(String[].class, renderer);
+	        for (int i = 0; i < numCols; ++i) {
+	        	table.getColumnModel().getColumn(i).setCellRenderer(renderer);
+	        }
+	        
+	        for (int row = 0; row < table.getRowCount(); row++) {
+	            int maxHeight = table.getRowHeight();
+	            for (int col = 0; col < table.getColumnCount(); col++) {
+	                Component comp = table.prepareRenderer(renderer, row, col);
+	                maxHeight = Math.max(maxHeight, comp.getPreferredSize().height);
+	            }
+	            table.setRowHeight(row, maxHeight);
+	        }
+	    }
+
+		public TablaDefault(String nombreTabla,  String[] columnNames, Collection<Object> data) {
 	        this.setTitle(nombreTabla);
 	        this.setLayout(new BorderLayout());
 	        Dimension sd = Constants.screenDimension();
@@ -218,23 +238,8 @@ public abstract class FactoriaAbstractaPresentacion {
 	        JTableHeader header = table.getTableHeader();
 	        header.setFont(Constants.FontTablaDefaultCabecera());
 
-	        //Las celdas de la tabla pueden contener listas, luego para mostrar los elementos uno debajo del otro, hace falta
-	        //cambiar la forma de renderizarlas
-	        MultiLineTableCellRenderer renderer = new MultiLineTableCellRenderer(); 
-	        table.setDefaultRenderer(String[].class, renderer);
-	        for (int i = 0; i < columnNames.length; ++i) {
-	        	table.getColumnModel().getColumn(i).setCellRenderer(renderer);
-	        }
 	        
-	        for (int row = 0; row < table.getRowCount(); row++) {
-	            int maxHeight = table.getRowHeight();
-	            for (int col = 0; col < table.getColumnCount(); col++) {
-	                Component comp = table.prepareRenderer(renderer, row, col);
-	                maxHeight = Math.max(maxHeight, comp.getPreferredSize().height);
-	            }
-	            table.setRowHeight(row, maxHeight);
-	        }
-
+	        this.setRender(table, columnNames.length);
 	        this.add(new JScrollPane(table), BorderLayout.CENTER);
 	        this.setLocationRelativeTo(null);
 	        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

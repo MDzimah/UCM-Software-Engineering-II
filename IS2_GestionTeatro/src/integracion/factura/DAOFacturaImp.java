@@ -13,20 +13,20 @@ public class DAOFacturaImp implements DAOFactura {
 
 	@Override
 	public int create(TFactura tFactura) throws BBDDReadException, BBDDWriteException {
-		JSONObject bdFactura = new JSONObject();
+		JSONObject bdFac = new JSONObject();
 		
 		//Inicializo la BD si no está ya inicializada
 		if (OpsBBDD.isEmpty(Messages.BDFac)) {
-			bdFactura.put(Messages.KEY_lastId, 0);
-			bdFactura.put(Messages.KEY_facs, new JSONObject());
+			bdFac.put(Messages.KEY_lastId, 0);
+			bdFac.put(Messages.KEY_facs, new JSONObject());
 		}
-		else bdFactura = OpsBBDD.read(Messages.BDFac);
-	
-		JSONObject facturas = new JSONObject(bdFactura.get(Messages.KEY_facs));
+		else bdFac = OpsBBDD.read(Messages.BDFac);
+		
+		JSONObject facs = bdFac.getJSONObject(Messages.KEY_facs);
 		
 		//Aumentamos el último índice de la bd
-		int newId = bdFactura.getInt(Messages.KEY_lastId) + 1;
-		bdFactura.put(Messages.KEY_lastId, newId);
+		int newId = bdFac.getInt(Messages.KEY_lastId) + 1;
+		bdFac.put(Messages.KEY_lastId, newId);
 		
 		//Creamos la nueva factura
 		JSONObject nuevaFactura = new JSONObject();
@@ -34,12 +34,12 @@ public class DAOFacturaImp implements DAOFactura {
 		nuevaFactura.put(Messages.KEY_idCli, tFactura.getIdCliente());
 		nuevaFactura.put(Messages.KEY_idTaq, tFactura.getIdTaquillero());
 		nuevaFactura.put(Messages.KEY_fecha, tFactura.getFecha().toString());
-		nuevaFactura.put(Messages.KEY_subtotal, tFactura.getSubtotal());
 		nuevaFactura.put(Messages.KEY_importe, tFactura.getImporte());
+		nuevaFactura.put(Messages.KEY_subtotal, tFactura.getSubtotal());
 		
 		//La insertamos en la bd de facturas, su clave es su id
-		facturas.put(Integer.toString(newId), nuevaFactura);
-		OpsBBDD.write(bdFactura, Messages.BDFac);
+		facs.put(Integer.toString(newId), nuevaFactura);
+		OpsBBDD.write(bdFac, Messages.BDFac);
 		
 		return newId;
 	}
@@ -47,13 +47,14 @@ public class DAOFacturaImp implements DAOFactura {
 	@Override
 	public int delete(int id) throws BBDDReadException, BBDDWriteException {
 		if (!OpsBBDD.isEmpty(Messages.BDFac)) {
-			JSONObject bdFactura = OpsBBDD.read(Messages.BDFac);
-			JSONObject facs = bdFactura.getJSONObject(Messages.KEY_facs);
+			JSONObject bdFac = OpsBBDD.read(Messages.BDFac);
+			JSONObject facs = bdFac.getJSONObject(Messages.KEY_facs);
 	        
-			if (facs.has(Integer.toString(id))) {
-		        JSONObject fac = facs.getJSONObject(Integer.toString(id));
+			String _id = Integer.toString(id);
+			if (facs.has(_id) && facs.getJSONObject(_id).getBoolean(Messages.KEY_act)) {
+		        JSONObject fac = facs.getJSONObject(_id);
 		        fac.put(Messages.KEY_act, false);
-		        OpsBBDD.write(bdFactura, Messages.BDFac);
+		        OpsBBDD.write(bdFac, Messages.BDFac);
 		        return id;
 			}
 		}
@@ -85,24 +86,24 @@ public class DAOFacturaImp implements DAOFactura {
 		if (!OpsBBDD.isEmpty(Messages.BDFac)) {
 			JSONObject bdFactura = OpsBBDD.read(Messages.BDFac);
 			
-			Collection<TFactura> facturasValidas = new ArrayList<>();
+			Collection<TFactura> facsValidas = new ArrayList<>();
 			
-			JSONObject facturas = new JSONObject(bdFactura.getJSONArray(Messages.KEY_facs));
+			JSONObject facs = bdFactura.getJSONObject(Messages.KEY_facs);
 			
-			Set<String> allIdsFacs = facturas.keySet();
+			Set<String> allIdsFacs = facs.keySet();
 			for (String idFactura : allIdsFacs) {
-				JSONObject factura = facturas.getJSONObject(idFactura);
+				JSONObject fac = facs.getJSONObject(idFactura);
 				
 				//Cojo solo las facturas activas
-				if (factura.getBoolean(Messages.KEY_act)) {
-					TFactura tFacVal = this.readAux(factura);
+				if (fac.getBoolean(Messages.KEY_act)) {
+					TFactura tFacVal = this.readAux(fac);
 					tFacVal.setIdFactura(Integer.valueOf(idFactura)); //No va a dar excepción porque a la BD llegan solo id con números
-					facturasValidas.add(tFacVal);
+					facsValidas.add(tFacVal);
 				}
 			}
 			
-			((ArrayList<TFactura>) facturasValidas).sort((a, b) -> Integer.compare(a.getIdFactura(), b.getIdFactura()));
-			return facturasValidas;
+			((ArrayList<TFactura>) facsValidas).sort((a, b) -> Integer.compare(a.getIdFactura(), b.getIdFactura()));
+			return facsValidas;
 		}
 		else return null;
 	}
@@ -141,7 +142,7 @@ public class DAOFacturaImp implements DAOFactura {
 				fac.getInt(Messages.KEY_idTaq),
 				fac.getBoolean(Messages.KEY_act),
 				LocalDateTime.parse(fac.getString(Messages.KEY_fecha)),
-				fac.getFloat(Messages.KEY_subtotal),
-				fac.getFloat(Messages.KEY_importe));
+				fac.getFloat(Messages.KEY_importe),
+				fac.getFloat(Messages.KEY_subtotal));
 	}
 }

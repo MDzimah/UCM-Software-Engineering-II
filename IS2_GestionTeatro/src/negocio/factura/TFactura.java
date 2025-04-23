@@ -15,9 +15,10 @@ public class TFactura {
 	private float importe;
 	
 	public TFactura (int idCl, int idTaq, boolean act, 
-			LocalDateTime fecha, float subtotal, float importe) 
+			LocalDateTime fecha, float importe, float subtotal) 
 	{
 		this.idCliente = idCl;
+		this.idTaquillero = idTaq;
 		this.activo = act;
 		this.fecha = fecha;
 		this.subtotal = subtotal;

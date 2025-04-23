@@ -1,16 +1,10 @@
 package presentacion.GUIfactura;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.Collection;
 
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JPanel;
+import javax.swing.*;
 
-import misc.Constants;
-import misc.Evento;
-import misc.Messages;
+import misc.*;
 import misc.JSwingUtils;
 import presentacion.IGUI;
 import presentacion.controlador.Controlador;
@@ -30,18 +24,12 @@ public class VistaMostrarFacs extends JFrame implements IGUI {
 		JPanel responsePanel = JSwingUtils.createResponsePair(this.mostrar, this.cancel);
 		responsePanel.setSize(Constants.getScaledScreenDimension(2, 2));
 		
-		mostrar.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				Controlador.getInstance().accion(Evento.MOSTRAR_FACTURAS, null);
-				dispose();
-			}
+		mostrar.addActionListener(e->{
+			Controlador.getInstance().accion(Evento.MOSTRAR_FACTURAS, null);
+			dispose();
 		});
 		
-		cancel.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) { dispose(); }
-		});
+		cancel.addActionListener(e->{dispose();});
 		
 		this.setVisible(true);
 		this.setLocationRelativeTo(null);
