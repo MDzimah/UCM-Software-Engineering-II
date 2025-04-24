@@ -17,7 +17,6 @@ public class TObra {
 	private String genero;
 	private String sinopsis;
 	private boolean activa;
-	private LinkedList<Integer> pases;
 	
 	//Constructores
 	public TObra (int idObra, String titulo, String autor, String genero, String sinopsis) {
@@ -26,24 +25,10 @@ public class TObra {
 		this.autor = autor;
 		this.genero = genero;
 		this.sinopsis = sinopsis;
-		this.pases = new LinkedList<Integer>();
 	}
-	public TObra (String titulo, String autor, String genero, String sinopsis) {
-		this(-1,titulo, autor, genero, sinopsis);
-	}
-	
-	public TObra (int idObra, String titulo, String autor, String genero, String sinopsis, List<Integer> pases) 
-	{
-		this(idObra, titulo, autor, genero, sinopsis);
-		this.pases = (LinkedList<Integer>) pases;
-		activa = !pases.isEmpty();
-	}
-	
-	public TObra (String titulo, String autor, String genero, String sinopsis, List<Integer> pases) 
+	public TObra (String titulo, String autor, String genero, String sinopsis) 
 	{
 		this(-1, titulo, autor, genero, sinopsis);
-		this.pases = (LinkedList<Integer>) pases;
-		activa = !pases.isEmpty();
 	}
 
 	//Getters
@@ -61,10 +46,6 @@ public class TObra {
 	
 	public String getGenero() {
 		return genero;
-	}
-
-	public LinkedList<Integer> getPases() {
-		return (LinkedList<Integer>) Collections.unmodifiableCollection(pases);
 	}
 	
 	public boolean isActiva() {
@@ -111,14 +92,5 @@ public class TObra {
 
 	public void setSinopsis(String sinopsis) {
 		this.sinopsis = sinopsis;
-	}
-	
-	//Modificacion de pases
-	public void agregarPase(Integer pase) {
-		pases.add(pase);
-	}
-	
-	public boolean eliminarPase(Integer pase) {
-		return pases.remove(pase);
 	}
 }

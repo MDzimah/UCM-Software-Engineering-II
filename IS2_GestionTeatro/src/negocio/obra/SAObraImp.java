@@ -8,6 +8,7 @@ import exceptions.BBDDWriteException;
 import exceptions.UnknownObraException;
 import integracion.factoria.FactoriaAbstractaIntegracion;
 import integracion.obra.DAOObra;
+import integracion.pase.DAOPase;
 
 public class SAObraImp implements SAObra {
 
@@ -49,8 +50,8 @@ public class SAObraImp implements SAObra {
 
 	@Override
 	public Collection<TObra> readActive() throws BBDDReadException, UnknownObraException {
-		DAOObra daoObra = FactoriaAbstractaIntegracion.getInstance().crearDAOObra();
-		Collection<TObra> obras = daoObra.readActive();
+		DAOPase daoPase = FactoriaAbstractaIntegracion.getInstance().crearDAOPase();
+		Collection<TObra> obras = daoPase.buscarXObras();
 		if(obras.isEmpty() || obras==null)
 			throw new UnknownObraException();
 		else
@@ -64,26 +65,6 @@ public class SAObraImp implements SAObra {
 			throw new UnknownObraException();
 		else
 			return obras;
-	}
-
-	@Override
-	public int enlazarPase(int IdPase, int idObra) throws BBDDReadException, BBDDWriteException, UnknownObraException {
-		DAOObra daoObra = FactoriaAbstractaIntegracion.getInstance().crearDAOObra();
-		TObra obra = daoObra.read(idObra);
-		if(obra==null)
-			throw new UnknownObraException();
-		obra.agregarPase(IdPase);
-		return daoObra.update(obra);
-	}
-
-	@Override
-	public int desenlazarPase(int IdPase, int idObra) throws BBDDReadException, BBDDWriteException, UnknownObraException {
-		DAOObra daoObra = FactoriaAbstractaIntegracion.getInstance().crearDAOObra();
-		TObra obra = daoObra.read(idObra);
-		if(obra==null)
-			throw new UnknownObraException();
-		obra.eliminarPase(IdPase);
-		return daoObra.update(obra);
 	}
 
 }

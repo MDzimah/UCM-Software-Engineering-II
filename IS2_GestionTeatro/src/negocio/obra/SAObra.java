@@ -23,8 +23,5 @@ public interface SAObra {
 	 * @throws UnknownObraException
 	 */
 	public Collection<TObra> search(List<String> params) throws BBDDReadException, UnknownObraException;
-	
-	//Para la relacion n a 1 con los Pases
-	int enlazarPase(int IdPase, int idObra) throws BBDDReadException, BBDDWriteException, UnknownObraException;
-	int desenlazarPase(int IdPase, int idObra) throws BBDDReadException, BBDDWriteException, UnknownObraException;
+
 }

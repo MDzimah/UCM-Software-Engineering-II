@@ -140,13 +140,8 @@ public class ControladorImp extends Controlador {
 				int val = saObra.create((TObra)datos);
 				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_ALTA_OBRA_OK, val);
 			}
-			catch(BBDDReadException e) {
-				FactoriaAbstractaPresentacion.getInstance().createNonIGUIVistas(Evento.X_BBDD_READ, null);
-				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_ALTA_OBRA_KO, null);
-			}
-			catch(BBDDWriteException e) {
-				FactoriaAbstractaPresentacion.getInstance().createNonIGUIVistas(Evento.X_BBDD_WRITE, null);
-				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_ALTA_OBRA_KO, (TObra)datos);
+			catch(Exception e) {
+				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_ALTA_OBRA_KO, e.getMessage());
 			}
 			break;
 		}
@@ -156,17 +151,8 @@ public class ControladorImp extends Controlador {
 				saObra.delete((int)datos);
 				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_ELIMINAR_OBRA_OK, (int)datos);
 			}
-			catch(BBDDReadException e) {
-				FactoriaAbstractaPresentacion.getInstance().createNonIGUIVistas(Evento.X_BBDD_READ, null);
-				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_ELIMINAR_OBRA_KO, null);
-			}
-			catch(BBDDWriteException e) {
-				FactoriaAbstractaPresentacion.getInstance().createNonIGUIVistas(Evento.X_BBDD_WRITE, null);
-				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_ELIMINAR_OBRA_KO, null);
-			}
-			catch(UnknownObraException e) {
-				FactoriaAbstractaPresentacion.getInstance().createNonIGUIVistas(Evento.UNKNOWN_OBRA, null);
-				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_ELIMINAR_OBRA_KO, (int)datos);
+			catch(Exception e) {
+				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_ELIMINAR_OBRA_KO, e.getMessage());
 			}
 			break;
 		}
@@ -177,17 +163,8 @@ public class ControladorImp extends Controlador {
 				saObra.update((TObra)datos);
 				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_ACTUALIZAR_OBRA_OK, (TObra)datos);
 			}
-			catch(BBDDReadException e) {
-				FactoriaAbstractaPresentacion.getInstance().createNonIGUIVistas(Evento.X_BBDD_READ, null);
-				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_ACTUALIZAR_OBRA_KO, null);
-			}
-			catch(BBDDWriteException e) {
-				FactoriaAbstractaPresentacion.getInstance().createNonIGUIVistas(Evento.X_BBDD_WRITE, null);
-				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_ACTUALIZAR_OBRA_KO, null);
-			}
-			catch(UnknownObraException e) {
-				FactoriaAbstractaPresentacion.getInstance().createNonIGUIVistas(Evento.UNKNOWN_OBRA, null);
-				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_ACTUALIZAR_OBRA_KO, (TObra)datos);
+			catch(Exception e) {
+				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_ACTUALIZAR_OBRA_KO, e.getMessage());
 			}
 			break;
 		}
@@ -198,13 +175,8 @@ public class ControladorImp extends Controlador {
 				TObra obra = saObra.read((int)datos);
 				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_CONSULTAR_OBRA_OK, obra);
 			}
-			catch(BBDDReadException e) {
-				FactoriaAbstractaPresentacion.getInstance().createNonIGUIVistas(Evento.X_BBDD_READ, null);
-				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_CONSULTAR_OBRA_KO, null);
-			}
-			catch(UnknownObraException e) {
-				FactoriaAbstractaPresentacion.getInstance().createNonIGUIVistas(Evento.UNKNOWN_OBRA, null);
-				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_CONSULTAR_OBRA_KO, (int)datos);
+			catch(Exception e) {
+				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_CONSULTAR_OBRA_KO, e.getMessage());
 			}
 			break;
 		}
@@ -215,13 +187,8 @@ public class ControladorImp extends Controlador {
 				List<TObra> obras = (List<TObra>) saObra.search((List<String>)datos);
 				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_BUSCAR_OBRA_OK, obras);
 			}
-			catch(BBDDReadException e) {
-				FactoriaAbstractaPresentacion.getInstance().createNonIGUIVistas(Evento.X_BBDD_READ, null);
-				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_BUSCAR_OBRA_KO, null);
-			}
-			catch(UnknownObraException e) {
-				FactoriaAbstractaPresentacion.getInstance().createNonIGUIVistas(Evento.UNKNOWN_OBRA, null);
-				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_BUSCAR_OBRA_KO, (List<String>)datos);
+			catch(Exception e) {
+				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_BUSCAR_OBRA_KO, e.getMessage());
 			}
 			break;
 		}
@@ -232,13 +199,8 @@ public class ControladorImp extends Controlador {
 				List<TObra> obras = (List<TObra>) saObra.readActive();
 				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_LISTAR_OBRAS_OK, obras);
 			}
-			catch(BBDDReadException e) {
-				FactoriaAbstractaPresentacion.getInstance().createNonIGUIVistas(Evento.X_BBDD_READ, null);
-				//FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_BUSCAR_OBRA_KO, null); no existe la vista porque no hay que introducir nada
-			}
-			catch(UnknownObraException e) {
-				FactoriaAbstractaPresentacion.getInstance().createNonIGUIVistas(Evento.UNKNOWN_OBRA, null);
-				//FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_BUSCAR_OBRA_KO, null);
+			catch(Exception e) {
+				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_LISTAR_OBRAS_KO, e.getMessage());
 			}
 			break;
 		}

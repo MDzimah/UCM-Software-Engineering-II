@@ -34,7 +34,6 @@ public class DAOObraImp implements DAOObra {
 		nuevaObra.put(Messages.KEY_autor, tObra.getAutor());
 		nuevaObra.put(Messages.KEY_Genero, tObra.getGenero());
 		nuevaObra.put(Messages.KEY_sinopsis, tObra.getSinopsis());
-		nuevaObra.put(Messages.KEY_ListaPases, tObra.getPases());
 		nuevaObra.put(Messages.KEY_Activo, tObra.isActiva());
 		tObra.setIdObra(lastPos+1);
 		
@@ -57,11 +56,6 @@ public class DAOObraImp implements DAOObra {
 		JSONObject bdObras = OpsBBDD.read(Messages.BDOb);
 		if(bdObras.has(String.valueOf(id))) {
 			TObra obra = readJSON(bdObras.getJSONObject(String.valueOf(id)));
-			
-			DAOPase daoPase = FactoriaAbstractaIntegracion.getInstance().crearDAOPase();
-			for(int id1 : obra.getPases()) {
-				daoPase.delete(id1);
-			}
 			
 			bdObras.remove(String.valueOf(id));
 			OpsBBDD.write(bdObras, Messages.BDOb);
@@ -104,7 +98,6 @@ public class DAOObraImp implements DAOObra {
 			nuevaObra.put(Messages.KEY_autor, tObra.getAutor());
 			nuevaObra.put(Messages.KEY_Genero, tObra.getGenero());
 			nuevaObra.put(Messages.KEY_sinopsis, tObra.getSinopsis());
-			nuevaObra.put(Messages.KEY_ListaPases, tObra.getPases());
 			nuevaObra.put(Messages.KEY_Activo, tObra.isActiva());
 			tObra.setIdObra(tObra.getIdObra());
 			
@@ -114,21 +107,6 @@ public class DAOObraImp implements DAOObra {
 		}
 		else
 			return -1;
-	}
-
-	@Override
-	public List<TObra> readActive() throws BBDDReadException {
-		JSONObject bdObras = OpsBBDD.read(Messages.BDOb);
-		List<TObra> obrasActivas = new LinkedList<TObra>();
-		
-		for(String key : JSONObject.getNames(bdObras)) {
-			if(key!="LastKey") {
-				JSONObject val = bdObras.getJSONObject(key);
-				if(val.getBoolean(Messages.KEY_Activo))
-					obrasActivas.add(readJSON(val));
-			}
-		}
-		return obrasActivas;
 	}
 
 	/**@throws BBDDReadException 
@@ -167,7 +145,7 @@ public class DAOObraImp implements DAOObra {
 		    listaBuena.add(pases.getInt(i));
 		}
 		
-		return new TObra(obra.getInt(Messages.KEY_idObra), obra.getString(Messages.KEY_titulo), obra.getString(Messages.KEY_autor), obra.getString(Messages.KEY_Genero), obra.getString(Messages.KEY_sinopsis), listaBuena);	
+		return new TObra(obra.getInt(Messages.KEY_idObra), obra.getString(Messages.KEY_titulo), obra.getString(Messages.KEY_autor), obra.getString(Messages.KEY_Genero), obra.getString(Messages.KEY_sinopsis));	
 	}
 	
 	private void busquedaLineal(JSONObject bdObras, String criterio, List<TObra> obras, Object clave ) {
