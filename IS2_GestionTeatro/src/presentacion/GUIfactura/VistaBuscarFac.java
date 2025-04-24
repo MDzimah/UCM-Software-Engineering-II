@@ -64,7 +64,7 @@ public class VistaBuscarFac extends JFrame implements IGUI {
 			fac.add((TFactura)datos);
 			String[] nomCols = {"ID","ID CLIENTE", "ID TAQUILLERO", "FECHA", "IMPORTE", "SUBTOTAL"};
 			
-			FactoriaAbstractaPresentacion.getInstance().createTabla("BUSCAR FACTURA", nomCols, fac);
+			FactoriaAbstractaPresentacion.getInstance().createTabla("BUSCA_ FACTURA", nomCols, fac);
 		}
 		else if(evento == Evento.RES_KO) {
 			FactoriaAbstractaPresentacion.getInstance().createErrorDialogMessage(Messages.X_BUSCAR_FACTURA + ' ' + Messages.MOTIVO.formatted((String)datos));
