@@ -13,10 +13,10 @@ import presentacion.controlador.Controlador;
 import presentacion.VistaDefault;
 import negocio.compTea.TCompTea;
 
-public class VistaAltaCompania extends VistaDefault implements IGUI{
+public class VistaBajaCompTea extends VistaDefault implements IGUI{
 	
 	
-	public VistaAltaCompania() {
+	public VistaBajaCompTea() {
 		initGUI();
 		this.setVisible(true);
 	}
