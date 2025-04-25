@@ -48,6 +48,7 @@ public class VistaCrearPase extends VistaDefault {
 		componentesEtiquetados.add(new Pair<>(cantidadStockLabel,cantidadStockText));
 		componentesEtiquetados.add(new Pair<>(precioLabel,precioText));
 		super.initComps(componentesEtiquetados, ok, cancelar, false);
+		this.setVisible(true);
 		ok.addActionListener(e -> {
 			int idCompTea = Integer.valueOf(idCompTeaText.getText());
 			int idObra = Integer.valueOf(idObraText.getText());
