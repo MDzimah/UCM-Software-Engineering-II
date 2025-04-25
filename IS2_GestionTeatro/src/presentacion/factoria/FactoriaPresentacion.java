@@ -28,7 +28,14 @@ public class FactoriaPresentacion extends FactoriaAbstractaPresentacion {
 		
 		//Taquillero
 		
+		//Pase
 		
+		case CREAR_PASE: return null;
+		case ELIMINAR_PASE: return null;
+		case CONSULTAR_PASE: return null;
+		case BUSCAR_PASE: return null;
+		case LISTAR_PASES: return null;
+
 		//Obra
 		
 		

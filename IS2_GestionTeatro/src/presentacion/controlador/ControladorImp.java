@@ -148,7 +148,15 @@ public class ControladorImp extends Controlador {
 		case ACTUALIZAR_CLIENTE: 
 		
 		//Taquillero
+			
+			
+		//Pase
 		
+		case CREAR_PASE: 
+		case ELIMINAR_PASE: 
+		case CONSULTAR_PASE: 
+		case BUSCAR_PASE: 
+		case LISTAR_PASES: 
 		
 		//Obra
 		
