@@ -2,6 +2,11 @@ package presentacion.factoria;
 
 import misc.Evento;
 import presentacion.*;
+import presentacion.GUIPase.VistaBuscarPase;
+import presentacion.GUIPase.VistaConsultarPase;
+import presentacion.GUIPase.VistaCrearPase;
+import presentacion.GUIPase.VistaEliminarPase;
+import presentacion.GUIPase.VistaListarPases;
 import presentacion.GUIfactura.*;
 
 public class FactoriaPresentacion extends FactoriaAbstractaPresentacion {
@@ -28,7 +33,14 @@ public class FactoriaPresentacion extends FactoriaAbstractaPresentacion {
 		
 		//Taquillero
 		
+		//Pase
 		
+		case CREAR_PASE: return new VistaCrearPase();
+		case ELIMINAR_PASE: return new VistaEliminarPase();
+		case CONSULTAR_PASE: return new VistaConsultarPase();
+		case BUSCAR_PASE: return new VistaBuscarPase();
+		case LISTAR_PASES: return new VistaListarPases();
+
 		//Obra
 		
 		
