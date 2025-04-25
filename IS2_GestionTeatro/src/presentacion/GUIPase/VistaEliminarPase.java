@@ -1,5 +1,15 @@
 package presentacion.GUIPase;
 
-public class VistaEliminarPase {
+import misc.Evento;
+import presentacion.IGUI;
+import presentacion.VistaDefault;
+
+public class VistaEliminarPase extends VistaDefault implements IGUI{
+
+	@Override
+	public void actualizar(Evento evento, Object datos) {
+		// TODO Auto-generated method stub
+		
+	}
 
 }
