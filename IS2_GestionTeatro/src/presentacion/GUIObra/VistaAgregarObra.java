@@ -6,12 +6,12 @@ import javax.swing.JComponent;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 
-import eventos.Evento;
+import presentacion.Evento;
 import misc.Pair;
 import negocio.obra.TObra;
 import presentacion.IGUI;
 import presentacion.controlador.Controlador;
-import presentacion.superClases.VistaDefault;
+import presentacion.VistaDefault;
 
 public class VistaAgregarObra extends VistaDefault implements IGUI{
 	//Atributos
@@ -35,13 +35,13 @@ public class VistaAgregarObra extends VistaDefault implements IGUI{
 		genero = new JTextField();
 		sinopsis = new JTextField();
 		
-		ArrayList<Pair<JLabel, JComponent>> campos = new ArrayList<>();
+		ArrayList<Pair<JComponent, JComponent>> campos = new ArrayList<>();
 		campos.add(new Pair<>(titulo1, titulo));
 		campos.add(new Pair<>(autor1, autor));
 		campos.add(new Pair<>(genero1, genero));
 		campos.add(new Pair<>(sinopsis1, sinopsis));
 
-		super.initComps(campos, agregar, cancelar);
+		super.initComps(campos, agregar, cancelar, false);
 		
 		//Declaramos los listeners
 		agregar.addActionListener(e ->{

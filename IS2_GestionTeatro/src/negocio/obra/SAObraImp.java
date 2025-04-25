@@ -1,11 +1,14 @@
 package negocio.obra;
 
 import java.util.Collection;
+import java.util.List;
 
 import exceptions.BBDDReadException;
 import exceptions.BBDDWriteException;
+import exceptions.UnknownObraException;
 import integracion.factoria.FactoriaAbstractaIntegracion;
 import integracion.obra.DAOObra;
+import integracion.pase.DAOPase;
 
 public class SAObraImp implements SAObra {
 
@@ -16,48 +19,52 @@ public class SAObraImp implements SAObra {
 	}
 
 	@Override
-	public TObra read(int id) throws BBDDReadException {
+	public TObra read(int id) throws BBDDReadException, UnknownObraException {
 		DAOObra daoObra = FactoriaAbstractaIntegracion.getInstance().crearDAOObra();
-		return daoObra.read(id);
+		TObra obra = daoObra.read(id);
+		if(obra==null)
+			throw new UnknownObraException();
+		else
+			return obra;
 	}
 
 	@Override
-	public int update(TObra o) throws BBDDReadException, BBDDWriteException {
+	public int update(TObra o) throws BBDDReadException, BBDDWriteException, UnknownObraException {
 		DAOObra daoObra = FactoriaAbstractaIntegracion.getInstance().crearDAOObra();
-		return daoObra.update(o);
+		int salida = daoObra.update(o);
+		if(salida<=0)
+			throw new UnknownObraException();
+		else
+			return salida;
 	}
 
 	@Override
-	public int delete(int id) throws BBDDReadException, BBDDWriteException {
+	public int delete(int id) throws BBDDReadException, BBDDWriteException, UnknownObraException {
 		DAOObra daoObra = FactoriaAbstractaIntegracion.getInstance().crearDAOObra();
-		return daoObra.delete(id);
+		int salida = daoObra.delete(id);
+		if(salida<=0)
+			throw new UnknownObraException();
+		else
+			return salida;			
 	}
 
 	@Override
-	public Collection<TObra> readActive() throws BBDDReadException {
-		DAOObra daoObra = FactoriaAbstractaIntegracion.getInstance().crearDAOObra();
-		return daoObra.readActive();
+	public Collection<TObra> readActive() throws BBDDReadException, UnknownObraException {
+		DAOPase daoPase = FactoriaAbstractaIntegracion.getInstance().crearDAOPase();
+		Collection<TObra> obras = daoPase.buscarXObras();
+		if(obras.isEmpty() || obras==null)
+			throw new UnknownObraException();
+		else
+			return obras;
 	}
 
-	public Collection<TObra> search(Integer Id, String titulo, String autor, String genero, Boolean activo) throws BBDDReadException{
+	public Collection<TObra> search(List<String> params) throws BBDDReadException, UnknownObraException{
 		DAOObra daoObra = FactoriaAbstractaIntegracion.getInstance().crearDAOObra();
-		return daoObra.search(Id, titulo, autor, genero, activo);
-	}
-
-	@Override
-	public int enlazarPase(int IdPase, int idObra) throws BBDDReadException, BBDDWriteException {
-		DAOObra daoObra = FactoriaAbstractaIntegracion.getInstance().crearDAOObra();
-		TObra obra = daoObra.read(idObra);
-		obra.agregarPase(IdPase);
-		return daoObra.update(obra);
-	}
-
-	@Override
-	public int desenlazarPase(int IdPase, int idObra) throws BBDDReadException, BBDDWriteException {
-		DAOObra daoObra = FactoriaAbstractaIntegracion.getInstance().crearDAOObra();
-		TObra obra = daoObra.read(idObra);
-		obra.eliminarPase(IdPase);
-		return daoObra.update(obra);
+		Collection<TObra> obras = daoObra.search(params);
+		if(obras.isEmpty() || obras==null)
+			throw new UnknownObraException();
+		else
+			return obras;
 	}
 
 }

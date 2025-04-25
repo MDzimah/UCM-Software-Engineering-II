@@ -34,7 +34,6 @@ public class DAOObraImp implements DAOObra {
 		nuevaObra.put(Messages.KEY_autor, tObra.getAutor());
 		nuevaObra.put(Messages.KEY_Genero, tObra.getGenero());
 		nuevaObra.put(Messages.KEY_sinopsis, tObra.getSinopsis());
-		nuevaObra.put(Messages.KEY_ListaPases, tObra.getPases());
 		nuevaObra.put(Messages.KEY_Activo, tObra.isActiva());
 		tObra.setIdObra(lastPos+1);
 		
@@ -57,11 +56,6 @@ public class DAOObraImp implements DAOObra {
 		JSONObject bdObras = OpsBBDD.read(Messages.BDOb);
 		if(bdObras.has(String.valueOf(id))) {
 			TObra obra = readJSON(bdObras.getJSONObject(String.valueOf(id)));
-			
-			DAOPase daoPase = FactoriaAbstractaIntegracion.getInstance().crearDAOPase();
-			for(int id1 : obra.getPases()) {
-				daoPase.delete(id1);
-			}
 			
 			bdObras.remove(String.valueOf(id));
 			OpsBBDD.write(bdObras, Messages.BDOb);
@@ -104,7 +98,6 @@ public class DAOObraImp implements DAOObra {
 			nuevaObra.put(Messages.KEY_autor, tObra.getAutor());
 			nuevaObra.put(Messages.KEY_Genero, tObra.getGenero());
 			nuevaObra.put(Messages.KEY_sinopsis, tObra.getSinopsis());
-			nuevaObra.put(Messages.KEY_ListaPases, tObra.getPases());
 			nuevaObra.put(Messages.KEY_Activo, tObra.isActiva());
 			tObra.setIdObra(tObra.getIdObra());
 			
@@ -116,46 +109,34 @@ public class DAOObraImp implements DAOObra {
 			return -1;
 	}
 
-	@Override
-	public List<TObra> readActive() throws BBDDReadException {
-		JSONObject bdObras = OpsBBDD.read(Messages.BDOb);
-		List<TObra> obrasActivas = new LinkedList<TObra>();
-		
-		for(String key : JSONObject.getNames(bdObras)) {
-			if(key!="LastKey") {
-				JSONObject val = bdObras.getJSONObject(key);
-				if(val.getBoolean(Messages.KEY_Activo))
-					obrasActivas.add(readJSON(val));
-			}
-		}
-		return obrasActivas;
-	}
-
 	/**@throws BBDDReadException 
 	 * @Override
 	 *  Busca por prioridad de criterios de izquierda a derecha, con null si no quieres ese criterio
+	 *  @param params - Integer Id, String titulo, String autor, String genero, Boolean activo
 	 */
-	public List<TObra> search(Integer Id, String titulo, String autor, String genero, Boolean activo) throws BBDDReadException {
+	public List<TObra> search(List<String> params) throws BBDDReadException {
 		JSONObject bdObras = OpsBBDD.read(Messages.BDOb);
 		List<TObra> obras = new LinkedList<TObra>();
-		if(Id != null) {
-			if(bdObras.has(String.valueOf(Id))) {
-				obras.add(readJSON(bdObras.getJSONObject(String.valueOf(Id))));
+		if(Integer.valueOf(params.get(0)) != null) {
+			if(bdObras.has(String.valueOf(Integer.valueOf(params.get(0))))) {
+				obras.add(readJSON(bdObras.getJSONObject(String.valueOf(Integer.valueOf(params.get(0))))));
 			}
 			return obras;
 		}
 		else {
-			if(titulo!=null)
-				busquedaLineal(bdObras, Messages.KEY_titulo, obras, titulo);					
-			if(autor!=null)
-				busquedaLineal(bdObras, Messages.KEY_autor, obras, autor);					
-			if(genero!=null)
-				busquedaLineal(bdObras, Messages.KEY_Genero, obras, genero);					
-			if(activo!=null)
-				busquedaLineal(bdObras, Messages.KEY_Activo, obras, activo);
+			if(params.get(1)!=null)
+				busquedaLineal(bdObras, Messages.KEY_titulo, obras, params.get(1));					
+			if(params.get(2)!=null)
+				busquedaLineal(bdObras, Messages.KEY_autor, obras, params.get(2));					
+			if(params.get(3)!=null)
+				busquedaLineal(bdObras, Messages.KEY_Genero, obras, params.get(3));					
+			if(Boolean.valueOf(params.get(4)) != null )
+				busquedaLineal(bdObras, Messages.KEY_Activo, obras, Boolean.valueOf(params.get(4)));
 			return obras;
 		}
 	}
+	
+	//Metodos privados
 	
 	private TObra readJSON(JSONObject obra) {
 		JSONArray pases = obra.getJSONArray(Messages.KEY_Activo);
@@ -164,10 +145,9 @@ public class DAOObraImp implements DAOObra {
 		    listaBuena.add(pases.getInt(i));
 		}
 		
-		return new TObra(obra.getInt(Messages.KEY_idObra), obra.getString(Messages.KEY_titulo), obra.getString(Messages.KEY_autor), obra.getString(Messages.KEY_Genero), obra.getString(Messages.KEY_sinopsis), listaBuena);	
+		return new TObra(obra.getInt(Messages.KEY_idObra), obra.getString(Messages.KEY_titulo), obra.getString(Messages.KEY_autor), obra.getString(Messages.KEY_Genero), obra.getString(Messages.KEY_sinopsis));	
 	}
 	
-	//Metodos privados
 	private void busquedaLineal(JSONObject bdObras, String criterio, List<TObra> obras, Object clave ) {
 		if(obras.isEmpty())
 			for(String key : JSONObject.getNames(bdObras)) {

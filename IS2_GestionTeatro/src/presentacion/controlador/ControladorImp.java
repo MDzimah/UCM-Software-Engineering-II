@@ -2,14 +2,19 @@ package presentacion.controlador;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 import exceptions.BBDDReadException;
 import misc.Evento;
 import misc.Messages;
+import exceptions.BBDDWriteException;
+import exceptions.UnknownObraException;
 import negocio.factoria.FactoriaAbstractaNegocio;
 import negocio.factura.SAFactura;
 import negocio.factura.TFactura;
 import negocio.factura.TLineaFactura;
+import negocio.obra.SAObra;
+import negocio.obra.TObra;
 import negocio.pase.SAPase;
 import negocio.pase.TPase;
 import presentacion.GUIfactura.VistaVentaEnCurso;
@@ -151,7 +156,76 @@ public class ControladorImp extends Controlador {
 		
 		
 		//Obra
-		
+		case CREAR_OBRA:{
+			try{
+				SAObra saObra = FactoriaAbstractaNegocio.getInstance().crearSAObra();
+				int val = saObra.create((TObra)datos);
+				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_OK, val);
+			}
+			catch(Exception e) {
+				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_KO, e.getMessage());
+			}
+			break;
+		}
+		case ELIMINAR_OBRA:{
+			try {
+				SAObra saObra = FactoriaAbstractaNegocio.getInstance().crearSAObra();
+				saObra.delete((int)datos);
+				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_OK, (int)datos);
+			}
+			catch(Exception e) {
+				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_KO, e.getMessage());
+			}
+			break;
+		}
+		case MODIFICAR_OBRA:
+		{
+			try {
+				SAObra saObra = FactoriaAbstractaNegocio.getInstance().crearSAObra();
+				saObra.update((TObra)datos);
+				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_OK, (TObra)datos);
+			}
+			catch(Exception e) {
+				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_KO, e.getMessage());
+			}
+			break;
+		}
+		case CONSULTAR_OBRA:
+		{
+			try {
+				SAObra saObra = FactoriaAbstractaNegocio.getInstance().crearSAObra();
+				TObra obra = saObra.read((int)datos);
+				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_OK, obra);
+			}
+			catch(Exception e) {
+				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_KO, e.getMessage());
+			}
+			break;
+		}
+		case BUSCAR_OBRA:
+		{
+			try {
+				SAObra saObra = FactoriaAbstractaNegocio.getInstance().crearSAObra();
+				List<TObra> obras = (List<TObra>) saObra.search((List<String>)datos);
+				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_OK, obras);
+			}
+			catch(Exception e) {
+				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_KO, e.getMessage());
+			}
+			break;
+		}
+		case LISTAR_OBRAS:
+		{
+			try {
+				SAObra saObra = FactoriaAbstractaNegocio.getInstance().crearSAObra();
+				List<TObra> obras = (List<TObra>) saObra.readActive();
+				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_OK, obras);
+			}
+			catch(Exception e) {
+				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_KO, e.getMessage());
+			}
+			break;
+		}
 		
 		//CompTea
 		
