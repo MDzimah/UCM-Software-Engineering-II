@@ -9,9 +9,13 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
 import misc.Evento;
+import misc.Messages;
 import misc.Pair;
+import negocio.pase.TPase;
 import presentacion.IGUI;
 import presentacion.VistaDefault;
+import presentacion.controlador.Controlador;
+import presentacion.factoria.FactoriaAbstractaPresentacion;
 
 public class VistaCrearPase extends VistaDefault {
 	
@@ -28,15 +32,44 @@ public class VistaCrearPase extends VistaDefault {
 	
 	public VistaCrearPase() {
 		this.setTitle("Crear pase");
+		ok = new JButton("OK");
+		cancelar = new JButton("cancelar");
+		idCompTeaLabel = new JLabel("id de la companya teatral");
+		idCompTeaText = new JTextField(20);
+		idObraLabel = new JLabel("id de la obra");
+		idObraText = new JTextField(20);
+		cantidadStockLabel = new JLabel("stock a comprar");
+		cantidadStockText = new JTextField(20);
+		precioLabel = new JLabel("precio de compra");
+		precioText = new JTextField(20);
 		ArrayList<Pair<JComponent, JComponent>> componentesEtiquetados = new ArrayList<>();
 		componentesEtiquetados.add(new Pair<>(idCompTeaLabel,idCompTeaText));
-		this.setVisible(true);	
+		componentesEtiquetados.add(new Pair<>(idObraLabel,idObraText));
+		componentesEtiquetados.add(new Pair<>(cantidadStockLabel,cantidadStockText));
+		componentesEtiquetados.add(new Pair<>(precioLabel,precioText));
+		super.initComps(componentesEtiquetados, ok, cancelar, false);
+		ok.addActionListener(e -> {
+			int idCompTea = Integer.valueOf(idCompTeaText.getText());
+			int idObra = Integer.valueOf(idObraText.getText());
+			int stock = Integer.valueOf(cantidadStockText.getText());
+			int precio = Integer.valueOf(precioText.getText());
+			TPase tPase = new TPase(-1, idCompTea, idObra, true, null, stock, precio); //Buscar forma de hacer la fecha
+			Controlador.getInstance().accion(Evento.CREAR_PASE, tPase);
+			this.dispose();
+		});
+		cancelar.addActionListener(e ->{
+			this.dispose();
+		});
 	}
 	
 	@Override
 	public void actualizar(Evento evento, Object datos) {
-		// TODO Auto-generated method stub
-		
+		if (evento == Evento.RES_OK) {
+			FactoriaAbstractaPresentacion.getInstance().createDialogMessage(Messages.EX_PASE_CREADO);
+		}
+		else if(evento == Evento.RES_KO) {
+			FactoriaAbstractaPresentacion.getInstance().createErrorDialogMessage(Messages.X_PASE_CREADO + ' ' + Messages.MOTIVO.formatted((String)datos));
+		}
 	}
 
 }
