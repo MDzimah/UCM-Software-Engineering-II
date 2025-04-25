@@ -59,6 +59,7 @@ public enum Evento {
 	/*--OTRAS VENTANAS--*/
 	MAINWINDOW,
 	MENU_FACTURA,
+	MENU_OBRA,
 	
 	/*--RESPUESTAS--*/
 	RES_OK, 

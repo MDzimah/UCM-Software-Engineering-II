@@ -6,11 +6,12 @@ import javax.swing.JComponent;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 
-import presentacion.Evento;
+import misc.Evento;
 import misc.Pair;
 import negocio.obra.TObra;
 import presentacion.IGUI;
 import presentacion.controlador.Controlador;
+import presentacion.factoria.FactoriaAbstractaPresentacion;
 import presentacion.VistaDefault;
 
 public class VistaAgregarObra extends VistaDefault implements IGUI{
@@ -56,11 +57,16 @@ public class VistaAgregarObra extends VistaDefault implements IGUI{
 		});
 	}
 	
-	
+
+
 	@Override
-	public void actualizar(Evento evento, Object datos) {
-		// TODO Auto-generated method stub
-		
+	public void actualizar(misc.Evento evento, Object datos) {
+		if(evento==Evento.RES_OK) {
+			FactoriaAbstractaPresentacion.getInstance().createDialogMessage("Se ha añadido correctamente la obra " + (int)datos);			
+		}
+		else if(evento==Evento.RES_KO) {
+			FactoriaAbstractaPresentacion.getInstance().createErrorDialogMessage("No se ha podido añadir la obra.\n" +(String)datos);
+		}
 	}
 
 }

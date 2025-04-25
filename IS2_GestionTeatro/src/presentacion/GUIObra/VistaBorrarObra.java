@@ -1,16 +1,18 @@
 package presentacion.GUIObra;
 
 import java.util.ArrayList;
+import java.util.Collection;
 
 import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 
-import presentacion.Evento;
+import misc.Evento;
 import misc.Pair;
 import presentacion.IGUI;
 import presentacion.controlador.Controlador;
+import presentacion.factoria.FactoriaAbstractaPresentacion;
 import presentacion.VistaDefault;
 
 public class VistaBorrarObra extends VistaDefault implements IGUI{
@@ -50,9 +52,14 @@ public class VistaBorrarObra extends VistaDefault implements IGUI{
 		});
 	}
 
+
 	@Override
-	public void actualizar(Evento evento, Object datos) {
-		// TODO Auto-generated method stub
-		
+	public void actualizar(misc.Evento evento, Object datos) {
+		if(evento==Evento.RES_OK) {
+			FactoriaAbstractaPresentacion.getInstance().createDialogMessage("Se ha eliminado correctamente la obra " + (int)datos);			
+		}
+		else if(evento==Evento.RES_KO) {
+			FactoriaAbstractaPresentacion.getInstance().createErrorDialogMessage("No se ha podido eliminar la obra.\n" +(String)datos);
+		}
 	}
 }

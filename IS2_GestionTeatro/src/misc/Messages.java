@@ -31,6 +31,8 @@ public class Messages {
 	public static final String ERROR_CAMPOS_INCORRECTOS = "Campos incorrectos. Por favor, complete todos los campos.";
 	public static final String ERROR_LECTURA_BBDD = "Error al leer la BBDD de %s";
 	public static final String ERROR_ESCRITURA_BBDD = "Error al escribr en la BBDD de %s";
+	public static final String ERROR = "ERROR: %s"; 
+
 	
 	//Path a file
 	public static final String PATH_TO_BBDD = "resources/BBDD/%s";
@@ -98,5 +100,5 @@ public class Messages {
 	public static final String KEY_titulo = "titulo"; 
 	public static final String KEY_autor = "autor"; 
 	public static final String KEY_Genero = "genero"; 
-	public static final String KEY_sinopsis = "sinopsis"; 
+	public static final String KEY_sinopsis = "sinopsis";
 }

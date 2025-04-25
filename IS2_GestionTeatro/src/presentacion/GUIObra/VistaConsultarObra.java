@@ -1,17 +1,19 @@
 package presentacion.GUIObra;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.LinkedList;
 
 import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 
-import misc.Pair;
-import presentacion.Evento;
+import misc.*;
 import presentacion.IGUI;
 import presentacion.VistaDefault;
 import presentacion.controlador.Controlador;
+import presentacion.factoria.FactoriaAbstractaPresentacion;
 
 public class VistaConsultarObra extends VistaDefault implements IGUI{
 	private JButton consultar, cancelar;
@@ -48,10 +50,17 @@ public class VistaConsultarObra extends VistaDefault implements IGUI{
 			VistaConsultarObra.this.dispose();
 		});
 	}
-
+	
 	@Override
-	public void actualizar(Evento evento, Object datos) {
-		// TODO Auto-generated method stub
-		
+	public void actualizar(misc.Evento evento, Object datos) {
+		if(evento==Evento.RES_OK) {
+			String[] nomCols = {"ID","TITULO", "AUTOR", "GENERO", "SINOPSIS"};
+			Collection<Object> obra= new LinkedList<Object>();
+			obra.add(datos);
+			FactoriaAbstractaPresentacion.getInstance().createTabla("CONSULTAR OBRA", nomCols, obra);			
+		}
+		else if(evento==Evento.RES_KO) {
+			FactoriaAbstractaPresentacion.getInstance().createErrorDialogMessage("No se ha podido acceder a la obra.\n" +(String)datos);
+		}
 	}
 }
