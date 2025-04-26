@@ -25,6 +25,13 @@ public class DAOObraImp implements DAOObra {
 	 * @throws BBDDWriteException 
 	 */
 	public int create(TObra tObra) throws BBDDReadException, BBDDWriteException {
+		
+		if (OpsBBDD.isEmpty(Messages.BDOb)) {
+			JSONObject bdObra = new JSONObject();
+			bdObra.put("LastKey", 0);
+			OpsBBDD.write(bdObra, Messages.BDOb);
+		}
+		
 		JSONObject bdObras = OpsBBDD.read(Messages.BDOb);
 		int lastPos = bdObras.getInt("LastKey");
 		JSONObject nuevaObra = new JSONObject();
@@ -34,7 +41,6 @@ public class DAOObraImp implements DAOObra {
 		nuevaObra.put(Messages.KEY_autor, tObra.getAutor());
 		nuevaObra.put(Messages.KEY_Genero, tObra.getGenero());
 		nuevaObra.put(Messages.KEY_sinopsis, tObra.getSinopsis());
-		nuevaObra.put(Messages.KEY_Activo, tObra.isActiva());
 		tObra.setIdObra(lastPos+1);
 		
 		bdObras.put(String.valueOf(lastPos+1), nuevaObra);
@@ -98,7 +104,6 @@ public class DAOObraImp implements DAOObra {
 			nuevaObra.put(Messages.KEY_autor, tObra.getAutor());
 			nuevaObra.put(Messages.KEY_Genero, tObra.getGenero());
 			nuevaObra.put(Messages.KEY_sinopsis, tObra.getSinopsis());
-			nuevaObra.put(Messages.KEY_Activo, tObra.isActiva());
 			tObra.setIdObra(tObra.getIdObra());
 			
 			bdObras.put(String.valueOf(tObra.getIdObra()), nuevaObra);
@@ -124,14 +129,12 @@ public class DAOObraImp implements DAOObra {
 			return obras;
 		}
 		else {
+			if(params.get(0)!=null)
+				busquedaLineal(bdObras, Messages.KEY_titulo, obras, params.get(0));					
 			if(params.get(1)!=null)
-				busquedaLineal(bdObras, Messages.KEY_titulo, obras, params.get(1));					
+				busquedaLineal(bdObras, Messages.KEY_autor, obras, params.get(1));					
 			if(params.get(2)!=null)
-				busquedaLineal(bdObras, Messages.KEY_autor, obras, params.get(2));					
-			if(params.get(3)!=null)
-				busquedaLineal(bdObras, Messages.KEY_Genero, obras, params.get(3));					
-			if(Boolean.valueOf(params.get(4)) != null )
-				busquedaLineal(bdObras, Messages.KEY_Activo, obras, Boolean.valueOf(params.get(4)));
+				busquedaLineal(bdObras, Messages.KEY_Genero, obras, params.get(2));					
 			return obras;
 		}
 	}
@@ -139,11 +142,6 @@ public class DAOObraImp implements DAOObra {
 	//Metodos privados
 	
 	private TObra readJSON(JSONObject obra) {
-		JSONArray pases = obra.getJSONArray(Messages.KEY_Activo);
-		List<Integer> listaBuena = new LinkedList<Integer>();
-		for (int i = 0; i < pases.length(); i++) {
-		    listaBuena.add(pases.getInt(i));
-		}
 		
 		return new TObra(obra.getInt(Messages.KEY_idObra), obra.getString(Messages.KEY_titulo), obra.getString(Messages.KEY_autor), obra.getString(Messages.KEY_Genero), obra.getString(Messages.KEY_sinopsis));	
 	}

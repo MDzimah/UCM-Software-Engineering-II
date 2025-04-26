@@ -16,7 +16,6 @@ public class TObra {
 	private String autor;
 	private String genero;
 	private String sinopsis;
-	private boolean activa;
 	
 	//Constructores
 	public TObra (int idObra, String titulo, String autor, String genero, String sinopsis) {
@@ -48,10 +47,6 @@ public class TObra {
 		return genero;
 	}
 	
-	public boolean isActiva() {
-		return activa;
-	}
-	
 	public String getSinopsis() {
 		return sinopsis;
 	}
@@ -68,8 +63,6 @@ public class TObra {
 			return genero;
 		case "Sinopsis":
 			return sinopsis;
-		case "Activo":
-			return activa;
 		}
 		return null;
 	}

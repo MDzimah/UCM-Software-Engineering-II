@@ -41,8 +41,9 @@ public class VistaConsultarObra extends VistaDefault implements IGUI{
 		
 		//Declaramos los listeners
 		consultar.addActionListener(e ->{
-			Integer id2 = Integer.valueOf(id.getText());
+			Integer id2 = Integer.valueOf(id.getText());			
 			Controlador.getInstance().accion(Evento.CONSULTAR_OBRA, id2);
+
 			VistaConsultarObra.this.dispose();
 		});
 		
