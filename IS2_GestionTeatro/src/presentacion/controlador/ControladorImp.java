@@ -133,7 +133,7 @@ public class ControladorImp extends Controlador {
 						}
 					}
 						
-					if (!estaba) {
+					if (estaba) {
 						FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_OK, null);
 						break;
 					}
