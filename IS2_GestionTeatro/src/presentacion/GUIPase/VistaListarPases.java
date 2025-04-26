@@ -44,7 +44,7 @@ public class VistaListarPases extends VistaDefault implements IGUI{
 			FactoriaAbstractaPresentacion.getInstance().createTabla("MOSTRAR PASES", head, pases);
 		}
 		else if(evento == Evento.RES_KO) {
-			FactoriaAbstractaPresentacion.getInstance().createErrorDialogMessage(Messages.X_MOSTRAR_FACTURAS + ' ' + Messages.MOTIVO.formatted((String)datos));
+			FactoriaAbstractaPresentacion.getInstance().createErrorDialogMessage(Messages.X_MOSTRAR_PASES + ' ' + Messages.MOTIVO.formatted((String)datos));
 		}
 	}
 

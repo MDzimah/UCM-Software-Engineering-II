@@ -6,6 +6,8 @@ public class Messages {
 	public static final String EX_VENTA_CERRADA = "Se ha cerrado la venta correctamente.";
 	public static final String EX_PASE_QUITADO_DE_VENTA = "Se ha quitado correctamente el pase del carrito.";
 	public static final String EX_PASE_CREADO = "Se ha creado el pase correctamente.";
+	public static final String EX_PASE_BUSCADO = "Se ha encontrado el pase de forma exitosa.";
+	public static final String EX_PASE_ELIMINADO = "Se ha eliminado el pase de forma exitosa.";
 	
 	// NOTE: seguramente lo cambie mas adelante
 	public static final String EX_OBRA_ANYADIDA_CORRECT = "La obra ha sido registrada correctamente.";
@@ -18,7 +20,10 @@ public class Messages {
 	public static final String X_QUITAR_PASE_DE_VENTA = "No se ha podido quitar el pase del carrito.";
 	public static final String X_BUSCAR_FACTURA = "No se ha encontrado la factura con dicho id.";
 	public static final String X_MOSTRAR_FACTURAS = "No hay facturas para mostrar.";
+	public static final String X_MOSTRAR_PASES= "No se han podido mostrar pases.";
 	public static final String X_PASE_CREADO = "No se ha podido crear el pase.";
+	public static final String X_PASE_BUSCADO = "No se ha podido encontrar el pase solicitado.";
+	public static final String X_PASE_ELIMINADO = "No se ha podido eliminar el pase solicitado.";
 	
 	//Motivos por ops canceladas
 	public static final String MOTIVO = "Motivo: \"%s\".";

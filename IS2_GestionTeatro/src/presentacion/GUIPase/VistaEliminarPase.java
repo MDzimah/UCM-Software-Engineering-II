@@ -54,13 +54,10 @@ public class VistaEliminarPase extends VistaDefault {
 	@Override
 	public void actualizar(Evento evento, Object datos) {
 		if(evento==Evento.RES_OK) {
-			Collection<Object> p = new ArrayList<Object>();
-			p.add((TFactura)datos);
-			String[] nomCols = {"ID","ID COMPANYA", "ID OBRA", "FECHA", "STOCK", "PRECIO"};
-			FactoriaAbstractaPresentacion.getInstance().createTabla("BUSCAR PASE", nomCols, p);			
+			FactoriaAbstractaPresentacion.getInstance().createDialogMessage(Messages.EX_PASE_ELIMINADO);
 		}
 		else if(evento==Evento.RES_KO) {
-			FactoriaAbstractaPresentacion.getInstance().createErrorDialogMessage(Messages.X_BUSCAR_FACTURA + ' ' + Messages.MOTIVO.formatted((String)datos));
+			FactoriaAbstractaPresentacion.getInstance().createErrorDialogMessage(Messages.X_PASE_ELIMINADO + ' ' + Messages.MOTIVO.formatted((String)datos));
 		}
 	}
 

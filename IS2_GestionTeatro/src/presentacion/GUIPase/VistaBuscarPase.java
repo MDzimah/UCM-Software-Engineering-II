@@ -58,10 +58,11 @@ public class VistaBuscarPase extends VistaDefault {
 			Collection<Object> p = new ArrayList<Object>();
 			p.add((TFactura)datos);
 			String[] nomCols = {"ID","ID COMPANYA", "ID OBRA", "FECHA", "STOCK", "PRECIO"};
+			//FactoriaAbstractaPresentacion.getInstance().createDialogMessage(Messages.EX_PASE_BUSCADO);
 			FactoriaAbstractaPresentacion.getInstance().createTabla("BUSCAR PASE", nomCols, p);			
 		}
 		else if(evento==Evento.RES_KO) {
-			FactoriaAbstractaPresentacion.getInstance().createErrorDialogMessage(Messages.X_BUSCAR_FACTURA + ' ' + Messages.MOTIVO.formatted((String)datos));
+			FactoriaAbstractaPresentacion.getInstance().createErrorDialogMessage(Messages.X_PASE_BUSCADO + ' ' + Messages.MOTIVO.formatted((String)datos));
 		}
 	}
 
