@@ -38,7 +38,7 @@ public class VistaCrearPase extends VistaDefault {
 		idCompTeaText = new JTextField(20);
 		idObraLabel = new JLabel("id de la obra:");
 		idObraText = new JTextField(20);
-		cantidadStockLabel = new JLabel("stock a comprar:");
+		cantidadStockLabel = new JLabel("stock:");
 		cantidadStockText = new JTextField(20);
 		precioLabel = new JLabel("precio de compra:");
 		precioText = new JTextField(20);

@@ -31,8 +31,6 @@ public class VistaBuscarPase extends VistaDefault {
 	
 	public VistaBuscarPase() {
 		this.setTitle("BUSCAR PASE");
-		JPanel mainPanel = new JPanel(new BorderLayout());
-		mainPanel.setSize(Constants.getScaledScreenDimension(2, 2));
 		this.IDPaseL = new JLabel("Id Pase:");
 		this.IDPaseT = new JTextField(20);
 		this.buscar = new JButton("Aceptar");
@@ -56,7 +54,15 @@ public class VistaBuscarPase extends VistaDefault {
 	
 	@Override
 	public void actualizar(Evento evento, Object datos) {
-		
+		if(evento==Evento.RES_OK) {
+			Collection<Object> p = new ArrayList<Object>();
+			p.add((TFactura)datos);
+			String[] nomCols = {"ID","ID COMPANYA", "ID OBRA", "FECHA", "STOCK", "PRECIO"};
+			FactoriaAbstractaPresentacion.getInstance().createTabla("BUSCAR PASE", nomCols, p);			
+		}
+		else if(evento==Evento.RES_KO) {
+			FactoriaAbstractaPresentacion.getInstance().createErrorDialogMessage(Messages.X_BUSCAR_FACTURA + ' ' + Messages.MOTIVO.formatted((String)datos));
+		}
 	}
 
 }
