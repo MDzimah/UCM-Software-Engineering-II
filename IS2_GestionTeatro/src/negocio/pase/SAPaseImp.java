@@ -76,4 +76,10 @@ public class SAPaseImp implements SAPase {
 		daoPas.update(tPase);
 		return cantidadReal;
 	}
+
+	@Override
+	public boolean existePaseConObra(int idObra) throws BBDDReadException {
+		DAOPase daoPas = FactoriaAbstractaIntegracion.getInstance().crearDAOPase();
+		return daoPas.readPorObra(idObra);
+	}
 }

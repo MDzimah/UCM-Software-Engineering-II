@@ -110,4 +110,17 @@ public class DAOPaseImp implements DAOPase {
 				jsonPas.getInt(Messages.KEY_stock),
 				jsonPas.getFloat(Messages.KEY_precioPase));
 		}
+
+	@Override
+	public boolean readPorObra(int idObra) throws BBDDReadException {
+		JSONObject bdPase = OpsBBDD.read(Messages.BDPase);
+		JSONObject pases = new JSONObject(bdPase.getJSONArray(Messages.KEY_pases));
+		Set<String> idSetPases = pases.keySet();
+		for (String idPase : idSetPases) {
+			TPase tPase = read(Integer.valueOf(idPase));
+			if (tPase.getIdObra() == idObra) return true;
+		}
+		return false;
+	}
+	
 }
