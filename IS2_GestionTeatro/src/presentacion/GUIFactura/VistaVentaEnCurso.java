@@ -1,4 +1,4 @@
-package presentacion.GUIfactura;
+package presentacion.GUIFactura;
 
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;

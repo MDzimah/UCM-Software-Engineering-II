@@ -1,4 +1,4 @@
-package presentacion.GUIfactura;
+package presentacion.GUIFactura;
 
 import misc.Evento;
 import misc.Messages;

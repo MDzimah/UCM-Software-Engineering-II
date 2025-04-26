@@ -1,4 +1,4 @@
-package presentacion.GUIfactura;
+package presentacion.GUIFactura;
 
 import java.util.Collection;
 

@@ -7,17 +7,11 @@ import java.util.List;
 import exceptions.BBDDReadException;
 import misc.Evento;
 import misc.Messages;
-import exceptions.BBDDWriteException;
-import exceptions.UnknownObraException;
 import negocio.factoria.FactoriaAbstractaNegocio;
-import negocio.factura.SAFactura;
-import negocio.factura.TFactura;
-import negocio.factura.TLineaFactura;
-import negocio.obra.SAObra;
-import negocio.obra.TObra;
-import negocio.pase.SAPase;
-import negocio.pase.TPase;
-import presentacion.GUIfactura.VistaVentaEnCurso;
+import negocio.factura.*;
+import negocio.obra.*;
+import negocio.pase.*;
+import presentacion.GUIFactura.VistaVentaEnCurso;
 import presentacion.factoria.FactoriaAbstractaPresentacion;
 
 public class ControladorImp extends Controlador {
@@ -45,17 +39,27 @@ public class ControladorImp extends Controlador {
 					boolean estaba = false;
 					
 					//Recorremos el carrito para ver si ya hay una instancia de la línea factura
-					//Si sí, entonces sumamos a la cantidad que ya había
+					//Si sí, entonces sumamos a la cantidad que ya había (asegurando que queda stock)
 					for(TLineaFactura tLf : carr) {
 						if (tLf.getIdPase() == newTLf.getIdPase()) {
-							tLf.setCantidad(tLf.getCantidad() + newTLf.getCantidad());
+							if (tPase.getStock() - tLf.getCantidad() - newTLf.getCantidad() >= 0) tLf.setCantidad(tLf.getCantidad() + newTLf.getCantidad());
+							else {
+								FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_KO, Messages.STOCK_INSUF);
+								return;
+							}
 							estaba = true;
 							break;
 						}
 					}
 					
 					//No hay instancia previa de newTLf en el carrito
-					if (!estaba) carr.add(newTLf);	
+					if (!estaba) {
+						if (tPase.getStock() - newTLf.getCantidad() >= 0) carr.add(newTLf);	
+						else {
+							FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_KO, Messages.STOCK_INSUF);
+							return;
+						}
+					}
 					
 					FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_OK, null);
 				}

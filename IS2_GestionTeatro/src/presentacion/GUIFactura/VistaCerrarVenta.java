@@ -1,4 +1,4 @@
-package presentacion.GUIfactura;
+package presentacion.GUIFactura;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;

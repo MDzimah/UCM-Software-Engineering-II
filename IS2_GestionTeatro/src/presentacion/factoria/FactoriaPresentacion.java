@@ -2,12 +2,12 @@ package presentacion.factoria;
 
 import misc.Evento;
 import presentacion.*;
+import presentacion.GUIFactura.*;
 import presentacion.GUIPase.VistaBuscarPase;
 import presentacion.GUIPase.VistaConsultarPase;
 import presentacion.GUIPase.VistaCrearPase;
 import presentacion.GUIPase.VistaEliminarPase;
 import presentacion.GUIPase.VistaListarPases;
-import presentacion.GUIfactura.*;
 
 public class FactoriaPresentacion extends FactoriaAbstractaPresentacion {
 
