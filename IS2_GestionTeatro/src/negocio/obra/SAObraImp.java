@@ -1,6 +1,7 @@
 package negocio.obra;
 
 import java.util.Collection;
+import java.util.LinkedList;
 import java.util.List;
 
 import exceptions.BBDDReadException;
@@ -51,11 +52,18 @@ public class SAObraImp implements SAObra {
 	@Override
 	public Collection<TObra> readActive() throws BBDDReadException, UnknownObraException {
 		DAOPase daoPase = FactoriaAbstractaIntegracion.getInstance().crearDAOPase();
-		Collection<TObra> obras = daoPase.buscarXObras();
-		if(obras.isEmpty() || obras==null)
+		DAOObra daoObra = FactoriaAbstractaIntegracion.getInstance().crearDAOObra();
+		
+		List<TObra> lista = new LinkedList<TObra>();
+		for(TObra obra: daoObra.getObras()) {
+			if(daoPase.readPorObra(obra.getIdObra()))
+					lista.add(obra);
+		}
+		
+		if(lista.isEmpty())
 			throw new UnknownObraException();
 		else
-			return obras;
+			return lista;
 	}
 
 	public Collection<TObra> search(List<String> params) throws BBDDReadException, UnknownObraException{

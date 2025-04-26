@@ -1,5 +1,6 @@
 package integracion.obra;
 
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -112,6 +113,18 @@ public class DAOObraImp implements DAOObra {
 		}
 		else
 			return -1;
+	}
+	
+	@Override
+	public List<TObra> getObras() throws BBDDReadException {
+		JSONObject bdObras = OpsBBDD.read(Messages.BDOb);
+		List<TObra> IdObras = new LinkedList<TObra>();
+		
+		Iterator<String> claves = bdObras.keys();
+        while (claves.hasNext()) {
+           IdObras.add(readJSON(bdObras.getJSONObject(claves.next())));
+        }
+		return IdObras;
 	}
 
 	/**@throws BBDDReadException 
