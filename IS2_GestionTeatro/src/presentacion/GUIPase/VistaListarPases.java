@@ -32,6 +32,7 @@ public class VistaListarPases extends VistaDefault implements IGUI{
 		
 		cancel.addActionListener(e->{
 			dispose();
+			this.setVisible(false);
 		});
 	}
 	

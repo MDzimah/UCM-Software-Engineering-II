@@ -20,6 +20,9 @@ public class TPase {
 		this.stock = stock;
 		this.precio = precio;
 	}
+	public TPase(int IDPase) {
+		idPase = IDPase;
+	}
 	public Integer getIdPase() {
 		return idPase;
 	}

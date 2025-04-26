@@ -31,16 +31,16 @@ public class VistaCrearPase extends VistaDefault {
 	private JTextField precioText;
 	
 	public VistaCrearPase() {
-		this.setTitle("Crear pase");
-		ok = new JButton("OK");
-		cancelar = new JButton("cancelar");
-		idCompTeaLabel = new JLabel("id de la companya teatral");
+		this.setTitle("CREAR PASE");
+		ok = new JButton("Aceptar");
+		cancelar = new JButton("cancelar:");
+		idCompTeaLabel = new JLabel("id de la companya teatral:");
 		idCompTeaText = new JTextField(20);
-		idObraLabel = new JLabel("id de la obra");
+		idObraLabel = new JLabel("id de la obra:");
 		idObraText = new JTextField(20);
-		cantidadStockLabel = new JLabel("stock a comprar");
+		cantidadStockLabel = new JLabel("stock a comprar:");
 		cantidadStockText = new JTextField(20);
-		precioLabel = new JLabel("precio de compra");
+		precioLabel = new JLabel("precio de compra:");
 		precioText = new JTextField(20);
 		ArrayList<Pair<JComponent, JComponent>> componentesEtiquetados = new ArrayList<>();
 		componentesEtiquetados.add(new Pair<>(idCompTeaLabel,idCompTeaText));
@@ -60,6 +60,7 @@ public class VistaCrearPase extends VistaDefault {
 		});
 		cancelar.addActionListener(e ->{
 			this.dispose();
+			this.setVisible(false);
 		});
 	}
 	
