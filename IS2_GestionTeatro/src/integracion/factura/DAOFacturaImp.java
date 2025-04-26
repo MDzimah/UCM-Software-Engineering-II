@@ -28,17 +28,8 @@ public class DAOFacturaImp implements DAOFactura {
 		int newId = bdFac.getInt(Messages.KEY_lastId) + 1;
 		bdFac.put(Messages.KEY_lastId, newId);
 		
-		//Creamos la nueva factura
-		JSONObject nuevaFactura = new JSONObject();
-		nuevaFactura.put(Messages.KEY_act, tFactura.getActivo());
-		nuevaFactura.put(Messages.KEY_idCli, tFactura.getIdCliente());
-		nuevaFactura.put(Messages.KEY_idTaq, tFactura.getIdTaquillero());
-		nuevaFactura.put(Messages.KEY_fecha, tFactura.getFecha().toString());
-		nuevaFactura.put(Messages.KEY_importe, tFactura.getImporte());
-		nuevaFactura.put(Messages.KEY_subtotal, tFactura.getSubtotal());
-		
-		//La insertamos en la bd de facturas, su clave es su id
-		facs.put(Integer.toString(newId), nuevaFactura);
+		//Insertamos nueva factura en la bd de facturas, su clave es su id
+		facs.put(Integer.toString(newId), this.newFactura(tFactura));
 		OpsBBDD.write(bdFac, Messages.BDFac);
 		
 		return newId;
@@ -52,8 +43,7 @@ public class DAOFacturaImp implements DAOFactura {
 	        
 			String _id = Integer.toString(id);
 			if (facs.has(_id) && facs.getJSONObject(_id).getBoolean(Messages.KEY_act)) {
-		        JSONObject fac = facs.getJSONObject(_id);
-		        fac.put(Messages.KEY_act, false);
+				facs.getJSONObject(_id).put(Messages.KEY_act, false);
 		        OpsBBDD.write(bdFac, Messages.BDFac);
 		        return id;
 			}
@@ -69,10 +59,10 @@ public class DAOFacturaImp implements DAOFactura {
 			TFactura tFacRead = null;
 			String _id = Integer.toString(id);
 			
+			boolean c = facs.has(_id);
 			//Aseguramos que el id está en las facturas y que 
-			if (facs.has(_id) && facs.getJSONObject(_id).getBoolean(Messages.KEY_act)) {
-				JSONObject fac = facs.getJSONObject(Integer.toString(id));
-				tFacRead = readAux(fac);
+			if (c && facs.getJSONObject(_id).getBoolean(Messages.KEY_act)) {
+				tFacRead = readAux(facs.getJSONObject(_id));
 				tFacRead.setIdFactura(id);
 			}
 			
@@ -114,23 +104,12 @@ public class DAOFacturaImp implements DAOFactura {
 			JSONObject bdFactura = OpsBBDD.read(Messages.BDFac);
 			JSONObject facs = bdFactura.getJSONObject(Messages.KEY_facs);
 			
-			Set<String> allIdsFacs = facs.keySet();
-			for (String idFactura : allIdsFacs) {
-				JSONObject fac = facs.getJSONObject(idFactura);
-				
-				//Solo se actualiza la factura si coinciden los ids y está activa
-	            if (Integer.valueOf(idFactura) == tFactura.getIdFactura() && fac.getBoolean(Messages.KEY_act)) {
-	            	fac.put(Messages.KEY_act, tFactura.getActivo());
-	            	fac.put(Messages.KEY_idCli, tFactura.getIdCliente());
-	            	fac.put(Messages.KEY_idTaq, tFactura.getIdTaquillero());
-	            	fac.put(Messages.KEY_fecha, tFactura.getFecha().toString());
-	        		fac.put(Messages.KEY_subtotal, tFactura.getSubtotal());
-	        		fac.put(Messages.KEY_importe, tFactura.getImporte());
-	            	
-	            	OpsBBDD.write(bdFactura, Messages.BDFac);
-	                return Integer.valueOf(idFactura);
-	            }
-	        }
+			String _id = Integer.toString(tFactura.getIdFactura());
+			if (facs.has(_id) && facs.getJSONObject(_id).getBoolean(Messages.KEY_act)) {
+				facs.put(_id, this.newFactura(tFactura));
+            	OpsBBDD.write(bdFactura, Messages.BDFac);
+            	return tFactura.getIdFactura();
+			}
 		}
         return -1; //No se ha encontrado la factura pasada por parámetro
 	}
@@ -144,5 +123,16 @@ public class DAOFacturaImp implements DAOFactura {
 				LocalDateTime.parse(fac.getString(Messages.KEY_fecha)),
 				fac.getFloat(Messages.KEY_importe),
 				fac.getFloat(Messages.KEY_subtotal));
+	}
+	
+	private JSONObject newFactura(TFactura tFactura) {
+		JSONObject res = new JSONObject();
+		res.put(Messages.KEY_act, tFactura.getActivo());
+		res.put(Messages.KEY_idCli, tFactura.getIdCliente());
+		res.put(Messages.KEY_idTaq, tFactura.getIdTaquillero());
+		res.put(Messages.KEY_fecha, tFactura.getFecha().toString());
+		res.put(Messages.KEY_importe, tFactura.getImporte());
+		res.put(Messages.KEY_subtotal, tFactura.getSubtotal());
+		return res;
 	}
 }

@@ -31,15 +31,8 @@ public class DAOLineaFacturaImp implements DAOLineaFactura {
 		int newId = bdLinFac.getInt(Messages.KEY_lastId) + 1;
 		bdLinFac.put(Messages.KEY_lastId, newId);
 		
-		//Creamos nueva linea
-		JSONObject nuevaLinea = new JSONObject();
-		nuevaLinea.put(Messages.KEY_idFac, tLineaFactura.getIdFactura());
-		nuevaLinea.put(Messages.KEY_idPase, tLineaFactura.getIdPase());
-		nuevaLinea.put(Messages.KEY_ctdad, tLineaFactura.getCantidad());
-		nuevaLinea.put(Messages.KEY_precioVenta, tLineaFactura.getPrecioVenta());
-		
-		//La insertamos en la bd de facturas, su clave es su id
-		lineasFactura.put(Integer.toString(newId), nuevaLinea);
+		//Insertamos nueva linea en la bd de LinFacturas, su clave es su id
+		lineasFactura.put(Integer.toString(newId), this.newLinFac(tLineaFactura));
 		OpsBBDD.write(bdLinFac, Messages.BDLinFac);
 		
 		return newId;
@@ -51,13 +44,10 @@ public class DAOLineaFacturaImp implements DAOLineaFactura {
 			JSONObject bdLinFac = OpsBBDD.read(Messages.BDLinFac);
 			JSONObject lineasFactura = bdLinFac.getJSONObject(Messages.KEY_facs);
 	        
-			if (lineasFactura.has(Integer.toString(id))) {
-		        JSONObject linea = lineasFactura.getJSONObject(Integer.toString(id));
-		        
-		        if (linea.getBoolean(Messages.KEY_act)) {
-			    	linea.put(Messages.KEY_act, false);
-			    	return id;  
-		        }
+			String _id = Integer.toString(id);
+			if (lineasFactura.has(_id)) {
+		        lineasFactura.getJSONObject(_id).remove(_id);
+			    return id;
 			}
 		}
         return -1; //No se ha encontrado la linea de factura con dicho id
@@ -70,13 +60,11 @@ public class DAOLineaFacturaImp implements DAOLineaFactura {
 			JSONObject lineasFactura = bdLinFac.getJSONObject(Messages.KEY_facs);
 			
 			TLineaFactura tLfRead = null;
-			if (lineasFactura.has(Integer.toString(id))) {
-				JSONObject lf = lineasFactura.getJSONObject(Integer.toString(id));
-				
-				if (lf.getBoolean(Messages.KEY_act)) {
-					tLfRead = this.readAux(lf);
-					tLfRead.setIdFactura(id);
-				}
+			String _id = Integer.toString(id);
+			
+			if (lineasFactura.has(_id)) {
+		        tLfRead = this.readAux(lineasFactura.getJSONObject(_id));
+		        tLfRead.setIdLineaFactura(id);
 			}
 			return tLfRead;
 		}
@@ -114,21 +102,17 @@ public class DAOLineaFacturaImp implements DAOLineaFactura {
 	public int update(TLineaFactura tLineaFac) throws BBDDReadException, BBDDWriteException {
 		if (!OpsBBDD.isEmpty(Messages.BDLinFac)) {
 			JSONObject bdLinFac = OpsBBDD.read(Messages.BDLinFac);
-			JSONObject lineasFactura = bdLinFac.getJSONObject(Messages.KEY_facs);
+			JSONObject linFacs = bdLinFac.getJSONObject(Messages.KEY_facs);
 			
-			Set<String> allIdsLinFacs = lineasFactura.keySet();
-			for (String idLinFac : allIdsLinFacs) {
-	        	JSONObject linea = lineasFactura.getJSONObject(idLinFac);
-	        	
-	        	//Solo se actualiza si coincide en id y si está activa
-	            if (linea.getInt(Messages.KEY_idFac) == tLineaFac.getIdFactura() && linea.getBoolean(Messages.KEY_act)) {
-	            	lineasFactura.put(idLinFac,tLineaFac);
-	            	OpsBBDD.write(bdLinFac, Messages.BDFac);
-	                return Integer.valueOf(idLinFac);
-	            }
-	        }
+			String _id = Integer.toString(tLineaFac.getIdLineaFactura());
+			
+			if (linFacs.has(_id)) {
+				linFacs.put(_id, this.newLinFac(tLineaFac));
+        		OpsBBDD.write(bdLinFac, Messages.BDLinFac);
+        		return tLineaFac.getIdLineaFactura();
+			}
 		}
-        return -1; //No se ha actualizado la factura pasada por parámetro
+        return -1; //No se ha actualizado la linea factura pasada por parámetro
 	}
 	
 	private TLineaFactura readAux(JSONObject lf) {
@@ -137,5 +121,14 @@ public class DAOLineaFacturaImp implements DAOLineaFactura {
 				lf.getInt(Messages.KEY_idPase),
 				lf.getInt(Messages.KEY_ctdad),
 				lf.getFloat(Messages.KEY_precioVenta));
+	}
+	
+	private JSONObject newLinFac(TLineaFactura tLinFac) {
+		JSONObject res = new JSONObject();
+		res.put(Messages.KEY_idFac, tLinFac.getIdFactura());
+		res.put(Messages.KEY_idPase, tLinFac.getIdPase());
+		res.put(Messages.KEY_ctdad, tLinFac.getCantidad());
+		res.put(Messages.KEY_precioVenta, tLinFac.getPrecioVenta());
+		return res;
 	}
 }
