@@ -84,7 +84,6 @@ public class SAFacturaImp implements SAFactura {
 					carrito.put(idLineaFactura);
 					
 				}
-				//Internamente usa DAOLineaFactura y da el id de la factura a las líneas
 				//TAQUILLERO TIENE Q ACTUALIZARSE
 			}
 		}
