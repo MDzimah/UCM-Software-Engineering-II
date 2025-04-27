@@ -246,6 +246,7 @@ public abstract class FactoriaAbstractaPresentacion {
 	}
 	
 	  //PRUEBA DE LA TABLA
+	/*
     public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> {
             String[] columnNames = {
@@ -268,7 +269,6 @@ public abstract class FactoriaAbstractaPresentacion {
                 facturas.add(factura);
             }
             FactoriaAbstractaPresentacion.getInstance().createTabla("Tabla de Facturas", columnNames, facturas, true);
-
         });
     }
     //*/
