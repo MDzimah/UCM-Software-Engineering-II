@@ -74,7 +74,7 @@ public class DAOLineaFacturaImp implements DAOLineaFactura {
 	@Override
 	public Collection<TLineaFactura> readAll() throws BBDDReadException {
 		if (!OpsBBDD.isEmpty(Messages.BDLinFac)) {
-			JSONObject bdLinFac = OpsBBDD.read(Messages.BDFac);
+			JSONObject bdLinFac = OpsBBDD.read(Messages.BDLinFac);
 			
 			Collection<TLineaFactura> lfValidas = new ArrayList<>();
 			

@@ -14,7 +14,7 @@ public class TCompT_MiemCompT {
 	
 	//GETTERS
 	
-	public int getidRelacionMiemComp() { return this.idRelacionMiemComp; }
+	public int getIdRelacionMiemComp() { return this.idRelacionMiemComp; }
 	
 	public int getIdCompania() { return this.idCompania; }
 	
@@ -22,7 +22,7 @@ public class TCompT_MiemCompT {
 	
 	//SETTERS
 	
-	public void setidRelacionMiemComp(int idRela) { this.idRelacionMiemComp = idRela; }
+	public void setIdRelacionMiemComp(int idRela) { this.idRelacionMiemComp = idRela; }
 	
 	public void setIdCompania(int idComp) { this.idCompania = idComp; }
 	

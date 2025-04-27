@@ -17,9 +17,17 @@ public class DAOMiemCompTeaImp implements DAOMiemCompTea {
 
 	@Override
 	public int create(TMiemCompTea tMieCT) throws BBDDReadException, BBDDWriteException{
-		JSONObject BDMiemComp;
-		BDMiemComp = OpsBBDD.read(Messages.BDMCT);
-		JSONArray miembrosComp = new JSONArray(BDMiemComp.get(Messages.KEY_MiembCompTea));
+		JSONObject BDMiemComp = new JSONObject();
+		
+		if (OpsBBDD.isEmpty(Messages.BDMCT)) {
+			BDMiemComp.put(Messages.KEY_lastId, 0);
+			BDMiemComp.put(Messages.KEY_MiembCompTea, new JSONObject());
+		}
+		else {
+			BDMiemComp = OpsBBDD.read(Messages.BDMCT);
+		}
+		
+		JSONObject miembrosComp = BDMiemComp.getJSONObject(Messages.KEY_MiembCompTea);
 		
 		int newId = BDMiemComp.getInt(Messages.KEY_lastId) + 1;
 		BDMiemComp.put(Messages.KEY_lastId, newId);
@@ -34,7 +42,7 @@ public class DAOMiemCompTeaImp implements DAOMiemCompTea {
 		nuevoMiemComp.put(Messages.KEY_act, tMieCT.getActivo());
 		nuevoMiemComp.put(Messages.KEY_genero, tMieCT.getGenero().toString());			
 		
-		miembrosComp.put(nuevoMiemComp);
+		miembrosComp.put(Integer.toString(newId), nuevoMiemComp);
 		BDMiemComp.put(Messages.KEY_MiembCompTea, miembrosComp);
 		OpsBBDD.write(BDMiemComp, Messages.BDMCT);
 		
@@ -43,52 +51,69 @@ public class DAOMiemCompTeaImp implements DAOMiemCompTea {
 
 	@Override
 	public int delete(int id) throws BBDDReadException, BBDDWriteException {
-		JSONObject BDMiemComp = OpsBBDD.read(Messages.BDMCT);
-		JSONObject miembrosComp = BDMiemComp.getJSONObject(Messages.KEY_MiembCompTea);
-        
-		if (miembrosComp.has(Integer.toString(id))) {
-	        JSONObject elimMiemComp = miembrosComp.getJSONObject(Integer.toString(id));
-	        elimMiemComp.put(Messages.KEY_act, false);
-	        OpsBBDD.write(BDMiemComp, Messages.BDMCT);
-	        return id;
-		}
+		if (!OpsBBDD.isEmpty(Messages.BDMCT)) {
+			JSONObject BDMiemComp = OpsBBDD.read(Messages.BDMCT);
+			JSONObject miembrosComp = BDMiemComp.getJSONObject(Messages.KEY_MiembCompTea);
+			
+			if (miembrosComp.has(Integer.toString(id))) {
+		        miembrosComp.getJSONObject(Integer.toString(id)).put(Messages.KEY_act, false);
+		        OpsBBDD.write(BDMiemComp, Messages.BDMCT);
+		        return id;
+			}
+		}        
+		
         return -1;
 	}
 
 	@Override
 	public TMiemCompTea read(int id) throws BBDDReadException {
-		JSONObject miembrosComp = OpsBBDD.read(Messages.BDMCT).getJSONObject(Messages.KEY_MiembCompTea);
-		
-		TMiemCompTea tMiemComp = null;
-		if (miembrosComp.has(Integer.toString(id))) {
-			JSONObject miemComp = miembrosComp.getJSONObject(Integer.toString(id));
-			tMiemComp = createTMiemCompTea(miemComp);
-			tMiemComp.setIdMiembComp(id);
+		if (!OpsBBDD.isEmpty(Messages.BDMCT)) {
+			JSONObject miembrosComp = OpsBBDD.read(Messages.BDMCT).getJSONObject(Messages.KEY_MiembCompTea);
+			
+			TMiemCompTea tMiemComp = null;
+			String _id = Integer.toString(id);
+			if (miembrosComp.has(_id) && miembrosComp.getJSONObject(_id).getBoolean(Messages.KEY_act)) {
+				JSONObject miemComp = miembrosComp.getJSONObject(Integer.toString(id));
+				tMiemComp = createTMiemCompTea(miemComp);
+				tMiemComp.setIdMiembComp(id);
+			}
+			return tMiemComp;
 		}
-		return tMiemComp;
+		return null;
 	}
 
 	@Override
 	public Collection<TMiemCompTea> readAll() throws BBDDReadException {
-		JSONObject BDMiemComp = OpsBBDD.read(Messages.BDMCT);			
-		JSONArray miembrosComp = new JSONArray(BDMiemComp.getJSONArray(Messages.KEY_MiembCompTea));
-		Collection<TMiemCompTea> miembrosCollection = new ArrayList<>();
-		
-		for (int i = 0; i < miembrosComp.length(); i++) {
-			miembrosCollection.add(createTMiemCompTea(miembrosComp.getJSONObject(i)));
+		if (!OpsBBDD.isEmpty(Messages.BDMCT)) {
+			JSONObject BDMiemComp = OpsBBDD.read(Messages.BDMCT);			
+			JSONObject miembrosComp = BDMiemComp.getJSONObject(Messages.KEY_MiembCompTea);
+			Collection<TMiemCompTea> miembrosCollection = new ArrayList<>();
+			
+			Set<String> allIds = miembrosComp.keySet();
+			for (String id: allIds) {
+				JSONObject miemComp = miembrosComp.getJSONObject(id);
+				
+				if(miembrosComp.getBoolean(Messages.KEY_act)) {
+					TMiemCompTea tMiemComp = createTMiemCompTea(miemComp);
+					tMiemComp.setIdMiembComp(Integer.valueOf(id));
+					miembrosCollection.add(tMiemComp);
+				}
+			}
+			return miembrosCollection;
 		}
-		return miembrosCollection;
+		return null;
 	}
 
 	@Override
 	public int update(TMiemCompTea tMieCT) throws BBDDReadException, BBDDWriteException {
-		JSONObject BDMiemComp = OpsBBDD.read(Messages.BDMCT);
-		JSONObject miembrosComp = BDMiemComp.getJSONObject(Messages.KEY_MiembCompTea);
-		
-		Set<String> allIdsMiemComp = miembrosComp.keySet();
-		for (String idMiemComp : allIdsMiemComp) {
-			if (Integer.valueOf(idMiemComp) == tMieCT.getIdMiembComp()) {
-				JSONObject miemComp = miembrosComp.getJSONObject(idMiemComp);
+		if (!OpsBBDD.isEmpty(Messages.BDMCT)) {
+			JSONObject BDMiemComp = OpsBBDD.read(Messages.BDMCT);
+			JSONObject miembrosComp = BDMiemComp.getJSONObject(Messages.KEY_MiembCompTea);
+			
+			String id = Integer.toString(tMieCT.getIdMiembComp());
+			
+			if (miembrosComp.has(id) && miembrosComp.getJSONObject(id).getBoolean(Messages.KEY_act)) {
+				JSONObject miemComp = new JSONObject();
 				miemComp.put(Messages.KEY_DNI, tMieCT.getDNI());
 				miemComp.put(Messages.KEY_nombre, tMieCT.getNombre());
 				miemComp.put(Messages.KEY_apellido, tMieCT.getApellido());
@@ -97,8 +122,9 @@ public class DAOMiemCompTeaImp implements DAOMiemCompTea {
 				miemComp.put(Messages.KEY_act, tMieCT.getActivo());
 				miemComp.put(Messages.KEY_genero, tMieCT.getGenero().toString());
 				
-				OpsBBDD.write(BDMiemComp, Messages.BDFac);
-                return Integer.valueOf(idMiemComp);
+				miembrosComp.put(id, miemComp);
+				OpsBBDD.write(BDMiemComp, Messages.BDMCT);
+                return Integer.valueOf(id);
 			}
 		}
 		return -1;
@@ -106,16 +132,19 @@ public class DAOMiemCompTeaImp implements DAOMiemCompTea {
 	
 	@Override
 	public TMiemCompTea readByDNI(String dni) throws BBDDReadException {
-		JSONObject BDMiemCompTea = OpsBBDD.read(Messages.BDMCT);
-		JSONArray miembrosComp = new JSONArray(BDMiemCompTea.getJSONArray(Messages.KEY_MiembCompTea));
-		
-		for (int i = 0; i < miembrosComp.length(); i++) {
-			JSONObject miembroComp = miembrosComp.getJSONObject(i);
-			if (miembroComp.getString(Messages.KEY_DNI).equals(dni)) {
-				return createTMiemCompTea(miembroComp);
+		if (!OpsBBDD.isEmpty(Messages.BDMCT)) {
+			JSONObject BDMiemComp = OpsBBDD.read(Messages.BDMCT);
+			JSONObject miembrosComp = BDMiemComp.getJSONObject(Messages.KEY_MiembCompTea);
+			
+			Set<String> allIds = miembrosComp.keySet();
+			for (String id: allIds) {
+				JSONObject miembroComp = miembrosComp.getJSONObject(id);
+				
+				if (miembroComp.getString(Messages.KEY_DNI).equals(dni)) {
+					return createTMiemCompTea(miembroComp);
+				}
 			}
 		}
-	
 		return null;
 	}
 

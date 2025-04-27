@@ -55,7 +55,7 @@ public class Messages {
 	public static final String BDLinFac = "LineaFactura.json";
 	public static final String BDPase = "Pase.json";
 	public static final String BDTaq = "Taquillero.json";
-	
+	public static final String BDCT_MCT = "Taquillero.json";	
 	
 	//CLAVES PARA ACCEDER A LA BBDD
 	
@@ -70,6 +70,7 @@ public class Messages {
 	public static final String KEY_lastId = "lastId";
 	public static final String KEY_idObra = "IdObra"; 
 	public static final String KEY_DNI = "DNI";
+	public static final String KEY_idRelComp_Miem = "idRelacionMiemComp"; 
 	
 	//Listas en ficheros
 	public static final String KEY_facs = "facturas";
@@ -80,6 +81,7 @@ public class Messages {
 	public static final String KEY_CliVIPs = "clientes";
 	public static final String KEY_pases = "pases";
 	public static final String KEY_miembros = "miembros";
+	public static final String KEY_RelComp_Miem = "relacion miembro-compania";
 	
 	//Atributos
 	public static final String KEY_act = "activo";
