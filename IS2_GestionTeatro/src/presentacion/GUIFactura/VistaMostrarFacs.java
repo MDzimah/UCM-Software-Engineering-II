@@ -4,8 +4,9 @@ import java.util.Collection;
 
 import javax.swing.*;
 
+import exceptions.BBDDReadException;
 import misc.*;
-import misc.JSwingUtils;
+import negocio.factura.TFactura;
 import presentacion.IGUI;
 import presentacion.controlador.Controlador;
 import presentacion.factoria.FactoriaAbstractaPresentacion;
@@ -41,10 +42,13 @@ public class VistaMostrarFacs extends JFrame implements IGUI {
 			@SuppressWarnings("unchecked")
 			Collection<Object> castedData = (Collection<Object>)datos;
 			String[] nomCols = {"ID","ID CLIENTE", "ID TAQUILLERO", "FECHA", "IMPORTE"};
-			FactoriaAbstractaPresentacion.getInstance().createTabla("MOSTRAR FACTURAS", nomCols, castedData, true);
+			FactoriaAbstractaPresentacion.getInstance().createTabla("MOSTRAR FACTURAS", nomCols, castedData, false);
 		}
 		else if(evento == Evento.RES_KO) {
-			FactoriaAbstractaPresentacion.getInstance().createErrorDialogMessage(Messages.X_MOSTRAR_FACTURAS + ' ' + Messages.MOTIVO.formatted((String)datos));
+			String error;
+			if (datos instanceof BBDDReadException) error = ((BBDDReadException)datos).getMessage();
+			else error = Messages.NO_HAY_DATOS;
+			FactoriaAbstractaPresentacion.getInstance().createErrorDialogMessage(Messages.X_BUSCAR_FACTURA + ' ' + Messages.MOTIVO.formatted(error));
 		}
 	}
 

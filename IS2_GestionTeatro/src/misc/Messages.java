@@ -30,6 +30,8 @@ public class Messages {
 	public static final String ID_NO_ENCONTRADO = "El id \"%s\" no se ha encontrado.";
 	public static final String NO_HAY_DATOS = "No hay datos para mostrar.";
 	public static final String STOCK_INSUF = "Stock insuficiente.";
+	public static final String NO_EN_CARRITO = "El pase no se encuentra en el carrito.";
+
 	
 	// NOTE: seguramente lo cambie mas adelante
 	public static final String EX_OBRA_ANYADIDA_ERROR = "Ha habido un error en el registro de la obra.";

@@ -6,6 +6,7 @@ import java.util.Collection;
 
 import javax.swing.*;
 
+import exceptions.BBDDReadException;
 import misc.Constants;
 import misc.Evento;
 import misc.Messages;
@@ -42,8 +43,7 @@ public class VistaBuscarFac extends JFrame implements IGUI {
 		
 		buscar.addActionListener(e->{
 			try {
-				TFactura tFac = new TFactura(Integer.valueOf(tIdFac.getText()));
-				Controlador.getInstance().accion(Evento.BUSCAR_FACTURA, tFac);
+				Controlador.getInstance().accion(Evento.BUSCAR_FACTURA, Integer.valueOf(tIdFac.getText()));
 				dispose();
 			}
 			catch(ArithmeticException ex) {
@@ -64,11 +64,14 @@ public class VistaBuscarFac extends JFrame implements IGUI {
 			fac.add((TFactura)datos);
 			String[] nomCols = {"ID","ID CLIENTE", "ID TAQUILLERO", "FECHA", "IMPORTE", "SUBTOTAL"};
 			
-			FactoriaAbstractaPresentacion.getInstance().createTabla("BUSCA_ FACTURA", nomCols, fac, false);
+			FactoriaAbstractaPresentacion.getInstance().createTabla("BUSCAR FACTURA", nomCols, fac, true);
 		}
 		else if(evento == Evento.RES_KO) {
-			FactoriaAbstractaPresentacion.getInstance().createErrorDialogMessage(Messages.X_BUSCAR_FACTURA + ' ' + Messages.MOTIVO.formatted((String)datos));
+			String error;
+			if (datos instanceof String) error = (String)datos;
+			else if (datos instanceof BBDDReadException) error = ((BBDDReadException)datos).getMessage();
+			else error = Messages.ID_NO_ENCONTRADO.formatted(String.valueOf(((int)datos)));
+			FactoriaAbstractaPresentacion.getInstance().createErrorDialogMessage(Messages.X_BUSCAR_FACTURA + ' ' + Messages.MOTIVO.formatted(error));
 		}
 	}
-
 }

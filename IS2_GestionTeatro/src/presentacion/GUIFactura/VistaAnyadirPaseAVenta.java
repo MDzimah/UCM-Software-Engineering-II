@@ -1,0 +1,38 @@
+package presentacion.GUIFactura;
+
+import exceptions.BBDDReadException;
+import misc.Evento;
+import misc.Messages;
+import negocio.factura.TLineaFactura;
+import presentacion.factoria.FactoriaAbstractaPresentacion;
+
+@SuppressWarnings("serial")
+public class VistaAnyadirPaseAVenta extends ModificacionPaseEnVenta {
+	
+	public VistaAnyadirPaseAVenta() {
+			this.setTitle("AÑADIR PASE A VENTA");
+			
+			super.initComps();
+			
+			super.okAndCancelListener(Evento.ANYADIR_PASE_A_VENTA);
+			
+			this.setVisible(true);
+			this.setLocationRelativeTo(null);
+	}
+	
+	@Override
+	public void actualizar(Evento evento, Object datos) {
+		if (evento == Evento.RES_OK) FactoriaAbstractaPresentacion.getInstance().createDialogMessage(Messages.EX_PASE_ANYADIDO_A_VENTA);
+		else if(evento == Evento.RES_KO) { 
+			String error;
+			if (datos instanceof TLineaFactura) {
+				if (datos != null) error = Messages.ID_NO_ENCONTRADO.formatted(((TLineaFactura)datos).getIdPase());
+				else error = Messages.STOCK_INSUF; 
+			}
+			else if (datos instanceof BBDDReadException) error = ((BBDDReadException)datos).getMessage();
+			else error = (String)datos;
+			
+			FactoriaAbstractaPresentacion.getInstance().createErrorDialogMessage(Messages.X_ANYADIR_PASE_A_VENTA + ' ' + Messages.MOTIVO.formatted(error));
+		}
+	}
+}

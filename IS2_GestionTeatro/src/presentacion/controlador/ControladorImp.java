@@ -44,7 +44,7 @@ public class ControladorImp extends Controlador {
 						if (tLf.getIdPase() == newTLf.getIdPase()) {
 							if (tPase.getStock() - tLf.getCantidad() - newTLf.getCantidad() >= 0) tLf.setCantidad(tLf.getCantidad() + newTLf.getCantidad());
 							else {
-								FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_KO, Messages.STOCK_INSUF);
+								FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_KO, (TLineaFactura)null);
 								return;
 							}
 							estaba = true;
@@ -56,55 +56,17 @@ public class ControladorImp extends Controlador {
 					if (!estaba) {
 						if (tPase.getStock() - newTLf.getCantidad() >= 0) carr.add(newTLf);	
 						else {
-							FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_KO, Messages.STOCK_INSUF);
-							return;
+							FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_KO, (TLineaFactura)null);
+							break;
 						}
 					}
 					
 					FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_OK, null);
 				}
-				else FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_KO, newTLf.getIdPase());
+				else FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_KO, newTLf);
 			}
 			catch(BBDDReadException e) {
-				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_KO, e.getMessage());
-			}
-			break;
-		}
-		case BUSCAR_FACTURA: {
-			if (datos instanceof String) {
-				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_KO, (String)datos);
-				break;
-			}
-			try {
-				int idFac = (int)datos;
-				SAFactura saFac = FactoriaAbstractaNegocio.getInstance().crearSAFactura();
-				TFactura tFacBuscada = saFac.read(idFac);
-			
-				if(tFacBuscada != null)	FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_OK, tFacBuscada);
-				else FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_KO, Messages.ID_NO_ENCONTRADO.formatted(idFac));
-			}
-			catch(BBDDReadException e) {
-				 FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_KO, e.getMessage());
-			}
-			
-			break;
-		}
-		case CERRAR_VENTA: {
-			
-			//Creación de la factura, tratamiento de las 4 excepciones
-			
-			break;
-		}
-		case MOSTRAR_FACTURAS: {
-			try {
-				SAFactura saFac = FactoriaAbstractaNegocio.getInstance().crearSAFactura();
-				Collection<TFactura> allFacturas = saFac.readAll();
-				
-				if (!allFacturas.isEmpty()) FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_OK, allFacturas); 
-				else FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_KO, Messages.NO_HAY_DATOS); 
-			}
-			catch(BBDDReadException e) {
-				 FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_KO, e.getMessage());
+				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_KO, e);
 			}
 			break;
 		}
@@ -133,18 +95,57 @@ public class ControladorImp extends Controlador {
 						}
 					}
 						
-					if (estaba) {
-						FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_OK, null);
-						break;
-					}
+					if (estaba) FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_OK, null);
+					else FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_KO, (TLineaFactura)null);
+					
+					break;
 				}
-				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_KO, tLfAQuitar.getIdPase());
+				else FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_KO, tLfAQuitar);
 			}
 			catch(BBDDReadException e) {
-				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_KO, e.getMessage());
+				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_KO, e);
 			}
 			break;
 		}
+		case BUSCAR_FACTURA: {
+			if (datos instanceof String) {
+				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_KO, (String)datos);
+				break;
+			}
+			try {
+				int idFac = (int)datos;
+				SAFactura saFac = FactoriaAbstractaNegocio.getInstance().crearSAFactura();
+				TFactura tFacBuscada = saFac.read(idFac);
+			
+				if(tFacBuscada != null)	FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_OK, tFacBuscada);
+				else FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_KO, idFac);
+			}
+			catch(BBDDReadException e) {
+				 FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_KO, e);
+			}
+			
+			break;
+		}
+		case CERRAR_VENTA: {
+			
+			//Creación de la factura, tratamiento de las 4 excepciones
+			
+			break;
+		}
+		case MOSTRAR_FACTURAS: {
+			try {
+				SAFactura saFac = FactoriaAbstractaNegocio.getInstance().crearSAFactura();
+				Collection<TFactura> allFacturas = saFac.readAll();
+				
+				if (!allFacturas.isEmpty()) FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_OK, allFacturas); 
+				else FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_KO, allFacturas); 
+			}
+			catch(BBDDReadException e) {
+				 FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_KO, e);
+			}
+			break;
+		}
+		
 		
 		
 		
