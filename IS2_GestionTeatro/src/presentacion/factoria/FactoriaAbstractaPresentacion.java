@@ -31,33 +31,21 @@ public abstract class FactoriaAbstractaPresentacion {
 	}
 	
 	public abstract IGUI createVista(Evento evento);
-	
+
 	//Tabla
-    /**
-     * Creates and displays a window with a table populated with business entity data.
+   /**
+     * Creates and displays a table window populated with business entity data.
      * <p>
-     * The table supports dynamic rendering of objects such as {@code TFactura}, {@code TCliente},
-     * {@code TPase}, etc., depending on the type of objects in the {@code datos} collection.
-     * It uses a custom table model and a multiline cell renderer that formats arrays or
-     * collections by displaying each element on a new line.
-     * </p>
-     *
-     * <p>
-     * Column headers are automatically capitalized and styled. Each cell in the table adapts
-     * its height to fit the content, and lists or arrays are rendered using a vertical layout
-     * inside the cell.
-     * </p>
-     *
-     * <p>
-     * This method is designed for general-purpose viewing of business data in tabular form and
-     * automatically adapts to the structure of the data passed in.
+     * The table dynamically renders collections or arrays with a multi-line layout
+     * inside cells, automatically adjusting row heights for better readability.
+     * It supports dynamic types like {@link TFactura}, {@link TCliente},
+     * {@link TPase}, {@link TTaquillero}, {@link TObra}, {@link TCompTea}, etc.
      * </p>
      *
      * @param tituloTabla the title of the window and the table view
      * @param nomCols an array of column names (headers) to be displayed
-     * @param datos a collection of business objects to be shown in the table; supported types
-     *              include {@code TFactura}, {@code TCliente}, {@code TPase}, {@code TTaquillero},
-     *              {@code TObra}, {@code TCompTea}, and others
+     * @param datos a collection of business objects to be shown in the table
+     * @param consultar if {@code true}, the table will open in a compact size suitable for consulting
      */
 	public void createTabla(String tituloTabla, String[] nomCols, Collection<Object> datos, boolean consultar) {
 		new TablaDefault(tituloTabla, nomCols, datos, consultar).setVisible(true);
