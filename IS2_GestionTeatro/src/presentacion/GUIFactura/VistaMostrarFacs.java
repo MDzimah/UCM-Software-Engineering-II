@@ -41,7 +41,7 @@ public class VistaMostrarFacs extends JFrame implements IGUI {
 			@SuppressWarnings("unchecked")
 			Collection<Object> castedData = (Collection<Object>)datos;
 			String[] nomCols = {"ID","ID CLIENTE", "ID TAQUILLERO", "FECHA", "IMPORTE"};
-			FactoriaAbstractaPresentacion.getInstance().createTabla("MOSTRAR FACTURAS", nomCols, castedData);
+			FactoriaAbstractaPresentacion.getInstance().createTabla("MOSTRAR FACTURAS", nomCols, castedData, true);
 		}
 		else if(evento == Evento.RES_KO) {
 			FactoriaAbstractaPresentacion.getInstance().createErrorDialogMessage(Messages.X_MOSTRAR_FACTURAS + ' ' + Messages.MOTIVO.formatted((String)datos));

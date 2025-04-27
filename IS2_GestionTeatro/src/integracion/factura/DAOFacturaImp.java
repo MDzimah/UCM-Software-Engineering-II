@@ -1,6 +1,7 @@
 package integracion.factura;
 
 import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
 import java.util.*;
 
 import org.json.JSONObject;
@@ -130,7 +131,7 @@ public class DAOFacturaImp implements DAOFactura {
 		res.put(Messages.KEY_act, tFactura.getActivo());
 		res.put(Messages.KEY_idCli, tFactura.getIdCliente());
 		res.put(Messages.KEY_idTaq, tFactura.getIdTaquillero());
-		res.put(Messages.KEY_fecha, tFactura.getFecha().toString());
+		res.put(Messages.KEY_fecha, tFactura.getFecha().truncatedTo(ChronoUnit.SECONDS).toString());
 		res.put(Messages.KEY_importe, tFactura.getImporte());
 		res.put(Messages.KEY_subtotal, tFactura.getSubtotal());
 		return res;
