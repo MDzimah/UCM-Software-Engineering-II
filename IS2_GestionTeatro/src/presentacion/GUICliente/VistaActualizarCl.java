@@ -1,4 +1,4 @@
-package presentacion.GUIcliente;
+package presentacion.GUICliente;
 
 import javax.swing.JFrame;
 
@@ -6,7 +6,7 @@ import misc.Evento;
 import presentacion.IGUI;
 
 @SuppressWarnings("serial")
-public class VistaAnyadirCl extends JFrame implements IGUI {
+public class VistaActualizarCl extends JFrame implements IGUI {
 
 	@Override
 	public void actualizar(Evento evento, Object datos) {

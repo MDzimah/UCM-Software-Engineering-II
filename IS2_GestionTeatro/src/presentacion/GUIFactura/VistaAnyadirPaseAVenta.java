@@ -3,7 +3,6 @@ package presentacion.GUIFactura;
 import exceptions.BBDDReadException;
 import misc.Evento;
 import misc.Messages;
-import negocio.factura.TLineaFactura;
 import presentacion.factoria.FactoriaAbstractaPresentacion;
 
 @SuppressWarnings("serial")
@@ -25,12 +24,12 @@ public class VistaAnyadirPaseAVenta extends ModificacionPaseEnVenta {
 		if (evento == Evento.RES_OK) FactoriaAbstractaPresentacion.getInstance().createDialogMessage(Messages.EX_PASE_ANYADIDO_A_VENTA);
 		else if(evento == Evento.RES_KO) { 
 			String error;
-			if (datos instanceof TLineaFactura) {
-				if (datos != null) error = Messages.ID_NO_ENCONTRADO.formatted(((TLineaFactura)datos).getIdPase());
+			if (datos instanceof String) error = (String)datos; //Campos incorrectos
+			else if (datos instanceof BBDDReadException) error = ((BBDDReadException)datos).getMessage();
+			else {
+				if (datos != null) error = Messages.ID_NO_ENCONTRADO.formatted((int)datos);
 				else error = Messages.STOCK_INSUF; 
 			}
-			else if (datos instanceof BBDDReadException) error = ((BBDDReadException)datos).getMessage();
-			else error = (String)datos;
 			
 			FactoriaAbstractaPresentacion.getInstance().createErrorDialogMessage(Messages.X_ANYADIR_PASE_A_VENTA + ' ' + Messages.MOTIVO.formatted(error));
 		}

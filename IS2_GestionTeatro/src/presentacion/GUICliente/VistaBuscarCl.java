@@ -1,4 +1,4 @@
-package presentacion.GUIcliente;
+package presentacion.GUICliente;
 
 import javax.swing.JFrame;
 

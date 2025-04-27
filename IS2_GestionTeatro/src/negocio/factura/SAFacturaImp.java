@@ -14,6 +14,7 @@ import integracion.factura.DAOFactura;
 import integracion.factura.DAOLineaFactura;
 import integracion.pase.DAOPase;
 import integracion.taquillero.DAOTaquillero;
+import misc.Evento;
 import misc.Messages;
 import negocio.cliente.SACliente;
 import negocio.cliente.TCliente;
@@ -21,11 +22,12 @@ import negocio.factoria.FactoriaAbstractaNegocio;
 import negocio.pase.SAPase;
 import negocio.pase.TPase;
 import negocio.taquillero.TTaquillero;
+import presentacion.GUIFactura.VistaVentaEnCurso;
+import presentacion.factoria.FactoriaAbstractaPresentacion;
 
 public class SAFacturaImp implements SAFactura {
 	
-	@Override
-	public int create(TDatosVenta tDv) throws UnknownClienteException, UnknownTaquilleroException, BBDDReadException, BBDDWriteException  {
+	public int crearFactura(TDatosVenta tDv) throws UnknownClienteException, UnknownTaquilleroException, BBDDReadException, BBDDWriteException  {
 		int idFacNueva = -1;
 		
 		Collection<TLineaFactura> carritoFinal = new ArrayList<TLineaFactura>();
@@ -92,27 +94,87 @@ public class SAFacturaImp implements SAFactura {
 	}
 
 	@Override
-	public TFactura read(int id) throws BBDDReadException {
+	public int anyadirPaseAVenta(TLineaFactura newTLf, Collection<TLineaFactura> carrito) throws BBDDReadException {
+		SAPase saP = FactoriaAbstractaNegocio.getInstance().crearSAPase();
+		
+		TPase tPase = saP.read(newTLf.getIdPase());
+		
+		boolean estaba = false;
+		
+		if (tPase != null) {
+			Collection<TLineaFactura> carr = VistaVentaEnCurso.getCarrito();
+			
+			//Recorremos el carrito para ver si ya hay una instancia de la línea factura
+			//Si sí, entonces sumamos a la cantidad que ya había (asegurando que queda stock)
+			for(TLineaFactura tLf : carr) {
+				if (tLf.getIdPase() == newTLf.getIdPase()) {
+					if (tPase.getStock() - tLf.getCantidad() - newTLf.getCantidad() >= 0) tLf.setCantidad(tLf.getCantidad() + newTLf.getCantidad());
+					else return -1;
+					estaba = true;
+					break;
+				}
+			}
+			
+			//No hay instancia previa de newTLf en el carrito
+			if (!estaba) {
+				if (tPase.getStock() - newTLf.getCantidad() >= 0) carrito.add(newTLf);	
+				else return -1;
+			}
+			
+			return 1;
+		}
+		else return 0;
+	}
+	
+	@Override
+	public int quitarPaseDeVenta(TLineaFactura tLfAQuitar, Collection<TLineaFactura> carrito) throws BBDDReadException {
+		SAPase saP = FactoriaAbstractaNegocio.getInstance().crearSAPase();
+		
+		TPase tPase = saP.read(tLfAQuitar.getIdPase());
+		
+		if (tPase != null) {
+			ArrayList<TLineaFactura> carr = (ArrayList<TLineaFactura>) VistaVentaEnCurso.getCarrito();
+			
+			boolean estaba = false;
+			for(int i = 0; i < carr.size(); ++i) {
+				TLineaFactura tLf = carr.get(i);
+				if (tLf.getIdPase() == tLfAQuitar.getIdPase()) {
+					tLf.setCantidad(tLf.getCantidad() - tLfAQuitar.getCantidad());
+					if (carr.get(i).getCantidad() <= 0) carr.remove(i);
+					estaba = true;
+					break;
+				}
+			}
+				
+			if (estaba) return 1;
+			else return -1;
+		}
+		else return 0;
+	}
+	
+	@Override
+	public TFactura buscarFactura(int id) throws BBDDReadException {
 		DAOFactura daoFac = FactoriaAbstractaIntegracion.getInstance().crearDAOFactura();
 		return daoFac.read(id);
 	}
 
 	@Override
-	public int update(TFactura tFac) throws BBDDReadException, BBDDWriteException {
-		DAOFactura daoFac = FactoriaAbstractaIntegracion.getInstance().crearDAOFactura();
-		return daoFac.update(tFac);
-	}
-
-	@Override
-	public int delete(int id) throws BBDDReadException, BBDDWriteException {
-		DAOFactura daoFac = FactoriaAbstractaIntegracion.getInstance().crearDAOFactura();
-		return daoFac.delete(id);
-	}
-
-	@Override
-	public Collection<TFactura> readAll() throws BBDDReadException {
+	public Collection<TFactura> facturasActivas() throws BBDDReadException {
 		DAOFactura daoFac = FactoriaAbstractaIntegracion.getInstance().crearDAOFactura();
 		return daoFac.readAll();
 	}
 
+	@Override
+	public Collection<TFactura> facturasPorCliente(int idCliente) throws BBDDReadException {
+		DAOFactura daoFac = FactoriaAbstractaIntegracion.getInstance().crearDAOFactura();
+		ArrayList<TFactura> allFacs = (ArrayList<TFactura>)daoFac.readAll();
+
+		ArrayList<TFactura> facsPorCli = new ArrayList<TFactura>();
+		
+		for (TFactura tFac : allFacs) {
+			if (tFac.getIdCliente() == idCliente) facsPorCli.add(tFac);
+		}
+		
+		return facsPorCli;
+	}
 }

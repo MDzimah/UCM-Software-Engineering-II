@@ -6,7 +6,6 @@ import javax.swing.*;
 
 import exceptions.BBDDReadException;
 import misc.*;
-import negocio.factura.TFactura;
 import presentacion.IGUI;
 import presentacion.controlador.Controlador;
 import presentacion.factoria.FactoriaAbstractaPresentacion;
