@@ -5,6 +5,8 @@ import java.util.Collection;
 import javax.swing.JOptionPane;
 import presentacion.IGUI;
 import java.awt.*;
+import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
 import java.util.*;
 import java.util.List;
 
@@ -57,8 +59,8 @@ public abstract class FactoriaAbstractaPresentacion {
      *              include {@code TFactura}, {@code TCliente}, {@code TPase}, {@code TTaquillero},
      *              {@code TObra}, {@code TCompTea}, and others
      */
-	public void createTabla(String tituloTabla, String[] nomCols, Collection<Object> datos) {
-		new TablaDefault(tituloTabla, nomCols, datos).setVisible(true);
+	public void createTabla(String tituloTabla, String[] nomCols, Collection<Object> datos, boolean consultar) {
+		new TablaDefault(tituloTabla, nomCols, datos, consultar).setVisible(true);
 	}
 	
 	//Diálogos
@@ -163,8 +165,8 @@ public abstract class FactoriaAbstractaPresentacion {
 	    				fila[1] = tFac.getIdCliente();
 	    				fila[2] = tFac.getIdTaquillero();
 	    				fila[3] = tFac.getFecha();
-	    				fila[5] = tFac.getImporte();
-	    				fila[6] = tFac.getSubtotal();
+	    				fila[4] = tFac.getImporte();
+	    				fila[5] = tFac.getSubtotal();
 	    				
 	    				matInfo.add(fila);
 	    			}
@@ -219,12 +221,20 @@ public abstract class FactoriaAbstractaPresentacion {
 	        }
 	    }
 
-		public TablaDefault(String nombreTabla,  String[] columnNames, Collection<Object> data) {
+		public TablaDefault(String nombreTabla,  String[] columnNames, Collection<Object> data, boolean consultar) {
 	        this.setTitle(nombreTabla);
 	        this.setLayout(new BorderLayout());
+	        
 	        Dimension sd = Constants.screenDimension();
-	        int width = sd.width - sd.width / 10;
-	        int height = sd.height - sd.height / 12;
+	        int width, height;
+	        if (consultar) {
+	        	width = sd.width/2;
+	        	height = sd.height/10;
+	        }
+	        else {	     
+		        width = sd.width - sd.width / 10;
+		        height = sd.height - sd.height / 12;   
+	        }
 	        this.setSize(new Dimension(width, height));
 	        
 	        for (int i = 0; i < columnNames.length; ++i) {
@@ -245,44 +255,35 @@ public abstract class FactoriaAbstractaPresentacion {
 	        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	        this.setVisible(true);
 	    }
-	    
-	    
-	    /* PRUEBA DE LA TABLA
-	    public static void main(String[] args) {
-	        SwingUtilities.invokeLater(() -> {
-	            String[] columnNames = {
-	                "ID Factura", "ID Cliente", "ID Taquillero", "Fecha", "Carrito", "Importe"
-	            };
-
-	            Collection<Object> facturas = new ArrayList<>();
-
-	            for (int i = 1; i <= 3; i++) {
-	                Collection<TLineaFactura> carrito = new ArrayList<>();
-	                carrito.add(new TLineaFactura(100 + i, 2));
-	                carrito.add(new TLineaFactura(200 + i, 1));
-	                carrito.add(new TLineaFactura(300 + i, 20));
-	                for (TLineaFactura lf : carrito) {
-	                    lf.setPrecioVenta(9.99f + i);
-	                }
-
-	                TFactura factura = new TFactura(
-	                        1000 + i, 2000 + i, true,
-	                        LocalDateTime.now().minusDays(i),
-	                        carrito,
-	                        50.0f + i,
-	                        60.0f + i
-	                );
-	                factura.setIdFactura(i);
-	                factura.setIdTaquillero(3000 + i);
-
-	                facturas.add(factura);
-	            }
-
-	            new TablaDefault(columnNames, facturas, "Tabla de Facturas").setVisible(true);
-	        });
-	    }
-	    */
 	}
+	
+	  //PRUEBA DE LA TABLA
+    public static void main(String[] args) {
+        SwingUtilities.invokeLater(() -> {
+            String[] columnNames = {
+                "ID Factura", "ID Cliente", "ID Taquillero", "Fecha", "Importe", "Subtotal"
+            };
+
+            Collection<Object> facturas = new ArrayList<>();
+
+            for (int i = 1; i <= 1; i++) {
+
+                TFactura factura = new TFactura(
+                        1000 + i, 2000 + i, true,
+                        LocalDateTime.now().minusDays(i).truncatedTo(ChronoUnit.SECONDS),
+                        50.0f + i,
+                        60.0f + i
+                );
+                factura.setIdFactura(i);
+                factura.setIdTaquillero(3000 + i);
+
+                facturas.add(factura);
+            }
+            FactoriaAbstractaPresentacion.getInstance().createTabla("Tabla de Facturas", columnNames, facturas, true);
+
+        });
+    }
+    //*/
 }
 
 
