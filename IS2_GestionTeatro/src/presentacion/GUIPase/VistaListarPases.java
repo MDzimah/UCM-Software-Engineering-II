@@ -9,6 +9,7 @@ import misc.Constants;
 import misc.Evento;
 import misc.JSwingUtils;
 import misc.Messages;
+import negocio.pase.TPase;
 import presentacion.IGUI;
 import presentacion.VistaDefault;
 import presentacion.controlador.Controlador;
@@ -41,7 +42,7 @@ public class VistaListarPases extends VistaDefault implements IGUI{
 		if (evento == Evento.RES_OK) {
 			Collection<Object> pases = (Collection<Object>)datos;
 			String[] head = {"ID","ID COMPANYA TEATRAL", "ID OBRA", "FECHA", "STOCK", "PRECIO"};
-			FactoriaAbstractaPresentacion.getInstance().createTabla("MOSTRAR PASES", head, pases);
+			FactoriaAbstractaPresentacion.getInstance().createTabla("MOSTRAR PASES", head, pases, false);
 		}
 		else if(evento == Evento.RES_KO) {
 			FactoriaAbstractaPresentacion.getInstance().createErrorDialogMessage(Messages.X_MOSTRAR_PASES + ' ' + Messages.MOTIVO.formatted((String)datos));

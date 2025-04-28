@@ -59,7 +59,7 @@ public class VistaBuscarPase extends VistaDefault {
 			p.add((TFactura)datos);
 			String[] nomCols = {"ID","ID COMPANYA", "ID OBRA", "FECHA", "STOCK", "PRECIO"};
 			//FactoriaAbstractaPresentacion.getInstance().createDialogMessage(Messages.EX_PASE_BUSCADO);
-			FactoriaAbstractaPresentacion.getInstance().createTabla("BUSCAR PASE", nomCols, p, false); //se crea una tabla con una sola linea que contiene
+			FactoriaAbstractaPresentacion.getInstance().createTabla("BUSCAR PASE", nomCols, p, true); //se crea una tabla con una sola linea que contiene
 																									   //la info del transfer del pase buscado
 		}
 		else if(evento==Evento.RES_KO) {

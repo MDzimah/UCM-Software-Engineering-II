@@ -119,7 +119,7 @@ public class ControladorImp extends Controlador {
 				saPase.create((TPase) datos);
 				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_OK, null);
 			} catch(Exception e) {
-				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_KO, e.getMessage());
+				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_KO, e);
 			}
 		}
 		case ELIMINAR_PASE: {
@@ -129,7 +129,7 @@ public class ControladorImp extends Controlador {
 				saPase.delete(idBuscado);
 				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_OK, null);
 			} catch(Exception e) {
-				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_KO, e.getMessage());
+				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_KO, e);
 			}
 		}
 		case CONSULTAR_PASE: 
@@ -140,17 +140,16 @@ public class ControladorImp extends Controlador {
 				TPase tPaseBuscado = saPase.read(idBuscado);
 				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_OK, tPaseBuscado); //le paso el transfer para que lo muestre
 			} catch(Exception e) {
-				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_KO, e.getMessage());
+				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_KO, e);
 			}
 		}
 		case LISTAR_PASES:{
 			try {
 				SAPase saPase = FactoriaAbstractaNegocio.getInstance().crearSAPase();
-				int idBuscado = ((TPase) datos).getIdPase();
-				TPase tPaseBuscado = saPase.read(idBuscado);
-				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_OK, null); //le paso el transfer para que lo muestre
+				Collection<TPase> pases = saPase.readAll();
+				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_OK, pases); //le paso el transfer para que lo muestre
 			} catch(Exception e) {
-				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_KO, e.getMessage());
+				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_KO, e);
 			}
 		}
 		
