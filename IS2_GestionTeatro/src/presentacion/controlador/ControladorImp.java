@@ -8,6 +8,8 @@ import misc.Evento;
 import negocio.factoria.FactoriaAbstractaNegocio;
 import negocio.factura.*;
 import negocio.obra.*;
+import negocio.pase.SAPase;
+import negocio.pase.TPase;
 import presentacion.GUIFactura.VistaVentaEnCurso;
 import presentacion.factoria.FactoriaAbstractaPresentacion;
 
@@ -111,11 +113,46 @@ public class ControladorImp extends Controlador {
 			
 		//Pase
 		
-		case CREAR_PASE: 
-		case ELIMINAR_PASE: 
+		case CREAR_PASE: {
+			try {
+				SAPase saPase = FactoriaAbstractaNegocio.getInstance().crearSAPase();
+				saPase.create((TPase) datos);
+				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_OK, null);
+			} catch(Exception e) {
+				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_KO, e.getMessage());
+			}
+		}
+		case ELIMINAR_PASE: {
+			try {
+				SAPase saPase = FactoriaAbstractaNegocio.getInstance().crearSAPase();
+				int idBuscado = ((TPase) datos).getIdPase();
+				saPase.delete(idBuscado);
+				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_OK, null);
+			} catch(Exception e) {
+				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_KO, e.getMessage());
+			}
+		}
 		case CONSULTAR_PASE: 
-		case BUSCAR_PASE: 
-		case LISTAR_PASES: 
+		case BUSCAR_PASE: {
+			try {
+				SAPase saPase = FactoriaAbstractaNegocio.getInstance().crearSAPase();
+				int idBuscado = ((TPase) datos).getIdPase();
+				TPase tPaseBuscado = saPase.read(idBuscado);
+				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_OK, tPaseBuscado); //le paso el transfer para que lo muestre
+			} catch(Exception e) {
+				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_KO, e.getMessage());
+			}
+		}
+		case LISTAR_PASES:{
+			try {
+				SAPase saPase = FactoriaAbstractaNegocio.getInstance().crearSAPase();
+				int idBuscado = ((TPase) datos).getIdPase();
+				TPase tPaseBuscado = saPase.read(idBuscado);
+				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_OK, null); //le paso el transfer para que lo muestre
+			} catch(Exception e) {
+				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_KO, e.getMessage());
+			}
+		}
 		
 		//Obra
 		case CREAR_OBRA:{

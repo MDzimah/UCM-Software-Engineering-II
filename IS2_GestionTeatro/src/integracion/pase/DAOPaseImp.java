@@ -83,7 +83,7 @@ public class DAOPaseImp implements DAOPase {
 	@Override
 	public int update(TPase tPase) throws BBDDReadException, BBDDWriteException {
 		JSONObject bdPase = OpsBBDD.read("BDPase.json");
-		if(bdPase.has(String.valueOf(tPase.getIdObra())) && bdPase.getBoolean(null)) {
+		if(bdPase.has(String.valueOf(tPase.getIdPase())) && bdPase.getBoolean(null)) {
 			
 			JSONObject nuevoPase = new JSONObject();
 			nuevoPase.put(Messages.KEY_idPase, tPase.getIdPase());
