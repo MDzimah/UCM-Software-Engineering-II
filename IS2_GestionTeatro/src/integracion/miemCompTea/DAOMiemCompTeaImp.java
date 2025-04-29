@@ -93,7 +93,7 @@ public class DAOMiemCompTeaImp implements DAOMiemCompTea {
 			for (String id: allIds) {
 				JSONObject miemComp = miembrosComp.getJSONObject(id);
 				
-				if(miembrosComp.getBoolean(Messages.KEY_act)) {
+				if(miemComp.getBoolean(Messages.KEY_act)) {
 					TMiemCompTea tMiemComp = createTMiemCompTea(miemComp);
 					tMiemComp.setIdMiembComp(Integer.valueOf(id));
 					miembrosCollection.add(tMiemComp);
@@ -114,6 +114,7 @@ public class DAOMiemCompTeaImp implements DAOMiemCompTea {
 			
 			if (miembrosComp.has(id) && miembrosComp.getJSONObject(id).getBoolean(Messages.KEY_act)) {
 				JSONObject miemComp = new JSONObject();
+				miemComp.put(Messages.KEY_idMiemComp, tMieCT.getIdMiembComp());
 				miemComp.put(Messages.KEY_DNI, tMieCT.getDNI());
 				miemComp.put(Messages.KEY_nombre, tMieCT.getNombre());
 				miemComp.put(Messages.KEY_apellido, tMieCT.getApellido());
@@ -140,7 +141,7 @@ public class DAOMiemCompTeaImp implements DAOMiemCompTea {
 			for (String id: allIds) {
 				JSONObject miembroComp = miembrosComp.getJSONObject(id);
 				
-				if (miembroComp.getString(Messages.KEY_DNI).equals(dni)) {
+				if (miembroComp.getString(Messages.KEY_DNI).equals(dni) && miembroComp.getBoolean(Messages.KEY_act)) {
 					return createTMiemCompTea(miembroComp);
 				}
 			}

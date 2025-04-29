@@ -233,7 +233,7 @@ public class ControladorImp extends Controlador {
 		case BUSCAR_MIEMBRO_COMPANIA:
 		case CONTRATAR_MIEMBRO_COMPANIA:
 		case DESPEDIR_MIEMBRO_COMPANIA:
-		case LISTAR_MIEMBRO_COMPANIA:
+		case LISTAR_MIEMBROS_COMPANIA:
 		
 		//Todas las ventanas que abren a otras (las que no sean de CU)
 		default: 
