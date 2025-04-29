@@ -25,14 +25,14 @@ public class DAOLineaFacturaImp implements DAOLineaFactura {
 		}
 		else bdLinFac = OpsBBDD.read(Messages.BDLinFac);
 		
-		JSONObject lineasFactura = bdLinFac.getJSONObject(Messages.KEY_LineasFac);
+		JSONObject linFacs = bdLinFac.getJSONObject(Messages.KEY_LineasFac);
 		
 		//Aumentamos el último índice de la bd
 		int newId = bdLinFac.getInt(Messages.KEY_lastId) + 1;
 		bdLinFac.put(Messages.KEY_lastId, newId);
 		
 		//Insertamos nueva linea en la bd de LinFacturas, su clave es su id
-		lineasFactura.put(Integer.toString(newId), this.newLinFac(tLineaFactura));
+		linFacs.put(Integer.toString(newId), this.newLinFac(tLineaFactura));
 		OpsBBDD.write(bdLinFac, Messages.BDLinFac);
 		
 		return newId;
@@ -46,7 +46,8 @@ public class DAOLineaFacturaImp implements DAOLineaFactura {
 	        
 			String _id = Integer.toString(id);
 			if (lineasFactura.has(_id)) {
-		        lineasFactura.getJSONObject(_id).remove(_id);
+		        lineasFactura.remove(_id);
+		        OpsBBDD.write(bdLinFac, Messages.BDLinFac);
 			    return id;
 			}
 		}
