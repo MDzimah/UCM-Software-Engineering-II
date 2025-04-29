@@ -9,6 +9,12 @@ public class Messages {
 	public static final String EX_PASE_BUSCADO = "Se ha encontrado el pase de forma exitosa.";
 	public static final String EX_PASE_ELIMINADO = "Se ha eliminado el pase de forma exitosa.";
 	
+	public static final String EX_MIEMBRO_CONTRATADO = "El nuevo miembro ha sido contratado exitosamente.";
+	public static final String EX_MIEMBRO_ENCONTRADO = "Se ha encontrado el miembro de forma exitosa.";
+	public static final String EX_MIEMBRO_ACTUALIZADO = "Se ha actualizado el miembro de forma exitosa.";
+	public static final String EX_MIEMBRO_DESPEDIDO = "El miembro ha sido despedido exitosamente.";
+	public static final String EX_MIEMBROS_LISTADOS = "Se han listados los miembros de forma exitosa.";
+	
 	// NOTE: seguramente lo cambie mas adelante
 	public static final String EX_OBRA_ANYADIDA_CORRECT = "La obra ha sido registrada correctamente.";
 	public static final String EX_OBRA_BORRADA_CORRECT = "La obra ha sido borrada correctamente.";
@@ -24,6 +30,12 @@ public class Messages {
 	public static final String X_PASE_CREADO = "No se ha podido crear el pase.";
 	public static final String X_PASE_BUSCADO = "No se ha podido encontrar el pase solicitado.";
 	public static final String X_PASE_ELIMINADO = "No se ha podido eliminar el pase solicitado.";
+	
+	public static final String X_MIEMBRO_CONTRATADO = "No se ha podido contratar al nuevo miembro exitosamente.";
+	public static final String X_MIEMBRO_ENCONTRADO = "No se ha podido encontrar el miembro solicitado.";
+	public static final String X_MIEMBRO_ACTUALIZADO = "No se ha podido actualizar el miembro solicitado.";
+	public static final String X_MIEMBRO_DESPEDIDO = "No se ha podido despedir al miembro solicitado.";
+	public static final String X_MIEMBROS_LISTADOS = "No se ha podido listar a los miembros.";
 	
 	//Motivos por ops canceladas
 	public static final String MOTIVO = "Motivo: \"%s\".";

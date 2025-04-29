@@ -39,5 +39,11 @@ public class SAMiemCompTeaImp implements SAMiemCompTea {
 		DAOMiemCompTea daoMiem = FactoriaAbstractaIntegracion.getInstance().crearDAOMiemCompTea();
 		return daoMiem.readAll();
 	}
+	
+	@Override
+	public TMiemCompTea readByDNI(String dni) throws BBDDReadException{
+		DAOMiemCompTea daoMiem = FactoriaAbstractaIntegracion.getInstance().crearDAOMiemCompTea();
+		return daoMiem.readByDNI(dni);
+	}
 
 }
