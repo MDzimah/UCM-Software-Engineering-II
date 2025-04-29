@@ -3,6 +3,8 @@ package integracion.pase;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Set;
 
 import org.json.JSONArray;
@@ -112,15 +114,18 @@ public class DAOPaseImp implements DAOPase {
 		}
 
 	@Override
-	public boolean readPorObra(int idObra) throws BBDDReadException {
-		JSONObject bdPase = OpsBBDD.read(Messages.BDPase);
-		JSONObject pases = new JSONObject(bdPase.getJSONArray(Messages.KEY_pases));
-		Set<String> idSetPases = pases.keySet();
-		for (String idPase : idSetPases) {
-			TPase tPase = read(Integer.valueOf(idPase));
-			if (tPase.getIdObra() == idObra) return true;
+	public void deletePorObra(int idObra) throws BBDDReadException, BBDDWriteException {
+		JSONObject bdPases = OpsBBDD.read(Messages.BDPase);
+		List<String> clavesEliminar = new LinkedList<>();
+		for (String idPase : bdPases.keySet()) {
+			JSONObject pase = bdPases.getJSONObject(idPase);
+			int idObraPase = pase.getInt(Messages.KEY_idObra);
+			if (idObra == idObraPase) clavesEliminar.add(idPase);
 		}
-		return false;
+		for (String key: clavesEliminar) {
+			bdPases.remove(key);
+		}
+		OpsBBDD.write(bdPases, Messages.BDPase);
 	}
 	
 }

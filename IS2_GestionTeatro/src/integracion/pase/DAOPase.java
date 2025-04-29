@@ -12,5 +12,5 @@ public interface DAOPase {
 	public TPase read(int id) throws BBDDReadException;
 	public Collection<TPase> readAll() throws BBDDReadException;
 	public int update(TPase tPase) throws BBDDReadException, BBDDWriteException;
-	public boolean readPorObra(int idObra) throws BBDDReadException;
+	public void deletePorObra(int idObra) throws BBDDReadException, BBDDWriteException;
 }

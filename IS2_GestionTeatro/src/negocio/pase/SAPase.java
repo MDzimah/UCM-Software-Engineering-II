@@ -17,5 +17,5 @@ public interface SAPase {
 	public int comprar(int idPase, int cantidad) throws BBDDReadException, BBDDWriteException;  //Devuelve el stock comprado del pase con idPase. 
 												   												//Si cantidad > stock, entonces da todo lo que tenga (lo dijo Vicky)
 																								//Además, actualiza en la BD el pase con dicho id
-	public boolean existePaseConObra(int idObra) throws BBDDReadException; //Devuelve si existe algun pase con el id de la obra pasada por parametro
+	public void deletePorObra(int idObra) throws BBDDReadException, BBDDWriteException; //Devuelve si existe algun pase con el id de la obra pasada por parametro
 }

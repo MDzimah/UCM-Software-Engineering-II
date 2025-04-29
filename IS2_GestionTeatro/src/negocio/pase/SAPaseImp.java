@@ -78,8 +78,8 @@ public class SAPaseImp implements SAPase {
 	}
 
 	@Override
-	public boolean existePaseConObra(int idObra) throws BBDDReadException {
+	public void deletePorObra(int idObra) throws BBDDReadException, BBDDWriteException {
 		DAOPase daoPas = FactoriaAbstractaIntegracion.getInstance().crearDAOPase();
-		return daoPas.readPorObra(idObra);
+		daoPas.deletePorObra(idObra);
 	}
 }
