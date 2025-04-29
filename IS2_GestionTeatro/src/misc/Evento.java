@@ -27,6 +27,7 @@ public enum Evento {
 	CONSULTAR_PASE,
 	BUSCAR_PASE,
 	LISTAR_PASES,
+	ACTUALIZAR_PASE,
 	
 	//Taquillero
 	

@@ -114,6 +114,10 @@ public class ControladorImp extends Controlador {
 		//Pase
 		
 		case CREAR_PASE: {
+			if (datos instanceof String) {
+				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_KO, (String)datos);
+				break;
+			}
 			try {
 				SAPase saPase = FactoriaAbstractaNegocio.getInstance().crearSAPase();
 				saPase.create((TPase) datos);
@@ -123,6 +127,10 @@ public class ControladorImp extends Controlador {
 			}
 		}
 		case ELIMINAR_PASE: {
+			if (datos instanceof String) {
+				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_KO, (String)datos);
+				break;
+			}
 			try {
 				SAPase saPase = FactoriaAbstractaNegocio.getInstance().crearSAPase();
 				int idBuscado = ((TPase) datos).getIdPase();
@@ -134,6 +142,10 @@ public class ControladorImp extends Controlador {
 		}
 		case CONSULTAR_PASE: 
 		case BUSCAR_PASE: {
+			if (datos instanceof String) {
+				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_KO, (String)datos);
+				break;
+			}
 			try {
 				SAPase saPase = FactoriaAbstractaNegocio.getInstance().crearSAPase();
 				int idBuscado = ((TPase) datos).getIdPase();
@@ -144,6 +156,10 @@ public class ControladorImp extends Controlador {
 			}
 		}
 		case LISTAR_PASES:{
+			if (datos instanceof String) {
+				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_KO, (String)datos);
+				break;
+			}
 			try {
 				SAPase saPase = FactoriaAbstractaNegocio.getInstance().crearSAPase();
 				Collection<TPase> pases = saPase.readAll();
@@ -152,6 +168,7 @@ public class ControladorImp extends Controlador {
 				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_KO, e);
 			}
 		}
+		case ACTUALIZAR_PASE:
 		
 		//Obra
 		case CREAR_OBRA:{
