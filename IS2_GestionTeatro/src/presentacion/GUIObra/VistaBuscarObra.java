@@ -66,7 +66,7 @@ public class VistaBuscarObra extends VistaDefault implements IGUI{
 		public void actualizar(misc.Evento evento, Object datos) {
 			if(evento==Evento.RES_OK) {
 				String[] nomCols = {"ID","TITULO", "AUTOR", "GENERO", "SINOPSIS"};
-				FactoriaAbstractaPresentacion.getInstance().createTabla("CONSULTAR OBRA", nomCols, (Collection<Object>)datos);			
+				FactoriaAbstractaPresentacion.getInstance().createTabla("CONSULTAR OBRA", nomCols, (Collection<Object>)datos, true);			
 			}
 			else if(evento==Evento.RES_KO) {
 				FactoriaAbstractaPresentacion.getInstance().createErrorDialogMessage("No se han encontrado obras.\n" +(String)datos);

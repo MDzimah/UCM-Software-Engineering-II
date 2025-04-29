@@ -58,7 +58,7 @@ public class VistaConsultarObra extends VistaDefault implements IGUI{
 			String[] nomCols = {"ID","TITULO", "AUTOR", "GENERO", "SINOPSIS"};
 			Collection<Object> obra= new LinkedList<Object>();
 			obra.add(datos);
-			FactoriaAbstractaPresentacion.getInstance().createTabla("CONSULTAR OBRA", nomCols, obra);			
+			FactoriaAbstractaPresentacion.getInstance().createTabla("CONSULTAR OBRA", nomCols, obra, true);			
 		}
 		else if(evento==Evento.RES_KO) {
 			FactoriaAbstractaPresentacion.getInstance().createErrorDialogMessage("No se ha podido acceder a la obra.\n" +(String)datos);

@@ -11,7 +11,7 @@ import negocio.pase.TPase;
 
 public class TObra {
 	//Atributos
-	private int IdObra;
+	private int idObra;
 	private String titulo;
 	private String autor;
 	private String genero;
@@ -19,7 +19,7 @@ public class TObra {
 	
 	//Constructores
 	public TObra (int idObra, String titulo, String autor, String genero, String sinopsis) {
-		this.IdObra = idObra;
+		this.idObra = idObra;
 		this.titulo = titulo;
 		this.autor = autor;
 		this.genero = genero;
@@ -32,7 +32,7 @@ public class TObra {
 
 	//Getters
 	public int getIdObra() {
-		return IdObra;
+		return idObra;
 	}
 	
 	public String getAutor() {
@@ -54,7 +54,7 @@ public class TObra {
 	public Object genericGetter(String key) {
 		switch(key) {
 		case "IdObra":
-			return Integer.valueOf(IdObra);
+			return Integer.valueOf(idObra);
 		case "Autor":
 			return autor;
 		case "Titulo":
@@ -69,7 +69,7 @@ public class TObra {
 	
 	//Setters	
 	public void setIdObra(int id) {
-		this.IdObra=id;
+		this.idObra=id;
 	}
 	public void setTitulo(String titulo) {
 		this.titulo = titulo;

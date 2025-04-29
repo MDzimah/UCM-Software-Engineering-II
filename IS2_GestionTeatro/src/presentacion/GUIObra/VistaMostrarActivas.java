@@ -17,7 +17,7 @@ public class VistaMostrarActivas implements IGUI{
 	public void actualizar(Evento evento, Object datos) {
 		if(evento==Evento.RES_OK) {
 			String[] nomCols = {"ID","TITULO", "AUTOR", "GENERO", "SINOPSIS"};
-			FactoriaAbstractaPresentacion.getInstance().createTabla("MOSTRAR OBRAS ACTIVAS", nomCols, (Collection<Object>)datos);	
+			FactoriaAbstractaPresentacion.getInstance().createTabla("MOSTRAR OBRAS ACTIVAS", nomCols, (Collection<Object>)datos, true);	
 		}
 		else if(evento==Evento.RES_KO) {
 			FactoriaAbstractaPresentacion.getInstance().createDialogMessage("No se han podido mostrar las obras.\n" + (String)datos);

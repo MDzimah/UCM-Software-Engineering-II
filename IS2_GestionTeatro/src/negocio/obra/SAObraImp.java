@@ -41,8 +41,10 @@ public class SAObraImp implements SAObra {
 
 	@Override
 	public int delete(int id) throws BBDDReadException, BBDDWriteException, UnknownObraException {
-		DAOObra daoObra = FactoriaAbstractaIntegracion.getInstance().crearDAOObra();
-		int salida = daoObra.delete(id);
+		 DAOObra daoObra = FactoriaAbstractaIntegracion.getInstance().crearDAOObra();
+		 DAOPase daoPase = FactoriaAbstractaIntegracion.getInstance().crearDAOPase();
+		 daoPase.deletePorObra(id);
+		 int salida = daoObra.delete(id);
 		if(salida<=0)
 			throw new UnknownObraException();
 		else

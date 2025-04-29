@@ -19,12 +19,12 @@ public class DAOObraImp implements DAOObra {
 
 	
 	/**
-	 * @Override
 	 * @param modifica el IdObra a uno nuevo para la BD
 	 * @return -1 si hay error, IdNuevo si todo bien
 	 * @throws BBDDReadException 
 	 * @throws BBDDWriteException 
 	 */
+	 @Override
 	public int create(TObra tObra) throws BBDDReadException, BBDDWriteException {
 		
 		if (OpsBBDD.isEmpty(Messages.BDOb)) {
@@ -54,11 +54,12 @@ public class DAOObraImp implements DAOObra {
 
 	
 	/**
-	 * @Override elimina los pases asociados con el
+	 * elimina los pases asociados con el
 	 * @return <0 si hay error, >0 si todo bien
 	 * @throws BBDDReadException 
 	 * @throws BBDDWriteException 
 	 */
+	 @Override
 	public int delete(int id) throws BBDDReadException, BBDDWriteException {
 		JSONObject bdObras = OpsBBDD.read(Messages.BDOb);
 		if(bdObras.has(String.valueOf(id))) {
@@ -74,10 +75,10 @@ public class DAOObraImp implements DAOObra {
 
 	
 	/**
-	@Override
 	@return Devuelve null si no existe y se lee bien la BD
 	 * @throws BBDDReadException 
 	*/
+	 @Override
 	public TObra read(int id) throws BBDDReadException {
 		JSONObject bdObras = OpsBBDD.read(Messages.BDOb);
 		if(bdObras.has(String.valueOf(id))){
@@ -88,12 +89,12 @@ public class DAOObraImp implements DAOObra {
 	}
 
 	/**
-	@Override
 	@param tObra debe tener un Id ya existente
 	@return <0 si no existe, >0 si todo bien
 	 * @throws BBDDReadException 
 	 * @throws BBDDWriteException 
 	*/
+	 @Override
 	public int update(TObra tObra) throws BBDDReadException, BBDDWriteException {
 		JSONObject bdObras = OpsBBDD.read(Messages.BDOb);
 		if(bdObras.has(String.valueOf(tObra.getIdObra()))) {
@@ -108,7 +109,7 @@ public class DAOObraImp implements DAOObra {
 			tObra.setIdObra(tObra.getIdObra());
 			
 			bdObras.put(String.valueOf(tObra.getIdObra()), nuevaObra);
-			OpsBBDD.write(nuevaObra, Messages.BDOb);
+			OpsBBDD.write(bdObras, Messages.BDOb);
 			return 1;
 		}
 		else
@@ -128,28 +129,27 @@ public class DAOObraImp implements DAOObra {
 	}
 
 	/**@throws BBDDReadException 
-	 * @Override
 	 *  Busca por prioridad de criterios de izquierda a derecha, con null si no quieres ese criterio
 	 *  @param params - Integer Id, String titulo, String autor, String genero, Boolean activo
 	 */
+	 @Override
 	public List<TObra> search(List<String> params) throws BBDDReadException {
 		JSONObject bdObras = OpsBBDD.read(Messages.BDOb);
 		List<TObra> obras = new LinkedList<TObra>();
-		if(Integer.valueOf(params.get(0)) != null) {
+		/*if(Integer.valueOf(params.get(0)) != null) {
 			if(bdObras.has(String.valueOf(Integer.valueOf(params.get(0))))) {
 				obras.add(readJSON(bdObras.getJSONObject(String.valueOf(Integer.valueOf(params.get(0))))));
 			}
 			return obras;
 		}
-		else {
-			if(params.get(0)!=null)
-				busquedaLineal(bdObras, Messages.KEY_titulo, obras, params.get(0));					
-			if(params.get(1)!=null)
-				busquedaLineal(bdObras, Messages.KEY_autor, obras, params.get(1));					
-			if(params.get(2)!=null)
-				busquedaLineal(bdObras, Messages.KEY_Genero, obras, params.get(2));					
-			return obras;
-		}
+		else {*/
+		if(params.get(0)!=null)
+			busquedaLineal(bdObras, Messages.KEY_titulo, obras, params.get(0));					
+		if(params.get(1)!=null)
+			busquedaLineal(bdObras, Messages.KEY_autor, obras, params.get(1));					
+		if(params.get(2)!=null)
+			busquedaLineal(bdObras, Messages.KEY_Genero, obras, params.get(2));					
+		return obras;
 	}
 	
 	//Metodos privados
@@ -162,16 +162,16 @@ public class DAOObraImp implements DAOObra {
 	private void busquedaLineal(JSONObject bdObras, String criterio, List<TObra> obras, Object clave ) {
 		if(obras.isEmpty())
 			for(String key : JSONObject.getNames(bdObras)) {
-				if(key!="LastKey") {
+				if(!key.equals("LastKey")) {
 					JSONObject val = bdObras.getJSONObject(key);
-					if(val.get(criterio) == clave)
+					if(val.get(criterio).equals(clave))
 						obras.add(readJSON(val));
 				}
 			}
 		else {
 			int i =0;
 			while(i<obras.size()) {
-				if(obras.get(i).genericGetter(criterio)!=clave)
+				if(!obras.get(i).genericGetter(criterio).equals(clave))
 					obras.remove(i);
 				else
 					++i;
