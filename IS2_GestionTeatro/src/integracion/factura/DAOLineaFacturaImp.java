@@ -42,11 +42,11 @@ public class DAOLineaFacturaImp implements DAOLineaFactura {
 	public int delete(int id) throws BBDDReadException, BBDDWriteException {
 		if (!OpsBBDD.isEmpty(Messages.BDLinFac)) {
 			JSONObject bdLinFac = OpsBBDD.read(Messages.BDLinFac);
-			JSONObject lineasFactura = bdLinFac.getJSONObject(Messages.KEY_facs);
+			JSONObject linFacs = bdLinFac.getJSONObject(Messages.KEY_facs);
 	        
 			String _id = Integer.toString(id);
-			if (lineasFactura.has(_id)) {
-		        lineasFactura.remove(_id);
+			if (linFacs.has(_id)) {
+		        linFacs.remove(_id);
 		        OpsBBDD.write(bdLinFac, Messages.BDLinFac);
 			    return id;
 			}
@@ -58,13 +58,13 @@ public class DAOLineaFacturaImp implements DAOLineaFactura {
 	public TLineaFactura read(int id) throws BBDDReadException {
 		if (!OpsBBDD.isEmpty(Messages.BDLinFac)) {
 			JSONObject bdLinFac = OpsBBDD.read(Messages.BDLinFac);
-			JSONObject lineasFactura = bdLinFac.getJSONObject(Messages.KEY_facs);
+			JSONObject linFacs = bdLinFac.getJSONObject(Messages.KEY_facs);
 			
 			TLineaFactura tLfRead = null;
 			String _id = Integer.toString(id);
 			
-			if (lineasFactura.has(_id)) {
-		        tLfRead = this.readAux(lineasFactura.getJSONObject(_id));
+			if (linFacs.has(_id)) {
+		        tLfRead = this.readAux(linFacs.getJSONObject(_id));
 		        tLfRead.setIdLineaFactura(id);
 			}
 			return tLfRead;
