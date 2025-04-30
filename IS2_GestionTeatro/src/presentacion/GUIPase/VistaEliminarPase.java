@@ -12,6 +12,7 @@ import javax.swing.JTextField;
 
 import misc.Constants;
 import misc.Evento;
+import misc.JSwingUtils;
 import misc.Messages;
 import misc.Pair;
 import negocio.factura.TFactura;
@@ -25,39 +26,38 @@ public class VistaEliminarPase extends VistaDefault {
 
 	private JLabel IDPaseL;
 	private JTextField IDPaseT;
-	private JButton buscar;
+	private JButton aceptar;
 	private JButton cancelar;
 	
 	public VistaEliminarPase() {
 		this.setTitle("ELIMINAR PASE");
 		this.IDPaseL = new JLabel("Id Pase:");
 		this.IDPaseT = new JTextField(20);
-		this.buscar = new JButton("Aceptar");
+		this.aceptar = new JButton("Aceptar");
 		this.cancelar = new JButton("Cancelar");
 		
 		ArrayList<Pair<JComponent, JComponent>> pairComponents = new ArrayList<>();
 		pairComponents.add(new Pair<>(IDPaseL, IDPaseT));
 		
-		super.initComps(pairComponents, buscar, cancelar, false);
+		super.initComps(pairComponents, aceptar, cancelar);
 		
 		this.setVisible(true);
 		
-		buscar.addActionListener(e->{
-			TPase tPase = new TPase(Integer.valueOf(IDPaseT.getText()));
-			Controlador.getInstance().accion(Evento.ELIMINAR_PASE, tPase);
+		aceptar.addActionListener(e->{
+			Controlador.getInstance().accion(Evento.ELIMINAR_PASE, Integer.valueOf(IDPaseT.getText()));
 			dispose();
 		});
 		
-		cancelar.addActionListener(e->{dispose(); this.setVisible(false);});
+		cancelar.addActionListener(e->{this.setVisible(false); dispose();});
 	}
 	
 	@Override
 	public void actualizar(Evento evento, Object datos) {
 		if(evento==Evento.RES_OK) {
-			FactoriaAbstractaPresentacion.getInstance().createDialogMessage(Messages.EX_PASE_ELIMINADO);
+			JSwingUtils.createDialogMessage(Messages.EX_PASE_ELIMINADO);
 		}
 		else if(evento==Evento.RES_KO) {
-			FactoriaAbstractaPresentacion.getInstance().createErrorDialogMessage(Messages.X_PASE_ELIMINADO + ' ' + Messages.MOTIVO.formatted((String)datos));
+			JSwingUtils.createErrorDialogMessage(Messages.X_PASE_CREADO + ' ' + Messages.MOTIVO.formatted((String)datos));
 		}
 	}
 

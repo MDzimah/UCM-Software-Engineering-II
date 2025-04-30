@@ -15,7 +15,7 @@ import presentacion.VistaDefault;
 import presentacion.controlador.Controlador;
 import presentacion.factoria.FactoriaAbstractaPresentacion;
 
-public class VistaListarPases extends VistaDefault implements IGUI{
+public class VistaListarPases extends VistaDefault {
 	private JButton mostrar;
 	private JButton cancel;
 	
@@ -32,8 +32,8 @@ public class VistaListarPases extends VistaDefault implements IGUI{
 		});
 		
 		cancel.addActionListener(e->{
-			dispose();
 			this.setVisible(false);
+			dispose();
 		});
 	}
 	
@@ -42,10 +42,10 @@ public class VistaListarPases extends VistaDefault implements IGUI{
 		if (evento == Evento.RES_OK) {
 			Collection<Object> pases = (Collection<Object>)datos;
 			String[] head = {"ID","ID COMPANYA TEATRAL", "ID OBRA", "FECHA", "STOCK", "PRECIO"};
-			FactoriaAbstractaPresentacion.getInstance().createTabla("MOSTRAR PASES", head, pases, false);
+			JSwingUtils.createTabla("MOSTRAR PASES", head, pases, false, false);
 		}
 		else if(evento == Evento.RES_KO) {
-			FactoriaAbstractaPresentacion.getInstance().createErrorDialogMessage(Messages.X_MOSTRAR_PASES + ' ' + Messages.MOTIVO.formatted((String)datos));
+			JSwingUtils.createErrorDialogMessage(Messages.X_PASE_CREADO + ' ' + Messages.MOTIVO.formatted((String)datos));
 		}
 	}
 

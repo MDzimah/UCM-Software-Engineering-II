@@ -44,7 +44,6 @@ public class FactoriaPresentacion extends FactoriaAbstractaPresentacion {
 		
 		case CREAR_PASE: return new VistaCrearPase();
 		case ELIMINAR_PASE: return new VistaEliminarPase();
-		case CONSULTAR_PASE: return new VistaConsultarPase();
 		case BUSCAR_PASE: return new VistaBuscarPase();
 		case LISTAR_PASES: return new VistaListarPases();
 		case ACTUALIZAR_PASE: return new VistaActualizarPase();
