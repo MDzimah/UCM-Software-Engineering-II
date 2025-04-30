@@ -231,6 +231,7 @@ public class JSwingUtils {
 	        if (consultar) {
 	        	width = sd.width/2;
 	        	height = sd.height/10;
+	        	this.setResizable(false);
 	        }
 	        else {	     
 		        width = sd.width - sd.width / 10;
