@@ -9,14 +9,14 @@ import misc.Messages;
 public class VistaAnyadirPaseAVenta extends ModificacionPaseEnVenta {
 	
 	public VistaAnyadirPaseAVenta() {
-			this.setTitle("AÑADIR PASE A VENTA");
-			
-			super.initComps();
-			
-			super.okAndCancelListener(Evento.ANYADIR_PASE_A_VENTA);
-			
-			this.setVisible(true);
-			this.setLocationRelativeTo(null);
+		this.setTitle("AÑADIR PASE A VENTA");
+		
+		super.initComps();
+		
+		super.okAndCancelListener(Evento.ANYADIR_PASE_A_VENTA);
+		
+		this.setVisible(true);
+		this.setLocationRelativeTo(null);
 	}
 	
 	@Override

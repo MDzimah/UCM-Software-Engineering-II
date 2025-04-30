@@ -26,7 +26,6 @@ public class VistaQuitarPaseDeVenta extends ModificacionPaseEnVenta {
 			String error;
 			if (datos instanceof BBDDReadException) error = ((BBDDReadException)datos).getMessage();
 			else error = Messages.NO_EN_CARRITO; 
-			
 			JSwingUtils.createErrorDialogMessage(Messages.X_QUITAR_PASE_DE_VENTA + ' ' + Messages.MOTIVO.formatted(error));
 		}
 	}

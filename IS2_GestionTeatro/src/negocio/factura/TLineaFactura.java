@@ -7,13 +7,16 @@ public class TLineaFactura {
 	private int idFactura;
 	private int idPase;
 	
+	private boolean activo;
 	private int cantidad;
 	private float precioVenta;
+
 	
-	public TLineaFactura(int idFactura, int idPase,
-			int cantidad, float precioVenta) {
+	public TLineaFactura(int idFactura, int idPase, 
+			boolean activo,	int cantidad, float precioVenta) {
 		this.idFactura = idFactura;
 		this.idPase = idPase;
+		this.activo = activo;
 		this.cantidad = cantidad;
 		this.precioVenta = precioVenta;
 	}
@@ -32,6 +35,8 @@ public class TLineaFactura {
 	
 	public int getIdPase() { return this.idPase; }
 	
+	public boolean getActivo() { return this.activo; }
+	
 	public int getCantidad() { return this.cantidad; }
 	
 	public float getPrecioVenta() {	return this.precioVenta; }
@@ -45,12 +50,9 @@ public class TLineaFactura {
 	
 	public void setIdPase(int idPase) {	this.idPase = idPase; }
 	
+	public void setActivo(boolean activo) { this.activo = activo; }
+	
 	public void setCantidad(int cantidad) {	this.cantidad = cantidad; }
 	
 	public void setPrecioVenta(float importe) {	this.precioVenta = importe;	}
-	
-	@Override
-	public String toString() {
-	    return "Pase ID: " + idPase + ", Cantidad: " + cantidad + ", Precio: " + precioVenta;
-	}
 }

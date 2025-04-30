@@ -45,8 +45,8 @@ public class DAOLineaFacturaImp implements DAOLineaFactura {
 			JSONObject linFacs = bdLinFac.getJSONObject(Messages.KEY_facs);
 	        
 			String _id = Integer.toString(id);
-			if (linFacs.has(_id)) {
-		        linFacs.remove(_id);
+			if (linFacs.has(_id) && linFacs.getJSONObject(_id).getBoolean(Messages.KEY_act)) {
+		        linFacs.getJSONObject(_id).put(Messages.KEY_act, false);
 		        OpsBBDD.write(bdLinFac, Messages.BDLinFac);
 			    return id;
 			}
@@ -120,6 +120,7 @@ public class DAOLineaFacturaImp implements DAOLineaFactura {
 		return new TLineaFactura(
 				lf.getInt(Messages.KEY_idLinFac), 
 				lf.getInt(Messages.KEY_idPase),
+				lf.getBoolean(Messages.KEY_act),
 				lf.getInt(Messages.KEY_ctdad),
 				lf.getFloat(Messages.KEY_precioVenta));
 	}
@@ -128,6 +129,7 @@ public class DAOLineaFacturaImp implements DAOLineaFactura {
 		JSONObject res = new JSONObject();
 		res.put(Messages.KEY_idFac, tLinFac.getIdFactura());
 		res.put(Messages.KEY_idPase, tLinFac.getIdPase());
+		res.put(Messages.KEY_act, tLinFac.getActivo());
 		res.put(Messages.KEY_ctdad, tLinFac.getCantidad());
 		res.put(Messages.KEY_precioVenta, tLinFac.getPrecioVenta());
 		return res;
