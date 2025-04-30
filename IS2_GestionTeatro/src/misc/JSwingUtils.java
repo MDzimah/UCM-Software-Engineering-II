@@ -26,52 +26,31 @@ public class JSwingUtils {
 	 
 
 	//Tabla
-<<<<<<< HEAD
-   /**
-     * Creates and displays a table window populated with business entity data.
-     * <p>
-     * The table dynamically renders collections or arrays with a multi-line layout
-     * inside cells, automatically adjusting row heights for better readability.
-     * It supports dynamic types like {@link TFactura}, {@link TCliente},
-     * {@link TPase}, {@link TTaquillero}, {@link TObra}, {@link TCompTea}, etc.
-     * </p>
-     *
-     * @param tituloTabla the title of the window and the table view
-     * @param nomCols an array of column names (headers) to be displayed
-     * @param datos a collection of business objects to be shown in the table
-     * @param consultar if {@code true}, the table will open in a compact size suitable for consulting
-     */
-	public static TablaDefault createTabla(String tituloTabla, String[] nomCols, Collection<Object> datos, boolean consultar, boolean editable) {
-		return new TablaDefault(tituloTabla, nomCols, datos, consultar, editable);
-=======
-	/**
-	 * Creates and displays a JFrame window containing a customized JTable populated with business entity data.
-	 * <p>
-	 * This table supports rendering collections and arrays within individual cells as multi-line entries using a custom
-	 * cell renderer. It adjusts row heights dynamically to accommodate multi-line content. Additionally, it detects
-	 * the type of business object contained in the input collection (e.g., {@link TFactura}, {@link TCliente},
-	 * {@link TCompTea}, etc.) and automatically formats each row based on the detected structure.
-	 * </p>
-	 * <p>
-	 * The method supports two display modes:
-	 * <ul>
-	 *   <li><b>Consultation mode</b> (compact size): If {@code consultar} is {@code true}, the table is shown in a smaller window for quick lookup.</li>
-	 *   <li><b>Edition mode</b>: If {@code edicion} is {@code true}, the table is rendered with editable cells and an additional "Aceptar" button.</li>
-	 * </ul>
-	 * </p>
-	 *
-	 * @param tituloTabla the title of the window and the table
-	 * @param nomCols an array of column headers (automatically converted to uppercase)
-	 * @param datos a collection of business entity objects to be displayed (e.g., {@link TFactura}, {@link TMiemCompTea}, etc.)
-	 * @param consultar if {@code true}, displays the table in a compact window for read-only viewing
-	 * @param edicion if {@code true}, makes cells editable and shows an "Aceptar" button for confirming updates
-	 * @return a {@link JFrame} object containing the constructed table view
-	 */
-	public static JFrame createTabla(String tituloTabla, String[] nomCols, Collection<Object> datos, boolean consultar, boolean edicion) {
-		JFrame jframe = new TablaDefault(tituloTabla, nomCols, datos, consultar, edicion);
-		jframe.setVisible(true);
-		return jframe;
->>>>>>> refs/heads/Javadoc
+	 /**
+	  * Creates and displays a JFrame window containing a customized JTable populated with business entity data.
+	  * <p>
+	  * This table supports rendering collections and arrays within individual cells as multi-line entries using a custom
+	  * cell renderer. It adjusts row heights dynamically to accommodate multi-line content. Additionally, it detects
+	  * the type of business object contained in the input collection (e.g., {@link TFactura}, {@link TCliente},
+	  * {@link TCompTea}, etc.) and automatically formats each row based on the detected structure.
+	  * </p>
+	  * <p>
+	  * The method supports two display modes:
+	  * <ul>
+	  *   <li><b>Consultation mode</b> (compact size): If {@code consultar} is {@code true}, the table is shown in a smaller window for quick lookup.</li>
+	  *   <li><b>Edition mode</b>: If {@code edicion} is {@code true}, the table is rendered with editable cells and an additional "Aceptar" button.</li>
+	  * </ul>
+	  * </p>
+	  *
+	  * @param tituloTabla the title of the window and the table
+	  * @param nomCols an array of column headers (automatically converted to uppercase)
+	  * @param datos a collection of business entity objects to be displayed (e.g., {@link TFactura}, {@link TMiemCompTea}, etc.)
+	  * @param consultar if {@code true}, displays the table in a compact window for read-only viewing
+	  * @param edicion if {@code true}, makes cells editable and shows an "Aceptar" button for confirming updates
+	  * @return a {@link JFrame} object containing the constructed table view
+	  */
+	 public static JFrame createTabla(String tituloTabla, String[] nomCols, Collection<Object> datos, boolean consultar, boolean edicion) {
+		return new TablaDefault(tituloTabla, nomCols, datos, consultar, edicion);
 	}
 	
 	//Diálogos
