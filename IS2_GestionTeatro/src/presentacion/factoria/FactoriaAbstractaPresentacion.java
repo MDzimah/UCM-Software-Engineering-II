@@ -18,6 +18,7 @@ import misc.Evento;
 import negocio.cliente.TCliente;
 import negocio.compTea.TCompTea;
 import negocio.factura.TFactura;
+import negocio.miemCompTea.TMiemCompTea;
 import negocio.obra.TObra;
 import negocio.pase.TPase;
 import negocio.taquillero.TTaquillero;
@@ -180,7 +181,19 @@ public abstract class FactoriaAbstractaPresentacion {
 					
 				}
 				else if (this.containsType(data, TCompTea.class)) {
-					
+					for (TMiemCompTea tMiemComp : data.toArray(new TMiemCompTea[0])) {
+	    				Object[] fila = new Object[numCols];
+	    				
+	    				fila[0] = tMiemComp.getIdMiembComp();
+	    				fila[1] = tMiemComp.getNombre();
+	    				fila[2] = tMiemComp.getApellido();
+	    				fila[3] = tMiemComp.getEdad();
+	    				fila[4] = tMiemComp.getDNI();
+	    				fila[5] = tMiemComp.getEmail();
+	    				fila[6] = tMiemComp.getGenero().toString();
+	    				
+	    				matInfo.add(fila);
+	    			}
 				}
 				else { //Instancia de TMiemCompTea
 					
