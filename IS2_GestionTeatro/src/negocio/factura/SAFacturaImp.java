@@ -115,7 +115,7 @@ public class SAFacturaImp implements SAFactura {
 				if (tPase != null) {					
 					SAPase saPase = FactoriaAbstractaNegocio.getInstance().crearSAPase();
 					int cantidadVendida = saPase.comprar(tPase.getIdPase(), tLinea.getCantidad());
-					if (cantidadVendida > 0) {
+					if (cantidadVendida > 0) { //No hace falta devolver cantidad vendida ya que se asegura que el carrito final no tiene para cualquier pase más de lo que hay en stock (mirar anyadirPaseAVenta)
 						tLinea.setCantidad(cantidadVendida);
 						tLinea.setPrecioVenta(tPase.getPrecio()*cantidadVendida);
 						importeFinal += tLinea.getPrecioVenta();
