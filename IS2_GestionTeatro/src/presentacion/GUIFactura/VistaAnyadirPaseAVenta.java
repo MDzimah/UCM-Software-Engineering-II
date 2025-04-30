@@ -2,8 +2,8 @@ package presentacion.GUIFactura;
 
 import exceptions.BBDDReadException;
 import misc.Evento;
+import misc.JSwingUtils;
 import misc.Messages;
-import presentacion.factoria.FactoriaAbstractaPresentacion;
 
 @SuppressWarnings("serial")
 public class VistaAnyadirPaseAVenta extends ModificacionPaseEnVenta {
@@ -21,7 +21,7 @@ public class VistaAnyadirPaseAVenta extends ModificacionPaseEnVenta {
 	
 	@Override
 	public void actualizar(Evento evento, Object datos) {
-		if (evento == Evento.RES_OK) FactoriaAbstractaPresentacion.getInstance().createDialogMessage(Messages.EX_PASE_ANYADIDO_A_VENTA);
+		if (evento == Evento.RES_OK) JSwingUtils.createDialogMessage(Messages.EX_PASE_ANYADIDO_A_VENTA);
 		else if(evento == Evento.RES_KO) { 
 			String error;
 			if (datos instanceof String) error = (String)datos; //Campos incorrectos
@@ -31,7 +31,7 @@ public class VistaAnyadirPaseAVenta extends ModificacionPaseEnVenta {
 				else error = Messages.STOCK_INSUF; 
 			}
 			
-			FactoriaAbstractaPresentacion.getInstance().createErrorDialogMessage(Messages.X_ANYADIR_PASE_A_VENTA + ' ' + Messages.MOTIVO.formatted(error));
+			JSwingUtils.createErrorDialogMessage(Messages.X_ANYADIR_PASE_A_VENTA + ' ' + Messages.MOTIVO.formatted(error));
 		}
 	}
 }
