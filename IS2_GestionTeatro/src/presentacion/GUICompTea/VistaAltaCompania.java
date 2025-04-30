@@ -16,6 +16,12 @@ import negocio.compTea.TCompTea;
 public class VistaAltaCompania extends VistaDefault implements IGUI{
 	
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+
 	public VistaAltaCompania() {
 		initGUI();
 		this.setVisible(true);

@@ -57,7 +57,7 @@ public class VistaMostrarCompania extends VistaDefault implements IGUI{
 			FactoriaAbstractaPresentacion.getInstance().createTabla("CONSULTAR OBRA", nomCols, (Collection<Object>)datos, true);			
 		}
 		else if(evento==Evento.RES_KO) {
-			FactoriaAbstractaPresentacion.getInstance().createErrorDialogMessage("N +(String)datos);
+			FactoriaAbstractaPresentacion.getInstance().createErrorDialogMessage("NO SE PUDO LISTAR LAS COMPANIAS TEATRALES");
 		}
 	}
 
