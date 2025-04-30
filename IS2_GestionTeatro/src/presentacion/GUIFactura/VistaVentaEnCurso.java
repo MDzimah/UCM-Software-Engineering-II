@@ -14,10 +14,10 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
-import misc.Evento;
 import misc.JSwingUtils;
 import negocio.factura.TFactura;
 import negocio.factura.TLineaFactura;
+import presentacion.Evento;
 import presentacion.IGUI;
 import presentacion.controlador.Controlador;
 import presentacion.factoria.FactoriaAbstractaPresentacion;

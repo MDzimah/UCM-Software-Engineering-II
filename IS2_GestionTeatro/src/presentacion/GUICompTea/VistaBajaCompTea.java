@@ -7,8 +7,8 @@ import javax.swing.JLabel;
 import javax.swing.JTextField;
 
 import integracion.factoria.FactoriaAbstractaIntegracion;
-import misc.Evento;
 import misc.Pair;
+import presentacion.Evento;
 import presentacion.IGUI;
 import presentacion.controlador.Controlador;
 import presentacion.VistaDefault;

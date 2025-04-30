@@ -2,8 +2,8 @@ package presentacion.GUImiemCompTea;
 
 import java.util.Collection;
 
-import misc.Evento;
 import misc.Messages;
+import presentacion.Evento;
 import presentacion.VistaDefault;
 import presentacion.controlador.Controlador;
 import presentacion.factoria.FactoriaAbstractaPresentacion;

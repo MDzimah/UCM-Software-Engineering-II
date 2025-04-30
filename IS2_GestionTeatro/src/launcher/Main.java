@@ -4,7 +4,7 @@ import javax.swing.*;
 
 import com.formdev.flatlaf.FlatIntelliJLaf;
 
-import misc.Evento;
+import presentacion.Evento;
 import presentacion.factoria.FactoriaAbstractaPresentacion;
 
 public class Main {

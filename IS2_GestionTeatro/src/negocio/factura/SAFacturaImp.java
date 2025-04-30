@@ -14,7 +14,6 @@ import integracion.factura.DAOFactura;
 import integracion.factura.DAOLineaFactura;
 import integracion.pase.DAOPase;
 import integracion.taquillero.DAOTaquillero;
-import misc.Evento;
 import misc.Messages;
 import negocio.cliente.SACliente;
 import negocio.cliente.TCliente;
@@ -22,6 +21,7 @@ import negocio.factoria.FactoriaAbstractaNegocio;
 import negocio.pase.SAPase;
 import negocio.pase.TPase;
 import negocio.taquillero.TTaquillero;
+import presentacion.Evento;
 import presentacion.GUIFactura.VistaVentaEnCurso;
 import presentacion.factoria.FactoriaAbstractaPresentacion;
 

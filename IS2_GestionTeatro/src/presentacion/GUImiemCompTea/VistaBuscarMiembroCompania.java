@@ -10,12 +10,12 @@ import javax.swing.JLabel;
 import javax.swing.JTextField;
 
 import exceptions.BBDDReadException;
-import misc.Evento;
 import misc.Messages;
 import misc.Pair;
 import negocio.factura.TFactura;
 import negocio.miemCompTea.TMiemCompTea;
 import negocio.miemCompTea.TMiemCompTea.Genero;
+import presentacion.Evento;
 import presentacion.VistaDefault;
 import presentacion.controlador.Controlador;
 import presentacion.factoria.FactoriaAbstractaPresentacion;

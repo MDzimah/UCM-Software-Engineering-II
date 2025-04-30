@@ -1,8 +1,7 @@
 package presentacion.factoria;
 
+import presentacion.Evento;
 import presentacion.IGUI;
-
-import misc.Evento;
 
 
 public abstract class FactoriaAbstractaPresentacion {

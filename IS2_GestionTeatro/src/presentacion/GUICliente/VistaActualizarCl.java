@@ -2,7 +2,7 @@ package presentacion.GUICliente;
 
 import javax.swing.JFrame;
 
-import misc.Evento;
+import presentacion.Evento;
 import presentacion.IGUI;
 
 @SuppressWarnings("serial")

@@ -4,7 +4,6 @@ import java.util.Collection;
 import java.util.List;
 
 import exceptions.BBDDReadException;
-import misc.Evento;
 import negocio.compTea.SACompTea;
 import negocio.compTea.TCompTea;
 import negocio.factoria.FactoriaAbstractaNegocio;
@@ -13,6 +12,7 @@ import negocio.miemCompTea.*;
 import negocio.obra.*;
 import negocio.pase.SAPase;
 import negocio.pase.TPase;
+import presentacion.Evento;
 import presentacion.GUIFactura.VistaVentaEnCurso;
 import presentacion.factoria.FactoriaAbstractaPresentacion;
 

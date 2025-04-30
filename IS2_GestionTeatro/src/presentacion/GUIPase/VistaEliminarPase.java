@@ -11,12 +11,12 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import misc.Constants;
-import misc.Evento;
 import misc.JSwingUtils;
 import misc.Messages;
 import misc.Pair;
 import negocio.factura.TFactura;
 import negocio.pase.TPase;
+import presentacion.Evento;
 import presentacion.IGUI;
 import presentacion.VistaDefault;
 import presentacion.controlador.Controlador;

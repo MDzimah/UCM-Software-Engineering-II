@@ -5,6 +5,7 @@ import javax.swing.*;
 
 import misc.*;
 import negocio.factura.*;
+import presentacion.Evento;
 import presentacion.VistaDefault;
 import presentacion.controlador.Controlador;
 

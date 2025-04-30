@@ -1,6 +1,5 @@
 package presentacion.factoria;
 
-import misc.Evento;
 import presentacion.*;
 import presentacion.GUIFactura.*;
 import presentacion.GUIObra.VistaActualizarObra;

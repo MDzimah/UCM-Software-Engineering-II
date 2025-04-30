@@ -6,10 +6,10 @@ import javax.swing.JComponent;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 
-import misc.Evento;
 import misc.JSwingUtils;
 import misc.Pair;
 import negocio.obra.TObra;
+import presentacion.Evento;
 import presentacion.IGUI;
 import presentacion.controlador.Controlador;
 import presentacion.factoria.FactoriaAbstractaPresentacion;
@@ -61,7 +61,7 @@ public class VistaAltaObra extends VistaDefault implements IGUI{
 
 
 	@Override
-	public void actualizar(misc.Evento evento, Object datos) {
+	public void actualizar(presentacion.Evento evento, Object datos) {
 		if(evento==Evento.RES_OK) {
 			JSwingUtils.createErrorDialogMessage("Se ha añadido correctamente la obra " + (int)datos);
 

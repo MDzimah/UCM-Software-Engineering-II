@@ -7,7 +7,6 @@ import javax.swing.*;
 import javax.swing.border.*;
 
 import misc.Constants;
-import misc.Evento;
 import misc.JSwingUtils;
 import presentacion.controlador.Controlador;
 import presentacion.factoria.FactoriaAbstractaPresentacion;

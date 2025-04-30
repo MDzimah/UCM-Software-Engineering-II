@@ -6,10 +6,10 @@ import javax.swing.JButton;
 import javax.swing.JPanel;
 
 import misc.Constants;
-import misc.Evento;
 import misc.JSwingUtils;
 import misc.Messages;
 import negocio.pase.TPase;
+import presentacion.Evento;
 import presentacion.IGUI;
 import presentacion.VistaDefault;
 import presentacion.controlador.Controlador;

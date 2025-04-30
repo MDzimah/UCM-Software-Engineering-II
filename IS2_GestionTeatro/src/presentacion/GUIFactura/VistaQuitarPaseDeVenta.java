@@ -1,9 +1,9 @@
 package presentacion.GUIFactura;
 
 import exceptions.BBDDReadException;
-import misc.Evento;
 import misc.JSwingUtils;
 import misc.Messages;
+import presentacion.Evento;
 
 @SuppressWarnings("serial")
 public class VistaQuitarPaseDeVenta extends ModificacionPaseEnVenta {

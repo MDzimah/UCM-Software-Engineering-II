@@ -8,11 +8,11 @@ import javax.swing.*;
 
 import exceptions.BBDDReadException;
 import misc.Constants;
-import misc.Evento;
 import misc.Messages;
 import misc.Pair;
 import misc.JSwingUtils;
 import negocio.factura.TFactura;
+import presentacion.Evento;
 import presentacion.VistaDefault;
 import presentacion.controlador.Controlador;
 

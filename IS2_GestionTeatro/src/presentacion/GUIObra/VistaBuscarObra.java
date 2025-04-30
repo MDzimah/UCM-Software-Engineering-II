@@ -10,9 +10,9 @@ import javax.swing.JComponent;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 
-import misc.Evento;
 import misc.JSwingUtils;
 import misc.Pair;
+import presentacion.Evento;
 import presentacion.IGUI;
 import presentacion.VistaDefault;
 import presentacion.controlador.Controlador;
@@ -64,7 +64,7 @@ public class VistaBuscarObra extends VistaDefault implements IGUI{
 
 
 		@Override
-		public void actualizar(misc.Evento evento, Object datos) {
+		public void actualizar(presentacion.Evento evento, Object datos) {
 			if(evento==Evento.RES_OK) {
 				String[] nomCols = {"ID","TITULO", "AUTOR", "GENERO", "SINOPSIS"};
 				JSwingUtils.createTabla("CONSULTAR OBRAS", nomCols, (Collection<Object>)datos, false);

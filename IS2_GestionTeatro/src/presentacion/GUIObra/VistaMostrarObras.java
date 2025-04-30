@@ -2,8 +2,8 @@ package presentacion.GUIObra;
 
 import java.util.Collection;
 
-import misc.Evento;
 import misc.JSwingUtils;
+import presentacion.Evento;
 import presentacion.IGUI;
 import presentacion.controlador.Controlador;
 import presentacion.factoria.FactoriaAbstractaPresentacion;

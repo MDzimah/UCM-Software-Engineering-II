@@ -9,6 +9,7 @@ import javax.swing.JTextField;
 
 import misc.*;
 import negocio.obra.TObra;
+import presentacion.Evento;
 import presentacion.IGUI;
 import presentacion.VistaDefault;
 import presentacion.controlador.Controlador;

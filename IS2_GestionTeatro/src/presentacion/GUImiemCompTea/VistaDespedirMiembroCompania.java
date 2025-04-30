@@ -7,9 +7,9 @@ import javax.swing.JComponent;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 
-import misc.Evento;
 import misc.Messages;
 import misc.Pair;
+import presentacion.Evento;
 import presentacion.VistaDefault;
 import presentacion.controlador.Controlador;
 import presentacion.factoria.FactoriaAbstractaPresentacion;

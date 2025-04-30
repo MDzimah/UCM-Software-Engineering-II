@@ -5,10 +5,10 @@ import java.util.Collection;
 
 import javax.swing.JFrame;
 
-import misc.Evento;
 import misc.JSwingUtils;
 import misc.Messages;
 import negocio.factura.TFactura;
+import presentacion.Evento;
 import presentacion.VistaDefault;
 
 public class VistaActualizarPase extends VistaDefault {

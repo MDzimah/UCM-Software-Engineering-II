@@ -6,6 +6,7 @@ import javax.swing.*;
 
 import exceptions.BBDDReadException;
 import misc.*;
+import presentacion.Evento;
 import presentacion.VistaDefault;
 import presentacion.controlador.Controlador;
 
