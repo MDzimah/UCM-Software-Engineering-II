@@ -9,6 +9,7 @@ import negocio.compTea.SACompTea;
 import negocio.compTea.TCompTea;
 import negocio.factoria.FactoriaAbstractaNegocio;
 import negocio.factura.*;
+import negocio.miemCompTea.*;
 import negocio.obra.*;
 import negocio.pase.SAPase;
 import negocio.pase.TPase;
@@ -200,6 +201,7 @@ public class ControladorImp extends Controlador {
 			try {
 				SAObra saObra = FactoriaAbstractaNegocio.getInstance().crearSAObra();
 				saObra.update((TObra)datos);
+				//lees int(datos) en la VistaActualizarObra
 				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_OK, (TObra)datos);
 			}
 			catch(Exception e) {
@@ -300,9 +302,59 @@ public class ControladorImp extends Controlador {
 		//MiemCompTea
 		case ACTUALIZAR_MIEMBRO_COMPANIA:
 		case BUSCAR_MIEMBRO_COMPANIA:
+		{
+			try {
+				SAMiemCompTea saMiemComp = FactoriaAbstractaNegocio.getInstance().crearSAMiemCompTea();
+				TMiemCompTea tMiemComp = saMiemComp.read((int)datos);
+			
+				if(tMiemComp != null)	FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_OK, tMiemComp);
+				else FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_KO, (int)datos);
+			}
+			catch(Exception e) {
+				 FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_KO, e.getMessage());
+			}
+			
+			break;
+		}
 		case CONTRATAR_MIEMBRO_COMPANIA:
+		{
+			try {
+				SAMiemCompTea saMiemComp = FactoriaAbstractaNegocio.getInstance().crearSAMiemCompTea();
+				int id = saMiemComp.create((TMiemCompTea) datos);
+				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_OK, id);
+			}
+			catch(Exception e) {
+				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_KO, e.getMessage());
+			}
+			break;
+		}
 		case DESPEDIR_MIEMBRO_COMPANIA:
+		{
+			try {
+				SAMiemCompTea saMiemComp = FactoriaAbstractaNegocio.getInstance().crearSAMiemCompTea();
+				int id = saMiemComp.delete((int)datos);
+				
+				if(id != -1) FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_OK, (int)datos);
+				else FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_KO, (int)datos);
+			}
+			catch(Exception e) {
+				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_KO, e.getMessage());
+			}
+			break;
+		}
 		case LISTAR_MIEMBROS_COMPANIA:
+		{
+			try {
+				SAMiemCompTea saMiemComp = FactoriaAbstractaNegocio.getInstance().crearSAMiemCompTea();
+				Collection<TMiemCompTea> miembros = saMiemComp.readAll();
+				if(miembros != null) FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_OK, miembros);
+				else FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_KO, null);
+			}
+			catch(Exception e) {
+				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_KO, e.getMessage());
+			}
+			break;
+		}
 		
 		//Todas las ventanas que abren a otras (las que no sean de CU)
 		default: 

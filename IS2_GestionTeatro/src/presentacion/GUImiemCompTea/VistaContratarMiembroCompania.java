@@ -1,6 +1,5 @@
 package presentacion.GUImiemCompTea;
 
-import exceptions.BBDDReadException;
 import misc.Evento;
 import misc.Messages;
 import presentacion.VistaDefault;
@@ -11,7 +10,6 @@ import java.util.ArrayList;
 import misc.Pair;
 import negocio.miemCompTea.TMiemCompTea;
 import negocio.miemCompTea.TMiemCompTea.Genero;
-import presentacion.controlador.Controlador;
 
 public class VistaContratarMiembroCompania extends VistaDefault{
 	
@@ -25,11 +23,11 @@ public class VistaContratarMiembroCompania extends VistaDefault{
     public VistaContratarMiembroCompania() {
         super();
 
-        nombreField = new JTextField(20);
-        apellidoField = new JTextField(20);
-        edadField = new JTextField(4);
-        dniField = new JTextField(15);
-        emailField = new JTextField(30);       
+        nombreField = new JTextField();
+        apellidoField = new JTextField();
+        edadField = new JTextField();
+        dniField = new JTextField();
+        emailField = new JTextField();       
         generoField = new JComboBox<String>();
         generoField.addItem("Hombre");
         generoField.addItem("Mujer");
@@ -55,30 +53,23 @@ public class VistaContratarMiembroCompania extends VistaDefault{
     }
 
     private void contratarMiembro() {
-        String nombre = nombreField.getText().trim();
-        String apellido = apellidoField.getText().trim();
-        int edad = Integer.valueOf(edadField.getText().trim());
-        String dni = dniField.getText().trim();
-        String email = emailField.getText().trim();
-        String genero = generoField.getName();
+    	String nombre = nombreField.getText();
+        String apellido = apellidoField.getText();
+        int edad = Integer.valueOf(edadField.getText());
+        String dni = dniField.getText();
+        String email = emailField.getText();
+        String genero = (String) generoField.getSelectedItem();
+        Genero generoEnum = genero == "Hombre" ? Genero.HOMBRE : Genero.MUJER;
         
-        TMiemCompTea tMiem = new TMiemCompTea(dni, nombre, apellido, email, edad, true, Genero.valueOf(genero));
+        TMiemCompTea tMiem = new TMiemCompTea(dni, nombre, apellido, email, edad, true, generoEnum);
         Controlador.getInstance().accion(Evento.CONTRATAR_MIEMBRO_COMPANIA, tMiem);
     }
 
-	@Override
+    @Override
 	public void actualizar(Evento evento, Object datos) {
 		if (evento == Evento.RES_OK) FactoriaAbstractaPresentacion.getInstance().createDialogMessage(Messages.EX_MIEMBRO_CONTRATADO);
 		else if (evento == Evento.RES_KO) {
-			String error;
-			if (datos instanceof String) error = (String)datos;
-			else if (datos instanceof BBDDReadException) error = ((BBDDReadException)datos).getMessage();
-			else {
-				if (datos != null) error = Messages.ID_NO_ENCONTRADO.formatted((int)datos);
-				else //error = Messages.STOCK_INSUF; 
-			}
-			
-			FactoriaAbstractaPresentacion.getInstance().createErrorDialogMessage(Messages.EX_MIEMBRO_CONTRATADO + ' ' + Messages.MOTIVO.formatted(error));
+			FactoriaAbstractaPresentacion.getInstance().createErrorDialogMessage(Messages.X_MIEMBRO_CONTRATADO + ' ' + Messages.MOTIVO.formatted((String) datos));
 		}
 	}
 }

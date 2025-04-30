@@ -1,5 +1,34 @@
 package presentacion.GUImiemCompTea;
 
-public class VistaListarMiembrosCompania {
+import java.util.Collection;
 
+import misc.Evento;
+import misc.Messages;
+import presentacion.VistaDefault;
+import presentacion.controlador.Controlador;
+import presentacion.factoria.FactoriaAbstractaPresentacion;
+
+public class VistaListarMiembrosCompania extends VistaDefault{
+	
+	public VistaListarMiembrosCompania() {
+		Controlador.getInstance().accion(Evento.LISTAR_MIEMBROS_COMPANIA, null);
+	}
+
+	@Override
+	public void actualizar(Evento evento, Object datos) {
+		if (evento == Evento.RES_OK) {
+			@SuppressWarnings("unchecked")
+			Collection<Object> castedData = (Collection<Object>)datos;
+			String[] nomCols = {"ID","NOMBRE", "APELLIDO", "EDAD", "DNI", "EMAIL", "GENERO"};
+			FactoriaAbstractaPresentacion.getInstance().createTabla("LISTA DE MIEMBROS DE LA COMPANIA", nomCols, castedData, false);
+		}
+		else if (evento == Evento.RES_KO) {
+			String error;
+			if (datos instanceof String) error = (String) datos;
+			else error = Messages.NO_HAY_DATOS;
+			FactoriaAbstractaPresentacion.getInstance().createErrorDialogMessage(Messages.X_MIEMBROS_LISTADOS + ' ' + Messages.MOTIVO.formatted(error));
+		}
+		
+	}
+	
 }
