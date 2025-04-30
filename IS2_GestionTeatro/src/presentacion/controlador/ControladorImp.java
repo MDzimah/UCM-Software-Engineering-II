@@ -53,7 +53,7 @@ public class ControladorImp extends Controlador {
 			try {
 				int idFac = (int)datos;
 				SAFactura saFac = FactoriaAbstractaNegocio.getInstance().crearSAFactura();
-				TFactura tFacBuscada = saFac.buscarFactura(idFac);
+				TFactura tFacBuscada = saFac.read(idFac);
 			
 				if(tFacBuscada != null)	FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_OK, tFacBuscada);
 				else FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_KO, idFac);
@@ -73,7 +73,7 @@ public class ControladorImp extends Controlador {
 		case MOSTRAR_FACTURAS: {
 			try {
 				SAFactura saFac = FactoriaAbstractaNegocio.getInstance().crearSAFactura();
-				Collection<TFactura> allFacturas = saFac.facturasActivas();
+				Collection<TFactura> allFacturas = saFac.allFacturas();
 				
 				if (!allFacturas.isEmpty()) FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_OK, allFacturas); 
 				else FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_KO, null); 

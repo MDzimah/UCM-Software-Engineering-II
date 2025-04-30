@@ -8,7 +8,7 @@ public interface SAFactura {
 	public boolean anyadirPaseAVenta(TLineaFactura newTLf, Collection<TLineaFactura> carrito) throws BBDDReadException;
 	public boolean quitarPaseDeVenta(TLineaFactura tLfAQuitar, Collection<TLineaFactura> carrito) throws BBDDReadException;
 	public int crearFactura(TDatosVenta tDv) throws UnknownClienteException, UnknownTaquilleroException, BBDDReadException, BBDDWriteException;
-	public TFactura buscarFactura(int id) throws BBDDReadException;
-	public Collection<TFactura> facturasActivas() throws BBDDReadException;
-	public Collection<TFactura> facturasPorCliente(int idCliente) throws BBDDReadException ;
+	public TFactura read(int idFactura) throws BBDDReadException;
+	public Collection<TFactura> allFacturas() throws BBDDReadException;
+	public Collection<TFactura> allFacturasPorCliente(int idCliente) throws BBDDReadException ;
 }

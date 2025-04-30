@@ -133,19 +133,19 @@ public class SAFacturaImp implements SAFactura {
 	}
 	
 	@Override
-	public TFactura buscarFactura(int id) throws BBDDReadException {
+	public TFactura read(int idFactura) throws BBDDReadException {
 		DAOFactura daoFac = FactoriaAbstractaIntegracion.getInstance().crearDAOFactura();
-		return daoFac.read(id);
+		return daoFac.read(idFactura);
 	}
 
 	@Override
-	public Collection<TFactura> facturasActivas() throws BBDDReadException {
+	public Collection<TFactura> allFacturas() throws BBDDReadException {
 		DAOFactura daoFac = FactoriaAbstractaIntegracion.getInstance().crearDAOFactura();
 		return daoFac.readAll();
 	}
 
 	@Override
-	public Collection<TFactura> facturasPorCliente(int idCliente) throws BBDDReadException {
+	public Collection<TFactura> allFacturasPorCliente(int idCliente) throws BBDDReadException {
 		DAOFactura daoFac = FactoriaAbstractaIntegracion.getInstance().crearDAOFactura();
 		ArrayList<TFactura> allFacs = (ArrayList<TFactura>)daoFac.readAll();
 
