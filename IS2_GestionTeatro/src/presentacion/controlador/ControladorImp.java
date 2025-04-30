@@ -261,11 +261,12 @@ public class ControladorImp extends Controlador {
 		{
 			try {
 				SACompTea saCompTea=FactoriaAbstractaNegocio.getInstance().crearSACompTea();
-				String nombre =(String)datos;
-				saCompTea.
+				Integer id =(Integer)datos;
+				TCompTea newComp= saCompTea.read(id);
+				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_OK, newComp);
 			}
 			catch(Exception e) {
-				
+				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_KO, "Error: " +e.getMessage());
 			}
 		}
 		case ELIMINAR_COMPANIA_TEATRAL:
