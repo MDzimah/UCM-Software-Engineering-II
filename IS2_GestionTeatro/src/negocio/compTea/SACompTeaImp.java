@@ -18,7 +18,6 @@ public class SACompTeaImp implements SACompTea {
 	public int create(TCompTea ct) throws BBDDReadException, BBDDWriteException, UnknownCompTeaException  {
 		if(ct==null)throw new UnknownCompTeaException();
 		DAOCompTea daoCT=FactoriaAbstractaIntegracion.getInstance().crearDAOCompTea();
-		Collection<TMiemCompTea> listaMiembros=ct.getMiembros();
 		return daoCT.create(ct);
 	}
 
