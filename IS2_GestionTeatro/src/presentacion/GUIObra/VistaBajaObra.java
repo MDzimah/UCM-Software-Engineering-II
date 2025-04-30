@@ -16,14 +16,14 @@ import presentacion.controlador.Controlador;
 import presentacion.factoria.FactoriaAbstractaPresentacion;
 import presentacion.VistaDefault;
 
-public class VistaBorrarObra extends VistaDefault implements IGUI{
+public class VistaBajaObra extends VistaDefault implements IGUI{
 	//Atributos
 	private JButton eliminar, cancelar;
 	
 	private JTextField id;
 
 	//Constructor
-	public VistaBorrarObra() {
+	public VistaBajaObra() {
 		initGUI();
 		this.setVisible(true);
 	}
@@ -45,11 +45,11 @@ public class VistaBorrarObra extends VistaDefault implements IGUI{
 		eliminar.addActionListener(e ->{
 			Integer id2 = Integer.valueOf(id.getText());
 			Controlador.getInstance().accion(Evento.ELIMINAR_OBRA, id2);
-			VistaBorrarObra.this.dispose();	//Igual cambio algo de aqui porque el problema es que como esta ahora se ejecuta el controller antes de cerrar la ventana
+			VistaBajaObra.this.dispose();	//Igual cambio algo de aqui porque el problema es que como esta ahora se ejecuta el controller antes de cerrar la ventana
 		});
 		
 		cancelar.addActionListener(e ->{
-			VistaBorrarObra.this.dispose();
+			VistaBajaObra.this.dispose();
 		});
 	}
 

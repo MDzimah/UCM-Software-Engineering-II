@@ -8,9 +8,9 @@ import presentacion.VistaDefault;
 import presentacion.controlador.Controlador;
 import presentacion.factoria.FactoriaAbstractaPresentacion;
 
-public class VistaListarMiembrosCompania extends VistaDefault{
+public class VistaMostrarMiembrosCompania extends VistaDefault{
 	
-	public VistaListarMiembrosCompania() {
+	public VistaMostrarMiembrosCompania() {
 		Controlador.getInstance().accion(Evento.LISTAR_MIEMBROS_COMPANIA, null);
 	}
 

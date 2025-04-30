@@ -15,13 +15,13 @@ import presentacion.controlador.Controlador;
 import presentacion.factoria.FactoriaAbstractaPresentacion;
 import presentacion.VistaDefault;
 
-public class VistaAgregarObra extends VistaDefault implements IGUI{
+public class VistaAltaObra extends VistaDefault implements IGUI{
 	//Atributos
 	private JButton agregar, cancelar;
 	private JTextField titulo, autor , genero, sinopsis;
 
 	//Constructor
-	public VistaAgregarObra() {
+	public VistaAltaObra() {
 		initGUI();
 		this.setVisible(true);
 	}
@@ -50,11 +50,11 @@ public class VistaAgregarObra extends VistaDefault implements IGUI{
 			String titulo2 = titulo.getText(), autor2= autor.getText(), genero2= genero.getText(), sinopsis2= sinopsis.getText();
 			TObra obra = new TObra(titulo2, autor2, genero2, sinopsis2);
 			Controlador.getInstance().accion(Evento.CREAR_OBRA, obra);
-			VistaAgregarObra.this.dispose();	//Igual cambio algo de aqui porque el problema es que como esta ahora se ejecuta el controller antes de cerrar la ventana
+			VistaAltaObra.this.dispose();	//Igual cambio algo de aqui porque el problema es que como esta ahora se ejecuta el controller antes de cerrar la ventana
 		});
 		
 		cancelar.addActionListener(e ->{
-			VistaAgregarObra.this.dispose();
+			VistaAltaObra.this.dispose();
 		});
 	}
 	

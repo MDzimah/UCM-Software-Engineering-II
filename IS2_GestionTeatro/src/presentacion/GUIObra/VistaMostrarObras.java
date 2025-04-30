@@ -8,9 +8,9 @@ import presentacion.IGUI;
 import presentacion.controlador.Controlador;
 import presentacion.factoria.FactoriaAbstractaPresentacion;
 
-public class VistaMostrarTodas implements IGUI{
+public class VistaMostrarObras implements IGUI{
 
-	public VistaMostrarTodas() {
+	public VistaMostrarObras() {
 		Controlador.getInstance().accion(Evento.LISTAR_OBRAS, null);
 	}
 	

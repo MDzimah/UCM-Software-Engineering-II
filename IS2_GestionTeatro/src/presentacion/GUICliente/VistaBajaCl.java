@@ -6,7 +6,7 @@ import misc.Evento;
 import presentacion.IGUI;
 
 @SuppressWarnings("serial")
-public class VistaEliminarCl extends JFrame implements IGUI{
+public class VistaBajaCl extends JFrame implements IGUI{
 
 	@Override
 	public void actualizar(Evento evento, Object datos) {

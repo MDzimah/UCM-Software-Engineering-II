@@ -4,11 +4,11 @@ import misc.Evento;
 import presentacion.*;
 import presentacion.GUIFactura.*;
 import presentacion.GUIObra.VistaActualizarObra;
-import presentacion.GUIObra.VistaAgregarObra;
-import presentacion.GUIObra.VistaBorrarObra;
+import presentacion.GUIObra.VistaAltaObra;
+import presentacion.GUIObra.VistaBajaObra;
 import presentacion.GUIObra.VistaBuscarObra;
 import presentacion.GUIObra.VistaConsultarObra;
-import presentacion.GUIObra.VistaMostrarTodas;
+import presentacion.GUIObra.VistaMostrarObras;
 import presentacion.GUIPase.VistaActualizarPase;
 import presentacion.GUIPase.VistaBuscarPase;
 import presentacion.GUIPase.VistaConsultarPase;
@@ -49,12 +49,12 @@ public class FactoriaPresentacion extends FactoriaAbstractaPresentacion {
 		case ACTUALIZAR_PASE: return new VistaActualizarPase();
 
 		//Obra
-		case CREAR_OBRA: return new VistaAgregarObra();
-		case ELIMINAR_OBRA: return new VistaBorrarObra();
+		case CREAR_OBRA: return new VistaAltaObra();
+		case ELIMINAR_OBRA: return new VistaBajaObra();
 		case ACTUALIZAR_OBRA: return new VistaActualizarObra();
 		case CONSULTAR_OBRA: return new VistaBuscarObra();
 		case BUSCAR_OBRA: return new VistaConsultarObra();
-		case LISTAR_OBRAS: return new VistaMostrarTodas();
+		case LISTAR_OBRAS: return new VistaMostrarObras();
 		
 		//CompTea
 		
