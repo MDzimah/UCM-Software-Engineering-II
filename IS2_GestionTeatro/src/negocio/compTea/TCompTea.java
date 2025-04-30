@@ -40,13 +40,6 @@ public class TCompTea {
 	    return costecontratacion;
 	}
 
-	public Collection<TPase> getPases() {
-		return Collections.unmodifiableCollection(pases);
-	}
-	
-	public Collection<TMiemCompTea> getMiembros() {
-		return Collections.unmodifiableCollection(miembros);
-	}
 	
 	public void setIdCompTeat(int idCompTeat) {
 	    this.idCompTeat = idCompTeat;
@@ -68,9 +61,5 @@ public class TCompTea {
 	    this.costecontratacion = costecontratacion;
 	}
 
-	public void setPases(Collection<TPase> pases) {
-	    this.pases = pases;
-	}
-	
 	
 }
