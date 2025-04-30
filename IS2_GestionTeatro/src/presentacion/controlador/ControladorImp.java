@@ -22,18 +22,12 @@ public class ControladorImp extends Controlador {
 		switch(evento) {
 		//Factura
 		case ANYADIR_PASE_A_VENTA: {
-			//Es un mensaje de error
-			if (datos instanceof String) {
-				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_KO, (String)datos);
-				break;
-			}
 			try {
 				TLineaFactura newTLf = (TLineaFactura)datos;
 				SAFactura saFac = FactoriaAbstractaNegocio.getInstance().crearSAFactura();
-				int res = saFac.anyadirPaseAVenta(newTLf, VistaVentaEnCurso.getCarrito());
+				boolean res = saFac.anyadirPaseAVenta(newTLf, VistaVentaEnCurso.getCarrito());
 				
-				if (res == 1) FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_OK, null);
-				else if (res == 0) FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_KO, newTLf.getIdPase());
+				if (res) FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_OK, newTLf.getIdPase());
 				else FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_KO, null);
 			}
 			catch(BBDDReadException e) {
@@ -42,19 +36,13 @@ public class ControladorImp extends Controlador {
 			break;
 		}
 		case QUITAR_PASE_DE_VENTA: {
-			if (datos instanceof String) {
-				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_KO, (String)datos);
-				break;
-			}
-			
 			try {
 				TLineaFactura tLfAQuitar = (TLineaFactura)datos;
 				SAFactura saFac = FactoriaAbstractaNegocio.getInstance().crearSAFactura();
-				int res = saFac.quitarPaseDeVenta(tLfAQuitar, VistaVentaEnCurso.getCarrito());
+				boolean res = saFac.quitarPaseDeVenta(tLfAQuitar, VistaVentaEnCurso.getCarrito());
 						
-				if (res == 1) FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_OK, null);
-				else if (res == 0) FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_KO, tLfAQuitar.getIdPase());
-				else FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_KO, null);
+				if (res) FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_OK, tLfAQuitar.getIdPase());
+				else FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_KO, tLfAQuitar.getIdPase());
 			}
 			catch(BBDDReadException e) {
 				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_KO, e);
@@ -62,10 +50,6 @@ public class ControladorImp extends Controlador {
 			break;
 		}
 		case BUSCAR_FACTURA: {
-			if (datos instanceof String) {
-				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_KO, (String)datos);
-				break;
-			}
 			try {
 				int idFac = (int)datos;
 				SAFactura saFac = FactoriaAbstractaNegocio.getInstance().crearSAFactura();

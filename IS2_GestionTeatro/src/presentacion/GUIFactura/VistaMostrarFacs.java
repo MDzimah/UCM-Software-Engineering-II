@@ -8,7 +8,6 @@ import exceptions.BBDDReadException;
 import misc.*;
 import presentacion.IGUI;
 import presentacion.controlador.Controlador;
-import presentacion.factoria.FactoriaAbstractaPresentacion;
 
 
 @SuppressWarnings("serial")
@@ -41,13 +40,13 @@ public class VistaMostrarFacs extends JFrame implements IGUI {
 			@SuppressWarnings("unchecked")
 			Collection<Object> castedData = (Collection<Object>)datos;
 			String[] nomCols = {"ID","ID CLIENTE", "ID TAQUILLERO", "FECHA", "IMPORTE"};
-			FactoriaAbstractaPresentacion.getInstance().createTabla("MOSTRAR FACTURAS", nomCols, castedData, false);
+			JSwingUtils.createTabla("MOSTRAR FACTURAS", nomCols, castedData, false);
 		}
 		else if(evento == Evento.RES_KO) {
 			String error;
 			if (datos instanceof BBDDReadException) error = ((BBDDReadException)datos).getMessage();
 			else error = Messages.NO_HAY_DATOS;
-			FactoriaAbstractaPresentacion.getInstance().createErrorDialogMessage(Messages.X_BUSCAR_FACTURA + ' ' + Messages.MOTIVO.formatted(error));
+			JSwingUtils.createErrorDialogMessage(Messages.X_BUSCAR_FACTURA + ' ' + Messages.MOTIVO.formatted(error));
 		}
 	}
 

@@ -21,7 +21,7 @@ public abstract class ModificacionPaseEnVenta extends VistaDefault {
 	void initComps() {
 		JSwingUtils.setAppIcon(this);
 		lIdPase = new JLabel("Id pase:");
-		SpinnerNumberModel spinnerModel = new SpinnerNumberModel(0, 1, Long.MAX_VALUE, 1);
+		SpinnerNumberModel spinnerModel = new SpinnerNumberModel(0, 0, Long.MAX_VALUE, 1);
 		sIdPase = new JSpinner(spinnerModel);
 		/*
 		lFecha = new JLabel("Fecha (DD/MM/AAAA) Hora (HH:MM):");
