@@ -101,6 +101,7 @@ public class JSwingUtils {
 
 	@SuppressWarnings("serial")
 	private static class TablaDefault extends JFrame {
+		JButton aceptar; //solo para el modo de actualizacion
 
 	    private class DefaultTableModel extends AbstractTableModel {
 	        private final String[] columnNames;
@@ -291,13 +292,20 @@ public class JSwingUtils {
 	        JTableHeader header = table.getTableHeader();
 	        header.setFont(Constants.FontTablaDefaultCabecera());
 
-	        
 	        this.setRender(table, columnNames.length);
-	        this.add(new JScrollPane(table), BorderLayout.CENTER);
+	        if (!edicion) this.add(new JScrollPane(table), BorderLayout.CENTER);
+	        else {
+	        	this.aceptar = new JButton("aceptar");
+	        	this.add(new JScrollPane(table), BorderLayout.NORTH);
+	        	this.add(this.aceptar, BorderLayout.SOUTH);
+	        	
+	        }
 	        this.setLocationRelativeTo(null);
 	        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	        this.setVisible(true);
 	    }
+		
+		public JButton getListener() {return this.aceptar;}
 	}
 
 	
