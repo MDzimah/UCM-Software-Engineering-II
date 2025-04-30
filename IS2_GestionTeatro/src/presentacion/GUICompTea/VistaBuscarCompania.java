@@ -6,6 +6,7 @@ import javax.swing.JComponent;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 
+import integracion.factoria.FactoriaAbstractaIntegracion;
 import misc.Evento;
 import misc.Pair;
 import presentacion.IGUI;
@@ -13,39 +14,32 @@ import presentacion.controlador.Controlador;
 import presentacion.VistaDefault;
 import negocio.compTea.TCompTea;
 
-public class VistaAltaCompania extends VistaDefault implements IGUI{
+public class VistaBuscarCompania extends VistaDefault implements IGUI{
 	
 	
-	public VistaAltaCompania() {
+	public VistaBuscarCompania() {
 		initGUI();
 		this.setVisible(true);
 	}
 	
 	private void initGUI() {
 		
-		this.setTitle("Añadir Compañia Teatral");//no se si dan problemas la verdad
-		JButton anyadir= new JButton("Añadir");
+		this.setTitle("Buscar Compañia Teatral");//no se si dan problemas la verdad
+		JButton anyadir= new JButton("Buscar");
 		JButton cancelar = new JButton("Cancelar");
-		JLabel nombrelabel= new JLabel("nombre");
-		JLabel direccionlabel=new JLabel("direccion");
-		JLabel costeContratacionLabel= new JLabel("coste contratacion");
+		JLabel pregunta= new JLabel("Nombre de la compania para buscar");
 		
-		JTextField nombre = new JTextField();
-		JTextField direccion = new JTextField();
-		JTextField coste = new JTextField();
+		JTextField respuesta = new JTextField();
 		
 		
 		ArrayList<Pair<JComponent, JComponent>> campos = new ArrayList<>();
-		campos.add(new Pair<>(nombrelabel, nombre));
-		campos.add(new Pair<>(direccionlabel, direccion));
-		campos.add(new Pair<>(costeContratacionLabel, coste));
+		campos.add(new Pair<>(pregunta, respuesta));
 		anyadir.addActionListener(e ->{
-			String nombreString = nombre.getText(); 
-			String direccionString = direccion.getText();
-			String costeString= coste.getText();
-			TCompTea tCompTea= new TCompTea(-1,nombreString,direccionString,true,Float.parseFloat(costeString));
-			Controlador.getInstance().accion(Evento.CREAR_OBRA, tCompTea);
-			this.dispose();	//Igual cambio algo de aqui porque el problema es que como esta ahora se ejecuta el controller antes de cerrar la ventana
+			String nombreString = respuesta.getText(); 
+			FactoriaAbstractaIntegracion.getInstance().crearDAOCompTea();
+			
+			Controlador.getInstance().accion(Evento.BUSCAR_COMPANIA_TEATRAL, nombreString);
+			this.dispose();	
 		});
 		cancelar.addActionListener(e ->{
 			this.dispose();
@@ -59,7 +53,7 @@ public class VistaAltaCompania extends VistaDefault implements IGUI{
 	
 	@Override
 	public void actualizar(Evento evento, Object datos) {
-		// TODO Auto-generated method stub
+		
 		
 	}
 
