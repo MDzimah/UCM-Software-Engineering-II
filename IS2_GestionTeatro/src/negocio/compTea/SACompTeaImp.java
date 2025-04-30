@@ -29,13 +29,13 @@ public class SACompTeaImp implements SACompTea {
 	}
 
 	@Override
-	public int update(TCompTea ct) {
+	public int update(TCompTea ct) throws BBDDWriteException, BBDDReadException {
 		DAOCompTea daoCT=FactoriaAbstractaIntegracion.getInstance().crearDAOCompTea();
 		return daoCT.update(ct);
 	}
 
 	@Override
-	public int delete(int id) {
+	public int delete(int id) throws BBDDReadException, BBDDWriteException {
 		DAOCompTea daoCT=FactoriaAbstractaIntegracion.getInstance().crearDAOCompTea();
 		return daoCT.delete(id);
 	}

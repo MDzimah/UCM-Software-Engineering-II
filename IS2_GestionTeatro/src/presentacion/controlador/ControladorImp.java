@@ -5,6 +5,8 @@ import java.util.List;
 
 import exceptions.BBDDReadException;
 import misc.Evento;
+import negocio.compTea.SACompTea;
+import negocio.compTea.TCompTea;
 import negocio.factoria.FactoriaAbstractaNegocio;
 import negocio.factura.*;
 import negocio.obra.*;
@@ -243,7 +245,56 @@ public class ControladorImp extends Controlador {
 		}
 		
 		//CompTea
-		
+		case ACTUALIZAR_COMPANIA_TEATRAL:
+		{
+			try {
+				SACompTea saCompTea=FactoriaAbstractaNegocio.getInstance().crearSACompTea();
+				TCompTea tCompTea = (TCompTea)datos;
+				saCompTea.update(tCompTea);
+				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_OK, null);//TODO no se si hay que mostrar aqui
+			}
+			catch(Exception e) {
+				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_KO, "Error: " +e.getMessage());
+			}
+		}
+		case BUSCAR_COMPANIA_TEATRAL:
+		{
+			try {
+				SACompTea saCompTea=FactoriaAbstractaNegocio.getInstance().crearSACompTea();
+				String nombre =(String)datos;
+				saCompTea.
+			}
+			catch(Exception e) {
+				
+			}
+		}
+		case ELIMINAR_COMPANIA_TEATRAL:
+		{
+			try {
+				
+			}
+			catch(Exception e) {
+				
+			}
+		}
+		case ALTA_COMPANIA_TEATRAL:
+		{
+			try {
+				
+			}
+			catch(Exception e) {
+				
+			}
+		}
+		case MOSTRAR_COMPANIA_TEATRAL:
+		{
+			try {
+				
+			}
+			catch(Exception e) {
+				
+			}
+		}
 		
 		//MiemCompTea
 		case ACTUALIZAR_MIEMBRO_COMPANIA:
