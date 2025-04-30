@@ -1,7 +1,6 @@
 package presentacion.GUIFactura;
 
 import java.awt.*;
-import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Collection;
 
@@ -30,23 +29,23 @@ public class VistaBuscarFac extends VistaDefault {
 		JPanel mainPanel = new JPanel(new BorderLayout());
 		mainPanel.setSize(Constants.getScaledScreenDimension(2, 2));
 		this.lIdFac = new JLabel("Id factura:");
-		SpinnerNumberModel spinnerModel = new SpinnerNumberModel(0, 0, Long.MAX_VALUE, 1);
+		SpinnerNumberModel spinnerModel = new SpinnerNumberModel(0, 0, Integer.MAX_VALUE, 1);
 		this.sIdFac = new JSpinner(spinnerModel);
 		this.buscar = new JButton("Buscar");
 		this.cancel = new JButton("Cancelar");
 		
 		ArrayList<Pair<JComponent, JComponent>> labeledComponents = new ArrayList<>();
 		labeledComponents.add(new Pair<>(lIdFac, sIdFac));
-		super.initComps(labeledComponents, cancel, buscar);
+		super.initComps(labeledComponents, buscar, cancel);
 		
 		buscar.addActionListener(e->{
 			try {
 				sIdFac.commitEdit();
-				int idFac = (int)sIdFac.getValue();
-				Controlador.getInstance().accion(Evento.BUSCAR_FACTURA, idFac);
+				Integer idFac = (Integer)sIdFac.getValue();
+				SwingUtilities.invokeLater(()->{Controlador.getInstance().accion(Evento.BUSCAR_FACTURA, idFac);});
 				dispose();
 			}
-			catch(ParseException ex) {
+			catch(Exception ex) {
 				sIdFac.updateUI();
 			}
 		});
@@ -63,13 +62,12 @@ public class VistaBuscarFac extends VistaDefault {
 			Collection<Object> fac = new ArrayList<Object>();
 			fac.add((TFactura)datos);
 			String[] nomCols = {"ID","ID CLIENTE", "ID TAQUILLERO", "FECHA", "IMPORTE", "SUBTOTAL"};
-			
-			JSwingUtils.createTabla("BUSCAR FACTURA", nomCols, fac, true);
+
+			JSwingUtils.createTabla("BUSCAR FACTURA", nomCols, fac, true, false);
 		}
 		else if(evento == Evento.RES_KO) {
 			String error;
-			if (datos instanceof String) error = (String)datos;
-			else if (datos instanceof BBDDReadException) error = ((BBDDReadException)datos).getMessage();
+			if (datos instanceof BBDDReadException) error = ((BBDDReadException)datos).getMessage();
 			else error = Messages.ID_NO_ENCONTRADO.formatted(String.valueOf(((int)datos)));
 			JSwingUtils.createErrorDialogMessage(Messages.X_BUSCAR_FACTURA + ' ' + Messages.MOTIVO.formatted(error));
 		}

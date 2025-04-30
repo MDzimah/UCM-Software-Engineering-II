@@ -1,5 +1,4 @@
 package presentacion.GUIFactura;
-import java.text.ParseException;
 import java.util.*;
 
 import javax.swing.*;
@@ -21,7 +20,7 @@ public abstract class ModificacionPaseEnVenta extends VistaDefault {
 	void initComps() {
 		JSwingUtils.setAppIcon(this);
 		lIdPase = new JLabel("Id pase:");
-		SpinnerNumberModel spinnerModel = new SpinnerNumberModel(0, 0, Long.MAX_VALUE, 1);
+		SpinnerNumberModel spinnerModel = new SpinnerNumberModel(0, 0, Integer.MAX_VALUE, 1);
 		sIdPase = new JSpinner(spinnerModel);
 		/*
 		lFecha = new JLabel("Fecha (DD/MM/AAAA) Hora (HH:MM):");
@@ -59,10 +58,10 @@ public abstract class ModificacionPaseEnVenta extends VistaDefault {
 				int ctdad = (Integer)sCtdad.getValue(); 
 			
 				TLineaFactura tLf = new TLineaFactura(idPase, ctdad);
-				Controlador.getInstance().accion(evento, tLf);
+				SwingUtilities.invokeLater(()->{Controlador.getInstance().accion(evento, tLf);});
 				dispose();
 			}
-			catch(ParseException ex) {
+			catch(Exception ex) {
 				sCtdad.updateUI();
 				sIdPase.updateUI();
 			}
@@ -70,5 +69,4 @@ public abstract class ModificacionPaseEnVenta extends VistaDefault {
 		
 		cancel.addActionListener(e->{dispose();});
 	}
-	
 }

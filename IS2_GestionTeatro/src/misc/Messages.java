@@ -20,18 +20,22 @@ public class Messages {
 	public static final String EX_OBRA_BORRADA_CORRECT = "La obra ha sido borrada correctamente.";
 
 	
-	//Ops. canceladas
-	public static final String X_ANYADIR_PASE_A_VENTA = "No se ha podido añadir el pase con id \"%s\" al carrito.";
+	//Ops. con error
+	//Factura
+	public static final String X_ANYADIR_PASE_A_VENTA = "No se ha podido añadir el pase al carrito.";
 	public static final String X_VENTA_CERRADA = "No se ha podido realizar la venta.";
 	public static final String X_QUITAR_PASE_DE_VENTA = "No se ha podido quitar el pase del carrito.";
-	public static final String X_BUSCAR_FACTURA = "No se ha encontrado la factura con dicho id.";
-	public static final String X_MOSTRAR_FACTURAS = "No hay facturas para mostrar.";
+	public static final String X_BUSCAR_FACTURA = "No se ha encontrado la factura.";
+	public static final String X_MOSTRAR_FACTURAS = "No se han podido mostrar las facturas.";
+	
+	//Pase
 	public static final String X_MOSTRAR_PASES= "No se han podido mostrar pases.";
 	public static final String X_PASE_CREADO = "No se ha podido crear el pase.";
 	public static final String X_PASE_BUSCADO = "No se ha podido encontrar el pase solicitado.";
 	public static final String X_PASE_ELIMINADO = "No se ha podido eliminar el pase solicitado.";
 	public static final String X_PASE_ACTUALIZADO = "No se ha podido actualizar el pase solicitado.";
 	
+	//Miembros de la comp. tea.
 	public static final String X_MIEMBRO_CONTRATADO = "No se ha podido contratar al nuevo miembro exitosamente.";
 	public static final String X_MIEMBRO_ENCONTRADO = "No se ha podido encontrar el miembro solicitado.";
 	public static final String X_MIEMBRO_ACTUALIZADO = "No se ha podido actualizar el miembro solicitado.";
@@ -40,9 +44,9 @@ public class Messages {
 	
 	//Motivos por ops canceladas
 	public static final String MOTIVO = "Motivo: \"%s\".";
-	public static final String ID_NO_ENCONTRADO = "El id \"%s\" no se ha encontrado.";
-	public static final String NO_HAY_DATOS = "No hay datos para mostrar.";
-	public static final String NO_EN_CARRITO = "El pase no se encuentra en el carrito.";
+	public static final String ID_NO_ENCONTRADO = "El id \"%s\" no se ha encontrado";
+	public static final String NO_HAY_DATOS = "No hay datos para mostrar";
+	public static final String NO_EN_CARRITO = "El pase no se encuentra en el carrito";
 
 	
 	// NOTE: seguramente lo cambie mas adelante

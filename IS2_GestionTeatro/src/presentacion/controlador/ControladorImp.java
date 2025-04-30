@@ -75,7 +75,7 @@ public class ControladorImp extends Controlador {
 				SAFactura saFac = FactoriaAbstractaNegocio.getInstance().crearSAFactura();
 				Collection<TFactura> allFacturas = saFac.allFacturas();
 				
-				if (!allFacturas.isEmpty()) FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_OK, allFacturas); 
+				if (allFacturas != null && !allFacturas.isEmpty()) FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_OK, allFacturas); 
 				else FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_KO, null); 
 			}
 			catch(BBDDReadException e) {
@@ -183,7 +183,7 @@ public class ControladorImp extends Controlador {
 			}
 			break;
 		}
-		case MODIFICAR_OBRA:
+		case ACTUALIZAR_OBRA:
 		{
 			try {
 				SAObra saObra = FactoriaAbstractaNegocio.getInstance().crearSAObra();
@@ -224,7 +224,7 @@ public class ControladorImp extends Controlador {
 		{
 			try {
 				SAObra saObra = FactoriaAbstractaNegocio.getInstance().crearSAObra();
-				List<TObra> obras = (List<TObra>) saObra.readActive();
+				List<TObra> obras = (List<TObra>) saObra.readAll();
 				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_OK, obras);
 			}
 			catch(Exception e) {

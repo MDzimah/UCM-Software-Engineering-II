@@ -6,32 +6,30 @@ import javax.swing.*;
 
 import exceptions.BBDDReadException;
 import misc.*;
-import presentacion.IGUI;
+import presentacion.VistaDefault;
 import presentacion.controlador.Controlador;
 
 
 @SuppressWarnings("serial")
-public class VistaMostrarFacs extends JFrame implements IGUI {
+public class VistaMostrarFacs extends VistaDefault {
 	private JButton mostrar;
 	private JButton cancel;
 	
 	public VistaMostrarFacs() {
-		super("MOSTRAR FACTURAS");
+		this.setTitle("MOSTRAR FACTURAS");
 		JSwingUtils.setAppIcon(this);
 		this.mostrar = new JButton("Mostrar");
 		this.cancel = new JButton("Cancelar");
-		JPanel responsePanel = JSwingUtils.createResponsePair(this.mostrar, this.cancel);
-		responsePanel.setSize(Constants.getScaledScreenDimension(2, 2));
+		this.initComps(null, mostrar, cancel);
 		
 		mostrar.addActionListener(e->{
-			Controlador.getInstance().accion(Evento.MOSTRAR_FACTURAS, null);
+			SwingUtilities.invokeLater(()->{Controlador.getInstance().accion(Evento.MOSTRAR_FACTURAS, null);});
 			dispose();
 		});
 		
 		cancel.addActionListener(e->{dispose();});
 		
 		this.setVisible(true);
-		this.setLocationRelativeTo(null);
 	}
 	
 	@Override
@@ -40,14 +38,14 @@ public class VistaMostrarFacs extends JFrame implements IGUI {
 			@SuppressWarnings("unchecked")
 			Collection<Object> castedData = (Collection<Object>)datos;
 			String[] nomCols = {"ID","ID CLIENTE", "ID TAQUILLERO", "FECHA", "IMPORTE"};
-			JSwingUtils.createTabla("MOSTRAR FACTURAS", nomCols, castedData, false);
+			
+			JSwingUtils.createTabla("MOSTRAR FACTURAS", nomCols, castedData, false, false);
 		}
 		else if(evento == Evento.RES_KO) {
 			String error;
 			if (datos instanceof BBDDReadException) error = ((BBDDReadException)datos).getMessage();
 			else error = Messages.NO_HAY_DATOS;
-			JSwingUtils.createErrorDialogMessage(Messages.X_BUSCAR_FACTURA + ' ' + Messages.MOTIVO.formatted(error));
+			JSwingUtils.createErrorDialogMessage(Messages.X_MOSTRAR_FACTURAS + ' ' + Messages.MOTIVO.formatted(error));
 		}
 	}
-
 }
