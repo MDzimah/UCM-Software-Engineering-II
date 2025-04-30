@@ -37,7 +37,7 @@ public class VistaConsultarObra extends VistaDefault implements IGUI{
 		ArrayList<Pair<JComponent, JComponent>> campos = new ArrayList<>();
 		campos.add(new Pair<>(id1, id));
 
-		super.initComps(campos, consultar, cancelar, false);
+		super.initComps(campos, consultar, cancelar);
 		
 		//Declaramos los listeners
 		consultar.addActionListener(e ->{
@@ -58,10 +58,10 @@ public class VistaConsultarObra extends VistaDefault implements IGUI{
 			String[] nomCols = {"ID","TITULO", "AUTOR", "GENERO", "SINOPSIS"};
 			Collection<Object> obra= new LinkedList<Object>();
 			obra.add(datos);
-			FactoriaAbstractaPresentacion.getInstance().createTabla("CONSULTAR OBRA", nomCols, obra, true);			
+			JSwingUtils.createTabla("MOSTRAR FACTURAS", nomCols, obra, false);
 		}
 		else if(evento==Evento.RES_KO) {
-			FactoriaAbstractaPresentacion.getInstance().createErrorDialogMessage("No se ha podido acceder a la obra.\n" +(String)datos);
+			JSwingUtils.createErrorDialogMessage("No se han podido acceder a la obra.\n" + (String)datos);
 		}
 	}
 }

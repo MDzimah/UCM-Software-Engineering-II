@@ -3,13 +3,14 @@ package presentacion.GUIObra;
 import java.util.Collection;
 
 import misc.Evento;
+import misc.JSwingUtils;
 import presentacion.IGUI;
 import presentacion.controlador.Controlador;
 import presentacion.factoria.FactoriaAbstractaPresentacion;
 
-public class VistaMostrarActivas implements IGUI{
+public class VistaMostrarTodas implements IGUI{
 
-	public VistaMostrarActivas() {
+	public VistaMostrarTodas() {
 		Controlador.getInstance().accion(Evento.LISTAR_OBRAS, null);
 	}
 	
@@ -17,10 +18,10 @@ public class VistaMostrarActivas implements IGUI{
 	public void actualizar(Evento evento, Object datos) {
 		if(evento==Evento.RES_OK) {
 			String[] nomCols = {"ID","TITULO", "AUTOR", "GENERO", "SINOPSIS"};
-			FactoriaAbstractaPresentacion.getInstance().createTabla("MOSTRAR OBRAS ACTIVAS", nomCols, (Collection<Object>)datos, true);	
+			JSwingUtils.createTabla("MOSTRAR OBRAS", nomCols, (Collection<Object>)datos, false);
 		}
 		else if(evento==Evento.RES_KO) {
-			FactoriaAbstractaPresentacion.getInstance().createDialogMessage("No se han podido mostrar las obras.\n" + (String)datos);
+			JSwingUtils.createErrorDialogMessage("No se han podido mostrar las obras.\n" + (String)datos);
 		}
 	}
 }

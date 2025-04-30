@@ -3,6 +3,12 @@ package presentacion.factoria;
 import misc.Evento;
 import presentacion.*;
 import presentacion.GUIFactura.*;
+import presentacion.GUIObra.VistaActualizarObra;
+import presentacion.GUIObra.VistaAgregarObra;
+import presentacion.GUIObra.VistaBorrarObra;
+import presentacion.GUIObra.VistaBuscarObra;
+import presentacion.GUIObra.VistaConsultarObra;
+import presentacion.GUIObra.VistaMostrarTodas;
 import presentacion.GUIPase.VistaActualizarPase;
 import presentacion.GUIPase.VistaBuscarPase;
 import presentacion.GUIPase.VistaConsultarPase;
@@ -44,7 +50,12 @@ public class FactoriaPresentacion extends FactoriaAbstractaPresentacion {
 		case ACTUALIZAR_PASE: return new VistaActualizarPase();
 
 		//Obra
-		
+		case CREAR_OBRA: return new VistaAgregarObra();
+		case ELIMINAR_OBRA: return new VistaBorrarObra();
+		case ACTUALIZAR_OBRA: return new VistaActualizarObra();
+		case CONSULTAR_OBRA: return new VistaBuscarObra();
+		case BUSCAR_OBRA: return new VistaConsultarObra();
+		case LISTAR_OBRAS: return new VistaMostrarTodas();
 		
 		//CompTea
 		

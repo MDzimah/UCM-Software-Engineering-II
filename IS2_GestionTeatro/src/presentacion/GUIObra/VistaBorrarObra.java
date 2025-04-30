@@ -9,6 +9,7 @@ import javax.swing.JLabel;
 import javax.swing.JTextField;
 
 import misc.Evento;
+import misc.JSwingUtils;
 import misc.Pair;
 import presentacion.IGUI;
 import presentacion.controlador.Controlador;
@@ -38,7 +39,7 @@ public class VistaBorrarObra extends VistaDefault implements IGUI{
 		ArrayList<Pair<JComponent, JComponent>> campos = new ArrayList<>();
 		campos.add(new Pair<>(id1, id));
 
-		super.initComps(campos, eliminar, cancelar, false);
+		super.initComps(campos, eliminar, cancelar);
 		
 		//Declaramos los listeners
 		eliminar.addActionListener(e ->{
@@ -56,10 +57,12 @@ public class VistaBorrarObra extends VistaDefault implements IGUI{
 	@Override
 	public void actualizar(misc.Evento evento, Object datos) {
 		if(evento==Evento.RES_OK) {
-			FactoriaAbstractaPresentacion.getInstance().createDialogMessage("Se ha eliminado correctamente la obra " + (int)datos);			
+			JSwingUtils.createErrorDialogMessage("Se ha eliminado correctamente la obra " + (int)datos);
+
 		}
 		else if(evento==Evento.RES_KO) {
-			FactoriaAbstractaPresentacion.getInstance().createErrorDialogMessage("No se ha podido eliminar la obra.\n" +(String)datos);
+			JSwingUtils.createErrorDialogMessage("No se ha podido eliminar la obra.\n" +(String)datos);
+
 		}
 	}
 }

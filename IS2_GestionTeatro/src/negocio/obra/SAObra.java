@@ -14,10 +14,10 @@ public interface SAObra {
 	public TObra read(int id) throws BBDDReadException, UnknownObraException;
 	public int update(TObra o) throws BBDDReadException, BBDDWriteException, UnknownObraException;
 	public int delete (int id) throws BBDDReadException, BBDDWriteException, UnknownObraException;
-	public Collection<TObra> readActive() throws BBDDReadException, UnknownObraException;
+	public Collection<TObra> readAll() throws BBDDReadException, UnknownObraException;
 	/**
 	 * 
-	 * @param params - params - Integer Id, String titulo, String autor, String genero, Boolean activo
+	 * @param params - params - String titulo, String autor, String genero
 	 * @return
 	 * @throws BBDDReadException
 	 * @throws UnknownObraException

@@ -52,16 +52,10 @@ public class SAObraImp implements SAObra {
 	}
 
 	@Override
-	public Collection<TObra> readActive() throws BBDDReadException, UnknownObraException {
-		DAOPase daoPase = FactoriaAbstractaIntegracion.getInstance().crearDAOPase();
+	public Collection<TObra> readAll() throws BBDDReadException, UnknownObraException {
 		DAOObra daoObra = FactoriaAbstractaIntegracion.getInstance().crearDAOObra();
 		
-		List<TObra> lista = new LinkedList<TObra>();
-		for(TObra obra: daoObra.getObras()) {
-			if(daoPase.readPorObra(obra.getIdObra()))
-					lista.add(obra);
-		}
-		
+		List<TObra> lista = daoObra.getAll();
 		if(lista.isEmpty())
 			throw new UnknownObraException();
 		else

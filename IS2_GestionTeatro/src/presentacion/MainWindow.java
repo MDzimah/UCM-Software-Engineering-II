@@ -10,6 +10,7 @@ import misc.Constants;
 import misc.Evento;
 import misc.JSwingUtils;
 import presentacion.controlador.Controlador;
+import presentacion.factoria.FactoriaAbstractaPresentacion;
 
 @SuppressWarnings("serial")
 public class MainWindow extends JFrame implements IGUI {
@@ -188,8 +189,45 @@ public class MainWindow extends JFrame implements IGUI {
         subsObra.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-           
+            	JDialog menuObra= new JDialog(MainWindow.this,"Menú obras", true);
+            	
+            	JButton actualizar, agregar, borrar, buscar, consultar, mostrar;
+
+            	actualizar = new JButton("Actualizar obra");
+        		agregar = new JButton("Agregar obra");
+        		borrar = new JButton("Borrar obra");
+        		buscar = new JButton("Buscar obras por campos");
+        		consultar = new JButton("Consultar obra por id");
+        		mostrar = new JButton("Mostrar obras en cartelera");
+        		
+        		actualizar.addActionListener((ev)->{
+        			FactoriaAbstractaPresentacion.getInstance().createVista(Evento.ACTUALIZAR_OBRA);
+        		});
+        		agregar.addActionListener((ev)->{
+        			FactoriaAbstractaPresentacion.getInstance().createVista(Evento.CREAR_OBRA);
+        		});
+        		borrar.addActionListener((ev)->{
+        			FactoriaAbstractaPresentacion.getInstance().createVista(Evento.ELIMINAR_OBRA);
+        		});		
+        		buscar.addActionListener((ev)->{
+        			FactoriaAbstractaPresentacion.getInstance().createVista(Evento.BUSCAR_OBRA);
+        		});		
+        		consultar.addActionListener((ev)->{
+        			FactoriaAbstractaPresentacion.getInstance().createVista(Evento.CONSULTAR_OBRA);
+        		});		
+        		mostrar.addActionListener((ev)->{
+        			FactoriaAbstractaPresentacion.getInstance().createVista(Evento.LISTAR_OBRAS);
+        		});
+        		
+        		menuObra.add(actualizar);        		
+        		menuObra.add(agregar);
+        		menuObra.add(borrar);
+        		menuObra.add(buscar);
+        		menuObra.add(consultar);
+        		menuObra.add(mostrar);
+        		menuObra.setVisible(true);
             }
+            
         });
 
         subsCompTea.addActionListener(new ActionListener() {

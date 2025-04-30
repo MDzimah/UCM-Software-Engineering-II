@@ -11,6 +11,7 @@ import javax.swing.JLabel;
 import javax.swing.JTextField;
 
 import misc.Evento;
+import misc.JSwingUtils;
 import misc.Pair;
 import presentacion.IGUI;
 import presentacion.VistaDefault;
@@ -45,7 +46,7 @@ public class VistaBuscarObra extends VistaDefault implements IGUI{
 			campos.add(new Pair<>(autor1, autor));
 			campos.add(new Pair<>(genero1, genero));
 
-			super.initComps(campos, buscar, cancelar, false);
+			super.initComps(campos, buscar, cancelar);
 			
 			//Declaramos los listeners
 			buscar.addActionListener(e ->{
@@ -66,10 +67,11 @@ public class VistaBuscarObra extends VistaDefault implements IGUI{
 		public void actualizar(misc.Evento evento, Object datos) {
 			if(evento==Evento.RES_OK) {
 				String[] nomCols = {"ID","TITULO", "AUTOR", "GENERO", "SINOPSIS"};
-				FactoriaAbstractaPresentacion.getInstance().createTabla("CONSULTAR OBRA", nomCols, (Collection<Object>)datos, true);			
+				JSwingUtils.createTabla("CONSULTAR OBRAS", nomCols, (Collection<Object>)datos, false);
+
 			}
 			else if(evento==Evento.RES_KO) {
-				FactoriaAbstractaPresentacion.getInstance().createErrorDialogMessage("No se han encontrado obras.\n" +(String)datos);
+				JSwingUtils.createErrorDialogMessage("No se han encontrado obras.\n" +(String)datos);
 			}
 		}
 

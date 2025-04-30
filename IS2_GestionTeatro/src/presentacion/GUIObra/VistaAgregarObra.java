@@ -7,6 +7,7 @@ import javax.swing.JLabel;
 import javax.swing.JTextField;
 
 import misc.Evento;
+import misc.JSwingUtils;
 import misc.Pair;
 import negocio.obra.TObra;
 import presentacion.IGUI;
@@ -42,7 +43,7 @@ public class VistaAgregarObra extends VistaDefault implements IGUI{
 		campos.add(new Pair<>(genero1, genero));
 		campos.add(new Pair<>(sinopsis1, sinopsis));
 
-		super.initComps(campos, agregar, cancelar, false);
+		super.initComps(campos, agregar, cancelar);
 		
 		//Declaramos los listeners
 		agregar.addActionListener(e ->{
@@ -62,10 +63,12 @@ public class VistaAgregarObra extends VistaDefault implements IGUI{
 	@Override
 	public void actualizar(misc.Evento evento, Object datos) {
 		if(evento==Evento.RES_OK) {
-			FactoriaAbstractaPresentacion.getInstance().createDialogMessage("Se ha añadido correctamente la obra " + (int)datos);			
+			JSwingUtils.createErrorDialogMessage("Se ha añadido correctamente la obra " + (int)datos);
+
 		}
 		else if(evento==Evento.RES_KO) {
-			FactoriaAbstractaPresentacion.getInstance().createErrorDialogMessage("No se ha podido añadir la obra.\n" +(String)datos);
+			JSwingUtils.createErrorDialogMessage("No se ha podido añadir la obra.\n" +(String)datos);
+
 		}
 	}
 

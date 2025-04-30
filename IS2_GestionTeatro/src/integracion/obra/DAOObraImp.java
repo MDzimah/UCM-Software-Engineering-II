@@ -117,7 +117,7 @@ public class DAOObraImp implements DAOObra {
 	}
 	
 	@Override
-	public List<TObra> getObras() throws BBDDReadException {
+	public List<TObra> getAll() throws BBDDReadException {
 		JSONObject bdObras = OpsBBDD.read(Messages.BDOb);
 		List<TObra> IdObras = new LinkedList<TObra>();
 		
