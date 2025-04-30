@@ -81,8 +81,10 @@ public class JSwingUtils {
      * @param datos a collection of business objects to be shown in the table
      * @param consultar if {@code true}, the table will open in a compact size suitable for consulting
      */
-	public static void createTabla(String tituloTabla, String[] nomCols, Collection<Object> datos, boolean consultar, boolean edicion) {
-		new TablaDefault(tituloTabla, nomCols, datos, consultar, edicion).setVisible(true);
+	public static JFrame createTabla(String tituloTabla, String[] nomCols, Collection<Object> datos, boolean consultar, boolean edicion) {
+		JFrame jframe = new TablaDefault(tituloTabla, nomCols, datos, consultar, edicion);
+		jframe.setVisible(true);
+		return jframe;
 	}
 	
 	//Diálogos

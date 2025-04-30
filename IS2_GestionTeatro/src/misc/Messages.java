@@ -30,6 +30,7 @@ public class Messages {
 	public static final String X_PASE_CREADO = "No se ha podido crear el pase.";
 	public static final String X_PASE_BUSCADO = "No se ha podido encontrar el pase solicitado.";
 	public static final String X_PASE_ELIMINADO = "No se ha podido eliminar el pase solicitado.";
+	public static final String X_PASE_ACTUALIZADO = "No se ha podido actualizar el pase solicitado.";
 	
 	public static final String X_MIEMBRO_CONTRATADO = "No se ha podido contratar al nuevo miembro exitosamente.";
 	public static final String X_MIEMBRO_ENCONTRADO = "No se ha podido encontrar el miembro solicitado.";
