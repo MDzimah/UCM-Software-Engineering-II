@@ -54,7 +54,7 @@ public class FactoriaPresentacion extends FactoriaAbstractaPresentacion {
 		case BUSCAR_MIEMBRO_COMPANIA:
 		case CONTRATAR_MIEMBRO_COMPANIA:
 		case DESPEDIR_MIEMBRO_COMPANIA:
-		case LISTAR_MIEMBRO_COMPANIA:
+		case LISTAR_MIEMBROS_COMPANIA:
 		
 		default: return null;
 		

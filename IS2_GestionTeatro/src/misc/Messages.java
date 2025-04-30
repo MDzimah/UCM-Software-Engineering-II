@@ -54,7 +54,6 @@ public class Messages {
 	public static final String ERROR_LECTURA_BBDD = "Error al leer la BBDD de %s";
 	public static final String ERROR_ESCRITURA_BBDD = "Error al escribr en la BBDD de %s";
 	public static final String ERROR = "ERROR: %s"; 
-
 	
 	//Path a file
 	public static final String PATH_TO_BBDD = "resources/BBDD/%s";
