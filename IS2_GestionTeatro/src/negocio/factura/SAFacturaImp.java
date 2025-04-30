@@ -29,25 +29,24 @@ public class SAFacturaImp implements SAFactura {
 
 	@Override
 	public boolean anyadirPaseAVenta(TLineaFactura newTLf, Collection<TLineaFactura> carrito) throws BBDDReadException {
-		Collection<TLineaFactura> carr = VistaVentaEnCurso.getCarrito();
-		
-		boolean estaba = false;
 		//Recorremos el carrito para ver si ya hay una instancia de la línea factura
-		//Si sí, entonces sumamos a la cantidad que ya había (asegurando que queda stock)
-		for(TLineaFactura tLf : carr) {
-			if (tLf.getIdPase() == newTLf.getIdPase()) {
-				tLf.setCantidad(tLf.getCantidad() + newTLf.getCantidad());
-				estaba = true;
-				break;
-			}
-		}
 		
-		//Dependiendo de si había instancia previa de newTLf en el carrito, devolvemos true o false
-		if (estaba) return true;
-		else {
-			carrito.add(newTLf);
-			return false;
+		SAPase saP = FactoriaAbstractaNegocio.getInstance().crearSAPase(); 		
+ 		TPase tPase = saP.read(newTLf.getIdPase());
+ 		
+ 		if (tPase != null) {
+ 			boolean estaba = false;
+			for(TLineaFactura tLf : carrito) {
+				if (tLf.getIdPase() == newTLf.getIdPase()) {
+					tLf.setCantidad(tLf.getCantidad() + newTLf.getCantidad());
+					estaba = true;
+					break;
+				}
+			}
+			if (!estaba) carrito.add(newTLf);
+			return true;
 		}
+ 		else return false;
 	}
 	
 	@Override
