@@ -42,7 +42,7 @@ public class VistaListarPases extends VistaDefault {
 		if (evento == Evento.RES_OK) {
 			Collection<Object> pases = (Collection<Object>)datos;
 			String[] head = {"ID","ID COMPANYA TEATRAL", "ID OBRA", "FECHA", "STOCK", "PRECIO"};
-			JSwingUtils.createTabla("MOSTRAR PASES", head, pases, false);
+			JSwingUtils.createTabla("MOSTRAR PASES", head, pases, false, false);
 		}
 		else if(evento == Evento.RES_KO) {
 			JSwingUtils.createErrorDialogMessage(Messages.X_PASE_CREADO + ' ' + Messages.MOTIVO.formatted((String)datos));

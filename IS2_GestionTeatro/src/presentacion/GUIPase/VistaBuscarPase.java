@@ -58,8 +58,8 @@ public class VistaBuscarPase extends VistaDefault {
 			p.add((TFactura)datos);
 			String[] nomCols = {"ID","ID COMPANYA", "ID OBRA", "FECHA", "STOCK", "PRECIO"};
 			//FactoriaAbstractaPresentacion.getInstance().createDialogMessage(Messages.EX_PASE_BUSCADO);
-			JSwingUtils.createTabla("BUSCAR PASE", nomCols, p, true); //se crea una tabla con una sola linea que contiene
-																	  //la info del transfer del pase buscado
+			JSwingUtils.createTabla("BUSCAR PASE", nomCols, p, true, false); //se crea una tabla con una sola linea que contiene
+																	  		 //la info del transfer del pase buscado
 		}
 		else if(evento==Evento.RES_KO) {
 			JSwingUtils.createErrorDialogMessage(Messages.X_PASE_BUSCADO + ' ' + Messages.MOTIVO.formatted((String)datos));
