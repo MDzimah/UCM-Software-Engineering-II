@@ -112,6 +112,7 @@ public class ControladorImp extends Controlador {
 			} catch(Exception e) {
 				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_KO, e);
 			}
+			break;
 		}
 		case ELIMINAR_PASE: {
 			if (datos instanceof String) {
@@ -120,14 +121,14 @@ public class ControladorImp extends Controlador {
 			}
 			try {
 				SAPase saPase = FactoriaAbstractaNegocio.getInstance().crearSAPase();
-				int idBuscado = ((TPase) datos).getIdPase();
+				int idBuscado = (int) datos;
 				saPase.delete(idBuscado);
 				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_OK, null);
 			} catch(Exception e) {
 				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_KO, e);
 			}
+			break;
 		}
-		case CONSULTAR_PASE: 
 		case BUSCAR_PASE: {
 			if (datos instanceof String) {
 				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_KO, (String)datos);
@@ -135,12 +136,13 @@ public class ControladorImp extends Controlador {
 			}
 			try {
 				SAPase saPase = FactoriaAbstractaNegocio.getInstance().crearSAPase();
-				int idBuscado = ((TPase) datos).getIdPase();
+				int idBuscado = (int) datos;
 				TPase tPaseBuscado = saPase.read(idBuscado);
 				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_OK, tPaseBuscado); //le paso el transfer para que lo muestre
 			} catch(Exception e) {
 				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_KO, e);
 			}
+			break;
 		}
 		case LISTAR_PASES:{
 			if (datos instanceof String) {
@@ -154,6 +156,7 @@ public class ControladorImp extends Controlador {
 			} catch(Exception e) {
 				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_KO, e);
 			}
+			break;
 		}
 		case ACTUALIZAR_PASE:
 		

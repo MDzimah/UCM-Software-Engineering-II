@@ -39,17 +39,16 @@ public class VistaBuscarPase extends VistaDefault {
 		ArrayList<Pair<JComponent, JComponent>> pairComponents = new ArrayList<>();
 		pairComponents.add(new Pair<>(IDPaseL, IDPaseT));
 		
-		super.initComps(pairComponents, buscar, cancelar, false);
+		super.initComps(pairComponents, buscar, cancelar);
 		
 		this.setVisible(true);
 		
 		buscar.addActionListener(e->{
-			TPase tPase = new TPase(Integer.valueOf(IDPaseT.getText()));
-			Controlador.getInstance().accion(Evento.BUSCAR_PASE, tPase);
+			Controlador.getInstance().accion(Evento.BUSCAR_PASE, Integer.valueOf(IDPaseT.getText()));
 			dispose();
 		});
 		
-		cancelar.addActionListener(e->{dispose(); this.setVisible(false);});
+		cancelar.addActionListener(e->{this.setVisible(false); dispose();});
 	}
 	
 	@Override
@@ -59,11 +58,11 @@ public class VistaBuscarPase extends VistaDefault {
 			p.add((TFactura)datos);
 			String[] nomCols = {"ID","ID COMPANYA", "ID OBRA", "FECHA", "STOCK", "PRECIO"};
 			//FactoriaAbstractaPresentacion.getInstance().createDialogMessage(Messages.EX_PASE_BUSCADO);
-			FactoriaAbstractaPresentacion.getInstance().createTabla("BUSCAR PASE", nomCols, p, true); //se crea una tabla con una sola linea que contiene
-																									   //la info del transfer del pase buscado
+			JSwingUtils.createTabla("BUSCAR PASE", nomCols, p, true, false); //se crea una tabla con una sola linea que contiene
+																	  		 //la info del transfer del pase buscado
 		}
 		else if(evento==Evento.RES_KO) {
-			FactoriaAbstractaPresentacion.getInstance().createErrorDialogMessage(Messages.X_PASE_BUSCADO + ' ' + Messages.MOTIVO.formatted((String)datos));
+			JSwingUtils.createErrorDialogMessage(Messages.X_PASE_BUSCADO + ' ' + Messages.MOTIVO.formatted((String)datos));
 		}
 	}
 

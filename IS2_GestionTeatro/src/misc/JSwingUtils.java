@@ -81,8 +81,10 @@ public class JSwingUtils {
      * @param datos a collection of business objects to be shown in the table
      * @param consultar if {@code true}, the table will open in a compact size suitable for consulting
      */
-	public static void createTabla(String tituloTabla, String[] nomCols, Collection<Object> datos, boolean consultar) {
-		new TablaDefault(tituloTabla, nomCols, datos, consultar).setVisible(true);
+	public static JFrame createTabla(String tituloTabla, String[] nomCols, Collection<Object> datos, boolean consultar, boolean edicion) {
+		JFrame jframe = new TablaDefault(tituloTabla, nomCols, datos, consultar, edicion);
+		jframe.setVisible(true);
+		return jframe;
 	}
 	
 	//Diálogos
@@ -103,10 +105,12 @@ public class JSwingUtils {
 	    private class DefaultTableModel extends AbstractTableModel {
 	        private final String[] columnNames;
 	        private final List<Object[]> datos;
+	        private final boolean editable;
 
-	        public DefaultTableModel(String[] nomCols, List<Object[]> datos) {
+	        public DefaultTableModel(String[] nomCols, List<Object[]> datos, boolean editable) {
 	            this.columnNames = nomCols;
 	            this.datos = datos;
+				this.editable = editable;
 	        }
 
 	        @Override
@@ -120,6 +124,11 @@ public class JSwingUtils {
 
 	        @Override
 	        public String getColumnName(int columnIndex) { return columnNames[columnIndex]; }
+	        
+	        @Override
+            public boolean isCellEditable(int row, int column) {
+                return editable;
+            }
 	    }
 
 	    //MultiLineTableCellRenderer inspirado por Channa Jayamuni en Stack Overflow
@@ -255,7 +264,7 @@ public class JSwingUtils {
 	        }
 	    }
 
-		public TablaDefault(String nombreTabla,  String[] columnNames, Collection<Object> data, boolean consultar) {
+		public TablaDefault(String nombreTabla,  String[] columnNames, Collection<Object> data, boolean consultar, boolean edicion) {
 	        this.setTitle(nombreTabla);
 	        this.setLayout(new BorderLayout());
 	        
@@ -275,7 +284,7 @@ public class JSwingUtils {
 	        	columnNames[i] = columnNames[i].toUpperCase();
 	        }
 	        
-	        DefaultTableModel model = new DefaultTableModel(columnNames, this.convert(data, columnNames.length));
+	        DefaultTableModel model = new DefaultTableModel(columnNames, this.convert(data, columnNames.length), edicion);
 	        JTable table = new JTable(model);
 	        
 	        //Cambiar apariencia del header de la tabla
@@ -290,6 +299,7 @@ public class JSwingUtils {
 	        this.setVisible(true);
 	    }
 	}
+
 	
 	  //PRUEBA DE LA TABLA
 	/*

@@ -9,6 +9,7 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
 import misc.Evento;
+import misc.JSwingUtils;
 import misc.Messages;
 import misc.Pair;
 import negocio.pase.TPase;
@@ -47,7 +48,7 @@ public class VistaCrearPase extends VistaDefault {
 		componentesEtiquetados.add(new Pair<>(idObraLabel,idObraText));
 		componentesEtiquetados.add(new Pair<>(cantidadStockLabel,cantidadStockText));
 		componentesEtiquetados.add(new Pair<>(precioLabel,precioText));
-		super.initComps(componentesEtiquetados, ok, cancelar, false);
+		super.initComps(componentesEtiquetados, ok, cancelar);
 		this.setVisible(true);
 		ok.addActionListener(e -> {
 			int idCompTea = Integer.valueOf(idCompTeaText.getText());
@@ -59,18 +60,18 @@ public class VistaCrearPase extends VistaDefault {
 			this.dispose();
 		});
 		cancelar.addActionListener(e ->{
-			this.dispose();
 			this.setVisible(false);
+			this.dispose();
 		});
 	}
 	
 	@Override
 	public void actualizar(Evento evento, Object datos) {
 		if (evento == Evento.RES_OK) {
-			FactoriaAbstractaPresentacion.getInstance().createDialogMessage(Messages.EX_PASE_CREADO);
+			JSwingUtils.createDialogMessage(Messages.EX_PASE_CREADO);
 		}
 		else if(evento == Evento.RES_KO) {
-			FactoriaAbstractaPresentacion.getInstance().createErrorDialogMessage(Messages.X_PASE_CREADO + ' ' + Messages.MOTIVO.formatted((String)datos));
+			JSwingUtils.createErrorDialogMessage(Messages.X_PASE_CREADO + ' ' + Messages.MOTIVO.formatted((String)datos));
 		}
 	}
 
