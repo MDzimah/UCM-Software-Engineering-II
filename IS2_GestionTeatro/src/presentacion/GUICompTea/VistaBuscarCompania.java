@@ -1,6 +1,8 @@
 package presentacion.GUICompTea;
 
 import java.util.ArrayList;
+import java.util.Collection;
+
 import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JLabel;
@@ -11,6 +13,7 @@ import misc.Evento;
 import misc.Pair;
 import presentacion.IGUI;
 import presentacion.controlador.Controlador;
+import presentacion.factoria.FactoriaAbstractaPresentacion;
 import presentacion.VistaDefault;
 import negocio.compTea.TCompTea;
 
@@ -53,7 +56,13 @@ public class VistaBuscarCompania extends VistaDefault implements IGUI{
 	
 	@Override
 	public void actualizar(Evento evento, Object datos) {
-		
+		if(evento==Evento.RES_OK) {
+			String[] columnas = {"ID","NOMBRE","DIRECCION","COSTE DE CONTRATACION"};
+			FactoriaAbstractaPresentacion.getInstance().createTabla("BUSCAR COMPANIA TEATRAL", columnas , (Collection<Object>)datos, true);			
+		}
+		else if(evento==Evento.RES_KO) {
+			FactoriaAbstractaPresentacion.getInstance().createErrorDialogMessage("NO EXISTEN LAS COMPANIAS:.\n" +(String)datos);
+		}
 		
 	}
 

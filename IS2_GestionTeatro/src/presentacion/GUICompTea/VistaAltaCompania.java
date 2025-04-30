@@ -44,7 +44,7 @@ public class VistaAltaCompania extends VistaDefault implements IGUI{
 			String direccionString = direccion.getText();
 			String costeString= coste.getText();
 			TCompTea tCompTea= new TCompTea(-1,nombreString,direccionString,true,Float.parseFloat(costeString));
-			Controlador.getInstance().accion(Evento.ALTA_COMPANIA, tCompTea);
+			Controlador.getInstance().accion(Evento.ALTA_COMPANIA_TEATRAL, tCompTea);
 			this.dispose();	//Igual cambio algo de aqui porque el problema es que como esta ahora se ejecuta el controller antes de cerrar la ventana
 		});
 		cancelar.addActionListener(e ->{
