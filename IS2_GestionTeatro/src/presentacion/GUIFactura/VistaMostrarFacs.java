@@ -16,7 +16,7 @@ public class VistaMostrarFacs extends VistaDefault {
 	private JButton cancel;
 	
 	public VistaMostrarFacs() {
-		this.setTitle("MOSTRAR FACTURAS");
+		this.setTitle("Mostrar facturas");
 		JSwingUtils.setAppIcon(this);
 		this.mostrar = new JButton("Mostrar");
 		this.cancel = new JButton("Cancelar");

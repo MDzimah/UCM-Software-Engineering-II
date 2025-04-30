@@ -42,7 +42,7 @@ public class VistaVentaEnCurso extends JFrame implements IGUI {
 	private JButton cancelar;
 	
 	public VistaVentaEnCurso() {
-		super("NUEVA VENTA");
+		super("Nueva venta");
 		JSwingUtils.setAppIcon(this);
 		this.setLayout(new BoxLayout(vistaCarrito, BoxLayout.Y_AXIS));
 		

@@ -37,7 +37,7 @@ public class VistaCerrarVenta extends VistaDefault {
 	public VistaCerrarVenta() {}
 
 	public VistaCerrarVenta(TFactura tFactura) {
-		this.setTitle("CERRAR VENTA");
+		this.setTitle("Cerrar venta");
 		JSwingUtils.setAppIcon(this);
 		this.carrito = tFactura.getCarrito();
 		this.labelCliente = new JLabel("DNI del cliente:");

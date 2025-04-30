@@ -24,7 +24,7 @@ public class VistaBuscarFac extends VistaDefault {
 	private JButton cancel;
 	
 	public VistaBuscarFac() {
-		this.setTitle("BUSCAR FACTURA");
+		this.setTitle("Buscar factura");
 		JSwingUtils.setAppIcon(this);
 		JPanel mainPanel = new JPanel(new BorderLayout());
 		mainPanel.setSize(Constants.getScaledScreenDimension(2, 2));

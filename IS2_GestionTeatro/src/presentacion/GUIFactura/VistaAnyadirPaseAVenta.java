@@ -9,7 +9,7 @@ import misc.Messages;
 public class VistaAnyadirPaseAVenta extends ModificacionPaseEnVenta {
 	
 	public VistaAnyadirPaseAVenta() {
-		this.setTitle("AÑADIR PASE A VENTA");
+		this.setTitle("Añadir pase a venta");
 		
 		super.initComps();
 		
