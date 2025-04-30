@@ -11,36 +11,33 @@ import exceptions.BBDDReadException;
 import misc.Constants;
 import misc.Evento;
 import misc.Messages;
+import misc.Pair;
 import misc.JSwingUtils;
 import negocio.factura.TFactura;
-import presentacion.IGUI;
+import presentacion.VistaDefault;
 import presentacion.controlador.Controlador;
 
 @SuppressWarnings("serial")
-public class VistaBuscarFac extends JFrame implements IGUI {
+public class VistaBuscarFac extends VistaDefault {
 	private JLabel lIdFac;
 	private JSpinner sIdFac;
 	private JButton buscar;
 	private JButton cancel;
 	
 	public VistaBuscarFac() {
-		super("BUSCAR FACTURA");
+		this.setTitle("BUSCAR FACTURA");
 		JSwingUtils.setAppIcon(this);
 		JPanel mainPanel = new JPanel(new BorderLayout());
 		mainPanel.setSize(Constants.getScaledScreenDimension(2, 2));
 		this.lIdFac = new JLabel("Id factura:");
 		SpinnerNumberModel spinnerModel = new SpinnerNumberModel(0, 0, Long.MAX_VALUE, 1);
 		this.sIdFac = new JSpinner(spinnerModel);
-		this.buscar = new JButton("Aceptar");
+		this.buscar = new JButton("Buscar");
 		this.cancel = new JButton("Cancelar");
 		
-		JPanel infoPanel = new JPanel();
-		infoPanel.setLayout(new BoxLayout(infoPanel, BoxLayout.Y_AXIS));
-		infoPanel.add(JSwingUtils.createComponentPair(this.lIdFac, this.sIdFac));
-		mainPanel.add(infoPanel, BorderLayout.CENTER);
-		
-		JPanel responsePanel = JSwingUtils.createResponsePair(buscar, cancel);
-		mainPanel.add(responsePanel, BorderLayout.SOUTH);
+		ArrayList<Pair<JComponent, JComponent>> labeledComponents = new ArrayList<>();
+		labeledComponents.add(new Pair<>(lIdFac, sIdFac));
+		super.initComps(labeledComponents, cancel, buscar);
 		
 		buscar.addActionListener(e->{
 			try {

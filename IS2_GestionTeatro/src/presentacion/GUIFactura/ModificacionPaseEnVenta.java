@@ -38,7 +38,7 @@ public abstract class ModificacionPaseEnVenta extends VistaDefault {
 		ArrayList<Pair<JComponent, JComponent>> labeledComponents = new ArrayList<>();
 		labeledComponents.add(new Pair<>(lIdPase, sIdPase));
 		labeledComponents.add(new Pair<>(lCtdad, sCtdad));
-		super.initComps(labeledComponents, ok, cancel, false);
+		super.initComps(labeledComponents, ok, cancel);
 	}
 	
 	void okAndCancelListener(Evento evento) {
