@@ -160,7 +160,7 @@ public class MainWindow extends JFrame implements IGUI {
             @Override
             public void actionPerformed(ActionEvent e) {
             	dispose();
-            	Controlador.getInstance().accion(Evento.MAINWINDOW, Evento.MENU_FACTURA);
+            	Controlador.getInstance().accion(Evento.MAINWINDOW, Evento.SUBS_FACTURA);
             }
         });
 
@@ -247,7 +247,7 @@ public class MainWindow extends JFrame implements IGUI {
 	@Override
 	public void actualizar(Evento evento, Object datos) {
 		switch(evento) {
-		case MENU_FACTURA: //Ventana de Jaime, q tendrá su propio actualizar q hará lo que sea
+		case SUBS_FACTURA: //Ventana de Jaime, q tendrá su propio actualizar q hará lo que sea
 		/*
 		 * 
 		 * 
