@@ -6,7 +6,9 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JComponent;
 import javax.swing.JLabel;
+import javax.swing.JSpinner;
 import javax.swing.JTextField;
+import javax.swing.SpinnerNumberModel;
 
 import misc.Pair;
 import negocio.miemCompTea.TMiemCompTea;
@@ -20,7 +22,7 @@ public class VistaActualizarMiembroCompania extends VistaDefault {
 	
 	private JTextField nombreField;
     private JTextField apellidoField;
-    private JTextField edadField;
+    private JSpinner edadField;
     private JTextField dniField;
     private JTextField emailField;    
     private JComboBox<String> generoField;
@@ -30,7 +32,8 @@ public class VistaActualizarMiembroCompania extends VistaDefault {
 
         nombreField = new JTextField();
         apellidoField = new JTextField();
-        edadField = new JTextField();
+        SpinnerNumberModel spinnerModel = new SpinnerNumberModel(0, 0, Integer.MAX_VALUE, 1);
+        edadField = new JSpinner(spinnerModel);
         dniField = new JTextField();
         emailField = new JTextField();       
         generoField = new JComboBox<String>();
@@ -51,22 +54,24 @@ public class VistaActualizarMiembroCompania extends VistaDefault {
         btnContratar.addActionListener(e -> actualizarMiembro());
         btnCancelar.addActionListener(e -> dispose());
 
-        this.initComps(componentes, btnContratar, btnCancelar, false);
+        this.initComps(componentes, btnContratar, btnCancelar);
         this.setTitle("Actualizar Miembro");
         this.setVisible(true);
+        this.setLocationRelativeTo(null);
     }
 
     private void actualizarMiembro() {
         String nombre = nombreField.getText();
         String apellido = apellidoField.getText();
-        int edad = Integer.valueOf(edadField.getText());
+        int edad = (Integer) edadField.getValue();
         String dni = dniField.getText();
         String email = emailField.getText();
         String genero = (String) generoField.getSelectedItem();
-        Genero generoEnum = genero == "Hombre" ? Genero.HOMBRE : Genero.MUJER;
+        Genero generoEnum = "Hombre".equals(genero) ? Genero.HOMBRE : Genero.MUJER;
         
         TMiemCompTea tMiem = new TMiemCompTea(dni, nombre, apellido, email, edad, true, generoEnum);
         Controlador.getInstance().accion(Evento.ACTUALIZAR_MIEMBRO_COMPANIA, tMiem);
+        dispose();
     }
 
 	@Override
