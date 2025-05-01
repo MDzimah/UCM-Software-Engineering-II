@@ -50,6 +50,7 @@ public class VistaAltaObra extends VistaDefault implements IGUI{
 		agregar.addActionListener(e ->{
 			String titulo2 = titulo.getText(), autor2= autor.getText(), genero2= genero.getText(), sinopsis2= sinopsis.getText();
 			TObra obra = new TObra(titulo2, autor2, genero2, sinopsis2);
+
 			SwingUtilities.invokeLater(()->{Controlador.getInstance().accion(Evento.CREAR_OBRA, obra);});
 			VistaAltaObra.this.dispose();
 		});

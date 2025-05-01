@@ -135,7 +135,10 @@ public class DAOObraImp implements DAOObra {
 		
 		Iterator<String> claves = bdObras.keys();
         while (claves.hasNext()) {
-           IdObras.add(readJSON(bdObras.getJSONObject(claves.next())));
+        	String clave = claves.next();
+            if (!clave.equals("LastKey")) {
+                IdObras.add(readJSON(bdObras.getJSONObject(clave)));
+            }
         }
 		return IdObras;
 		}
