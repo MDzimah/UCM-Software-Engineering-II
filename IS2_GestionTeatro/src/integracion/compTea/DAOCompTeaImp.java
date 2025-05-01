@@ -27,8 +27,13 @@ public class DAOCompTeaImp implements DAOCompTea {
 
 	@Override
 	public int create(TCompTea tCompTea) throws BBDDReadException, BBDDWriteException  {
-		
-			JSONObject bdCompania = OpsBBDD.read(Messages.BDCT);
+		JSONObject bdCompania= new JSONObject();
+		if (OpsBBDD.isEmpty(Messages.BDCT)) {
+			bdCompania.put(Messages.KEY_lastId, 0);
+		}
+		else {
+			bdCompania = OpsBBDD.read(Messages.BDCT);
+		}
 			int lastPos = bdCompania.getInt(Messages.KEY_lastId);
 			JSONObject nuevaCompania = new JSONObject();
 			
@@ -47,6 +52,7 @@ public class DAOCompTeaImp implements DAOCompTea {
 
 	@Override
 	public int delete(int id) throws BBDDReadException, BBDDWriteException {
+		if (!OpsBBDD.isEmpty(Messages.BDCT)) {
 		JSONObject bdCompania = OpsBBDD.read(Messages.BDCT);
 		JSONObject compania = bdCompania.getJSONObject(Integer.toString(id));
         
@@ -55,15 +61,15 @@ public class DAOCompTeaImp implements DAOCompTea {
 	        OpsBBDD.write(bdCompania, Messages.BDCT);
 	        return id;
 		}
+		}
         return -1;
 	}
 
 	@Override
 	public TCompTea read(int id) throws BBDDReadException {
-    JSONObject bdCompania= OpsBBDD.read(Messages.BDCT);
-
 		TCompTea tCompTea = null;
-		
+		if (!OpsBBDD.isEmpty(Messages.BDMCT)) {//si esta vacio logicamente no habra nada que devolver (null)
+		JSONObject bdCompania= OpsBBDD.read(Messages.BDCT);
 		if (bdCompania.has(Integer.toString(id))) {
 			JSONObject compania = bdCompania.getJSONObject(Integer.toString(id));
 			
@@ -77,13 +83,14 @@ public class DAOCompTeaImp implements DAOCompTea {
 				paseslista.add(tLineaFactura);}*/
 			tCompTea = new TCompTea(id, compania.getString(Messages.KEY_CompTea), compania.getString(Messages.KEY_direccion),compania.getBoolean(Messages.KEY_act), compania.getFloat(Messages.KEY_coste));
 		}
+		}
 		
 		return tCompTea;
 	
 	}
 
 	@Override
-	public Collection<TCompTea> readAll() {
+	public Collection<TCompTea> readAll() throws BBDDReadException {
 		Collection<TCompTea> companias = new ArrayList<>();
 		if (!OpsBBDD.isEmpty(Messages.BDCT)) {
 			JSONObject BDCompania = OpsBBDD.read(Messages.BDCT);
@@ -107,7 +114,7 @@ public class DAOCompTeaImp implements DAOCompTea {
 	
 
 	@Override
-	public int update(TCompTea tCompTea) {
+	public int update(TCompTea tCompTea) throws BBDDWriteException, BBDDReadException {
 		if (!OpsBBDD.isEmpty(Messages.BDCT)) {
 			JSONObject BDCompania = OpsBBDD.read(Messages.BDCT);
 			
@@ -130,9 +137,8 @@ public class DAOCompTeaImp implements DAOCompTea {
 	            }
 	        }
 		}
-        return -1; //No se ha encontrado la factura pasada por parámetro
-	}
-		return 0;
+        return -1; 
+	
 	}
 
 }
