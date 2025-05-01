@@ -1,41 +1,17 @@
 package presentacion.GUIFactura;
 
-import java.awt.FlowLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collection;
 
-import javax.swing.BoxLayout;
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-
-import misc.JSwingUtils;
-import negocio.factura.TFactura;
 import negocio.factura.TLineaFactura;
-import presentacion.Evento;
-import presentacion.IGUI;
-import presentacion.controlador.Controlador;
-import presentacion.factoria.FactoriaAbstractaPresentacion;
 
-//VENATANA QUE MUESTRA EL CARRITO + 3 BOTONES
-
-//- anyadir pase al carrito
-//- 'aceptar' para cerrar la venta
-//- 'cancelar'
-
-@SuppressWarnings("serial")
-public class VistaVentaEnCurso extends JFrame implements IGUI {
-	
-	private JButton anyadirPase;
-	private JButton quitarPase;
-	
+public class AbrirVenta {
 	private static Collection<TLineaFactura> carrito = new ArrayList<TLineaFactura>();
 	
+	public static Collection<TLineaFactura> getCarrito() { return carrito; } 
+	
+	//YA HECHO EN MAINWINDOW. TIENES Q METER EL CARRITO AHÍ DE ALGUNA FORMA....
+	/*
 	private JScrollPane vistaCarrito;
 	
 	private JButton aceptar;
@@ -105,7 +81,7 @@ public class VistaVentaEnCurso extends JFrame implements IGUI {
 		}
 	}
 	
-	public static Collection<TLineaFactura> getCarrito() { return carrito; } 
+
 	
 	private void cargarVistaCarrito() {
 		vistaCarrito.removeAll();
@@ -123,5 +99,5 @@ public class VistaVentaEnCurso extends JFrame implements IGUI {
 		label.setText(tLineaFactura.getCantidad() + " X " + tLineaFactura.getTituloObra() + " | " + fecha);
 		return label;
 	}
-
+	*/
 }

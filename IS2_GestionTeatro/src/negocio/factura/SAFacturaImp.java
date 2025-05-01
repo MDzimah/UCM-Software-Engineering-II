@@ -22,7 +22,7 @@ import negocio.pase.SAPase;
 import negocio.pase.TPase;
 import negocio.taquillero.TTaquillero;
 import presentacion.Evento;
-import presentacion.GUIFactura.VistaVentaEnCurso;
+import presentacion.GUIFactura.AbrirVenta;
 import presentacion.factoria.FactoriaAbstractaPresentacion;
 
 public class SAFacturaImp implements SAFactura {
@@ -51,7 +51,7 @@ public class SAFacturaImp implements SAFactura {
 	
 	@Override
 	public boolean quitarPaseDeVenta(TLineaFactura tLfAQuitar, Collection<TLineaFactura> carrito) throws BBDDReadException {
-		ArrayList<TLineaFactura> carr = (ArrayList<TLineaFactura>) VistaVentaEnCurso.getCarrito();
+		ArrayList<TLineaFactura> carr = (ArrayList<TLineaFactura>) AbrirVenta.getCarrito();
 			
 		boolean estaba = false;
 		for(int i = 0; i < carr.size(); ++i) {

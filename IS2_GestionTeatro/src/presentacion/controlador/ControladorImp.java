@@ -13,7 +13,7 @@ import negocio.obra.*;
 import negocio.pase.SAPase;
 import negocio.pase.TPase;
 import presentacion.Evento;
-import presentacion.GUIFactura.VistaVentaEnCurso;
+import presentacion.GUIFactura.AbrirVenta;
 import presentacion.GUIObra.VistaActualizarObra_1;
 import presentacion.factoria.FactoriaAbstractaPresentacion;
 
@@ -26,7 +26,7 @@ public class ControladorImp extends Controlador {
 			try {
 				TLineaFactura newTLf = (TLineaFactura)datos;
 				SAFactura saFac = FactoriaAbstractaNegocio.getInstance().crearSAFactura();
-				boolean res = saFac.anyadirPaseAVenta(newTLf, VistaVentaEnCurso.getCarrito());
+				boolean res = saFac.anyadirPaseAVenta(newTLf, AbrirVenta.getCarrito());
 				
 				if (res) FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_OK, newTLf.getIdPase());
 				else FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_KO, null);
@@ -40,7 +40,7 @@ public class ControladorImp extends Controlador {
 			try {
 				TLineaFactura tLfAQuitar = (TLineaFactura)datos;
 				SAFactura saFac = FactoriaAbstractaNegocio.getInstance().crearSAFactura();
-				boolean res = saFac.quitarPaseDeVenta(tLfAQuitar, VistaVentaEnCurso.getCarrito());
+				boolean res = saFac.quitarPaseDeVenta(tLfAQuitar, AbrirVenta.getCarrito());
 						
 				if (res) FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_OK, tLfAQuitar.getIdPase());
 				else FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_KO, tLfAQuitar.getIdPase());
@@ -233,7 +233,7 @@ public class ControladorImp extends Controlador {
 			}
 			break;
 		}
-		case LISTAR_OBRAS:
+		case MOSTRAR_OBRAS:
 		{
 			try {
 				SAObra saObra = FactoriaAbstractaNegocio.getInstance().crearSAObra();
@@ -357,13 +357,8 @@ public class ControladorImp extends Controlador {
 		}
 		
 		//Todas las ventanas que abren a otras (las que no sean de CU)
-		default: 
-			switch((Evento) datos) {
-				case SUBS_FACTURA: FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.SUBS_FACTURA, null);
-				
-				default:
-			}
-		}
+		default: break;
+	}
 	}
 
 }

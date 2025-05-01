@@ -11,7 +11,6 @@ import presentacion.GUIObra.VistaConsultarObra;
 import presentacion.GUIObra.VistaMostrarObras;
 import presentacion.GUIPase.VistaActualizarPase;
 import presentacion.GUIPase.VistaBuscarPase;
-import presentacion.GUIPase.VistaConsultarPase;
 import presentacion.GUIPase.VistaCrearPase;
 import presentacion.GUIPase.VistaEliminarPase;
 import presentacion.GUIPase.VistaListarPases;
@@ -22,7 +21,6 @@ public class FactoriaPresentacion extends FactoriaAbstractaPresentacion {
 	@Override
 	public IGUI createVista(Evento e) {
 		switch(e) {
-		case MAINWINDOW: return new MainWindow();
 		//Factura
 		case ANYADIR_PASE_A_VENTA: return new VistaAnyadirPaseAVenta();
 		case BUSCAR_FACTURA: return new VistaBuscarFac();
@@ -56,7 +54,7 @@ public class FactoriaPresentacion extends FactoriaAbstractaPresentacion {
 		case ACTUALIZAR_OBRA_1: return new VistaActualizarObra_1();
 		case CONSULTAR_OBRA: return new VistaBuscarObras();
 		case BUSCAR_OBRA: return new VistaConsultarObra();
-		case LISTAR_OBRAS: return new VistaMostrarObras();
+		case MOSTRAR_OBRAS: return new VistaMostrarObras();
 		
 		//CompTea
 		

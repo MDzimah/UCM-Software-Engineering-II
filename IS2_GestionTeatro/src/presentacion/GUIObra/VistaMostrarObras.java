@@ -11,7 +11,7 @@ import presentacion.factoria.FactoriaAbstractaPresentacion;
 public class VistaMostrarObras implements IGUI{
 
 	public VistaMostrarObras() {
-		Controlador.getInstance().accion(Evento.LISTAR_OBRAS, null);
+		Controlador.getInstance().accion(Evento.MOSTRAR_OBRAS, null);
 	}
 	
 	@Override
