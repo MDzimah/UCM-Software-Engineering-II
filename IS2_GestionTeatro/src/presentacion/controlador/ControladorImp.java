@@ -277,8 +277,13 @@ public class ControladorImp extends Controlador {
 				SACompTea saCompTea=FactoriaAbstractaNegocio.getInstance().crearSACompTea();
 				Integer id =(Integer)datos;
 				int id2= saCompTea.delete(id);
-				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_OK, newComp);
-			}
+				if(id2!=-1) {
+				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_OK, id2);
+				}
+				else {
+					FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_KO, id2);
+				}
+				}
 			catch(Exception e) {
 				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_KO, "Error: " +e.getMessage());
 			}

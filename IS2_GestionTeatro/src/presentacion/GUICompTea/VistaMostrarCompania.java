@@ -45,7 +45,7 @@ public class VistaMostrarCompania extends VistaDefault implements IGUI{
 		});
 		
 
-		initComps(campos, anyadir, cancelar, false);//no se si tiene que ser fullscreen...
+		initComps(campos, anyadir, cancelar);//no se si tiene que ser fullscreen...
 	
 	}
 	
