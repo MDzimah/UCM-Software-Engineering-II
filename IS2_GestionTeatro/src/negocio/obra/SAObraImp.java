@@ -56,7 +56,7 @@ public class SAObraImp implements SAObra {
 		DAOObra daoObra = FactoriaAbstractaIntegracion.getInstance().crearDAOObra();
 		
 		List<TObra> lista = daoObra.getAll();
-		if(lista.isEmpty())
+		if(lista==null || lista.isEmpty())
 			throw new UnknownObraException();
 		else
 			return lista;
@@ -65,7 +65,7 @@ public class SAObraImp implements SAObra {
 	public Collection<TObra> search(List<String> params) throws BBDDReadException, UnknownObraException{
 		DAOObra daoObra = FactoriaAbstractaIntegracion.getInstance().crearDAOObra();
 		Collection<TObra> obras = daoObra.search(params);
-		if(obras.isEmpty() || obras==null)
+		if(obras==null || obras.isEmpty())
 			throw new UnknownObraException();
 		else
 			return obras;

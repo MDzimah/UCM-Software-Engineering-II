@@ -189,9 +189,11 @@ public class MainWindow extends JFrame implements IGUI {
             @Override
             public void actionPerformed(ActionEvent e) {
             	JDialog menuObra= new JDialog(MainWindow.this,"Menú obras", true);
-            	
-            	JButton actualizar, agregar, borrar, buscar, consultar, mostrar;
+            	menuObra.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);            
+                menuObra.setLayout(new FlowLayout());
 
+            	JButton actualizar, agregar, borrar, buscar, consultar, mostrar;
+            
             	actualizar = new JButton("Actualizar obra");
         		agregar = new JButton("Agregar obra");
         		borrar = new JButton("Borrar obra");
@@ -224,6 +226,10 @@ public class MainWindow extends JFrame implements IGUI {
         		menuObra.add(buscar);
         		menuObra.add(consultar);
         		menuObra.add(mostrar);
+        		
+        		menuObra.setModal(false);
+        		menuObra.pack();
+        		menuObra.setLocationRelativeTo(MainWindow.this);
         		menuObra.setVisible(true);
             }
             

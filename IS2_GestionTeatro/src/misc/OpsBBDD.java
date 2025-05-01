@@ -30,6 +30,6 @@ public class OpsBBDD {
 	}
 	
 	public static boolean isEmpty(String BDSubs) {
-		return new File(Messages.PATH_TO_BBDD.formatted(Messages.BDFac)).length() == 0;
+		return new File(Messages.PATH_TO_BBDD.formatted(BDSubs)).length() == 0;
 	}
 }

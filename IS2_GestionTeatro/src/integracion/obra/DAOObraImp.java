@@ -61,13 +61,17 @@ public class DAOObraImp implements DAOObra {
 	 */
 	 @Override
 	public int delete(int id) throws BBDDReadException, BBDDWriteException {
-		JSONObject bdObras = OpsBBDD.read(Messages.BDOb);
-		if(bdObras.has(String.valueOf(id))) {
-			TObra obra = readJSON(bdObras.getJSONObject(String.valueOf(id)));
-			
-			bdObras.remove(String.valueOf(id));
-			OpsBBDD.write(bdObras, Messages.BDOb);
-			return 1;
+		if (!OpsBBDD.isEmpty(Messages.BDOb)) {
+
+			JSONObject bdObras = OpsBBDD.read(Messages.BDOb);
+			if(bdObras.has(String.valueOf(id))) {
+				TObra obra = readJSON(bdObras.getJSONObject(String.valueOf(id)));
+				
+				bdObras.remove(String.valueOf(id));
+				OpsBBDD.write(bdObras, Messages.BDOb);
+				return 1;
+			}
+			else return -1;
 		}
 		else
 			return -1;
@@ -80,12 +84,16 @@ public class DAOObraImp implements DAOObra {
 	*/
 	 @Override
 	public TObra read(int id) throws BBDDReadException {
+		if (!OpsBBDD.isEmpty(Messages.BDOb)) {
+
 		JSONObject bdObras = OpsBBDD.read(Messages.BDOb);
 		if(bdObras.has(String.valueOf(id))){
 			return readJSON(bdObras.getJSONObject(String.valueOf(id)));
 		}
 		else
 			return null;
+		}
+		else return null;
 	}
 
 	/**
@@ -96,6 +104,7 @@ public class DAOObraImp implements DAOObra {
 	*/
 	 @Override
 	public int update(TObra tObra) throws BBDDReadException, BBDDWriteException {
+		if (!OpsBBDD.isEmpty(Messages.BDOb)) {
 		JSONObject bdObras = OpsBBDD.read(Messages.BDOb);
 		if(bdObras.has(String.valueOf(tObra.getIdObra()))) {
 			
@@ -114,10 +123,13 @@ public class DAOObraImp implements DAOObra {
 		}
 		else
 			return -1;
+		}
+		else return -1;
 	}
 	
 	@Override
 	public List<TObra> getAll() throws BBDDReadException {
+		if (!OpsBBDD.isEmpty(Messages.BDOb)) {
 		JSONObject bdObras = OpsBBDD.read(Messages.BDOb);
 		List<TObra> IdObras = new LinkedList<TObra>();
 		
@@ -126,6 +138,8 @@ public class DAOObraImp implements DAOObra {
            IdObras.add(readJSON(bdObras.getJSONObject(claves.next())));
         }
 		return IdObras;
+		}
+		else return null;
 	}
 
 	/**@throws BBDDReadException 
@@ -134,22 +148,20 @@ public class DAOObraImp implements DAOObra {
 	 */
 	 @Override
 	public List<TObra> search(List<String> params) throws BBDDReadException {
-		JSONObject bdObras = OpsBBDD.read(Messages.BDOb);
-		List<TObra> obras = new LinkedList<TObra>();
-		/*if(Integer.valueOf(params.get(0)) != null) {
-			if(bdObras.has(String.valueOf(Integer.valueOf(params.get(0))))) {
-				obras.add(readJSON(bdObras.getJSONObject(String.valueOf(Integer.valueOf(params.get(0))))));
-			}
+		if (OpsBBDD.isEmpty(Messages.BDOb)) {
+
+			JSONObject bdObras = OpsBBDD.read(Messages.BDOb);
+			List<TObra> obras = new LinkedList<TObra>();
+			
+			if(params.get(0)!=null)
+				busquedaLineal(bdObras, Messages.KEY_titulo, obras, params.get(0));					
+			if(params.get(1)!=null)
+				busquedaLineal(bdObras, Messages.KEY_autor, obras, params.get(1));					
+			if(params.get(2)!=null)
+				busquedaLineal(bdObras, Messages.KEY_Genero, obras, params.get(2));					
 			return obras;
 		}
-		else {*/
-		if(params.get(0)!=null)
-			busquedaLineal(bdObras, Messages.KEY_titulo, obras, params.get(0));					
-		if(params.get(1)!=null)
-			busquedaLineal(bdObras, Messages.KEY_autor, obras, params.get(1));					
-		if(params.get(2)!=null)
-			busquedaLineal(bdObras, Messages.KEY_Genero, obras, params.get(2));					
-		return obras;
+		else return null;
 	}
 	
 	//Metodos privados
