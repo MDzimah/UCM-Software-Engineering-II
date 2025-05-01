@@ -14,6 +14,7 @@ import presentacion.GUIPase.VistaConsultarPase;
 import presentacion.GUIPase.VistaCrearPase;
 import presentacion.GUIPase.VistaEliminarPase;
 import presentacion.GUIPase.VistaListarPases;
+import presentacion.GUImiemCompTea.*;
 
 public class FactoriaPresentacion extends FactoriaAbstractaPresentacion {
 
@@ -59,11 +60,11 @@ public class FactoriaPresentacion extends FactoriaAbstractaPresentacion {
 		
 		
 		//MiemCompTea
-		case ACTUALIZAR_MIEMBRO_COMPANIA:
-		case BUSCAR_MIEMBRO_COMPANIA:
-		case CONTRATAR_MIEMBRO_COMPANIA:
-		case DESPEDIR_MIEMBRO_COMPANIA:
-		case LISTAR_MIEMBROS_COMPANIA:
+		case ACTUALIZAR_MIEMBRO_COMPANIA: return new VistaActualizarMiembroCompania();
+		case BUSCAR_MIEMBRO_COMPANIA: return new VistaBuscarMiembroCompania();
+		case CONTRATAR_MIEMBRO_COMPANIA: return new VistaContratarMiembroCompania();
+		case DESPEDIR_MIEMBRO_COMPANIA: return new VistaDespedirMiembroCompania();
+		case MOSTRAR_MIEMBROS_COMPANIA: return new VistaMostrarMiembrosCompania();
 		
 		default: return null;
 		

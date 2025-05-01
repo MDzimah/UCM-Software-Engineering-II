@@ -329,7 +329,7 @@ public class ControladorImp extends Controlador {
 			}
 			break;
 		}
-		case LISTAR_MIEMBROS_COMPANIA:
+		case MOSTRAR_MIEMBROS_COMPANIA:
 		{
 			try {
 				SAMiemCompTea saMiemComp = FactoriaAbstractaNegocio.getInstance().crearSAMiemCompTea();

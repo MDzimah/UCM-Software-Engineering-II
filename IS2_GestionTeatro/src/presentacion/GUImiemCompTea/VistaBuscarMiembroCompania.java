@@ -7,9 +7,12 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JComponent;
 import javax.swing.JLabel;
+import javax.swing.JSpinner;
 import javax.swing.JTextField;
+import javax.swing.SpinnerNumberModel;
 
 import exceptions.BBDDReadException;
+import misc.JSwingUtils;
 import misc.Messages;
 import misc.Pair;
 import negocio.factura.TFactura;
@@ -22,13 +25,13 @@ import presentacion.factoria.FactoriaAbstractaPresentacion;
 
 public class VistaBuscarMiembroCompania extends VistaDefault{
 	
-    private JTextField idField;
+    private JSpinner idField;
 
     public VistaBuscarMiembroCompania(){
         super();
         
-        idField = new JTextField();
-
+        SpinnerNumberModel spinnerModel = new SpinnerNumberModel(0, 0, Integer.MAX_VALUE, 1);
+        idField = new JSpinner(spinnerModel);
         
         ArrayList<Pair<JComponent, JComponent>> componentes = new ArrayList<>();
         componentes.add(new Pair<>(new JLabel("Id:"), idField));
@@ -39,14 +42,16 @@ public class VistaBuscarMiembroCompania extends VistaDefault{
         btnBuscar.addActionListener(e -> buscarMiembro());
         btnCancelar.addActionListener(e -> dispose());
 
-        this.initComps(componentes, btnBuscar, btnCancelar, false);
+        this.initComps(componentes, btnBuscar, btnCancelar);
         this.setTitle("Buscar Miembro");
         this.setVisible(true);
+        this.setLocationRelativeTo(null);
     }
 
     private void buscarMiembro() {
-        int id = Integer.valueOf(idField.getText());        
+        int id = (Integer) idField.getValue();        
         Controlador.getInstance().accion(Evento.BUSCAR_MIEMBRO_COMPANIA, id);
+        dispose();
     }
 
 	@Override
@@ -56,13 +61,13 @@ public class VistaBuscarMiembroCompania extends VistaDefault{
 			miemComp.add((TMiemCompTea)datos);
 			String[] nomCols = {"ID","NOMBRE", "APELLIDO", "EDAD", "DNI", "EMAIL", "GENERO"};
 			
-			FactoriaAbstractaPresentacion.getInstance().createTabla("BUSCAR MIEMBRO", nomCols, miemComp, true);
+			JSwingUtils.createTabla("BUSCAR MIEMBRO", nomCols, miemComp, true, false);
 		}
 		else if(evento == Evento.RES_KO) {
 			String error;
 			if (datos instanceof String) error = (String) datos;
 			else error = Messages.ID_NO_ENCONTRADO.formatted(String.valueOf(((int)datos)));
-			FactoriaAbstractaPresentacion.getInstance().createErrorDialogMessage(Messages.X_MIEMBRO_ENCONTRADO + ' ' + Messages.MOTIVO.formatted(error));
+			JSwingUtils.createErrorDialogMessage(Messages.X_MIEMBRO_ENCONTRADO + ' ' + Messages.MOTIVO.formatted(error));
 		}
 	}
 }
