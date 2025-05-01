@@ -212,9 +212,9 @@ public class MainWindow extends JFrame {
         		subsFactura.add(buscar);
         		subsFactura.add(cerrarVenta);
         		subsFactura.add(mostrar);
-        		subsFactura.setModal(false);     
-        		subsFactura.setLocationRelativeTo(null);
+        		subsFactura.setModal(false);   
         		subsFactura.pack();
+        		subsFactura.setLocationRelativeTo(null);
         		subsFactura.setVisible(true);
             }
         });
@@ -281,8 +281,8 @@ public class MainWindow extends JFrame {
         		subsObra.add(consultar);
         		subsObra.add(mostrar);
         		subsObra.setModal(false);  
-        		subsObra.setLocationRelativeTo(null);
         		subsObra.pack();
+        		subsObra.setLocationRelativeTo(null);
         		subsObra.setVisible(true);
             }
         });
