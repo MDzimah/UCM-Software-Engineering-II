@@ -6,6 +6,7 @@ import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
+import javax.swing.SwingUtilities;
 
 import misc.*;
 import negocio.obra.TObra;
@@ -59,7 +60,7 @@ public class VistaActualizarObra_1 extends VistaDefault implements IGUI{
 				String titulo2 = titulo.getText(), autor2= autor.getText(), genero2= genero.getText(), sinopsis2= sinopsis.getText();
 				TObra obra1 = new TObra(titulo2, autor2, genero2, sinopsis2);
 
-				Controlador.getInstance().accion(Evento.ACTUALIZAR_OBRA_1, obra1);
+				SwingUtilities.invokeLater(()->{Controlador.getInstance().accion(Evento.ACTUALIZAR_OBRA_1, obra1);});
 				VistaActualizarObra_1.this.dispose();
 			});
 			

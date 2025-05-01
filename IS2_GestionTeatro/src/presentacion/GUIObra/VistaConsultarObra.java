@@ -8,6 +8,7 @@ import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
+import javax.swing.SwingUtilities;
 
 import misc.*;
 import presentacion.Evento;
@@ -43,10 +44,16 @@ public class VistaConsultarObra extends VistaDefault implements IGUI{
 		
 		//Declaramos los listeners
 		consultar.addActionListener(e ->{
-			Integer id2 = Integer.valueOf(id.getText());			
-			Controlador.getInstance().accion(Evento.CONSULTAR_OBRA, id2);
-
-			VistaConsultarObra.this.dispose();
+			if(!id.getText().equals("")) {
+				try {
+				Integer id2 = Integer.valueOf(id.getText());			
+				SwingUtilities.invokeLater(()->{Controlador.getInstance().accion(Evento.CONSULTAR_OBRA, id2);});
+				VistaConsultarObra.this.dispose();
+				}
+				catch(NumberFormatException ex) {
+			        JSwingUtils.createErrorDialogMessage("El ID debe ser un número entero.");
+				}
+			}
 		});
 		
 		cancelar.addActionListener(e ->{

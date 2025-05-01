@@ -9,6 +9,7 @@ import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
+import javax.swing.SwingUtilities;
 
 import misc.JSwingUtils;
 import misc.Pair;
@@ -51,7 +52,7 @@ public class VistaBuscarObras extends VistaDefault implements IGUI{
 				String titulo2 = titulo.getText(), autor2= autor.getText(), genero2= genero.getText();
 				List<String> paramBusqueda= new LinkedList<String>();
 				paramBusqueda.add(titulo2); paramBusqueda.add(autor2); paramBusqueda.add(genero2);
-				Controlador.getInstance().accion(Evento.BUSCAR_OBRA, paramBusqueda);
+				SwingUtilities.invokeLater(()->{Controlador.getInstance().accion(Evento.BUSCAR_OBRA, paramBusqueda);});
 				VistaBuscarObras.this.dispose();
 			});
 			

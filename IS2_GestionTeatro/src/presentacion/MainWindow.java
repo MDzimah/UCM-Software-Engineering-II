@@ -250,8 +250,6 @@ public class MainWindow extends JFrame {
             	subsObra.setLayout(new FlowLayout());
             	
             	JButton actualizar, alta, baja, buscar, consultar, mostrar;
-
-            	JButton actualizar, agregar, borrar, buscar, consultar, mostrar;
             
             	actualizar = new JButton("Actualizar obra");
             	alta = new JButton("Alta obra");
@@ -279,18 +277,6 @@ public class MainWindow extends JFrame {
         			FactoriaAbstractaPresentacion.getInstance().createVista(Evento.MOSTRAR_OBRAS);
         		});
         		
-        		menuObra.add(actualizar);        		
-        		menuObra.add(agregar);
-        		menuObra.add(borrar);
-        		menuObra.add(buscar);
-        		menuObra.add(consultar);
-        		menuObra.add(mostrar);
-        		
-        		menuObra.setModal(false);
-        		menuObra.pack();
-        		menuObra.setLocationRelativeTo(MainWindow.this);
-        		menuObra.setVisible(true);
-
         		subsObra.add(actualizar);        		
         		subsObra.add(alta);
         		subsObra.add(baja);

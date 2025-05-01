@@ -2,16 +2,37 @@ package presentacion.GUIObra;
 
 import java.util.Collection;
 
+import javax.swing.JButton;
+import javax.swing.SwingUtilities;
+
 import misc.JSwingUtils;
+import negocio.obra.TObra;
 import presentacion.Evento;
 import presentacion.IGUI;
+import presentacion.VistaDefault;
 import presentacion.controlador.Controlador;
 import presentacion.factoria.FactoriaAbstractaPresentacion;
 
-public class VistaMostrarObras implements IGUI{
+public class VistaMostrarObras extends VistaDefault implements IGUI{
+	private JButton mostrar, cancelar;
 
 	public VistaMostrarObras() {
-		Controlador.getInstance().accion(Evento.MOSTRAR_OBRAS, null);
+		
+		this.setTitle("Mostrar obras");
+		mostrar = new JButton("Mostrar");
+		cancelar = new JButton("Cancelar");
+				
+		super.initComps(null, mostrar, cancelar);
+		mostrar.addActionListener(e ->{
+			SwingUtilities.invokeLater(()->{Controlador.getInstance().accion(Evento.MOSTRAR_OBRAS, null);});
+			VistaMostrarObras.this.dispose();
+		});
+		
+		cancelar.addActionListener(e ->{
+			VistaMostrarObras.this.dispose();
+		});	
+
+		this.setVisible(true);
 	}
 	
 	@Override
