@@ -14,6 +14,7 @@ import negocio.pase.SAPase;
 import negocio.pase.TPase;
 import presentacion.Evento;
 import presentacion.GUIFactura.VistaVentaEnCurso;
+import presentacion.GUIObra.VistaActualizarObra_1;
 import presentacion.factoria.FactoriaAbstractaPresentacion;
 
 public class ControladorImp extends Controlador {
@@ -183,13 +184,25 @@ public class ControladorImp extends Controlador {
 			}
 			break;
 		}
-		case ACTUALIZAR_OBRA:
+		case ACTUALIZAR_OBRA_0:
+		{
+			try {
+				SAObra saObra = FactoriaAbstractaNegocio.getInstance().crearSAObra();
+				TObra obra = saObra.read((int)datos);
+				VistaActualizarObra_1 vista= (VistaActualizarObra_1) FactoriaAbstractaPresentacion.getInstance().createVista(Evento.ACTUALIZAR_OBRA_1);
+				vista.setDatos(obra);
+			}
+			catch(Exception e) {
+				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_KO, "Error: " +e.getMessage());
+			}
+			break;
+		}
+		case ACTUALIZAR_OBRA_1:
 		{
 			try {
 				SAObra saObra = FactoriaAbstractaNegocio.getInstance().crearSAObra();
 				saObra.update((TObra)datos);
-				//lees int(datos) en la VistaActualizarObra
-				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_OK, (TObra)datos);
+				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_OK, (int)datos);
 			}
 			catch(Exception e) {
 				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_KO, "Error: " +e.getMessage());

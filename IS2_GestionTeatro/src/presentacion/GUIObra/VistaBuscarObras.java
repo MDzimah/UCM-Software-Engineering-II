@@ -18,13 +18,13 @@ import presentacion.VistaDefault;
 import presentacion.controlador.Controlador;
 import presentacion.factoria.FactoriaAbstractaPresentacion;
 
-public class VistaBuscarObra extends VistaDefault implements IGUI{
+public class VistaBuscarObras extends VistaDefault implements IGUI{
 	//Atributos
 		private JButton buscar, cancelar;
-		private JTextField id, titulo, autor , genero;
+		private JTextField titulo, autor , genero;
 
 		//Constructor
-		public VistaBuscarObra() {
+		public VistaBuscarObras() {
 			initGUI();
 			this.setVisible(true);
 		}
@@ -34,14 +34,12 @@ public class VistaBuscarObra extends VistaDefault implements IGUI{
 			this.setTitle("Buscar obra");
 			buscar = new JButton("Buscar");
 			cancelar = new JButton("Cancelar");
-			JLabel id1 = new JLabel("Id"), titulo1 = new JLabel("Titulo"), autor1 = new JLabel("Autor"), genero1 = new JLabel("Género");
-			id = new JTextField();
+			JLabel titulo1 = new JLabel("Titulo"), autor1 = new JLabel("Autor"), genero1 = new JLabel("Género");
 			titulo = new JTextField();
 			autor = new JTextField();
 			genero = new JTextField();
 			
 			ArrayList<Pair<JComponent, JComponent>> campos = new ArrayList<>();
-			campos.add(new Pair<>(id1, id));
 			campos.add(new Pair<>(titulo1, titulo));
 			campos.add(new Pair<>(autor1, autor));
 			campos.add(new Pair<>(genero1, genero));
@@ -50,15 +48,15 @@ public class VistaBuscarObra extends VistaDefault implements IGUI{
 			
 			//Declaramos los listeners
 			buscar.addActionListener(e ->{
-				String id2 = id.getText(), titulo2 = titulo.getText(), autor2= autor.getText(), genero2= genero.getText();
+				String titulo2 = titulo.getText(), autor2= autor.getText(), genero2= genero.getText();
 				List<String> paramBusqueda= new LinkedList<String>();
-				paramBusqueda.add(id2); paramBusqueda.add(titulo2); paramBusqueda.add(autor2); paramBusqueda.add(genero2);
+				paramBusqueda.add(titulo2); paramBusqueda.add(autor2); paramBusqueda.add(genero2);
 				Controlador.getInstance().accion(Evento.BUSCAR_OBRA, paramBusqueda);
-				VistaBuscarObra.this.dispose();
+				VistaBuscarObras.this.dispose();
 			});
 			
 			cancelar.addActionListener(e ->{
-				VistaBuscarObra.this.dispose();
+				VistaBuscarObras.this.dispose();
 			});
 		}
 
@@ -67,7 +65,7 @@ public class VistaBuscarObra extends VistaDefault implements IGUI{
 		public void actualizar(presentacion.Evento evento, Object datos) {
 			if(evento==Evento.RES_OK) {
 				String[] nomCols = {"ID","TITULO", "AUTOR", "GENERO", "SINOPSIS"};
-				JSwingUtils.createTabla("CONSULTAR OBRAS", nomCols, (Collection<Object>)datos, false);
+				JSwingUtils.createTabla("OBRAS", nomCols, (Collection<Object>)datos, true, false);
 
 			}
 			else if(evento==Evento.RES_KO) {

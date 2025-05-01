@@ -199,7 +199,7 @@ public class MainWindow extends JFrame {
         		mostrar = new JButton("Mostrar obras en cartelera");
         		
         		actualizar.addActionListener((ev)->{
-        			FactoriaAbstractaPresentacion.getInstance().createVista(Evento.ACTUALIZAR_OBRA);
+        			FactoriaAbstractaPresentacion.getInstance().createVista(Evento.ACTUALIZAR_OBRA_0);
         		});
         		agregar.addActionListener((ev)->{
         			FactoriaAbstractaPresentacion.getInstance().createVista(Evento.CREAR_OBRA);

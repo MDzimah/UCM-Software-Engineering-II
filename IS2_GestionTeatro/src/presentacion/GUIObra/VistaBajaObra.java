@@ -45,7 +45,7 @@ public class VistaBajaObra extends VistaDefault implements IGUI{
 		eliminar.addActionListener(e ->{
 			Integer id2 = Integer.valueOf(id.getText());
 			Controlador.getInstance().accion(Evento.ELIMINAR_OBRA, id2);
-			VistaBajaObra.this.dispose();	//Igual cambio algo de aqui porque el problema es que como esta ahora se ejecuta el controller antes de cerrar la ventana
+			VistaBajaObra.this.dispose();
 		});
 		
 		cancelar.addActionListener(e ->{
