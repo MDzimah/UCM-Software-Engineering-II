@@ -46,6 +46,15 @@ public class DAOFacturaImp implements DAOFactura {
 			if (facs.has(_id) && facs.getJSONObject(_id).getBoolean(Messages.KEY_act)) {
 				facs.getJSONObject(_id).put(Messages.KEY_act, false);
 		        OpsBBDD.write(bdFac, Messages.BDFac);
+		        
+		        DAOLineaFactura daoLF = FactoriaAbstractaIntegracion.crearDAOLineaFactura();
+		        Collection<TLineaFactura> lineas = daoLF.readAll();
+		        for (TLineaFactura tLF : lineas) {
+		        	if (tLF.getIdFactura().equals(id)) {
+		        		daoLF.delete(tLF.getIdLineaFactura());
+		        	}
+		        }
+		        
 		        return id;
 			}
 		}

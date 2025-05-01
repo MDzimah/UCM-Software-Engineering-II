@@ -4,6 +4,9 @@ import java.util.Collection;
 import java.util.List;
 
 import exceptions.BBDDReadException;
+import exceptions.BBDDWriteException;
+import exceptions.UnknownClienteException;
+import exceptions.UnknownTaquilleroException;
 import negocio.compTea.SACompTea;
 import negocio.compTea.TCompTea;
 import negocio.factoria.FactoriaAbstractaNegocio;
@@ -66,10 +69,15 @@ public class ControladorImp extends Controlador {
 			break;
 		}
 		case CERRAR_VENTA: {
+			SAFactura saFac = FactoriaAbstractaNegocio.getInstance().crearSAFactura();
+			TDatosVenta tDV = (TDatosVenta)datos;
+			try {
+				saFac.crearFactura(tDV);
+			}
+			catch (BBDDReadException | BBDDWriteException | UnknownClienteException | UnknownTaquilleroException e) {
+				 FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_KO, e);
+			}
 			
-			//Creación de la factura, tratamiento de las 4 excepciones
-			
-			break;
 		}
 		case MOSTRAR_FACTURAS: {
 			try {

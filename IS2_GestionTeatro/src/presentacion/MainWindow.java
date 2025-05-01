@@ -163,12 +163,9 @@ public class MainWindow extends JFrame {
             	subsFactura.setLayout(new FlowLayout());
             	
             	JButton abrirVenta, anyPV, quitarPV, cerrarVenta, buscar, mostrar;
-            	/*
-            	 * AbrirVenta ventaActiva = new AbrirVenta();
-            	 * ...
-            	 * 
-            	 * 
-            	*/
+
+            	AbrirVenta ventaActiva = new AbrirVenta();
+            	
             	abrirVenta = new JButton("Abrir venta");
             	anyPV = new JButton("Añadir pase a venta");
             	quitarPV = new JButton("Quitar pase de venta");
@@ -180,18 +177,26 @@ public class MainWindow extends JFrame {
         		quitarPV.setEnabled(false);
         		cerrarVenta.setEnabled(false);
         		
+        		//  ABRIR VENTA
         		abrirVenta.addActionListener((ev)->{
         			anyPV.setEnabled(true);
             		quitarPV.setEnabled(true);
             		cerrarVenta.setEnabled(true);
             		abrirVenta.setEnabled(false);
+            		ventaActiva.resetCarrito();
         		});
+        		
+        		// AÑADIR PASE VENTA
         		anyPV.addActionListener((ev)->{
         			FactoriaAbstractaPresentacion.getInstance().createVista(Evento.ANYADIR_PASE_A_VENTA);
         		});
+        		
+        		// QUITAR PASE VENTA
         		quitarPV.addActionListener((ev)->{
         			FactoriaAbstractaPresentacion.getInstance().createVista(Evento.QUITAR_PASE_DE_VENTA);
-        		});		
+        		});	
+        		
+        		// CERRAR VENTA
         		cerrarVenta.addActionListener((ev)->{
         			FactoriaAbstractaPresentacion.getInstance().createVista(Evento.CERRAR_VENTA);
         			anyPV.setEnabled(false);
