@@ -274,28 +274,50 @@ public class ControladorImp extends Controlador {
 		case ELIMINAR_COMPANIA_TEATRAL:
 		{
 			try {
-				
-			}
+				SACompTea saCompTea=FactoriaAbstractaNegocio.getInstance().crearSACompTea();
+				Integer id =(Integer)datos;
+				int id2= saCompTea.delete(id);
+				if(id2!=-1) {
+				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_OK, id2);
+				}
+				else {
+					FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_KO, id2);
+				}
+				}
 			catch(Exception e) {
-				
+				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_KO, "Error: " +e.getMessage());
 			}
 		}
 		case ALTA_COMPANIA_TEATRAL:
 		{
 			try {
-				
+				SACompTea saCompTea=FactoriaAbstractaNegocio.getInstance().crearSACompTea();
+				TCompTea tCompTea =(TCompTea)datos;
+				int id2= saCompTea.create(tCompTea);
+				if(id2!=-1) FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_OK, (int)id2);
+				else {
+					FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_KO, (int)id2);
+				}
 			}
 			catch(Exception e) {
-				
+				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_KO, "Error: " +e.getMessage());
 			}
 		}
 		case MOSTRAR_COMPANIA_TEATRAL:
 		{
 			try {
-				
+				SACompTea saCompTea=FactoriaAbstractaNegocio.getInstance().crearSACompTea();
+				Collection<TCompTea> tCompsTeas =saCompTea.readAll();
+				if(tCompsTeas!=null) {
+				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_OK, tCompsTeas);
+				}
+				else {
+				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_KO, "Error: no hay companias que mostrar");
+				}
 			}
+			
 			catch(Exception e) {
-				
+				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_KO, "Error: "+ e.getMessage());
 			}
 		}
 		
