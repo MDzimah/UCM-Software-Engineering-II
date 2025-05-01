@@ -1,7 +1,7 @@
 package presentacion;
 
 public enum Evento {
-	
+	MAINWINDOW,
 	/*--VENTANAS DE CU--*/
 	
 	//Factura
@@ -52,11 +52,7 @@ public enum Evento {
 	CONTRATAR_MIEMBRO_COMPANIA,
 	DESPEDIR_MIEMBRO_COMPANIA,
 	MOSTRAR_MIEMBROS_COMPANIA,
-	
-	
-	/*--OTRAS VENTANAS--*/
-	MAINWINDOW,
-	SUBS_FACTURA,
+
 	
 	/*--RESPUESTAS--*/
 	RES_OK, 

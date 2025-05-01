@@ -344,13 +344,8 @@ public class ControladorImp extends Controlador {
 		}
 		
 		//Todas las ventanas que abren a otras (las que no sean de CU)
-		default: 
-			switch((Evento) datos) {
-				case SUBS_FACTURA: FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.SUBS_FACTURA, null);
-				
-				default:
-			}
-		}
+		default: break;
+	}
 	}
 
 }
