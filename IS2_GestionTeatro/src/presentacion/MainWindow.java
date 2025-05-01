@@ -160,6 +160,7 @@ public class MainWindow extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
             	JDialog subsFactura= new JDialog(MainWindow.this,"Subsistema factura", true);
+            	subsFactura.setLayout(new FlowLayout());
             	
             	JButton abrirVenta, anyPV, quitarPV, cerrarVenta, buscar, mostrar;
             	/*
@@ -211,7 +212,9 @@ public class MainWindow extends JFrame {
         		subsFactura.add(buscar);
         		subsFactura.add(cerrarVenta);
         		subsFactura.add(mostrar);
-        		subsFactura.setModal(false);        		
+        		subsFactura.setModal(false);     
+        		subsFactura.setLocationRelativeTo(null);
+        		subsFactura.pack();
         		subsFactura.setVisible(true);
             }
         });
@@ -241,6 +244,7 @@ public class MainWindow extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
             	JDialog subsObra= new JDialog(MainWindow.this,"Subsistema obras", true);
+            	subsObra.setLayout(new FlowLayout());
             	
             	JButton actualizar, alta, baja, buscar, consultar, mostrar;
 
@@ -276,7 +280,9 @@ public class MainWindow extends JFrame {
         		subsObra.add(buscar);
         		subsObra.add(consultar);
         		subsObra.add(mostrar);
-        		subsObra.setModal(false);        		
+        		subsObra.setModal(false);  
+        		subsObra.setLocationRelativeTo(null);
+        		subsObra.pack();
         		subsObra.setVisible(true);
             }
         });
