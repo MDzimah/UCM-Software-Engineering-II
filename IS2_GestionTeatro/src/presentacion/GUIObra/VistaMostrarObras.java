@@ -18,7 +18,7 @@ public class VistaMostrarObras implements IGUI{
 	public void actualizar(Evento evento, Object datos) {
 		if(evento==Evento.RES_OK) {
 			String[] nomCols = {"ID","TITULO", "AUTOR", "GENERO", "SINOPSIS"};
-			JSwingUtils.createTabla("MOSTRAR OBRAS", nomCols, (Collection<Object>)datos, false);
+			JSwingUtils.createTabla("OBRAS", nomCols, (Collection<Object>)datos, true, false);
 		}
 		else if(evento==Evento.RES_KO) {
 			JSwingUtils.createErrorDialogMessage("No se han podido mostrar las obras.\n" + (String)datos);
