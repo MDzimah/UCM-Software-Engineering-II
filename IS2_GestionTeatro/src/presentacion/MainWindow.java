@@ -8,6 +8,7 @@ import javax.swing.border.*;
 
 import misc.Constants;
 import misc.JSwingUtils;
+import presentacion.GUIFactura.AbrirVenta;
 import presentacion.factoria.FactoriaAbstractaPresentacion;
 
 @SuppressWarnings("serial")
@@ -158,8 +159,60 @@ public class MainWindow extends JFrame {
         subsFactura.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-            	dispose();
-            	//Controlador.getInstance().accion(Evento.MAINWINDOW, Evento.SUBS_FACTURA);
+            	JDialog subsFactura= new JDialog(MainWindow.this,"Subsistema factura", true);
+            	
+            	JButton abrirVenta, anyPV, quitarPV, cerrarVenta, buscar, mostrar;
+            	/*
+            	 * AbrirVenta ventaActiva = new AbrirVenta();
+            	 * ...
+            	 * 
+            	 * 
+            	*/
+            	abrirVenta = new JButton("Abrir venta");
+            	anyPV = new JButton("Añadir pase a venta");
+            	quitarPV = new JButton("Quitar pase de venta");
+            	cerrarVenta = new JButton("Cerrar venta");
+        		buscar = new JButton("Buscar factura");
+        		mostrar = new JButton("Mostrar facturas");
+        		
+        		anyPV.setEnabled(false);
+        		quitarPV.setEnabled(false);
+        		cerrarVenta.setEnabled(false);
+        		
+        		abrirVenta.addActionListener((ev)->{
+        			anyPV.setEnabled(true);
+            		quitarPV.setEnabled(true);
+            		cerrarVenta.setEnabled(true);
+            		abrirVenta.setEnabled(false);
+        		});
+        		anyPV.addActionListener((ev)->{
+        			FactoriaAbstractaPresentacion.getInstance().createVista(Evento.ANYADIR_PASE_A_VENTA);
+        		});
+        		quitarPV.addActionListener((ev)->{
+        			FactoriaAbstractaPresentacion.getInstance().createVista(Evento.QUITAR_PASE_DE_VENTA);
+        		});		
+        		cerrarVenta.addActionListener((ev)->{
+        			FactoriaAbstractaPresentacion.getInstance().createVista(Evento.CERRAR_VENTA);
+        			anyPV.setEnabled(false);
+            		quitarPV.setEnabled(false);
+            		cerrarVenta.setEnabled(false);
+            		abrirVenta.setEnabled(true);
+        		});		
+        		buscar.addActionListener((ev)->{
+        			FactoriaAbstractaPresentacion.getInstance().createVista(Evento.BUSCAR_FACTURA);
+        		});	
+        		mostrar.addActionListener((ev)->{
+        			FactoriaAbstractaPresentacion.getInstance().createVista(Evento.MOSTRAR_FACTURAS);
+        		});
+        		
+        		subsFactura.add(abrirVenta);        		
+        		subsFactura.add(anyPV);
+        		subsFactura.add(quitarPV);
+        		subsFactura.add(buscar);
+        		subsFactura.add(cerrarVenta);
+        		subsFactura.add(mostrar);
+        		subsFactura.setModal(false);        		
+        		subsFactura.setVisible(true);
             }
         });
 
@@ -187,13 +240,13 @@ public class MainWindow extends JFrame {
         subsObra.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-            	JDialog menuObra= new JDialog(MainWindow.this,"Menú obras", true);
+            	JDialog subsObra= new JDialog(MainWindow.this,"Subsistema obras", true);
             	
-            	JButton actualizar, agregar, borrar, buscar, consultar, mostrar;
+            	JButton actualizar, alta, baja, buscar, consultar, mostrar;
 
             	actualizar = new JButton("Actualizar obra");
-        		agregar = new JButton("Agregar obra");
-        		borrar = new JButton("Borrar obra");
+            	alta = new JButton("Alta obra");
+            	baja = new JButton("Baja obra");
         		buscar = new JButton("Buscar obras por campos");
         		consultar = new JButton("Consultar obra por id");
         		mostrar = new JButton("Mostrar obras en cartelera");
@@ -201,10 +254,10 @@ public class MainWindow extends JFrame {
         		actualizar.addActionListener((ev)->{
         			FactoriaAbstractaPresentacion.getInstance().createVista(Evento.ACTUALIZAR_OBRA_0);
         		});
-        		agregar.addActionListener((ev)->{
+        		alta.addActionListener((ev)->{
         			FactoriaAbstractaPresentacion.getInstance().createVista(Evento.CREAR_OBRA);
         		});
-        		borrar.addActionListener((ev)->{
+        		baja.addActionListener((ev)->{
         			FactoriaAbstractaPresentacion.getInstance().createVista(Evento.ELIMINAR_OBRA);
         		});		
         		buscar.addActionListener((ev)->{
@@ -214,18 +267,18 @@ public class MainWindow extends JFrame {
         			FactoriaAbstractaPresentacion.getInstance().createVista(Evento.CONSULTAR_OBRA);
         		});		
         		mostrar.addActionListener((ev)->{
-        			FactoriaAbstractaPresentacion.getInstance().createVista(Evento.LISTAR_OBRAS);
+        			FactoriaAbstractaPresentacion.getInstance().createVista(Evento.MOSTRAR_OBRAS);
         		});
         		
-        		menuObra.add(actualizar);        		
-        		menuObra.add(agregar);
-        		menuObra.add(borrar);
-        		menuObra.add(buscar);
-        		menuObra.add(consultar);
-        		menuObra.add(mostrar);
-        		menuObra.setVisible(true);
+        		subsObra.add(actualizar);        		
+        		subsObra.add(alta);
+        		subsObra.add(baja);
+        		subsObra.add(buscar);
+        		subsObra.add(consultar);
+        		subsObra.add(mostrar);
+        		subsObra.setModal(false);        		
+        		subsObra.setVisible(true);
             }
-            
         });
 
         subsCompTea.addActionListener(new ActionListener() {

@@ -56,7 +56,7 @@ public class FactoriaPresentacion extends FactoriaAbstractaPresentacion {
 		case ACTUALIZAR_OBRA_1: return new VistaActualizarObra_1();
 		case CONSULTAR_OBRA: return new VistaBuscarObras();
 		case BUSCAR_OBRA: return new VistaConsultarObra();
-		case LISTAR_OBRAS: return new VistaMostrarObras();
+		case MOSTRAR_OBRAS: return new VistaMostrarObras();
 		
 		//CompTea
 		
