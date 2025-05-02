@@ -26,6 +26,22 @@ import negocio.obra.TObra;
 import negocio.pase.TPase;
 import negocio.taquillero.TTaquillero;
 
+/**
+ * {@code TablaDefault} is a generic Swing-based window designed to display collections of various
+ * domain objects (such as {@code TFactura}, {@code TObra}, {@code TCliente}, etc.) in a table format.
+ *
+ * <p>This class creates a {@code JFrame} containing a {@code JTable} with optional editing capabilities and dynamic
+ * multi-line cell rendering. It automatically adapts the row content depending on the object type
+ * and supports both consultation (read-only) and editing modes.</p>
+ *
+ * <p>Main features:</p>
+ * <ul>
+ *   <li>Dynamic rendering of arrays or collections inside table cells as multi-line content.</li>
+ *   <li>Support for multiple domain object types via internal data conversion logic.</li>
+ *   <li>Editable and non-editable table modes, with optional "Aceptar" button for confirming changes.</li>
+ *   <li>Consistent UI styling using predefined constants for fonts and dimensions.</li>
+ * </ul>
+ */
 @SuppressWarnings("serial")
 public class TablaDefault extends JFrame {
 	private JButton aceptar; //Solo para el modo de actualizacion
@@ -213,6 +229,18 @@ public class TablaDefault extends JFrame {
         }
     }
 
+    /**
+     * Constructs a {@code TablaDefault} window configured to display tabular data.
+     *
+     * @param nombreTabla the title of the table window, shown in the frame's title bar
+     * @param columnNames the column headers for the table (converted to uppercase automatically)
+     * @param data        a collection of domain objects to display in the table; supports multiple types
+     * @param consultar   if {@code true}, the window is shown in consultation mode (smaller, non-resizable)
+     * @param editable    if {@code true}, the table cells are editable and an "Aceptar" button is shown
+     *
+     * <p>If {@code data} is not {@code null}, it will be inspected and converted into table rows
+     * based on its object type (e.g., {@code TFactura}, {@code TObra}, etc.). Unsupported types are ignored.</p>
+     */
 	public TablaDefault(String nombreTabla,  String[] columnNames, Collection<Object> data, boolean consultar, boolean editable) {
         this.setTitle(nombreTabla);
         this.setLayout(new BorderLayout());
