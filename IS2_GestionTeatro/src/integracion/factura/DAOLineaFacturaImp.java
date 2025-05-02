@@ -53,6 +53,7 @@ public class DAOLineaFacturaImp implements DAOLineaFactura {
 		}
         return -1; //No se ha encontrado la linea de factura con dicho id
 	}
+	
 
 	@Override
 	public TLineaFactura read(int id) throws BBDDReadException {

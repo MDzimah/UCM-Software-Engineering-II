@@ -4,6 +4,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 
 import javax.swing.JButton;
 import javax.swing.JComponent;
@@ -36,10 +37,11 @@ public class VistaCerrarVenta extends VistaDefault {
 
 	public VistaCerrarVenta() {}
 
-	public VistaCerrarVenta(TFactura tFactura) {
+	public VistaCerrarVenta() {
 		this.setTitle("Cerrar venta");
 		JSwingUtils.setAppIcon(this);
-		this.carrito = tFactura.getCarrito();
+		this.carrito = Collections.unmodifiableCollection(AbrirVenta.getCarrito());
+		
 		this.labelCliente = new JLabel("DNI del cliente:");
 		this.tfCliente = new JTextField(20);
 
