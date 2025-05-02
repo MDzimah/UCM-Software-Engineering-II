@@ -108,9 +108,10 @@ public class JSwingUtils {
 	}
 
 	@SuppressWarnings("serial")
-	private static class TablaDefault extends JFrame {
+	public static class TablaDefault extends JFrame {
 		private JButton aceptar; //Solo para el modo de actualizacion
 		private boolean editable;
+		private JTable table;
 
 	    private class DefaultTableModel extends AbstractTableModel {
 	        private final String[] columnNames;
@@ -320,7 +321,7 @@ public class JSwingUtils {
 	        if (data != null) {
 	        	
 		        DefaultTableModel model = new DefaultTableModel(columnNames, this.convert(data, columnNames.length));
-		        JTable table = new JTable(model);
+		        this.table = new JTable(model);
 		       
 		        
 		        //Cambiar apariencia del header de la tabla
@@ -342,6 +343,8 @@ public class JSwingUtils {
 	    }
 		
 		public JButton getOkButton() { return editable ? this.aceptar : null; }
+		
+		public JTable getTable() {return this.table;}
 	}
 
 	

@@ -18,6 +18,7 @@ import negocio.pase.TPase;
 import presentacion.Evento;
 import presentacion.GUIFactura.AbrirVenta;
 import presentacion.GUIObra.VistaActualizarObra_1;
+import presentacion.GUIPase.VistaActualizarPaseDescarga;
 import presentacion.factoria.FactoriaAbstractaPresentacion;
 
 public class ControladorImp extends Controlador {
@@ -110,10 +111,6 @@ public class ControladorImp extends Controlador {
 		//Pase
 		
 		case CREAR_PASE: {
-			if (datos instanceof String) {
-				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_KO, (String)datos);
-				break;
-			}
 			try {
 				SAPase saPase = FactoriaAbstractaNegocio.getInstance().crearSAPase();
 				saPase.create((TPase) datos);
@@ -124,10 +121,6 @@ public class ControladorImp extends Controlador {
 			break;
 		}
 		case ELIMINAR_PASE: {
-			if (datos instanceof String) {
-				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_KO, (String)datos);
-				break;
-			}
 			try {
 				SAPase saPase = FactoriaAbstractaNegocio.getInstance().crearSAPase();
 				int idBuscado = (int) datos;
@@ -139,10 +132,6 @@ public class ControladorImp extends Controlador {
 			break;
 		}
 		case BUSCAR_PASE: {
-			if (datos instanceof String) {
-				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_KO, (String)datos);
-				break;
-			}
 			try {
 				SAPase saPase = FactoriaAbstractaNegocio.getInstance().crearSAPase();
 				int idBuscado = (int) datos;
@@ -154,10 +143,6 @@ public class ControladorImp extends Controlador {
 			break;
 		}
 		case LISTAR_PASES:{
-			if (datos instanceof String) {
-				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_KO, (String)datos);
-				break;
-			}
 			try {
 				SAPase saPase = FactoriaAbstractaNegocio.getInstance().crearSAPase();
 				Collection<TPase> pases = saPase.readAll();
@@ -167,7 +152,29 @@ public class ControladorImp extends Controlador {
 			}
 			break;
 		}
-		case ACTUALIZAR_PASE:
+		case ACTUALIZAR_PASE_CARGA:{
+			try {
+				SAPase saPase = FactoriaAbstractaNegocio.getInstance().crearSAPase();
+				int idBuscado = (int)datos;
+				TPase tPaseActualizar = saPase.read(idBuscado);
+				VistaActualizarPaseDescarga vista = (VistaActualizarPaseDescarga) FactoriaAbstractaPresentacion.getInstance().createVista(Evento.ACTUALIZAR_OBRA_1);
+				vista.cargarPase(tPaseActualizar);
+			} catch(Exception e) {
+				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_KO, e);
+			}
+			break;
+		}
+		case ACTUALIZAR_PASE_DESCARGA:{
+			try {
+				SAObra saPase = FactoriaAbstractaNegocio.getInstance().crearSAObra();
+				TPase tPase = saPase.read((int)datos);
+				
+			}
+			catch(Exception e) {
+				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_KO, e);
+			}
+			break;
+		}
 		
 		//Obra
 		case CREAR_OBRA:{
