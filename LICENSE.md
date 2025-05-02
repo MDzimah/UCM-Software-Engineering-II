@@ -5,14 +5,19 @@ Copyright (c) 2025 UCM Software Engineering II Team
 This project would not have been possible without the contributions of the following individuals, listed at:  
 [https://github.com/MDzimah/UCM-Software-Engineering-II/graphs/contributors](https://github.com/MDzimah/UCM-Software-Engineering-II/graphs/contributors)
 
-Permission is hereby granted, free of charge, to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, under the following conditions:
+Permission is hereby granted, free of charge, to use, copy, modify, merge, publish, and distribute copies of the Software, subject to the following conditions:
 
 1. The above copyright notice and this permission notice must be included in all copies or substantial portions of the Software.
 
-2. The Software may **not** be used for commercial purposes.  
-   _"Commercial use"_ means any use that is intended for or directed towards commercial advantage or monetary compensation.
+2. **Use Restrictions**  
+   This Software is provided **strictly for non-commercial purposes**.  
+   - **Non-commercial use** includes personal, academic, educational, or research activities that are not intended for or directed toward commercial advantage or monetary compensation.  
+   - **Commercial use** is **not allowed** under this license.
 
-3. If you wish to use the Software for commercial purposes, you must obtain explicit permission from the copyright holder, **UCM Software Engineering II Team**, and negotiate the terms of such use.
+3. **Requesting Commercial Use Rights**  
+   If you wish to use this Software for commercial purposes, you **must obtain prior written permission** from the copyright holders:  
+   **UCM Software Engineering II Team**.  
+   Commercial rights may be granted under a separate license with mutually agreed-upon terms.
 
 ---
 
