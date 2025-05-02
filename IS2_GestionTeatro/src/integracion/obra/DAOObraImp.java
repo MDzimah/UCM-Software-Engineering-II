@@ -151,16 +151,16 @@ public class DAOObraImp implements DAOObra {
 	 */
 	 @Override
 	public List<TObra> search(List<String> params) throws BBDDReadException {
-		if (OpsBBDD.isEmpty(Messages.BDOb)) {
+		if (!OpsBBDD.isEmpty(Messages.BDOb)) {
 
 			JSONObject bdObras = OpsBBDD.read(Messages.BDOb);
 			List<TObra> obras = new LinkedList<TObra>();
 			
-			if(params.get(0)!=null)
+			if(!params.get(0).equals(""))
 				busquedaLineal(bdObras, Messages.KEY_titulo, obras, params.get(0));					
-			if(params.get(1)!=null)
+			if(!params.get(1).equals(""))
 				busquedaLineal(bdObras, Messages.KEY_autor, obras, params.get(1));					
-			if(params.get(2)!=null)
+			if(!params.get(2).equals(""))
 				busquedaLineal(bdObras, Messages.KEY_Genero, obras, params.get(2));					
 			return obras;
 		}

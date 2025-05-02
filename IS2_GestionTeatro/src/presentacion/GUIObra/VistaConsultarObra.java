@@ -11,6 +11,7 @@ import javax.swing.JTextField;
 import javax.swing.SwingUtilities;
 
 import misc.*;
+import negocio.obra.TObra;
 import presentacion.Evento;
 import presentacion.IGUI;
 import presentacion.VistaDefault;
@@ -66,7 +67,7 @@ public class VistaConsultarObra extends VistaDefault implements IGUI{
 		if(evento==Evento.RES_OK) {
 			String[] nomCols = {"ID","TITULO", "AUTOR", "GENERO", "SINOPSIS"};
 			Collection<Object> obra= new LinkedList<Object>();
-			obra.add(datos);
+			obra.add((TObra) datos);
 			JSwingUtils.createTabla("OBRA", nomCols, obra, false, false);
 		}
 		else if(evento==Evento.RES_KO) {

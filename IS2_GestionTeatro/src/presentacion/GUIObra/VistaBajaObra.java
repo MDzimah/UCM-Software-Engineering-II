@@ -65,7 +65,7 @@ public class VistaBajaObra extends VistaDefault implements IGUI{
 	@Override
 	public void actualizar(presentacion.Evento evento, Object datos) {
 		if(evento==Evento.RES_OK) {
-			JSwingUtils.createErrorDialogMessage("Se ha eliminado correctamente la obra " + (int)datos);
+			JSwingUtils.createDialogMessage("Se ha eliminado correctamente la obra: " + (int)datos);
 
 		}
 		else if(evento==Evento.RES_KO) {

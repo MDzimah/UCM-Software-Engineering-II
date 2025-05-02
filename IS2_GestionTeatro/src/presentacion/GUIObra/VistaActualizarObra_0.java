@@ -42,7 +42,7 @@ public class VistaActualizarObra_0 extends VistaDefault implements IGUI{
 		aceptar.addActionListener(e ->{
 			if(!id.getText().equals("")) {
 				try{
-					String id2 = id.getText();
+					Integer id2 = Integer.valueOf(id.getText());
 					SwingUtilities.invokeLater(()->{Controlador.getInstance().accion(Evento.ACTUALIZAR_OBRA_0, id2);});
 					VistaActualizarObra_0.this.dispose();
 			}

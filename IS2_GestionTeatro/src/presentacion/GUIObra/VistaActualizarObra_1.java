@@ -20,14 +20,14 @@ public class VistaActualizarObra_1 extends VistaDefault implements IGUI{
 	//Atributos
 	private JButton actualizar, cancelar;
 	private JTextField titulo, autor , genero, sinopsis;
+	private JLabel id1;
 
 	//Constructor
 		public VistaActualizarObra_1() {
 			initGUI();
 		}
 		public void setDatos(TObra obra) {
-			JLabel id1 = new JLabel(String.valueOf(obra.getIdObra()));
-
+			id1.setText(String.valueOf(obra.getIdObra()));;
 			titulo.setText(obra.getTitulo());
 			autor.setText(obra.getAutor());
 			genero.setText(obra.getGenero());
@@ -40,7 +40,10 @@ public class VistaActualizarObra_1 extends VistaDefault implements IGUI{
 			this.setTitle("Actualizar obra");
 			actualizar = new JButton("Actualizar");
 			cancelar = new JButton("Cancelar");
-			JLabel id0 = new JLabel("Id"), id1 = new JLabel(), titulo1 = new JLabel("Titulo"), autor1 = new JLabel("Autor"), genero1 = new JLabel("Género"), sinopsis1 = new JLabel("Sinopsis");
+			JLabel id0 = new JLabel("Id"),  titulo1 = new JLabel("Titulo"), 
+					autor1 = new JLabel("Autor"), genero1 = new JLabel("Género"), 
+					sinopsis1 = new JLabel("Sinopsis");
+			id1 = new JLabel();
 			titulo = new JTextField();
 			autor = new JTextField();
 			genero = new JTextField();
@@ -58,7 +61,7 @@ public class VistaActualizarObra_1 extends VistaDefault implements IGUI{
 			//Declaramos los listeners
 			actualizar.addActionListener(e ->{
 				String titulo2 = titulo.getText(), autor2= autor.getText(), genero2= genero.getText(), sinopsis2= sinopsis.getText();
-				TObra obra1 = new TObra(titulo2, autor2, genero2, sinopsis2);
+				TObra obra1 = new TObra(Integer.valueOf(id1.getText()), titulo2, autor2, genero2, sinopsis2);
 
 				SwingUtilities.invokeLater(()->{Controlador.getInstance().accion(Evento.ACTUALIZAR_OBRA_1, obra1);});
 				VistaActualizarObra_1.this.dispose();
@@ -74,7 +77,7 @@ public class VistaActualizarObra_1 extends VistaDefault implements IGUI{
 	@Override
 	public void actualizar(Evento evento, Object datos) {
 		if(evento==Evento.RES_OK) {
-			JSwingUtils.createErrorDialogMessage("Se ha actualizado correctamente la obra " + (int)datos);
+			JSwingUtils.createDialogMessage("Se ha actualizado correctamente la obra: " + ((int)datos));
 
 		}
 		else if(evento==Evento.RES_KO) {

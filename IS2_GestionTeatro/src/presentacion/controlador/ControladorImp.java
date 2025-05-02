@@ -202,7 +202,7 @@ public class ControladorImp extends Controlador {
 			try {
 				SAObra saObra = FactoriaAbstractaNegocio.getInstance().crearSAObra();
 				saObra.update((TObra)datos);
-				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_OK, (int)datos);
+				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_OK, ((TObra) datos).getIdObra());
 			}
 			catch(Exception e) {
 				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_KO, "Error: " +e.getMessage());

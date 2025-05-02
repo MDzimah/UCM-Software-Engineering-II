@@ -229,7 +229,17 @@ public class JSwingUtils {
 					
 				}
 				else if (this.containsType(data, TObra.class)) {
-					
+					for (TObra tObra : data.toArray(new TObra[0])) {
+	    				Object[] fila = new Object[numCols];
+	    				
+	    				fila[0] = tObra.getIdObra();
+	    				fila[1] = tObra.getTitulo();
+	    				fila[2] = tObra.getAutor();
+	    				fila[3] = tObra.getGenero();
+	    				fila[4] = tObra.getSinopsis();
+	    				
+	    				matInfo.add(fila);
+	    			}
 				}
 				else if (this.containsType(data, TCompTea.class)) {
 					for (TMiemCompTea tMiemComp : data.toArray(new TMiemCompTea[0])) {
@@ -313,7 +323,7 @@ public class JSwingUtils {
 		        }
 	        }
 	        this.setLocationRelativeTo(null);
-	        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	        this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 	        this.setVisible(true);
 	    }
 		
