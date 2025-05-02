@@ -7,6 +7,7 @@ import java.util.*;
 import org.json.JSONObject;
 
 import exceptions.*;
+import integracion.factoria.FactoriaAbstractaIntegracion;
 import misc.*;
 import negocio.factura.*;
 
@@ -50,7 +51,7 @@ public class DAOFacturaImp implements DAOFactura {
 		        DAOLineaFactura daoLF = FactoriaAbstractaIntegracion.crearDAOLineaFactura();
 		        Collection<TLineaFactura> lineas = daoLF.readAll();
 		        for (TLineaFactura tLF : lineas) {
-		        	if (tLF.getIdFactura().equals(id)) {
+		        	if (tLF.getIdFactura()== id) {
 		        		daoLF.delete(tLF.getIdLineaFactura());
 		        	}
 		        }
