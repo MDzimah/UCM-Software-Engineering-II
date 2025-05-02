@@ -7,7 +7,9 @@ import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
+import javax.swing.SwingUtilities;
 
+import misc.JSwingUtils;
 import misc.Pair;
 import presentacion.Evento;
 import presentacion.IGUI;
@@ -29,15 +31,10 @@ public class VistaMostrarCompania extends VistaDefault implements IGUI{
 		this.setTitle("Mostrar Compañia Teatral");//no se si dan problemas la verdad
 		JButton anyadir= new JButton("Mostrar");
 		JButton cancelar = new JButton("Cancelar");
-		
-		
-
-		
-		
 		ArrayList<Pair<JComponent, JComponent>> campos = new ArrayList<>();
 		campos.add(null);//TODO otra vista la verdad
 		anyadir.addActionListener(e ->{
-			Controlador.getInstance().accion(Evento.MOSTRAR_COMPANIA_TEATRAL, null);//TODO no se si esto es por nombre
+			SwingUtilities.invokeLater(()->Controlador.getInstance().accion(Evento.MOSTRAR_COMPANIA_TEATRAL, null));
 			this.dispose();	//Igual cambio algo de aqui porque el problema es que como esta ahora se ejecuta el controller antes de cerrar la ventana
 		});
 		cancelar.addActionListener(e ->{
@@ -54,10 +51,10 @@ public class VistaMostrarCompania extends VistaDefault implements IGUI{
 	public void actualizar(Evento evento, Object datos) {
 		if(evento==Evento.RES_OK) {
 			String[] nomCols = {"ID","TITULO", "AUTOR", "GENERO", "SINOPSIS"};
-			FactoriaAbstractaPresentacion.getInstance().createTabla("CONSULTAR OBRA", nomCols, (Collection<Object>)datos, true);			
+			JSwingUtils.createTabla("CONSULTAR OBRA", nomCols, (Collection<Object>)datos, false,false);			
 		}
 		else if(evento==Evento.RES_KO) {
-			FactoriaAbstractaPresentacion.getInstance().createErrorDialogMessage("NO SE PUDO LISTAR LAS COMPANIAS TEATRALES");
+			JSwingUtils.createErrorDialogMessage("NO SE PUDO LISTAR LAS COMPANIAS TEATRALES");
 		}
 	}
 

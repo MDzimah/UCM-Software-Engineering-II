@@ -2,6 +2,7 @@ package presentacion.factoria;
 
 import presentacion.*;
 import presentacion.GUIFactura.*;
+import presentacion.GUICompTea.*;
 import presentacion.GUIObra.VistaActualizarObra_0;
 import presentacion.GUIObra.VistaActualizarObra_1;
 import presentacion.GUIObra.VistaAltaObra;
@@ -57,8 +58,11 @@ public class FactoriaPresentacion extends FactoriaAbstractaPresentacion {
 		case MOSTRAR_OBRAS: return new VistaMostrarObras();
 		
 		//CompTea
-		
-		
+		case ALTA_COMPANIA_TEATRAL:  return new VistaAltaCompania();
+		case ACTUALIZAR_COMPANIA_TEATRAL: return new VistaActualizarCompania();
+		case BUSCAR_COMPANIA_TEATRAL: return new VistaBuscarCompania();
+		case ELIMINAR_COMPANIA_TEATRAL: return new VistaBajaCompTea();
+		case MOSTRAR_COMPANIA_TEATRAL: return new VistaMostrarCompania();
 		//MiemCompTea
 		case ACTUALIZAR_MIEMBRO_COMPANIA: return new VistaActualizarMiembroCompania();
 		case BUSCAR_MIEMBRO_COMPANIA: return new VistaBuscarMiembroCompania();
