@@ -167,8 +167,8 @@ public class ControladorImp extends Controlador {
 		case ACTUALIZAR_PASE_DESCARGA:{
 			try {
 				SAObra saPase = FactoriaAbstractaNegocio.getInstance().crearSAObra();
-				TPase tPase = saPase.read((int)datos);
-				
+				saPase.update((TObra) datos);
+				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_OK, null);
 			}
 			catch(Exception e) {
 				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_KO, e);

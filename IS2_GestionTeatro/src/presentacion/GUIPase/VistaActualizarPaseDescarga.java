@@ -10,6 +10,7 @@ import negocio.factoria.FactoriaAbstractaNegocio;
 import negocio.pase.TPase;
 import presentacion.Evento;
 import presentacion.IGUI;
+import presentacion.controlador.Controlador;
 
 public class VistaActualizarPaseDescarga implements IGUI {
 	
@@ -26,9 +27,8 @@ public class VistaActualizarPaseDescarga implements IGUI {
 			int stock = Integer.valueOf((String) tabla.getTable().getValueAt(0, 4));
 			int precio = Integer.valueOf((String) tabla.getTable().getValueAt(0, 5));
 			TPase tPaseNuevo = new TPase(id, idCompTea, idObra, true, null, stock, precio); 
-			
+			Controlador.getInstance().accion(Evento.ACTUALIZAR_PASE_DESCARGA, tPaseNuevo);
 		});
-		FactoriaAbstractaNegocio.getInstance().crearSAPase().update(tPaseNuevo);
 	}
 	
 	@Override
