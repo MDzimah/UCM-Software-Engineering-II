@@ -15,8 +15,7 @@ Permission is hereby granted, free of charge, to use, copy, modify, merge, publi
    - **Commercial use** is **not allowed** under this license.
 
 3. **Requesting Commercial Use Rights**  
-   If you wish to use this Software for commercial purposes, you **must obtain prior written permission** from the copyright holders:  
-   **UCM Software Engineering II Team**.  
+   If you wish to use this Software for commercial purposes, you **must obtain prior written permission** from the copyright holders, the **UCM Software Engineering II Team**.  
    Commercial rights may be granted under a separate license with mutually agreed-upon terms.
 
 ---
