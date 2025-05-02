@@ -241,7 +241,7 @@ public class JSwingUtils {
 	    				matInfo.add(fila);
 	    			}
 				}
-				else if (this.containsType(data, TCompTea.class)) {
+				else if (this.containsType(data, TMiemCompTea.class)) {
 					for (TMiemCompTea tMiemComp : data.toArray(new TMiemCompTea[0])) {
 	    				Object[] fila = new Object[numCols];
 	    				
@@ -256,6 +256,18 @@ public class JSwingUtils {
 	    				matInfo.add(fila);
 	    			}
 				}
+				else if (this.containsType(data, TCompTea.class)) {
+					for (TCompTea tComp : data.toArray(new TCompTea[0])) {
+	    				Object[] fila = new Object[numCols];
+	    				
+	    				fila[0] = tComp.getId();
+	    				fila[1] = tComp.getNombre();
+	    				fila[2] = tComp.getCosteContratacion();
+	    				
+	    				matInfo.add(fila);
+	    			}
+				}
+	    		
 				else { //Instancia de TMiemCompTea
 					
 				}

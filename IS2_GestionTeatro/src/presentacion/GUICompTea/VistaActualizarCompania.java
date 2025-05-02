@@ -5,6 +5,7 @@ import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
+import javax.swing.SwingUtilities;
 
 import misc.Pair;
 import presentacion.Evento;
@@ -44,7 +45,7 @@ public class VistaActualizarCompania extends VistaDefault implements IGUI{
 			String direccionString = direccion.getText();
 			String costeString= coste.getText();
 			TCompTea tCompTea= new TCompTea(-1,nombreString,direccionString,true,Float.parseFloat(costeString));
-			Controlador.getInstance().accion(Evento.CREAR_OBRA, tCompTea);
+			SwingUtilities.invokeLater(()->Controlador.getInstance().accion(Evento.CREAR_OBRA, tCompTea));
 			this.dispose();	//Igual cambio algo de aqui porque el problema es que como esta ahora se ejecuta el controller antes de cerrar la ventana
 		});
 		cancelar.addActionListener(e ->{

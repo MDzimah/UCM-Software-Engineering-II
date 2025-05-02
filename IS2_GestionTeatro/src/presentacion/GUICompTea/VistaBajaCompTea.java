@@ -5,6 +5,7 @@ import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
+import javax.swing.SwingUtilities;
 
 import integracion.factoria.FactoriaAbstractaIntegracion;
 import misc.Pair;
@@ -43,8 +44,7 @@ public class VistaBajaCompTea extends VistaDefault implements IGUI{
 		anyadir.addActionListener(e ->{
 			String nombreString = nombre.getText(); 
 			FactoriaAbstractaIntegracion.getInstance().crearDAOCompTea();
-			
-			Controlador.getInstance().accion(Evento.ELIMINAR_COMPANIA_TEATRAL, nombreString);
+			SwingUtilities.invokeLater(()->Controlador.getInstance().accion(Evento.ELIMINAR_COMPANIA_TEATRAL, nombreString));
 			this.dispose();	//Igual cambio algo de aqui porque el problema es que como esta ahora se ejecuta el controller antes de cerrar la ventana
 		});
 		cancelar.addActionListener(e ->{

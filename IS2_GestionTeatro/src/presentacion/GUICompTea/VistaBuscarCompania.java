@@ -5,10 +5,13 @@ import java.util.Collection;
 
 import javax.swing.JButton;
 import javax.swing.JComponent;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
+import javax.swing.SwingUtilities;
 
 import integracion.factoria.FactoriaAbstractaIntegracion;
+import misc.JSwingUtils;
 import misc.Pair;
 import presentacion.Evento;
 import presentacion.IGUI;
@@ -47,7 +50,7 @@ public class VistaBuscarCompania extends VistaDefault implements IGUI{
 			String nombreString = respuesta.getText(); 
 			FactoriaAbstractaIntegracion.getInstance().crearDAOCompTea();
 			
-			Controlador.getInstance().accion(Evento.BUSCAR_COMPANIA_TEATRAL, nombreString);
+			SwingUtilities.invokeLater(()->Controlador.getInstance().accion(Evento.BUSCAR_COMPANIA_TEATRAL, nombreString));
 			this.dispose();	
 		});
 		cancelar.addActionListener(e ->{
@@ -64,10 +67,10 @@ public class VistaBuscarCompania extends VistaDefault implements IGUI{
 	public void actualizar(Evento evento, Object datos) {
 		if(evento==Evento.RES_OK) {
 			String[] columnas = {"ID","NOMBRE","DIRECCION","COSTE DE CONTRATACION"};
-			FactoriaAbstractaPresentacion.getInstance().createTabla("BUSCAR COMPANIA TEATRAL", columnas , (Collection<Object>)datos, false);			
+			JFrame j= JSwingUtils.createTabla("COMPANIA", columnas, (Collection<Object>)datos, true, false);			
 		}
 		else if(evento==Evento.RES_KO) {
-			FactoriaAbstractaPresentacion.getInstance().createErrorDialogMessage("NO EXISTEN LAS COMPANIAS:.\n" +(String)datos);
+			JSwingUtils.createErrorDialogMessage("NO EXISTEN LAS COMPANIAS:.\n" +(String)datos);
 		}
 		
 	}
