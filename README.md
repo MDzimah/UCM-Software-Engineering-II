@@ -4,11 +4,14 @@
 A desktop application for managing theatre operations, including patron records, show scheduling, ticket sales, and staff management. The system is implemented using a strict 3-layer architecture, demonstrating key object-oriented and architectural design principles.
 
 ### Core Features
-- **Patron Management**: Register, remove, and list theatre patrons.
-- **Ticket Invoicing**: Create and manage JSON-based invoices for ticket purchases.
-- **Show Scheduling**: Organize productions and their showtimes.
-- **Seating and Session Management**: Assign seats and manage specific performances.
-- **Company and Staff Management**: Maintain company details and box office staff roles.
+- **Cliente Management**: Registering, deleting, and listing theatre patrons.
+- **Invoice and Payment Management**: Creating and storing invoices for ticket purchases using JSON.
+- **Show Management**: Handling details of theatrical productions.
+- **Session and Seating Management**: Managing showtimes (pases) and seat allocations.
+- **Theatre Company Management**: Administering information about theatre companies.
+- **Company Member Management**: Managing individual members of a theatre company.
+- **Box Office Operations**: Supporting the workflow and tasks of ticket sellers.
+- **Graphical User Interface**: Swing-based GUI for interaction with all system functionalities.
 
 ## Architecture Overview
 The application implements a comprehensive set of subsystems required for theatre management:
