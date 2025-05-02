@@ -7,6 +7,7 @@ import javax.swing.JPanel;
 
 import misc.Constants;
 import misc.JSwingUtils;
+import misc.JSwingUtils.TablaDefault;
 import misc.Messages;
 import negocio.pase.TPase;
 import presentacion.Evento;

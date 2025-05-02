@@ -8,6 +8,7 @@ public class Messages {
 	public static final String EX_PASE_CREADO = "Se ha creado el pase correctamente.";
 	public static final String EX_PASE_BUSCADO = "Se ha encontrado el pase de forma exitosa.";
 	public static final String EX_PASE_ELIMINADO = "Se ha eliminado el pase de forma exitosa.";
+	public static final String EX_PASE_ACTUALIZADO = "Se ha actualizado el pase de forma exitosa.";
 	
 	public static final String EX_MIEMBRO_CONTRATADO = "El nuevo miembro ha sido contratado exitosamente.";
 	public static final String EX_MIEMBRO_ENCONTRADO = "Se ha encontrado el miembro de forma exitosa.";

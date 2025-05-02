@@ -55,7 +55,7 @@ public class VistaBuscarPase extends VistaDefault {
 	public void actualizar(Evento evento, Object datos) {
 		if(evento==Evento.RES_OK) {
 			Collection<Object> p = new ArrayList<Object>();
-			p.add((TFactura)datos);
+			p.add((TPase)datos);
 			String[] nomCols = {"ID","ID COMPANYA", "ID OBRA", "FECHA", "STOCK", "PRECIO"};
 			//FactoriaAbstractaPresentacion.getInstance().createDialogMessage(Messages.EX_PASE_BUSCADO);
 			JSwingUtils.createTabla("BUSCAR PASE", nomCols, p, true, false); //se crea una tabla con una sola linea que contiene
