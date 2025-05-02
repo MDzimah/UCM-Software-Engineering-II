@@ -19,6 +19,7 @@ import negocio.factura.TFactura;
 import negocio.pase.TPase;
 import presentacion.Evento;
 import presentacion.IGUI;
+import presentacion.TablaDefault;
 import presentacion.VistaDefault;
 import presentacion.controlador.Controlador;
 import presentacion.factoria.FactoriaAbstractaPresentacion;
@@ -58,7 +59,7 @@ public class VistaBuscarPase extends VistaDefault {
 			p.add((TPase)datos);
 			String[] nomCols = {"ID","ID COMPANYA", "ID OBRA", "FECHA", "STOCK", "PRECIO"};
 			//FactoriaAbstractaPresentacion.getInstance().createDialogMessage(Messages.EX_PASE_BUSCADO);
-			JSwingUtils.createTabla("BUSCAR PASE", nomCols, p, true, false); //se crea una tabla con una sola linea que contiene
+			new TablaDefault("BUSCAR PASE", nomCols, p, true, false); //se crea una tabla con una sola linea que contiene
 																	  		 //la info del transfer del pase buscado
 		}
 		else if(evento==Evento.RES_KO) {

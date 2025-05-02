@@ -5,11 +5,11 @@ import java.util.Collection;
 
 import misc.JSwingUtils;
 import misc.Messages;
-import misc.JSwingUtils.TablaDefault;
 import negocio.factoria.FactoriaAbstractaNegocio;
 import negocio.pase.TPase;
 import presentacion.Evento;
 import presentacion.IGUI;
+import presentacion.TablaDefault;
 import presentacion.controlador.Controlador;
 
 public class VistaActualizarPaseDescarga implements IGUI {
@@ -18,7 +18,7 @@ public class VistaActualizarPaseDescarga implements IGUI {
 		Collection<Object> p = new ArrayList<Object>();
 		p.add((TPase)datos);
 		String[] nomCols = {"ID","ID COMPANYA", "ID OBRA", "FECHA", "STOCK", "PRECIO"};
-		TablaDefault tabla = JSwingUtils.createTabla("BUSCAR PASE", nomCols, p, true, true);
+		TablaDefault tabla = new TablaDefault("BUSCAR PASE", nomCols, p, true, true);
 		tabla.getOkButton().addActionListener(e -> {
 			int id = Integer.valueOf((String) tabla.getTable().getValueAt(0, 0));
 			int idCompTea = Integer.valueOf((String) tabla.getTable().getValueAt(0, 1));
