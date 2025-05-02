@@ -34,7 +34,7 @@ UML modeling (done using **draw.io**) was completed for the following subsystems
 - **Factura** and **Cliente**: Include Class Diagrams, Sequence Diagrams, and Activity Diagrams across all three layers.
 - Class diagrams are also provided for the **Factory** classes in the Presentation, Business, and Integration layers, showing how object creation and dependencies are managed.
 
-All UML diagrams are located in `uml/subsystems/`. The top-level `uml-diagrams/` folder remains empty intentionally.
+All UML diagrams are located in the `Diagramas_UML/` folder, inside the `IS2_GestionTeatro/` directory.
 
 ## Technologies
 - **Java 11+**
@@ -66,6 +66,6 @@ This project applies several classical design patterns to maintain modularity an
 │   └── gui/                    # GUI components (presentation layer)
 │
 ├── resources/                  # JSON data files (e.g., clientes.json, facturas.json)
-├── uml/subsystems/             # draw.io UML diagrams by subsystem
+├── Diagramas_UML/              # draw.io UML diagrams by subsystem
 ├── lib/                        # External libraries (e.g., Gson)
 └── README.md
