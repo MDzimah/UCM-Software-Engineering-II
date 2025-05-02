@@ -13,6 +13,7 @@ import misc.Pair;
 import misc.JSwingUtils;
 import negocio.factura.TFactura;
 import presentacion.Evento;
+import presentacion.TablaDefault;
 import presentacion.VistaDefault;
 import presentacion.controlador.Controlador;
 
@@ -63,7 +64,7 @@ public class VistaBuscarFac extends VistaDefault {
 			fac.add((TFactura)datos);
 			String[] nomCols = {"ID","ID CLIENTE", "ID TAQUILLERO", "FECHA", "IMPORTE", "SUBTOTAL"};
 
-			JSwingUtils.createTabla("BUSCAR FACTURA", nomCols, fac, true, false);
+			new TablaDefault("BUSCAR FACTURA", nomCols, fac, true, false).setVisible(true);
 		}
 		else if(evento == Evento.RES_KO) {
 			String error;

@@ -7,6 +7,7 @@ import javax.swing.*;
 import exceptions.BBDDReadException;
 import misc.*;
 import presentacion.Evento;
+import presentacion.TablaDefault;
 import presentacion.VistaDefault;
 import presentacion.controlador.Controlador;
 
@@ -40,7 +41,7 @@ public class VistaMostrarFacs extends VistaDefault {
 			Collection<Object> castedData = (Collection<Object>)datos;
 			String[] nomCols = {"ID","ID CLIENTE", "ID TAQUILLERO", "FECHA", "IMPORTE"};
 			
-			JSwingUtils.createTabla("MOSTRAR FACTURAS", nomCols, castedData, false, false);
+			new TablaDefault("MOSTRAR FACTURAS", nomCols, castedData, false, false).setVisible(true);;
 		}
 		else if(evento == Evento.RES_KO) {
 			String error;
