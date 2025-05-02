@@ -48,7 +48,8 @@ public class DAOFacturaImp implements DAOFactura {
 				facs.getJSONObject(_id).put(Messages.KEY_act, false);
 		        OpsBBDD.write(bdFac, Messages.BDFac);
 		        
-		        DAOLineaFactura daoLF = FactoriaAbstractaIntegracion.crearDAOLineaFactura();
+		        //Borrar las facturas implica también borrar las líneas asociadas a ella
+		        DAOLineaFactura daoLF = FactoriaAbstractaIntegracion.getInstance().crearDAOLineaFactura();
 		        Collection<TLineaFactura> lineas = daoLF.readAll();
 		        for (TLineaFactura tLF : lineas) {
 		        	if (tLF.getIdFactura()== id) {
