@@ -234,7 +234,51 @@ public class MainWindow extends JFrame {
         subsPase.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-               
+            	JDialog subsPase= new JDialog(MainWindow.this,"Subsistema pase", true);
+            	subsPase.setLayout(new FlowLayout());
+            	
+            	JButton actualizar, alta, baja, buscar, consultar, mostrar;
+            
+            	actualizar = new JButton("Actualizar pase");
+            	alta = new JButton("Alta pase");
+            	baja = new JButton("Baja pase");
+        		buscar = new JButton("Buscar pase");
+        		mostrar = new JButton("Listar pases");
+        		
+        		//ACTUALIZAR PASE
+        		actualizar.addActionListener((ev)->{
+        			FactoriaAbstractaPresentacion.getInstance().createVista(Evento.ACTUALIZAR_PASE_CARGA);
+        		});
+        		
+        		//ALTA PASE
+        		alta.addActionListener((ev)->{
+        			FactoriaAbstractaPresentacion.getInstance().createVista(Evento.CREAR_PASE);
+        		});
+        		
+        		//BAJA PASE
+        		baja.addActionListener((ev)->{
+        			FactoriaAbstractaPresentacion.getInstance().createVista(Evento.ELIMINAR_PASE);
+        		});		
+        		
+        		//CONSULTAR PASE
+        		buscar.addActionListener((ev)->{
+        			FactoriaAbstractaPresentacion.getInstance().createVista(Evento.BUSCAR_PASE);
+        		});	
+        		
+        		//LISTAR PASES
+        		mostrar.addActionListener((ev)->{
+        			FactoriaAbstractaPresentacion.getInstance().createVista(Evento.LISTAR_PASES);
+        		});
+        		
+        		subsPase.add(actualizar);        		
+        		subsPase.add(alta);
+        		subsPase.add(baja);
+        		subsPase.add(buscar);
+        		subsPase.add(mostrar);
+        		subsPase.setModal(false);  
+        		subsPase.pack();
+        		subsPase.setLocationRelativeTo(null);
+        		subsPase.setVisible(true);
             }
         });
 
