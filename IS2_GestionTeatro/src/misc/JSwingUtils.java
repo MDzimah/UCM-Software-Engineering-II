@@ -68,30 +68,30 @@ public class JSwingUtils {
 	 
 
 	//Tabla
-	 /**
-	  * Creates and displays a JFrame window containing a customized JTable populated with business entity data.
-	  * <p>
-	  * This table supports rendering collections and arrays within individual cells as multi-line entries using a custom
-	  * cell renderer. It adjusts row heights dynamically to accommodate multi-line content. Additionally, it detects
-	  * the type of business object contained in the input collection (e.g., {@link TFactura}, {@link TCliente},
-	  * {@link TCompTea}, etc.) and automatically formats each row based on the detected structure.
-	  * </p>
-	  * <p>
-	  * The method supports two display modes:
-	  * <ul>
-	  *   <li><b>Consultation mode</b> (compact size): If {@code consultar} is {@code true}, the table is shown in a smaller window for quick lookup.</li>
-	  *   <li><b>Edition mode</b>: If {@code edicion} is {@code true}, the table is rendered with editable cells and an additional "Aceptar" button.</li>
-	  * </ul>
-	  * </p>
-	  *
-	  * @param tituloTabla the title of the window and the table
-	  * @param nomCols an array of column headers (automatically converted to uppercase)
-	  * @param datos a collection of business entity objects to be displayed (e.g., {@link TFactura}, {@link TMiemCompTea}, etc.)
-	  * @param consultar if {@code true}, displays the table in a compact window for read-only viewing
-	  * @param edicion if {@code true}, makes cells editable and shows an "Aceptar" button for confirming updates
-	  * @return a {@link JFrame} object containing the constructed table view
-	  */
-	 public static JFrame createTabla(String tituloTabla, String[] nomCols, Collection<Object> datos, boolean consultar, boolean edicion) {
+	/**
+	 * Creates and returns a {@link TablaDefault} window containing a dynamic and customizable {@code JTable}
+	 * for displaying business entity data.
+	 * <p>
+	 * The table is capable of rendering arrays and collections as multi-line cells using a custom cell renderer,
+	 * automatically adjusting row heights to fit their content. It supports both editable and non-editable modes,
+	 * and auto-detects the data type (e.g., {@link TFactura}, {@link TCliente}, {@link TObra}, etc.) to extract
+	 * and structure table data accordingly.
+	 * </p>
+	 *
+	 * <p><b>Display Modes:</b></p>
+	 * <ul>
+	 *   <li><b>Consultation Mode:</b> If {@code consultar} is {@code true}, a smaller, non-editable window is shown for viewing purposes.</li>
+	 *   <li><b>Edit Mode:</b> If {@code edicion} is {@code true}, cells are made editable, and an "Aceptar" button is added to confirm changes.</li>
+	 * </ul>
+	 *
+	 * @param tituloTabla the title of the table and its enclosing window
+	 * @param nomCols an array of column names (automatically converted to uppercase)
+	 * @param datos a collection of business objects (e.g., {@link TFactura}, {@link TObra}, etc.) to populate the table
+	 * @param consultar {@code true} to enable consultation mode (read-only, compact view)
+	 * @param edicion {@code true} to enable edit mode (editable cells, includes confirmation button)
+	 * @return a {@link TablaDefault} instance containing the constructed table within a JFrame
+	 */
+	 public static TablaDefault createTabla(String tituloTabla, String[] nomCols, Collection<Object> datos, boolean consultar, boolean edicion) {
 		return new TablaDefault(tituloTabla, nomCols, datos, consultar, edicion);
 	}
 	
@@ -109,17 +109,16 @@ public class JSwingUtils {
 
 	@SuppressWarnings("serial")
 	private static class TablaDefault extends JFrame {
-		private JButton aceptar; //solo para el modo de actualizacion
+		private JButton aceptar; //Solo para el modo de actualizacion
+		private boolean editable;
 
 	    private class DefaultTableModel extends AbstractTableModel {
 	        private final String[] columnNames;
 	        private final List<Object[]> datos;
-	        private final boolean editable;
 
-	        public DefaultTableModel(String[] nomCols, List<Object[]> datos, boolean editable) {
+	        public DefaultTableModel(String[] nomCols, List<Object[]> datos) {
 	            this.columnNames = nomCols;
 	            this.datos = datos;
-				this.editable = editable;
 	        }
 
 	        @Override
@@ -316,8 +315,11 @@ public class JSwingUtils {
 	        	columnNames[i] = columnNames[i].toUpperCase();
 	        }
 	        
+	        this.editable = editable;
+	        
 	        if (data != null) {
-		        DefaultTableModel model = new DefaultTableModel(columnNames, this.convert(data, columnNames.length), editable);
+	        	
+		        DefaultTableModel model = new DefaultTableModel(columnNames, this.convert(data, columnNames.length));
 		        JTable table = new JTable(model);
 		       
 		        
@@ -339,7 +341,7 @@ public class JSwingUtils {
 	        this.setVisible(true);
 	    }
 		
-		public JButton getListener() { return this.aceptar; }
+		public JButton getOkButton() { return editable ? this.aceptar : null; }
 	}
 
 	
