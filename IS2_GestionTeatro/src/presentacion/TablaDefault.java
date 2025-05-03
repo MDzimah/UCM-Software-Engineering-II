@@ -3,6 +3,8 @@ package presentacion;
 import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.Dimension;
+import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -13,6 +15,7 @@ import javax.swing.JFrame;
 import javax.swing.JList;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.SwingUtilities;
 import javax.swing.table.AbstractTableModel;
 import javax.swing.table.JTableHeader;
 import javax.swing.table.TableCellRenderer;
@@ -350,12 +353,11 @@ public class TablaDefault extends JFrame {
 	public JTable getTable() {return this.table;}
 
 
-}
 
 
-  //PRUEBA DE LA TABLA
-/*
-public static void main(String[] args) {
+
+
+/*public static void main(String[] args) {
     SwingUtilities.invokeLater(() -> {
         String[] columnNames = {
             "ID Factura", "ID Cliente", "ID Taquillero", "Fecha", "Importe", "Subtotal"
@@ -376,7 +378,9 @@ public static void main(String[] args) {
 
             facturas.add(factura);
         }
-        JSwingUtils.createTabla("Tabla de Facturas", columnNames, facturas, true);
+        TablaDefault v= new TablaDefault("Tabla de Facturas", columnNames, facturas, true, true);
     });
+    
+}*/
 }
 //*/
