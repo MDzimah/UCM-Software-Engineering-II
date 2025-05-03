@@ -7,6 +7,7 @@ import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.SwingUtilities;
 
@@ -16,6 +17,7 @@ import misc.Messages;
 import misc.Pair;
 import presentacion.Evento;
 import presentacion.IGUI;
+import presentacion.TablaDefault;
 import presentacion.controlador.Controlador;
 import presentacion.factoria.FactoriaAbstractaPresentacion;
 import presentacion.VistaDefault;
@@ -67,7 +69,14 @@ public class VistaBuscarCompania extends VistaDefault implements IGUI{
 	@Override
 	public void actualizar(Evento evento, Object datos) {
 		if(evento==Evento.RES_OK) {
-			JFrame j= JSwingUtils.createTabla("COMPAÑÍA", Messages.colNomsCompTea, (Collection<TCompTea>)datos, true, false);			
+			TablaDefault j= new TablaDefault("COMPAÑÍA", Messages.colNomsCompTea, (Collection<TCompTea>)datos, true, false);
+			
+			JTable t= j.getTable();
+			JButton b =j.getOkButton();
+			 b.addActionListener(e->{
+				 j.dispose();
+			 });
+			
 		}
 		else if(evento==Evento.RES_KO) {
 			JSwingUtils.createErrorDialogMessage("NO EXISTEN LAS COMPAÑÍAS:.\n" +(String)datos);

@@ -47,6 +47,8 @@ public class TablaDefault extends JFrame {
 	private JButton aceptar; //Solo para el modo de actualizacion
 	private boolean editable;
 	private JTable table;
+	private DefaultTableModel model;
+	private Class<?> transferType;
 
     private class DefaultTableModel extends AbstractTableModel {
         private final String[] columnNames;
@@ -197,7 +199,8 @@ public class TablaDefault extends JFrame {
     				
     				fila[0] = tComp.getId();
     				fila[1] = tComp.getNombre();
-    				fila[2] = tComp.getCosteContratacion();
+    				fila[2]= tComp.getDireccion();
+    				fila[3] = tComp.getCosteContratacion();
     				
     				matInfo.add(fila);
     			}
@@ -245,7 +248,9 @@ public class TablaDefault extends JFrame {
 	public TablaDefault(String nombreTabla,  String[] columnNames, Collection<?> data, boolean consultar, boolean editable) {
         this.setTitle(nombreTabla);
         this.setLayout(new BorderLayout());
-        
+        if (data != null && !data.isEmpty()) {
+            this.transferType = data.iterator().next().getClass();
+        }
         Dimension sd = Constants.screenDimension();
         int width, height;
         if (consultar) {
@@ -267,7 +272,7 @@ public class TablaDefault extends JFrame {
         
         if (data != null) {
         	
-	        DefaultTableModel model = new DefaultTableModel(columnNames, this.convert(data, columnNames.length));
+	        model = new DefaultTableModel(columnNames, this.convert(data, columnNames.length));
 	        this.table = new JTable(model);
 	       
 	        
@@ -287,10 +292,64 @@ public class TablaDefault extends JFrame {
         this.setLocationRelativeTo(null);
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
     }
-	
+	@SuppressWarnings("unchecked")
+	public <T> List<T> getTransfersFromTable() {
+	    List<T> transfers = new ArrayList<>();
+	    
+	    if (model == null || transferType == null) {
+	        return transfers;
+	    }
+	    
+	    for (int row = 0; row < model.getRowCount(); row++) {
+	        Object[] rowData = new Object[model.getColumnCount()];
+	        for (int col = 0; col < model.getColumnCount(); col++) {
+	            rowData[col] = model.getValueAt(row, col);
+	        }
+	        
+	        // Reconstruir el Transfer según su tipo
+	        T transfer = (T) createTransferFromRowData(rowData);
+	        if (transfer != null) {
+	            transfers.add(transfer);
+	        }
+	    }
+	    
+	    return transfers;
+	}
+	private Object createTransferFromRowData(Object[] rowData) {
+	    try {
+	        if (transferType == TCompTea.class) {
+	            
+	            return new TCompTea(
+	                (Integer) rowData[0],  // id
+	                (String) rowData[1],   // nombre
+	                (String) rowData[2],
+	                true,//activo 
+	                (float) rowData[3]    // costeContratacion
+	            );
+	        }
+	        else if (transferType == TFactura.class) {
+	        
+	            /*return new TFactura(
+	                (Integer) rowData[0],  // idFactura
+	                (Integer) rowData[1],   // idCliente
+	                (Integer) rowData[2],   // idTaquillero
+	                (String) rowData[3],    // fecha
+	                (Double) rowData[4],    // importe
+	                (Double) rowData[5]     // subtotal
+	            );*/
+	        }
+	        // Añadir vuestros casos (TObra, TMiemCompTea, etc.)
+	    } catch (Exception e) {
+	        System.err.println("Error al reconstruir Transfer: " + e.getMessage());
+	        return null;
+	    }
+	    return null;
+	}
 	public JButton getOkButton() { return editable ? this.aceptar : null; }
 	
 	public JTable getTable() {return this.table;}
+
+
 }
 
 

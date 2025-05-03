@@ -20,8 +20,14 @@ public class Messages {
 	public static final String EX_MIEMBRO_ACTUALIZADO = Messages.SHP.formatted("actualizado el miembro");
 	public static final String EX_MIEMBRO_DESPEDIDO = Messages.SHP.formatted("despedido al miembro");
 	public static final String EX_MIEMBROS_LISTADOS = Messages.SHP.formatted("listado los miembros");
-
-		//Obra (SEGURAMENTE LO CAMBIE DESPUÉS)
+       //Compania Teatral
+	public static final String COMPANIA_ACTUALIZADA = Messages.SHP.formatted("compania actualizada");
+	public static final String COMPANIA_ENCONTRADA = Messages.SHP.formatted("compania encontrada");
+	public static final String COMPANIA_CREADA = Messages.SHP.formatted("compania creada");
+	public static final String COMPANIA_BUSCADA = Messages.SHP.formatted("compania buscada");
+	public static final String COMPANIA_MOSTRADA = Messages.SHP.formatted("compania mostrada");
+		
+	//Obra (SEGURAMENTE LO CAMBIE DESPUÉS)
 	public static final String EX_OBRA_ANYADIDA_CORRECT = Messages.SHP.formatted("registrado la obra");
 	public static final String EX_OBRA_BORRADA_CORRECT = Messages.SHP.formatted("borrado la obra");
 	public static final String EX_OBRA_ANYADIDA_ERROR = Messages.NSHP.formatted("registrar la obra.");
@@ -62,7 +68,7 @@ public class Messages {
 	//Columnas de las tablas
 	public static final String[] colNomsFactura = {"ID","ID CLIENTE", "ID TAQUILLERO", "FECHA", "IMPORTE", "SUBTOTAL"};
 	public static final String[] colNomsCliente = {/*COMPLETAR*/};
-	public static final String[] colNomsCompTea = {/*COMPLETAR*/};
+	public static final String[] colNomsCompTea = {"ID","NOMBRE","DIRECCION","COSTE CONTRATACION"};
 	public static final String[] colNomsMiemCompTea = {"ID","NOMBRE", "APELLIDO", "EDAD", "DNI", "EMAIL", "GENERO"};
 	public static final String[] colNomsObra = {"ID","TITULO", "AUTOR", "GENERO", "SINOPSIS"};
 	public static final String[] colNomsPase = {"ID","ID COMPANYA", "ID OBRA", "FECHA", "STOCK", "PRECIO"};

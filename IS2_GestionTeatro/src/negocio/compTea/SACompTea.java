@@ -12,5 +12,5 @@ public interface SACompTea {
 	public TCompTea read(int id)throws UnknownCompTeaException, BBDDReadException;
 	public int update(TCompTea ct) throws BBDDWriteException, BBDDReadException;
 	public int delete (int id) throws BBDDReadException, BBDDWriteException;
-	public Collection<TCompTea> readAll();
+	public Collection<TCompTea> readAll() throws BBDDReadException;
 }

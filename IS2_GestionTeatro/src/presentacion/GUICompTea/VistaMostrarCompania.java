@@ -14,6 +14,7 @@ import misc.Messages;
 import misc.Pair;
 import presentacion.Evento;
 import presentacion.IGUI;
+import presentacion.TablaDefault;
 import presentacion.controlador.Controlador;
 import presentacion.factoria.FactoriaAbstractaPresentacion;
 import presentacion.VistaDefault;
@@ -51,7 +52,7 @@ public class VistaMostrarCompania extends VistaDefault implements IGUI{
 	@Override
 	public void actualizar(Evento evento, Object datos) {
 		if(evento==Evento.RES_OK) {
-			JSwingUtils.createTabla("CONSULTAR OBRA", Messages.colNomsCompTea, (Collection<TCompTea>)datos, false,false);			
+			TablaDefault t= new TablaDefault("CONSULTAR OBRA", Messages.colNomsCompTea, (Collection<TCompTea>)datos, false,false);	
 		}
 		else if(evento==Evento.RES_KO) {
 			JSwingUtils.createErrorDialogMessage("NO SE PUDO LISTAR LAS COMPANIAS TEATRALES");

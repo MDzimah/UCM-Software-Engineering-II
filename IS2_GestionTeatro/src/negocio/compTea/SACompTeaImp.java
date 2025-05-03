@@ -40,7 +40,7 @@ public class SACompTeaImp implements SACompTea {
 	}
 
 	@Override
-	public Collection<TCompTea> readAll() {
+	public Collection<TCompTea> readAll() throws BBDDReadException {
 		DAOCompTea daoCT=FactoriaAbstractaIntegracion.getInstance().crearDAOCompTea();
 		return daoCT.readAll();
 	}

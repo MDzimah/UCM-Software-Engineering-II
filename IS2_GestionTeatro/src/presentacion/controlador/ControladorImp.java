@@ -273,16 +273,39 @@ public class ControladorImp extends Controlador {
 		}
 		
 		//CompTea
-		case ACTUALIZAR_COMPANIA_TEATRAL:
+		case ACTUALIZAR0_COMPANIA_TEATRAL:
 		{
+			
 			try {
 				SACompTea saCompTea=FactoriaAbstractaNegocio.getInstance().crearSACompTea();
-				TCompTea tCompTea = (TCompTea)datos;
-				saCompTea.update(tCompTea);
-				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_OK, null);//TODO no se si hay que mostrar aqui
-			}
+				Integer id =(Integer)datos;
+				TCompTea newComp= saCompTea.read(id);
+				if(newComp!=null) {
+				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_OK, newComp);//TODO no se si hay que mostrar aqui
+				}
+				else {
+					FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_KO, id);
+				}
+				}
 			catch(Exception e) {
-				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_KO, "Error: " +e.getMessage());
+				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_KO, e);
+			}
+		}
+		case ACTUALIZAR1_COMPANIA_TEATRAL:
+		{
+			TCompTea tCompTea =(TCompTea)datos;
+			try {
+				SACompTea saCompTea=FactoriaAbstractaNegocio.getInstance().crearSACompTea();
+				int id= saCompTea.update(tCompTea);
+				if(id!=-1) {
+				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_OK, id);//TODO no se si hay que mostrar aqui
+				}
+				else {
+					FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_KO, id);
+				}
+				}
+			catch(Exception e) {
+				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_KO, e);
 			}
 		}
 		case BUSCAR_COMPANIA_TEATRAL:
