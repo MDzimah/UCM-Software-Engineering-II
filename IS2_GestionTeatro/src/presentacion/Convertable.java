@@ -37,5 +37,5 @@ public interface Convertable<T> {
      * @param col the index of the column (field) to update
      * @param value the new value to set; may require casting inside the implementation
      */
-    void setColumnValue(int col, Object value);
+    void setColumnValue(int col, String value) throws Exception;
 }

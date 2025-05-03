@@ -2,13 +2,19 @@ package presentacion;
 
 
 import java.awt.*;
+import java.time.LocalDateTime;
 import java.util.*;
 
 import javax.swing.*;
 import javax.swing.event.*;
 import javax.swing.table.*;
 
+import com.formdev.flatlaf.themes.FlatMacLightLaf;
+
 import misc.Constants;
+import misc.JSwingUtils;
+import misc.Messages;
+import negocio.factura.TFactura;
 
 /**
  * {@code TablaDefault} is a generic Swing-based window for displaying and optionally editing a list of
@@ -63,7 +69,12 @@ public class TablaDefault<T extends Convertable<T>> extends JFrame {
         
         @Override
         public void setValueAt(Object value, int row, int col) {
-            datos.get(row).setColumnValue(col, value);
+        	try {
+        		datos.get(row).setColumnValue(col, (String)value);
+        	}
+        	catch(Exception e) {
+        		JSwingUtils.createErrorDialogMessage(Messages.EDICION_INVALIDA_TABLA);
+        	}
             fireTableCellUpdated(row, col);
         }
         
@@ -184,6 +195,7 @@ public class TablaDefault<T extends Convertable<T>> extends JFrame {
         if (data != null && !data.isEmpty()) {
         	DefaultTableModel model = new DefaultTableModel(columnNames, data);
 	        JTable table = new JTable(model);
+	        table.setFont(Constants.FontTablaDefaultCuerpo());
 	       
 	        
 	        //Cambiar apariencia del header de la tabla
@@ -222,31 +234,24 @@ public class TablaDefault<T extends Convertable<T>> extends JFrame {
 	public JButton getOkButton() { return editable ? this.aceptar : null; }
 
   //PRUEBA DE LA TABLA
-/*
-public static void main(String[] args) {
-    SwingUtilities.invokeLater(() -> {
-        String[] columnNames = {
-            "ID Factura", "ID Cliente", "ID Taquillero", "Fecha", "Importe", "Subtotal"
-        };
+	
+	public static void main(String[] args) {
+        SwingUtilities.invokeLater(() -> {
+        	try {
+				UIManager.setLookAndFeel(new FlatMacLightLaf());
+			} catch (UnsupportedLookAndFeelException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+            ArrayList<TFactura> facturas = new ArrayList<>();
+            facturas.add(new TFactura(101, 201, true, LocalDateTime.now(), 120.5f, 100.0f));
+            facturas.add(new TFactura(102, 202, true, LocalDateTime.now().minusDays(1), 95.0f, 80.0f));
 
-        Collection<Object> facturas = new ArrayList<>();
+            // If you want to test update mode on a single row, set consultar=true, editable=true
+            TablaDefault<TFactura> tabla = new TablaDefault<>("Tabla de Facturas", Messages.colNomsFactura, facturas, true, true);
+            tabla.setVisible(true);
+        });
+    }
+	
 
-        for (int i = 1; i <= 1; i++) {
-
-            TFactura factura = new TFactura(
-                    1000 + i, 2000 + i, true,
-                    LocalDateTime.now().minusDays(i).truncatedTo(ChronoUnit.SECONDS),
-                    50.0f + i,
-                    60.0f + i
-            );
-            factura.setIdFactura(i);
-            factura.setIdTaquillero(3000 + i);
-
-            facturas.add(factura);
-        }
-        TablaDefault v= new TablaDefault("Tabla de Facturas", columnNames, facturas, true, true);
-    });
-    
-}*/
 }
-//*/

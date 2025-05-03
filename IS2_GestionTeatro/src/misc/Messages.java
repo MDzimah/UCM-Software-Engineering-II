@@ -64,6 +64,7 @@ public class Messages {
 	public static final String ID_NO_ENCONTRADO = "El id \"%s\" no se ha encontrado";
 	public static final String NO_HAY_DATOS = "No hay datos para mostrar";
 	public static final String NO_EN_CARRITO = "El pase no se encuentra en el carrito";
+	public static final String EDICION_INVALIDA_TABLA = "Datos inválidos";
 
 	//Columnas de las tablas
 	public static final String[] colNomsFactura = {"ID","ID CLIENTE", "ID TAQUILLERO", "FECHA", "IMPORTE", "SUBTOTAL"};

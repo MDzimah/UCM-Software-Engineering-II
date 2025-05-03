@@ -77,14 +77,14 @@ public class TFactura implements Convertable<TFactura> {
 	}
 
 	@Override
-	public void setColumnValue(int col, Object value) {
+	public void setColumnValue(int col, String value) {
 	    switch(col) {
-	        case 0: this.idFactura = (int) value; break;
-	        case 1: this.idCliente = (int) value; break;
-	        case 2: this.idTaquillero = (int) value; break;
-	        case 3: this.fecha = (LocalDateTime) value; break;
-	        case 4: this.importe = (Float) value; break;
-	        default: this.subtotal = (Float) value; break;
+	        case 0: this.idFactura = Integer.valueOf(value); break;
+	        case 1: this.idCliente = Integer.valueOf(value); break;
+	        case 2: this.idTaquillero = Integer.valueOf(value); break;
+	        case 3: this.fecha = LocalDateTime.parse(value); break;
+	        case 4: this.importe = Float.parseFloat(value); break;
+	        default: this.subtotal = Float.parseFloat(value); break;
 	    }
 	}
 }
