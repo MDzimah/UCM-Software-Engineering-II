@@ -40,7 +40,7 @@ All subsystems are organized using a strict 3-layer architecture:
 
 ## UML Artifacts
 UML modeling (done using **draw.io**) was completed for the following subsystems:
-- **Factura** and **Cliente**: Include Class Diagrams, Sequence Diagrams, and Activity Diagrams across all three layers.
+- **Factura** and **Cliente**: Class Diagrams, Sequence Diagrams, and Activity Diagrams across all three layers.
 - Class diagrams are also provided for the **Factory** classes in the Presentation, Business, and Integration layers, showing how object creation and dependencies are managed.
 
 All UML diagrams are located in the `Diagramas_UML/` folder, inside the `IS2_GestionTeatro/` directory.
