@@ -36,13 +36,6 @@ UML modeling (done using **draw.io**) was completed for the following subsystems
 
 All UML diagrams are located in the `Diagramas_UML/` folder, inside the `IS2_GestionTeatro/` directory.
 
-## Technologies
-- **Java 11+**
-- **Swing** for GUI development
-- **Gson** for JSON persistence
-- **draw.io** for UML modeling
-- **Eclipse IDE** for development
-
 ## Design Patterns
 This project applies several classical design patterns to maintain modularity and clear responsibilities:
 
@@ -52,6 +45,13 @@ This project applies several classical design patterns to maintain modularity an
 - **Factory Pattern** – Used in all layers to encapsulate object creation, promoting flexibility and decoupling.
 - **Singleton** – Applied where centralized configuration or shared access to resources is required.
 
+## Technologies
+- **Java 11+**
+- **Swing** for GUI development
+- **Gson** for JSON persistence
+- **draw.io** for UML modeling
+- **Eclipse IDE** for development
+  
 ## Repository Structure
 
 ```markdown
