@@ -44,7 +44,7 @@ public class VistaBajaPase extends VistaDefault {
 		this.setVisible(true);
 		
 		aceptar.addActionListener(e->{
-			Controlador.getInstance().accion(Evento.ELIMINAR_PASE, Integer.valueOf(IDPaseT.getText()));
+			Controlador.getInstance().accion(Evento.BAJA_PASE, Integer.valueOf(IDPaseT.getText()));
 			dispose();
 		});
 		

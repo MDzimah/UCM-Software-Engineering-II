@@ -252,12 +252,12 @@ public class MainWindow extends JFrame {
         		
         		//ALTA PASE
         		alta.addActionListener((ev)->{
-        			FactoriaAbstractaPresentacion.getInstance().createVista(Evento.CREAR_PASE);
+        			FactoriaAbstractaPresentacion.getInstance().createVista(Evento.ALTA_PASE);
         		});
         		
         		//BAJA PASE
         		baja.addActionListener((ev)->{
-        			FactoriaAbstractaPresentacion.getInstance().createVista(Evento.ELIMINAR_PASE);
+        			FactoriaAbstractaPresentacion.getInstance().createVista(Evento.BAJA_PASE);
         		});		
         		
         		//CONSULTAR PASE
@@ -267,7 +267,7 @@ public class MainWindow extends JFrame {
         		
         		//LISTAR PASES
         		mostrar.addActionListener((ev)->{
-        			FactoriaAbstractaPresentacion.getInstance().createVista(Evento.LISTAR_PASES);
+        			FactoriaAbstractaPresentacion.getInstance().createVista(Evento.MOSTRAR_PASES);
         		});
         		
         		subsPase.add(actualizar);        		
@@ -311,10 +311,10 @@ public class MainWindow extends JFrame {
         			FactoriaAbstractaPresentacion.getInstance().createVista(Evento.ACTUALIZAR_OBRA_0);
         		});
         		alta.addActionListener((ev)->{
-        			FactoriaAbstractaPresentacion.getInstance().createVista(Evento.CREAR_OBRA);
+        			FactoriaAbstractaPresentacion.getInstance().createVista(Evento.ALTA_OBRA);
         		});
         		baja.addActionListener((ev)->{
-        			FactoriaAbstractaPresentacion.getInstance().createVista(Evento.ELIMINAR_OBRA);
+        			FactoriaAbstractaPresentacion.getInstance().createVista(Evento.BAJA_OBRA);
         		});		
         		buscar.addActionListener((ev)->{
         			FactoriaAbstractaPresentacion.getInstance().createVista(Evento.BUSCAR_OBRA);

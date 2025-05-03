@@ -21,11 +21,11 @@ public class DAOLineaFacturaImp implements DAOLineaFactura {
 		//Inicializo la BD si no está ya inicializada
 		if (OpsBBDD.isEmpty(Messages.BDLinFac)) {
 			bdLinFac.put(Messages.KEY_lastId, 0);
-			bdLinFac.put(Messages.KEY_LineasFac, new JSONObject());
+			bdLinFac.put(Messages.KEY_linFacs, new JSONObject());
 		}
 		else bdLinFac = OpsBBDD.read(Messages.BDLinFac);
 		
-		JSONObject linFacs = bdLinFac.getJSONObject(Messages.KEY_LineasFac);
+		JSONObject linFacs = bdLinFac.getJSONObject(Messages.KEY_linFacs);
 		
 		//Aumentamos el último índice de la bd
 		int newId = bdLinFac.getInt(Messages.KEY_lastId) + 1;
@@ -80,7 +80,7 @@ public class DAOLineaFacturaImp implements DAOLineaFactura {
 			
 			Collection<TLineaFactura> lfValidas = new ArrayList<>();
 			
-			JSONObject linFacs = new JSONObject(bdLinFac.getJSONArray(Messages.KEY_LineasFac));
+			JSONObject linFacs = new JSONObject(bdLinFac.getJSONArray(Messages.KEY_linFacs));
 			
 			Set<String> allIdsLinFacs = linFacs.keySet();
 			for (String idLf : allIdsLinFacs) {

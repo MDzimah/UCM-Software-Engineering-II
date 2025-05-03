@@ -1,21 +1,11 @@
 package presentacion.factoria;
 
 import presentacion.*;
-import presentacion.GUIFactura.*;
 import presentacion.GUIMiemCompTea.*;
+import presentacion.GUIFactura.*;
 import presentacion.GUICompTea.*;
-import presentacion.GUIObra.VistaActualizarObra_0;
-import presentacion.GUIObra.VistaActualizarObra_1;
-import presentacion.GUIObra.VistaAltaObra;
-import presentacion.GUIObra.VistaBajaObra;
-import presentacion.GUIObra.VistaBuscarObras;
-import presentacion.GUIObra.VistaConsultarObra;
-import presentacion.GUIObra.VistaMostrarObras;
-import presentacion.GUIPase.VistaActualizarPase;
-import presentacion.GUIPase.VistaBuscarPase;
-import presentacion.GUIPase.VistaAltaPase;
-import presentacion.GUIPase.VistaBajaPase;
-import presentacion.GUIPase.VistaMostrarPases;
+import presentacion.GUIObra.*;
+import presentacion.GUIPase.*;
 
 public class FactoriaPresentacion extends FactoriaAbstractaPresentacion {
 
@@ -34,23 +24,24 @@ public class FactoriaPresentacion extends FactoriaAbstractaPresentacion {
 		
 		case ALTA_CLIENTE: return null;
 		case BUSCAR_CLIENTE: return null;
-		case ELIMINAR_CLIENTE: return null;
-		case MOSTRAR_CLIENTE: return null;
+		case BAJA_CLIENTE: return null;
+		case MOSTRAR_CLIENTES: return null;
 		case ACTUALIZAR_CLIENTE:  return null;
 		
 		//Taquillero
 		
 		//Pase
 		
-		case CREAR_PASE: return new VistaAltaPase();
-		case ELIMINAR_PASE: return new VistaBajaPase();
+		case ALTA_PASE: return new VistaAltaPase();
+		case BAJA_PASE: return new VistaBajaPase();
 		case BUSCAR_PASE: return new VistaBuscarPase();
-		case LISTAR_PASES: return new VistaMostrarPases();
-		case ACTUALIZAR_PASE: return new VistaActualizarPase();
+		case MOSTRAR_PASES: return new VistaMostrarPases();
+		case ACTUALIZAR_PASE_CARGA: return new VistaActualizarPaseCarga();
+		case ACTUALIZAR_PASE_DESCARGA: return new VistaActualizarPaseDescarga();
 
 		//Obra
-		case CREAR_OBRA: return new VistaAltaObra();
-		case ELIMINAR_OBRA: return new VistaBajaObra();
+		case ALTA_OBRA: return new VistaAltaObra();
+		case BAJA_OBRA: return new VistaBajaObra();
 		case ACTUALIZAR_OBRA_0: return new VistaActualizarObra_0();
 		case ACTUALIZAR_OBRA_1: return new VistaActualizarObra_1();
 		case CONSULTAR_OBRA: return new VistaConsultarObra();
@@ -61,7 +52,7 @@ public class FactoriaPresentacion extends FactoriaAbstractaPresentacion {
 		case ALTA_COMPANIA_TEATRAL:  return new VistaAltaCompania();
 		case ACTUALIZAR_COMPANIA_TEATRAL: return new VistaActualizarCompania();
 		case BUSCAR_COMPANIA_TEATRAL: return new VistaBuscarCompania();
-		case ELIMINAR_COMPANIA_TEATRAL: return new VistaBajaCompTea();
+		case BAJA_COMPANIA_TEATRAL: return new VistaBajaCompTea();
 		case MOSTRAR_COMPANIA_TEATRAL: return new VistaMostrarCompania();
 		//MiemCompTea
 		case ACTUALIZAR_MIEMBRO_COMPANIA: return new VistaActualizarMiembroCompania();

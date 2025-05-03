@@ -101,8 +101,8 @@ public class ControladorImp extends Controlador {
 		
 		case ALTA_CLIENTE: 
 		case BUSCAR_CLIENTE: 
-		case ELIMINAR_CLIENTE:
-		case MOSTRAR_CLIENTE: 
+		case BAJA_CLIENTE:
+		case MOSTRAR_CLIENTES: 
 		case ACTUALIZAR_CLIENTE: 
 		
 		//Taquillero
@@ -110,7 +110,7 @@ public class ControladorImp extends Controlador {
 			
 		//Pase
 		
-		case CREAR_PASE: {
+		case ALTA_PASE: {
 			try {
 				SAPase saPase = FactoriaAbstractaNegocio.getInstance().crearSAPase();
 				saPase.create((TPase) datos);
@@ -120,7 +120,7 @@ public class ControladorImp extends Controlador {
 			}
 			break;
 		}
-		case ELIMINAR_PASE: {
+		case BAJA_PASE: {
 			try {
 				SAPase saPase = FactoriaAbstractaNegocio.getInstance().crearSAPase();
 				int idBuscado = (int) datos;
@@ -142,7 +142,7 @@ public class ControladorImp extends Controlador {
 			}
 			break;
 		}
-		case LISTAR_PASES:{
+		case MOSTRAR_PASES:{
 			try {
 				SAPase saPase = FactoriaAbstractaNegocio.getInstance().crearSAPase();
 				Collection<TPase> pases = saPase.readAll();
@@ -177,7 +177,7 @@ public class ControladorImp extends Controlador {
 		}
 		
 		//Obra
-		case CREAR_OBRA:{
+		case ALTA_OBRA:{
 			try{
 				SAObra saObra = FactoriaAbstractaNegocio.getInstance().crearSAObra();
 				int val = saObra.create((TObra)datos);
@@ -188,7 +188,7 @@ public class ControladorImp extends Controlador {
 			}
 			break;
 		}
-		case ELIMINAR_OBRA:{
+		case BAJA_OBRA:{
 			try {
 				SAObra saObra = FactoriaAbstractaNegocio.getInstance().crearSAObra();
 				saObra.delete((int)datos);
@@ -286,7 +286,7 @@ public class ControladorImp extends Controlador {
 				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_KO, "Error: " +e.getMessage());
 			}
 		}
-		case ELIMINAR_COMPANIA_TEATRAL:
+		case BAJA_COMPANIA_TEATRAL:
 		{
 			try {
 				SACompTea saCompTea=FactoriaAbstractaNegocio.getInstance().crearSACompTea();

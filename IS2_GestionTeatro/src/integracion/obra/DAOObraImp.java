@@ -40,7 +40,7 @@ public class DAOObraImp implements DAOObra {
 		nuevaObra.put(Messages.KEY_idObra, lastPos+1);
 		nuevaObra.put(Messages.KEY_titulo, tObra.getTitulo());
 		nuevaObra.put(Messages.KEY_autor, tObra.getAutor());
-		nuevaObra.put(Messages.KEY_Genero, tObra.getGenero());
+		nuevaObra.put(Messages.KEY_generoObra, tObra.getGenero());
 		nuevaObra.put(Messages.KEY_sinopsis, tObra.getSinopsis());
 		tObra.setIdObra(lastPos+1);
 		
@@ -113,7 +113,7 @@ public class DAOObraImp implements DAOObra {
 			nuevaObra.put(Messages.KEY_idObra, tObra.getIdObra());
 			nuevaObra.put(Messages.KEY_titulo, tObra.getTitulo());
 			nuevaObra.put(Messages.KEY_autor, tObra.getAutor());
-			nuevaObra.put(Messages.KEY_Genero, tObra.getGenero());
+			nuevaObra.put(Messages.KEY_generoObra, tObra.getGenero());
 			nuevaObra.put(Messages.KEY_sinopsis, tObra.getSinopsis());
 			tObra.setIdObra(tObra.getIdObra());
 			
@@ -161,7 +161,7 @@ public class DAOObraImp implements DAOObra {
 			if(!params.get(1).equals(""))
 				busquedaLineal(bdObras, Messages.KEY_autor, obras, params.get(1));					
 			if(!params.get(2).equals(""))
-				busquedaLineal(bdObras, Messages.KEY_Genero, obras, params.get(2));					
+				busquedaLineal(bdObras, Messages.KEY_generoObra, obras, params.get(2));					
 			return obras;
 		}
 		else return null;
@@ -171,7 +171,7 @@ public class DAOObraImp implements DAOObra {
 	
 	private TObra readJSON(JSONObject obra) {
 		
-		return new TObra(obra.getInt(Messages.KEY_idObra), obra.getString(Messages.KEY_titulo), obra.getString(Messages.KEY_autor), obra.getString(Messages.KEY_Genero), obra.getString(Messages.KEY_sinopsis));	
+		return new TObra(obra.getInt(Messages.KEY_idObra), obra.getString(Messages.KEY_titulo), obra.getString(Messages.KEY_autor), obra.getString(Messages.KEY_generoObra), obra.getString(Messages.KEY_sinopsis));	
 	}
 	
 	private void busquedaLineal(JSONObject bdObras, String criterio, List<TObra> obras, Object clave ) {

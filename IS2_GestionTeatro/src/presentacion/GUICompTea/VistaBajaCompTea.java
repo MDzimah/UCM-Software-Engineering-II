@@ -44,7 +44,7 @@ public class VistaBajaCompTea extends VistaDefault implements IGUI{
 		anyadir.addActionListener(e ->{
 			String nombreString = nombre.getText(); 
 			FactoriaAbstractaIntegracion.getInstance().crearDAOCompTea();
-			SwingUtilities.invokeLater(()->Controlador.getInstance().accion(Evento.ELIMINAR_COMPANIA_TEATRAL, nombreString));
+			SwingUtilities.invokeLater(()->Controlador.getInstance().accion(Evento.BAJA_COMPANIA_TEATRAL, nombreString));
 			this.dispose();	//Igual cambio algo de aqui porque el problema es que como esta ahora se ejecuta el controller antes de cerrar la ventana
 		});
 		cancelar.addActionListener(e ->{

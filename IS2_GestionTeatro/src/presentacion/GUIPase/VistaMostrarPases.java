@@ -27,7 +27,7 @@ public class VistaMostrarPases extends VistaDefault {
 		super.initComps(null, mostrar, cancel);
 		this.setVisible(true);
 		mostrar.addActionListener(e->{
-			Controlador.getInstance().accion(Evento.LISTAR_PASES, null);
+			Controlador.getInstance().accion(Evento.MOSTRAR_PASES, null);
 			dispose();
 		});
 		

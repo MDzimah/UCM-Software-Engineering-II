@@ -38,7 +38,7 @@ public class DAOCompTeaImp implements DAOCompTea {
 			JSONObject nuevaCompania = new JSONObject();
 			
 			nuevaCompania.put(Messages.KEY_idCompTea, lastPos+1);
-			nuevaCompania.put(Messages.KEY_CompTea, tCompTea.getNombre());
+			nuevaCompania.put(Messages.KEY_compTea, tCompTea.getNombre());
 			nuevaCompania.put(Messages.KEY_direccion, tCompTea.getDireccion());
 			nuevaCompania.put(Messages.KEY_coste, tCompTea.getCosteContratacion());
 			nuevaCompania.put(Messages.KEY_act, tCompTea.isActivo());
@@ -81,7 +81,7 @@ public class DAOCompTeaImp implements DAOCompTea {
 				int idPase = pases.getInt(i);
 				TPase tLineaFactura = daoPase.read(idPase);
 				paseslista.add(tLineaFactura);}*/
-			tCompTea = new TCompTea(id, compania.getString(Messages.KEY_CompTea), compania.getString(Messages.KEY_direccion),compania.getBoolean(Messages.KEY_act), compania.getFloat(Messages.KEY_coste));
+			tCompTea = new TCompTea(id, compania.getString(Messages.KEY_compTea), compania.getString(Messages.KEY_direccion),compania.getBoolean(Messages.KEY_act), compania.getFloat(Messages.KEY_coste));
 		}
 		}
 		
@@ -100,7 +100,7 @@ public class DAOCompTeaImp implements DAOCompTea {
 				if(!id.equals(Messages.KEY_lastId)){//hay una clave que guarda lastid
 					JSONObject JSONcompania = BDCompania.getJSONObject(id);
 					if (JSONcompania.getBoolean(Messages.KEY_act)) {
-						TCompTea tCompTea = new TCompTea(Integer.parseInt(id), JSONcompania.getString(Messages.KEY_CompTea), JSONcompania.getString(Messages.KEY_direccion),JSONcompania.getBoolean(Messages.KEY_act), JSONcompania.getFloat(Messages.KEY_coste));
+						TCompTea tCompTea = new TCompTea(Integer.parseInt(id), JSONcompania.getString(Messages.KEY_compTea), JSONcompania.getString(Messages.KEY_direccion),JSONcompania.getBoolean(Messages.KEY_act), JSONcompania.getFloat(Messages.KEY_coste));
 						companias.add(tCompTea);
 					}
 		        }
@@ -126,7 +126,7 @@ public class DAOCompTeaImp implements DAOCompTea {
 				
 	            if (Integer.valueOf(idCompania) == tCompTea.getId() && Compania.getBoolean(Messages.KEY_act)) {
 	            	Compania.put(Messages.KEY_act, tCompTea.isActivo());
-	    	        Compania.put(Messages.KEY_CompTea, tCompTea.getNombre());
+	    	        Compania.put(Messages.KEY_compTea, tCompTea.getNombre());
 	    			Compania.put(Messages.KEY_direccion, tCompTea.getDireccion());
 	    			Compania.put(Messages.KEY_coste, tCompTea.getCosteContratacion());
 	    			Compania.put(Messages.KEY_act, tCompTea.isActivo());

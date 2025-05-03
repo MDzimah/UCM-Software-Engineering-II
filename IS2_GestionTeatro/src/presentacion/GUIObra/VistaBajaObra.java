@@ -47,7 +47,7 @@ public class VistaBajaObra extends VistaDefault implements IGUI{
 			if(!id.getText().equals("")) {
 				try {
 					Integer id2 = Integer.valueOf(id.getText());
-					SwingUtilities.invokeLater(()->{Controlador.getInstance().accion(Evento.ELIMINAR_OBRA, id2);});
+					SwingUtilities.invokeLater(()->{Controlador.getInstance().accion(Evento.BAJA_OBRA, id2);});
 					VistaBajaObra.this.dispose();
 				}
 				catch(NumberFormatException ex) {

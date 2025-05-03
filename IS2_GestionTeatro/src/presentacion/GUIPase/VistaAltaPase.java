@@ -56,7 +56,7 @@ public class VistaAltaPase extends VistaDefault {
 			int stock = Integer.valueOf(cantidadStockText.getText());
 			int precio = Integer.valueOf(precioText.getText());
 			TPase tPase = new TPase(-1, idCompTea, idObra, true, null, stock, precio); //Buscar forma de hacer la fecha
-			Controlador.getInstance().accion(Evento.CREAR_PASE, tPase);
+			Controlador.getInstance().accion(Evento.ALTA_PASE, tPase);
 			this.dispose();
 		});
 		cancelar.addActionListener(e ->{

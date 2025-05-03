@@ -21,13 +21,13 @@ public class DAOMiemCompTeaImp implements DAOMiemCompTea {
 		
 		if (OpsBBDD.isEmpty(Messages.BDMCT)) {
 			BDMiemComp.put(Messages.KEY_lastId, 0);
-			BDMiemComp.put(Messages.KEY_MiembCompTea, new JSONObject());
+			BDMiemComp.put(Messages.KEY_miembCompTea, new JSONObject());
 		}
 		else {
 			BDMiemComp = OpsBBDD.read(Messages.BDMCT);
 		}
 		
-		JSONObject miembrosComp = BDMiemComp.getJSONObject(Messages.KEY_MiembCompTea);
+		JSONObject miembrosComp = BDMiemComp.getJSONObject(Messages.KEY_miembCompTea);
 		
 		int newId = BDMiemComp.getInt(Messages.KEY_lastId) + 1;
 		BDMiemComp.put(Messages.KEY_lastId, newId);
@@ -43,7 +43,7 @@ public class DAOMiemCompTeaImp implements DAOMiemCompTea {
 		nuevoMiemComp.put(Messages.KEY_genero, tMieCT.getGenero().toString());			
 		
 		miembrosComp.put(Integer.toString(newId), nuevoMiemComp);
-		BDMiemComp.put(Messages.KEY_MiembCompTea, miembrosComp);
+		BDMiemComp.put(Messages.KEY_miembCompTea, miembrosComp);
 		OpsBBDD.write(BDMiemComp, Messages.BDMCT);
 		
 		return newId;
@@ -53,7 +53,7 @@ public class DAOMiemCompTeaImp implements DAOMiemCompTea {
 	public int delete(int id) throws BBDDReadException, BBDDWriteException {
 		if (!OpsBBDD.isEmpty(Messages.BDMCT)) {
 			JSONObject BDMiemComp = OpsBBDD.read(Messages.BDMCT);
-			JSONObject miembrosComp = BDMiemComp.getJSONObject(Messages.KEY_MiembCompTea);
+			JSONObject miembrosComp = BDMiemComp.getJSONObject(Messages.KEY_miembCompTea);
 			
 			if (miembrosComp.has(Integer.toString(id))) {
 		        miembrosComp.getJSONObject(Integer.toString(id)).put(Messages.KEY_act, false);
@@ -68,7 +68,7 @@ public class DAOMiemCompTeaImp implements DAOMiemCompTea {
 	@Override
 	public TMiemCompTea read(int id) throws BBDDReadException {
 		if (!OpsBBDD.isEmpty(Messages.BDMCT)) {
-			JSONObject miembrosComp = OpsBBDD.read(Messages.BDMCT).getJSONObject(Messages.KEY_MiembCompTea);
+			JSONObject miembrosComp = OpsBBDD.read(Messages.BDMCT).getJSONObject(Messages.KEY_miembCompTea);
 			
 			TMiemCompTea tMiemComp = null;
 			String _id = Integer.toString(id);
@@ -86,7 +86,7 @@ public class DAOMiemCompTeaImp implements DAOMiemCompTea {
 	public Collection<TMiemCompTea> readAll() throws BBDDReadException {
 		if (!OpsBBDD.isEmpty(Messages.BDMCT)) {
 			JSONObject BDMiemComp = OpsBBDD.read(Messages.BDMCT);			
-			JSONObject miembrosComp = BDMiemComp.getJSONObject(Messages.KEY_MiembCompTea);
+			JSONObject miembrosComp = BDMiemComp.getJSONObject(Messages.KEY_miembCompTea);
 			Collection<TMiemCompTea> miembrosCollection = new ArrayList<>();
 			
 			Set<String> allIds = miembrosComp.keySet();
@@ -108,7 +108,7 @@ public class DAOMiemCompTeaImp implements DAOMiemCompTea {
 	public int update(TMiemCompTea tMieCT) throws BBDDReadException, BBDDWriteException {
 		if (!OpsBBDD.isEmpty(Messages.BDMCT)) {
 			JSONObject BDMiemComp = OpsBBDD.read(Messages.BDMCT);
-			JSONObject miembrosComp = BDMiemComp.getJSONObject(Messages.KEY_MiembCompTea);
+			JSONObject miembrosComp = BDMiemComp.getJSONObject(Messages.KEY_miembCompTea);
 			
 			String id = Integer.toString(tMieCT.getIdMiembComp());
 			
@@ -135,7 +135,7 @@ public class DAOMiemCompTeaImp implements DAOMiemCompTea {
 	public TMiemCompTea readByDNI(String dni) throws BBDDReadException {
 		if (!OpsBBDD.isEmpty(Messages.BDMCT)) {
 			JSONObject BDMiemComp = OpsBBDD.read(Messages.BDMCT);
-			JSONObject miembrosComp = BDMiemComp.getJSONObject(Messages.KEY_MiembCompTea);
+			JSONObject miembrosComp = BDMiemComp.getJSONObject(Messages.KEY_miembCompTea);
 			
 			Set<String> allIds = miembrosComp.keySet();
 			for (String id: allIds) {

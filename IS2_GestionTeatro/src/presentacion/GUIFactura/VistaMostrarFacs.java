@@ -20,7 +20,7 @@ public class VistaMostrarFacs extends VistaDefault {
 	
 	public VistaMostrarFacs() {
 		this.setTitle("Mostrar facturas");
-		JSwingUtils.setAppIcon(this);
+		//JSwingUtils.setAppIcon(this);
 		this.mostrar = new JButton("Mostrar");
 		this.cancel = new JButton("Cancelar");
 		this.initComps(null, mostrar, cancel);
@@ -46,5 +46,9 @@ public class VistaMostrarFacs extends VistaDefault {
 			else error = Messages.NO_HAY_DATOS;
 			JSwingUtils.createErrorDialogMessage(Messages.X_MOSTRAR_FACTURAS + ' ' + Messages.MOTIVO.formatted(error));
 		}
+	}
+	
+	public static void main(String args[]) {
+		VistaMostrarFacs mf = new VistaMostrarFacs();
 	}
 }
