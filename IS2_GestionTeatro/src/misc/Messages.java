@@ -128,4 +128,12 @@ public class Messages {
 	public static final String KEY_autor = "autor"; 
 	public static final String KEY_Genero = "genero"; 
 	public static final String KEY_sinopsis = "sinopsis";
+	
+	//Columnas de las tablas
+	public static final String[] colNomsFactura = {"ID","ID CLIENTE", "ID TAQUILLERO", "FECHA", "IMPORTE", "SUBTOTAL"};
+	public static final String[] colNomsCliente = {/*COMPLETAR*/};
+	public static final String[] colNomsCompTea = {/*COMPLETAR*/};
+	public static final String[] colNomsMiemCompTea = {"ID","NOMBRE", "APELLIDO", "EDAD", "DNI", "EMAIL", "GENERO"};
+	public static final String[] colNomsObra = {"ID","TITULO", "AUTOR", "GENERO", "SINOPSIS"};
+	public static final String[] colNomsPase = {"ID","ID COMPANYA", "ID OBRA", "FECHA", "STOCK", "PRECIO"};
 }

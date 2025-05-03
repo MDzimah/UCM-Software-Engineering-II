@@ -18,7 +18,7 @@ import presentacion.VistaDefault;
 import presentacion.controlador.Controlador;
 import presentacion.factoria.FactoriaAbstractaPresentacion;
 
-public class VistaCrearPase extends VistaDefault {
+public class VistaAltaPase extends VistaDefault {
 	
 	private JButton ok;
 	private JButton cancelar;
@@ -31,7 +31,7 @@ public class VistaCrearPase extends VistaDefault {
 	private JLabel precioLabel;
 	private JTextField precioText;
 	
-	public VistaCrearPase() {
+	public VistaAltaPase() {
 		this.setTitle("CREAR PASE");
 		ok = new JButton("Aceptar");
 		cancelar = new JButton("cancelar:");

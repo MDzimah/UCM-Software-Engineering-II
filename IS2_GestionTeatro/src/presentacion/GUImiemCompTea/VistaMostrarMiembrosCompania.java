@@ -1,9 +1,10 @@
-package presentacion.GUImiemCompTea;
+package presentacion.GUIMiemCompTea;
 
 import java.util.Collection;
 
 import misc.JSwingUtils;
 import misc.Messages;
+import negocio.miemCompTea.TMiemCompTea;
 import presentacion.Evento;
 import presentacion.VistaDefault;
 import presentacion.controlador.Controlador;
@@ -18,10 +19,7 @@ public class VistaMostrarMiembrosCompania extends VistaDefault{
 	@Override
 	public void actualizar(Evento evento, Object datos) {
 		if (evento == Evento.RES_OK) {
-			@SuppressWarnings("unchecked")
-			Collection<Object> castedData = (Collection<Object>)datos;
-			String[] nomCols = {"ID","NOMBRE", "APELLIDO", "EDAD", "DNI", "EMAIL", "GENERO"};
-			JSwingUtils.createTabla("LISTA DE MIEMBROS DE LA COMPANIA", nomCols, castedData, true, false);
+			JSwingUtils.createTabla("MIEMBROS DE LAS COMPAÑÍAS TEATRALES", Messages.colNomsMiemCompTea, (Collection<TMiemCompTea>)datos, true, false);
 		}
 		else if (evento == Evento.RES_KO) {
 			String error;

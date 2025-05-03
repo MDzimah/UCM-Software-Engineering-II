@@ -1,4 +1,4 @@
-package presentacion.GUImiemCompTea;
+package presentacion.GUIMiemCompTea;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -57,11 +57,10 @@ public class VistaBuscarMiembroCompania extends VistaDefault{
 	@Override
 	public void actualizar(Evento evento, Object datos) {
 		if (evento == Evento.RES_OK) {
-			Collection<Object> miemComp = new ArrayList<Object>();
+			Collection<TMiemCompTea> miemComp = new ArrayList<TMiemCompTea>();
 			miemComp.add((TMiemCompTea)datos);
-			String[] nomCols = {"ID","NOMBRE", "APELLIDO", "EDAD", "DNI", "EMAIL", "GENERO"};
 			
-			JSwingUtils.createTabla("BUSCAR MIEMBRO", nomCols, miemComp, true, false);
+			JSwingUtils.createTabla("MIEMBRO DE COMPAÑÍA TEATRAL", Messages.colNomsMiemCompTea, miemComp, true, false);
 		}
 		else if(evento == Evento.RES_KO) {
 			String error;

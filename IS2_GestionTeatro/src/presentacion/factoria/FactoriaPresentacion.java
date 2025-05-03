@@ -2,6 +2,7 @@ package presentacion.factoria;
 
 import presentacion.*;
 import presentacion.GUIFactura.*;
+import presentacion.GUIMiemCompTea.*;
 import presentacion.GUICompTea.*;
 import presentacion.GUIObra.VistaActualizarObra_0;
 import presentacion.GUIObra.VistaActualizarObra_1;
@@ -12,10 +13,9 @@ import presentacion.GUIObra.VistaConsultarObra;
 import presentacion.GUIObra.VistaMostrarObras;
 import presentacion.GUIPase.VistaActualizarPase;
 import presentacion.GUIPase.VistaBuscarPase;
-import presentacion.GUIPase.VistaCrearPase;
-import presentacion.GUIPase.VistaEliminarPase;
-import presentacion.GUIPase.VistaListarPases;
-import presentacion.GUImiemCompTea.*;
+import presentacion.GUIPase.VistaAltaPase;
+import presentacion.GUIPase.VistaBajaPase;
+import presentacion.GUIPase.VistaMostrarPases;
 
 public class FactoriaPresentacion extends FactoriaAbstractaPresentacion {
 
@@ -42,10 +42,10 @@ public class FactoriaPresentacion extends FactoriaAbstractaPresentacion {
 		
 		//Pase
 		
-		case CREAR_PASE: return new VistaCrearPase();
-		case ELIMINAR_PASE: return new VistaEliminarPase();
+		case CREAR_PASE: return new VistaAltaPase();
+		case ELIMINAR_PASE: return new VistaBajaPase();
 		case BUSCAR_PASE: return new VistaBuscarPase();
-		case LISTAR_PASES: return new VistaListarPases();
+		case LISTAR_PASES: return new VistaMostrarPases();
 		case ACTUALIZAR_PASE: return new VistaActualizarPase();
 
 		//Obra

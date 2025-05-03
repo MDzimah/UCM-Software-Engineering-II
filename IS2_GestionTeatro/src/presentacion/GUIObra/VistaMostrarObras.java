@@ -6,6 +6,7 @@ import javax.swing.JButton;
 import javax.swing.SwingUtilities;
 
 import misc.JSwingUtils;
+import misc.Messages;
 import negocio.obra.TObra;
 import presentacion.Evento;
 import presentacion.IGUI;
@@ -38,9 +39,8 @@ public class VistaMostrarObras extends VistaDefault implements IGUI{
 	@Override
 	public void actualizar(Evento evento, Object datos) {
 		if(evento==Evento.RES_OK) {
-			String[] nomCols = {"ID","TITULO", "AUTOR", "GENERO", "SINOPSIS"};
 			
-			JSwingUtils.createTabla("OBRAS", nomCols, (Collection<Object>)datos, false, false);
+			JSwingUtils.createTabla("OBRAS", Messages.colNomsObra, (Collection<TObra>)datos, false, false);
 		}
 		else if(evento==Evento.RES_KO) {
 			JSwingUtils.createErrorDialogMessage("No se han podido mostrar las obras.\n" + (String)datos);
