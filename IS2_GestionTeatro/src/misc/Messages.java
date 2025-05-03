@@ -129,7 +129,7 @@ public class Messages {
 	public static final String KEY_ptosAcum = "puntos";
 	public static final String KEY_nivelVIP = "nivel";
 	
-		//Identificación adicional del subs
+		//Identificación adicional
 	public static final String KEY_nombre = "nombre";
 	public static final String KEY_apellido = "apellido";
 	public static final String KEY_genero = "genero";	
