@@ -13,7 +13,6 @@ import javax.swing.JTextField;
 import exceptions.BBDDReadException;
 import exceptions.BBDDWriteException;
 import misc.JSwingUtils;
-import misc.JSwingUtils.TablaDefault;
 import misc.Messages;
 import misc.Pair;
 import negocio.factoria.FactoriaAbstractaNegocio;

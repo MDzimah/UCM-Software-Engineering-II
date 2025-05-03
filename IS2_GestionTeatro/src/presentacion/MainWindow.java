@@ -281,6 +281,7 @@ public class MainWindow extends JFrame {
         		subsPase.add(baja);
         		subsPase.add(buscar);
         		subsPase.add(mostrar);
+        		subsPase.add(mostrar_por_obra);
         		subsPase.setModal(false);  
         		subsPase.pack();
         		subsPase.setLocationRelativeTo(null);
