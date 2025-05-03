@@ -1,8 +1,11 @@
 package negocio.factura;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 
-public class TFactura {
+import presentacion.Convertable;
+
+public class TFactura implements Convertable<TFactura> {
 	
 	private int idFactura;
 	
@@ -62,7 +65,22 @@ public class TFactura {
 	
 	public void setImporte(float nuevoImporte) { this.importe = nuevoImporte; }
 
-	
+
 	@Override
-	public String toString() { return Integer.toString(this.idFactura); }
+	public ArrayList<ArrayList<Object>> matrizDeInformacion(ArrayList<TFactura> objects) {
+		ArrayList<ArrayList<Object>> matInfo = new ArrayList<ArrayList<Object>>();
+		for (TFactura tFac : objects) {
+			ArrayList<Object> fila = new ArrayList<Object>();
+			
+			fila.add(tFac.getIdFactura());
+			fila.add(tFac.getIdCliente());
+			fila.add(getIdTaquillero());
+			fila.add(tFac.getFecha());
+			fila.add(tFac.getImporte());
+			fila.add(tFac.getSubtotal());
+			
+			matInfo.add(fila);
+		}
+		return matInfo;
+	}
 }

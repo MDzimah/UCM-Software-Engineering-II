@@ -2,7 +2,6 @@ package presentacion.GUIFactura;
 
 import java.awt.*;
 import java.util.ArrayList;
-import java.util.Collection;
 
 import javax.swing.*;
 
@@ -60,9 +59,9 @@ public class VistaBuscarFac extends VistaDefault {
 	@Override
 	public void actualizar(Evento evento, Object datos) {
 		if (evento == Evento.RES_OK) {
-			Collection<TFactura> fac = new ArrayList<TFactura>();
+			ArrayList<TFactura> fac = new ArrayList<TFactura>();
 			fac.add((TFactura)datos);
-			new TablaDefault("FACTURA", Messages.colNomsFactura, fac, true, false).setVisible(true);
+			new TablaDefault<TFactura>("FACTURA", Messages.colNomsFactura, fac, true, false).setVisible(true);
 		}
 		else if(evento == Evento.RES_KO) {
 			String error;
