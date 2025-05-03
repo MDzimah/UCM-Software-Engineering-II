@@ -30,7 +30,7 @@ public class Messages {
 
 	
 	//Ops. fracasadas
-	private static final String NSHP = "No se ha poidido %s";
+	private static final String NSHP = "No se ha podido %s";
 		//Factura
 	public static final String X_ANYADIR_PASE_A_VENTA = Messages.NSHP.formatted("añadir el pase al carrito.");
 	public static final String X_VENTA_CERRADA = Messages.NSHP.formatted("realizar la venta.");
