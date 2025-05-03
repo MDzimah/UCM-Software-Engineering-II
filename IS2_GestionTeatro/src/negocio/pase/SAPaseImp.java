@@ -1,6 +1,7 @@
 package negocio.pase;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.Collection;
 
 import exceptions.BBDDReadException;
@@ -81,5 +82,19 @@ public class SAPaseImp implements SAPase {
 	public void deletePorObra(int idObra) throws BBDDReadException, BBDDWriteException {
 		DAOPase daoPas = FactoriaAbstractaIntegracion.getInstance().crearDAOPase();
 		daoPas.deletePorObra(idObra);
+	}
+	
+	@Override
+	public Collection<TPase> allPasesPorObra(int idObra) throws BBDDReadException {
+		DAOPase daoPase = FactoriaAbstractaIntegracion.getInstance().crearDAOPase();
+		ArrayList<TPase> pases = (ArrayList<TPase>)daoPase.readAll();
+
+		ArrayList<TPase> pasesPorObra = new ArrayList<TPase>();
+		
+		for (TPase tPase : pases) {
+			if (tPase.getIdObra() == idObra) pasesPorObra.add(tPase);
+		}
+		
+		return pasesPorObra;
 	}
 }

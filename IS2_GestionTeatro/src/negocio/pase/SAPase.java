@@ -18,4 +18,5 @@ public interface SAPase {
 												   												//Si cantidad > stock, entonces da todo lo que tenga (lo dijo Vicky)
 																								//Además, actualiza en la BD el pase con dicho id
 	public void deletePorObra(int idObra) throws BBDDReadException, BBDDWriteException; //Devuelve si existe algun pase con el id de la obra pasada por parametro
+	Collection<TPase> allPasesPorObra(int idObra) throws BBDDReadException;
 }

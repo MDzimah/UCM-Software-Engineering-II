@@ -175,6 +175,17 @@ public class ControladorImp extends Controlador {
 			}
 			break;
 		}
+		case MOSTRAR_PASES_POR_OBRA:{
+			try {
+				SAPase saPase = FactoriaAbstractaNegocio.getInstance().crearSAPase();
+				int idObra = (int) datos;
+				Collection<TPase> pasesPorObra = saPase.allPasesPorObra(idObra);
+				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_OK, pasesPorObra);
+			} catch(Exception e) {
+				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_KO, e);
+			}
+			break;
+		}
 		
 		//Obra
 		case ALTA_OBRA:{

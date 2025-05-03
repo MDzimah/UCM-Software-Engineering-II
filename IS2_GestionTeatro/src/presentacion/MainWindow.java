@@ -237,13 +237,14 @@ public class MainWindow extends JFrame {
             	JDialog subsPase= new JDialog(MainWindow.this,"Subsistema pase", true);
             	subsPase.setLayout(new FlowLayout());
             	
-            	JButton actualizar, alta, baja, buscar, consultar, mostrar;
+            	JButton actualizar, alta, baja, buscar, mostrar, mostrar_por_obra;
             
             	actualizar = new JButton("Actualizar pase");
             	alta = new JButton("Alta pase");
             	baja = new JButton("Baja pase");
         		buscar = new JButton("Buscar pase");
         		mostrar = new JButton("Listar pases");
+        		mostrar_por_obra = new JButton("Listar pases por obra");
         		
         		//ACTUALIZAR PASE
         		actualizar.addActionListener((ev)->{
@@ -268,6 +269,11 @@ public class MainWindow extends JFrame {
         		//LISTAR PASES
         		mostrar.addActionListener((ev)->{
         			FactoriaAbstractaPresentacion.getInstance().createVista(Evento.MOSTRAR_PASES);
+        		});
+        		
+        		//LISTAR PASES POR OBRA
+        		mostrar_por_obra.addActionListener((ev) ->{
+        			FactoriaAbstractaPresentacion.getInstance().createVista(Evento.MOSTRAR_PASES_POR_OBRA);
         		});
         		
         		subsPase.add(actualizar);        		
