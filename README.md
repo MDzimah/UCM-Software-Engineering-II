@@ -24,6 +24,15 @@ The application implements a comprehensive set of subsystems required for theatr
 - **MiembroCompaniaTeatro**: Management of company members and their roles.
 - **Taquillero**: Functions for box office staff.
 
+## Design Patterns
+This project applies several classical design patterns to maintain modularity and clear responsibilities:
+
+- **Model-View-Controller (MVC)** – Uses a Passive View variation: views are decoupled from the logic, controllers (ActionListeners) mediate between view and business logic.
+- **DAO (Data Access Object)** – Manages persistence logic for each entity, storing data in JSON format.
+- **SA (Service Application)** – A dedicated layer that encapsulates business logic and mediates between the presentation and data access layers.
+- **Factory Pattern** – Used in all layers to encapsulate object creation, promoting flexibility and decoupling.
+- **Singleton** – Applied where centralized configuration or shared access to resources is required.
+
 All subsystems are organized using a strict 3-layer architecture:
 
 **Presentation Layer → Business Layer → Integration Layer**  
@@ -35,15 +44,6 @@ UML modeling (done using **draw.io**) was completed for the following subsystems
 - Class diagrams are also provided for the **Factory** classes in the Presentation, Business, and Integration layers, showing how object creation and dependencies are managed.
 
 All UML diagrams are located in the `Diagramas_UML/` folder, inside the `IS2_GestionTeatro/` directory.
-
-## Design Patterns
-This project applies several classical design patterns to maintain modularity and clear responsibilities:
-
-- **Model-View-Controller (MVC)** – Uses a Passive View variation: views are decoupled from the logic, controllers (ActionListeners) mediate between view and business logic.
-- **DAO (Data Access Object)** – Manages persistence logic for each entity, storing data in JSON format.
-- **SA (Service Application)** – A dedicated layer that encapsulates business logic and mediates between the presentation and data access layers.
-- **Factory Pattern** – Used in all layers to encapsulate object creation, promoting flexibility and decoupling.
-- **Singleton** – Applied where centralized configuration or shared access to resources is required.
 
 ## Technologies
 - **Java 11+**
