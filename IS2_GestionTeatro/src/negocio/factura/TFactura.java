@@ -83,4 +83,15 @@ public class TFactura implements Convertable<TFactura> {
 		}
 		return matInfo;
 	}
+
+	@Override
+	public TFactura filaAObjetoT(ArrayList<Object> fila) {
+		 return new TFactura(
+				 (int)fila.get(0), 
+				 (int)fila.get(1), 
+				 (boolean)fila.get(2), 
+				 (LocalDateTime)fila.get(3), 
+				 (float)fila.get(4), 
+				 (float)fila.get(5));
+	}
 }

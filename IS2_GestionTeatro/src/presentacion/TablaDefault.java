@@ -5,6 +5,7 @@ import java.awt.*;
 import java.util.*;
 
 import javax.swing.*;
+import javax.swing.event.*;
 import javax.swing.table.*;
 
 import misc.Constants;
@@ -31,25 +32,25 @@ import misc.Constants;
 public class TablaDefault<T extends Convertable<T>> extends JFrame {
 	private JButton aceptar; //Solo para el modo de actualizacion
 	private boolean editable;
-	private JTable table;
-
+	private T edicion;
+	
     private class DefaultTableModel extends AbstractTableModel {
         private final String[] columnNames;
-        private final ArrayList<ArrayList<Object>> datos;
+        private ArrayList<ArrayList<Object>> datosConvertidos;
 
         public DefaultTableModel(String[] nomCols, ArrayList<ArrayList<Object>> datos) {
             this.columnNames = nomCols;
-            this.datos = datos;
+            this.datosConvertidos = datos;
         }
 
         @Override
-        public int getRowCount() { return datos.size(); }
+        public int getRowCount() { return datosConvertidos.size(); }
 
         @Override
         public int getColumnCount() { return columnNames.length; }
 
         @Override
-        public Object getValueAt(int rowIndex, int columnIndex) { return datos.get(rowIndex).get(columnIndex); }
+        public Object getValueAt(int rowIndex, int columnIndex) { return datosConvertidos.get(rowIndex).get(columnIndex); }
 
         @Override
         public String getColumnName(int columnIndex) { return columnNames[columnIndex]; }
@@ -60,8 +61,10 @@ public class TablaDefault<T extends Convertable<T>> extends JFrame {
         }
     }
 
+    //POR SI HUBIERA QUE MOSTRAR EN LA TABLA ARRAYS/COLLECTIONS EN CELDAS
     //MultiLineTableCellRenderer inspirado por Channa Jayamuni en Stack Overflow
     //https://stackoverflow.com/questions/9955595/how-to-display-multiple-lines-in-a-jtable-cell
+    /*
     private class MultiLineTableCellRenderer extends JList<String> implements TableCellRenderer {
     	
     	//Para una apariencia más vistosa de la tabla
@@ -106,12 +109,36 @@ public class TablaDefault<T extends Convertable<T>> extends JFrame {
         }
     }
     
+     private void setRender(JTable table, int numCols) {
+        //Las celdas de la tabla pueden contener listas, luego para mostrar los elementos uno debajo del otro, hace falta
+        //cambiar la forma de renderizarlas
+        MultiLineTableCellRenderer renderer = new MultiLineTableCellRenderer(); 
+        table.setDefaultRenderer(String[].class, renderer);
+        for (int i = 0; i < numCols; ++i) {
+        	table.getColumnModel().getColumn(i).setCellRenderer(renderer);
+        }
+        
+        for (int row = 0; row < table.getRowCount(); row++) {
+            int maxHeight = table.getRowHeight();
+            for (int col = 0; col < table.getColumnCount(); col++) {
+                Component comp = table.prepareRenderer(renderer, row, col);
+                maxHeight = Math.max(maxHeight, comp.getPreferredSize().height);
+            }
+            table.setRowHeight(row, maxHeight);
+        }
+    }
+    */
+    
     //Convierte colección de TFacturas, TClientes, etc. a una matriz de información para la tabla
-    /*OBSOLETO: COMO DIJO DAVID Q QUIZÁS NOS PONE PEGAS POR HACER CASTING, HACEMOS LA TABLA GENÉRICA. 
-     EN CADA TRANSFER HAY Q EXTENDER LA CLASE CONVERTABLE<T> Y HACER LO DE CONVERTIR EL ARRAYLIST A UNA MATRIZ*/
+    /*
+     * 
+     * 
+     * OBSOLETO: COMO DIJO DAVID Q QUIZÁS NOS PONE PEGAS POR HACER CASTING, HACEMOS LA TABLA GENÉRICA. 
+     EN CADA TRANSFER HAY Q EXTENDER LA CLASE CONVERTABLE<T> Y HACER LO DE CONVERTIR EL ARRAYLIST A UNA MATRIZ
+     
    // private List<Object[]> convert(Collection<T> data){
     	
-    	/*
+    	
     	List<Object[]> matInfo = new ArrayList<Object[]>();
     	if (data.isEmpty()) return matInfo;
     	else {
@@ -189,24 +216,7 @@ public class TablaDefault<T extends Convertable<T>> extends JFrame {
     */
    // }
 
-    private void setRender(JTable table, int numCols) {
-        //Las celdas de la tabla pueden contener listas, luego para mostrar los elementos uno debajo del otro, hace falta
-        //cambiar la forma de renderizarlas
-        MultiLineTableCellRenderer renderer = new MultiLineTableCellRenderer(); 
-        table.setDefaultRenderer(String[].class, renderer);
-        for (int i = 0; i < numCols; ++i) {
-        	table.getColumnModel().getColumn(i).setCellRenderer(renderer);
-        }
-        
-        for (int row = 0; row < table.getRowCount(); row++) {
-            int maxHeight = table.getRowHeight();
-            for (int col = 0; col < table.getColumnCount(); col++) {
-                Component comp = table.prepareRenderer(renderer, row, col);
-                maxHeight = Math.max(maxHeight, comp.getPreferredSize().height);
-            }
-            table.setRowHeight(row, maxHeight);
-        }
-    }
+    
 
     /**
      * Constructs a {@code TablaDefault} window configured to display tabular data.
@@ -239,35 +249,59 @@ public class TablaDefault<T extends Convertable<T>> extends JFrame {
         }
         this.setSize(new Dimension(width, height));
         
-        for (int i = 0; i < columnNames.length; ++i) {
-        	columnNames[i] = columnNames[i].toUpperCase();
-        }
-        
         this.editable = editable;
         
         if (data != null) {
         	T aux = data.get(0); //Para inicializarlo a algo y poder acceder al método de Convertable<T>
-        	
         	DefaultTableModel model = new DefaultTableModel(columnNames, aux.matrizDeInformacion(data));
-	        this.table = new JTable(model);
+	        JTable table = new JTable(model);
 	       
 	        
 	        //Cambiar apariencia del header de la tabla
 	        JTableHeader header = table.getTableHeader();
 	        header.setFont(Constants.FontTablaDefaultCabecera());
 
-	        this.setRender(table, columnNames.length);
-	        if (!editable) this.add(new JScrollPane(table), BorderLayout.CENTER);
-	        else {
-	        	this.aceptar = new JButton("aceptar");
+	        //this.setRender(table, columnNames.length);
+	        
+	        //Solo se edita la tabla en los CU de actualizar, luego consultar tiene que ser true también
+	        if (editable && consultar) {
+	        	this.aceptar = new JButton("Aceptar");
 	        	this.add(new JScrollPane(table), BorderLayout.NORTH);
 	        	this.add(this.aceptar, BorderLayout.SOUTH);
 	        	
+	        	//En el modo consultar la tabla tiene una única fila, luego inicializo la edicion a lo
+	        	//que vale el array de datos en su única posición no nula
+	        	this.edicion = data.get(0);
+	        	
+		        table.getModel().addTableModelListener(new TableModelListener() {
+		            @Override
+		            public void tableChanged(TableModelEvent e) {
+		                if (e.getType() == TableModelEvent.UPDATE) {
+		                	 int row = e.getFirstRow();
+
+		                     //Reconstruimos la fila editada
+		                     ArrayList<Object> datosFila = new ArrayList<>();
+		                     for (int col = 0; col < table.getColumnCount(); col++) {
+		                    	 datosFila.add(table.getValueAt(row, col));
+		                     }
+
+		                     //Convertimos la fila editada y guardamos la edición
+		                     edicion = edicion.filaAObjetoT(datosFila);
+		                }
+		            }
+		        });
 	        }
+	        else this.add(new JScrollPane(table), BorderLayout.CENTER);
         }
         this.setLocationRelativeTo(null);
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
     }
+	
+	public T getEdition() { return this.edicion; }
+	
+	public JButton getOkButton() { return editable ? this.aceptar : null; }
+	
+	/*
 	@SuppressWarnings("unchecked")
 	public <T> List<T> getTransfersFromTable() {
 	    List<T> transfers = new ArrayList<>();
@@ -312,7 +346,7 @@ public class TablaDefault<T extends Convertable<T>> extends JFrame {
 	                (String) rowData[3],    // fecha
 	                (Double) rowData[4],    // importe
 	                (Double) rowData[5]     // subtotal
-	            );*/
+	            );
 	        }
 	        // Añadir vuestros casos (TObra, TMiemCompTea, etc.)
 	    } catch (Exception e) {
@@ -321,16 +355,13 @@ public class TablaDefault<T extends Convertable<T>> extends JFrame {
 	    }
 	    return null;
 	}
-	public JButton getOkButton() { return editable ? this.aceptar : null; }
-	
-	public JTable getTable() {return this.table;}
 
+}
+*/
 
-
-
-
-
-/*public static void main(String[] args) {
+  //PRUEBA DE LA TABLA
+/*
+public static void main(String[] args) {
     SwingUtilities.invokeLater(() -> {
         String[] columnNames = {
             "ID Factura", "ID Cliente", "ID Taquillero", "Fecha", "Importe", "Subtotal"

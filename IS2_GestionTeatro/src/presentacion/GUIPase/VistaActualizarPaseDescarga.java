@@ -18,15 +18,9 @@ public class VistaActualizarPaseDescarga implements IGUI {
 		Collection<Object> p = new ArrayList<Object>();
 		p.add((TPase)datos);
 		String[] nomCols = {"ID","ID COMPANYA", "ID OBRA", "FECHA", "STOCK", "PRECIO"};
-		TablaDefault tabla = new TablaDefault("BUSCAR PASE", nomCols, p, true, true);
+		TablaDefault<TPase> tabla = new TablaDefault("BUSCAR PASE", nomCols, p, true, true);
 		tabla.getOkButton().addActionListener(e -> {
-			int id = Integer.valueOf((String) tabla.getTable().getValueAt(0, 0));
-			int idCompTea = Integer.valueOf((String) tabla.getTable().getValueAt(0, 1));
-			int idObra = Integer.valueOf((String) tabla.getTable().getValueAt(0, 2));
-			//int fecha = Integer.valueOf((String) tabla.getTable().getValueAt(0, 3));
-			int stock = Integer.valueOf((String) tabla.getTable().getValueAt(0, 4));
-			int precio = Integer.valueOf((String) tabla.getTable().getValueAt(0, 5));
-			TPase tPaseNuevo = new TPase(id, idCompTea, idObra, true, null, stock, precio); 
+			TPase tPaseNuevo = tabla.getEdition();
 			Controlador.getInstance().accion(Evento.ACTUALIZAR_PASE_DESCARGA, tPaseNuevo);
 		});
 	}

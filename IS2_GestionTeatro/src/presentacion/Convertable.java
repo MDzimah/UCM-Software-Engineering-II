@@ -3,30 +3,40 @@ package presentacion;
 import java.util.ArrayList;
 
 /**
- * An interface for converting a list of objects of type {@code T} into a matrix-like 
- * structure represented by a {@code List} of {@code Object[]} arrays.
+ * A generic interface for converting between objects of type {@code T} and a tabular data format.
+ * <p>
+ * This interface is designed to facilitate integration between domain objects and user interface components,
+ * particularly table-based views such as {@code JTable}. It allows both:
+ * <ul>
+ *   <li>Conversion of a list of {@code T} objects into a matrix (for display in tables).</li>
+ *   <li>Reconstruction of a {@code T} object from a row of data (after editing in a table).</li>
+ * </ul>
  *
- * <p>Classes implementing this interface should define a way to transform data from objects 
- * of type {@code T} into a tabular format, which can be useful in various scenarios, 
- * such as displaying data in a user interface, exporting data to files, or performing 
- * matrix-based computations.</p>
- *
- * @param <T> the type of the objects to be converted into a matrix format
+ * @param <T> the type of the domain objects involved in the conversion
  */
 public interface Convertable<T> {
 
     /**
-     * Converts a list of objects of type {@code T} into a matrix-like structure.
+     * Converts a list of {@code T} objects into a tabular structure suitable for display.
+     * <p>
+     * Each entry in the returned list represents a row in the table, where each row is a list
+     * of values (columns) corresponding to the fields of a {@code T} object.
      *
-     * <p>The returned list represents a matrix where each element is a row, and each row is an 
-     * array of objects representing the data fields of an individual {@code T} object.</p>
-     *
-     * <p>The conversion logic can vary depending on the structure of {@code T}, but the 
-     * result should always be a tabular format that can be used for further operations or presentation.</p>
-     *
-     * @param objects a list of objects of type {@code T} to be converted into a matrix
-     * @return a list of {@code Object[]} arrays, where each array represents a row in the matrix,
-     *         and each row contains the data fields corresponding to one {@code T} object
+     * @param objects a list of {@code T} objects to convert
+     * @return a list of rows, where each row is a list of objects representing a {@code T}'s fields
      */
-    public ArrayList<ArrayList<Object>> matrizDeInformacion(ArrayList<T> objects);
+    ArrayList<ArrayList<Object>> matrizDeInformacion(ArrayList<T> objects);
+
+    /**
+     * Converts a row of tabular data back into a {@code T} object.
+     * <p>
+     * This is typically used to reconstruct domain objects after editing rows in a user interface table.
+     * Implementing classes should ensure the order and type of values in {@code datosFila}
+     * match those expected by the object constructor or field assignment logic.
+     *
+     * @param fila a list of values representing a single row's data in the table
+     * @return a new {@code T} object reconstructed from the given row data
+     */
+    T filaAObjetoT(ArrayList<Object> fila);
 }
+
