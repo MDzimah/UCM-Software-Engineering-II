@@ -25,7 +25,7 @@ public class VistaMostrarPasesPorObra extends VistaDefault {
 	
 	public VistaMostrarPasesPorObra() {
 		this.setTitle("MOSTRAR PASES POR OBRA");
-		this.IDObraL = new JLabel("Id Pase:");
+		this.IDObraL = new JLabel("Id Obra:");
 		this.IDObraT = new JTextField(20);
 		this.buscar = new JButton("Aceptar");
 		this.cancelar = new JButton("Cancelar");
