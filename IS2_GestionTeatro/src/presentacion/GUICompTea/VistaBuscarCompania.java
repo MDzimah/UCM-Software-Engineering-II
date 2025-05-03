@@ -12,6 +12,7 @@ import javax.swing.SwingUtilities;
 
 import integracion.factoria.FactoriaAbstractaIntegracion;
 import misc.JSwingUtils;
+import misc.Messages;
 import misc.Pair;
 import presentacion.Evento;
 import presentacion.IGUI;
@@ -66,11 +67,10 @@ public class VistaBuscarCompania extends VistaDefault implements IGUI{
 	@Override
 	public void actualizar(Evento evento, Object datos) {
 		if(evento==Evento.RES_OK) {
-			String[] columnas = {"ID","NOMBRE","DIRECCION","COSTE DE CONTRATACION"};
-			JFrame j= JSwingUtils.createTabla("COMPANIA", columnas, (Collection<Object>)datos, true, false);			
+			JFrame j= JSwingUtils.createTabla("COMPAÑÍA", Messages.colNomsCompTea, (Collection<TCompTea>)datos, true, false);			
 		}
 		else if(evento==Evento.RES_KO) {
-			JSwingUtils.createErrorDialogMessage("NO EXISTEN LAS COMPANIAS:.\n" +(String)datos);
+			JSwingUtils.createErrorDialogMessage("NO EXISTEN LAS COMPAÑÍAS:.\n" +(String)datos);
 		}
 		
 	}

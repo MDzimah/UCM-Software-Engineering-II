@@ -60,11 +60,9 @@ public class VistaBuscarFac extends VistaDefault {
 	@Override
 	public void actualizar(Evento evento, Object datos) {
 		if (evento == Evento.RES_OK) {
-			Collection<Object> fac = new ArrayList<Object>();
+			Collection<TFactura> fac = new ArrayList<TFactura>();
 			fac.add((TFactura)datos);
-			String[] nomCols = {"ID","ID CLIENTE", "ID TAQUILLERO", "FECHA", "IMPORTE", "SUBTOTAL"};
-
-			new TablaDefault("BUSCAR FACTURA", nomCols, fac, true, false).setVisible(true);
+			new TablaDefault("FACTURA", Messages.colNomsFactura, fac, true, false).setVisible(true);
 		}
 		else if(evento == Evento.RES_KO) {
 			String error;

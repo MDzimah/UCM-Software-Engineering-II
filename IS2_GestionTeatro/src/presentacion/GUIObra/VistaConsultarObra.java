@@ -65,10 +65,9 @@ public class VistaConsultarObra extends VistaDefault implements IGUI{
 	@Override
 	public void actualizar(presentacion.Evento evento, Object datos) {
 		if(evento==Evento.RES_OK) {
-			String[] nomCols = {"ID","TITULO", "AUTOR", "GENERO", "SINOPSIS"};
-			Collection<Object> obra= new LinkedList<Object>();
+			Collection<TObra> obra= new LinkedList<TObra>();
 			obra.add((TObra) datos);
-			JSwingUtils.createTabla("OBRA", nomCols, obra, false, false);
+			JSwingUtils.createTabla("OBRA", Messages.colNomsObra, obra, false, false);
 		}
 		else if(evento==Evento.RES_KO) {
 			JSwingUtils.createErrorDialogMessage("No se han podido acceder a la obra.\n" + (String)datos);

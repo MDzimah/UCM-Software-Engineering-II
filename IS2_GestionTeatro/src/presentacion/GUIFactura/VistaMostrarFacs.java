@@ -6,6 +6,7 @@ import javax.swing.*;
 
 import exceptions.BBDDReadException;
 import misc.*;
+import negocio.factura.TFactura;
 import presentacion.Evento;
 import presentacion.TablaDefault;
 import presentacion.VistaDefault;
@@ -37,11 +38,7 @@ public class VistaMostrarFacs extends VistaDefault {
 	@Override
 	public void actualizar(Evento evento, Object datos) {
 		if (evento == Evento.RES_OK) {
-			@SuppressWarnings("unchecked")
-			Collection<Object> castedData = (Collection<Object>)datos;
-			String[] nomCols = {"ID","ID CLIENTE", "ID TAQUILLERO", "FECHA", "IMPORTE"};
-			
-			new TablaDefault("MOSTRAR FACTURAS", nomCols, castedData, false, false).setVisible(true);;
+			new TablaDefault("FACTURAS", Messages.colNomsFactura, (Collection<TFactura>)datos, false, false).setVisible(true);;
 		}
 		else if(evento == Evento.RES_KO) {
 			String error;

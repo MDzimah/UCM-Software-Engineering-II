@@ -10,6 +10,7 @@ import javax.swing.JTextField;
 import javax.swing.SwingUtilities;
 
 import misc.JSwingUtils;
+import misc.Messages;
 import misc.Pair;
 import presentacion.Evento;
 import presentacion.IGUI;
@@ -50,8 +51,7 @@ public class VistaMostrarCompania extends VistaDefault implements IGUI{
 	@Override
 	public void actualizar(Evento evento, Object datos) {
 		if(evento==Evento.RES_OK) {
-			String[] nomCols = {"ID","TITULO", "AUTOR", "GENERO", "SINOPSIS"};
-			JSwingUtils.createTabla("CONSULTAR OBRA", nomCols, (Collection<Object>)datos, false,false);			
+			JSwingUtils.createTabla("CONSULTAR OBRA", Messages.colNomsCompTea, (Collection<TCompTea>)datos, false,false);			
 		}
 		else if(evento==Evento.RES_KO) {
 			JSwingUtils.createErrorDialogMessage("NO SE PUDO LISTAR LAS COMPANIAS TEATRALES");

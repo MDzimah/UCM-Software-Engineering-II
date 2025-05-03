@@ -1,4 +1,4 @@
-package presentacion.GUImiemCompTea;
+package presentacion.GUIMiemCompTea;
 
 import java.util.ArrayList;
 

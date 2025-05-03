@@ -127,7 +127,7 @@ public class TablaDefault extends JFrame {
     }
     
     //Convierte colección de TFacturas, TClientes, etc. a una matriz de información para la tabla
-    private List<Object[]> convert(Collection<Object> data, int numCols){
+    private List<Object[]> convert(Collection<?> data, int numCols){
     	List<Object[]> matInfo = new ArrayList<Object[]>();
     	if (data.isEmpty()) return matInfo;
     	else {
@@ -242,7 +242,7 @@ public class TablaDefault extends JFrame {
      * <p>If {@code data} is not {@code null}, it will be inspected and converted into table rows
      * based on its object type (e.g., {@code TFactura}, {@code TObra}, etc.). Unsupported types are ignored.</p>
      */
-	public TablaDefault(String nombreTabla,  String[] columnNames, Collection<Object> data, boolean consultar, boolean editable) {
+	public TablaDefault(String nombreTabla,  String[] columnNames, Collection<?> data, boolean consultar, boolean editable) {
         this.setTitle(nombreTabla);
         this.setLayout(new BorderLayout());
         

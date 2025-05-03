@@ -22,14 +22,14 @@ import presentacion.VistaDefault;
 import presentacion.controlador.Controlador;
 import presentacion.factoria.FactoriaAbstractaPresentacion;
 
-public class VistaEliminarPase extends VistaDefault {
+public class VistaBajaPase extends VistaDefault {
 
 	private JLabel IDPaseL;
 	private JTextField IDPaseT;
 	private JButton aceptar;
 	private JButton cancelar;
 	
-	public VistaEliminarPase() {
+	public VistaBajaPase() {
 		this.setTitle("ELIMINAR PASE");
 		this.IDPaseL = new JLabel("Id Pase:");
 		this.IDPaseT = new JTextField(20);
