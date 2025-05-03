@@ -1,42 +1,41 @@
 package presentacion;
 
-import java.util.ArrayList;
-
 /**
- * A generic interface for converting between objects of type {@code T} and a tabular data format.
- * <p>
- * This interface is designed to facilitate integration between domain objects and user interface components,
- * particularly table-based views such as {@code JTable}. It allows both:
+ * A generic interface that defines methods for mapping domain objects to and from a tabular format.
+ *
+ * <p>This interface is primarily intended to support integration between domain models and UI components,
+ * such as {@link javax.swing.JTable}. Implementing this interface allows each domain object to act as a
+ * table row whose fields can be accessed and modified by index.</p>
+ *
+ * <p>Typical use cases include:</p>
  * <ul>
- *   <li>Conversion of a list of {@code T} objects into a matrix (for display in tables).</li>
- *   <li>Reconstruction of a {@code T} object from a row of data (after editing in a table).</li>
+ *   <li>Displaying a list of domain objects in a table by accessing their fields via column indices.</li>
+ *   <li>Allowing in-place editing of table cells and updating the underlying object accordingly.</li>
  * </ul>
  *
- * @param <T> the type of the domain objects involved in the conversion
+ * <p>Implementations must provide logic for both retrieving and setting the value of a specific field
+ * based on the column index.</p>
+ *
+ * @param <T> the type of the implementing class (self-referential generic pattern)
  */
 public interface Convertable<T> {
+    /**
+     * Returns the value of the field at the specified column index.
+     *
+     * <p>This method is typically used by table renderers to retrieve cell values for display.</p>
+     *
+     * @param columnIndex the index of the column (field) to retrieve
+     * @return the value of the specified column; can be {@code null}
+     */
+    Object getColumnValue(int columnIndex);
 
     /**
-     * Converts a list of {@code T} objects into a tabular structure suitable for display.
-     * <p>
-     * Each entry in the returned list represents a row in the table, where each row is a list
-     * of values (columns) corresponding to the fields of a {@code T} object.
+     * Updates the field at the specified column index with the given value.
      *
-     * @param objects a list of {@code T} objects to convert
-     * @return a list of rows, where each row is a list of objects representing a {@code T}'s fields
-     */
-    ArrayList<ArrayList<Object>> matrizDeInformacion(ArrayList<T> objects);
-
-    /**
-     * Converts a row of tabular data back into a {@code T} object.
-     * <p>
-     * This is typically used to reconstruct domain objects after editing rows in a user interface table.
-     * Implementing classes should ensure the order and type of values in {@code datosFila}
-     * match those expected by the object constructor or field assignment logic.
+     * <p>This method is typically used to apply user edits from table cells back into the object.</p>
      *
-     * @param fila a list of values representing a single row's data in the table
-     * @return a new {@code T} object reconstructed from the given row data
+     * @param col the index of the column (field) to update
+     * @param value the new value to set; may require casting inside the implementation
      */
-    T filaAObjetoT(ArrayList<Object> fila);
+    void setColumnValue(int col, Object value);
 }
-

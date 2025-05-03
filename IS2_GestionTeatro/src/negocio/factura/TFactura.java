@@ -1,7 +1,6 @@
 package negocio.factura;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 
 import presentacion.Convertable;
 
@@ -65,33 +64,27 @@ public class TFactura implements Convertable<TFactura> {
 	
 	public void setImporte(float nuevoImporte) { this.importe = nuevoImporte; }
 
-
 	@Override
-	public ArrayList<ArrayList<Object>> matrizDeInformacion(ArrayList<TFactura> objects) {
-		ArrayList<ArrayList<Object>> matInfo = new ArrayList<ArrayList<Object>>();
-		for (TFactura tFac : objects) {
-			ArrayList<Object> fila = new ArrayList<Object>();
-			
-			fila.add(tFac.getIdFactura());
-			fila.add(tFac.getIdCliente());
-			fila.add(getIdTaquillero());
-			fila.add(tFac.getFecha());
-			fila.add(tFac.getImporte());
-			fila.add(tFac.getSubtotal());
-			
-			matInfo.add(fila);
+	public Object getColumnValue(int columnIndex) {
+		switch (columnIndex) {
+	        case 0: return this.idFactura;
+	        case 1: return this.idCliente;
+	        case 2: return this.idTaquillero;
+	        case 3: return this.fecha;
+	        case 4: return this.importe;
+	        default: return this.subtotal;   
 		}
-		return matInfo;
 	}
 
 	@Override
-	public TFactura filaAObjetoT(ArrayList<Object> fila) {
-		 return new TFactura(
-				 (int)fila.get(0), 
-				 (int)fila.get(1), 
-				 (boolean)fila.get(2), 
-				 (LocalDateTime)fila.get(3), 
-				 (float)fila.get(4), 
-				 (float)fila.get(5));
+	public void setColumnValue(int col, Object value) {
+	    switch(col) {
+	        case 0: this.idFactura = (int) value; break;
+	        case 1: this.idCliente = (int) value; break;
+	        case 2: this.idTaquillero = (int) value; break;
+	        case 3: this.fecha = (LocalDateTime) value; break;
+	        case 4: this.importe = (Float) value; break;
+	        default: this.subtotal = (Float) value; break;
+	    }
 	}
 }

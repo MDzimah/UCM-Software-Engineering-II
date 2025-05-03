@@ -11,49 +11,61 @@ import javax.swing.table.*;
 import misc.Constants;
 
 /**
- * {@code TablaDefault} is a generic Swing-based window designed to display collections of various
- * domain objects (such as {@code TFactura}, {@code TObra}, {@code TCliente}, etc.) in a table format.
+ * {@code TablaDefault} is a generic Swing-based window for displaying and optionally editing a list of
+ * domain objects in a tabular format.
  *
- * <p>This class creates a {@code JFrame} containing a {@code JTable} with optional editing capabilities and dynamic
- * multi-line cell rendering. It automatically adapts the row content depending on the object type
- * and supports both consultation (read-only) and editing modes.</p>
+ * <p>This class extends {@code JFrame} and embeds a {@code JTable} whose contents are automatically derived
+ * from objects implementing the {@link Convertable} interface. It supports both read-only ("consultar") and editable modes.</p>
  *
- * <p>Main features:</p>
+ * <p>Key features include:</p>
  * <ul>
- *   <li>Dynamic rendering of arrays or collections inside table cells as multi-line content.</li>
- *   <li>Support for multiple domain object types via internal data conversion logic.</li>
- *   <li>Editable and non-editable table modes, with optional "Aceptar" button for confirming changes in editable mode.</li>
- *   <li>Consistent UI styling using predefined constants for fonts and dimensions.</li>
+ *   <li>Automatic mapping of domain object fields to table cells via {@code getColumnValue} and {@code setColumnValue} methods.</li>
+ *   <li>Support for multiple domain types such as {@code TFactura}, {@code TObra}, {@code TCliente}, etc.</li>
+ *   <li>Editable mode with a built-in "Aceptar" button to confirm changes made to table cells.</li>
+ *   <li>Consultation mode with a more compact, non-resizable layout for viewing single-record tables.</li>
+ *   <li>Optional support (currently commented out) for multi-line cell rendering to display arrays or collections inside cells.</li>
+ *   <li>Consistent UI styling using centralized font and layout constants from the {@code Constants} class.</li>
  * </ul>
  *
- * @param <T> the type of domain objects to be displayed in the table, which must implement {@link Convertable}
+ * <p>Note: This class uses an internal {@code DefaultTableModel} implementation to bind data and column headers
+ * to the {@code JTable}, and relies on the domain objects conforming to the {@code Convertable<T>} interface.</p>
+ *
+ * @param <T> the type of domain objects to display in the table; must implement {@link Convertable}
  */
-@SuppressWarnings("serial")
 public class TablaDefault<T extends Convertable<T>> extends JFrame {
-	private JButton aceptar; //Solo para el modo de actualizacion
+	//Solo para los modos de actualizacion
+	private JButton aceptar; 
 	private boolean editable;
 	private T edicion;
 	
     private class DefaultTableModel extends AbstractTableModel {
-        private final String[] columnNames;
-        private ArrayList<ArrayList<Object>> datosConvertidos;
+        private final String[] nomCols;
+        private ArrayList<T> datos;
 
-        public DefaultTableModel(String[] nomCols, ArrayList<ArrayList<Object>> datos) {
-            this.columnNames = nomCols;
-            this.datosConvertidos = datos;
+        public DefaultTableModel(String[] nomCols, ArrayList<T> datos) {
+            this.nomCols = nomCols;
+            this.datos = datos;
         }
 
         @Override
-        public int getRowCount() { return datosConvertidos.size(); }
+        public int getRowCount() { return datos.size(); }
 
         @Override
-        public int getColumnCount() { return columnNames.length; }
+        public int getColumnCount() { return nomCols.length; }
 
         @Override
-        public Object getValueAt(int rowIndex, int columnIndex) { return datosConvertidos.get(rowIndex).get(columnIndex); }
+        public Object getValueAt(int rowIndex, int columnIndex) { 
+        	 return datos.get(rowIndex).getColumnValue(columnIndex);
+        }
 
         @Override
-        public String getColumnName(int columnIndex) { return columnNames[columnIndex]; }
+        public String getColumnName(int columnIndex) { return nomCols[columnIndex]; }
+        
+        @Override
+        public void setValueAt(Object value, int row, int col) {
+            datos.get(row).setColumnValue(col, value);
+            fireTableCellUpdated(row, col);
+        }
         
         @Override
         public boolean isCellEditable(int row, int column) {
@@ -128,109 +140,27 @@ public class TablaDefault<T extends Convertable<T>> extends JFrame {
         }
     }
     */
-    
-    //Convierte colección de TFacturas, TClientes, etc. a una matriz de información para la tabla
-    /*
-     * 
-     * 
-     * OBSOLETO: COMO DIJO DAVID Q QUIZÁS NOS PONE PEGAS POR HACER CASTING, HACEMOS LA TABLA GENÉRICA. 
-     EN CADA TRANSFER HAY Q EXTENDER LA CLASE CONVERTABLE<T> Y HACER LO DE CONVERTIR EL ARRAYLIST A UNA MATRIZ
-     
-   // private List<Object[]> convert(Collection<T> data){
-    	
-    	
-    	List<Object[]> matInfo = new ArrayList<Object[]>();
-    	if (data.isEmpty()) return matInfo;
-    	else {
-    		//Vemos de que tipo es la colección de objetos
-    		if (this.containsType(data, TFactura.class)) {
-    			for (TFactura tFac : data.toArray(new TFactura[0])) {
-    				Object[] fila = new Object[numCols];
-    				
-    				fila[0] = tFac.getIdFactura();
-    				fila[1] = tFac.getIdCliente();
-    				fila[2] = tFac.getIdTaquillero();
-    				fila[3] = tFac.getFecha();
-    				fila[4] = tFac.getImporte();
-    				fila[5] = tFac.getSubtotal();
-    				
-    				matInfo.add(fila);
-    			}
-    		}
-    		else if (this.containsType(data, TCliente.class)) {
-    			
-    		}
-			else if (this.containsType(data, TPase.class)) {
-			    			
-			    		}
-			else if (this.containsType(data, TTaquillero.class)) {
-				
-			}
-			else if (this.containsType(data, TObra.class)) {
-				for (TObra tObra : data.toArray(new TObra[0])) {
-    				Object[] fila = new Object[numCols];
-    				
-    				fila[0] = tObra.getIdObra();
-    				fila[1] = tObra.getTitulo();
-    				fila[2] = tObra.getAutor();
-    				fila[3] = tObra.getGenero();
-    				fila[4] = tObra.getSinopsis();
-    				
-    				matInfo.add(fila);
-    			}
-			}
-			else if (this.containsType(data, TMiemCompTea.class)) {
-				for (TMiemCompTea tMiemComp : data.toArray(new TMiemCompTea[0])) {
-    				Object[] fila = new Object[numCols];
-    				
-    				fila[0] = tMiemComp.getIdMiembComp();
-    				fila[1] = tMiemComp.getNombre();
-    				fila[2] = tMiemComp.getApellido();
-    				fila[3] = tMiemComp.getEdad();
-    				fila[4] = tMiemComp.getDNI();
-    				fila[5] = tMiemComp.getEmail();
-    				fila[6] = tMiemComp.getGenero().toString();
-    				
-    				matInfo.add(fila);
-    			}
-			}
-			else if (this.containsType(data, TCompTea.class)) {
-				for (TCompTea tComp : data.toArray(new TCompTea[0])) {
-    				Object[] fila = new Object[numCols];
-    				
-    				fila[0] = tComp.getId();
-    				fila[1] = tComp.getNombre();
-    				fila[2]= tComp.getDireccion();
-    				fila[3] = tComp.getCosteContratacion();
-    				
-    				matInfo.add(fila);
-    			}
-			}
-    		
-			else { //Instancia de TMiemCompTea
-				
-			}
-    		
-    		return matInfo;
-    	}
-    */
-   // }
 
-    
 
     /**
-     * Constructs a {@code TablaDefault} window configured to display tabular data.
+     * Constructs a {@code TablaDefault} window configured to display a list of domain objects in a table format.
      *
-     * <p>This constructor initializes the window with the provided table title, column names, data, and modes.</p>
+     * <p>This constructor creates a Swing {@code JFrame} that displays the provided data using a {@code JTable}.
+     * It supports both consultation (read-only) and editable modes. In editable mode, an "Aceptar" button is displayed
+     * to confirm edits made to the table.</p>
      *
-     * @param nombreTabla the title of the table window, shown in the frame's title bar
-     * @param columnNames the column headers for the table (converted to uppercase automatically)
-     * @param data a list of domain objects to display in the table; supports multiple types
-     * @param consultar if {@code true}, the window is shown in consultation mode (smaller, non-resizable)
-     * @param editable if {@code true}, the table cells are editable and an "Aceptar" button is shown
+     * @param nombreTabla the title to be shown on the window's title bar
+     * @param columnNames an array of column header names (each corresponding to a property of the domain object)
+     * @param data a list of domain objects (implementing {@link Convertable}) to be displayed in the table
+     * @param consultar if {@code true}, the window uses a compact, fixed-size layout intended for simple viewing or editing a single record
+     * @param editable if {@code true}, enables editing of the table's cells and shows an "Aceptar" button at the bottom
      *
-     * <p>If {@code data} is not {@code null}, it will be inspected and converted into table rows
-     * based on its object type (e.g., {@code TFactura}, {@code TObra}, etc.). Unsupported types are ignored.</p>
+     * <p>Behavior notes:</p>
+     * <ul>
+     *   <li>If {@code data} is not {@code null}, each row in the table corresponds to an instance of the domain object.</li>
+     *   <li>In editable + consultar mode, it assumes a single row and allows inline editing of that record.</li>
+     *   <li>Column values are dynamically extracted and updated using the {@code getColumnValue} and {@code setColumnValue} methods from {@code Convertable}.</li>
+     * </ul>
      */
 	public TablaDefault(String nombreTabla,  String[] columnNames, ArrayList<T> data, boolean consultar, boolean editable) {
         this.setTitle(nombreTabla);
@@ -251,9 +181,8 @@ public class TablaDefault<T extends Convertable<T>> extends JFrame {
         
         this.editable = editable;
         
-        if (data != null) {
-        	T aux = data.get(0); //Para inicializarlo a algo y poder acceder al método de Convertable<T>
-        	DefaultTableModel model = new DefaultTableModel(columnNames, aux.matrizDeInformacion(data));
+        if (data != null && !data.isEmpty()) {
+        	DefaultTableModel model = new DefaultTableModel(columnNames, data);
 	        JTable table = new JTable(model);
 	       
 	        
@@ -277,16 +206,7 @@ public class TablaDefault<T extends Convertable<T>> extends JFrame {
 		            @Override
 		            public void tableChanged(TableModelEvent e) {
 		                if (e.getType() == TableModelEvent.UPDATE) {
-		                	 int row = e.getFirstRow();
-
-		                     //Reconstruimos la fila editada
-		                     ArrayList<Object> datosFila = new ArrayList<>();
-		                     for (int col = 0; col < table.getColumnCount(); col++) {
-		                    	 datosFila.add(table.getValueAt(row, col));
-		                     }
-
-		                     //Convertimos la fila editada y guardamos la edición
-		                     edicion = edicion.filaAObjetoT(datosFila);
+		                	edicion = data.get(0);
 		                }
 		            }
 		        });
@@ -297,67 +217,9 @@ public class TablaDefault<T extends Convertable<T>> extends JFrame {
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
     }
 	
-	public T getEdition() { return this.edicion; }
+	public T getEdicion() { return this.edicion; }
 	
 	public JButton getOkButton() { return editable ? this.aceptar : null; }
-	
-	/*
-	@SuppressWarnings("unchecked")
-	public <T> List<T> getTransfersFromTable() {
-	    List<T> transfers = new ArrayList<>();
-	    
-	    if (model == null || transferType == null) {
-	        return transfers;
-	    }
-	    
-	    for (int row = 0; row < model.getRowCount(); row++) {
-	        Object[] rowData = new Object[model.getColumnCount()];
-	        for (int col = 0; col < model.getColumnCount(); col++) {
-	            rowData[col] = model.getValueAt(row, col);
-	        }
-	        
-	        // Reconstruir el Transfer según su tipo
-	        T transfer = (T) createTransferFromRowData(rowData);
-	        if (transfer != null) {
-	            transfers.add(transfer);
-	        }
-	    }
-	    
-	    return transfers;
-	}
-	private Object createTransferFromRowData(Object[] rowData) {
-	    try {
-	        if (transferType == TCompTea.class) {
-	            
-	            return new TCompTea(
-	                (Integer) rowData[0],  // id
-	                (String) rowData[1],   // nombre
-	                (String) rowData[2],
-	                true,//activo 
-	                (float) rowData[3]    // costeContratacion
-	            );
-	        }
-	        else if (transferType == TFactura.class) {
-	        
-	            /*return new TFactura(
-	                (Integer) rowData[0],  // idFactura
-	                (Integer) rowData[1],   // idCliente
-	                (Integer) rowData[2],   // idTaquillero
-	                (String) rowData[3],    // fecha
-	                (Double) rowData[4],    // importe
-	                (Double) rowData[5]     // subtotal
-	            );
-	        }
-	        // Añadir vuestros casos (TObra, TMiemCompTea, etc.)
-	    } catch (Exception e) {
-	        System.err.println("Error al reconstruir Transfer: " + e.getMessage());
-	        return null;
-	    }
-	    return null;
-	}
-
-}
-*/
 
   //PRUEBA DE LA TABLA
 /*

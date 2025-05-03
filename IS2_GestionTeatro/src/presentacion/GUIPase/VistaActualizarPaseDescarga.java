@@ -20,7 +20,7 @@ public class VistaActualizarPaseDescarga implements IGUI {
 		String[] nomCols = {"ID","ID COMPANYA", "ID OBRA", "FECHA", "STOCK", "PRECIO"};
 		TablaDefault<TPase> tabla = new TablaDefault("BUSCAR PASE", nomCols, p, true, true);
 		tabla.getOkButton().addActionListener(e -> {
-			TPase tPaseNuevo = tabla.getEdition();
+			TPase tPaseNuevo = tabla.getEdicion();
 			Controlador.getInstance().accion(Evento.ACTUALIZAR_PASE_DESCARGA, tPaseNuevo);
 		});
 	}
