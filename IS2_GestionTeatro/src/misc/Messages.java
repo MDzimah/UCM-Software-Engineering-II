@@ -53,7 +53,7 @@ public class Messages {
 	public static final String X_MIEMBROS_LISTADOS = Messages.NSHP.formatted("mostrar a los miembros.");
 
 	
-		//Motivos por ops canceladas
+		//Motivos por ops fracasadas
 	public static final String MOTIVO = "Motivo: \"%s\".";
 	public static final String ID_NO_ENCONTRADO = "El id \"%s\" no se ha encontrado";
 	public static final String NO_HAY_DATOS = "No hay datos para mostrar";
