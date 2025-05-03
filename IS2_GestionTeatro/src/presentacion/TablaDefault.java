@@ -1,33 +1,13 @@
 package presentacion;
 
-import java.awt.BorderLayout;
-import java.awt.Component;
-import java.awt.Dimension;
-import java.time.LocalDateTime;
-import java.time.temporal.ChronoUnit;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
 
-import javax.swing.BorderFactory;
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JList;
-import javax.swing.JScrollPane;
-import javax.swing.JTable;
-import javax.swing.SwingUtilities;
-import javax.swing.table.AbstractTableModel;
-import javax.swing.table.JTableHeader;
-import javax.swing.table.TableCellRenderer;
+import java.awt.*;
+import java.util.*;
+
+import javax.swing.*;
+import javax.swing.table.*;
 
 import misc.Constants;
-import negocio.cliente.TCliente;
-import negocio.compTea.TCompTea;
-import negocio.factura.TFactura;
-import negocio.miemCompTea.TMiemCompTea;
-import negocio.obra.TObra;
-import negocio.pase.TPase;
-import negocio.taquillero.TTaquillero;
 
 /**
  * {@code TablaDefault} is a generic Swing-based window designed to display collections of various
@@ -41,23 +21,23 @@ import negocio.taquillero.TTaquillero;
  * <ul>
  *   <li>Dynamic rendering of arrays or collections inside table cells as multi-line content.</li>
  *   <li>Support for multiple domain object types via internal data conversion logic.</li>
- *   <li>Editable and non-editable table modes, with optional "Aceptar" button for confirming changes.</li>
+ *   <li>Editable and non-editable table modes, with optional "Aceptar" button for confirming changes in editable mode.</li>
  *   <li>Consistent UI styling using predefined constants for fonts and dimensions.</li>
  * </ul>
+ *
+ * @param <T> the type of domain objects to be displayed in the table, which must implement {@link Convertable}
  */
 @SuppressWarnings("serial")
-public class TablaDefault extends JFrame {
+public class TablaDefault<T extends Convertable<T>> extends JFrame {
 	private JButton aceptar; //Solo para el modo de actualizacion
 	private boolean editable;
 	private JTable table;
-	private DefaultTableModel model;
-	private Class<?> transferType;
 
     private class DefaultTableModel extends AbstractTableModel {
         private final String[] columnNames;
-        private final List<Object[]> datos;
+        private final ArrayList<ArrayList<Object>> datos;
 
-        public DefaultTableModel(String[] nomCols, List<Object[]> datos) {
+        public DefaultTableModel(String[] nomCols, ArrayList<ArrayList<Object>> datos) {
             this.columnNames = nomCols;
             this.datos = datos;
         }
@@ -69,7 +49,7 @@ public class TablaDefault extends JFrame {
         public int getColumnCount() { return columnNames.length; }
 
         @Override
-        public Object getValueAt(int rowIndex, int columnIndex) { return datos.get(rowIndex)[columnIndex]; }
+        public Object getValueAt(int rowIndex, int columnIndex) { return datos.get(rowIndex).get(columnIndex); }
 
         @Override
         public String getColumnName(int columnIndex) { return columnNames[columnIndex]; }
@@ -126,13 +106,12 @@ public class TablaDefault extends JFrame {
         }
     }
     
-    //Se asume una colección no vacía
-    private boolean containsType(Collection<?> data, Class<?> clase) {
-        return clase.isInstance(data.iterator().next());
-    }
-    
     //Convierte colección de TFacturas, TClientes, etc. a una matriz de información para la tabla
-    private List<Object[]> convert(Collection<?> data, int numCols){
+    /*OBSOLETO: COMO DIJO DAVID Q QUIZÁS NOS PONE PEGAS POR HACER CASTING, HACEMOS LA TABLA GENÉRICA. 
+     EN CADA TRANSFER HAY Q EXTENDER LA CLASE CONVERTABLE<T> Y HACER LO DE CONVERTIR EL ARRAYLIST A UNA MATRIZ*/
+   // private List<Object[]> convert(Collection<T> data){
+    	
+    	/*
     	List<Object[]> matInfo = new ArrayList<Object[]>();
     	if (data.isEmpty()) return matInfo;
     	else {
@@ -154,14 +133,6 @@ public class TablaDefault extends JFrame {
     		else if (this.containsType(data, TCliente.class)) {
     			
     		}
-    		/* Luis tendrá método "mostrar clientes VIP/Normales"???
-			else if (aux[0] instanceof TClienteVIP) {
-			    			
-			    		}
-			else if (aux[0] instanceof TClienteNormal) {
-				
-			}
-			*/
 			else if (this.containsType(data, TPase.class)) {
 			    			
 			    		}
@@ -215,7 +186,8 @@ public class TablaDefault extends JFrame {
     		
     		return matInfo;
     	}
-    }
+    */
+   // }
 
     private void setRender(JTable table, int numCols) {
         //Las celdas de la tabla pueden contener listas, luego para mostrar los elementos uno debajo del otro, hace falta
@@ -239,21 +211,21 @@ public class TablaDefault extends JFrame {
     /**
      * Constructs a {@code TablaDefault} window configured to display tabular data.
      *
+     * <p>This constructor initializes the window with the provided table title, column names, data, and modes.</p>
+     *
      * @param nombreTabla the title of the table window, shown in the frame's title bar
      * @param columnNames the column headers for the table (converted to uppercase automatically)
-     * @param data        a collection of domain objects to display in the table; supports multiple types
-     * @param consultar   if {@code true}, the window is shown in consultation mode (smaller, non-resizable)
-     * @param editable    if {@code true}, the table cells are editable and an "Aceptar" button is shown
+     * @param data a list of domain objects to display in the table; supports multiple types
+     * @param consultar if {@code true}, the window is shown in consultation mode (smaller, non-resizable)
+     * @param editable if {@code true}, the table cells are editable and an "Aceptar" button is shown
      *
      * <p>If {@code data} is not {@code null}, it will be inspected and converted into table rows
      * based on its object type (e.g., {@code TFactura}, {@code TObra}, etc.). Unsupported types are ignored.</p>
      */
-	public TablaDefault(String nombreTabla,  String[] columnNames, Collection<?> data, boolean consultar, boolean editable) {
+	public TablaDefault(String nombreTabla,  String[] columnNames, ArrayList<T> data, boolean consultar, boolean editable) {
         this.setTitle(nombreTabla);
         this.setLayout(new BorderLayout());
-        if (data != null && !data.isEmpty()) {
-            this.transferType = data.iterator().next().getClass();
-        }
+        
         Dimension sd = Constants.screenDimension();
         int width, height;
         if (consultar) {
@@ -274,8 +246,9 @@ public class TablaDefault extends JFrame {
         this.editable = editable;
         
         if (data != null) {
+        	T aux = data.get(0); //Para inicializarlo a algo y poder acceder al método de Convertable<T>
         	
-	        model = new DefaultTableModel(columnNames, this.convert(data, columnNames.length));
+        	DefaultTableModel model = new DefaultTableModel(columnNames, aux.matrizDeInformacion(data));
 	        this.table = new JTable(model);
 	       
 	        
