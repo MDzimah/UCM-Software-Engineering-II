@@ -1,5 +1,6 @@
 package presentacion.controlador;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
@@ -179,7 +180,7 @@ public class ControladorImp extends Controlador {
 			try {
 				SAPase saPase = FactoriaAbstractaNegocio.getInstance().crearSAPase();
 				int idObra = (int) datos;
-				Collection<TPase> pasesPorObra = saPase.allPasesPorObra(idObra);
+				ArrayList<TPase> pasesPorObra = saPase.allPasesPorObra(idObra);
 				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_OK, pasesPorObra);
 			} catch(Exception e) {
 				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_KO, e);

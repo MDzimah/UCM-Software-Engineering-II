@@ -66,10 +66,10 @@ public class DAOPaseImp implements DAOPase {
 	}
 
 	@Override
-	public Collection<TPase> readAll() throws BBDDReadException {
+	public ArrayList<TPase> readAll() throws BBDDReadException {
 		JSONObject bdPase = OpsBBDD.read(Messages.BDPase);
 		JSONObject pases = new JSONObject(bdPase.getJSONArray(Messages.KEY_pases));
-		Collection<TPase> pasesADevolver = new ArrayList<>();
+		ArrayList<TPase> pasesADevolver = new ArrayList<>();
 		Set<String> idSetPases = pases.keySet();
 		for (String idPase : idSetPases) {
 			JSONObject pase = pases.getJSONObject(idPase);

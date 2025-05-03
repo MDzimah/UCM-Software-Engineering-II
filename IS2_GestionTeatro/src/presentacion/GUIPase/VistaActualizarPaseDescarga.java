@@ -15,12 +15,12 @@ import presentacion.controlador.Controlador;
 public class VistaActualizarPaseDescarga implements IGUI {
 	
 	public void cargarPase(TPase datos) {
-		Collection<TPase> p = new ArrayList<TPase>();
-		p.add((TPase)datos);
-		String[] nomCols = {"ID","ID COMPANYA", "ID OBRA", "FECHA", "STOCK", "PRECIO"};
-		TablaDefault<TPase extends Convertable<TPase>> tabla = new TablaDefault("BUSCAR PASE", nomCols, p, true, true);
+		ArrayList<TPase> p = new ArrayList<TPase>();
+		p.add(datos);
+		TablaDefault<TPase> tabla = new TablaDefault<TPase>("PASES", Messages.colNomsPase, p, true, true);
+		tabla.setVisible(true);
 		tabla.getOkButton().addActionListener(e -> {
-			TPase tPaseNuevo = tabla.getEdicion();
+			TPase tPaseNuevo = (TPase) tabla.getEdicion();
 			Controlador.getInstance().accion(Evento.ACTUALIZAR_PASE_DESCARGA, tPaseNuevo);
 		});
 	}

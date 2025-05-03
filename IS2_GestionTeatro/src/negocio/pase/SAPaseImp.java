@@ -60,7 +60,7 @@ public class SAPaseImp implements SAPase {
 	}
 
 	@Override
-	public Collection<TPase> readAll() throws BBDDReadException {
+	public ArrayList<TPase> readAll() throws BBDDReadException {
 		DAOPase daoPas = FactoriaAbstractaIntegracion.getInstance().crearDAOPase();
 		return daoPas.readAll();
 	}
@@ -85,7 +85,7 @@ public class SAPaseImp implements SAPase {
 	}
 	
 	@Override
-	public Collection<TPase> allPasesPorObra(int idObra) throws BBDDReadException {
+	public ArrayList<TPase> allPasesPorObra(int idObra) throws BBDDReadException {
 		DAOPase daoPase = FactoriaAbstractaIntegracion.getInstance().crearDAOPase();
 		ArrayList<TPase> pases = (ArrayList<TPase>)daoPase.readAll();
 
