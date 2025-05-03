@@ -12,6 +12,7 @@ A desktop application for managing theatre operations, including patron records,
 - **Company Member Management**: Managing individual members of a theatre company.
 - **Box Office Operations**: Supporting the workflow and tasks of ticket sellers.
 - **Graphical User Interface**: Swing-based GUI for interaction with all system functionalities.
+- **Interactive Table for Data Management**: A dynamic table view displays and edits key system data like client records and invoices. It allows easy viewing and editing in a user-friendly interface with support for inline updates, making it ideal for both administrative and customer service tasks. This feature is highly customizable, supporting both read-only and editable modes, depending on user role or context.
 
 ## Architecture Overview
 The application implements a comprehensive set of subsystems required for theatre management:
