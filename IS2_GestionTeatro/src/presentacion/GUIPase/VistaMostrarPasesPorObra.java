@@ -49,6 +49,7 @@ public class VistaMostrarPasesPorObra extends VistaDefault {
 	public void actualizar(Evento evento, Object datos) {
 		if(evento==Evento.RES_OK) {
 			new TablaDefault("PASES", Messages.colNomsPase, (Collection<TPase>)datos, false, false);
+			
 		}
 		else if(evento==Evento.RES_KO) {
 			JSwingUtils.createErrorDialogMessage(Messages.X_PASE_BUSCADO + ' ' + Messages.MOTIVO.formatted((String)datos));
