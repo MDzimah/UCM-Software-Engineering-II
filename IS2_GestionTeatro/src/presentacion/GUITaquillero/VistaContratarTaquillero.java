@@ -35,12 +35,12 @@ public class VistaContratarTaquillero extends VistaDefault {
 		l_sueldo = new JLabel("Sueldo: ");
 		l_edad = new JLabel("Edad: ");
 		l_genero = new JLabel("Genero: ");
-		nombre = new JTextField("Introduce el nombre");
-		apellido = new JTextField("Introduce el apellido");
-		dni = new JTextField("Introduce el DNI");
-		sueldo = new JTextField("Introduce el sueldo");
-		edad = new JTextField("Introduce la edad");
-		genero = new JTextField("Introduce el genero");
+		nombre = new JTextField();
+		apellido = new JTextField();
+		dni = new JTextField();
+		sueldo = new JTextField();
+		edad = new JTextField();
+		genero = new JTextField();
 		aceptar = new JButton("Aceptar");
 		cancelar = new JButton("Cancelar");
 		
