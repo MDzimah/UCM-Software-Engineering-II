@@ -4,6 +4,7 @@ import javax.swing.JButton;
 
 import presentacion.Evento;
 import presentacion.VistaDefault;
+import presentacion.controlador.Controlador;
 
 public class VistaMostrarTaquilleros extends VistaDefault {
 
@@ -15,8 +16,20 @@ public class VistaMostrarTaquilleros extends VistaDefault {
 	}
 	
 	private void initGUI() {
+		this.setTitle("Mostrar taquilleros");
+		mostrar = new JButton("Mostrar");
+		cancelar = new JButton("Cancelar");
+		super.initComps(null, mostrar, cancelar);
 		
+		//oyentes
+		mostrar.addActionListener(e->{
+			Controlador.getInstance().accion(Evento.MOSTRAR_TAQUILLEROS, null);
+			VistaMostrarTaquilleros.this.dispose();
+		});
 		
+		cancelar.addActionListener(e->{
+			VistaMostrarTaquilleros.this.dispose();
+		});
 	}
 
 	@Override
