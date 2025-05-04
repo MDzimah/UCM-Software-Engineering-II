@@ -48,7 +48,10 @@ public class SATaquilleroImp implements SATaquillero {
 	@Override
 	public int aumentarVenta(int id) throws BBDDReadException, BBDDWriteException {
 		DAOTaquillero daoTaquillero = FactoriaAbstractaIntegracion.getInstance().crearDAOTaquillero();
-		return daoTaquillero.aumentarVenta(id);
+		TTaquillero tTaq = daoTaquillero.read(id);
+		int nuevoNumVentas = tTaq.getNumVentas() + 1;
+		tTaq.setNumVentas(nuevoNumVentas);
+		return daoTaquillero.update(tTaq);
 	}
 
 }

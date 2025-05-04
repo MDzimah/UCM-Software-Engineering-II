@@ -124,6 +124,7 @@ public class DAOTaquilleroImp implements DAOTaquillero {
 		return null;
 	}
 	
+	/*
 	@Override
 	public int aumentarVenta(int id) throws BBDDReadException, BBDDWriteException {
 		if(!OpsBBDD.isEmpty(Messages.BDTaq)) {
@@ -142,7 +143,7 @@ public class DAOTaquilleroImp implements DAOTaquillero {
 			}
 		}
 		return -1; //no se ha encontrado o no existe
-	}
+	}*/
 
 	//Método adicional
 	@Override
