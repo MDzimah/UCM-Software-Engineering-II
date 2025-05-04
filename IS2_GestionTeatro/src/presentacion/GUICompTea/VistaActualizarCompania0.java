@@ -82,5 +82,3 @@ public class VistaActualizarCompania extends VistaDefault implements IGUI{
 		}
 		
 	}
-
-}
