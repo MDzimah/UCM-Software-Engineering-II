@@ -129,6 +129,26 @@ public class DAOTaquilleroImp implements DAOTaquillero {
 		// TODO Auto-generated method stub
 		return null;
 	}
+	
+	@Override
+	public int aumentarVenta(int id) throws BBDDReadException, BBDDWriteException {
+		if(!OpsBBDD.isEmpty(Messages.BDTaq)) {
+			JSONObject bdTaq = OpsBBDD.read(Messages.BDTaq);
+			JSONObject taquilleros = bdTaq.getJSONObject(Messages.KEY_taquilleros);
+			
+			String _id = Integer.toString(id);
+			if(taquilleros.has(_id) && taquilleros.getJSONObject(_id).getBoolean(Messages.KEY_act)) {
+				JSONObject taq = taquilleros.getJSONObject(_id);
+				int numVentas = taq.getInt(Messages.KEY_numVentas);
+				taq.put(Messages.KEY_numVentas, numVentas + 1);
+				taquilleros.put(_id, taq);
+				OpsBBDD.write(bdTaq, Messages.BDTaq);
+				
+				return id;
+			}
+		}
+		return -1; //no se ha encontrado o no existe
+	}
 
 	//Método adicional
 	@Override
