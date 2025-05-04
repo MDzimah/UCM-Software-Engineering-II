@@ -14,9 +14,11 @@ import javax.swing.SwingUtilities;
 import misc.JSwingUtils;
 import misc.Messages;
 import misc.Pair;
+import negocio.factura.TFactura;
 import negocio.obra.TObra;
 import presentacion.Evento;
 import presentacion.IGUI;
+import presentacion.TablaDefault;
 import presentacion.VistaDefault;
 import presentacion.controlador.Controlador;
 import presentacion.factoria.FactoriaAbstractaPresentacion;
@@ -66,12 +68,17 @@ public class VistaBuscarObras extends VistaDefault implements IGUI{
 
 		@Override
 		public void actualizar(presentacion.Evento evento, Object datos) {
-			if(evento==Evento.RES_OK) {
-				JSwingUtils.createTabla("OBRAS", Messages.colNomsObra, (Collection<TObra>)datos, false, false);
-
+			if(evento==Evento.RES_OK) {				
+				
+				ArrayList<TObra> obras = new ArrayList<TObra>();
+				for(TObra o : (List<TObra>)datos)
+					obras.add(o);
+				
+	            TablaDefault<TObra> tabla = new TablaDefault<>("OBRAS", Messages.colNomsObra, obras, false, false);
+	            tabla.setVisible(true);
 			}
 			else if(evento==Evento.RES_KO) {
-				JSwingUtils.createErrorDialogMessage("No se han encontrado obras.\n" +(String)datos);
+				JSwingUtils.createErrorDialogMessage("No se han encontrado obras.\n" + "Error: " +((Exception) datos).getMessage());
 			}
 		}
 

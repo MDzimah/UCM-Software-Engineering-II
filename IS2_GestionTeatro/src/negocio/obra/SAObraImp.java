@@ -4,12 +4,15 @@ import java.util.Collection;
 import java.util.LinkedList;
 import java.util.List;
 
+import org.json.JSONObject;
+
 import exceptions.BBDDReadException;
 import exceptions.BBDDWriteException;
 import exceptions.UnknownObraException;
 import integracion.factoria.FactoriaAbstractaIntegracion;
 import integracion.obra.DAOObra;
 import integracion.pase.DAOPase;
+import misc.Messages;
 
 public class SAObraImp implements SAObra {
 
@@ -62,13 +65,36 @@ public class SAObraImp implements SAObra {
 			return lista;
 	}
 
+	/** Busca por prioridad de criterios de izquierda a derecha, con null si no quieres ese criterio
+	 *  @param params - String titulo, String autor, String genero
+	 */
 	public Collection<TObra> search(List<String> params) throws BBDDReadException, UnknownObraException{
 		DAOObra daoObra = FactoriaAbstractaIntegracion.getInstance().crearDAOObra();
-		Collection<TObra> obras = daoObra.search(params);
+		
+		List<TObra> obras = daoObra.getAll();		
+
+		if(!params.get(0).equals(""))
+			busquedaLineal(Messages.KEY_titulo, obras, params.get(0));					
+		if(!params.get(1).equals(""))
+			busquedaLineal(Messages.KEY_autor, obras, params.get(1));					
+		if(!params.get(2).equals(""))
+			busquedaLineal(Messages.KEY_generoObra, obras, params.get(2));							
+		
 		if(obras==null || obras.isEmpty())
 			throw new UnknownObraException();
 		else
 			return obras;
 	}
 
+	//Metodo auxiliares
+	
+	private void busquedaLineal(String criterio, List<TObra> obras, Object clave ) {
+		int i =0;
+		while(i<obras.size()) {
+			if(!obras.get(i).genericGetter(criterio).equals(clave))
+				obras.remove(i);
+			else
+				++i;
+		}
+	}
 }

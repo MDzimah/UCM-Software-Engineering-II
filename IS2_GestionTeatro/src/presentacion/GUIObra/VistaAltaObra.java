@@ -69,7 +69,7 @@ public class VistaAltaObra extends VistaDefault implements IGUI{
 
 		}
 		else if(evento==Evento.RES_KO) {
-			JSwingUtils.createErrorDialogMessage("No se ha podido añadir la obra.\n" +(String)datos);
+			JSwingUtils.createErrorDialogMessage("No se ha podido añadir la obra.\n" +"Error: " +((Exception) datos).getMessage());
 		}
 	}
 

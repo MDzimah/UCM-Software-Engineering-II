@@ -333,9 +333,9 @@ public class MainWindow extends JFrame {
         			FactoriaAbstractaPresentacion.getInstance().createVista(Evento.MOSTRAR_OBRAS);
         		});
         		
-        		subsObra.add(actualizar);        		
         		subsObra.add(alta);
         		subsObra.add(baja);
+        		subsObra.add(actualizar);        		
         		subsObra.add(buscar);
         		subsObra.add(consultar);
         		subsObra.add(mostrar);

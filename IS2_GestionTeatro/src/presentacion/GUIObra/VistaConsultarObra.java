@@ -14,6 +14,7 @@ import misc.*;
 import negocio.obra.TObra;
 import presentacion.Evento;
 import presentacion.IGUI;
+import presentacion.TablaDefault;
 import presentacion.VistaDefault;
 import presentacion.controlador.Controlador;
 import presentacion.factoria.FactoriaAbstractaPresentacion;
@@ -65,12 +66,14 @@ public class VistaConsultarObra extends VistaDefault implements IGUI{
 	@Override
 	public void actualizar(presentacion.Evento evento, Object datos) {
 		if(evento==Evento.RES_OK) {
-			Collection<TObra> obra= new LinkedList<TObra>();
+			ArrayList<TObra> obra= new ArrayList<TObra>();
 			obra.add((TObra) datos);
-			JSwingUtils.createTabla("OBRA", Messages.colNomsObra, obra, false, false);
+			
+            TablaDefault<TObra> tabla = new TablaDefault<>("OBRA", Messages.colNomsObra, obra, false, false);
+            tabla.setVisible(true);
 		}
 		else if(evento==Evento.RES_KO) {
-			JSwingUtils.createErrorDialogMessage("No se han podido acceder a la obra.\n" + (String)datos);
+			JSwingUtils.createErrorDialogMessage("No se han podido acceder a la obra.\n" + "Error: " +((Exception) datos).getMessage());
 		}
 	}
 }

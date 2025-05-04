@@ -59,7 +59,7 @@ public class VistaActualizarObra_0 extends VistaDefault implements IGUI{
 	@Override
 	public void actualizar(Evento evento, Object datos) {
 		if(evento==Evento.RES_KO) {
-			JSwingUtils.createErrorDialogMessage("No se ha podido actualizar la obra.\n" + (String)datos);
+			JSwingUtils.createErrorDialogMessage("No se ha podido actualizar la obra.\n" + "Error: " +((Exception) datos).getMessage());
 		}
 		
 	}

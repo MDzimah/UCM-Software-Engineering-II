@@ -69,7 +69,7 @@ public class VistaBajaObra extends VistaDefault implements IGUI{
 
 		}
 		else if(evento==Evento.RES_KO) {
-			JSwingUtils.createErrorDialogMessage("No se ha podido eliminar la obra.\n" +(String)datos);
+			JSwingUtils.createErrorDialogMessage("No se ha podido eliminar la obra.\n" + "Error: " +((Exception) datos).getMessage());
 
 		}
 	}
