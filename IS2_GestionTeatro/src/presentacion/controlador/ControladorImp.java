@@ -6,6 +6,7 @@ import java.util.List;
 
 import exceptions.BBDDReadException;
 import exceptions.BBDDWriteException;
+import exceptions.InvalidFields;
 import exceptions.UnknownClienteException;
 import exceptions.UnknownTaquilleroException;
 import misc.Messages;
@@ -207,9 +208,13 @@ public class ControladorImp extends Controlador {
 		}
 		case BAJA_OBRA:{
 			try {
+				Integer i = Integer.valueOf((String)datos);
 				SAObra saObra = FactoriaAbstractaNegocio.getInstance().crearSAObra();
-				saObra.delete((int)datos);
+				saObra.delete(i);
 				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_OK, (int)datos);
+			}
+			catch(NumberFormatException e) {
+				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_KO, new InvalidFields());
 			}
 			catch(Exception e) {
 				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_KO, e);
@@ -219,10 +224,14 @@ public class ControladorImp extends Controlador {
 		case ACTUALIZAR_OBRA_0:
 		{
 			try {
+				Integer i = Integer.valueOf((String)datos);
 				SAObra saObra = FactoriaAbstractaNegocio.getInstance().crearSAObra();
-				TObra obra = saObra.read((int)datos);
+				TObra obra = saObra.read(i);
 				VistaActualizarObra_1 vista= (VistaActualizarObra_1) FactoriaAbstractaPresentacion.getInstance().createVista(Evento.ACTUALIZAR_OBRA_1);
 				vista.setDatos(obra);
+			}
+			catch(NumberFormatException e) {
+				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_KO, new InvalidFields());
 			}
 			catch(Exception e) {
 				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_KO, e);
@@ -244,9 +253,13 @@ public class ControladorImp extends Controlador {
 		case CONSULTAR_OBRA:
 		{
 			try {
+				Integer i = Integer.valueOf((String)datos);
 				SAObra saObra = FactoriaAbstractaNegocio.getInstance().crearSAObra();
-				TObra obra = saObra.read((int)datos);
+				TObra obra = saObra.read(i);
 				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_OK, obra);
+			}
+			catch(NumberFormatException e) {
+				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_KO, new InvalidFields());
 			}
 			catch(Exception e) {
 				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_KO, e);

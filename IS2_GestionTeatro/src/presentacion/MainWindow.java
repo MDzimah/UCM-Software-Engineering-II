@@ -305,7 +305,7 @@ public class MainWindow extends JFrame {
                 
         		//ACTUALIZAR TAQUILLERO
         		actualizar.addActionListener((ev)->{
-        			FactoriaAbstractaPresentacion.getInstance().createVista(Evento.ACTUALIZAR_TAQUILLERO);
+        			//FactoriaAbstractaPresentacion.getInstance().createVista(Evento.ACTUALIZAR_TAQUILLERO);
         		});
         		
         		//ALTA TAQUILLERO

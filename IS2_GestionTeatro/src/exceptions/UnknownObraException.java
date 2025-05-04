@@ -1,7 +1,9 @@
 package exceptions;
 
+import misc.Messages;
+
 public class UnknownObraException extends Exception {
 	public UnknownObraException() {
-	       super("Obra desconocida");
+	       super(Messages.EXC_UNKNOWN_OBRA);
 	}
 }

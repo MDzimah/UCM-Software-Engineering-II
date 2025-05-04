@@ -74,7 +74,7 @@ public class VistaBuscarObras extends VistaDefault implements IGUI{
 				for(TObra o : (List<TObra>)datos)
 					obras.add(o);
 				
-	            TablaDefault<TObra> tabla = new TablaDefault<>("OBRAS", Messages.colNomsObra, obras, false, false);
+	            TablaDefault<TObra> tabla = new TablaDefault<>("OBRAS", Messages.colNomsObra, obras, false);
 	            tabla.setVisible(true);
 			}
 			else if(evento==Evento.RES_KO) {

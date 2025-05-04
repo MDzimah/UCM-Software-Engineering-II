@@ -46,16 +46,9 @@ public class VistaConsultarObra extends VistaDefault implements IGUI{
 		
 		//Declaramos los listeners
 		consultar.addActionListener(e ->{
-			if(!id.getText().equals("")) {
-				try {
-				Integer id2 = Integer.valueOf(id.getText());	
-				SwingUtilities.invokeLater(()->{Controlador.getInstance().accion(Evento.CONSULTAR_OBRA, id2);});
-				VistaConsultarObra.this.dispose();
-				}
-				catch(NumberFormatException ex) {
-			        JSwingUtils.createErrorDialogMessage("El ID debe ser un número entero.");
-				}
-			}
+			String id2 = id.getText();	
+			SwingUtilities.invokeLater(()->{Controlador.getInstance().accion(Evento.CONSULTAR_OBRA, id2);});
+			VistaConsultarObra.this.dispose();
 		});
 		
 		cancelar.addActionListener(e ->{
@@ -69,7 +62,7 @@ public class VistaConsultarObra extends VistaDefault implements IGUI{
 			ArrayList<TObra> obra= new ArrayList<TObra>();
 			obra.add((TObra) datos);
 			
-            TablaDefault<TObra> tabla = new TablaDefault<>("OBRA", Messages.colNomsObra, obra, false, false);
+            TablaDefault<TObra> tabla = new TablaDefault<>("OBRA", Messages.colNomsObra, obra, false);
             tabla.setVisible(true);
 		}
 		else if(evento==Evento.RES_KO) {

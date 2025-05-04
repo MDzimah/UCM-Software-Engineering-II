@@ -44,16 +44,9 @@ public class VistaBajaObra extends VistaDefault implements IGUI{
 		
 		//Declaramos los listeners
 		eliminar.addActionListener(e ->{
-			if(!id.getText().equals("")) {
-				try {
-					Integer id2 = Integer.valueOf(id.getText());
-					SwingUtilities.invokeLater(()->{Controlador.getInstance().accion(Evento.BAJA_OBRA, id2);});
-					VistaBajaObra.this.dispose();
-				}
-				catch(NumberFormatException ex) {
-			        JSwingUtils.createErrorDialogMessage("El ID debe ser un número entero.");
-				}
-			}
+			String id2 = id.getText();
+			SwingUtilities.invokeLater(()->{Controlador.getInstance().accion(Evento.BAJA_OBRA, id2);});
+			VistaBajaObra.this.dispose();
 		});
 		
 		cancelar.addActionListener(e ->{
