@@ -109,6 +109,7 @@ public class ControladorImp extends Controlador {
 		case ACTUALIZAR_CLIENTE: 
 		
 		//Taquillero
+<<<<<<< HEAD
 		case ALTA_TAQUILLERO: {
 			
 			
@@ -150,6 +151,12 @@ public class ControladorImp extends Controlador {
 			
 			break;
 		}
+=======
+		case ALTA_TAQUILLERO:
+		case BAJA_TAQUILLERO:
+		case BUSCAR_TAQUILLERO:
+		case MOSTRAR_TAQUILLEROS:
+>>>>>>> branch 'main' of https://github.com/MDzimah/UCM-Software-Engineering-II.git
 			
 		//Pase
 		
