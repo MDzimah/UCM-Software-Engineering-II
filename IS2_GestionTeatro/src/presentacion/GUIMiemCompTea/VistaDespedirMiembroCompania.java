@@ -10,10 +10,10 @@ import javax.swing.JTextField;
 import javax.swing.SpinnerNumberModel;
 import javax.swing.SwingUtilities;
 
-import misc.JSwingUtils;
 import misc.Messages;
 import misc.Pair;
 import presentacion.Evento;
+import presentacion.ViewUtils;
 import presentacion.VistaDefault;
 import presentacion.controlador.Controlador;
 import presentacion.factoria.FactoriaAbstractaPresentacion;
@@ -51,12 +51,12 @@ public class VistaDespedirMiembroCompania extends VistaDefault {
 
 	@Override
 	public void actualizar(Evento evento, Object datos) {
-		if (evento == Evento.RES_OK) JSwingUtils.createDialogMessage(Messages.EX_MIEMBRO_DESPEDIDO);
+		if (evento == Evento.RES_OK) ViewUtils.createDialogMessage(Messages.EX_MIEMBRO_DESPEDIDO);
 		else if (evento == Evento.RES_KO) {
 			String error;
 			if (datos instanceof String) error = (String) datos;
 			else error = Messages.ID_NO_ENCONTRADO.formatted(String.valueOf(((int)datos)));
-			JSwingUtils.createErrorDialogMessage(Messages.EX_MIEMBRO_DESPEDIDO + ' ' + Messages.MOTIVO.formatted(error));
+			ViewUtils.createErrorDialogMessage(Messages.EX_MIEMBRO_DESPEDIDO + ' ' + Messages.MOTIVO.formatted(error));
 		}
 	}
 }

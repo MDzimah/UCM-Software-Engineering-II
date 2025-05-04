@@ -9,10 +9,10 @@ import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.SwingUtilities;
 
-import misc.JSwingUtils;
 import misc.Pair;
 import presentacion.Evento;
 import presentacion.IGUI;
+import presentacion.ViewUtils;
 import presentacion.controlador.Controlador;
 import presentacion.factoria.FactoriaAbstractaPresentacion;
 import presentacion.VistaDefault;
@@ -44,16 +44,9 @@ public class VistaBajaObra extends VistaDefault implements IGUI{
 		
 		//Declaramos los listeners
 		eliminar.addActionListener(e ->{
-			if(!id.getText().equals("")) {
-				try {
-					Integer id2 = Integer.valueOf(id.getText());
-					SwingUtilities.invokeLater(()->{Controlador.getInstance().accion(Evento.BAJA_OBRA, id2);});
-					VistaBajaObra.this.dispose();
-				}
-				catch(NumberFormatException ex) {
-			        JSwingUtils.createErrorDialogMessage("El ID debe ser un número entero.");
-				}
-			}
+			String id2 = id.getText();
+			SwingUtilities.invokeLater(()->{Controlador.getInstance().accion(Evento.BAJA_OBRA, id2);});
+			VistaBajaObra.this.dispose();
 		});
 		
 		cancelar.addActionListener(e ->{
@@ -65,11 +58,11 @@ public class VistaBajaObra extends VistaDefault implements IGUI{
 	@Override
 	public void actualizar(presentacion.Evento evento, Object datos) {
 		if(evento==Evento.RES_OK) {
-			JSwingUtils.createDialogMessage("Se ha eliminado correctamente la obra: " + (int)datos);
+			ViewUtils.createDialogMessage("Se ha eliminado correctamente la obra: " + (int)datos);
 
 		}
 		else if(evento==Evento.RES_KO) {
-			JSwingUtils.createErrorDialogMessage("No se ha podido eliminar la obra.\n" +(String)datos);
+			ViewUtils.createErrorDialogMessage("No se ha podido eliminar la obra.\n" + "Error: " +((Exception) datos).getMessage());
 
 		}
 	}

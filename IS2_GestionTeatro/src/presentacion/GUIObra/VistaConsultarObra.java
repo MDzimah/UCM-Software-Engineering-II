@@ -14,6 +14,8 @@ import misc.*;
 import negocio.obra.TObra;
 import presentacion.Evento;
 import presentacion.IGUI;
+import presentacion.ViewUtils;
+import presentacion.TablaDefault;
 import presentacion.VistaDefault;
 import presentacion.controlador.Controlador;
 import presentacion.factoria.FactoriaAbstractaPresentacion;
@@ -45,16 +47,9 @@ public class VistaConsultarObra extends VistaDefault implements IGUI{
 		
 		//Declaramos los listeners
 		consultar.addActionListener(e ->{
-			if(!id.getText().equals("")) {
-				try {
-				Integer id2 = Integer.valueOf(id.getText());	
-				SwingUtilities.invokeLater(()->{Controlador.getInstance().accion(Evento.CONSULTAR_OBRA, id2);});
-				VistaConsultarObra.this.dispose();
-				}
-				catch(NumberFormatException ex) {
-			        JSwingUtils.createErrorDialogMessage("El ID debe ser un número entero.");
-				}
-			}
+			String id2 = id.getText();	
+			SwingUtilities.invokeLater(()->{Controlador.getInstance().accion(Evento.CONSULTAR_OBRA, id2);});
+			VistaConsultarObra.this.dispose();
 		});
 		
 		cancelar.addActionListener(e ->{
@@ -65,12 +60,14 @@ public class VistaConsultarObra extends VistaDefault implements IGUI{
 	@Override
 	public void actualizar(presentacion.Evento evento, Object datos) {
 		if(evento==Evento.RES_OK) {
-			Collection<TObra> obra= new LinkedList<TObra>();
+			ArrayList<TObra> obra= new ArrayList<TObra>();
 			obra.add((TObra) datos);
-			JSwingUtils.createTabla("OBRA", Messages.colNomsObra, obra, false, false);
+			
+            TablaDefault<TObra> tabla = new TablaDefault<>("OBRA", Messages.colNomsObra, obra, false);
+            tabla.setVisible(true);
 		}
 		else if(evento==Evento.RES_KO) {
-			JSwingUtils.createErrorDialogMessage("No se han podido acceder a la obra.\n" + (String)datos);
+			ViewUtils.createErrorDialogMessage("No se han podido acceder a la obra.\n" + "Error: " +((Exception) datos).getMessage());
 		}
 	}
 }

@@ -6,6 +6,7 @@ import presentacion.GUIFactura.*;
 import presentacion.GUICompTea.*;
 import presentacion.GUIObra.*;
 import presentacion.GUIPase.*;
+import presentacion.GUITaquillero.*;
 
 public class FactoriaPresentacion extends FactoriaAbstractaPresentacion {
 
@@ -19,9 +20,7 @@ public class FactoriaPresentacion extends FactoriaAbstractaPresentacion {
 		case MOSTRAR_FACTURAS: return new VistaMostrarFacs();
 		case QUITAR_PASE_DE_VENTA: return new VistaQuitarPaseDeVenta();
 		
-		
 		//Cliente
-		
 		case ALTA_CLIENTE: return null;
 		case BUSCAR_CLIENTE: return null;
 		case BAJA_CLIENTE: return null;
@@ -29,9 +28,13 @@ public class FactoriaPresentacion extends FactoriaAbstractaPresentacion {
 		case ACTUALIZAR_CLIENTE:  return null;
 		
 		//Taquillero
+		case ALTA_TAQUILLERO: return new VistaContratarTaquillero();
+		case BAJA_TAQUILLERO: return new VistaDespedirTaquillero();
+		case BUSCAR_TAQUILLERO: return new VistaBuscarTaquillero();
+		case MOSTRAR_TAQUILLEROS: return new VistaMostrarTaquilleros();
+	//	case ACTUALIZAR_TAQUILLERO: return new VistaActualizarTaquillero_0();
 		
 		//Pase
-		
 		case ALTA_PASE: return new VistaAltaPase();
 		case BAJA_PASE: return new VistaBajaPase();
 		case BUSCAR_PASE: return new VistaBuscarPase();
@@ -50,19 +53,21 @@ public class FactoriaPresentacion extends FactoriaAbstractaPresentacion {
 		
 		//CompTea
 		case ALTA_COMPANIA_TEATRAL:  return new VistaAltaCompania();
-		case ACTUALIZAR_COMPANIA_TEATRAL: return new VistaActualizarCompania();
+		case ACTUALIZAR0_COMPANIA_TEATRAL: return new VistaActualizarCompania(); // actualizar0 O actualizar1
 		case BUSCAR_COMPANIA_TEATRAL: return new VistaBuscarCompania();
 		case BAJA_COMPANIA_TEATRAL: return new VistaBajaCompTea();
 		case MOSTRAR_COMPANIA_TEATRAL: return new VistaMostrarCompania();
+		
 		//MiemCompTea
-		case ACTUALIZAR_MIEMBRO_COMPANIA: return new VistaActualizarMiembroCompania();
+		case ACTUALIZAR_MIEMBRO_COMPANIA_0: return new VistaActualizarMiembroCompania_0();
+		case ACTUALIZAR_MIEMBRO_COMPANIA_1: return new VistaActualizarMiembroCompania_1();
 		case BUSCAR_MIEMBRO_COMPANIA: return new VistaBuscarMiembroCompania();
 		case CONTRATAR_MIEMBRO_COMPANIA: return new VistaContratarMiembroCompania();
 		case DESPEDIR_MIEMBRO_COMPANIA: return new VistaDespedirMiembroCompania();
 		case MOSTRAR_MIEMBROS_COMPANIA: return new VistaMostrarMiembrosCompania();
 		
 		default: return null;
-		
 		}
 	}
+	
 }	

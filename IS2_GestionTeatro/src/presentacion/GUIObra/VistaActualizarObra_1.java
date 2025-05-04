@@ -12,6 +12,7 @@ import misc.*;
 import negocio.obra.TObra;
 import presentacion.Evento;
 import presentacion.IGUI;
+import presentacion.ViewUtils;
 import presentacion.VistaDefault;
 import presentacion.controlador.Controlador;
 import presentacion.factoria.FactoriaAbstractaPresentacion;
@@ -77,11 +78,11 @@ public class VistaActualizarObra_1 extends VistaDefault implements IGUI{
 	@Override
 	public void actualizar(Evento evento, Object datos) {
 		if(evento==Evento.RES_OK) {
-			JSwingUtils.createDialogMessage("Se ha actualizado correctamente la obra: " + ((int)datos));
+			ViewUtils.createDialogMessage("Se ha actualizado correctamente la obra: " + ((int)datos));
 
 		}
 		else if(evento==Evento.RES_KO) {
-			JSwingUtils.createErrorDialogMessage("No se ha podido actualizar la obra.\n" + (String)datos);
+			ViewUtils.createErrorDialogMessage("No se ha podido actualizar la obra.\n" + "Error: " +((Exception) datos).getMessage());
 		}
 	}
 }

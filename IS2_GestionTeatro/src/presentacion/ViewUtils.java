@@ -1,11 +1,46 @@
-package misc;
+package presentacion;
+
+import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.Image;
+import java.awt.Toolkit;
 
 import javax.swing.*;
 
-public class JSwingUtils {
+public class ViewUtils {
+	
+	/**
+	 * Returns the scaled screen dimensions.
+	 *
+	 * @return Dimension object representing the screen dimensions
+	 */
+	public static final Dimension screenDimension() { return getScaledScreenDimension(1,1); }
+	
+	/**
+	 * Returns the scaled screen dimensions based on the given height and width factors.
+	 * The screen's width and height are divided by the provided factors (factorH and factorW).
+	 *
+	 * @param factorH the factor by which the screen's height is scaled
+	 * @param factorW the factor by which the screen's width is scaled
+	 * @return Dimension object representing the scaled screen dimensions
+	 */
+	public static Dimension getScaledScreenDimension(int factorH, int factorW) {
+		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+		return new Dimension(screenSize.width/factorH, screenSize.height/factorH);
+	}
+	
+	//Imagenes
+	public static Image logoTeatret() { return new ImageIcon("resources/imagenes/teatretLogo.png").getImage(); }
+	
+	public static Image marcoOro() { return new ImageIcon("resources/imagenes/marcoOro.png").getImage(); }
+	
+	//Fonts
+	public static Font FontTablaDefaultCabecera() { return new Font("SansSerif", Font.BOLD, 16); }
+	
+	public static Font FontTablaDefaultCuerpo () { return new Font("SansSerif", Font.PLAIN, 15); }
 	
 	 public static void setAppIcon(JFrame window) {
-		 window.setIconImage(Constants.logoTeatret());
+		 window.setIconImage(logoTeatret());
 	 } 
 	 
 	 //CREO Q NO SE USAN EN NINGÚN LADOs

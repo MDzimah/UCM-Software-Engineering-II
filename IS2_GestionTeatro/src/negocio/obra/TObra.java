@@ -6,10 +6,12 @@ import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 
+import misc.Messages;
 import negocio.factura.TLineaFactura;
 import negocio.pase.TPase;
+import presentacion.Convertable;
 
-public class TObra {
+public class TObra implements Convertable<TObra>{
 	//Atributos
 	private int idObra;
 	private String titulo;
@@ -53,15 +55,15 @@ public class TObra {
 	
 	public Object genericGetter(String key) {
 		switch(key) {
-		case "IdObra":
+		case Messages.KEY_idObra:
 			return Integer.valueOf(idObra);
-		case "Autor":
+		case Messages.KEY_autor:
 			return autor;
-		case "Titulo":
+		case Messages.KEY_titulo:
 			return titulo;
-		case "Genero":
+		case Messages.KEY_generoObra:
 			return genero;
-		case "Sinopsis":
+		case Messages.KEY_sinopsis:
 			return sinopsis;
 		}
 		return null;
@@ -85,5 +87,39 @@ public class TObra {
 
 	public void setSinopsis(String sinopsis) {
 		this.sinopsis = sinopsis;
+	}
+	
+	//Metodos de Convertable para la tabla
+	@Override
+	public Object getColumnValue(int columnIndex) {
+		switch(columnIndex) {
+		case 0:
+			return idObra;
+		case 1:
+			return autor;
+		case 2:
+			return titulo;
+		case 3:
+			return genero;
+		case 4:
+			return sinopsis;
+		}
+		return null;
+	}
+	
+	@Override
+	public void setColumnValue(int col, String value) throws Exception {
+		switch(col) {
+		case 0:
+			idObra=Integer.valueOf(value);
+		case 1:
+			autor= value; break;
+		case 2:
+			titulo=value; break;
+		case 3:
+			genero=value; break;
+		case 4:
+			sinopsis=value; break;
+		}
 	}
 }

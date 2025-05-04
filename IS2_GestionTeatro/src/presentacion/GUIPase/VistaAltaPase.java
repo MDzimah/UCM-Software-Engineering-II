@@ -8,12 +8,12 @@ import javax.swing.JLabel;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
-import misc.JSwingUtils;
 import misc.Messages;
 import misc.Pair;
 import negocio.pase.TPase;
 import presentacion.Evento;
 import presentacion.IGUI;
+import presentacion.ViewUtils;
 import presentacion.VistaDefault;
 import presentacion.controlador.Controlador;
 import presentacion.factoria.FactoriaAbstractaPresentacion;
@@ -68,10 +68,10 @@ public class VistaAltaPase extends VistaDefault {
 	@Override
 	public void actualizar(Evento evento, Object datos) {
 		if (evento == Evento.RES_OK) {
-			JSwingUtils.createDialogMessage(Messages.EX_PASE_CREADO);
+			ViewUtils.createDialogMessage(Messages.EX_PASE_CREADO);
 		}
 		else if(evento == Evento.RES_KO) {
-			JSwingUtils.createErrorDialogMessage(Messages.X_PASE_CREADO + ' ' + Messages.MOTIVO.formatted((String)datos));
+			ViewUtils.createErrorDialogMessage(Messages.X_PASE_CREADO + ' ' + Messages.MOTIVO.formatted((String)datos));
 		}
 	}
 

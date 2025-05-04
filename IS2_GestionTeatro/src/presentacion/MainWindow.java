@@ -6,8 +6,6 @@ import java.awt.event.*;
 import javax.swing.*;
 import javax.swing.border.*;
 
-import misc.Constants;
-import misc.JSwingUtils;
 import presentacion.GUIFactura.AbrirVenta;
 import presentacion.factoria.FactoriaAbstractaPresentacion;
 
@@ -23,7 +21,7 @@ public class MainWindow extends JFrame {
     private JButton subsMiemCompTea;
 
     public MainWindow() {
-    	JSwingUtils.setAppIcon(this);
+    	ViewUtils.setAppIcon(this);
         subsFactura = new JButton("FACTURA");
         subsCliente = new JButton("CLIENTE");
         subsPase = new JButton("PASE");
@@ -59,7 +57,7 @@ public class MainWindow extends JFrame {
             //Para que la imagen quepa en la parte izquierda del panel
             protected void paintComponent(Graphics g) {
                 super.paintComponent(g);
-                Image image = Constants.logoTeatret();
+                Image image = ViewUtils.logoTeatret();
                 int x = (getWidth() - image.getWidth(null)) / 2;
                 int y = (getHeight() - image.getHeight(null)) / 2;
                 g.drawImage(image, x, y, this);
@@ -75,7 +73,7 @@ public class MainWindow extends JFrame {
             @Override
             protected void paintComponent(Graphics g) {
                 super.paintComponent(g);
-                g.drawImage(Constants.marcoOro(), 0, 0, getWidth(), getHeight(), this);
+                g.drawImage(ViewUtils.marcoOro(), 0, 0, getWidth(), getHeight(), this);
             }
         };
 
@@ -292,7 +290,51 @@ public class MainWindow extends JFrame {
         subsTaquillero.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                JDialog subTaquillero = new JDialog(MainWindow.this, "Subsistema Taquillero", true);
+                subTaquillero.setLayout(new FlowLayout());
                 
+                JButton actualizar, alta, baja, buscar, mostrar;
+                
+                actualizar = new JButton("Actualizar taquillero");
+            	alta = new JButton("Alta taquillero");
+            	baja = new JButton("Baja taquillero");
+        		buscar = new JButton("Buscar taquillero");
+        		mostrar = new JButton("Mostrar taquilleros");
+                
+        		//ACTUALIZAR TAQUILLERO
+        		actualizar.addActionListener((ev)->{
+        			//FactoriaAbstractaPresentacion.getInstance().createVista(Evento.ACTUALIZAR_TAQUILLERO);
+        		});
+        		
+        		//ALTA TAQUILLERO
+        		alta.addActionListener((ev)->{
+        			FactoriaAbstractaPresentacion.getInstance().createVista(Evento.ALTA_TAQUILLERO);
+        		});
+        		
+        		//BAJA TAQUILLERO
+        		baja.addActionListener((ev)->{
+        			FactoriaAbstractaPresentacion.getInstance().createVista(Evento.BAJA_TAQUILLERO);
+        		});		
+        		
+        		//BUSCAR TAQUILLERO
+        		buscar.addActionListener((ev)->{
+        			FactoriaAbstractaPresentacion.getInstance().createVista(Evento.BUSCAR_TAQUILLERO);
+        		});	
+        		
+        		//MOSTRAR TAQUILLEROS
+        		mostrar.addActionListener((ev)->{
+        			FactoriaAbstractaPresentacion.getInstance().createVista(Evento.MOSTRAR_TAQUILLEROS);
+        		});
+        		
+        		subTaquillero.add(actualizar);        		
+        		subTaquillero.add(alta);
+        		subTaquillero.add(baja);
+        		subTaquillero.add(buscar);
+        		subTaquillero.add(mostrar);
+        		subTaquillero.setModal(false);  
+        		subTaquillero.pack();
+        		subTaquillero.setLocationRelativeTo(null);
+        		subTaquillero.setVisible(true);
             }
         });
 
@@ -333,9 +375,9 @@ public class MainWindow extends JFrame {
         			FactoriaAbstractaPresentacion.getInstance().createVista(Evento.MOSTRAR_OBRAS);
         		});
         		
-        		subsObra.add(actualizar);        		
         		subsObra.add(alta);
         		subsObra.add(baja);
+        		subsObra.add(actualizar);        		
         		subsObra.add(buscar);
         		subsObra.add(consultar);
         		subsObra.add(mostrar);

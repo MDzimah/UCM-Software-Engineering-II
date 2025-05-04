@@ -12,13 +12,13 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import misc.Constants;
-import misc.JSwingUtils;
 import misc.Messages;
 import misc.Pair;
 import negocio.factura.TFactura;
 import negocio.pase.TPase;
 import presentacion.Evento;
 import presentacion.IGUI;
+import presentacion.ViewUtils;
 import presentacion.TablaDefault;
 import presentacion.VistaDefault;
 import presentacion.controlador.Controlador;
@@ -52,18 +52,18 @@ public class VistaBuscarPase extends VistaDefault {
 		cancelar.addActionListener(e->{this.setVisible(false); dispose();});
 	}
 	
+	@SuppressWarnings("unchecked")
 	@Override
 	public void actualizar(Evento evento, Object datos) {
 		if(evento==Evento.RES_OK) {
 			Collection<TPase> p = new ArrayList<TPase>();
 			p.add((TPase)datos);
-			String[] nomCols = {"ID","ID COMPANYA", "ID OBRA", "FECHA", "STOCK", "PRECIO"};
 			//FactoriaAbstractaPresentacion.getInstance().createDialogMessage(Messages.EX_PASE_BUSCADO);
-			new TablaDefault("PASE", Messages.colNomsPase, p, true, false); //se crea una tabla con una sola linea que contiene
-																	  		 //la info del transfer del pase buscado
+			new TablaDefault<TPase>("PASES", Messages.colNomsPase, (ArrayList<TPase>)datos, true, false).setVisible(true); //se crea una tabla con una sola linea que contiene
+																	  		 											   //la info del transfer del pase buscado
 		}
 		else if(evento==Evento.RES_KO) {
-			JSwingUtils.createErrorDialogMessage(Messages.X_PASE_BUSCADO + ' ' + Messages.MOTIVO.formatted((String)datos));
+			ViewUtils.createErrorDialogMessage(Messages.X_PASE_BUSCADO + ' ' + Messages.MOTIVO.formatted((String)datos));
 		}
 	}
 

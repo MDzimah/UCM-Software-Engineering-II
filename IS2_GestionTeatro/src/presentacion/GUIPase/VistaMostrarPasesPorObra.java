@@ -8,11 +8,11 @@ import javax.swing.JComponent;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 
-import misc.JSwingUtils;
 import misc.Messages;
 import misc.Pair;
 import negocio.pase.TPase;
 import presentacion.Evento;
+import presentacion.ViewUtils;
 import presentacion.TablaDefault;
 import presentacion.VistaDefault;
 import presentacion.controlador.Controlador;
@@ -45,13 +45,14 @@ public class VistaMostrarPasesPorObra extends VistaDefault {
 		cancelar.addActionListener(e->{this.setVisible(false); dispose();});
 	}
 	
+	@SuppressWarnings("unchecked")
 	@Override
 	public void actualizar(Evento evento, Object datos) {
 		if(evento==Evento.RES_OK) {
-			new TablaDefault("PASES", Messages.colNomsPase, (Collection<TPase>)datos, false, false);
+			new TablaDefault<TPase>("PASES", Messages.colNomsPase, (ArrayList<TPase>)datos, false, false).setVisible(true);
 		}
 		else if(evento==Evento.RES_KO) {
-			JSwingUtils.createErrorDialogMessage(Messages.X_PASE_BUSCADO + ' ' + Messages.MOTIVO.formatted((String)datos));
+			ViewUtils.createErrorDialogMessage(Messages.X_PASE_BUSCADO + ' ' + Messages.MOTIVO.formatted((String)datos));
 		}
 	}
 

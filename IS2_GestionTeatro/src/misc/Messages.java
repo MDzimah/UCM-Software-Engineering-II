@@ -69,15 +69,20 @@ public class Messages {
 	//Columnas de las tablas
 	public static final String[] colNomsFactura = {"ID","ID CLIENTE", "ID TAQUILLERO", "FECHA", "IMPORTE", "SUBTOTAL"};
 	public static final String[] colNomsCliente = {/*COMPLETAR*/};
+	public static final String[] colNomsTaquillero = {"ID", "NOMBRE", "APELLIDO", "DNI", "NUM VENTAS", "SUELDO", "EDAD", "GENERO"};
 	public static final String[] colNomsCompTea = {"ID","NOMBRE","DIRECCION","COSTE CONTRATACION"};
 	public static final String[] colNomsMiemCompTea = {"ID","NOMBRE", "APELLIDO", "EDAD", "DNI", "EMAIL", "GENERO"};
 	public static final String[] colNomsObra = {"ID","TITULO", "AUTOR", "GENERO", "SINOPSIS"};
 	public static final String[] colNomsPase = {"ID","ID COMPANYA", "ID OBRA", "FECHA", "STOCK", "PRECIO"};
 	
-	//Errores
-	public static final String ERROR_LECTURA_BBDD = "Error al leer la BBDD de %s";
-	public static final String ERROR_ESCRITURA_BBDD = "Error al escribr en la BBDD de %s";
+	//Excepciones 
 	public static final String ERROR = "ERROR: %s"; 
+	public static final String EXC_LECTURA_BBDD = "Error al leer la BBDD de %s";
+	public static final String EXC_ESCRITURA_BBDD = "Error al escribr en la BBDD de %s";
+	public static final String EXC_CAMPOS_INCORRECTOS = "Campos incorrectos";
+	public static final String EXC_UNKNOWN_TAQ = "Taquillero desconocido";
+	public static final String EXC_UNKNOWN_OBRA = "Obra desconocida";
+	public static final String EXC_EVENTO_TABLA = "Tipo de tabla incompatible con la operacion o con los datos";
 	
 	//BBDD
 	public static final String PATH_TO_BBDD = "resources/BBDD/%s";
@@ -118,6 +123,7 @@ public class Messages {
 	public static final String KEY_cliVIPs = "clientes";
 	public static final String KEY_pases = "pases";
 	public static final String KEY_miembros = "miembros";
+	public static final String KEY_taquilleros = "taquilleros";
 	public static final String KEY_relComp_Miem = "relacion miembro-compania";
 	
 	//Atributos
@@ -135,6 +141,8 @@ public class Messages {
 	public static final String KEY_coste = "coste";
 	public static final String KEY_ptosAcum = "puntos";
 	public static final String KEY_nivelVIP = "nivel";
+	public static final String KEY_numVentas = "numero de ventas";
+	public static final String KEY_sueldo = "sueldo";
 	
 		//Identificación adicional
 	public static final String KEY_nombre = "nombre";

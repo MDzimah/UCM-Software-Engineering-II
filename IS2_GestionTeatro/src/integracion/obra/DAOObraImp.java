@@ -144,53 +144,11 @@ public class DAOObraImp implements DAOObra {
 		}
 		else return null;
 	}
-
-	/**@throws BBDDReadException 
-	 *  Busca por prioridad de criterios de izquierda a derecha, con null si no quieres ese criterio
-	 *  @param params - Integer Id, String titulo, String autor, String genero, Boolean activo
-	 */
-	 @Override
-	public List<TObra> search(List<String> params) throws BBDDReadException {
-		if (!OpsBBDD.isEmpty(Messages.BDOb)) {
-
-			JSONObject bdObras = OpsBBDD.read(Messages.BDOb);
-			List<TObra> obras = new LinkedList<TObra>();
-			
-			if(!params.get(0).equals(""))
-				busquedaLineal(bdObras, Messages.KEY_titulo, obras, params.get(0));					
-			if(!params.get(1).equals(""))
-				busquedaLineal(bdObras, Messages.KEY_autor, obras, params.get(1));					
-			if(!params.get(2).equals(""))
-				busquedaLineal(bdObras, Messages.KEY_generoObra, obras, params.get(2));					
-			return obras;
-		}
-		else return null;
-	}
 	
 	//Metodos privados
 	
 	private TObra readJSON(JSONObject obra) {
 		
 		return new TObra(obra.getInt(Messages.KEY_idObra), obra.getString(Messages.KEY_titulo), obra.getString(Messages.KEY_autor), obra.getString(Messages.KEY_generoObra), obra.getString(Messages.KEY_sinopsis));	
-	}
-	
-	private void busquedaLineal(JSONObject bdObras, String criterio, List<TObra> obras, Object clave ) {
-		if(obras.isEmpty())
-			for(String key : JSONObject.getNames(bdObras)) {
-				if(!key.equals("LastKey")) {
-					JSONObject val = bdObras.getJSONObject(key);
-					if(val.get(criterio).equals(clave))
-						obras.add(readJSON(val));
-				}
-			}
-		else {
-			int i =0;
-			while(i<obras.size()) {
-				if(!obras.get(i).genericGetter(criterio).equals(clave))
-					obras.remove(i);
-				else
-					++i;
-			}
-		}
 	}
 }

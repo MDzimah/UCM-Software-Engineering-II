@@ -11,11 +11,11 @@ import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.SwingUtilities;
 
-import misc.JSwingUtils;
 import misc.Messages;
 import misc.Pair;
 import presentacion.Evento;
 import presentacion.IGUI;
+import presentacion.ViewUtils;
 import presentacion.TablaDefault;
 import presentacion.controlador.Controlador;
 import presentacion.VistaDefault;
@@ -69,15 +69,15 @@ public class VistaActualizarCompania extends VistaDefault implements IGUI{
 			 });
 			}
 			 else {
-				JSwingUtils.createDialogMessage(Messages.COMPANIA_ACTUALIZADA); 
+				ViewUtils.createDialogMessage(Messages.COMPANIA_ACTUALIZADA); 
 			 }
 			}
 		else if(evento==Evento.RES_KO) {
 			if(datos instanceof Exception) {
-			JSwingUtils.createErrorDialogMessage( ((Exception) datos).getMessage());
+			ViewUtils.createErrorDialogMessage( ((Exception) datos).getMessage());
 			}
 			else {
-				JSwingUtils.createErrorDialogMessage("NO EXISTEN COMPANIAS CON ID: "+(int) datos);
+				ViewUtils.createErrorDialogMessage("NO EXISTEN COMPANIAS CON ID: "+(int) datos);
 			}
 		}
 		

@@ -1,8 +1,8 @@
 package presentacion.GUIMiemCompTea;
 
-import misc.JSwingUtils;
 import misc.Messages;
 import presentacion.Evento;
+import presentacion.ViewUtils;
 import presentacion.VistaDefault;
 import presentacion.controlador.Controlador;
 import presentacion.factoria.FactoriaAbstractaPresentacion;
@@ -71,9 +71,9 @@ public class VistaContratarMiembroCompania extends VistaDefault{
 
     @Override
 	public void actualizar(Evento evento, Object datos) {
-		if (evento == Evento.RES_OK) JSwingUtils.createDialogMessage(Messages.EX_MIEMBRO_CONTRATADO);
+		if (evento == Evento.RES_OK) ViewUtils.createDialogMessage(Messages.EX_MIEMBRO_CONTRATADO);
 		else if (evento == Evento.RES_KO) {
-			JSwingUtils.createErrorDialogMessage(Messages.X_MIEMBRO_CONTRATADO + ' ' + Messages.MOTIVO.formatted((String) datos));
+			ViewUtils.createErrorDialogMessage(Messages.X_MIEMBRO_CONTRATADO + ' ' + Messages.MOTIVO.formatted((String) datos));
 		}
 	}
 }

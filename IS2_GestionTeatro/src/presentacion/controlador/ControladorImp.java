@@ -1,12 +1,15 @@
 package presentacion.controlador;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
 import exceptions.BBDDReadException;
 import exceptions.BBDDWriteException;
+import exceptions.InvalidFields;
 import exceptions.UnknownClienteException;
 import exceptions.UnknownTaquilleroException;
+import misc.Messages;
 import negocio.compTea.SACompTea;
 import negocio.compTea.TCompTea;
 import negocio.factoria.FactoriaAbstractaNegocio;
@@ -15,8 +18,11 @@ import negocio.miemCompTea.*;
 import negocio.obra.*;
 import negocio.pase.SAPase;
 import negocio.pase.TPase;
+import negocio.taquillero.SATaquillero;
+import negocio.taquillero.TTaquillero;
 import presentacion.Evento;
 import presentacion.GUIFactura.AbrirVenta;
+import presentacion.GUIMiemCompTea.VistaActualizarMiembroCompania_1;
 import presentacion.GUIObra.VistaActualizarObra_1;
 import presentacion.GUIPase.VistaActualizarPaseDescarga;
 import presentacion.factoria.FactoriaAbstractaPresentacion;
@@ -25,6 +31,7 @@ public class ControladorImp extends Controlador {
 	@Override
 	public void accion(Evento evento, Object datos) {
 		switch(evento) {
+		
 		//Factura
 		case ANYADIR_PASE_A_VENTA: {
 			try {
@@ -98,7 +105,6 @@ public class ControladorImp extends Controlador {
 		
 		
 		//Cliente
-		
 		case ALTA_CLIENTE: 
 		case BUSCAR_CLIENTE: 
 		case BAJA_CLIENTE:
@@ -106,10 +112,78 @@ public class ControladorImp extends Controlador {
 		case ACTUALIZAR_CLIENTE: 
 		
 		//Taquillero
+		case ALTA_TAQUILLERO: {
+			try {
+				SATaquillero saTaq = FactoriaAbstractaNegocio.getInstance().crearSATaquillero();
+				int idTaq = saTaq.create((TTaquillero) datos);
+				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_OK, idTaq);
+			} catch (Exception e) {
+				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_KO, e);
+			}
+			break;
+		}
+		case BAJA_TAQUILLERO: {
+			try {
+				SATaquillero saTaq = FactoriaAbstractaNegocio.getInstance().crearSATaquillero();
+				int idDelete = (int) datos;
+				int idTaq = saTaq.delete(idDelete);
+				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_OK, idTaq);
+			} catch (Exception e) {
+				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_KO, e);
+			}
 			
+			break;
+		}
+		case BUSCAR_TAQUILLERO: {
+			try {
+				SATaquillero saTaq = FactoriaAbstractaNegocio.getInstance().crearSATaquillero();
+				int idBuscar = (int) datos;
+				TTaquillero tTaq = saTaq.read(idBuscar);
+				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_OK, tTaq);
+			} catch (Exception e) {
+				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_KO, e);
+			}
+			
+			break;
+		}
+		case MOSTRAR_TAQUILLEROS: {
+			try {
+				SATaquillero saTaq = FactoriaAbstractaNegocio.getInstance().crearSATaquillero();
+				Collection<TTaquillero> listaTaq = saTaq.readAll();
+				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_OK, listaTaq);
+				
+			} catch (Exception e) {
+				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_KO, e);
+			}
+			
+			break;
+		}
+		case ACTUALIZAR_TAQUILLERO_0: {
+			try {
+				SATaquillero saTaq = FactoriaAbstractaNegocio.getInstance().crearSATaquillero();
+				int idBuscar = (int) datos;
+				TTaquillero tTaq = saTaq.read(idBuscar);
+				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_OK, tTaq);
+			} catch (Exception e) {
+				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_KO, e);
+			}
+			
+			break;
+		}
+		case ACTUALIZAR_TAQUILLERO_1: {
+			try {
+				SATaquillero saTaq = FactoriaAbstractaNegocio.getInstance().crearSATaquillero();
+				TTaquillero tTaq = (TTaquillero) datos;
+				int idTaq = saTaq.update(tTaq);
+				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_OK, idTaq);
+			} catch (Exception e) {
+				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_KO, e);
+			}
+			
+			break;
+		}
 			
 		//Pase
-		
 		case ALTA_PASE: {
 			try {
 				SAPase saPase = FactoriaAbstractaNegocio.getInstance().crearSAPase();
@@ -157,7 +231,7 @@ public class ControladorImp extends Controlador {
 				SAPase saPase = FactoriaAbstractaNegocio.getInstance().crearSAPase();
 				int idBuscado = (int)datos;
 				TPase tPaseActualizar = saPase.read(idBuscado);
-				VistaActualizarPaseDescarga vista = (VistaActualizarPaseDescarga) FactoriaAbstractaPresentacion.getInstance().createVista(Evento.ACTUALIZAR_OBRA_1);
+				VistaActualizarPaseDescarga vista = (VistaActualizarPaseDescarga) FactoriaAbstractaPresentacion.getInstance().createVista(Evento.ACTUALIZAR_PASE_DESCARGA);
 				vista.cargarPase(tPaseActualizar);
 			} catch(Exception e) {
 				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_KO, e);
@@ -179,7 +253,7 @@ public class ControladorImp extends Controlador {
 			try {
 				SAPase saPase = FactoriaAbstractaNegocio.getInstance().crearSAPase();
 				int idObra = (int) datos;
-				Collection<TPase> pasesPorObra = saPase.allPasesPorObra(idObra);
+				ArrayList<TPase> pasesPorObra = saPase.allPasesPorObra(idObra);
 				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_OK, pasesPorObra);
 			} catch(Exception e) {
 				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_KO, e);
@@ -195,31 +269,39 @@ public class ControladorImp extends Controlador {
 				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_OK, val);
 			}
 			catch(Exception e) {
-				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_KO, "Error: " +e.getMessage());
+				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_KO, e);
 			}
 			break;
 		}
 		case BAJA_OBRA:{
 			try {
+				Integer i = Integer.valueOf((String)datos);
 				SAObra saObra = FactoriaAbstractaNegocio.getInstance().crearSAObra();
-				saObra.delete((int)datos);
+				saObra.delete(i);
 				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_OK, (int)datos);
 			}
+			catch(NumberFormatException e) {
+				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_KO, new InvalidFields());
+			}
 			catch(Exception e) {
-				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_KO, "Error: " +e.getMessage());
+				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_KO, e);
 			}
 			break;
 		}
 		case ACTUALIZAR_OBRA_0:
 		{
 			try {
+				Integer i = Integer.valueOf((String)datos);
 				SAObra saObra = FactoriaAbstractaNegocio.getInstance().crearSAObra();
-				TObra obra = saObra.read((int)datos);
+				TObra obra = saObra.read(i);
 				VistaActualizarObra_1 vista= (VistaActualizarObra_1) FactoriaAbstractaPresentacion.getInstance().createVista(Evento.ACTUALIZAR_OBRA_1);
 				vista.setDatos(obra);
 			}
+			catch(NumberFormatException e) {
+				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_KO, new InvalidFields());
+			}
 			catch(Exception e) {
-				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_KO, "Error: " +e.getMessage());
+				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_KO, e);
 			}
 			break;
 		}
@@ -231,19 +313,23 @@ public class ControladorImp extends Controlador {
 				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_OK, ((TObra) datos).getIdObra());
 			}
 			catch(Exception e) {
-				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_KO, "Error: " +e.getMessage());
+				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_KO, e);
 			}
 			break;
 		}
 		case CONSULTAR_OBRA:
 		{
 			try {
+				Integer i = Integer.valueOf((String)datos);
 				SAObra saObra = FactoriaAbstractaNegocio.getInstance().crearSAObra();
-				TObra obra = saObra.read((int)datos);
+				TObra obra = saObra.read(i);
 				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_OK, obra);
 			}
+			catch(NumberFormatException e) {
+				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_KO, new InvalidFields());
+			}
 			catch(Exception e) {
-				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_KO, "Error: " +e.getMessage());
+				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_KO, e);
 			}
 			break;
 		}
@@ -255,7 +341,7 @@ public class ControladorImp extends Controlador {
 				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_OK, obras);
 			}
 			catch(Exception e) {
-				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_KO, "Error: " +e.getMessage());
+				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_KO, e);
 			}
 			break;
 		}
@@ -267,7 +353,7 @@ public class ControladorImp extends Controlador {
 				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_OK, obras);
 			}
 			catch(Exception e) {
-				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_KO, "Error: " +e.getMessage());
+				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_KO, e);
 			}
 			break;
 		}
@@ -371,7 +457,36 @@ public class ControladorImp extends Controlador {
 		}
 		
 		//MiemCompTea
-		case ACTUALIZAR_MIEMBRO_COMPANIA:
+		case ACTUALIZAR_MIEMBRO_COMPANIA_0:
+		{
+			try {
+				SAMiemCompTea saMiemComp = FactoriaAbstractaNegocio.getInstance().crearSAMiemCompTea();
+				TMiemCompTea tMiemComp = saMiemComp.read((int)datos);
+				if (tMiemComp != null) {
+					VistaActualizarMiembroCompania_1 vista= (VistaActualizarMiembroCompania_1) FactoriaAbstractaPresentacion.getInstance().createVista(Evento.ACTUALIZAR_MIEMBRO_COMPANIA_1);
+					vista.cargarMiembro(tMiemComp);
+				}
+				else {
+					FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_KO, Messages.ID_NO_ENCONTRADO);
+				}
+			}
+			catch(Exception e) {
+				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_KO, e.getMessage());
+			}
+			break;
+		}
+		case ACTUALIZAR_MIEMBRO_COMPANIA_1:
+		{
+			try {
+				SAMiemCompTea saMiemComp = FactoriaAbstractaNegocio.getInstance().crearSAMiemCompTea();
+				saMiemComp.update((TMiemCompTea) datos);
+				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_OK, null);
+			}
+			catch(Exception e) {
+				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_KO, e.getMessage());
+			}
+			break;
+		}
 		case BUSCAR_MIEMBRO_COMPANIA:
 		{
 			try {

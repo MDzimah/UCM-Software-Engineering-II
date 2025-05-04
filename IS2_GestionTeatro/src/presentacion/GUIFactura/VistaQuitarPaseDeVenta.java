@@ -1,9 +1,9 @@
 package presentacion.GUIFactura;
 
 import exceptions.BBDDReadException;
-import misc.JSwingUtils;
 import misc.Messages;
 import presentacion.Evento;
+import presentacion.ViewUtils;
 
 @SuppressWarnings("serial")
 public class VistaQuitarPaseDeVenta extends ModificacionPaseEnVenta {
@@ -21,12 +21,12 @@ public class VistaQuitarPaseDeVenta extends ModificacionPaseEnVenta {
 	
 	@Override
 	public void actualizar(Evento evento, Object datos) {
-		if (evento == Evento.RES_OK) JSwingUtils.createDialogMessage(Messages.EX_PASE_QUITADO_DE_VENTA.formatted((int)datos));
+		if (evento == Evento.RES_OK) ViewUtils.createDialogMessage(Messages.EX_PASE_QUITADO_DE_VENTA.formatted((int)datos));
 		else if(evento == Evento.RES_KO) {
 			String error;
 			if (datos instanceof BBDDReadException) error = ((BBDDReadException)datos).getMessage();
 			else error = Messages.NO_EN_CARRITO; 
-			JSwingUtils.createErrorDialogMessage(Messages.X_QUITAR_PASE_DE_VENTA + ' ' + Messages.MOTIVO.formatted(error));
+			ViewUtils.createErrorDialogMessage(Messages.X_QUITAR_PASE_DE_VENTA + ' ' + Messages.MOTIVO.formatted(error));
 		}
 	}
 }

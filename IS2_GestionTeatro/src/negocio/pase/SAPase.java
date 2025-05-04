@@ -1,5 +1,6 @@
 package negocio.pase;
 
+import java.util.ArrayList;
 import java.util.Collection;
 
 import exceptions.BBDDReadException;
@@ -13,10 +14,10 @@ public interface SAPase {
 	public TPase read(int id) throws BBDDReadException;
 	public int update(TPase tPase) throws BBDDReadException, BBDDWriteException;
 	public int delete (int id) throws BBDDReadException, BBDDWriteException;
-	public Collection<TPase> readAll() throws BBDDReadException;
+	public ArrayList<TPase> readAll() throws BBDDReadException;
 	public int comprar(int idPase, int cantidad) throws BBDDReadException, BBDDWriteException;  //Devuelve el stock comprado del pase con idPase. 
 												   												//Si cantidad > stock, entonces da todo lo que tenga (lo dijo Vicky)
 																								//Además, actualiza en la BD el pase con dicho id
 	public void deletePorObra(int idObra) throws BBDDReadException, BBDDWriteException; //Devuelve si existe algun pase con el id de la obra pasada por parametro
-	Collection<TPase> allPasesPorObra(int idObra) throws BBDDReadException;
+	ArrayList<TPase> allPasesPorObra(int idObra) throws BBDDReadException;
 }
