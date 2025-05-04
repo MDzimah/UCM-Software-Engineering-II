@@ -10,4 +10,7 @@ public interface DAOTaquillero {
 	public TTaquillero read(int id);
 	public Collection<TTaquillero> readAll();
 	public int update(TTaquillero tCliente);
+	
+	public Collection<TTaquillero> readActive();
+	public TTaquillero readByDNI();
 }
