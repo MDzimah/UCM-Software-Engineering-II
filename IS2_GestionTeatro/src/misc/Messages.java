@@ -75,13 +75,12 @@ public class Messages {
 	public static final String[] colNomsObra = {"ID","TITULO", "AUTOR", "GENERO", "SINOPSIS"};
 	public static final String[] colNomsPase = {"ID","ID COMPANYA", "ID OBRA", "FECHA", "STOCK", "PRECIO"};
 	
-	//Errores
-	public static final String ERROR_LECTURA_BBDD = "Error al leer la BBDD de %s";
-	public static final String ERROR_ESCRITURA_BBDD = "Error al escribr en la BBDD de %s";
-	public static final String ERROR = "ERROR: %s"; 
-	
 	//Excepciones 
+	public static final String ERROR = "ERROR: %s"; 
+	public static final String EXC_LECTURA_BBDD = "Error al leer la BBDD de %s";
+	public static final String EXC_ESCRITURA_BBDD = "Error al escribr en la BBDD de %s";
 	public static final String EXC_UNKNOWN_TAQ = "Taquillero desconocido";
+	public static final String EXC_EVENTO_TABLA = "Evento de la tabla es inválido";
 	
 	//BBDD
 	public static final String PATH_TO_BBDD = "resources/BBDD/%s";
