@@ -2,6 +2,7 @@ package presentacion;
 
 
 import java.awt.*;
+import java.awt.image.BufferedImage;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 import java.util.*;
@@ -12,9 +13,7 @@ import javax.swing.table.*;
 
 import com.formdev.flatlaf.themes.FlatMacLightLaf;
 
-import misc.Constants;
-import misc.JSwingUtils;
-import misc.Messages;
+import misc.*;
 import negocio.factura.TFactura;
 
 /**
@@ -186,38 +185,41 @@ public class TablaDefault<T extends Convertable<T>> extends JFrame {
 	        table.setFont(Constants.FontTablaDefaultCuerpo());
 	        
 	        //Cambiar apariencia del header de la tabla
+	        	//Font
 	        JTableHeader header = table.getTableHeader();
 	        header.setFont(Constants.FontTablaDefaultCabecera());
 	        header.setReorderingAllowed(false);
-	        TableColumnModel cm = table.getColumnModel();
-	        Dimension d = Constants.screenDimension();
-	        double w = d.getWidth(); 
-	        w -= d.getWidth()/2;
-	        w /= columnNames.length;
-	        for (int i = 0; i < columnNames.length; ++i) {
-	        	cm.getColumn(i).setPreferredWidth((int) Math.round(w));
-	        }
-
-	        //this.setRender(table, columnNames.length);
 	        
+	        	//Header
+	        TableColumnModel cm = table.getColumnModel();
+	        
+	        Graphics2D temp = new BufferedImage(1, 1, BufferedImage.TYPE_INT_ARGB).createGraphics();
+	        temp.setFont(Constants.FontTablaDefaultCabecera());
+	        
+	        FontMetrics metrics = temp.getFontMetrics();
+	        for (int i = 0; i < columnNames.length; ++i) {
+	            int headerWidth = metrics.stringWidth(columnNames[i]) + 120;
+	            cm.getColumn(i).setPreferredWidth(headerWidth);
+	        }
+	        temp.dispose();
+
 	        this.add(new JScrollPane(table), BorderLayout.CENTER);
+	        
 	        //Solo se edita la tabla en los CU de actualizar, luego consultar tiene que ser true también
 	        if (this.editable) {
+	        	//En el modo consultar la tabla tiene una única fila
 	        	if (data.size() > 1) throw new IllegalArgumentException(Messages.EXC_EVENTO_TABLA);  
 	        	
 	        	this.aceptar = new JButton("Aceptar");
 	        	this.add(this.aceptar, BorderLayout.SOUTH);
 	        	
-	        	//En el modo consultar la tabla tiene una única fila, luego inicializo la edicion a lo
-	        	//que vale el array de datos en su única posición no nula
+	        	//Lo inicializo a lo que vale el array de datos en su única posición no nula
 	        	this.edicion = data.get(0);
 	        	
 		        table.getModel().addTableModelListener(new TableModelListener() {
 		            @Override
 		            public void tableChanged(TableModelEvent e) {
-		                if (e.getType() == TableModelEvent.UPDATE) {
-		                	edicion = data.get(0);
-		                }
+		                if (e.getType() == TableModelEvent.UPDATE) edicion = data.get(0);
 		            }
 		        });
 	        }
