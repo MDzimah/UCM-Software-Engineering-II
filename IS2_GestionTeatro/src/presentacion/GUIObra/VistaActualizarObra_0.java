@@ -9,6 +9,7 @@ import javax.swing.JTextField;
 import javax.swing.SwingUtilities;
 
 import misc.JSwingUtils;
+import misc.Messages;
 import misc.Pair;
 import negocio.obra.TObra;
 import presentacion.Evento;
@@ -61,7 +62,5 @@ public class VistaActualizarObra_0 extends VistaDefault implements IGUI{
 		if(evento==Evento.RES_KO) {
 			JSwingUtils.createErrorDialogMessage("No se ha podido actualizar la obra.\n" + "Error: " +((Exception) datos).getMessage());
 		}
-		
 	}
-
 }

@@ -1,6 +1,8 @@
 package negocio.miemCompTea;
 
-public class TMiemCompTea {
+import presentacion.Convertable;
+
+public class TMiemCompTea implements Convertable<TMiemCompTea> {
 	
 	private int idMiemComp;
 	
@@ -62,4 +64,31 @@ public class TMiemCompTea {
 	
 	@Override
 	public String toString() { return Integer.toString(this.idMiemComp); }
+
+	@Override
+	public Object getColumnValue(int columnIndex) {
+		switch(columnIndex) {
+			case 0: return this.idMiemComp;
+			case 1: return this.nombre;
+			case 2: return this.apellido;
+			case 3: return this.edad;
+			case 4: return this.DNI;
+			case 5: return this.email;
+			default: return this.genero.toString();
+		}
+	}
+
+	@Override
+	public void setColumnValue(int col, String value) throws Exception {
+		switch(col) {
+			case 0: this.idMiemComp = Integer.valueOf(value); break;
+			case 1: this.nombre = value; break;
+			case 2: this.apellido = value; break;
+			case 3: this.edad = Integer.valueOf(value); break;
+			case 4: this.DNI = value; break;
+			case 5: this.email = value; break;
+			default: this.genero = Genero.valueOf(value);
+		}
+		
+	}
 }

@@ -173,7 +173,6 @@ public class DAOTaquilleroImp implements DAOTaquillero {
 	 */
 	private TTaquillero createTTaq(JSONObject taq) {
 		return new TTaquillero(
-				taq.getInt(Messages.KEY_idTaq),
 				taq.getBoolean(Messages.KEY_act),
 				taq.getString(Messages.KEY_DNI),
 				taq.getString(Messages.KEY_nombre),

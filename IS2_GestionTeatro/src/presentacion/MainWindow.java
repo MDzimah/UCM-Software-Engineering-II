@@ -292,7 +292,51 @@ public class MainWindow extends JFrame {
         subsTaquillero.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                JDialog subTaquillero = new JDialog(MainWindow.this, "Subsistema Taquillero", true);
+                subTaquillero.setLayout(new FlowLayout());
                 
+                JButton actualizar, alta, baja, buscar, mostrar;
+                
+                actualizar = new JButton("Actualizar taquillero");
+            	alta = new JButton("Alta taquillero");
+            	baja = new JButton("Baja taquillero");
+        		buscar = new JButton("Buscar taquillero");
+        		mostrar = new JButton("Mostrar taquilleros");
+                
+        		//ACTUALIZAR TAQUILLERO
+        		actualizar.addActionListener((ev)->{
+        			FactoriaAbstractaPresentacion.getInstance().createVista(Evento.ACTUALIZAR_TAQUILLERO);
+        		});
+        		
+        		//ALTA TAQUILLERO
+        		alta.addActionListener((ev)->{
+        			FactoriaAbstractaPresentacion.getInstance().createVista(Evento.ALTA_TAQUILLERO);
+        		});
+        		
+        		//BAJA TAQUILLERO
+        		baja.addActionListener((ev)->{
+        			FactoriaAbstractaPresentacion.getInstance().createVista(Evento.BAJA_TAQUILLERO);
+        		});		
+        		
+        		//BUSCAR TAQUILLERO
+        		buscar.addActionListener((ev)->{
+        			FactoriaAbstractaPresentacion.getInstance().createVista(Evento.BUSCAR_TAQUILLERO);
+        		});	
+        		
+        		//MOSTRAR TAQUILLEROS
+        		mostrar.addActionListener((ev)->{
+        			FactoriaAbstractaPresentacion.getInstance().createVista(Evento.MOSTRAR_TAQUILLEROS);
+        		});
+        		
+        		subTaquillero.add(actualizar);        		
+        		subTaquillero.add(alta);
+        		subTaquillero.add(baja);
+        		subTaquillero.add(buscar);
+        		subTaquillero.add(mostrar);
+        		subTaquillero.setModal(false);  
+        		subTaquillero.pack();
+        		subTaquillero.setLocationRelativeTo(null);
+        		subTaquillero.setVisible(true);
             }
         });
 

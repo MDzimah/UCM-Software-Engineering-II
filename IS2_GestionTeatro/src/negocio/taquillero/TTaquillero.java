@@ -15,9 +15,8 @@ public class TTaquillero {
 	
 	public TTaquillero() {}
 	
-	public TTaquillero(int idTaquillero, boolean activo, String DNI, String nombre, String apellido, int numVentas, 
+	public TTaquillero(boolean activo, String DNI, String nombre, String apellido, int numVentas, 
 			float sueldo, int edad, Genero genero) {
-		this.idTaquillero = idTaquillero;
 		this.activo = activo;
 		this.DNI = DNI;
 		this.nombre = nombre;
