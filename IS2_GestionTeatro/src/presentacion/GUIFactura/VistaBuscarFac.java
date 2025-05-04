@@ -61,7 +61,7 @@ public class VistaBuscarFac extends VistaDefault {
 		if (evento == Evento.RES_OK) {
 			ArrayList<TFactura> fac = new ArrayList<TFactura>();
 			fac.add((TFactura)datos);
-			new TablaDefault<TFactura>("FACTURA", Messages.colNomsFactura, fac, true, false).setVisible(true);
+			new TablaDefault<TFactura>("FACTURA", Messages.colNomsFactura, fac, false).setVisible(true);
 		}
 		else if(evento == Evento.RES_KO) {
 			String error;

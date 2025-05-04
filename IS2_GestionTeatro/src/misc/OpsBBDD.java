@@ -15,7 +15,7 @@ public class OpsBBDD {
 			return new JSONObject(contenidos);
 		}
 		catch(IOException e) {
-			throw new BBDDReadException(Messages.ERROR_LECTURA_BBDD.formatted(BDSubs), e);
+			throw new BBDDReadException(Messages.EXC_LECTURA_BBDD.formatted(BDSubs), e);
 		}
 	}
 	
@@ -25,7 +25,7 @@ public class OpsBBDD {
 	        file.flush(); //Para asegurar que el buffer se quede vacío
 		}
 		catch(IOException e) {
-			throw new BBDDWriteException(Messages.ERROR_ESCRITURA_BBDD.formatted(BDSubs), e);
+			throw new BBDDWriteException(Messages.EXC_ESCRITURA_BBDD.formatted(BDSubs), e);
 		}
 	}
 	

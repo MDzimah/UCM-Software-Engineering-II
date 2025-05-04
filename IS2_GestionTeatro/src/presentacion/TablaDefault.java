@@ -3,6 +3,7 @@ package presentacion;
 
 import java.awt.*;
 import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
 import java.util.*;
 
 import javax.swing.*;
@@ -41,8 +42,8 @@ import negocio.factura.TFactura;
 public class TablaDefault<T extends Convertable<T>> extends JFrame {
 	//Solo para los modos de actualizacion
 	private JButton aceptar; 
-	private boolean editable;
 	private T edicion;
+	private boolean editable;
 	
     private class DefaultTableModel extends AbstractTableModel {
         private final String[] nomCols;
@@ -173,41 +174,38 @@ public class TablaDefault<T extends Convertable<T>> extends JFrame {
      *   <li>Column values are dynamically extracted and updated using the {@code getColumnValue} and {@code setColumnValue} methods from {@code Convertable}.</li>
      * </ul>
      */
-	public TablaDefault(String nombreTabla,  String[] columnNames, ArrayList<T> data, boolean consultar, boolean editable) {
-        this.setTitle(nombreTabla);
+	public TablaDefault(String nombreTabla,  String[] columnNames, ArrayList<T> data, boolean CUActualizar) {
+		this.setTitle(nombreTabla);
         this.setLayout(new BorderLayout());
         
-        Dimension sd = Constants.screenDimension();
-        int width, height;
-        if (consultar) {
-        	width = sd.width/2;
-        	height = sd.height/10;
-        	this.setResizable(false);
-        }
-        else {	     
-	        width = sd.width - sd.width / 10;
-	        height = sd.height - sd.height / 12;   
-        }
-        this.setSize(new Dimension(width, height));
-        
-        this.editable = editable;
-        
+        this.editable = CUActualizar;
+
         if (data != null && !data.isEmpty()) {
         	DefaultTableModel model = new DefaultTableModel(columnNames, data);
-	        JTable table = new JTable(model);
+        	JTable table = new JTable(model);
 	        table.setFont(Constants.FontTablaDefaultCuerpo());
-	       
 	        
 	        //Cambiar apariencia del header de la tabla
 	        JTableHeader header = table.getTableHeader();
 	        header.setFont(Constants.FontTablaDefaultCabecera());
+	        header.setReorderingAllowed(false);
+	        TableColumnModel cm = table.getColumnModel();
+	        Dimension d = Constants.screenDimension();
+	        double w = d.getWidth(); 
+	        w -= d.getWidth()/1.9;
+	        w /= columnNames.length;
+	        for (int i = 0; i < columnNames.length; ++i) {
+	        	cm.getColumn(i).setPreferredWidth((int) Math.round(w));
+	        }
 
 	        //this.setRender(table, columnNames.length);
 	        
+	        this.add(new JScrollPane(table), BorderLayout.CENTER);
 	        //Solo se edita la tabla en los CU de actualizar, luego consultar tiene que ser true también
-	        if (editable && consultar) {
+	        if (this.editable) {
+	        	if (data.size() > 1) throw new IllegalArgumentException(Messages.EXC_EVENTO_TABLA);  
+	        	
 	        	this.aceptar = new JButton("Aceptar");
-	        	this.add(new JScrollPane(table), BorderLayout.NORTH);
 	        	this.add(this.aceptar, BorderLayout.SOUTH);
 	        	
 	        	//En el modo consultar la tabla tiene una única fila, luego inicializo la edicion a lo
@@ -223,15 +221,26 @@ public class TablaDefault<T extends Convertable<T>> extends JFrame {
 		            }
 		        });
 	        }
-	        else this.add(new JScrollPane(table), BorderLayout.CENTER);
+	        table.setPreferredScrollableViewportSize(table.getPreferredSize());
         }
+      
+        this.pack();
+        this.setResizable(true);
         this.setLocationRelativeTo(null);
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
     }
 	
-	public T getEdicion() { return this.edicion; }
 	
-	public JButton getOkButton() { return editable ? this.aceptar : null; }
+	public T getEdicion() { 
+		if(this.editable) return this.edicion; 
+		else throw new IllegalArgumentException(Messages.EXC_EVENTO_TABLA); 
+	}
+	
+	public JButton getOkButton() { 
+		if(this.editable) return this.aceptar;
+		else throw new IllegalArgumentException(Messages.EXC_EVENTO_TABLA);
+	}
+
 
   //PRUEBA DE LA TABLA
 	
@@ -244,11 +253,11 @@ public class TablaDefault<T extends Convertable<T>> extends JFrame {
 				e.printStackTrace();
 			}
             ArrayList<TFactura> facturas = new ArrayList<>();
-            facturas.add(new TFactura(101, 201, true, LocalDateTime.now(), 120.5f, 100.0f));
-            facturas.add(new TFactura(102, 202, true, LocalDateTime.now().minusDays(1), 95.0f, 80.0f));
+            facturas.add(new TFactura(101, 201, true, LocalDateTime.now().truncatedTo(ChronoUnit.SECONDS), 120.5f, 100.0f));
+            facturas.add(new TFactura(102, 202, true, LocalDateTime.now().minusDays(1).truncatedTo(ChronoUnit.SECONDS), 95.0f, 80.0f));
 
             // If you want to test update mode on a single row, set consultar=true, editable=true
-            TablaDefault<TFactura> tabla = new TablaDefault<>("Tabla de Facturas", Messages.colNomsFactura, facturas, true, true);
+            TablaDefault<TFactura> tabla = new TablaDefault<>("Tabla de Facturas", Messages.colNomsFactura, facturas, false);
             tabla.setVisible(true);
         });
     }
