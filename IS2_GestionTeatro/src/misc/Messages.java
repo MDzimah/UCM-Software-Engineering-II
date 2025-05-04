@@ -121,6 +121,7 @@ public class Messages {
 	public static final String KEY_cliVIPs = "clientes";
 	public static final String KEY_pases = "pases";
 	public static final String KEY_miembros = "miembros";
+	public static final String KEY_taquilleros = "taquilleros";
 	public static final String KEY_relComp_Miem = "relacion miembro-compania";
 	
 	//Atributos
@@ -138,6 +139,8 @@ public class Messages {
 	public static final String KEY_coste = "coste";
 	public static final String KEY_ptosAcum = "puntos";
 	public static final String KEY_nivelVIP = "nivel";
+	public static final String KEY_numVentas = "numero de ventas";
+	public static final String KEY_sueldo = "sueldo";
 	
 		//Identificación adicional
 	public static final String KEY_nombre = "nombre";
