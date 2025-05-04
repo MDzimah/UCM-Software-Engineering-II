@@ -9,6 +9,7 @@ import javax.swing.JTextField;
 import javax.swing.SwingUtilities;
 
 import misc.JSwingUtils;
+import misc.Messages;
 import misc.Pair;
 import negocio.obra.TObra;
 import presentacion.Evento;
@@ -59,7 +60,7 @@ public class VistaActualizarObra_0 extends VistaDefault implements IGUI{
 	@Override
 	public void actualizar(Evento evento, Object datos) {
 		if(evento==Evento.RES_KO) {
-			JSwingUtils.createErrorDialogMessage("No se ha podido actualizar la obra.\n" + (String)datos);
+			JSwingUtils.createErrorDialogMessage(Messages.X_PASE_ACTUALIZADO + ' ' + Messages.MOTIVO.formatted((String)datos));
 		}
 		
 	}
