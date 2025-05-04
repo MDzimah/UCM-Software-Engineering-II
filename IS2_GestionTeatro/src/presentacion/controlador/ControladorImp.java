@@ -18,6 +18,8 @@ import negocio.miemCompTea.*;
 import negocio.obra.*;
 import negocio.pase.SAPase;
 import negocio.pase.TPase;
+import negocio.taquillero.SATaquillero;
+import negocio.taquillero.TTaquillero;
 import presentacion.Evento;
 import presentacion.GUIFactura.AbrirVenta;
 import presentacion.GUIMiemCompTea.VistaActualizarMiembroCompania_1;
@@ -29,6 +31,7 @@ public class ControladorImp extends Controlador {
 	@Override
 	public void accion(Evento evento, Object datos) {
 		switch(evento) {
+		
 		//Factura
 		case ANYADIR_PASE_A_VENTA: {
 			try {
@@ -102,7 +105,6 @@ public class ControladorImp extends Controlador {
 		
 		
 		//Cliente
-		
 		case ALTA_CLIENTE: 
 		case BUSCAR_CLIENTE: 
 		case BAJA_CLIENTE:
@@ -110,13 +112,78 @@ public class ControladorImp extends Controlador {
 		case ACTUALIZAR_CLIENTE: 
 		
 		//Taquillero
-		case ALTA_TAQUILLERO:
-		case BAJA_TAQUILLERO:
-		case BUSCAR_TAQUILLERO:
-		case MOSTRAR_TAQUILLEROS:
+		case ALTA_TAQUILLERO: {
+			try {
+				SATaquillero saTaq = FactoriaAbstractaNegocio.getInstance().crearSATaquillero();
+				int idTaq = saTaq.create((TTaquillero) datos);
+				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_OK, idTaq);
+			} catch (Exception e) {
+				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_KO, e);
+			}
+			break;
+		}
+		case BAJA_TAQUILLERO: {
+			try {
+				SATaquillero saTaq = FactoriaAbstractaNegocio.getInstance().crearSATaquillero();
+				int idDelete = (int) datos;
+				int idTaq = saTaq.delete(idDelete);
+				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_OK, idTaq);
+			} catch (Exception e) {
+				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_KO, e);
+			}
+			
+			break;
+		}
+		case BUSCAR_TAQUILLERO: {
+			try {
+				SATaquillero saTaq = FactoriaAbstractaNegocio.getInstance().crearSATaquillero();
+				int idBuscar = (int) datos;
+				TTaquillero tTaq = saTaq.read(idBuscar);
+				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_OK, tTaq);
+			} catch (Exception e) {
+				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_KO, e);
+			}
+			
+			break;
+		}
+		case MOSTRAR_TAQUILLEROS: {
+			try {
+				SATaquillero saTaq = FactoriaAbstractaNegocio.getInstance().crearSATaquillero();
+				Collection<TTaquillero> listaTaq = saTaq.readAll();
+				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_OK, listaTaq);
+				
+			} catch (Exception e) {
+				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_KO, e);
+			}
+			
+			break;
+		}
+		case ACTUALIZAR_TAQUILLERO_0: {
+			try {
+				SATaquillero saTaq = FactoriaAbstractaNegocio.getInstance().crearSATaquillero();
+				int idBuscar = (int) datos;
+				TTaquillero tTaq = saTaq.read(idBuscar);
+				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_OK, tTaq);
+			} catch (Exception e) {
+				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_KO, e);
+			}
+			
+			break;
+		}
+		case ACTUALIZAR_TAQUILLERO_1: {
+			try {
+				SATaquillero saTaq = FactoriaAbstractaNegocio.getInstance().crearSATaquillero();
+				TTaquillero tTaq = (TTaquillero) datos;
+				int idTaq = saTaq.update(tTaq);
+				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_OK, idTaq);
+			} catch (Exception e) {
+				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_KO, e);
+			}
+			
+			break;
+		}
 			
 		//Pase
-		
 		case ALTA_PASE: {
 			try {
 				SAPase saPase = FactoriaAbstractaNegocio.getInstance().crearSAPase();

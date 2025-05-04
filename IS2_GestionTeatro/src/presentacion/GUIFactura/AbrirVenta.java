@@ -9,7 +9,7 @@ public class AbrirVenta {
 	private static Collection<TLineaFactura> carrito;
 	
 	public static void resetCarrito() {
-		carrito =  new ArrayList<TLineaFactura>();
+		this.carrito =  new ArrayList<TLineaFactura>();
 	}
 	
 	public static Collection<TLineaFactura> getCarrito() { return carrito; } 

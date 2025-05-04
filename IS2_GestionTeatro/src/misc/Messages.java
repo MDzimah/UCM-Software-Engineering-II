@@ -82,7 +82,6 @@ public class Messages {
 	public static final String EXC_UNKNOWN_TAQ = "Taquillero desconocido";
 	public static final String EXC_UNKNOWN_OBRA = "Obra desconocida";
 	public static final String EXC_EVENTO_TABLA = "Evento de la tabla es inválido";
-	public static final String EXC_INV_FIELDS = "Campos incorrectos";
 	
 	//BBDD
 	public static final String PATH_TO_BBDD = "resources/BBDD/%s";
