@@ -43,23 +43,29 @@ public abstract class ModificacionPaseEnVenta extends VistaDefault {
 	
 	void okAndCancelListener(Evento evento) {
 		ok.addActionListener(e->{
-			//Id pase
-			sIdPase.commitEdit();
-			int idPase = (Integer)sIdPase.getValue(); 
+			try {
+				//Id pase
+				sIdPase.commitEdit();
+				int idPase = (Integer)sIdPase.getValue(); 
+				
+				//Fecha
+				/*
+				Date fechaSeleccionada = (Date) sFecha.getValue();
+				LocalDateTime fechaPase = fechaSeleccionada.toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime();
+				*/
+				
+				//Cantidad
+				sCtdad.commitEdit();
+				int ctdad = (Integer)sCtdad.getValue(); 
 			
-			//Fecha
-			/*
-			Date fechaSeleccionada = (Date) sFecha.getValue();
-			LocalDateTime fechaPase = fechaSeleccionada.toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime();
-			*/
-			
-			//Cantidad
-			sCtdad.commitEdit();
-			int ctdad = (Integer)sCtdad.getValue(); 
-		
-			TLineaFactura tLf = new TLineaFactura(idPase, ctdad);
-			SwingUtilities.invokeLater(()->{Controlador.getInstance().accion(evento, tLf);});
-			dispose();
+				TLineaFactura tLf = new TLineaFactura(idPase, ctdad);
+				SwingUtilities.invokeLater(()->{Controlador.getInstance().accion(evento, tLf);});
+				dispose();
+			}
+			catch(Exception ex) {
+				sCtdad.updateUI();
+				sIdPase.updateUI();
+			}
 		});
 		
 		cancel.addActionListener(e->{dispose();});

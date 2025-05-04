@@ -70,8 +70,4 @@ public class VistaBuscarFac extends VistaDefault {
 			JSwingUtils.createErrorDialogMessage(Messages.X_BUSCAR_FACTURA + ' ' + Messages.MOTIVO.formatted(error));
 		}
 	}
-	
-	public static void main(String[] arg) {
-		VistaBuscarFac bf = new VistaBuscarFac();
-	}
 }
