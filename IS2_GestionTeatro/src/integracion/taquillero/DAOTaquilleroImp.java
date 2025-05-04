@@ -8,10 +8,10 @@ import org.json.JSONObject;
 
 import exceptions.BBDDReadException;
 import exceptions.BBDDWriteException;
+import misc.Genero;
 import misc.Messages;
 import misc.OpsBBDD;
 import negocio.taquillero.TTaquillero;
-import negocio.taquillero.TTaquillero.Genero;
 
 public class DAOTaquilleroImp implements DAOTaquillero {
 
@@ -106,7 +106,7 @@ public class DAOTaquilleroImp implements DAOTaquillero {
 			JSONObject bdTaq = OpsBBDD.read(Messages.BDTaq);
 			JSONObject taquilleros = bdTaq.getJSONObject(Messages.KEY_taquilleros);
 			
-			Collection<TTaquillero> listaTaqs = new ArrayList();
+			Collection<TTaquillero> listaTaqs = new ArrayList<TTaquillero>();
 			
 			Set<String> allIds = taquilleros.keySet();
 			for(String idTaq : allIds) {
@@ -125,7 +125,7 @@ public class DAOTaquilleroImp implements DAOTaquillero {
 	}
 	
 	@Override
-	public Collection<TTaquillero> readActive() throws BBDDReadException {
+	public Collection<TTaquillero> readActive() throws BBDDReadException { //Seguramente lo elimine
 		// TODO Auto-generated method stub
 		return null;
 	}

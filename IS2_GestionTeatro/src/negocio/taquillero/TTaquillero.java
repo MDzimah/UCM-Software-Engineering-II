@@ -1,9 +1,6 @@
 package negocio.taquillero;
 
-import java.util.Collection;
-import java.util.Collections;
-
-import negocio.factura.TFactura;
+import misc.Genero;
 
 public class TTaquillero {
 	private int idTaquillero;
@@ -14,8 +11,6 @@ public class TTaquillero {
 	private int edad;
 	private float sueldo;
 	private int numVentas;
-	
-	public enum Genero { HOMBRE, MUJER } //Habria que ponerlo en "misc" porque el enum lo tienen varios subsistemas
 	private Genero genero;
 	
 	public TTaquillero() {}
@@ -56,3 +51,7 @@ public class TTaquillero {
 	public void setGenero(Genero genero) { this.genero = genero; }
 	
  }
+
+
+
+
