@@ -1,5 +1,14 @@
 package presentacion.GUITaquillero;
 
-public class VistaBuscarTaquillero {
+import presentacion.Evento;
+import presentacion.VistaDefault;
+
+public class VistaBuscarTaquillero extends VistaDefault {
+
+	@Override
+	public void actualizar(Evento evento, Object datos) {
+		// TODO Auto-generated method stub
+		
+	}
 
 }
