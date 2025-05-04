@@ -10,7 +10,6 @@ public enum Evento {
 	BUSCAR_FACTURA,
 	MOSTRAR_FACTURAS, 
 	
-	
 	//Cliente
 	ALTA_CLIENTE, 
 	BUSCAR_CLIENTE, 
@@ -18,9 +17,7 @@ public enum Evento {
 	MOSTRAR_CLIENTES, 
 	ACTUALIZAR_CLIENTE,
 	
-	
 	//Pase
-	
 	ALTA_PASE,
 	BAJA_PASE,
 	BUSCAR_PASE,
@@ -30,7 +27,11 @@ public enum Evento {
 	MOSTRAR_PASES_POR_OBRA,
 	
 	//Taquillero
-	
+	ALTA_TAQUILLERO,
+	BAJA_TAQUILLERO,
+	BUSCAR_TAQUILLERO,
+	MOSTRAR_TAQUILLEROS,
+	ACTUALIZAR_TAQUILLERO,
 	
 	//Obra
 	ALTA_OBRA,
@@ -58,6 +59,6 @@ public enum Evento {
 
 	
 	/*--RESPUESTAS--*/
-	RES_OK, 
-	RES_KO,
+	RES_OK, //si
+	RES_KO, //no
 }
