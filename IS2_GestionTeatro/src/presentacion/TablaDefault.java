@@ -192,7 +192,7 @@ public class TablaDefault<T extends Convertable<T>> extends JFrame {
 	        TableColumnModel cm = table.getColumnModel();
 	        Dimension d = Constants.screenDimension();
 	        double w = d.getWidth(); 
-	        w -= d.getWidth()/1.9;
+	        w -= d.getWidth()/2;
 	        w /= columnNames.length;
 	        for (int i = 0; i < columnNames.length; ++i) {
 	        	cm.getColumn(i).setPreferredWidth((int) Math.round(w));

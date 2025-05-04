@@ -1,7 +1,6 @@
 package presentacion.GUIFactura;
 
 import java.util.ArrayList;
-import java.util.Collection;
 
 import javax.swing.*;
 
@@ -47,9 +46,5 @@ public class VistaMostrarFacs extends VistaDefault {
 			else error = Messages.NO_HAY_DATOS;
 			JSwingUtils.createErrorDialogMessage(Messages.X_MOSTRAR_FACTURAS + ' ' + Messages.MOTIVO.formatted(error));
 		}
-	}
-	
-	public static void main(String args[]) {
-		VistaMostrarFacs mf = new VistaMostrarFacs();
 	}
 }

@@ -33,10 +33,10 @@ public class VistaAltaObra extends VistaDefault implements IGUI{
 		agregar = new JButton("Agregar");
 		cancelar = new JButton("Cancelar");
 		JLabel titulo1 = new JLabel("Titulo"), autor1 = new JLabel("Autor"), genero1 = new JLabel("Género"), sinopsis1 = new JLabel("Sinopsis");
-		titulo = new JTextField();
-		autor = new JTextField();
-		genero = new JTextField();
-		sinopsis = new JTextField();
+		titulo = new JTextField(20);
+		autor = new JTextField(20);
+		genero = new JTextField(20);
+		sinopsis = new JTextField(20);
 		
 		ArrayList<Pair<JComponent, JComponent>> campos = new ArrayList<>();
 		campos.add(new Pair<>(titulo1, titulo));
