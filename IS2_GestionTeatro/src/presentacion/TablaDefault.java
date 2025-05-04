@@ -160,16 +160,22 @@ public class TablaDefault<T extends Convertable<T>> extends JFrame {
      * It supports both consultation (read-only) and editable modes. In editable mode, an "Aceptar" button is displayed
      * to confirm edits made to the table.</p>
      *
+     * <p>In this constructor, the column header widths are dynamically calculated based on the width of each column name.
+     * The width is determined by calculating the pixel width of the text in the header using {@code FontMetrics}, and a
+     * buffer of 120 pixels is added to ensure proper display of the headers in the window.</p>
+     *
+     * <p>If the table is in editable mode, only a single row will be displayed for editing. If the table contains more than one row
+     * and editable mode is selected, an {@code IllegalArgumentException} will be thrown.</p>
+     *
      * @param nombreTabla the title to be shown on the window's title bar
      * @param columnNames an array of column header names (each corresponding to a property of the domain object)
      * @param data a list of domain objects (implementing {@link Convertable}) to be displayed in the table
-     * @param consultar if {@code true}, the window uses a compact, fixed-size layout intended for simple viewing or editing a single record
-     * @param editable if {@code true}, enables editing of the table's cells and shows an "Aceptar" button at the bottom
-     *
+     * @param CUActualizar if {@code true}, enables editable mode and shows an "Aceptar" button for confirming table edits
+     * 
      * <p>Behavior notes:</p>
      * <ul>
      *   <li>If {@code data} is not {@code null}, each row in the table corresponds to an instance of the domain object.</li>
-     *   <li>In editable + consultar mode, it assumes a single row and allows inline editing of that record.</li>
+     *   <li>In editable mode, only one row will be available for editing, assuming the table's data size is 1.</li>
      *   <li>Column values are dynamically extracted and updated using the {@code getColumnValue} and {@code setColumnValue} methods from {@code Convertable}.</li>
      * </ul>
      */
