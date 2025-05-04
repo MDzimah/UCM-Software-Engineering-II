@@ -9,6 +9,7 @@ import exceptions.BBDDWriteException;
 import misc.Messages;
 import misc.OpsBBDD;
 import negocio.taquillero.TTaquillero;
+import negocio.taquillero.TTaquillero.Genero;
 
 public class DAOTaquilleroImp implements DAOTaquillero {
 
@@ -36,7 +37,7 @@ public class DAOTaquilleroImp implements DAOTaquillero {
 		nuevoTaq.put(Messages.KEY_numVentas, tCliente.getNumVentas());
 		nuevoTaq.put(Messages.KEY_sueldo, tCliente.getSueldo());
 		nuevoTaq.put(Messages.KEY_edad, tCliente.getEdad());
-		nuevoTaq.put(Messages.KEY_genero, tCliente.getGenero());
+		nuevoTaq.put(Messages.KEY_genero, tCliente.getGenero().toString());
 		nuevoTaq.put(Messages.KEY_act, tCliente.getActivo());
 		
 		taquilleros.put(Integer.toString(newId), nuevoTaq);
@@ -47,15 +48,38 @@ public class DAOTaquilleroImp implements DAOTaquillero {
 
 	@Override
 	public int delete(int id) throws BBDDReadException, BBDDWriteException {
-		// TODO Auto-generated method stub
-		return 0;
+		if(!OpsBBDD.isEmpty(Messages.BDTaq)) {
+			JSONObject bdTaq = OpsBBDD.read(Messages.BDTaq);
+			JSONObject taquilleros = bdTaq.getJSONObject(Messages.KEY_taquilleros);
+			
+			String _id = Integer.toString(id);
+			if(taquilleros.has(_id) && taquilleros.getJSONObject(_id).getBoolean(Messages.KEY_act)) {
+				taquilleros.getJSONObject(_id).put(Messages.KEY_act, false); //borrado lógico
+				OpsBBDD.write(bdTaq, Messages.BDTaq);
+				return id; 
+			}
+		}
+		return -1; //no se ha encontrado o no existe
 	}
 
 	@Override
 	public TTaquillero read(int id) throws BBDDReadException {
-		// TODO Auto-generated method stub
+		if(!OpsBBDD.isEmpty(Messages.BDTaq)) {
+			JSONObject bdTaq = OpsBBDD.read(Messages.BDTaq);
+			JSONObject taquilleros = bdTaq.getJSONObject(Messages.KEY_taquilleros);
+			
+			TTaquillero tTaq = null;
+			String _id = Integer.toString(id);
+			if(taquilleros.has(_id) && taquilleros.getJSONObject(_id).getBoolean(Messages.KEY_act)) {
+				JSONObject taq = taquilleros.getJSONObject(_id);
+				tTaq = readTTaquillero(taq);
+				tTaq.setIdTaquillero(id);
+			}
+			return tTaq; 
+		}
 		return null;
 	}
+	
 	
 	@Override
 	public int update(TTaquillero tCliente) throws BBDDReadException, BBDDWriteException {
@@ -81,5 +105,27 @@ public class DAOTaquilleroImp implements DAOTaquillero {
 		return null;
 	}
 
-	
+	private TTaquillero readTTaquillero(JSONObject taq) {
+		return new TTaquillero(
+				taq.getInt(Messages.KEY_idTaq),
+				taq.getBoolean(Messages.KEY_act),
+				taq.getString(Messages.KEY_DNI),
+				taq.getString(Messages.KEY_nombre),
+				taq.getString(Messages.KEY_apellido),
+				taq.getInt(Messages.KEY_numVentas),
+				taq.getFloat(Messages.KEY_sueldo),
+				taq.getInt(Messages.KEY_edad),
+				Genero.valueOf(taq.getString(Messages.KEY_genero))
+				);
+	}
+
 }
+
+
+
+
+
+
+
+
+
