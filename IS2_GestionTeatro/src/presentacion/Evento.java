@@ -61,4 +61,7 @@ public enum Evento {
 	/*--RESPUESTAS--*/
 	RES_OK, //si
 	RES_KO, //no
+	TABLA_ACTUALIZAR,
+	TABLA_BUSCAR,
+	TABLA_MOSTRAR
 }
