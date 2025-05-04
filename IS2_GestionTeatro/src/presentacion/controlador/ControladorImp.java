@@ -25,6 +25,7 @@ import presentacion.GUIFactura.AbrirVenta;
 import presentacion.GUIMiemCompTea.VistaActualizarMiembroCompania_1;
 import presentacion.GUIObra.VistaActualizarObra_1;
 import presentacion.GUIPase.VistaActualizarPaseDescarga;
+import presentacion.GUITaquillero.VistaActualizarTaquillero_1;
 import presentacion.factoria.FactoriaAbstractaPresentacion;
 
 public class ControladorImp extends Controlador {
@@ -163,7 +164,10 @@ public class ControladorImp extends Controlador {
 				SATaquillero saTaq = FactoriaAbstractaNegocio.getInstance().crearSATaquillero();
 				int idBuscar = (int) datos;
 				TTaquillero tTaq = saTaq.read(idBuscar);
-				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_OK, tTaq);
+				VistaActualizarTaquillero_1 vistaActTaq = (VistaActualizarTaquillero_1) FactoriaAbstractaPresentacion.getInstance().createVista(Evento.ACTUALIZAR_TAQUILLERO_1);
+				vistaActTaq.cargarTaquillero(tTaq);
+				vistaActTaq.setVisible(true);
+				//FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_OK, tTaq);
 			} catch (Exception e) {
 				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_KO, e);
 			}
