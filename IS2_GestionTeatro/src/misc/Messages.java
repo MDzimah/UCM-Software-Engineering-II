@@ -79,6 +79,9 @@ public class Messages {
 	public static final String ERROR_ESCRITURA_BBDD = "Error al escribr en la BBDD de %s";
 	public static final String ERROR = "ERROR: %s"; 
 	
+	//Excepciones 
+	public static final String EXC_UNKNOWN_TAQ = "Taquillero desconocido";
+	
 	//BBDD
 	public static final String PATH_TO_BBDD = "resources/BBDD/%s";
 	
