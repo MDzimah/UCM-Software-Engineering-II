@@ -28,6 +28,7 @@ public class ControladorImp extends Controlador {
 	@Override
 	public void accion(Evento evento, Object datos) {
 		switch(evento) {
+		
 		//Factura
 		case ANYADIR_PASE_A_VENTA: {
 			try {
@@ -101,7 +102,6 @@ public class ControladorImp extends Controlador {
 		
 		
 		//Cliente
-		
 		case ALTA_CLIENTE: 
 		case BUSCAR_CLIENTE: 
 		case BAJA_CLIENTE:
@@ -109,11 +109,47 @@ public class ControladorImp extends Controlador {
 		case ACTUALIZAR_CLIENTE: 
 		
 		//Taquillero
-		case ALTA_TAQUILLERO:
-		case BAJA_TAQUILLERO:
-		case BUSCAR_TAQUILLERO:
-		case MOSTRAR_TAQUILLEROS:
-		case ACTUALIZAR_TAQUILLERO:
+		case ALTA_TAQUILLERO: {
+			
+			
+			
+			
+			break;
+		}
+		case BAJA_TAQUILLERO: {
+			
+			
+			
+			
+			break;
+		}
+		case BUSCAR_TAQUILLERO: {
+			
+			
+			
+			
+			break;
+		}
+		case MOSTRAR_TAQUILLEROS: {
+			
+			
+			
+			
+			break;
+		}
+		case ACTUALIZAR_TAQUILLERO_0: {
+			
+			
+			
+			
+			break;
+		}
+		case ACTUALIZAR_TAQUILLERO_1: {
+			
+			
+			
+			break;
+		}
 			
 		//Pase
 		
