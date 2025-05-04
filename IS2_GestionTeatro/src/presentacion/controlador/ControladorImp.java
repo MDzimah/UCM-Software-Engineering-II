@@ -8,6 +8,7 @@ import exceptions.BBDDReadException;
 import exceptions.BBDDWriteException;
 import exceptions.UnknownClienteException;
 import exceptions.UnknownTaquilleroException;
+import misc.Messages;
 import negocio.compTea.SACompTea;
 import negocio.compTea.TCompTea;
 import negocio.factoria.FactoriaAbstractaNegocio;
@@ -18,6 +19,7 @@ import negocio.pase.SAPase;
 import negocio.pase.TPase;
 import presentacion.Evento;
 import presentacion.GUIFactura.AbrirVenta;
+import presentacion.GUIMiemCompTea.VistaActualizarMiembroCompania_1;
 import presentacion.GUIObra.VistaActualizarObra_1;
 import presentacion.GUIPase.VistaActualizarPaseDescarga;
 import presentacion.factoria.FactoriaAbstractaPresentacion;
@@ -158,7 +160,7 @@ public class ControladorImp extends Controlador {
 				SAPase saPase = FactoriaAbstractaNegocio.getInstance().crearSAPase();
 				int idBuscado = (int)datos;
 				TPase tPaseActualizar = saPase.read(idBuscado);
-				VistaActualizarPaseDescarga vista = (VistaActualizarPaseDescarga) FactoriaAbstractaPresentacion.getInstance().createVista(Evento.ACTUALIZAR_OBRA_1);
+				VistaActualizarPaseDescarga vista = (VistaActualizarPaseDescarga) FactoriaAbstractaPresentacion.getInstance().createVista(Evento.ACTUALIZAR_PASE_DESCARGA);
 				vista.cargarPase(tPaseActualizar);
 			} catch(Exception e) {
 				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_KO, e);
@@ -372,7 +374,36 @@ public class ControladorImp extends Controlador {
 		}
 		
 		//MiemCompTea
-		case ACTUALIZAR_MIEMBRO_COMPANIA:
+		case ACTUALIZAR_MIEMBRO_COMPANIA_0:
+		{
+			try {
+				SAMiemCompTea saMiemComp = FactoriaAbstractaNegocio.getInstance().crearSAMiemCompTea();
+				TMiemCompTea tMiemComp = saMiemComp.read((int)datos);
+				if (tMiemComp != null) {
+					VistaActualizarMiembroCompania_1 vista= (VistaActualizarMiembroCompania_1) FactoriaAbstractaPresentacion.getInstance().createVista(Evento.ACTUALIZAR_MIEMBRO_COMPANIA_1);
+					vista.cargarMiembro(tMiemComp);
+				}
+				else {
+					FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_KO, Messages.ID_NO_ENCONTRADO);
+				}
+			}
+			catch(Exception e) {
+				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_KO, e.getMessage());
+			}
+			break;
+		}
+		case ACTUALIZAR_MIEMBRO_COMPANIA_1:
+		{
+			try {
+				SAMiemCompTea saMiemComp = FactoriaAbstractaNegocio.getInstance().crearSAMiemCompTea();
+				saMiemComp.update((TMiemCompTea) datos);
+				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_OK, null);
+			}
+			catch(Exception e) {
+				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_KO, e.getMessage());
+			}
+			break;
+		}
 		case BUSCAR_MIEMBRO_COMPANIA:
 		{
 			try {
