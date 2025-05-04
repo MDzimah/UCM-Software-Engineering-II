@@ -14,7 +14,6 @@ public class TTaquillero {
 	private int edad;
 	private float sueldo;
 	private int numVentas;
-	private Collection<TFactura> facturas;
 	
 	public enum Genero { HOMBRE, MUJER } //Habria que ponerlo en "misc" porque el enum lo tienen varios subsistemas
 	private Genero genero;
@@ -44,7 +43,6 @@ public class TTaquillero {
 	public float getSueldo() { return sueldo; }
 	public int getNumVentas() { return numVentas; }
 	public Genero getGenero() { return genero; }
-	public Collection<TFactura> getFacturas() { return Collections.unmodifiableCollection(facturas); } //solo lectura
 	
 	//setters
 	public void setIdTaquillero(int idTaquillero) { this.idTaquillero = idTaquillero; }

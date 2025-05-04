@@ -1,6 +1,8 @@
 package integracion.taquillero;
 
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Set;
 
 import org.json.JSONObject;
 
@@ -14,7 +16,7 @@ import negocio.taquillero.TTaquillero.Genero;
 public class DAOTaquilleroImp implements DAOTaquillero {
 
 	@Override
-	public int create(TTaquillero tCliente) throws BBDDReadException, BBDDWriteException {
+	public int create(TTaquillero tTaquillero) throws BBDDReadException, BBDDWriteException {
 		JSONObject bdTaq = new JSONObject();
 		
 		if(OpsBBDD.isEmpty(Messages.BDTaq)) { //base de datos vacía
@@ -31,14 +33,14 @@ public class DAOTaquilleroImp implements DAOTaquillero {
 		//creamos nuevo taquillero
 		JSONObject nuevoTaq = new JSONObject();
 		nuevoTaq.put(Messages.KEY_idTaq, newId);
-		nuevoTaq.put(Messages.KEY_nombre, tCliente.getNombre());
-		nuevoTaq.put(Messages.KEY_apellido, tCliente.getApellido());
-		nuevoTaq.put(Messages.KEY_DNI, tCliente.getDNI());
-		nuevoTaq.put(Messages.KEY_numVentas, tCliente.getNumVentas());
-		nuevoTaq.put(Messages.KEY_sueldo, tCliente.getSueldo());
-		nuevoTaq.put(Messages.KEY_edad, tCliente.getEdad());
-		nuevoTaq.put(Messages.KEY_genero, tCliente.getGenero().toString());
-		nuevoTaq.put(Messages.KEY_act, tCliente.getActivo());
+		nuevoTaq.put(Messages.KEY_nombre, tTaquillero.getNombre());
+		nuevoTaq.put(Messages.KEY_apellido, tTaquillero.getApellido());
+		nuevoTaq.put(Messages.KEY_DNI, tTaquillero.getDNI());
+		nuevoTaq.put(Messages.KEY_numVentas, tTaquillero.getNumVentas());
+		nuevoTaq.put(Messages.KEY_sueldo, tTaquillero.getSueldo());
+		nuevoTaq.put(Messages.KEY_edad, tTaquillero.getEdad());
+		nuevoTaq.put(Messages.KEY_genero, tTaquillero.getGenero().toString());
+		nuevoTaq.put(Messages.KEY_act, tTaquillero.getActivo());
 		
 		taquilleros.put(Integer.toString(newId), nuevoTaq);
 		OpsBBDD.write(bdTaq, Messages.BDTaq);
@@ -72,7 +74,7 @@ public class DAOTaquilleroImp implements DAOTaquillero {
 			String _id = Integer.toString(id);
 			if(taquilleros.has(_id) && taquilleros.getJSONObject(_id).getBoolean(Messages.KEY_act)) {
 				JSONObject taq = taquilleros.getJSONObject(_id);
-				tTaq = readTTaquillero(taq);
+				tTaq = createTTaq(taq);
 				tTaq.setIdTaquillero(id);
 			}
 			return tTaq; 
@@ -82,14 +84,43 @@ public class DAOTaquilleroImp implements DAOTaquillero {
 	
 	
 	@Override
-	public int update(TTaquillero tCliente) throws BBDDReadException, BBDDWriteException {
-		// TODO Auto-generated method stub
-		return 0;
+	public int update(TTaquillero tTaquillero) throws BBDDReadException, BBDDWriteException {
+		if(!OpsBBDD.isEmpty(Messages.BDTaq)) {
+			JSONObject bdTaq = OpsBBDD.read(Messages.BDTaq);
+			JSONObject taquilleros = bdTaq.getJSONObject(Messages.KEY_taquilleros);
+			
+			String _id = Integer.toString(tTaquillero.getIdTaquillero());
+			if(taquilleros.has(_id) && taquilleros.getJSONObject(_id).getBoolean(Messages.KEY_act)) {
+				JSONObject taq = createJSONTaq(tTaquillero);
+				taquilleros.put(_id, taq);
+				OpsBBDD.write(bdTaq, Messages.BDTaq);
+				return Integer.parseInt(_id);
+			}
+		}
+		return -1;
 	}
 
 	@Override
 	public Collection<TTaquillero> readAll() throws BBDDReadException {
-		// TODO Auto-generated method stub
+		if(!OpsBBDD.isEmpty(Messages.BDTaq)) {
+			JSONObject bdTaq = OpsBBDD.read(Messages.BDTaq);
+			JSONObject taquilleros = bdTaq.getJSONObject(Messages.KEY_taquilleros);
+			
+			Collection<TTaquillero> listaTaqs = new ArrayList();
+			
+			Set<String> allIds = taquilleros.keySet();
+			for(String idTaq : allIds) {
+				JSONObject taq = taquilleros.getJSONObject(idTaq);
+				
+				if(taq.getBoolean(Messages.KEY_act)) {
+					TTaquillero tTaq = createTTaq(taq);
+					tTaq.setIdTaquillero(Integer.valueOf(idTaq));
+					listaTaqs.add(tTaq);
+				}
+			}
+			
+			return listaTaqs;
+		}
 		return null;
 	}
 	
@@ -99,13 +130,34 @@ public class DAOTaquilleroImp implements DAOTaquillero {
 		return null;
 	}
 
+	//Método adicional
 	@Override
 	public TTaquillero readByDNI() throws BBDDReadException {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	private TTaquillero readTTaquillero(JSONObject taq) {
+	/*
+	 * Crea un JSONObject a partir del Transfer Taquillero
+	 */
+	private JSONObject createJSONTaq(TTaquillero tTaquillero) {
+		JSONObject nuevoTaq = new JSONObject();
+		nuevoTaq.put(Messages.KEY_idTaq, tTaquillero.getIdTaquillero());
+		nuevoTaq.put(Messages.KEY_nombre, tTaquillero.getNombre());
+		nuevoTaq.put(Messages.KEY_apellido, tTaquillero.getApellido());
+		nuevoTaq.put(Messages.KEY_DNI, tTaquillero.getDNI());
+		nuevoTaq.put(Messages.KEY_numVentas, tTaquillero.getNumVentas());
+		nuevoTaq.put(Messages.KEY_sueldo, tTaquillero.getSueldo());
+		nuevoTaq.put(Messages.KEY_edad, tTaquillero.getEdad());
+		nuevoTaq.put(Messages.KEY_genero, tTaquillero.getGenero().toString());
+		nuevoTaq.put(Messages.KEY_act, tTaquillero.getActivo());
+		return nuevoTaq;
+	}
+	
+	/*
+	 * Crea un Transfer Taquillero a partir del JSONObject
+	 */
+	private TTaquillero createTTaq(JSONObject taq) {
 		return new TTaquillero(
 				taq.getInt(Messages.KEY_idTaq),
 				taq.getBoolean(Messages.KEY_act),
@@ -118,10 +170,7 @@ public class DAOTaquilleroImp implements DAOTaquillero {
 				Genero.valueOf(taq.getString(Messages.KEY_genero))
 				);
 	}
-
 }
-
-
 
 
 
