@@ -40,12 +40,6 @@ public class SATaquilleroImp implements SATaquillero {
 	}
 
 	@Override
-	public Collection<TTaquillero> readActive() throws BBDDReadException {
-		DAOTaquillero daoTaquillero = FactoriaAbstractaIntegracion.getInstance().crearDAOTaquillero();
-		return daoTaquillero.readActive();
-	}
-
-	@Override
 	public TTaquillero readByDNI() throws BBDDReadException {
 		
 		return null;

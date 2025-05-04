@@ -125,12 +125,6 @@ public class DAOTaquilleroImp implements DAOTaquillero {
 	}
 	
 	@Override
-	public Collection<TTaquillero> readActive() throws BBDDReadException { //Seguramente lo elimine
-		// TODO Auto-generated method stub
-		return null;
-	}
-	
-	@Override
 	public int aumentarVenta(int id) throws BBDDReadException, BBDDWriteException {
 		if(!OpsBBDD.isEmpty(Messages.BDTaq)) {
 			JSONObject bdTaq = OpsBBDD.read(Messages.BDTaq);
