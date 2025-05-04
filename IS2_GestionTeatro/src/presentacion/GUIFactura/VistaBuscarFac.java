@@ -9,9 +9,9 @@ import exceptions.BBDDReadException;
 import misc.Constants;
 import misc.Messages;
 import misc.Pair;
-import misc.JSwingUtils;
 import negocio.factura.TFactura;
 import presentacion.Evento;
+import presentacion.ViewUtils;
 import presentacion.TablaDefault;
 import presentacion.VistaDefault;
 import presentacion.controlador.Controlador;
@@ -25,7 +25,7 @@ public class VistaBuscarFac extends VistaDefault {
 	
 	public VistaBuscarFac() {
 		this.setTitle("Buscar factura");
-		JSwingUtils.setAppIcon(this);
+		ViewUtils.setAppIcon(this);
 		JPanel mainPanel = new JPanel(new BorderLayout());
 		mainPanel.setSize(Constants.getScaledScreenDimension(2, 2));
 		this.lIdFac = new JLabel("Id factura:");
@@ -67,7 +67,7 @@ public class VistaBuscarFac extends VistaDefault {
 			String error;
 			if (datos instanceof BBDDReadException) error = ((BBDDReadException)datos).getMessage();
 			else error = Messages.ID_NO_ENCONTRADO.formatted(String.valueOf(((int)datos)));
-			JSwingUtils.createErrorDialogMessage(Messages.X_BUSCAR_FACTURA + ' ' + Messages.MOTIVO.formatted(error));
+			ViewUtils.createErrorDialogMessage(Messages.X_BUSCAR_FACTURA + ' ' + Messages.MOTIVO.formatted(error));
 		}
 	}
 }

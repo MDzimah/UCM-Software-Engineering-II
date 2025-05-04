@@ -3,12 +3,12 @@ package presentacion.GUIPase;
 import java.util.ArrayList;
 import java.util.Collection;
 
-import misc.JSwingUtils;
 import misc.Messages;
 import negocio.factoria.FactoriaAbstractaNegocio;
 import negocio.pase.TPase;
 import presentacion.Evento;
 import presentacion.IGUI;
+import presentacion.ViewUtils;
 import presentacion.TablaDefault;
 import presentacion.controlador.Controlador;
 
@@ -28,10 +28,10 @@ public class VistaActualizarPaseDescarga implements IGUI {
 	@Override
 	public void actualizar(Evento evento, Object datos) {
 		if(evento==Evento.RES_OK) {
-			JSwingUtils.createDialogMessage(Messages.EX_PASE_ACTUALIZADO);
+			ViewUtils.createDialogMessage(Messages.EX_PASE_ACTUALIZADO);
 		}
 		else if (evento==Evento.RES_OK) {
-			JSwingUtils.createErrorDialogMessage(Messages.X_PASE_ACTUALIZADO + ' ' + Messages.MOTIVO.formatted((String)datos));
+			ViewUtils.createErrorDialogMessage(Messages.X_PASE_ACTUALIZADO + ' ' + Messages.MOTIVO.formatted((String)datos));
 		}
 	}
 

@@ -6,8 +6,6 @@ import java.awt.event.*;
 import javax.swing.*;
 import javax.swing.border.*;
 
-import misc.Constants;
-import misc.JSwingUtils;
 import presentacion.GUIFactura.AbrirVenta;
 import presentacion.factoria.FactoriaAbstractaPresentacion;
 
@@ -23,7 +21,7 @@ public class MainWindow extends JFrame {
     private JButton subsMiemCompTea;
 
     public MainWindow() {
-    	JSwingUtils.setAppIcon(this);
+    	ViewUtils.setAppIcon(this);
         subsFactura = new JButton("FACTURA");
         subsCliente = new JButton("CLIENTE");
         subsPase = new JButton("PASE");
@@ -59,7 +57,7 @@ public class MainWindow extends JFrame {
             //Para que la imagen quepa en la parte izquierda del panel
             protected void paintComponent(Graphics g) {
                 super.paintComponent(g);
-                Image image = Constants.logoTeatret();
+                Image image = ViewUtils.logoTeatret();
                 int x = (getWidth() - image.getWidth(null)) / 2;
                 int y = (getHeight() - image.getHeight(null)) / 2;
                 g.drawImage(image, x, y, this);
@@ -75,7 +73,7 @@ public class MainWindow extends JFrame {
             @Override
             protected void paintComponent(Graphics g) {
                 super.paintComponent(g);
-                g.drawImage(Constants.marcoOro(), 0, 0, getWidth(), getHeight(), this);
+                g.drawImage(ViewUtils.marcoOro(), 0, 0, getWidth(), getHeight(), this);
             }
         };
 

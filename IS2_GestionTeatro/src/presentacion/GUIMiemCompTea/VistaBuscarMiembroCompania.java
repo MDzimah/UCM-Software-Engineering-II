@@ -12,13 +12,13 @@ import javax.swing.JTextField;
 import javax.swing.SpinnerNumberModel;
 
 import exceptions.BBDDReadException;
-import misc.JSwingUtils;
 import misc.Messages;
 import misc.Pair;
 import negocio.factura.TFactura;
 import negocio.miemCompTea.TMiemCompTea;
 import negocio.miemCompTea.TMiemCompTea.Genero;
 import presentacion.Evento;
+import presentacion.ViewUtils;
 import presentacion.TablaDefault;
 import presentacion.VistaDefault;
 import presentacion.controlador.Controlador;
@@ -68,7 +68,7 @@ public class VistaBuscarMiembroCompania extends VistaDefault{
 			String error;
 			if (datos instanceof String) error = (String) datos;
 			else error = Messages.ID_NO_ENCONTRADO.formatted(String.valueOf(((int)datos)));
-			JSwingUtils.createErrorDialogMessage(Messages.X_MIEMBRO_ENCONTRADO + ' ' + Messages.MOTIVO.formatted(error));
+			ViewUtils.createErrorDialogMessage(Messages.X_MIEMBRO_ENCONTRADO + ' ' + Messages.MOTIVO.formatted(error));
 		}
 	}
 }

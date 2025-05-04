@@ -38,6 +38,8 @@ import negocio.factura.TFactura;
  *
  * @param <T> the type of domain objects to display in the table; must implement {@link Convertable}
  */
+
+@SuppressWarnings("serial")
 public class TablaDefault<T extends Convertable<T>> extends JFrame {
 	//Solo para los modos de actualizacion
 	private JButton aceptar; 
@@ -73,7 +75,7 @@ public class TablaDefault<T extends Convertable<T>> extends JFrame {
         		datos.get(row).setColumnValue(col, (String)value);
         	}
         	catch(Exception e) {
-        		JSwingUtils.createErrorDialogMessage(Messages.EDICION_INVALIDA_TABLA);
+        		ViewUtils.createErrorDialogMessage(Messages.EDICION_INVALIDA_TABLA);
         	}
             fireTableCellUpdated(row, col);
         }
@@ -188,19 +190,19 @@ public class TablaDefault<T extends Convertable<T>> extends JFrame {
         if (data != null && !data.isEmpty()) {
         	DefaultTableModel model = new DefaultTableModel(columnNames, data);
         	JTable table = new JTable(model);
-	        table.setFont(Constants.FontTablaDefaultCuerpo());
+	        table.setFont(ViewUtils.FontTablaDefaultCuerpo());
 	        
 	        //Cambiar apariencia del header de la tabla
 	        	//Font
 	        JTableHeader header = table.getTableHeader();
-	        header.setFont(Constants.FontTablaDefaultCabecera());
+	        header.setFont(ViewUtils.FontTablaDefaultCabecera());
 	        header.setReorderingAllowed(false);
 	        
 	        	//Header
 	        TableColumnModel cm = table.getColumnModel();
 	        
 	        Graphics2D temp = new BufferedImage(1, 1, BufferedImage.TYPE_INT_ARGB).createGraphics();
-	        temp.setFont(Constants.FontTablaDefaultCabecera());
+	        temp.setFont(ViewUtils.FontTablaDefaultCabecera());
 	        
 	        FontMetrics metrics = temp.getFontMetrics();
 	        for (int i = 0; i < columnNames.length; ++i) {

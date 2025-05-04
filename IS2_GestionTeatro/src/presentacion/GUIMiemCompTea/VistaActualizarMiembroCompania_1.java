@@ -10,7 +10,6 @@ import javax.swing.JSpinner;
 import javax.swing.JTextField;
 import javax.swing.SpinnerNumberModel;
 
-import misc.JSwingUtils;
 import misc.Messages;
 import misc.Pair;
 import negocio.miemCompTea.TMiemCompTea;
@@ -18,6 +17,7 @@ import negocio.miemCompTea.TMiemCompTea.Genero;
 import negocio.obra.TObra;
 import negocio.pase.TPase;
 import presentacion.Evento;
+import presentacion.ViewUtils;
 import presentacion.TablaDefault;
 import presentacion.VistaDefault;
 import presentacion.controlador.Controlador;
@@ -39,10 +39,10 @@ public class VistaActualizarMiembroCompania_1 extends VistaDefault {
 	@Override
 	public void actualizar(Evento evento, Object datos) {
 		if(evento==Evento.RES_OK) {
-			JSwingUtils.createDialogMessage(Messages.EX_MIEMBRO_ACTUALIZADO);
+			ViewUtils.createDialogMessage(Messages.EX_MIEMBRO_ACTUALIZADO);
 		}
 		else if (evento==Evento.RES_KO) {
-			JSwingUtils.createErrorDialogMessage(Messages.X_MIEMBRO_ACTUALIZADO + ' ' + Messages.MOTIVO.formatted((String)datos));
+			ViewUtils.createErrorDialogMessage(Messages.X_MIEMBRO_ACTUALIZADO + ' ' + Messages.MOTIVO.formatted((String)datos));
 		}
 	}
 }

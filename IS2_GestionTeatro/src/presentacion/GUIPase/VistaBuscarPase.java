@@ -12,13 +12,13 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import misc.Constants;
-import misc.JSwingUtils;
 import misc.Messages;
 import misc.Pair;
 import negocio.factura.TFactura;
 import negocio.pase.TPase;
 import presentacion.Evento;
 import presentacion.IGUI;
+import presentacion.ViewUtils;
 import presentacion.TablaDefault;
 import presentacion.VistaDefault;
 import presentacion.controlador.Controlador;
@@ -63,7 +63,7 @@ public class VistaBuscarPase extends VistaDefault {
 																	  		 											   //la info del transfer del pase buscado
 		}
 		else if(evento==Evento.RES_KO) {
-			JSwingUtils.createErrorDialogMessage(Messages.X_PASE_BUSCADO + ' ' + Messages.MOTIVO.formatted((String)datos));
+			ViewUtils.createErrorDialogMessage(Messages.X_PASE_BUSCADO + ' ' + Messages.MOTIVO.formatted((String)datos));
 		}
 	}
 

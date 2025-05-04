@@ -5,10 +5,10 @@ import java.util.Collection;
 
 import javax.swing.JButton;
 
-import misc.JSwingUtils;
 import misc.Messages;
 import negocio.miemCompTea.TMiemCompTea;
 import presentacion.Evento;
+import presentacion.ViewUtils;
 import presentacion.TablaDefault;
 import presentacion.VistaDefault;
 import presentacion.controlador.Controlador;
@@ -45,7 +45,7 @@ public class VistaMostrarMiembrosCompania extends VistaDefault{
 			String error;
 			if (datos instanceof String) error = (String) datos;
 			else error = Messages.NO_HAY_DATOS;
-			JSwingUtils.createErrorDialogMessage(Messages.X_MIEMBROS_LISTADOS + ' ' + Messages.MOTIVO.formatted(error));
+			ViewUtils.createErrorDialogMessage(Messages.X_MIEMBROS_LISTADOS + ' ' + Messages.MOTIVO.formatted(error));
 		}
 		
 	}

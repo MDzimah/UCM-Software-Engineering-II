@@ -9,10 +9,10 @@ import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.SwingUtilities;
 
-import misc.JSwingUtils;
 import misc.Pair;
 import presentacion.Evento;
 import presentacion.IGUI;
+import presentacion.ViewUtils;
 import presentacion.controlador.Controlador;
 import presentacion.factoria.FactoriaAbstractaPresentacion;
 import presentacion.VistaDefault;
@@ -58,11 +58,11 @@ public class VistaBajaObra extends VistaDefault implements IGUI{
 	@Override
 	public void actualizar(presentacion.Evento evento, Object datos) {
 		if(evento==Evento.RES_OK) {
-			JSwingUtils.createDialogMessage("Se ha eliminado correctamente la obra: " + (int)datos);
+			ViewUtils.createDialogMessage("Se ha eliminado correctamente la obra: " + (int)datos);
 
 		}
 		else if(evento==Evento.RES_KO) {
-			JSwingUtils.createErrorDialogMessage("No se ha podido eliminar la obra.\n" + "Error: " +((Exception) datos).getMessage());
+			ViewUtils.createErrorDialogMessage("No se ha podido eliminar la obra.\n" + "Error: " +((Exception) datos).getMessage());
 
 		}
 	}

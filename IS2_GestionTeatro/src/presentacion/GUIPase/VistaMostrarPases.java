@@ -7,12 +7,12 @@ import javax.swing.JButton;
 import javax.swing.JPanel;
 
 import misc.Constants;
-import misc.JSwingUtils;
 import misc.Messages;
 import negocio.factura.TFactura;
 import negocio.pase.TPase;
 import presentacion.Evento;
 import presentacion.IGUI;
+import presentacion.ViewUtils;
 import presentacion.TablaDefault;
 import presentacion.VistaDefault;
 import presentacion.controlador.Controlador;
@@ -46,7 +46,7 @@ public class VistaMostrarPases extends VistaDefault {
 			new TablaDefault<TPase>("PASES", Messages.colNomsPase, (ArrayList<TPase>)datos, false, false).setVisible(true);
 		}
 		else if(evento == Evento.RES_KO) {
-			JSwingUtils.createErrorDialogMessage(Messages.X_PASE_CREADO + ' ' + Messages.MOTIVO.formatted((String)datos));
+			ViewUtils.createErrorDialogMessage(Messages.X_PASE_CREADO + ' ' + Messages.MOTIVO.formatted((String)datos));
 		}
 	}
 

@@ -7,11 +7,11 @@ import java.util.List;
 import javax.swing.JButton;
 import javax.swing.SwingUtilities;
 
-import misc.JSwingUtils;
 import misc.Messages;
 import negocio.obra.TObra;
 import presentacion.Evento;
 import presentacion.IGUI;
+import presentacion.ViewUtils;
 import presentacion.TablaDefault;
 import presentacion.VistaDefault;
 import presentacion.controlador.Controlador;
@@ -51,7 +51,7 @@ public class VistaMostrarObras extends VistaDefault implements IGUI{
             tabla.setVisible(true);
 		}
 		else if(evento==Evento.RES_KO) {
-			JSwingUtils.createErrorDialogMessage("No se han podido mostrar las obras.\n" + "Error: " +((Exception) datos).getMessage());
+			ViewUtils.createErrorDialogMessage("No se han podido mostrar las obras.\n" + "Error: " +((Exception) datos).getMessage());
 		}
 	}
 }

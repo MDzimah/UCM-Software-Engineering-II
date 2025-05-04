@@ -12,11 +12,11 @@ import javax.swing.JTextField;
 import javax.swing.SwingUtilities;
 
 import integracion.factoria.FactoriaAbstractaIntegracion;
-import misc.JSwingUtils;
 import misc.Messages;
 import misc.Pair;
 import presentacion.Evento;
 import presentacion.IGUI;
+import presentacion.ViewUtils;
 import presentacion.TablaDefault;
 import presentacion.controlador.Controlador;
 import presentacion.factoria.FactoriaAbstractaPresentacion;
@@ -79,7 +79,7 @@ public class VistaBuscarCompania extends VistaDefault implements IGUI{
 			
 		}
 		else if(evento==Evento.RES_KO) {
-			JSwingUtils.createErrorDialogMessage("NO EXISTEN LAS COMPAÑÍAS:.\n" +(String)datos);
+			ViewUtils.createErrorDialogMessage("NO EXISTEN LAS COMPAÑÍAS:.\n" +(String)datos);
 		}
 		
 	}

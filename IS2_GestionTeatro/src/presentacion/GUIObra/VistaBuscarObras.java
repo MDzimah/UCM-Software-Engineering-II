@@ -11,13 +11,13 @@ import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.SwingUtilities;
 
-import misc.JSwingUtils;
 import misc.Messages;
 import misc.Pair;
 import negocio.factura.TFactura;
 import negocio.obra.TObra;
 import presentacion.Evento;
 import presentacion.IGUI;
+import presentacion.ViewUtils;
 import presentacion.TablaDefault;
 import presentacion.VistaDefault;
 import presentacion.controlador.Controlador;
@@ -78,7 +78,7 @@ public class VistaBuscarObras extends VistaDefault implements IGUI{
 	            tabla.setVisible(true);
 			}
 			else if(evento==Evento.RES_KO) {
-				JSwingUtils.createErrorDialogMessage("No se han encontrado obras.\n" + "Error: " +((Exception) datos).getMessage());
+				ViewUtils.createErrorDialogMessage("No se han encontrado obras.\n" + "Error: " +((Exception) datos).getMessage());
 			}
 		}
 

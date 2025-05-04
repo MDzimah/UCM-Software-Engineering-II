@@ -9,10 +9,10 @@ import javax.swing.JTextField;
 import javax.swing.SwingUtilities;
 
 import misc.Genero;
-import misc.JSwingUtils;
 import misc.Pair;
 import negocio.taquillero.TTaquillero;
 import presentacion.Evento;
+import presentacion.ViewUtils;
 import presentacion.VistaDefault;
 import presentacion.controlador.Controlador;
 
@@ -48,7 +48,7 @@ public class VistaBuscarTaquillero extends VistaDefault {
 					SwingUtilities.invokeLater(()-> {Controlador.getInstance().accion(Evento.BUSCAR_TAQUILLERO, _id); });
 					VistaBuscarTaquillero.this.dispose();
 				} catch (NumberFormatException ex) {
-					JSwingUtils.createErrorDialogMessage("El ID debe ser un número entero.");
+					ViewUtils.createErrorDialogMessage("El ID debe ser un número entero.");
 					VistaBuscarTaquillero.this.dispose();
 				}
 			}

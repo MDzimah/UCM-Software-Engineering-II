@@ -8,9 +8,9 @@ import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.SwingUtilities;
 
-import misc.JSwingUtils;
 import misc.Pair;
 import presentacion.Evento;
+import presentacion.ViewUtils;
 import presentacion.VistaDefault;
 import presentacion.controlador.Controlador;
 
@@ -46,7 +46,7 @@ public class VistaActualizarTaquillero_0 extends VistaDefault {
 					SwingUtilities.invokeLater(()-> {Controlador.getInstance().accion(Evento.ACTUALIZAR_TAQUILLERO_0, _id); });
 					VistaActualizarTaquillero_0.this.dispose();
 				} catch (NumberFormatException ex) {
-					JSwingUtils.createErrorDialogMessage("El ID debe ser un número entero.");
+					ViewUtils.createErrorDialogMessage("El ID debe ser un número entero.");
 					VistaActualizarTaquillero_0.this.dispose();
 				}
 			}

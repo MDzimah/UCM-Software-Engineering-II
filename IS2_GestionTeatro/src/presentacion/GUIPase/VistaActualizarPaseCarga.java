@@ -12,13 +12,13 @@ import javax.swing.JTextField;
 
 import exceptions.BBDDReadException;
 import exceptions.BBDDWriteException;
-import misc.JSwingUtils;
 import misc.Messages;
 import misc.Pair;
 import negocio.factoria.FactoriaAbstractaNegocio;
 import negocio.factura.TFactura;
 import negocio.pase.TPase;
 import presentacion.Evento;
+import presentacion.ViewUtils;
 import presentacion.VistaDefault;
 import presentacion.controlador.Controlador;
 
@@ -54,7 +54,7 @@ public class VistaActualizarPaseCarga extends VistaDefault {
 	@Override
 	public void actualizar(Evento evento, Object datos) {
 		if(evento==Evento.RES_KO) {
-			JSwingUtils.createErrorDialogMessage(Messages.X_PASE_ACTUALIZADO + ' ' + Messages.MOTIVO.formatted((String)datos));
+			ViewUtils.createErrorDialogMessage(Messages.X_PASE_ACTUALIZADO + ' ' + Messages.MOTIVO.formatted((String)datos));
 		}
 	}
 }

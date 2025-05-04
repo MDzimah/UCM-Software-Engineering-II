@@ -8,6 +8,7 @@ import exceptions.BBDDReadException;
 import misc.*;
 import negocio.factura.TFactura;
 import presentacion.Evento;
+import presentacion.ViewUtils;
 import presentacion.TablaDefault;
 import presentacion.VistaDefault;
 import presentacion.controlador.Controlador;
@@ -44,7 +45,7 @@ public class VistaMostrarFacs extends VistaDefault {
 			String error;
 			if (datos instanceof BBDDReadException) error = ((BBDDReadException)datos).getMessage();
 			else error = Messages.NO_HAY_DATOS;
-			JSwingUtils.createErrorDialogMessage(Messages.X_MOSTRAR_FACTURAS + ' ' + Messages.MOTIVO.formatted(error));
+			ViewUtils.createErrorDialogMessage(Messages.X_MOSTRAR_FACTURAS + ' ' + Messages.MOTIVO.formatted(error));
 		}
 	}
 }
