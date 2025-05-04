@@ -113,7 +113,6 @@ public class ControladorImp extends Controlador {
 		case BAJA_TAQUILLERO:
 		case BUSCAR_TAQUILLERO:
 		case MOSTRAR_TAQUILLEROS:
-		case ACTUALIZAR_TAQUILLERO:
 			
 		//Pase
 		
