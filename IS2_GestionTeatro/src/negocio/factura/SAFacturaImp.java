@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 import exceptions.*;
-import integracion.cliente.DAOCliente;
 import integracion.factoria.FactoriaAbstractaIntegracion;
 import integracion.factura.DAOFactura;
 import integracion.factura.DAOLineaFactura;
@@ -16,6 +15,7 @@ import negocio.cliente.TCliente;
 import negocio.factoria.FactoriaAbstractaNegocio;
 import negocio.pase.SAPase;
 import negocio.pase.TPase;
+import negocio.taquillero.SATaquillero;
 import negocio.taquillero.TTaquillero;
 
 public class SAFacturaImp implements SAFactura {
@@ -24,11 +24,12 @@ public class SAFacturaImp implements SAFactura {
 		
 		Collection<TLineaFactura> carritoFinal = new ArrayList<TLineaFactura>();
 		
-		DAOCliente daoCliente = FactoriaAbstractaIntegracion.getInstance().crearDAOCliente();
+		//El SA FActura NO puede acceder al DAO, tiene q acceder a ellos a traves del SA de otros subs
+		SACliente saCl = FactoriaAbstractaNegocio.getInstance().crearSACliente();
+		SATaquillero saTaq = FactoriaAbstractaNegocio.getInstance().crearSATaquillero();
 		
-		TCliente leidoCliente = daoCliente.read(tDv.getIdCliente());
-		DAOTaquillero daoTaquillero = FactoriaAbstractaIntegracion.getInstance().crearDAOTaquillero();
-		TTaquillero leidoTaquillero = daoTaquillero.read(tDv.getIdTaquillero());
+		TCliente leidoCliente = saCl.read(tDv.getIdCliente());
+		TTaquillero leidoTaquillero = saTaq.read(tDv.getIdTaquillero());
 		
 		//Comprobamos excepciones
 		if (leidoCliente == null) {
@@ -37,16 +38,14 @@ public class SAFacturaImp implements SAFactura {
 		if (leidoTaquillero == null) {
 			throw new UnknownTaquilleroException();
 		}
-		
-		DAOPase daoPase = FactoriaAbstractaIntegracion.getInstance().crearDAOPase();
 
 		//Calculamos el importe final de la factura (si el carrito tiene lineas de factura)
 		if (carritoFinal.size() > 0) {
 			float importeFinal = 0;
 			for (TLineaFactura tLinea : tDv.getCarrito()) {
-				TPase tPase = daoPase.read(tLinea.getIdPase());
+				SAPase saPase = FactoriaAbstractaNegocio.getInstance().crearSAPase();
+				TPase tPase = saPase.read(tLinea.getIdPase()); //HE HECHO CAMBIOS AQUÍ
 				if (tPase != null) {					
-					SAPase saPase = FactoriaAbstractaNegocio.getInstance().crearSAPase();
 					int cantidadVendida = saPase.comprar(tPase.getIdPase(), tLinea.getCantidad());
 					if (cantidadVendida > 0) {
 						tLinea.setCantidad(cantidadVendida);
@@ -58,7 +57,6 @@ public class SAFacturaImp implements SAFactura {
 			}
 		
 			//Aplicamos descuento
-			SACliente saCl = FactoriaAbstractaNegocio.getInstance().crearSACliente();
 			float subTotal = saCl.aplicarDescuento(tDv.getIdCliente(), importeFinal); 
 			
 			//Creamos la factura final
@@ -80,7 +78,7 @@ public class SAFacturaImp implements SAFactura {
 			}
 			
 			//Actualizamos al taquillero encargado de la factura
-			FactoriaAbstractaNegocio.getInstance().crearSATaquillero().aumentarVenta(tFacFinal.getIdTaquillero());
+			saTaq.aumentarVenta(tFacFinal.getIdTaquillero());
 		}
 		
 		return idFacNueva;
@@ -100,9 +98,7 @@ public class SAFacturaImp implements SAFactura {
 
 	@Override
 	public Collection<TFactura> allFacturasPorCliente(int idCliente) throws BBDDReadException {
-		DAOFactura daoFac = FactoriaAbstractaIntegracion.getInstance().crearDAOFactura();
-		ArrayList<TFactura> allFacs = (ArrayList<TFactura>)daoFac.readAll();
-
+		ArrayList<TFactura> allFacs = (ArrayList<TFactura>)this.allFacturas();
 		ArrayList<TFactura> facsPorCli = new ArrayList<TFactura>();
 		
 		for (TFactura tFac : allFacs) {
