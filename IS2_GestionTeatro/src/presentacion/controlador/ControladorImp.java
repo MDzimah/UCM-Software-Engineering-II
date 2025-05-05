@@ -250,8 +250,8 @@ public class ControladorImp extends Controlador {
 		case ALTA_PASE: {
 			try {
 				SAPase saPase = FactoriaAbstractaNegocio.getInstance().crearSAPase();
-				saPase.create((TPase) datos);
-				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_OK, null);
+				int idPase = saPase.create((TPase) datos);
+				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_OK, idPase);
 			} catch(Exception e) {
 				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_KO, e);
 			}
@@ -303,8 +303,8 @@ public class ControladorImp extends Controlador {
 		}
 		case ACTUALIZAR_PASE_DESCARGA:{
 			try {
-				SAObra saPase = FactoriaAbstractaNegocio.getInstance().crearSAObra();
-				saPase.update((TObra) datos);
+				SAPase saPase = FactoriaAbstractaNegocio.getInstance().crearSAPase();
+				saPase.update((TPase) datos);
 				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_OK, null);
 			}
 			catch(Exception e) {

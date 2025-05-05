@@ -9,7 +9,7 @@ public class Messages {
 	public static final String EX_PASE_QUITADO_DE_VENTA = Messages.SHP.formatted("quitado del carrito el pase con id \"%s\"");
 
 		//Pase
-	public static final String EX_PASE_CREADO = Messages.SHP.formatted("creado el pase con id: ");
+	public static final String EX_PASE_CREADO = Messages.SHP.formatted("creado el pase");
 	public static final String EX_PASE_BUSCADO = Messages.SHP.formatted("encontrado el pase");
 	public static final String EX_PASE_ELIMINADO = Messages.SHP.formatted("eliminado el pase");
 	public static final String EX_PASE_ACTUALIZADO = Messages.SHP.formatted("actualizado el pase");

@@ -1,12 +1,59 @@
 {
-    "pases": {"1": {
-        "idCompTea": 2,
-        "precioPase": 3,
-        "fecha": "Mon May 12 17:24:14 CEST 2025",
-        "IdObra": 2,
-        "stock": 23,
-        "idPase": 1,
-        "activo": true
-    }},
-    "lastId": 1
+    "pases": {
+        "1": {
+            "idCompTea": 2,
+            "precioPase": 3,
+            "fecha": "2025-05-28T23:38:07.782",
+            "IdObra": 2,
+            "stock": 1000,
+            "idPase": 1,
+            "activo": false
+        },
+        "2": {
+            "idCompTea": 2,
+            "precioPase": 3,
+            "fecha": "2025-05-28T23:38:07.782",
+            "IdObra": 2,
+            "stock": 1000,
+            "idPase": 1,
+            "activo": true
+        },
+        "3": {
+            "idCompTea": 3,
+            "precioPase": 4,
+            "fecha": "2025-05-15T23:39:03.412",
+            "IdObra": 3,
+            "stock": 4,
+            "idPase": 3,
+            "activo": true
+        },
+        "4": {
+            "idCompTea": 4,
+            "precioPase": 4,
+            "fecha": "2025-05-15T23:41:15.255",
+            "IdObra": 4,
+            "stock": 4,
+            "idPase": 4,
+            "activo": true
+        },
+        "5": {
+            "idCompTea": 6,
+            "precioPase": 6,
+            "fecha": "2025-05-13T23:42:37.359",
+            "IdObra": 6,
+            "stock": 6,
+            "idPase": 5,
+            "activo": true
+        },
+        "6": {
+            "idCompTea": 5,
+            "precioPase": 6,
+            "fecha": "2025-05-14T23:47:30.679",
+            "IdObra": 5,
+            "stock": 6,
+            "idPase": 6,
+            "activo": true
+        }
+    },
+    "lastId": 6
 }

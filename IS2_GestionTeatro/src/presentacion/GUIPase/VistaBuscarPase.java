@@ -55,10 +55,10 @@ public class VistaBuscarPase extends VistaDefault {
 	@Override
 	public void actualizar(Evento evento, Object datos) {
 		if(evento==Evento.RES_OK) {
-			Collection<TPase> p = new ArrayList<TPase>();
+			ArrayList<TPase> p = new ArrayList<TPase>();
 			p.add((TPase)datos);
 			//FactoriaAbstractaPresentacion.getInstance().createDialogMessage(Messages.EX_PASE_BUSCADO);
-			new TablaDefault<TPase>("PASES", Messages.colNomsPase, (ArrayList<TPase>)datos, true).setVisible(true); //se crea una tabla con una sola linea que contiene
+			new TablaDefault<TPase>("PASES", Messages.colNomsPase, p, false).setVisible(true); //se crea una tabla con una sola linea que contiene
 																	  		 											   //la info del transfer del pase buscado
 		}
 		else if(evento==Evento.RES_KO) {
