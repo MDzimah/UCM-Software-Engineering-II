@@ -89,6 +89,13 @@ public class SAFacturaImp implements SAFactura {
 		DAOFactura daoFac = FactoriaAbstractaIntegracion.getInstance().crearDAOFactura();
 		return daoFac.read(idFactura);
 	}
+	
+
+	@Override
+	public int delete(int idFactura) throws BBDDReadException, BBDDWriteException {
+		DAOFactura daoFac = FactoriaAbstractaIntegracion.getInstance().crearDAOFactura();
+		return daoFac.delete(idFactura);
+	}
 
 	@Override
 	public Collection<TFactura> allFacturas() throws BBDDReadException {
