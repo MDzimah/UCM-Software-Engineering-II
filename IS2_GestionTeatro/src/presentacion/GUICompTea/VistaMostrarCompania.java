@@ -33,8 +33,7 @@ public class VistaMostrarCompania extends VistaDefault implements IGUI{
 		this.setTitle("Mostrar Compañia Teatral");//no se si dan problemas la verdad
 		JButton anyadir= new JButton("Mostrar");
 		JButton cancelar = new JButton("Cancelar");
-		ArrayList<Pair<JComponent, JComponent>> campos = new ArrayList<>();
-		campos.add(null);//TODO otra vista la verdad
+		initComps(null,anyadir,cancelar);
 		anyadir.addActionListener(e ->{
 			SwingUtilities.invokeLater(()->Controlador.getInstance().accion(Evento.MOSTRAR_COMPANIA_TEATRAL, null));
 			this.dispose();	//Igual cambio algo de aqui porque el problema es que como esta ahora se ejecuta el controller antes de cerrar la ventana
@@ -43,19 +42,18 @@ public class VistaMostrarCompania extends VistaDefault implements IGUI{
 			this.dispose();
 		});
 		
-
-		initComps(campos, anyadir, cancelar);//no se si tiene que ser fullscreen...
-	
+		this.setVisible(true);
 	}
 	
 	
 	@Override
 	public void actualizar(Evento evento, Object datos) {
 		if(evento==Evento.RES_OK) {
-			TablaDefault t= new TablaDefault("CONSULTAR OBRA", Messages.colNomsCompTea, (ArrayList<TCompTea>)datos, false);	
+			TablaDefault<TCompTea> t= new TablaDefault("CONSULTAR OBRA", Messages.colNomsCompTea, (ArrayList<TCompTea>)datos, false);	
+		    t.setVisible(true);
 		}
 		else if(evento==Evento.RES_KO) {
-			ViewUtils.createErrorDialogMessage("NO SE PUDO LISTAR LAS COMPANIAS TEATRALES");
+			ViewUtils.createErrorDialogMessage(Messages.X_MOSTRAR_COMPANIAS);
 		}
 	}
 

@@ -7,6 +7,7 @@ import java.util.List;
 import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JLabel;
+import javax.swing.JSpinner;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.SwingUtilities;
@@ -37,13 +38,22 @@ public class VistaActualizarCompania0 extends VistaDefault implements IGUI{
 		JButton cancelar = new JButton("Cancelar");
 		JLabel Idlabel= new JLabel("Id Compania Teatral");
 		
-		JTextField IdField = new JTextField();
+		JSpinner IdField = ViewUtils.integerSpinner(0, 0, Integer.MAX_VALUE, 1);
 		
 		ArrayList<Pair<JComponent, JComponent>> campos = new ArrayList<>();
 		campos.add(new Pair<>(Idlabel, IdField));
 		anyadir.addActionListener(e ->{
-			Integer id = Integer.valueOf((IdField.getText())); 
-			SwingUtilities.invokeLater(()->Controlador.getInstance().accion(Evento.	ACTUALIZAR0_COMPANIA_TEATRAL, id));
+			
+			try {
+				IdField.commitEdit();
+				int id = (int)IdField.getValue();
+				SwingUtilities.invokeLater(()->{Controlador.getInstance().accion(Evento.	ACTUALIZAR0_COMPANIA_TEATRAL, id);});
+				dispose();
+			}
+			catch(Exception ex) {
+				ViewUtils.createInvalidFieldsPanel();
+				IdField.updateUI();
+			}
 			this.dispose();	
 		});
 		cancelar.addActionListener(e ->{

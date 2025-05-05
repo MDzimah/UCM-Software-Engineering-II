@@ -41,7 +41,12 @@ public class Messages {
 	public static final String X_QUITAR_PASE_DE_VENTA = Messages.NSHP.formatted("quitar el pase del carrito.");
 	public static final String X_BUSCAR_FACTURA = Messages.NSHP.formatted("encotrar la factura.");
 	public static final String X_MOSTRAR_FACTURAS = Messages.NSHP.formatted("mostrar las facturas.");
-	
+	//CompTea
+	public static final String X_MOSTRAR_COMPANIAS = Messages.NSHP.formatted("mostrar companias.");
+	public static final String X_CREAR_COMPANIA= Messages.NSHP.formatted("crear compania.");
+	public static final String X_ELIMINAR_COMPANIA = Messages.NSHP.formatted("dar de baja compania.");
+	public static final String X_BUSCAR_COMPANIA= Messages.NSHP.formatted("buscar compania.");
+	public static final String X_ACTUALIZAR_COMPANIA = Messages.NSHP.formatted("actualizar compania.");
 	//Pase
 	public static final String X_MOSTRAR_PASES = Messages.NSHP.formatted("mostrar los pases.");
 	public static final String X_PASE_CREADO = Messages.NSHP.formatted("crear el pase.");
@@ -71,6 +76,7 @@ public class Messages {
 	public static final String NO_EN_CARRITO = "El pase no se encuentra en el carrito";
 	public static final String EDICION_INVALIDA_TABLA = "Datos inválidos";
 	public static final String CARRITO_VACIO = "Carrito vacío";
+
 
 
 	//Columnas de las tablas
