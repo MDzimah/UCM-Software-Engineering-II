@@ -52,6 +52,7 @@ public class DAOClienteImp implements DAOCliente {
 
 		int newId = bdc.getInt(Messages.KEY_lastId) +1;
 		bdc.put(Messages.KEY_lastId, newId);
+		tCliente.setIdCliente(newId);
 		
 		//cliente normal
 		if (tCliente.getTipo() == "Normal") return createNormal(tCliente,bdc,newId);
