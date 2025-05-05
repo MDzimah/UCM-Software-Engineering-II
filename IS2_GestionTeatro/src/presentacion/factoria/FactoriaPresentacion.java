@@ -1,6 +1,11 @@
 package presentacion.factoria;
 
 import presentacion.*;
+import presentacion.GUICliente.VistaActualizarCl;
+import presentacion.GUICliente.VistaAltaCl;
+import presentacion.GUICliente.VistaBajaCl;
+import presentacion.GUICliente.VistaBuscarCl;
+import presentacion.GUICliente.VistaMostrarCl;
 import presentacion.GUIMiemCompTea.*;
 import presentacion.GUIFactura.*;
 import presentacion.GUICompTea.*;
@@ -21,11 +26,11 @@ public class FactoriaPresentacion extends FactoriaAbstractaPresentacion {
 		case QUITAR_PASE_DE_VENTA: return new VistaQuitarPaseDeVenta();
 		
 		//Cliente
-		case ALTA_CLIENTE: return null;
-		case BUSCAR_CLIENTE: return null;
-		case BAJA_CLIENTE: return null;
-		case MOSTRAR_CLIENTES: return null;
-		case ACTUALIZAR_CLIENTE:  return null;
+		case ALTA_CLIENTE: return new VistaAltaCl();
+		case BUSCAR_CLIENTE: return new VistaBuscarCl();
+		case BAJA_CLIENTE: return new VistaBajaCl();
+		case MOSTRAR_CLIENTES: return new VistaMostrarCl();
+		case ACTUALIZAR_CLIENTE:  return new VistaActualizarCl();
 		
 		//Taquillero
 		case ALTA_TAQUILLERO: return new VistaContratarTaquillero();

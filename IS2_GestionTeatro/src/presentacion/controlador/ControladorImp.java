@@ -10,6 +10,8 @@ import exceptions.InvalidFields;
 import exceptions.UnknownClienteException;
 import exceptions.UnknownTaquilleroException;
 import misc.Messages;
+import negocio.cliente.SACliente;
+import negocio.cliente.TCliente;
 import negocio.compTea.SACompTea;
 import negocio.compTea.TCompTea;
 import negocio.factoria.FactoriaAbstractaNegocio;
@@ -78,7 +80,16 @@ public class ControladorImp extends Controlador {
 		
 		
 		//Cliente
-		case ALTA_CLIENTE: 
+		case ALTA_CLIENTE: {
+			try {
+				SACliente sa = FactoriaAbstractaNegocio.getInstance().crearSACliente();
+				int id = sa.create((TCliente) datos);
+				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_OK, id);
+			}
+			catch (Exception e) {
+				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_KO, e);
+			}
+		}
 		case BUSCAR_CLIENTE: 
 		case BAJA_CLIENTE:
 		case MOSTRAR_CLIENTES: 
