@@ -12,8 +12,8 @@ public class TClienteVIP extends TCliente {
 		super();
 	}
 	
-	public TClienteVIP (int idCliente, String DNI,String nombre, String apellido, boolean activo, String cuentaBancaria, Collection<TFactura> facturas, VIPEnum nivelVIP, float coste) {
-		super(idCliente,DNI,nombre,apellido,activo,cuentaBancaria,facturas);
+	public TClienteVIP (int idCliente, String DNI,String nombre, String apellido, boolean activo, String cuentaBancaria, VIPEnum nivelVIP, float coste) {
+		super(idCliente,DNI,nombre,apellido,activo,cuentaBancaria);
 		tipo = "VIP";
 		this.nivelVIP = nivelVIP;
 		this.costeMensualSuscripcion = coste;

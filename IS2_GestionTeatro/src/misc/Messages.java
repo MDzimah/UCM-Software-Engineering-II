@@ -91,8 +91,7 @@ public class Messages {
 	public static final String PATH_TO_BBDD = "resources/BBDD/%s";
 	
 		//Nombres
-	public static final String BDCliNorm = "ClienteNormal.json";
-	public static final String BDCliVIP = "ClienteVIP.json";
+	public static final String BDCli = "Clientes.json";
 	public static final String BDCT = "CompTea.json";
 	public static final String BDMCT = "MiemCompTea.json";
 	public static final String BDOb = "Obra.json";

@@ -13,18 +13,16 @@ public class TCliente {
 	protected String apellido;
 	protected boolean activo;
 	protected String cuentaBancaria;
-	protected Collection<TFactura> facturas;
 	
 	public TCliente () {}
 	
-	public TCliente (int idCliente,String DNI, String nombre, String apellido, boolean activo, String cuentaBancaria, Collection<TFactura> facturas) {
+	public TCliente (int idCliente,String DNI, String nombre, String apellido, boolean activo, String cuentaBancaria) {
 		this.idCliente = idCliente;
 		this.DNI = DNI;
 		this.nombre = nombre;
 		this.apellido = apellido;
 		this.activo = activo;
 		this.cuentaBancaria = cuentaBancaria;
-		this.facturas = facturas;
 	}
 	
 	//getters
@@ -57,10 +55,6 @@ public class TCliente {
 	    return cuentaBancaria;
 	}
 
-	public Collection<TFactura> getFacturas() {
-	    return Collections.unmodifiableCollection(facturas);
-	}
-
 	// Setters
 	public void setTipo(String tipo) {
 	    this.tipo = tipo;
@@ -90,9 +84,6 @@ public class TCliente {
 	    this.cuentaBancaria = cuentaBancaria;
 	}
 
-	public void setFacturas(Collection<TFactura> facturas) {
-	    this.facturas = facturas;
-    }
 	
 	
 }
