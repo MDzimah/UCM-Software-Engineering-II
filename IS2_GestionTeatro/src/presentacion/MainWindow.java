@@ -393,9 +393,48 @@ public class MainWindow extends JFrame {
         });
 
         subsMiemCompTea.addActionListener(new ActionListener() {
-            @Override
+        	@Override
             public void actionPerformed(ActionEvent e) {
-                
+            	JDialog subMiemCompTea = new JDialog(MainWindow.this,"MIEMBROS DE LAS COMPAÑÍAS TEATRALES", true);
+            	subMiemCompTea.setLayout(new FlowLayout());
+            	
+            	JButton contratarMiem, despedirMiem, buscarMiem, mostrarMiembros, actualizarMiem;
+            	
+            	contratarMiem = new JButton("Contratar miembro");
+            	despedirMiem = new JButton("Despedir miembro");
+            	buscarMiem = new JButton("Buscar miembro");
+            	mostrarMiembros = new JButton("Mostrar miembros de la compañía");
+            	actualizarMiem = new JButton("Actualizar miembro");
+
+            	contratarMiem.addActionListener((ev)->{
+        			FactoriaAbstractaPresentacion.getInstance().createVista(Evento.CONTRATAR_MIEMBRO_COMPANIA);
+        		});
+
+            	despedirMiem.addActionListener((ev)->{
+        			FactoriaAbstractaPresentacion.getInstance().createVista(Evento.DESPEDIR_MIEMBRO_COMPANIA);
+        		});	
+
+            	buscarMiem.addActionListener((ev)->{
+        			FactoriaAbstractaPresentacion.getInstance().createVista(Evento.BUSCAR_MIEMBRO_COMPANIA);
+        		});		
+            	
+            	mostrarMiembros.addActionListener((ev)->{
+        			FactoriaAbstractaPresentacion.getInstance().createVista(Evento.MOSTRAR_MIEMBROS_COMPANIA);
+        		});	
+            	
+            	actualizarMiem.addActionListener((ev)->{
+        			FactoriaAbstractaPresentacion.getInstance().createVista(Evento.ACTUALIZAR_MIEMBRO_COMPANIA_0);
+        		});
+        		
+            	subMiemCompTea.add(contratarMiem);        		
+            	subMiemCompTea.add(despedirMiem);
+            	subMiemCompTea.add(buscarMiem);
+            	subMiemCompTea.add(mostrarMiembros);
+            	subMiemCompTea.add(actualizarMiem);
+        		subMiemCompTea.setModal(false);   
+        		subMiemCompTea.pack();
+        		subMiemCompTea.setLocationRelativeTo(null);
+        		subMiemCompTea.setVisible(true);
             }
         });
     }

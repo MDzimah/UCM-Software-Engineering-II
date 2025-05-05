@@ -62,7 +62,7 @@ public class VistaBuscarMiembroCompania extends VistaDefault{
 			ArrayList<TMiemCompTea> miemComp = new ArrayList<TMiemCompTea>();
 			miemComp.add((TMiemCompTea)datos);
 			
-			new TablaDefault<TMiemCompTea>("MIEMBRO DE LA COMPANIA", Messages.colNomsMiemCompTea, miemComp, true, false).setVisible(true);
+			new TablaDefault<TMiemCompTea>("MIEMBRO DE LA COMPANIA", Messages.colNomsMiemCompTea, miemComp, false).setVisible(true);
 		}
 		else if(evento == Evento.RES_KO) {
 			String error;

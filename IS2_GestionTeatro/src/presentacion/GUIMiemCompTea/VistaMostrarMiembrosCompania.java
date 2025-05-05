@@ -39,7 +39,7 @@ public class VistaMostrarMiembrosCompania extends VistaDefault{
 	@Override
 	public void actualizar(Evento evento, Object datos) {
 		if (evento == Evento.RES_OK) {
-			new TablaDefault<TMiemCompTea>("MIEMBROS DE LA COMPANIA", Messages.colNomsMiemCompTea, (ArrayList<TMiemCompTea>)datos, false, false).setVisible(true);
+			new TablaDefault<TMiemCompTea>("MIEMBROS DE LA COMPANIA", Messages.colNomsMiemCompTea, (ArrayList<TMiemCompTea>)datos, false).setVisible(true);
 		}
 		else if (evento == Evento.RES_KO) {
 			String error;

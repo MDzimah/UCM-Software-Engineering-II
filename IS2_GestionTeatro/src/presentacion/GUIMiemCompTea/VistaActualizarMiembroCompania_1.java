@@ -28,7 +28,7 @@ public class VistaActualizarMiembroCompania_1 extends VistaDefault {
 	public void cargarMiembro(TMiemCompTea datos) {
 		ArrayList<TMiemCompTea> miembro = new ArrayList<TMiemCompTea>();
 		miembro.add(datos);
-		TablaDefault<TMiemCompTea> tabla = new TablaDefault<TMiemCompTea>("Miembro de la compania", Messages.colNomsMiemCompTea, miembro, true, true);
+		TablaDefault<TMiemCompTea> tabla = new TablaDefault<TMiemCompTea>("Miembro de la compania", Messages.colNomsMiemCompTea, miembro, true);
 		tabla.setVisible(true);
 		tabla.getOkButton().addActionListener(e -> {
 			TMiemCompTea tMiemComp = (TMiemCompTea) tabla.getEdicion();
