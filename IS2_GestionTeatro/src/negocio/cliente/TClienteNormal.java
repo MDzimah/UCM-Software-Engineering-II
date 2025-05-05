@@ -11,8 +11,8 @@ public class TClienteNormal extends TCliente {
 		super();
 	}
 	
-	public TClienteNormal (int idCliente,String DNI, String nombre, String apellido, boolean activo, String cuentaBancaria, Collection<TFactura> facturas, int puntos) {
-		super(idCliente,DNI,nombre,apellido,activo,cuentaBancaria,facturas);
+	public TClienteNormal (int idCliente,String DNI, String nombre, String apellido, boolean activo, String cuentaBancaria, int puntos) {
+		super(idCliente,DNI,nombre,apellido,activo,cuentaBancaria);
 		tipo = "Normal";
 		this.PuntosAcumulados = puntos;
 	}

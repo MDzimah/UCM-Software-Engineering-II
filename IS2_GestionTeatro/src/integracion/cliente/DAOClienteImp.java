@@ -21,47 +21,42 @@ import negocio.factura.TFactura;
 public class DAOClienteImp implements DAOCliente {
 	
 	
-	private int createNormal(TCliente tCliente) throws BBDDReadException, BBDDWriteException {
-		JSONObject bdcn = new JSONObject();
-		
-		if (OpsBBDD.isEmpty(Messages.BDCliNorm)) {
-			bdcn.put(Messages.KEY_lastId,0);
-			bdcn.put(Messages.KEY_cliNorms, new JSONObject());
-		}
-		else bdcn = OpsBBDD.read(Messages.BDCliNorm);
-		int newId = bdcn.getInt(Messages.KEY_lastId) +1;
-		bdcn.put(Messages.KEY_lastId, newId);
-		JSONObject clientes = (JSONObject) bdcn.get(Messages.KEY_cliNorms);
+	private int createNormal(TCliente tCliente,JSONObject bdc, int newId) throws BBDDReadException, BBDDWriteException {
+		JSONObject clientes = (JSONObject) bdc.get(Messages.KEY_cliNorms);
 		
 		clientes.put(Integer.toString(newId), newClienteNormal((TClienteNormal) tCliente));
-		OpsBBDD.write(bdcn, Messages.BDCliNorm);
+		OpsBBDD.write(bdc, Messages.BDCli);
 		
 		return newId;
 	}
 	
-	private int createVIP(TCliente tCliente) throws BBDDReadException, BBDDWriteException { 
-		JSONObject bdcv = new JSONObject();
-		
-		if (OpsBBDD.isEmpty(Messages.BDCliVIP)) {
-			bdcv.put(Messages.KEY_lastId,0);
-			bdcv.put(Messages.KEY_cliVIPs, new JSONObject());
-		}
-		else bdcv = OpsBBDD.read(Messages.BDCliVIP);
-		int newId = bdcv.getInt(Messages.KEY_lastId) +1;
-		bdcv.put(Messages.KEY_lastId, newId);
-		JSONObject clientes = (JSONObject) bdcv.get(Messages.KEY_cliVIPs);
+	private int createVIP(TCliente tCliente, JSONObject bdc, int newId) throws BBDDReadException, BBDDWriteException { 
+		JSONObject clientes = (JSONObject) bdc.get(Messages.KEY_cliVIPs);
 		
 		clientes.put(Integer.toString(newId), newClienteVIP((TClienteVIP) tCliente));
-		OpsBBDD.write(bdcv, Messages.BDCliVIP);
+		OpsBBDD.write(bdc, Messages.BDCli);
 		
 		return newId;
 	}
 
 	@Override
 	public int create(TCliente tCliente) throws BBDDReadException, BBDDWriteException{
+		JSONObject bdc = new JSONObject();
+		
+		if (OpsBBDD.isEmpty(Messages.BDCli)) {
+			bdc.put(Messages.KEY_lastId,0);
+			bdc.put(Messages.KEY_cliVIPs, new JSONObject());
+			bdc.put(Messages.KEY_cliNorms, new JSONObject());
+		}
+		else bdc = OpsBBDD.read(Messages.BDCli);
+
+		int newId = bdc.getInt(Messages.KEY_lastId) +1;
+		bdc.put(Messages.KEY_lastId, newId);
+		
 		//cliente normal
-		if (tCliente.getTipo() == "Normal") return createNormal(tCliente);
-		else if (tCliente.getTipo() == "VIP") return createVIP(tCliente);
+		if (tCliente.getTipo() == "Normal") return createNormal(tCliente,bdc,newId);
+		//cliente VIP
+		else if (tCliente.getTipo() == "VIP") return createVIP(tCliente,bdc,newId);
 		else return -1;
 	}
 
@@ -69,20 +64,20 @@ public class DAOClienteImp implements DAOCliente {
 
 	@Override
 	public int delete(int id) throws BBDDReadException, BBDDWriteException {
-		JSONObject bdcn = OpsBBDD.read(Messages.BDCliNorm);
-		JSONObject clientes = (JSONObject) bdcn.get(Messages.KEY_cliNorms);
+		if (OpsBBDD.isEmpty(Messages.BDCli)) return -1;
+		JSONObject bdc = OpsBBDD.read(Messages.BDCli);
+		JSONObject clientes = (JSONObject) bdc.get(Messages.KEY_cliNorms);
 		if (clientes.get(Integer.toString(id)) != null) {
 			JSONObject cliente = (JSONObject) clientes.get(Integer.toString(id));
 			cliente.put(Messages.KEY_act, false);
-			OpsBBDD.write(bdcn, Messages.BDCliNorm);
+			OpsBBDD.write(bdc, Messages.BDCli);
 			return id;
 		}
-		JSONObject bdcv = OpsBBDD.read(Messages.BDCliVIP);
-		JSONObject clientesv = (JSONObject) bdcn.get(Messages.KEY_cliVIPs);
+		JSONObject clientesv = (JSONObject) bdc.get(Messages.KEY_cliVIPs);
 		if (clientesv.get(Integer.toString(id)) != null) {
 			JSONObject clientev = (JSONObject) clientesv.get(Integer.toString(id));
 			clientev.put(Messages.KEY_act, false);
-			OpsBBDD.write(bdcv, Messages.BDCliVIP);
+			OpsBBDD.write(bdc, Messages.BDCli);
 			return id;
 		}
 		else return -1;
@@ -92,8 +87,10 @@ public class DAOClienteImp implements DAOCliente {
 
 	@Override
 	public TCliente read(int id) throws BBDDReadException, BBDDWriteException {
-		JSONObject bdcn = OpsBBDD.read(Messages.BDCliNorm);
-		JSONObject clientes = (JSONObject) bdcn.get(Messages.KEY_cliNorms);
+		if (OpsBBDD.isEmpty(Messages.BDCli)) return null;
+		JSONObject bdc = OpsBBDD.read(Messages.BDCli);
+		JSONObject clientes = (JSONObject) bdc.get(Messages.KEY_cliNorms);
+		//cliente normal
 		if (clientes.get(Integer.toString(id)) != null) {
 			JSONObject cliente = (JSONObject) clientes.get(Integer.toString(id));
 			TClienteNormal tClienteN = new TClienteNormal();
@@ -107,8 +104,8 @@ public class DAOClienteImp implements DAOCliente {
 			tClienteN.setPuntosAcumulados(cliente.getInt(Messages.KEY_ptosAcum));
 			return tClienteN;
 		}
-		JSONObject bdcv = OpsBBDD.read(Messages.BDCliVIP);
-		JSONObject clientesv = (JSONObject) bdcv.get(Messages.KEY_cliVIPs);
+		//cliente VIP
+		JSONObject clientesv = (JSONObject) bdc.get(Messages.KEY_cliVIPs);
 		if (clientesv.get(Integer.toString(id)) != null) {
 			JSONObject clientev = (JSONObject) clientesv.get(Integer.toString(id));
 			TClienteVIP tClienteV = new TClienteVIP();
@@ -128,10 +125,10 @@ public class DAOClienteImp implements DAOCliente {
 
 	@Override
 	public Collection<TCliente> readAll() throws BBDDReadException, BBDDWriteException {
-		JSONObject bdcn = OpsBBDD.read(Messages.BDCliNorm);
-		JSONObject clientes = (JSONObject) bdcn.get(Messages.KEY_cliNorms);
-		JSONObject bdcv = OpsBBDD.read(Messages.BDCliVIP);
-		JSONObject clientesv = (JSONObject) bdcv.get(Messages.KEY_cliVIPs);
+		if (OpsBBDD.isEmpty(Messages.BDCli)) return null;
+		JSONObject bdc = OpsBBDD.read(Messages.BDCli);
+		JSONObject clientes = (JSONObject) bdc.get(Messages.KEY_cliNorms);
+		JSONObject clientesv = (JSONObject) bdc.get(Messages.KEY_cliVIPs);
 		List<TCliente> clist = new ArrayList<>();
 		//obtenemos todas las claves (idCliente de todos los clientes)
 		Set<String> scln = clientes.keySet();
@@ -148,50 +145,20 @@ public class DAOClienteImp implements DAOCliente {
 
 	@Override
 	public int update(TCliente tCliente) throws BBDDReadException, BBDDWriteException {
-
-		JSONObject bdcn = OpsBBDD.read(Messages.BDCliNorm);
-		JSONObject clientes = (JSONObject) bdcn.get(Messages.KEY_cliNorms);
+		if (OpsBBDD.isEmpty(Messages.BDCli)) return -1;
+		JSONObject bdc = OpsBBDD.read(Messages.BDCli);
+		JSONObject clientes = (JSONObject) bdc.get(Messages.KEY_cliNorms);
 		if (clientes.get(Integer.toString(tCliente.getIdCliente())) != null) {
-			TClienteNormal tClienteN = (TClienteNormal) tCliente;
-			JSONObject nCliente = new JSONObject();
-			nCliente.put(Messages.KEY_idCli,tCliente.getIdCliente());
-			nCliente.put(Messages.KEY_nombre, tCliente.getNombre());
-			nCliente.put(Messages.KEY_apellido, tCliente.getApellido());
-			nCliente.put(Messages.KEY_cuentaBancaria, tCliente.getCuentaBancaria());
-			nCliente.put(Messages.KEY_act, tCliente.getActivo());
-			nCliente.put(Messages.KEY_DNI, tCliente.getDNI());
-			nCliente.put(Messages.KEY_ptosAcum, tClienteN.getPuntosAcumulados());
-			List<Integer> facturas = new ArrayList<Integer>();
-			for (TFactura factura : tCliente.getFacturas()) {
-				facturas.addLast(factura.getIdFactura());
-			}
-			nCliente.put(Messages.KEY_facturasCliente, facturas);
-			clientes.put(Integer.toString(tCliente.getIdCliente()), nCliente);
-			bdcn.put(Messages.KEY_cliNorms, clientes);
-			OpsBBDD.write(bdcn, Messages.BDCliNorm);
+			clientes.put(Integer.toString(tCliente.getIdCliente()), newClienteNormal((TClienteNormal) tCliente));
+			//bdc.put(Messages.KEY_cliNorms, clientes);
+			OpsBBDD.write(bdc, Messages.BDCli);
 			return tCliente.getIdCliente();
 		}
-		JSONObject bdcv = OpsBBDD.read(Messages.BDCliVIP);
-		JSONObject clientesv = (JSONObject) bdcv.get(Messages.KEY_cliVIPs);
+		JSONObject clientesv = (JSONObject) bdc.get(Messages.KEY_cliVIPs);
 		if (clientesv.get(Integer.toString(tCliente.getIdCliente())) != null) {
-			TClienteVIP tClienteV = (TClienteVIP) tCliente;
-			JSONObject nCliente = new JSONObject();
-			nCliente.put(Messages.KEY_idCli,tCliente.getIdCliente());
-			nCliente.put(Messages.KEY_nombre, tCliente.getNombre());
-			nCliente.put(Messages.KEY_apellido, tCliente.getApellido());
-			nCliente.put(Messages.KEY_cuentaBancaria, tCliente.getCuentaBancaria());
-			nCliente.put(Messages.KEY_act, tCliente.getActivo());
-			nCliente.put(Messages.KEY_costeMensual, tClienteV.getCosteMensual());
-			nCliente.put(Messages.KEY_nivelVIP, tClienteV.getNivelVIP());
-			nCliente.put(Messages.KEY_DNI, tCliente.getDNI());
-			List<Integer> facturas = new ArrayList<Integer>();
-			for (TFactura factura : tCliente.getFacturas()) {
-				facturas.addLast(factura.getIdFactura());
-			}
-			nCliente.put(Messages.KEY_facturasCliente, facturas);
-			clientes.put(Integer.toString(tCliente.getIdCliente()), nCliente);
-			bdcv.put(Messages.KEY_cliVIPs, clientesv);
-			OpsBBDD.write(bdcv, Messages.BDCliVIP);
+			clientes.put(Integer.toString(tCliente.getIdCliente()), newClienteVIP((TClienteVIP) tCliente));
+			//bdc.put(Messages.KEY_cliVIPs, clientesv);
+			OpsBBDD.write(bdc, Messages.BDCli);
 			return tCliente.getIdCliente();
 		}
 		else return -1;

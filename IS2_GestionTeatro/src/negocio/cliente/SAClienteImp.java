@@ -7,12 +7,18 @@ import exceptions.BBDDWriteException;
 import exceptions.UnknownClienteException;
 import integracion.cliente.DAOCliente;
 import integracion.factoria.FactoriaAbstractaIntegracion;
+import integracion.factura.DAOFactura;
+import negocio.factoria.FactoriaAbstractaNegocio;
+import negocio.factura.SAFactura;
+import negocio.factura.TFactura;
 
 public class SAClienteImp implements SACliente {
 
 	@Override
 	public int create(TCliente cl) throws BBDDReadException, BBDDWriteException {
 		DAOCliente dao = FactoriaAbstractaIntegracion.getInstance().crearDAOCliente();
+		//no se si excepcion
+		if (dao.read(cl.getIdCliente()) == null) return -1;
 		return dao.create(cl);
 	}
 
@@ -31,7 +37,17 @@ public class SAClienteImp implements SACliente {
 	@Override
 	public int delete(int id) throws BBDDReadException, BBDDWriteException {
 		DAOCliente dao = FactoriaAbstractaIntegracion.getInstance().crearDAOCliente();
-		return dao.delete(id);
+		int nid = dao.delete(id);
+		if (nid != -1) {
+			//eliminamos todas las facturas asociadas al cliente eliminado
+			SAFactura sa = FactoriaAbstractaNegocio.getInstance().crearSAFactura();
+			DAOFactura daof = FactoriaAbstractaIntegracion.getInstance().crearDAOFactura();
+			Collection<TFactura> c = sa.allFacturasPorCliente(nid);
+			for (TFactura fac : c) {
+				if (fac.getIdCliente() == nid) daof.delete(fac.getIdFactura());
+			}
+		}
+		return nid;
 	}
 
 	@Override
