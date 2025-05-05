@@ -1,6 +1,7 @@
 package presentacion.GUITaquillero;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JComponent;
@@ -9,9 +10,11 @@ import javax.swing.JTextField;
 import javax.swing.SwingUtilities;
 
 import misc.Genero;
+import misc.Messages;
 import misc.Pair;
 import negocio.taquillero.TTaquillero;
 import presentacion.Evento;
+import presentacion.TablaDefault;
 import presentacion.ViewUtils;
 import presentacion.VistaDefault;
 import presentacion.controlador.Controlador;
@@ -61,7 +64,20 @@ public class VistaBuscarTaquillero extends VistaDefault {
 
 	@Override
 	public void actualizar(Evento evento, Object datos) {
-		// TODO Auto-generated method stub
+		if(evento == Evento.RES_OK) {
+			ArrayList<TTaquillero> taqs = new ArrayList<>();
+			
+			for(TTaquillero tTaq : (List<TTaquillero>) datos) {
+				taqs.add(tTaq);
+			}
+			
+			//creamos la tabla
+			TablaDefault<TTaquillero> tabla = new TablaDefault<TTaquillero>("Taquilleros", Messages.colNomsTaquillero, taqs, false);
+			tabla.setVisible(true);
+			
+		} else if(evento == Evento.RES_KO){
+			ViewUtils.createErrorDialogMessage("No se han encontrado taquilleros.\n" + "Error: " +((Exception) datos).getMessage());
+		}
 		
 	}
 

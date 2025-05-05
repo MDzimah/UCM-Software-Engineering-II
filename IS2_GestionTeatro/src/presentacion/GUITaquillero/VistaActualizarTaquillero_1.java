@@ -12,6 +12,7 @@ import misc.Genero;
 import misc.Pair;
 import negocio.taquillero.TTaquillero;
 import presentacion.Evento;
+import presentacion.ViewUtils;
 import presentacion.VistaDefault;
 import presentacion.controlador.Controlador;
 
@@ -73,11 +74,26 @@ public class VistaActualizarTaquillero_1 extends VistaDefault {
 			VistaActualizarTaquillero_1.this.dispose();
 		});
 	}
+	
+	/*
+	 * Carga los datos del taquillero en los JTextField para actualizarlos
+	 */
+	public void cargarTaquillero(TTaquillero tTaq) {
+		nombre.setText(tTaq.getNombre());
+		apellido.setText(tTaq.getApellido());
+		dni.setText(tTaq.getDNI());
+		sueldo.setText(Float.toString(tTaq.getSueldo()));
+		edad.setText(Integer.toString(tTaq.getEdad()));
+		genero.setText(tTaq.getGenero().toString());
+	}
 
 	@Override
 	public void actualizar(Evento evento, Object datos) {
-		// TODO Auto-generated method stub
-		
+		if(evento == Evento.RES_OK) {
+			ViewUtils.createDialogMessage("Se ha actualizado correctamente el taquillero: " + ((int)datos));
+		} else if(evento == Evento.RES_KO) {
+			ViewUtils.createErrorDialogMessage("No se ha podido actualizar el taquillero.\n" + "Error: " +((Exception) datos).getMessage());
+		}
 	}
 
 }

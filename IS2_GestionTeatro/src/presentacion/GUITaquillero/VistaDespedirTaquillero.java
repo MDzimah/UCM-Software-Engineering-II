@@ -10,6 +10,7 @@ import javax.swing.SwingUtilities;
 
 import misc.Pair;
 import presentacion.Evento;
+import presentacion.ViewUtils;
 import presentacion.VistaDefault;
 import presentacion.controlador.Controlador;
 
@@ -58,7 +59,11 @@ public class VistaDespedirTaquillero extends VistaDefault {
 
 	@Override
 	public void actualizar(Evento evento, Object datos) {
-		// TODO Auto-generated method stub
+		if(evento == Evento.RES_OK) {
+			ViewUtils.createDialogMessage("Se ha eliminado correctamente el taquillero: " + (int)datos);
+		} else if(evento == Evento.RES_KO) {
+			ViewUtils.createErrorDialogMessage("No se ha podido eliminar el taquillero.\n" + "Error: " +((Exception) datos).getMessage());
+		}
 		
 	}
 

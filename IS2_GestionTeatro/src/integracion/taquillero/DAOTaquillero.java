@@ -13,5 +13,4 @@ public interface DAOTaquillero {
 	public int update(TTaquillero tTaquillero) throws BBDDReadException, BBDDWriteException;
 	public Collection<TTaquillero> readAll() throws BBDDReadException;
 	public TTaquillero readByDNI() throws BBDDReadException;
-	public int aumentarVenta(int id) throws BBDDReadException, BBDDWriteException;
 }
