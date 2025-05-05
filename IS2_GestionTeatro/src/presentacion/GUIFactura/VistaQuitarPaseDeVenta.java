@@ -25,5 +25,7 @@ public class VistaQuitarPaseDeVenta extends ModificacionPaseEnVenta {
 				break;
 			}
 		}
+		
+		AbrirVenta.updateCarritoButton();
 	}
 }

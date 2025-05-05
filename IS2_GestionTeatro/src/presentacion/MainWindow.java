@@ -6,6 +6,7 @@ import java.awt.event.*;
 import javax.swing.*;
 import javax.swing.border.*;
 
+import negocio.factura.TLineaFactura;
 import presentacion.GUIFactura.AbrirVenta;
 import presentacion.factoria.FactoriaAbstractaPresentacion;
 
@@ -57,7 +58,7 @@ public class MainWindow extends JFrame {
             //Para que la imagen quepa en la parte izquierda del panel
             protected void paintComponent(Graphics g) {
                 super.paintComponent(g);
-                Image image = ViewUtils.logoTeatret();
+                Image image = ViewUtils.img_logoTeatret();
                 int x = (getWidth() - image.getWidth(null)) / 2;
                 int y = (getHeight() - image.getHeight(null)) / 2;
                 g.drawImage(image, x, y, this);
@@ -73,7 +74,7 @@ public class MainWindow extends JFrame {
             @Override
             protected void paintComponent(Graphics g) {
                 super.paintComponent(g);
-                g.drawImage(ViewUtils.marcoOro(), 0, 0, getWidth(), getHeight(), this);
+                g.drawImage(ViewUtils.img_marcoOro(), 0, 0, getWidth(), getHeight(), this);
             }
         };
 
@@ -157,10 +158,10 @@ public class MainWindow extends JFrame {
         subsFactura.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-            	JDialog subsFactura= new JDialog(MainWindow.this,"Subsistema Factura", true);
+            	JDialog subsFactura= new JDialog(MainWindow.this,"Subsistema Factura", false);
             	subsFactura.setLayout(new FlowLayout());
             	
-            	JButton abrirVenta, anyPV, quitarPV, cerrarVenta, buscar, mostrar;
+            	JButton abrirVenta, anyPV, quitarPV, cerrarVenta, buscar, mostrar, carr;
             	
             	abrirVenta = new JButton("Abrir venta");
             	anyPV = new JButton("Añadir pase a venta");
@@ -168,6 +169,9 @@ public class MainWindow extends JFrame {
             	cerrarVenta = new JButton("Cerrar venta");
         		buscar = new JButton("Buscar factura");
         		mostrar = new JButton("Mostrar facturas");
+        		carr = new JButton();
+        		carr.setIcon(new ImageIcon(ViewUtils.img_ticket()));
+        		carr.setText(String.valueOf(AbrirVenta.getCarrito().size()));
         		
         		anyPV.setEnabled(false);
         		quitarPV.setEnabled(false);
@@ -179,7 +183,6 @@ public class MainWindow extends JFrame {
             		quitarPV.setEnabled(true);
             		cerrarVenta.setEnabled(true);
             		abrirVenta.setEnabled(false);
-            		AbrirVenta.resetCarrito();
         		});
         		
         		// AÑADIR PASE VENTA
@@ -205,6 +208,17 @@ public class MainWindow extends JFrame {
         		mostrar.addActionListener((ev)->{
         			FactoriaAbstractaPresentacion.getInstance().createVista(Evento.MOSTRAR_FACTURAS);
         		});
+        		carr.addActionListener((ev)->{
+        			JDialog carritoView = new JDialog();
+        			carritoView.setTitle("Carrito");
+        			carritoView.setModal(true);
+        			carritoView.setLayout(new BoxLayout(BoxLayout.Y_AXIS));
+        			for (TLineaFactura tLf : AbrirVenta.getCarrito()) {
+        				carritoView.add(new JLabel(tLf.toString()));
+        			}
+        			carritoView.pack();
+        			carritoView.setVisible(true);
+        		});
         		
         		subsFactura.add(abrirVenta);        		
         		subsFactura.add(anyPV);
@@ -212,7 +226,7 @@ public class MainWindow extends JFrame {
         		subsFactura.add(buscar);
         		subsFactura.add(cerrarVenta);
         		subsFactura.add(mostrar);
-        		subsFactura.setModal(false);   
+        		subsFactura.add(carr);
         		subsFactura.pack();
         		subsFactura.setLocationRelativeTo(null);
         		subsFactura.setVisible(true);

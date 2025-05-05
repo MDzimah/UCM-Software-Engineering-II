@@ -8,19 +8,29 @@ import javax.swing.JButton;
 import negocio.factura.TLineaFactura;
 
 public class AbrirVenta {
-	private static List<TLineaFactura> carrito;
+	private static List<TLineaFactura> carrito =  new ArrayList<TLineaFactura>();;
+	private static JButton bCarr;
 	private static JButton bAbVenta;
+
 	
 	public static void enableButton() {
 		bAbVenta.setEnabled(true);
 	}
 	
-	public static void setButton(JButton abrirVenta) {
-		bAbVenta = abrirVenta;
+	public static void setAbrirVentaButton(JButton button) {
+		bAbVenta = button;
+	}
+	
+	public static void setCarritoButton(JButton button) {
+		bCarr = button;
+	}
+	
+	public static void updateCarritoButton() {
+		bCarr.setText(String.valueOf(carrito.size()));
 	}
 	
 	public static void resetCarrito() {
-		carrito =  new ArrayList<TLineaFactura>();
+		carrito.clear();
 	}
 	
 	public static List<TLineaFactura> getCarrito() { return carrito; } 

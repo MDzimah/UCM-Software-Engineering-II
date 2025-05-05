@@ -18,17 +18,17 @@ public class ViewUtils {
 	}
 	
 	//Imagenes
-	public static Image logoTeatret() { return new ImageIcon("resources/imagenes/teatretLogo.png").getImage(); }
-	
-	public static Image marcoOro() { return new ImageIcon("resources/imagenes/marcoOro.png").getImage(); }
+	public static Image img_logoTeatret() { return new ImageIcon("resources/imagenes/teatretLogo.png").getImage(); }
+	public static Image img_marcoOro() { return new ImageIcon("resources/imagenes/marcoOro.png").getImage(); }
+	public static Image img_ticket() { return new ImageIcon("resources/imagenes/ticket.png").getImage(); }
 	
 	//Fonts
-	public static Font FontTablaDefaultCabecera() { return new Font("SansSerif", Font.BOLD, 16); }
+	public static Font fontTablaDefaultCabecera() { return new Font("SansSerif", Font.BOLD, 16); }
 	
-	public static Font FontTablaDefaultCuerpo () { return new Font("SansSerif", Font.PLAIN, 15); }
+	public static Font fontTablaDefaultCuerpo () { return new Font("SansSerif", Font.PLAIN, 15); }
 	
 	public static void setAppIcon(JFrame window) {
-		window.setIconImage(logoTeatret());
+		window.setIconImage(img_logoTeatret());
 	} 
 	
 	//Diálogos

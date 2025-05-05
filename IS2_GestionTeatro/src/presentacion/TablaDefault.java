@@ -142,19 +142,19 @@ public class TablaDefault<T extends Convertable<T>> extends JFrame {
         if (data != null && !data.isEmpty()) {
         	DefaultTableModel model = new DefaultTableModel(columnNames, data);
         	JTable table = new JTable(model);
-	        table.setFont(ViewUtils.FontTablaDefaultCuerpo());
+	        table.setFont(ViewUtils.fontTablaDefaultCuerpo());
 	        
 	        //Cambiar apariencia del header de la tabla
 	        	//Font
 	        JTableHeader header = table.getTableHeader();
-	        header.setFont(ViewUtils.FontTablaDefaultCabecera());
+	        header.setFont(ViewUtils.fontTablaDefaultCabecera());
 	        header.setReorderingAllowed(false);
 	        
 	        	//Header
 	        TableColumnModel cm = table.getColumnModel();
 	        
 	        Graphics2D temp = new BufferedImage(1, 1, BufferedImage.TYPE_INT_ARGB).createGraphics();
-	        temp.setFont(ViewUtils.FontTablaDefaultCabecera());
+	        temp.setFont(ViewUtils.fontTablaDefaultCabecera());
 	        
 	        FontMetrics metrics = temp.getFontMetrics();
 	        for (int i = 0; i < columnNames.length; ++i) {
