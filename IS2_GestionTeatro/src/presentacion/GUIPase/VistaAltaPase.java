@@ -2,7 +2,6 @@ package presentacion.GUIPase;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.Properties;
 
 import org.jdatepicker.impl.*;
@@ -87,7 +86,7 @@ public class VistaAltaPase extends VistaDefault {
 	@Override
 	public void actualizar(Evento evento, Object datos) {
 		if (evento == Evento.RES_OK) {
-			ViewUtils.createDialogMessage(Messages.EX_PASE_CREADO);
+			ViewUtils.createDialogMessage(Messages.EX_PASE_CREADO + (int)datos);
 		}
 		else if(evento == Evento.RES_KO) {
 			ViewUtils.createErrorDialogMessage(Messages.X_PASE_CREADO + ' ' + Messages.MOTIVO.formatted(((Exception)datos).getMessage()));

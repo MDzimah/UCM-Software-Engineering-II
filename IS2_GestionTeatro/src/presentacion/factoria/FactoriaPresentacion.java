@@ -50,6 +50,7 @@ public class FactoriaPresentacion extends FactoriaAbstractaPresentacion {
 		case MOSTRAR_PASES: return new VistaMostrarPases();
 		case ACTUALIZAR_PASE_CARGA: return new VistaActualizarPaseCarga();
 		case ACTUALIZAR_PASE_DESCARGA: return new VistaActualizarPaseDescarga();
+		case MOSTRAR_PASES_POR_OBRA: return new VistaMostrarPasesPorObra();
 
 		//Obra
 		case ALTA_OBRA: return new VistaAltaObra();

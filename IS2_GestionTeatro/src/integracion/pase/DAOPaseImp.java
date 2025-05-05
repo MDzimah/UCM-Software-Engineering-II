@@ -38,7 +38,7 @@ public class DAOPaseImp implements DAOPase {
 		nuevoPase.put(Messages.KEY_idCompTea, tPase.getIdCompanyaTeatral());
 		nuevoPase.put(Messages.KEY_idObra, tPase.getIdObra());
 		nuevoPase.put(Messages.KEY_act, tPase.isActivo());
-		nuevoPase.put(Messages.KEY_fecha, tPase.getFecha().toString());
+		nuevoPase.put(Messages.KEY_fecha, tPase.getFecha());
 		nuevoPase.put(Messages.KEY_stock, tPase.getStock());
 		nuevoPase.put(Messages.KEY_precioPase, tPase.getPrecio());
 		pases.put(Integer.toString(newID), nuevoPase);
@@ -149,7 +149,10 @@ public class DAOPaseImp implements DAOPase {
 				if (idObra == idObraPase) clavesEliminar.add(idPase);
 			}
 			for (String key: clavesEliminar) {
-				bdPases.remove(key);
+				//bdPases.remove(key); no hago borrado fisico
+				JSONObject pase = bdPases.getJSONObject(Messages.KEY_pases).getJSONObject(key);
+		        pase.put(Messages.KEY_act, false);
+		        OpsBBDD.write(bdPases, Messages.BDPase);
 			}
 			OpsBBDD.write(bdPases, Messages.BDPase);
 		}
