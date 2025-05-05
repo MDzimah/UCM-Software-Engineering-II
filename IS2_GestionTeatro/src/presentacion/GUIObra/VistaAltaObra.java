@@ -7,6 +7,7 @@ import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.SwingUtilities;
 
+import misc.Messages;
 import misc.Pair;
 import negocio.obra.TObra;
 import presentacion.Evento;
@@ -65,11 +66,11 @@ public class VistaAltaObra extends VistaDefault implements IGUI{
 	@Override
 	public void actualizar(presentacion.Evento evento, Object datos) {
 		if(evento==Evento.RES_OK) {
-			ViewUtils.createDialogMessage("Se ha añadido correctamente la obra: " + (int)datos);
+			ViewUtils.createDialogMessage(Messages.EX_OBRA_ANYADIDA_CORRECT + '\n' + " Id: "+ (int)datos);
 
 		}
 		else if(evento==Evento.RES_KO) {
-			ViewUtils.createErrorDialogMessage("No se ha podido añadir la obra.\n" +"Error: " +((Exception) datos).getMessage());
+			ViewUtils.createErrorDialogMessage(Messages.EX_OBRA_ANYADIDA_ERROR + '\n' + Messages.ERROR.formatted(((Exception) datos).getMessage()));
 		}
 	}
 

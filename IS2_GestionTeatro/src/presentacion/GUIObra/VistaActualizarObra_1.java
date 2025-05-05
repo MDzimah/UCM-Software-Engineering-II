@@ -62,7 +62,7 @@ public class VistaActualizarObra_1 extends VistaDefault implements IGUI{
 			//Declaramos los listeners
 			actualizar.addActionListener(e ->{
 				String titulo2 = titulo.getText(), autor2= autor.getText(), genero2= genero.getText(), sinopsis2= sinopsis.getText();
-				TObra obra1 = new TObra(Integer.valueOf(id1.getText()), titulo2, autor2, genero2, sinopsis2);
+				TObra obra1 = new TObra(Integer.valueOf(id1.getText()), titulo2, autor2, genero2, sinopsis2, true);
 
 				SwingUtilities.invokeLater(()->{Controlador.getInstance().accion(Evento.ACTUALIZAR_OBRA_1, obra1);});
 				VistaActualizarObra_1.this.dispose();
@@ -78,11 +78,11 @@ public class VistaActualizarObra_1 extends VistaDefault implements IGUI{
 	@Override
 	public void actualizar(Evento evento, Object datos) {
 		if(evento==Evento.RES_OK) {
-			ViewUtils.createDialogMessage("Se ha actualizado correctamente la obra: " + ((int)datos));
+			ViewUtils.createDialogMessage(Messages.EX_OBRA_ACTUALIZADA_CORRECT + '\n' + "Id: " + ((int)datos));
 
 		}
 		else if(evento==Evento.RES_KO) {
-			ViewUtils.createErrorDialogMessage("No se ha podido actualizar la obra.\n" + "Error: " +((Exception) datos).getMessage());
+			ViewUtils.createErrorDialogMessage(Messages.EX_OBRA_ACTUALIZADA_ERROR + '\n' + Messages.ERROR.formatted(((Exception) datos).getMessage()));
 		}
 	}
 }

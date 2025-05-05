@@ -67,7 +67,7 @@ public class DAOObraImp implements DAOObra {
 			JSONObject bdObras = OpsBBDD.read(Messages.BDOb);
 			if(bdObras.has(String.valueOf(id))) {
 				JSONObject json = bdObras.getJSONObject(String.valueOf(id));
-				if(!Boolean.valueOf(json.getString(Messages.KEY_act)))
+				if(!json.getBoolean(Messages.KEY_act))
 					return -1;
 				else
 					json.put(Messages.KEY_act, false);
@@ -120,6 +120,7 @@ public class DAOObraImp implements DAOObra {
 			nuevaObra.put(Messages.KEY_autor, tObra.getAutor());
 			nuevaObra.put(Messages.KEY_generoObra, tObra.getGenero());
 			nuevaObra.put(Messages.KEY_sinopsis, tObra.getSinopsis());
+			nuevaObra.put(Messages.KEY_act, tObra.getActivo());
 			tObra.setIdObra(tObra.getIdObra());
 			
 			bdObras.put(String.valueOf(tObra.getIdObra()), nuevaObra);
@@ -154,6 +155,6 @@ public class DAOObraImp implements DAOObra {
 	
 	private TObra readJSON(JSONObject obra) {
 		
-		return new TObra(obra.getInt(Messages.KEY_idObra), obra.getString(Messages.KEY_titulo), obra.getString(Messages.KEY_autor), obra.getString(Messages.KEY_generoObra), obra.getString(Messages.KEY_sinopsis), Boolean.valueOf(obra.getString(Messages.KEY_act)));	
+		return new TObra(obra.getInt(Messages.KEY_idObra), obra.getString(Messages.KEY_titulo), obra.getString(Messages.KEY_autor), obra.getString(Messages.KEY_generoObra), obra.getString(Messages.KEY_sinopsis), obra.getBoolean(Messages.KEY_act));	
 	}
 }

@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JLabel;
+import javax.swing.JSpinner;
 import javax.swing.JTextField;
 import javax.swing.SwingUtilities;
 
@@ -19,7 +20,7 @@ import presentacion.controlador.Controlador;
 
 public class VistaActualizarObra_0 extends VistaDefault implements IGUI{
 	
-	private JTextField id;
+	private JSpinner id;
 	private JButton aceptar, cancelar;
 	
 	public VistaActualizarObra_0() {
@@ -32,7 +33,7 @@ public class VistaActualizarObra_0 extends VistaDefault implements IGUI{
 		this.setTitle("Actualizar obra");
 		aceptar = new JButton("Aceptar");
 		cancelar = new JButton("Cancelar");
-		id = new JTextField();
+		id = ViewUtils.integerSpinner(0, 0, Integer.MAX_VALUE, 1);
 		JLabel id1 = new JLabel("Introduce el id");
 
 		ArrayList<Pair<JComponent, JComponent>> campos = new ArrayList<>();
@@ -41,9 +42,16 @@ public class VistaActualizarObra_0 extends VistaDefault implements IGUI{
 		
 		//Declaramos los listeners
 		aceptar.addActionListener(e ->{
-			String id2 = id.getText();
-			SwingUtilities.invokeLater(()->{Controlador.getInstance().accion(Evento.ACTUALIZAR_OBRA_0, id2);});
-			VistaActualizarObra_0.this.dispose();
+			try {
+				id.commitEdit();
+				int idObra = (int)id.getValue();
+				SwingUtilities.invokeLater(()->{Controlador.getInstance().accion(Evento.ACTUALIZAR_OBRA_0, idObra);});
+				VistaActualizarObra_0.this.dispose();
+			}
+			catch(Exception ex) {
+				ViewUtils.createInvalidFieldsPanel();
+				id.updateUI();
+			}
 		});
 		
 		cancelar.addActionListener(e ->{
@@ -53,7 +61,7 @@ public class VistaActualizarObra_0 extends VistaDefault implements IGUI{
 	@Override
 	public void actualizar(Evento evento, Object datos) {
 		if(evento==Evento.RES_KO) {
-			ViewUtils.createErrorDialogMessage("No se ha podido actualizar la obra.\n" + "Error: " +((Exception) datos).getMessage());
+			ViewUtils.createErrorDialogMessage(Messages.EX_OBRA_ACTUALIZADA_ERROR + '\n' + Messages.ERROR.formatted(((Exception) datos).getMessage()));
 		}
 	}
 }

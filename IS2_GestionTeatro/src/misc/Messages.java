@@ -28,12 +28,18 @@ public class Messages {
 	public static final String COMPANIA_MOSTRADA = Messages.SHP.formatted("compania mostrada");
 		
 	//Obra (SEGURAMENTE LO CAMBIE DESPUÉS)
-	public static final String EX_OBRA_ANYADIDA_CORRECT = Messages.SHP.formatted("registrado la obra");
-	public static final String EX_OBRA_BORRADA_CORRECT = Messages.SHP.formatted("borrado la obra");
+	public static final String EX_OBRA_ANYADIDA_CORRECT = Messages.SHP.formatted("registrado la obra ");
+	public static final String EX_OBRA_BORRADA_CORRECT = Messages.SHP.formatted("borrado la obra ");
+	public static final String EX_OBRA_ACTUALIZADA_CORRECT = Messages.SHP.formatted("actualizado la obra ");
+
 	public static final String EX_OBRA_ANYADIDA_ERROR = Messages.NSHP.formatted("registrar la obra.");
 	public static final String EX_OBRA_BORRADA_ERROR = Messages.NSHP.formatted("borrar la obra.");
+	public static final String EX_OBRA_ACTUALIZADA_ERROR = Messages.NSHP.formatted("actualizar la obra.");
+	public static final String EX_OBRA_BUSCAR_ERROR = Messages.NSHP.formatted("encontrar obras.");
+	public static final String EX_OBRA_MOSTRAR_ERROR = Messages.NSHP.formatted("mostrar las obras.");
+	public static final String EX_OBRA_CONSULTAR_ERROR = Messages.NSHP.formatted("acceder a la obra.");
 
-
+	
 	
 	//Ops. fracasadas
 	private static final String NSHP = "No se ha podido %s";

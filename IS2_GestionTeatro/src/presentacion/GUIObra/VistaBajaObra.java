@@ -6,9 +6,11 @@ import java.util.Collection;
 import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JLabel;
+import javax.swing.JSpinner;
 import javax.swing.JTextField;
 import javax.swing.SwingUtilities;
 
+import misc.Messages;
 import misc.Pair;
 import presentacion.Evento;
 import presentacion.IGUI;
@@ -21,7 +23,7 @@ public class VistaBajaObra extends VistaDefault implements IGUI{
 	//Atributos
 	private JButton eliminar, cancelar;
 	
-	private JTextField id;
+	private JSpinner id;
 
 	//Constructor
 	public VistaBajaObra() {
@@ -35,7 +37,7 @@ public class VistaBajaObra extends VistaDefault implements IGUI{
 		eliminar = new JButton("Eliminar");
 		cancelar = new JButton("Cancelar");
 		JLabel id1 = new JLabel("Id");
-		id = new JTextField();
+		id = ViewUtils.integerSpinner(0, 0, Integer.MAX_VALUE, 1);
 		
 		ArrayList<Pair<JComponent, JComponent>> campos = new ArrayList<>();
 		campos.add(new Pair<>(id1, id));
@@ -44,9 +46,16 @@ public class VistaBajaObra extends VistaDefault implements IGUI{
 		
 		//Declaramos los listeners
 		eliminar.addActionListener(e ->{
-			String id2 = id.getText();
-			SwingUtilities.invokeLater(()->{Controlador.getInstance().accion(Evento.BAJA_OBRA, id2);});
-			VistaBajaObra.this.dispose();
+			try {
+				id.commitEdit();
+				int idObra = (int)id.getValue();
+				SwingUtilities.invokeLater(()->{Controlador.getInstance().accion(Evento.BAJA_OBRA, idObra);});
+				VistaBajaObra.this.dispose();
+			}
+			catch(Exception ex) {
+				ViewUtils.createInvalidFieldsPanel();
+				id.updateUI();
+			}
 		});
 		
 		cancelar.addActionListener(e ->{
@@ -58,11 +67,11 @@ public class VistaBajaObra extends VistaDefault implements IGUI{
 	@Override
 	public void actualizar(presentacion.Evento evento, Object datos) {
 		if(evento==Evento.RES_OK) {
-			ViewUtils.createDialogMessage("Se ha eliminado correctamente la obra: " + (int)datos);
+			ViewUtils.createDialogMessage(Messages.EX_OBRA_BORRADA_CORRECT + '\n' + "Id: "+(int)datos);
 
 		}
 		else if(evento==Evento.RES_KO) {
-			ViewUtils.createErrorDialogMessage("No se ha podido eliminar la obra.\n" + "Error: " +((Exception) datos).getMessage());
+			ViewUtils.createErrorDialogMessage(Messages.EX_OBRA_BORRADA_ERROR + '\n' + Messages.ERROR.formatted(((Exception) datos).getMessage()));
 
 		}
 	}
