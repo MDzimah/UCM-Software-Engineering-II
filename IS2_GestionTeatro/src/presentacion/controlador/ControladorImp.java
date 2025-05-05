@@ -96,6 +96,14 @@ public class ControladorImp extends Controlador {
 			break;
 		}
 		case BUSCAR_CLIENTE: {
+			try {
+				SACliente sa = FactoriaAbstractaNegocio.getInstance().crearSACliente();
+				TCliente tCliente = sa.read((int)datos);
+				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_OK, tCliente);
+			}
+			catch (Exception e){
+				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_KO, e);
+			}
 			break;
 		}
 		case BAJA_CLIENTE: {

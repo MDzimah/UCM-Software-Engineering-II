@@ -70,7 +70,8 @@ public class Messages {
 
 	//Columnas de las tablas
 	public static final String[] colNomsFactura = {"ID","ID CLIENTE", "ID TAQUILLERO", "FECHA", "IMPORTE", "SUBTOTAL"};
-	public static final String[] colNomsCliente = {/*COMPLETAR*/};
+	public static final String[] colNomsClienteNormal = {"TIPO","ID", "NOMBRE", "APELLIDO", "DNI", "CUENTA BANCARIA", "PUNTOS ACUMULADOS"};
+	public static final String[] colNomsClienteVIP = {"TIPO","ID", "NOMBRE", "APELLIDO", "DNI", "CUENTA BANCARIA", "NIVEL VIP", "CUOTA MENSUAL"};
 	public static final String[] colNomsTaquillero = {"ID", "NOMBRE", "APELLIDO", "DNI", "NUM VENTAS", "SUELDO", "EDAD", "GENERO"};
 	public static final String[] colNomsCompTea = {"ID","NOMBRE","DIRECCION","COSTE CONTRATACION"};
 	public static final String[] colNomsMiemCompTea = {"ID","NOMBRE", "APELLIDO", "EDAD", "DNI", "EMAIL", "GENERO"};
