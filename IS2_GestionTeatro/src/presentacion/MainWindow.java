@@ -236,7 +236,51 @@ public class MainWindow extends JFrame {
         subsCliente.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                JDialog sCliente = new JDialog(MainWindow.this,"Subsistema Cliente", true);
+                sCliente.setLayout(new FlowLayout());
                 
+                JButton actualizar, alta, baja, buscar, mostrar;
+                
+            	actualizar = new JButton("Actualizar Cliente");
+            	alta = new JButton("Alta Cliente");
+            	baja = new JButton("Baja Cliente");
+        		buscar = new JButton("Buscar Cliente");
+        		mostrar = new JButton("Mostrar Clientes");
+        		
+        		//ACTUALIZAR CLIENTE
+        		actualizar.addActionListener((ev)->{
+        			FactoriaAbstractaPresentacion.getInstance().createVista(Evento.ACTUALIZAR_CLIENTE);
+        		});
+        		
+        		//ALTA CLIENTE
+        		alta.addActionListener((ev)->{
+        			FactoriaAbstractaPresentacion.getInstance().createVista(Evento.ALTA_CLIENTE);
+        		});
+        		
+        		//BAJA CLIENTE
+        		baja.addActionListener((ev)->{
+        			FactoriaAbstractaPresentacion.getInstance().createVista(Evento.BAJA_CLIENTE);
+        		});		
+        		
+        		//CONSULTAR CLIENTE
+        		buscar.addActionListener((ev)->{
+        			FactoriaAbstractaPresentacion.getInstance().createVista(Evento.BUSCAR_CLIENTE);
+        		});	
+        		
+        		//MOSTRAR CLIENTES
+        		mostrar.addActionListener((ev)->{
+        			FactoriaAbstractaPresentacion.getInstance().createVista(Evento.MOSTRAR_CLIENTES);
+        		});
+        		
+        		sCliente.add(actualizar);        		
+        		sCliente.add(alta);
+        		sCliente.add(baja);
+        		sCliente.add(buscar);
+        		sCliente.add(mostrar);
+        		sCliente.setModal(false);  
+        		sCliente.pack();
+        		sCliente.setLocationRelativeTo(null);
+        		sCliente.setVisible(true);
             }
         });
 

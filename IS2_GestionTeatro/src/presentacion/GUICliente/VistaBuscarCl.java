@@ -36,7 +36,7 @@ public class VistaBuscarCl extends VistaDefault implements IGUI {
 	
 	private void initGUI() {
 		//iniciar componentes
-		this.setTitle("Baja Cliente");
+		this.setTitle("Buscar Cliente");
 		idl = new JLabel("Id");
 		id = ViewUtils.integerSpinner(0, 0, Integer.MAX_VALUE,1);
 		aceptar = new JButton("Aceptar");
