@@ -13,19 +13,29 @@ public class SAMiemCompTeaImp implements SAMiemCompTea {
 	@Override
 	public int create(TMiemCompTea tMieCT) throws BBDDReadException, BBDDWriteException {
 		DAOMiemCompTea daoMiem = FactoriaAbstractaIntegracion.getInstance().crearDAOMiemCompTea();
-		return daoMiem.create(tMieCT);
+		TMiemCompTea tMiemComp = daoMiem.readByDNI(tMieCT.getDNI());
+		if(tMiemComp == null) return daoMiem.create(tMieCT);
+		else if(tMiemComp.getActivo()) return -tMiemComp.getIdMiembComp();
+		else {
+			tMieCT.setIdMiembComp(tMiemComp.getIdMiembComp());
+			return daoMiem.update(tMieCT);
+		}
 	}
 
 	@Override
 	public TMiemCompTea read(int id) throws BBDDReadException{
 		DAOMiemCompTea daoMiem = FactoriaAbstractaIntegracion.getInstance().crearDAOMiemCompTea();
-		return daoMiem.read(id);
+		TMiemCompTea tMiemComp = daoMiem.read(id);
+		if(tMiemComp != null && !tMiemComp.getActivo()) tMiemComp = null;
+		return tMiemComp;
 	}
 
 	@Override
 	public int update(TMiemCompTea tMieCT) throws BBDDReadException, BBDDWriteException {
 		DAOMiemCompTea daoMiem = FactoriaAbstractaIntegracion.getInstance().crearDAOMiemCompTea();
-		return daoMiem.update(tMieCT);
+		int id = daoMiem.update(tMieCT);
+		if(id != -1 && !tMieCT.getActivo()) id = -1;
+		return id;
 	}
 
 	@Override

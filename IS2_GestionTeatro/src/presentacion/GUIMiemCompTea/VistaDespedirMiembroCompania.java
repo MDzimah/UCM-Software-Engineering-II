@@ -44,19 +44,27 @@ public class VistaDespedirMiembroCompania extends VistaDefault {
     }
 
     private void despedirMiembro() {
-        int id = (Integer) idField.getValue();
-        Controlador.getInstance().accion(Evento.DESPEDIR_MIEMBRO_COMPANIA, id);
-        dispose();
+    	 try {
+             idField.commitEdit();
+             int id = (Integer) idField.getValue(); 
+             dispose();
+             Controlador.getInstance().accion(Evento.DESPEDIR_MIEMBRO_COMPANIA, id);
+         } catch (java.text.ParseException ex) {
+             ViewUtils.createErrorDialogMessage("El ID ingresado no es válido.");
+         }
     }
 
 	@Override
 	public void actualizar(Evento evento, Object datos) {
-		if (evento == Evento.RES_OK) ViewUtils.createDialogMessage(Messages.EX_MIEMBRO_DESPEDIDO);
+		if (evento == Evento.RES_OK) {
+			ViewUtils.createDialogMessage(Messages.EX_MIEMBRO_DESPEDIDO);
+			dispose();
+		}
 		else if (evento == Evento.RES_KO) {
 			String error;
 			if (datos instanceof String) error = (String) datos;
 			else error = Messages.ID_NO_ENCONTRADO.formatted(String.valueOf(((int)datos)));
-			ViewUtils.createErrorDialogMessage(Messages.EX_MIEMBRO_DESPEDIDO + ' ' + Messages.MOTIVO.formatted(error));
+			ViewUtils.createErrorDialogMessage(Messages.X_MIEMBRO_DESPEDIDO + ' ' + Messages.MOTIVO.formatted(error));
 		}
 	}
 }

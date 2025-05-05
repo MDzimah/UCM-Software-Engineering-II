@@ -513,7 +513,7 @@ public class ControladorImp extends Controlador {
 					vista.cargarMiembro(tMiemComp);
 				}
 				else {
-					FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_KO, Messages.ID_NO_ENCONTRADO);
+					FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_KO, (int) datos);
 				}
 			}
 			catch(Exception e) {
@@ -553,7 +553,8 @@ public class ControladorImp extends Controlador {
 			try {
 				SAMiemCompTea saMiemComp = FactoriaAbstractaNegocio.getInstance().crearSAMiemCompTea();
 				int id = saMiemComp.create((TMiemCompTea) datos);
-				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_OK, id);
+				if(id >= 0) FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_OK, id);
+				else FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_KO, -id);
 			}
 			catch(Exception e) {
 				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_KO, e.getMessage());

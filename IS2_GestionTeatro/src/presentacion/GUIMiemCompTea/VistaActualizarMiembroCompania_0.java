@@ -36,9 +36,14 @@ public class VistaActualizarMiembroCompania_0 extends VistaDefault{
 		super.initComps(campos, aceptar, cancelar);
 		
 		aceptar.addActionListener(e ->{
-			 int id = (Integer) idField.getValue();        
-		     Controlador.getInstance().accion(Evento.ACTUALIZAR_MIEMBRO_COMPANIA_0, id);
-		     dispose();
+			try {
+                idField.commitEdit();
+                int id = (Integer) idField.getValue();        
+                Controlador.getInstance().accion(Evento.ACTUALIZAR_MIEMBRO_COMPANIA_0, id);
+                dispose();
+            } catch (java.text.ParseException ex) {
+                ViewUtils.createErrorDialogMessage("El ID ingresado no es válido.");
+            }
 		});
 		
 		cancelar.addActionListener(e -> dispose());
@@ -49,7 +54,10 @@ public class VistaActualizarMiembroCompania_0 extends VistaDefault{
 	@Override
 	public void actualizar(Evento evento, Object datos) {
 		if(evento==Evento.RES_KO) {
-			ViewUtils.createErrorDialogMessage(Messages.X_MIEMBRO_ACTUALIZADO + ' ' + Messages.MOTIVO.formatted((String)datos));
+			String error;
+			if(datos instanceof String) error = (String) datos;
+			else error = Messages.ID_NO_ENCONTRADO.formatted(String.valueOf(((int)datos)));
+			ViewUtils.createErrorDialogMessage(Messages.X_MIEMBRO_ACTUALIZADO + ' ' + Messages.MOTIVO.formatted(error));
 		}		
 	}
 	

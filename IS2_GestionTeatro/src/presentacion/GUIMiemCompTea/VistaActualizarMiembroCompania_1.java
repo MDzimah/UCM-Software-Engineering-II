@@ -33,6 +33,7 @@ public class VistaActualizarMiembroCompania_1 extends VistaDefault {
 		tabla.getOkButton().addActionListener(e -> {
 			TMiemCompTea tMiemComp = (TMiemCompTea) tabla.getEdicion();
 			Controlador.getInstance().accion(Evento.ACTUALIZAR_MIEMBRO_COMPANIA_1, tMiemComp);
+			dispose();
 		});
 	}
     
@@ -40,6 +41,7 @@ public class VistaActualizarMiembroCompania_1 extends VistaDefault {
 	public void actualizar(Evento evento, Object datos) {
 		if(evento==Evento.RES_OK) {
 			ViewUtils.createDialogMessage(Messages.EX_MIEMBRO_ACTUALIZADO);
+			dispose();
 		}
 		else if (evento==Evento.RES_KO) {
 			ViewUtils.createErrorDialogMessage(Messages.X_MIEMBRO_ACTUALIZADO + ' ' + Messages.MOTIVO.formatted((String)datos));
