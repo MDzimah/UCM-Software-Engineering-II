@@ -22,7 +22,7 @@ public class DAOPaseImp implements DAOPase {
 	@Override
 	public int create(TPase tPase) throws BBDDReadException, BBDDWriteException {
 		JSONObject bdPase = new JSONObject();
-		if (OpsBBDD.isEmpty(Messages.BDFac)) {
+		if (OpsBBDD.isEmpty(Messages.BDPase)) {
 			bdPase.put(Messages.KEY_lastId, 0);
 			bdPase.put(Messages.KEY_pases, new JSONObject());
 		}
@@ -46,7 +46,7 @@ public class DAOPaseImp implements DAOPase {
 
 	@Override
 	public int delete(int id) throws BBDDReadException, BBDDWriteException {
-		if (!OpsBBDD.isEmpty(Messages.BDFac)) {
+		if (!OpsBBDD.isEmpty(Messages.BDPase)) {
 			JSONObject bdPase = OpsBBDD.read(Messages.BDPase);
 			JSONObject pases = bdPase.getJSONObject(Messages.KEY_pases);
 			if (pases.has(Integer.toString(id))) {
@@ -62,7 +62,7 @@ public class DAOPaseImp implements DAOPase {
 
 	@Override
 	public TPase read(int id) throws BBDDReadException {
-		if (!OpsBBDD.isEmpty(Messages.BDFac)) {
+		if (!OpsBBDD.isEmpty(Messages.BDPase)) {
 			JSONObject bdPase = OpsBBDD.read(Messages.BDPase);
 			JSONObject pases = bdPase.getJSONObject(Messages.KEY_pases);
 			TPase tPase = null;
@@ -78,9 +78,9 @@ public class DAOPaseImp implements DAOPase {
 
 	@Override
 	public ArrayList<TPase> readAll() throws BBDDReadException {
-		if (!OpsBBDD.isEmpty(Messages.BDFac)) {
+		if (!OpsBBDD.isEmpty(Messages.BDPase)) {
 			JSONObject bdPase = OpsBBDD.read(Messages.BDPase);
-			JSONObject pases = new JSONObject(bdPase.getJSONArray(Messages.KEY_pases));
+			JSONObject pases = bdPase.getJSONObject(Messages.KEY_pases);
 			ArrayList<TPase> pasesADevolver = new ArrayList<>();
 			Set<String> idSetPases = pases.keySet();
 			for (String idPase : idSetPases) {
@@ -98,7 +98,7 @@ public class DAOPaseImp implements DAOPase {
 
 	@Override
 	public int update(TPase tPase) throws BBDDReadException, BBDDWriteException {
-		if (!OpsBBDD.isEmpty(Messages.BDFac)) {
+		if (!OpsBBDD.isEmpty(Messages.BDPase)) {
 			JSONObject bdPase = OpsBBDD.read("BDPase.json");
 			if(bdPase.has(String.valueOf(tPase.getIdPase())) && bdPase.getBoolean(null)) {
 				
@@ -132,7 +132,7 @@ public class DAOPaseImp implements DAOPase {
 
 	@Override
 	public void deletePorObra(int idObra) throws BBDDReadException, BBDDWriteException {
-		if (!OpsBBDD.isEmpty(Messages.BDFac)) {
+		if (!OpsBBDD.isEmpty(Messages.BDPase)) {
 			JSONObject bdPases = OpsBBDD.read(Messages.BDPase);
 			List<String> clavesEliminar = new LinkedList<>();
 			for (String idPase : bdPases.keySet()) {

@@ -212,7 +212,7 @@ public class MainWindow extends JFrame {
         			JDialog carritoView = new JDialog();
         			carritoView.setTitle("Carrito");
         			carritoView.setModal(true);
-        			carritoView.setLayout(new BoxLayout(BoxLayout.Y_AXIS));
+        			//carritoView.setLayout(new BoxLayout(BoxLayout.Y_AXIS));
         			for (TLineaFactura tLf : AbrirVenta.getCarrito()) {
         				carritoView.add(new JLabel(tLf.toString()));
         			}
