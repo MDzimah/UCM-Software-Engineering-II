@@ -5,7 +5,6 @@ import javax.swing.*;
 
 import misc.*;
 import negocio.factura.*;
-import presentacion.ViewUtils;
 import presentacion.VistaDefault;
 
 @SuppressWarnings("serial")
@@ -18,7 +17,6 @@ public abstract class ModificacionPaseEnVenta extends VistaDefault {
 	private JButton cancel;
 	
 	void initComps() {
-		ViewUtils.setAppIcon(this);
 		lIdPase = new JLabel("Id pase:");
 		SpinnerNumberModel spinnerModel = new SpinnerNumberModel(0, 0, Integer.MAX_VALUE, 1);
 		sIdPase = new JSpinner(spinnerModel);

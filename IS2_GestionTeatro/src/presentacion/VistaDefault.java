@@ -26,6 +26,7 @@ public abstract class VistaDefault extends JFrame implements IGUI {
 	public void initComps(ArrayList<Pair<JComponent, JComponent>> pairComponents,
 	                        JButton positiveResponse, JButton negativeResponse) 
 	{
+		ViewUtils.setAppIcon(this);
 		JPanel mainPanel = new JPanel(new BorderLayout());
 		
 		boolean validInfoPanel = pairComponents != null && !pairComponents.isEmpty();
@@ -72,7 +73,6 @@ public abstract class VistaDefault extends JFrame implements IGUI {
 		    mainPanel.add(responsePanel,where);
 		}
 		this.add(mainPanel);
-		
 		this.pack();
 		this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		this.setLocationRelativeTo(null);

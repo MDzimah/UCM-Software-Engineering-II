@@ -44,7 +44,6 @@ public class ControladorImp extends Controlador {
 			catch (BBDDReadException | BBDDWriteException | UnknownClienteException | UnknownTaquilleroException e) {
 				 FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_KO, e);
 			}
-			
 		}
 		case BUSCAR_FACTURA: {
 			try {

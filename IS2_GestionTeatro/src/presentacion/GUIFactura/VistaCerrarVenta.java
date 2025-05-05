@@ -23,7 +23,6 @@ public class VistaCerrarVenta extends VistaDefault {
 
 	public VistaCerrarVenta() {
 		this.setTitle("Cerrar venta");
-		ViewUtils.setAppIcon(this);
 		
 		SpinnerNumberModel spinnerModel = new SpinnerNumberModel(0, 0, Integer.MAX_VALUE, 1);
 
@@ -73,7 +72,7 @@ public class VistaCerrarVenta extends VistaDefault {
 			ViewUtils.createDialogMessage(Messages.EX_VENTA_CERRADA.formatted((int)datos));
 		} else if (evento == Evento.RES_KO) {
 			String error;
-			if (datos instanceof Exception) error = ((Exception)datos).getMessage();
+			if (datos != null) error = ((Exception)datos).getMessage();
 			else error = Messages.CARRITO_VACIO;
 			ViewUtils.createErrorDialogMessage(Messages.X_VENTA_CERRADA + ' ' + Messages.MOTIVO.formatted(error));
 		}

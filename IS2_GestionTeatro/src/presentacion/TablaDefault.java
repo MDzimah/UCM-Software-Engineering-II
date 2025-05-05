@@ -135,6 +135,7 @@ public class TablaDefault<T extends Convertable<T>> extends JFrame {
 	public TablaDefault(String nombreTabla,  String[] columnNames, ArrayList<T> data, boolean CUActualizar) {
 		this.setTitle(nombreTabla);
         this.setLayout(new BorderLayout());
+        ViewUtils.setAppIcon(this);
         
         this.editable = CUActualizar;
 
