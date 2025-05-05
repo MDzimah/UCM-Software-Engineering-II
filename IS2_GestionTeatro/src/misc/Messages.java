@@ -4,7 +4,7 @@ public class Messages {
 	//Ops. realizadas con éxito
 	private static final String SHP = "Se ha %s correctamente.";
 		//Factura
-	public static final String EX_VENTA_CERRADA = Messages.SHP.formatted("cerrado la venta");
+	public static final String EX_VENTA_CERRADA = Messages.SHP.formatted("cerrado la venta con id \"%s\"");
 	public static final String EX_PASE_ANYADIDO_A_VENTA = Messages.SHP.formatted("añadido al carrito el pase con id \"%s\"");
 	public static final String EX_PASE_QUITADO_DE_VENTA = Messages.SHP.formatted("quitado del carrito el pase con id \"%s\"");
 
@@ -65,6 +65,8 @@ public class Messages {
 	public static final String NO_HAY_DATOS = "No hay datos para mostrar";
 	public static final String NO_EN_CARRITO = "El pase no se encuentra en el carrito";
 	public static final String EDICION_INVALIDA_TABLA = "Datos inválidos";
+	public static final String CARRITO_VACIO = "Carrito vacío";
+
 
 	//Columnas de las tablas
 	public static final String[] colNomsFactura = {"ID","ID CLIENTE", "ID TAQUILLERO", "FECHA", "IMPORTE", "SUBTOTAL"};

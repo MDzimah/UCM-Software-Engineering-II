@@ -42,6 +42,7 @@ public class VistaBuscarFac extends VistaDefault {
 				dispose();
 			}
 			catch(Exception ex) {
+				ViewUtils.createInvalidFieldsPanel();
 				sIdFac.updateUI();
 			}
 		});

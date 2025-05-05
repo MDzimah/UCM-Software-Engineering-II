@@ -40,10 +40,7 @@ public class ViewUtils {
 	}
 	
 	public static void createInvalidFieldsPanel() {
-		JOptionPane.showMessageDialog(null,
-				Messages.EXC_CAMPOS_INCORRECTOS,
-	            "Error",
-	            JOptionPane.ERROR_MESSAGE);
+		createErrorDialogMessage(Messages.EXC_CAMPOS_INCORRECTOS);
 	}
 	
 	public static void createDialogMessage(String message) {

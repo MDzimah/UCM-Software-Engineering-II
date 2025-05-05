@@ -36,7 +36,10 @@ public class ControladorImp extends Controlador {
 			SAFactura saFac = FactoriaAbstractaNegocio.getInstance().crearSAFactura();
 			TDatosVenta tDV = (TDatosVenta)datos;
 			try {
-				saFac.crearFactura(tDV);
+				int idFac = saFac.crearFactura(tDV);
+				
+				if (idFac != -1) FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_OK, idFac);
+				else FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_KO, null);
 			}
 			catch (BBDDReadException | BBDDWriteException | UnknownClienteException | UnknownTaquilleroException e) {
 				 FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_KO, e);

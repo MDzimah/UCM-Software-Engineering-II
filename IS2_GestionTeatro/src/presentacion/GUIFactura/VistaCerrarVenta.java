@@ -1,34 +1,22 @@
 package presentacion.GUIFactura;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.event.*;
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
 
-import javax.swing.JButton;
-import javax.swing.JComponent;
-import javax.swing.JLabel;
-import javax.swing.JTextField;
+import javax.swing.*;
 
 import misc.Messages;
 import misc.Pair;
 import negocio.factura.TDatosVenta;
-import negocio.factura.TFactura;
-import negocio.factura.TLineaFactura;
-import presentacion.Evento;
-import presentacion.ViewUtils;
-import presentacion.VistaDefault;
+import presentacion.*;
 import presentacion.controlador.Controlador;
-import presentacion.factoria.FactoriaAbstractaPresentacion;
 
 @SuppressWarnings("serial")
 public class VistaCerrarVenta extends VistaDefault {
-
 	private JLabel labelCliente;
-	private JTextField tfCliente;
+	private JSpinner sCliente;
 	private JLabel labelTaquillero;
-	private JTextField tfTaquillero;
+	private JSpinner sTaquillero;
 
 	private JButton aceptar;
 	private JButton cancelar;
@@ -37,18 +25,20 @@ public class VistaCerrarVenta extends VistaDefault {
 		this.setTitle("Cerrar venta");
 		ViewUtils.setAppIcon(this);
 		
-		this.labelCliente = new JLabel("DNI del cliente:");
-		this.tfCliente = new JTextField(20);
+		SpinnerNumberModel spinnerModel = new SpinnerNumberModel(0, 0, Integer.MAX_VALUE, 1);
 
-		this.labelTaquillero = new JLabel("DNI del taquillero:");
-		this.tfTaquillero = new JTextField(20);
+		this.labelCliente = new JLabel("Id del cliente:");
+		this.sCliente = new JSpinner(spinnerModel);
+
+		this.labelTaquillero = new JLabel("Id del taquillero:");
+		this.sTaquillero = new JSpinner(spinnerModel);
 
 		this.aceptar = new JButton("Aceptar");
 		this.cancelar = new JButton("Cancelar");
 
 		ArrayList<Pair<JComponent, JComponent>> labeledComponents = new ArrayList<>();
-		labeledComponents.add(new Pair<>(labelCliente, tfCliente));
-		labeledComponents.add(new Pair<>(labelTaquillero, tfTaquillero));
+		labeledComponents.add(new Pair<>(labelCliente, sCliente));
+		labeledComponents.add(new Pair<>(labelTaquillero, sTaquillero));
 
 		super.initComps(labeledComponents, aceptar, cancelar);
 		
@@ -56,13 +46,15 @@ public class VistaCerrarVenta extends VistaDefault {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				try {
-					int cliente = Integer.valueOf(tfCliente.getText());
-					int taquillero = Integer.valueOf(tfTaquillero.getText());
+					int cliente = (Integer) sCliente.getValue();
+					int taquillero = (Integer) sTaquillero.getValue();
 					TDatosVenta tDv = new TDatosVenta(cliente, taquillero, AbrirVenta.getCarrito());
 					Controlador.getInstance().accion(Evento.CERRAR_VENTA, tDv);
 				}
 				catch(ArithmeticException ex) {
-					FactoriaAbstractaPresentacion.getInstance().createDialogoCamposIncorrectos();;
+					ViewUtils.createInvalidFieldsPanel();
+					sCliente.updateUI();
+					sTaquillero.updateUI();
 				}
 			}
 		});
@@ -78,9 +70,12 @@ public class VistaCerrarVenta extends VistaDefault {
 	@Override
 	public void actualizar(Evento evento, Object datos) {
 		if (evento == Evento.RES_OK) {
-			ViewUtils.createDialogMessage(Messages.EX_VENTA_CERRADA);
+			ViewUtils.createDialogMessage(Messages.EX_VENTA_CERRADA.formatted((int)datos));
 		} else if (evento == Evento.RES_KO) {
-			ViewUtils.createDialogMessage(Messages.X_VENTA_CERRADA);
+			String error;
+			if (datos instanceof Exception) error = ((Exception)datos).getMessage();
+			else error = Messages.CARRITO_VACIO;
+			ViewUtils.createErrorDialogMessage(Messages.X_VENTA_CERRADA + ' ' + Messages.MOTIVO.formatted(error));
 		}
 		
 		AbrirVenta.enableButton();

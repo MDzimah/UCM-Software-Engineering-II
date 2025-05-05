@@ -39,28 +39,29 @@ public class SAFacturaImp implements SAFactura {
 		}
 		
 		DAOPase daoPase = FactoriaAbstractaIntegracion.getInstance().crearDAOPase();
-		
-		//Cliente y Taquillero existen, preparamos la nueva factura
-		if (!leidoCliente.getActivo()) {
-			return -1;
-		}
-		float importeFinal = 0;
-		for (TLineaFactura tLinea : tDv.getCarrito()) {
-			TPase tPase = daoPase.read(tLinea.getIdPase());
-			if (tPase != null) {					
-				SAPase saPase = FactoriaAbstractaNegocio.getInstance().crearSAPase();
-				int cantidadVendida = saPase.comprar(tPase.getIdPase(), tLinea.getCantidad());
-				if (cantidadVendida > 0) {
-					tLinea.setCantidad(cantidadVendida);
-					tLinea.setPrecioVenta(tPase.getPrecio()*cantidadVendida);
-					importeFinal += tLinea.getPrecioVenta();
-					carritoFinal.add(tLinea);
+
+		//Calculamos el importe final de la factura (si el carrito tiene lineas de factura)
+		if (carritoFinal.size() > 0) {
+			float importeFinal = 0;
+			for (TLineaFactura tLinea : tDv.getCarrito()) {
+				TPase tPase = daoPase.read(tLinea.getIdPase());
+				if (tPase != null) {					
+					SAPase saPase = FactoriaAbstractaNegocio.getInstance().crearSAPase();
+					int cantidadVendida = saPase.comprar(tPase.getIdPase(), tLinea.getCantidad());
+					if (cantidadVendida > 0) {
+						tLinea.setCantidad(cantidadVendida);
+						tLinea.setPrecioVenta(tPase.getPrecio()*cantidadVendida);
+						importeFinal += tLinea.getPrecioVenta();
+						carritoFinal.add(tLinea);
+					}
 				}
 			}
-		}
-		if (carritoFinal.size() > 0) {
+		
+			//Aplicamos descuento
 			SACliente saCl = FactoriaAbstractaNegocio.getInstance().crearSACliente();
 			float subTotal = saCl.aplicarDescuento(tDv.getIdCliente(), importeFinal); 
+			
+			//Creamos la factura final
 			TFactura tFacFinal = new TFactura(tDv.getIdCliente(), 
 					tDv.getIdTaquillero(), 
 					true, 
@@ -68,16 +69,18 @@ public class SAFacturaImp implements SAFactura {
 					subTotal,
 					importeFinal);
 			DAOFactura daoFac = FactoriaAbstractaIntegracion.getInstance().crearDAOFactura();
+			//La guardamos en la BD
 			idFacNueva = daoFac.create(tFacFinal); 
 			
-			
+			//Damos el id de la factura a sus líneas y las guardamos en la BD
 			DAOLineaFactura daoLineaFactura = FactoriaAbstractaIntegracion.getInstance().crearDAOLineaFactura();
 			for (TLineaFactura tLineaFactura : carritoFinal) {
-				//Damos el id de la factura a sus líneas
-				tLineaFactura.setIdFactura(idFacNueva);
-				int idLineaFactura = daoLineaFactura.create(tLineaFactura);		
+				tLineaFactura.setIdFactura(idFacNueva);	
+				daoLineaFactura.create(tLineaFactura);
 			}
-			//TAQUILLERO TIENE Q ACTUALIZARSE
+			
+			//Actualizamos al taquillero encargado de la factura
+			FactoriaAbstractaNegocio.getInstance().crearSATaquillero().aumentarVenta(tFacFinal.getIdTaquillero());
 		}
 		
 		return idFacNueva;
