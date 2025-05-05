@@ -30,13 +30,13 @@ public class SAPaseImp implements SAPase {
 		DAOCompTea daoCompTea = FactoriaAbstractaIntegracion.getInstance().crearDAOCompTea();
 		TCompTea lecturaCompTea = daoCompTea.read(tPase.getIdCompanyaTeatral());
 		
-		if (lecturaObra == null) {
+		/*if (lecturaObra == null) {
 			throw new UnknownObraException();
 		}
 		if (lecturaCompTea == null) {
 			throw new UnknownCompTeaException();
 		}
-		
+		*/
 		DAOPase daoPas = FactoriaAbstractaIntegracion.getInstance().crearDAOPase();
 		id = daoPas.create(tPase);
 		

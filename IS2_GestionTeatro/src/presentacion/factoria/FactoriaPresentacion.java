@@ -1,6 +1,13 @@
 package presentacion.factoria;
 
 import presentacion.*;
+import presentacion.GUICliente.VistaActualizarCl;
+import presentacion.GUICliente.VistaActualizarClNormal;
+import presentacion.GUICliente.VistaActualizarClVIP;
+import presentacion.GUICliente.VistaAltaCl;
+import presentacion.GUICliente.VistaBajaCl;
+import presentacion.GUICliente.VistaBuscarCl;
+import presentacion.GUICliente.VistaMostrarCl;
 import presentacion.GUIMiemCompTea.*;
 import presentacion.GUIFactura.*;
 import presentacion.GUICompTea.*;
@@ -15,17 +22,19 @@ public class FactoriaPresentacion extends FactoriaAbstractaPresentacion {
 		switch(e) {
 		//Factura
 		case ANYADIR_PASE_A_VENTA: return new VistaAnyadirPaseAVenta();
-		case BUSCAR_FACTURA: return new VistaBuscarFac();
+		case BUSCAR_FACTURA: return new VistaBuscarFactura();
 		case CERRAR_VENTA: return new VistaCerrarVenta();
 		case MOSTRAR_FACTURAS: return new VistaMostrarFacs();
 		case QUITAR_PASE_DE_VENTA: return new VistaQuitarPaseDeVenta();
 		
 		//Cliente
-		case ALTA_CLIENTE: return null;
-		case BUSCAR_CLIENTE: return null;
-		case BAJA_CLIENTE: return null;
-		case MOSTRAR_CLIENTES: return null;
-		case ACTUALIZAR_CLIENTE:  return null;
+		case ALTA_CLIENTE: return new VistaAltaCl();
+		case BUSCAR_CLIENTE: return new VistaBuscarCl();
+		case BAJA_CLIENTE: return new VistaBajaCl();
+		case MOSTRAR_CLIENTES: return new VistaMostrarCl();
+		case ACTUALIZAR_CLIENTE:  return new VistaActualizarCl();
+		case ACTUALIZAR_CLIENTE_VIP:  return new VistaActualizarClVIP();
+		case ACTUALIZAR_CLIENTE_NORMAL:  return new VistaActualizarClNormal();
 		
 		//Taquillero
 		case ALTA_TAQUILLERO: return new VistaContratarTaquillero();

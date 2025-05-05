@@ -10,6 +10,10 @@ import exceptions.InvalidFields;
 import exceptions.UnknownClienteException;
 import exceptions.UnknownTaquilleroException;
 import misc.Messages;
+import negocio.cliente.SACliente;
+import negocio.cliente.TCliente;
+import negocio.cliente.TClienteNormal;
+import negocio.cliente.TClienteVIP;
 import negocio.compTea.SACompTea;
 import negocio.compTea.TCompTea;
 import negocio.factoria.FactoriaAbstractaNegocio;
@@ -21,6 +25,8 @@ import negocio.pase.TPase;
 import negocio.taquillero.SATaquillero;
 import negocio.taquillero.TTaquillero;
 import presentacion.Evento;
+import presentacion.GUICliente.VistaActualizarClNormal;
+import presentacion.GUICliente.VistaActualizarClVIP;
 import presentacion.GUICompTea.VistaActualizarCompania1;
 import presentacion.GUIMiemCompTea.VistaActualizarMiembroCompania_1;
 import presentacion.GUIObra.VistaActualizarObra_1;
@@ -78,11 +84,67 @@ public class ControladorImp extends Controlador {
 		
 		
 		//Cliente
-		case ALTA_CLIENTE: 
-		case BUSCAR_CLIENTE: 
-		case BAJA_CLIENTE:
-		case MOSTRAR_CLIENTES: 
-		case ACTUALIZAR_CLIENTE: 
+		case ALTA_CLIENTE: {
+			try {
+				SACliente sa = FactoriaAbstractaNegocio.getInstance().crearSACliente();
+				int id = sa.create((TCliente) datos);
+				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_OK, id);
+			}
+			catch (Exception e) {
+				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_KO, e);
+			}
+			break;
+		}
+		case BUSCAR_CLIENTE: {
+			break;
+		}
+		case BAJA_CLIENTE: {
+			break;
+		}
+		case MOSTRAR_CLIENTES: {
+			break;
+		}
+		case ACTUALIZAR_CLIENTE: {
+			try {
+				SACliente sa = FactoriaAbstractaNegocio.getInstance().crearSACliente();
+				int id = (int) datos;
+				TCliente tCliente = sa.read(id);
+				if (tCliente.getTipo() == "Normal") {
+					VistaActualizarClNormal vistaAct = (VistaActualizarClNormal) FactoriaAbstractaPresentacion.getInstance().createVista(Evento.ACTUALIZAR_CLIENTE_NORMAL);
+					vistaAct.cargarCliente((TClienteNormal) tCliente);
+				}
+				else if (tCliente.getTipo() == "VIP") {
+					VistaActualizarClVIP vistaAct = (VistaActualizarClVIP) FactoriaAbstractaPresentacion.getInstance().createVista(Evento.ACTUALIZAR_CLIENTE_VIP);
+					vistaAct.cargarCliente((TClienteVIP) tCliente);
+				}
+			}
+			catch (Exception e) {
+				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_KO, e);
+			}
+			break;
+		}
+		case ACTUALIZAR_CLIENTE_NORMAL: {
+			try {
+				SACliente saCl = FactoriaAbstractaNegocio.getInstance().crearSACliente();
+				TCliente tCliente = (TCliente) datos;
+				int id = saCl.update(tCliente);
+				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_OK, id);
+			} catch (Exception e) {
+				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_KO, e);
+			}
+			break;
+		}
+		case ACTUALIZAR_CLIENTE_VIP: {
+			try {
+				SACliente saCl = FactoriaAbstractaNegocio.getInstance().crearSACliente();
+				TCliente tCliente = (TCliente) datos;
+				int id = saCl.update(tCliente);
+				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_OK, id);
+			} catch (Exception e) {
+				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_KO, e);
+			}
+			break;
+		}
 		
 		//Taquillero
 		case ALTA_TAQUILLERO: {

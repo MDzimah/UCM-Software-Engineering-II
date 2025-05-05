@@ -1,16 +1,73 @@
 package presentacion.GUICliente;
 
-import javax.swing.JFrame;
+import java.util.ArrayList;
 
+import javax.swing.JButton;
+import javax.swing.JComponent;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JTextField;
+import javax.swing.SwingUtilities;
+
+import misc.Pair;
 import presentacion.Evento;
 import presentacion.IGUI;
+import presentacion.ViewUtils;
+import presentacion.VistaDefault;
+import presentacion.GUITaquillero.VistaActualizarTaquillero_0;
+import presentacion.controlador.Controlador;
 
 @SuppressWarnings("serial")
-public class VistaActualizarCl extends JFrame implements IGUI {
+public class VistaActualizarCl extends VistaDefault implements IGUI {
+
+	private JLabel idl;
+	private JTextField id;
+	private JButton aceptar, cancelar;
+	
+	public VistaActualizarCl() {
+		initGUI();
+		this.setVisible(true);
+	}
+	
+	private void initGUI() {
+		
+		//inicializar componentes
+		this.setTitle("Actualizar Cliente");
+		idl = new JLabel("ID");
+		id = new JTextField(20);
+		aceptar = new JButton("Aceptar");
+		cancelar = new JButton("Cancelar");
+		
+		ArrayList<Pair<JComponent, JComponent>> componentes = new ArrayList<>();
+		componentes.add(new Pair<>(idl, id));
+		super.initComps(componentes, aceptar, cancelar);
+		
+		//oyentes
+		aceptar.addActionListener((e) -> {
+			if(id.getText() != "") {
+				try {
+					int _id = Integer.parseInt(id.getText());
+					SwingUtilities.invokeLater(()-> {Controlador.getInstance().accion(Evento.ACTUALIZAR_CLIENTE, _id); });
+					
+				} catch (NumberFormatException ex) {
+					ViewUtils.createErrorDialogMessage("El ID debe ser un número entero.");
+				}
+				finally {
+					VistaActualizarCl.this.dispose();
+				}
+			}
+		});
+				
+		cancelar.addActionListener((e) -> {
+			VistaActualizarCl.this.dispose();
+		});
+	}
 
 	@Override
 	public void actualizar(Evento evento, Object datos) {
-		// TODO Auto-generated method stub
+		if(evento == Evento.RES_KO) {
+			ViewUtils.createErrorDialogMessage("No se ha podido actualizar el cliente.\n" + "Error: " +((Exception) datos).getMessage());
+		}
 		
 	}
 

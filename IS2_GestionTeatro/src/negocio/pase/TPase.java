@@ -1,6 +1,7 @@
 package negocio.pase;
 
 import java.time.LocalDateTime;
+import java.util.Date;
 
 import presentacion.Convertable;
 
@@ -13,12 +14,12 @@ public class TPase implements Convertable<TPase> {
 	private int stock;
 	private float precio;
 	public TPase(int idPase, int idCompanyaTeatral, int idObra, boolean activo,
-			LocalDateTime fecha, int stock, float precio) {
+			LocalDateTime selectedDate, int stock, float precio) {
 		this.idPase = idPase;
 		this.idCompanyaTeatral = idCompanyaTeatral;
 		this.idObra = idObra;
 		this.activo = activo;
-		this.fecha = fecha;
+		this.fecha = selectedDate;
 		this.stock = stock;
 		this.precio = precio;
 	}

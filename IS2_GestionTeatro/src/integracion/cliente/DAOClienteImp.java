@@ -83,17 +83,6 @@ public class DAOClienteImp implements DAOCliente {
 		}
 		else return -1;
 		
-		/*
-		 * 
-		 * 
-		 * 
-		 * 
-		 * HACE FALTA BORRAR TODAS SUS FACTURAS ACTIVAS TMB LLAMANDO A DAO FACTURA
-		 * 
-		 * 
-		 * 
-		 * 
-		 * */
 	}
 
 	@Override
