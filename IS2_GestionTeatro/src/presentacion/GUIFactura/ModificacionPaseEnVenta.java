@@ -22,12 +22,6 @@ public abstract class ModificacionPaseEnVenta extends VistaDefault {
 		lIdPase = new JLabel("Id pase:");
 		SpinnerNumberModel spinnerModel = new SpinnerNumberModel(0, 0, Integer.MAX_VALUE, 1);
 		sIdPase = new JSpinner(spinnerModel);
-		/*
-		lFecha = new JLabel("Fecha (DD/MM/AAAA) Hora (HH:MM):");
-		SpinnerDateModel model = new SpinnerDateModel(Calendar.getInstance().getTime(), null, null, Calendar.HOUR_OF_DAY);
-        sFecha = new JSpinner(model);
-        */
-		
 		lCtdad = new JLabel("Cantidad:");
 		spinnerModel = new SpinnerNumberModel(1, 1, 100, 1);
 	    sCtdad = new JSpinner(spinnerModel);
@@ -46,13 +40,6 @@ public abstract class ModificacionPaseEnVenta extends VistaDefault {
 				//Id pase
 				sIdPase.commitEdit();
 				int idPase = (Integer)sIdPase.getValue(); 
-				
-				//Fecha
-				/*
-				Date fechaSeleccionada = (Date) sFecha.getValue();
-				LocalDateTime fechaPase = fechaSeleccionada.toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime();
-				*/
-				
 				//Cantidad
 				sCtdad.commitEdit();
 				int ctdad = (Integer)sCtdad.getValue(); 

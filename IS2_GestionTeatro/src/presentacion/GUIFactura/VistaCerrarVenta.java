@@ -62,7 +62,6 @@ public class VistaCerrarVenta extends VistaDefault {
 					Controlador.getInstance().accion(Evento.CERRAR_VENTA, tDv);
 				}
 				catch(ArithmeticException ex) {
-					
 					FactoriaAbstractaPresentacion.getInstance().createDialogoCamposIncorrectos();;
 				}
 			}
@@ -78,10 +77,10 @@ public class VistaCerrarVenta extends VistaDefault {
 
 	@Override
 	public void actualizar(Evento evento, Object datos) {
-		if (evento == Evento.RES_CERRAR_VENTA_OK) {
-			FactoriaAbstractaPresentacion.getInstance().createDialogMessage(Messages.EX_VENTA_CERRADA);
-		} else if (evento == Evento.RES_CERRAR_VENTA_KO) {
-			FactoriaAbstractaPresentacion.getInstance().createDialogMessage(Messages.X_VENTA_CERRADA);
+		if (evento == Evento.RES_OK) {
+			ViewUtils.createDialogMessage(Messages.EX_VENTA_CERRADA);
+		} else if (evento == Evento.RES_KO) {
+			ViewUtils.createDialogMessage(Messages.X_VENTA_CERRADA);
 		}
 		
 		AbrirVenta.enableButton();
