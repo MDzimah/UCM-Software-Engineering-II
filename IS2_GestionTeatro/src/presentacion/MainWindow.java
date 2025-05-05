@@ -388,8 +388,58 @@ public class MainWindow extends JFrame {
         subsCompTea.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                	JDialog subsCompTea= new JDialog(MainWindow.this,"Subsistema Compañia Teatral", true);
+                	subsCompTea.setLayout(new FlowLayout());
+                	
+                	JButton actualizar, alta, baja, buscar, mostrar;
                 
-            }
+                	actualizar = new JButton("Actualizar compañia");
+                	alta = new JButton("Alta compañia");
+                	baja = new JButton("Baja compañia");
+            		buscar = new JButton("Buscar compañia");
+            		mostrar = new JButton("mostrar compañias");
+            		
+            	//actualizarCompania
+            		actualizar.addActionListener((ev)->{
+            			FactoriaAbstractaPresentacion.getInstance().createVista(Evento.ACTUALIZAR0_COMPANIA_TEATRAL);
+            		});
+            		
+            	//alta compania
+            		alta.addActionListener((ev)->{
+            			FactoriaAbstractaPresentacion.getInstance().createVista(Evento.ALTA_COMPANIA_TEATRAL);
+            		});
+            		
+            	//baja compania
+            		baja.addActionListener((ev)->{
+            			FactoriaAbstractaPresentacion.getInstance().createVista(Evento.BAJA_COMPANIA_TEATRAL);
+            		});		
+            		
+                //buscar compania
+            		buscar.addActionListener((ev)->{
+            			FactoriaAbstractaPresentacion.getInstance().createVista(Evento.BUSCAR_COMPANIA_TEATRAL);
+            		});	
+            		
+            	//mostrar companias
+            		mostrar.addActionListener((ev)->{
+            			FactoriaAbstractaPresentacion.getInstance().createVista(Evento.MOSTRAR_COMPANIA_TEATRAL);
+            		});
+            		
+            	//
+    
+            		
+            		subsCompTea.add(actualizar);        		
+            		subsCompTea.add(alta);
+            		subsCompTea.add(baja);
+            		subsCompTea.add(buscar);
+            		subsCompTea.add(mostrar);
+            		subsCompTea.setModal(false);  
+            		subsCompTea.pack();
+            		subsCompTea.setLocationRelativeTo(null);
+            		subsCompTea.setVisible(true);
+                }
+           
+                
+            
         });
 
         subsMiemCompTea.addActionListener(new ActionListener() {
