@@ -46,28 +46,34 @@ public class DAOPaseImp implements DAOPase {
 
 	@Override
 	public int delete(int id) throws BBDDReadException, BBDDWriteException {
-		JSONObject bdPase = OpsBBDD.read(Messages.BDPase);
-		JSONObject pases = bdPase.getJSONObject(Messages.KEY_pases);
-		if (pases.has(Integer.toString(id))) {
-			JSONObject pase = pases.getJSONObject(Integer.toString(id));
-	        pase.put(Messages.KEY_act, false);
-	        OpsBBDD.write(bdPase, Messages.BDPase);
-	        return id;
+		if (!OpsBBDD.isEmpty(Messages.BDFac)) {
+			JSONObject bdPase = OpsBBDD.read(Messages.BDPase);
+			JSONObject pases = bdPase.getJSONObject(Messages.KEY_pases);
+			if (pases.has(Integer.toString(id))) {
+				JSONObject pase = pases.getJSONObject(Integer.toString(id));
+		        pase.put(Messages.KEY_act, false);
+		        OpsBBDD.write(bdPase, Messages.BDPase);
+		        return id;
+			}
+			return -1; //no se ha borrado pase porque no se ha encontrado	
 		}
-		return -1; //no se ha borrado pase porque no se ha encontrado
+		return -1;
 	}
 
 	@Override
 	public TPase read(int id) throws BBDDReadException {
-		JSONObject bdPase = OpsBBDD.read(Messages.BDPase);
-		JSONObject pases = bdPase.getJSONObject(Messages.KEY_pases);
-		TPase tPase = null;
-		if (pases.has(Integer.toString(id))) {
-			JSONObject pase = pases.getJSONObject(Integer.toString(id));
-			tPase = read(pase);
-			tPase.setIdPase(id);
+		if (!OpsBBDD.isEmpty(Messages.BDFac)) {
+			JSONObject bdPase = OpsBBDD.read(Messages.BDPase);
+			JSONObject pases = bdPase.getJSONObject(Messages.KEY_pases);
+			TPase tPase = null;
+			if (pases.has(Integer.toString(id))) {
+				JSONObject pase = pases.getJSONObject(Integer.toString(id));
+				tPase = read(pase);
+				tPase.setIdPase(id);
+			}
+			return tPase;	
 		}
-		return tPase;
+		return null;
 	}
 
 	@Override
@@ -92,22 +98,25 @@ public class DAOPaseImp implements DAOPase {
 
 	@Override
 	public int update(TPase tPase) throws BBDDReadException, BBDDWriteException {
-		JSONObject bdPase = OpsBBDD.read("BDPase.json");
-		if(bdPase.has(String.valueOf(tPase.getIdPase())) && bdPase.getBoolean(null)) {
-			
-			JSONObject nuevoPase = new JSONObject();
-			nuevoPase.put(Messages.KEY_idPase, tPase.getIdPase());
-			nuevoPase.put(Messages.KEY_idCompTea, tPase.getIdCompanyaTeatral());
-			nuevoPase.put(Messages.KEY_idObra, tPase.getIdObra());
-			nuevoPase.put(Messages.KEY_act, tPase.isActivo());
-			nuevoPase.put(Messages.KEY_fecha, tPase.getFecha().toString());
-			nuevoPase.put(Messages.KEY_stock, tPase.getStock());
-			nuevoPase.put(Messages.KEY_precioPase, tPase.getPrecio());
-			
-			bdPase.put(String.valueOf(tPase.getIdObra()), nuevoPase);
-			return 1;
+		if (!OpsBBDD.isEmpty(Messages.BDFac)) {
+			JSONObject bdPase = OpsBBDD.read("BDPase.json");
+			if(bdPase.has(String.valueOf(tPase.getIdPase())) && bdPase.getBoolean(null)) {
+				
+				JSONObject nuevoPase = new JSONObject();
+				nuevoPase.put(Messages.KEY_idPase, tPase.getIdPase());
+				nuevoPase.put(Messages.KEY_idCompTea, tPase.getIdCompanyaTeatral());
+				nuevoPase.put(Messages.KEY_idObra, tPase.getIdObra());
+				nuevoPase.put(Messages.KEY_act, tPase.isActivo());
+				nuevoPase.put(Messages.KEY_fecha, tPase.getFecha().toString());
+				nuevoPase.put(Messages.KEY_stock, tPase.getStock());
+				nuevoPase.put(Messages.KEY_precioPase, tPase.getPrecio());
+				
+				bdPase.put(String.valueOf(tPase.getIdObra()), nuevoPase);
+				return 1;
+			}
+			return -1;
 		}
-		return -1;
+		else return -1;
 	}
 	
 	private TPase read(JSONObject jsonPas) {
@@ -123,17 +132,19 @@ public class DAOPaseImp implements DAOPase {
 
 	@Override
 	public void deletePorObra(int idObra) throws BBDDReadException, BBDDWriteException {
-		JSONObject bdPases = OpsBBDD.read(Messages.BDPase);
-		List<String> clavesEliminar = new LinkedList<>();
-		for (String idPase : bdPases.keySet()) {
-			JSONObject pase = bdPases.getJSONObject(idPase);
-			int idObraPase = pase.getInt(Messages.KEY_idObra);
-			if (idObra == idObraPase) clavesEliminar.add(idPase);
+		if (!OpsBBDD.isEmpty(Messages.BDFac)) {
+			JSONObject bdPases = OpsBBDD.read(Messages.BDPase);
+			List<String> clavesEliminar = new LinkedList<>();
+			for (String idPase : bdPases.keySet()) {
+				JSONObject pase = bdPases.getJSONObject(idPase);
+				int idObraPase = pase.getInt(Messages.KEY_idObra);
+				if (idObra == idObraPase) clavesEliminar.add(idPase);
+			}
+			for (String key: clavesEliminar) {
+				bdPases.remove(key);
+			}
+			OpsBBDD.write(bdPases, Messages.BDPase);
 		}
-		for (String key: clavesEliminar) {
-			bdPases.remove(key);
-		}
-		OpsBBDD.write(bdPases, Messages.BDPase);
 	}
 	
 }
