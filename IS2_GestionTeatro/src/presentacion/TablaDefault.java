@@ -185,7 +185,7 @@ public class TablaDefault<T extends Convertable<T>> extends JFrame {
 	        }
 	        table.setPreferredScrollableViewportSize(table.getPreferredSize());
         }
-      
+        
         this.pack();
         this.setResizable(true);
         this.setLocationRelativeTo(null);

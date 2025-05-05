@@ -40,6 +40,7 @@ public class VistaMostrarMiembrosCompania extends VistaDefault{
 	public void actualizar(Evento evento, Object datos) {
 		if (evento == Evento.RES_OK) {
 			new TablaDefault<TMiemCompTea>("MIEMBROS DE LA COMPANIA", Messages.colNomsMiemCompTea, (ArrayList<TMiemCompTea>)datos, false).setVisible(true);
+			dispose();
 		}
 		else if (evento == Evento.RES_KO) {
 			String error;

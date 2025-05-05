@@ -51,9 +51,14 @@ public class VistaBuscarMiembroCompania extends VistaDefault{
     }
 
     private void buscarMiembro() {
-        int id = (Integer) idField.getValue();        
-        Controlador.getInstance().accion(Evento.BUSCAR_MIEMBRO_COMPANIA, id);
-        dispose();
+        try {
+            idField.commitEdit();
+            int id = (Integer) idField.getValue();        
+            Controlador.getInstance().accion(Evento.BUSCAR_MIEMBRO_COMPANIA, id);
+            dispose();
+        } catch (java.text.ParseException ex) {
+            ViewUtils.createErrorDialogMessage("El ID ingresado no es válido.");
+        }
     }
 
 	@Override
@@ -63,6 +68,7 @@ public class VistaBuscarMiembroCompania extends VistaDefault{
 			miemComp.add((TMiemCompTea)datos);
 			
 			new TablaDefault<TMiemCompTea>("MIEMBRO DE LA COMPANIA", Messages.colNomsMiemCompTea, miemComp, false).setVisible(true);
+			dispose();
 		}
 		else if(evento == Evento.RES_KO) {
 			String error;
