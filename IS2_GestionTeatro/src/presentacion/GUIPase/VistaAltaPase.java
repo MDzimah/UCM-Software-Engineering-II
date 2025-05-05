@@ -26,6 +26,8 @@ public class VistaAltaPase extends VistaDefault {
 	private JTextField idCompTeaText;
 	private JLabel idObraLabel;
 	private JTextField idObraText;
+	private JLabel fechaText;
+	private JTextField fechaLabel;
 	private JLabel cantidadStockLabel;
 	private JTextField cantidadStockText;
 	private JLabel precioLabel;
@@ -39,6 +41,8 @@ public class VistaAltaPase extends VistaDefault {
 		idCompTeaText = new JTextField(20);
 		idObraLabel = new JLabel("id de la obra:");
 		idObraText = new JTextField(20);
+		fechaText = new JLabel("Fecha:");
+		fechaLabel = new JTextField(20);
 		cantidadStockLabel = new JLabel("stock:");
 		cantidadStockText = new JTextField(20);
 		precioLabel = new JLabel("precio de compra:");

@@ -84,6 +84,7 @@ public class Messages {
 	public static final String EXC_CAMPOS_INCORRECTOS = "Campos incorrectos";
 	public static final String EXC_UNKNOWN_TAQ = "Taquillero desconocido";
 	public static final String EXC_UNKNOWN_OBRA = "Obra desconocida";
+	public static final String EXC_UNKNOWN_PASE = "Pase desconocido";
 	public static final String EXC_EVENTO_TABLA = "Tipo de tabla incompatible con la operacion o con los datos";
 	
 	//BBDD
