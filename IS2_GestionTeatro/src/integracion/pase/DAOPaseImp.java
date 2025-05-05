@@ -1,10 +1,13 @@
 package integracion.pase;
 
 import java.time.LocalDateTime;
+import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Locale;
 import java.util.Set;
 
 import org.json.JSONArray;
@@ -120,12 +123,17 @@ public class DAOPaseImp implements DAOPase {
 	}
 	
 	private TPase read(JSONObject jsonPas) {
+		//DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+		//LocalDateTime fechaParseada = LocalDateTime.parse(jsonPas.getString(Messages.KEY_fecha), formatter);
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("EEE MMM dd HH:mm:ss z yyyy", Locale.ENGLISH);
+		ZonedDateTime zonedDate = ZonedDateTime.parse(jsonPas.getString(Messages.KEY_fecha), formatter);
+		LocalDateTime fecha = zonedDate.toLocalDateTime();
 		return new TPase(
 				jsonPas.getInt(Messages.KEY_idPase), 
 				jsonPas.getInt(Messages.KEY_idCompTea), 
 				jsonPas.getInt(Messages.KEY_idObra),
 				jsonPas.getBoolean(Messages.KEY_act),
-				LocalDateTime.parse(jsonPas.getString(Messages.KEY_fecha)),
+				fecha,
 				jsonPas.getInt(Messages.KEY_stock),
 				jsonPas.getFloat(Messages.KEY_precioPase));
 		}
