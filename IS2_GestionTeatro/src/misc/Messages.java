@@ -27,18 +27,10 @@ public class Messages {
 	public static final String COMPANIA_BUSCADA = Messages.SHP.formatted("compania buscada");
 	public static final String COMPANIA_MOSTRADA = Messages.SHP.formatted("compania mostrada");
 		
-	//Obra (SEGURAMENTE LO CAMBIE DESPUÉS)
+	//Obra
 	public static final String EX_OBRA_ANYADIDA_CORRECT = Messages.SHP.formatted("registrado la obra ");
 	public static final String EX_OBRA_BORRADA_CORRECT = Messages.SHP.formatted("borrado la obra ");
 	public static final String EX_OBRA_ACTUALIZADA_CORRECT = Messages.SHP.formatted("actualizado la obra ");
-
-	public static final String EX_OBRA_ANYADIDA_ERROR = Messages.NSHP.formatted("registrar la obra.");
-	public static final String EX_OBRA_BORRADA_ERROR = Messages.NSHP.formatted("borrar la obra.");
-	public static final String EX_OBRA_ACTUALIZADA_ERROR = Messages.NSHP.formatted("actualizar la obra.");
-	public static final String EX_OBRA_BUSCAR_ERROR = Messages.NSHP.formatted("encontrar obras.");
-	public static final String EX_OBRA_MOSTRAR_ERROR = Messages.NSHP.formatted("mostrar las obras.");
-	public static final String EX_OBRA_CONSULTAR_ERROR = Messages.NSHP.formatted("acceder a la obra.");
-
 	
 	
 	//Ops. fracasadas
@@ -63,6 +55,13 @@ public class Messages {
 	public static final String X_MIEMBRO_ACTUALIZADO = Messages.NSHP.formatted("actualizar el miembro solicitado.");
 	public static final String X_MIEMBRO_DESPEDIDO = Messages.NSHP.formatted("despedir al miembro solicitado.");
 	public static final String X_MIEMBROS_LISTADOS = Messages.NSHP.formatted("mostrar a los miembros.");
+	//Obras
+	public static final String EX_OBRA_ANYADIDA_ERROR = Messages.NSHP.formatted("registrar la obra.");
+	public static final String EX_OBRA_BORRADA_ERROR = Messages.NSHP.formatted("borrar la obra.");
+	public static final String EX_OBRA_ACTUALIZADA_ERROR = Messages.NSHP.formatted("actualizar la obra.");
+	public static final String EX_OBRA_BUSCAR_ERROR = Messages.NSHP.formatted("encontrar obras.");
+	public static final String EX_OBRA_MOSTRAR_ERROR = Messages.NSHP.formatted("mostrar las obras.");
+	public static final String EX_OBRA_CONSULTAR_ERROR = Messages.NSHP.formatted("acceder a la obra.");
 
 	
 		//Motivos por ops fracasadas
