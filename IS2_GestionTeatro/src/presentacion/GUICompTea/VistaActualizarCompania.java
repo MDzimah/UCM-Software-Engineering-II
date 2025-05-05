@@ -22,9 +22,15 @@ import presentacion.VistaDefault;
 import negocio.compTea.TCompTea;
 
 public class VistaActualizarCompania extends VistaDefault implements IGUI{
+
+	@Override
+	public void actualizar(Evento evento, Object datos) {
+		// TODO Auto-generated method stub
+		
+	}
 	
 	
-	public VistaActualizarCompania() {
+	/*public VistaActualizarCompania() {
 		initGUI();
 		this.setVisible(true);
 	}
@@ -81,6 +87,6 @@ public class VistaActualizarCompania extends VistaDefault implements IGUI{
 			}
 		}
 		
-	}
+	}*/
 
 }

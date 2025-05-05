@@ -72,15 +72,6 @@ public class DAOCompTeaImp implements DAOCompTea {
 		JSONObject bdCompania= OpsBBDD.read(Messages.BDCT);
 		if (bdCompania.has(Integer.toString(id))) {
 			JSONObject compania = bdCompania.getJSONObject(Integer.toString(id));
-			
-		/*	Collection<TPase> paseslista = new ArrayList<TPase>();
-		 * DAOPase daoPase = FactoriaAbstractaIntegracion.getInstance().crearDAOPase();
-			
-			JSONArray pases = compania.getJSONArray(Messages.KEY_pases);
-			for (int i = 0; i < pases.length(); i++) {
-				int idPase = pases.getInt(i);
-				TPase tLineaFactura = daoPase.read(idPase);
-				paseslista.add(tLineaFactura);}*/
 			tCompTea = new TCompTea(id, compania.getString(Messages.KEY_compTea), compania.getString(Messages.KEY_direccion),compania.getBoolean(Messages.KEY_act), compania.getFloat(Messages.KEY_coste));
 		}
 		}
