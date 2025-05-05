@@ -1,6 +1,8 @@
 package presentacion.GUIPase;
 
+import java.time.Instant;
 import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Properties;
@@ -73,8 +75,12 @@ public class VistaAltaPase extends VistaDefault {
 			int idObra = Integer.valueOf(idObraText.getText());
 			int stock = Integer.valueOf(cantidadStockText.getText());
 			int precio = Integer.valueOf(precioText.getText());
-			LocalDateTime selectedDate = (LocalDateTime) datePicker.getModel().getValue();
-			TPase tPase = new TPase(-1, idCompTea, idObra, true, selectedDate, stock, precio);
+			Date selectedDate = (Date) datePicker.getModel().getValue();
+			Instant instant = selectedDate.toInstant();
+			ZoneId zoneId = ZoneId.systemDefault(); // o la zona horaria que desees
+			LocalDateTime localDateTime = instant.atZone(zoneId).toLocalDateTime();
+			//LocalDateTime selectedDate = (LocalDateTime) datePicker.getModel().getValue();
+			TPase tPase = new TPase(-1, idCompTea, idObra, true, localDateTime, stock, precio);
 			Controlador.getInstance().accion(Evento.ALTA_PASE, tPase);
 			this.dispose();
 		});
@@ -87,7 +93,7 @@ public class VistaAltaPase extends VistaDefault {
 	@Override
 	public void actualizar(Evento evento, Object datos) {
 		if (evento == Evento.RES_OK) {
-			ViewUtils.createDialogMessage(Messages.EX_PASE_CREADO);
+			ViewUtils.createDialogMessage(Messages.EX_PASE_CREADO + "\n" + "id: " + (int)datos);
 		}
 		else if(evento == Evento.RES_KO) {
 			ViewUtils.createErrorDialogMessage(Messages.X_PASE_CREADO + ' ' + Messages.MOTIVO.formatted(((Exception)datos).getMessage()));

@@ -1,0 +1,19 @@
+{
+    "1": {
+        "IdObra": 1,
+        "genero": "gfd",
+        "titulo": "dsf",
+        "autor": "fds",
+        "sinopsis": "ads",
+        "activo": true
+    },
+    "2": {
+        "IdObra": 2,
+        "genero": "fdvs",
+        "titulo": "fsdgfd",
+        "autor": "fd",
+        "sinopsis": "ht",
+        "activo": true
+    },
+    "LastKey": 2
+}

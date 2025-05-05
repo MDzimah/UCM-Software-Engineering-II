@@ -38,7 +38,7 @@ public class DAOPaseImp implements DAOPase {
 		nuevoPase.put(Messages.KEY_idCompTea, tPase.getIdCompanyaTeatral());
 		nuevoPase.put(Messages.KEY_idObra, tPase.getIdObra());
 		nuevoPase.put(Messages.KEY_act, tPase.isActivo());
-		nuevoPase.put(Messages.KEY_fecha, tPase.getFecha().toString());
+		nuevoPase.put(Messages.KEY_fecha, tPase.getFecha());
 		nuevoPase.put(Messages.KEY_stock, tPase.getStock());
 		nuevoPase.put(Messages.KEY_precioPase, tPase.getPrecio());
 		pases.put(Integer.toString(newID), nuevoPase);
@@ -74,7 +74,9 @@ public class DAOPaseImp implements DAOPase {
 				tPase = read(pase);
 				tPase.setIdPase(id);
 			}
+			if (tPase.isActivo())
 			return tPase;	
+			else return null;
 		}
 		return null;
 	}
@@ -102,22 +104,28 @@ public class DAOPaseImp implements DAOPase {
 	@Override
 	public int update(TPase tPase) throws BBDDReadException, BBDDWriteException {
 		if (!OpsBBDD.isEmpty(Messages.BDPase)) {
-			JSONObject bdPase = OpsBBDD.read("BDPase.json");
-			if(bdPase.has(String.valueOf(tPase.getIdPase())) && bdPase.getBoolean(null)) {
-				
-				JSONObject nuevoPase = new JSONObject();
-				nuevoPase.put(Messages.KEY_idPase, tPase.getIdPase());
-				nuevoPase.put(Messages.KEY_idCompTea, tPase.getIdCompanyaTeatral());
-				nuevoPase.put(Messages.KEY_idObra, tPase.getIdObra());
-				nuevoPase.put(Messages.KEY_act, tPase.isActivo());
-				nuevoPase.put(Messages.KEY_fecha, tPase.getFecha().toString());
-				nuevoPase.put(Messages.KEY_stock, tPase.getStock());
-				nuevoPase.put(Messages.KEY_precioPase, tPase.getPrecio());
-				
-				bdPase.put(String.valueOf(tPase.getIdObra()), nuevoPase);
-				return 1;
+			JSONObject bdPase = OpsBBDD.read(Messages.BDPase);
+			JSONObject pases = bdPase.getJSONObject(Messages.KEY_pases);
+			if(pases.has(String.valueOf(tPase.getIdPase()))) {
+				JSONObject pase = pases.getJSONObject(String.valueOf(tPase.getIdPase()));
+				if (pase.getBoolean(Messages.KEY_act)) {
+					JSONObject nuevoPase = new JSONObject();
+					nuevoPase.put(Messages.KEY_idPase, tPase.getIdPase());
+					nuevoPase.put(Messages.KEY_idCompTea, tPase.getIdCompanyaTeatral());
+					nuevoPase.put(Messages.KEY_idObra, tPase.getIdObra());
+					nuevoPase.put(Messages.KEY_act, tPase.isActivo());
+					nuevoPase.put(Messages.KEY_fecha, tPase.getFecha().toString());
+					nuevoPase.put(Messages.KEY_stock, tPase.getStock());
+					nuevoPase.put(Messages.KEY_precioPase, tPase.getPrecio());
+					
+					pases.put(String.valueOf(tPase.getIdPase()), nuevoPase);
+					bdPase.put(Messages.KEY_pases, pases);
+					OpsBBDD.write(bdPase, Messages.BDPase);
+					return 1;
+				}
+				else return -1;
 			}
-			return -1;
+			else return -1;
 		}
 		else return -1;
 	}
@@ -125,15 +133,15 @@ public class DAOPaseImp implements DAOPase {
 	private TPase read(JSONObject jsonPas) {
 		//DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 		//LocalDateTime fechaParseada = LocalDateTime.parse(jsonPas.getString(Messages.KEY_fecha), formatter);
-		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("EEE MMM dd HH:mm:ss z yyyy", Locale.ENGLISH);
+		/*DateTimeFormatter formatter = DateTimeFormatter.ofPattern("EEE MMM dd HH:mm:ss z yyyy", Locale.ENGLISH);
 		ZonedDateTime zonedDate = ZonedDateTime.parse(jsonPas.getString(Messages.KEY_fecha), formatter);
-		LocalDateTime fecha = zonedDate.toLocalDateTime();
+		LocalDateTime fecha = zonedDate.toLocalDateTime();*/
 		return new TPase(
 				jsonPas.getInt(Messages.KEY_idPase), 
 				jsonPas.getInt(Messages.KEY_idCompTea), 
 				jsonPas.getInt(Messages.KEY_idObra),
 				jsonPas.getBoolean(Messages.KEY_act),
-				fecha,
+				LocalDateTime.parse(jsonPas.getString(Messages.KEY_fecha)),
 				jsonPas.getInt(Messages.KEY_stock),
 				jsonPas.getFloat(Messages.KEY_precioPase));
 		}
@@ -149,7 +157,10 @@ public class DAOPaseImp implements DAOPase {
 				if (idObra == idObraPase) clavesEliminar.add(idPase);
 			}
 			for (String key: clavesEliminar) {
-				bdPases.remove(key);
+				//bdPases.remove(key); no hago borrado fisico
+				JSONObject pase = bdPases.getJSONObject(Messages.KEY_pases).getJSONObject(key);
+		        pase.put(Messages.KEY_act, false);
+		        OpsBBDD.write(bdPases, Messages.BDPase);
 			}
 			OpsBBDD.write(bdPases, Messages.BDPase);
 		}

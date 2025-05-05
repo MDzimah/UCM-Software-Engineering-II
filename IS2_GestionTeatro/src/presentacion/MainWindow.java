@@ -329,11 +329,11 @@ public class MainWindow extends JFrame {
         			FactoriaAbstractaPresentacion.getInstance().createVista(Evento.MOSTRAR_PASES_POR_OBRA);
         		});
         		
-        		subsPase.add(actualizar);        		
         		subsPase.add(alta);
         		subsPase.add(baja);
         		subsPase.add(buscar);
         		subsPase.add(mostrar);
+        		subsPase.add(actualizar);   
         		subsPase.add(mostrar_por_obra);
         		subsPase.setModal(false);  
         		subsPase.pack();
