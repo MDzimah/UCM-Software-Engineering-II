@@ -28,6 +28,6 @@ public class VistaAnyadirPaseAVenta extends ModificacionPaseEnVenta {
 		}
 		if (!estaba) AbrirVenta.getCarrito().add(tLineaFactura);
 		
-		AbrirVenta.updateCarritoButton();
+		AbrirVenta.updateCarritoCountButton();
 	}
 }

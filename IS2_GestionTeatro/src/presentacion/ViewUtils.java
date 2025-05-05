@@ -6,6 +6,7 @@ import java.awt.Image;
 import java.awt.Toolkit;
 
 import javax.swing.*;
+import javax.swing.text.NumberFormatter;
 
 import misc.Messages;
 
@@ -16,6 +17,18 @@ public class ViewUtils {
 		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 		return new Dimension(screenSize.width/factorH, screenSize.height/factorH);
 	}
+	
+	public static JSpinner integerSpinner(int valorInicial, int min, int max, int step) {
+        SpinnerNumberModel model = new SpinnerNumberModel(valorInicial, min, max, step);
+        JSpinner spinner = new JSpinner(model);
+
+        JSpinner.NumberEditor editor = new JSpinner.NumberEditor(spinner, "#");
+        NumberFormatter formato = (NumberFormatter) editor.getTextField().getFormatter(); //Formateo del textfield del JSpinner
+        formato.setValueClass(Integer.class); //Restringimos a solo integer
+        formato.setAllowsInvalid(false); //Hace imposible escribir algo inválido en el spinner
+        spinner.setEditor(editor);
+        return spinner;
+    }
 	
 	//Imagenes
 	public static Image img_logoTeatret() { return new ImageIcon("resources/imagenes/teatretLogo.png").getImage(); }

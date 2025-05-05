@@ -5,6 +5,7 @@ import javax.swing.*;
 
 import misc.*;
 import negocio.factura.*;
+import presentacion.ViewUtils;
 import presentacion.VistaDefault;
 
 @SuppressWarnings("serial")
@@ -18,11 +19,9 @@ public abstract class ModificacionPaseEnVenta extends VistaDefault {
 	
 	void initComps() {
 		lIdPase = new JLabel("Id pase:");
-		SpinnerNumberModel spinnerModel = new SpinnerNumberModel(0, 0, Integer.MAX_VALUE, 1);
-		sIdPase = new JSpinner(spinnerModel);
+		sIdPase = ViewUtils.integerSpinner(0, 0, Integer.MAX_VALUE, 1);
 		lCtdad = new JLabel("Cantidad:");
-		spinnerModel = new SpinnerNumberModel(1, 1, 100, 1);
-	    sCtdad = new JSpinner(spinnerModel);
+	    sCtdad = ViewUtils.integerSpinner(1, 1, 100, 1);
 		ok = new JButton("Aceptar");
 		cancel = new JButton("Cancelar");
 		
@@ -37,10 +36,10 @@ public abstract class ModificacionPaseEnVenta extends VistaDefault {
 			try {
 				//Id pase
 				sIdPase.commitEdit();
-				int idPase = (Integer)sIdPase.getValue(); 
+				int idPase = (int)sIdPase.getValue(); 
 				//Cantidad
 				sCtdad.commitEdit();
-				int ctdad = (Integer)sCtdad.getValue(); 
+				int ctdad = (int)sCtdad.getValue(); 
 				
 				TLineaFactura tLf = new TLineaFactura(idPase, ctdad);
 				this.accion(tLf);
