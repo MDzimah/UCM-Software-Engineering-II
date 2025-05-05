@@ -11,7 +11,6 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-import misc.Constants;
 import misc.Messages;
 import misc.Pair;
 import negocio.factura.TFactura;
@@ -59,7 +58,7 @@ public class VistaBuscarPase extends VistaDefault {
 			Collection<TPase> p = new ArrayList<TPase>();
 			p.add((TPase)datos);
 			//FactoriaAbstractaPresentacion.getInstance().createDialogMessage(Messages.EX_PASE_BUSCADO);
-			new TablaDefault<TPase>("PASES", Messages.colNomsPase, (ArrayList<TPase>)datos, true, false).setVisible(true); //se crea una tabla con una sola linea que contiene
+			new TablaDefault<TPase>("PASES", Messages.colNomsPase, (ArrayList<TPase>)datos, true).setVisible(true); //se crea una tabla con una sola linea que contiene
 																	  		 											   //la info del transfer del pase buscado
 		}
 		else if(evento==Evento.RES_KO) {

@@ -6,7 +6,6 @@ import java.util.Collection;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
-import misc.Constants;
 import misc.Messages;
 import negocio.factura.TFactura;
 import negocio.pase.TPase;
@@ -43,7 +42,7 @@ public class VistaMostrarPases extends VistaDefault {
 	@Override
 	public void actualizar(Evento evento, Object datos) {
 		if (evento == Evento.RES_OK) {
-			new TablaDefault<TPase>("PASES", Messages.colNomsPase, (ArrayList<TPase>)datos, false, false).setVisible(true);
+			new TablaDefault<TPase>("PASES", Messages.colNomsPase, (ArrayList<TPase>)datos, false).setVisible(true);
 		}
 		else if(evento == Evento.RES_KO) {
 			ViewUtils.createErrorDialogMessage(Messages.X_PASE_CREADO + ' ' + Messages.MOTIVO.formatted((String)datos));

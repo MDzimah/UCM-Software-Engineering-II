@@ -10,7 +10,6 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-import misc.Constants;
 import misc.Messages;
 import misc.Pair;
 import negocio.factura.TFactura;
