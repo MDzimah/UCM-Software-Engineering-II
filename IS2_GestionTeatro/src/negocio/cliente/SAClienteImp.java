@@ -41,10 +41,9 @@ public class SAClienteImp implements SACliente {
 		if (nid != -1) {
 			//eliminamos todas las facturas asociadas al cliente eliminado
 			SAFactura sa = FactoriaAbstractaNegocio.getInstance().crearSAFactura();
-			DAOFactura daof = FactoriaAbstractaIntegracion.getInstance().crearDAOFactura();
 			Collection<TFactura> c = sa.allFacturasPorCliente(nid);
 			for (TFactura fac : c) {
-				if (fac.getIdCliente() == nid) daof.delete(fac.getIdFactura());
+				if (fac.getIdCliente() == nid) sa.delete(fac.getIdFactura());
 			}
 		}
 		return nid;
