@@ -6,6 +6,7 @@ import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JSpinner;
 import javax.swing.JTextField;
 import javax.swing.SwingUtilities;
 
@@ -21,7 +22,7 @@ import presentacion.controlador.Controlador;
 public class VistaActualizarCl extends VistaDefault implements IGUI {
 
 	private JLabel idl;
-	private JTextField id;
+	private JSpinner id;
 	private JButton aceptar, cancelar;
 	
 	public VistaActualizarCl() {
@@ -34,7 +35,7 @@ public class VistaActualizarCl extends VistaDefault implements IGUI {
 		//inicializar componentes
 		this.setTitle("Actualizar Cliente");
 		idl = new JLabel("ID");
-		id = new JTextField(20);
+		id = ViewUtils.integerSpinner(0, 0,Integer.MAX_VALUE, 1);
 		aceptar = new JButton("Aceptar");
 		cancelar = new JButton("Cancelar");
 		
@@ -44,9 +45,8 @@ public class VistaActualizarCl extends VistaDefault implements IGUI {
 		
 		//oyentes
 		aceptar.addActionListener((e) -> {
-			if(id.getText() != "") {
 				try {
-					int _id = Integer.parseInt(id.getText());
+					int _id = (int) id.getValue();
 					SwingUtilities.invokeLater(()-> {Controlador.getInstance().accion(Evento.ACTUALIZAR_CLIENTE, _id); });
 					
 				} catch (NumberFormatException ex) {
@@ -55,7 +55,6 @@ public class VistaActualizarCl extends VistaDefault implements IGUI {
 				finally {
 					VistaActualizarCl.this.dispose();
 				}
-			}
 		});
 				
 		cancelar.addActionListener((e) -> {
