@@ -391,16 +391,16 @@ public class MainWindow extends JFrame {
         subsCompTea.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                	JDialog subsPase= new JDialog(MainWindow.this,"Subsistema Compañia Teatral", true);
-                	subsPase.setLayout(new FlowLayout());
+                	JDialog subsCompTea= new JDialog(MainWindow.this,"Subsistema Compañia Teatral", true);
+                	subsCompTea.setLayout(new FlowLayout());
                 	
                 	JButton actualizar, alta, baja, buscar, mostrar;
                 
-                	actualizar = new JButton("Actualizar pase");
-                	alta = new JButton("Alta pase");
-                	baja = new JButton("Baja pase");
-            		buscar = new JButton("Buscar pase");
-            		mostrar = new JButton("Listar pases");
+                	actualizar = new JButton("Actualizar compañia");
+                	alta = new JButton("Alta compañia");
+                	baja = new JButton("Baja compañia");
+            		buscar = new JButton("Buscar compañia");
+            		mostrar = new JButton("mostrar compañias");
             		
             	//actualizarCompania
             		actualizar.addActionListener((ev)->{
@@ -430,15 +430,15 @@ public class MainWindow extends JFrame {
             	//
     
             		
-            		subsPase.add(actualizar);        		
-            		subsPase.add(alta);
-            		subsPase.add(baja);
-            		subsPase.add(buscar);
-            		subsPase.add(mostrar);
-            		subsPase.setModal(false);  
-            		subsPase.pack();
-            		subsPase.setLocationRelativeTo(null);
-            		subsPase.setVisible(true);
+            		subsCompTea.add(actualizar);        		
+            		subsCompTea.add(alta);
+            		subsCompTea.add(baja);
+            		subsCompTea.add(buscar);
+            		subsCompTea.add(mostrar);
+            		subsCompTea.setModal(false);  
+            		subsCompTea.pack();
+            		subsCompTea.setLocationRelativeTo(null);
+            		subsCompTea.setVisible(true);
                 }
            
                 
