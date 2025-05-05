@@ -55,8 +55,11 @@ public class DAOMiemCompTeaImp implements DAOMiemCompTea {
 			JSONObject BDMiemComp = OpsBBDD.read(Messages.BDMCT);
 			JSONObject miembrosComp = BDMiemComp.getJSONObject(Messages.KEY_miembCompTea);
 			
-			if (miembrosComp.has(Integer.toString(id))) {
-		        miembrosComp.getJSONObject(Integer.toString(id)).put(Messages.KEY_act, false);
+			String _id = Integer.toString(id);
+			if (miembrosComp.has(_id) && miembrosComp.getJSONObject(_id).getBoolean(Messages.KEY_act)) {
+				DAOCompT_MiemCompTImp relMiem_Comp = new DAOCompT_MiemCompTImp();
+				relMiem_Comp.delete_miembro(id);
+				miembrosComp.getJSONObject(Integer.toString(id)).put(Messages.KEY_act, false);
 		        OpsBBDD.write(BDMiemComp, Messages.BDMCT);
 		        return id;
 			}
