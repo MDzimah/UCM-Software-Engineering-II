@@ -4,69 +4,21 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collection;
 
-import exceptions.BBDDReadException;
-import exceptions.BBDDWriteException;
-import exceptions.UnknownClienteException;
-import exceptions.UnknownTaquilleroException;
+import exceptions.*;
 import integracion.cliente.DAOCliente;
 import integracion.factoria.FactoriaAbstractaIntegracion;
 import integracion.factura.DAOFactura;
 import integracion.factura.DAOLineaFactura;
 import integracion.pase.DAOPase;
 import integracion.taquillero.DAOTaquillero;
-import misc.Messages;
 import negocio.cliente.SACliente;
 import negocio.cliente.TCliente;
 import negocio.factoria.FactoriaAbstractaNegocio;
 import negocio.pase.SAPase;
 import negocio.pase.TPase;
 import negocio.taquillero.TTaquillero;
-import presentacion.Evento;
-import presentacion.GUIFactura.AbrirVenta;
-import presentacion.factoria.FactoriaAbstractaPresentacion;
 
 public class SAFacturaImp implements SAFactura {
-
-	@Override
-	public boolean anyadirPaseAVenta(TLineaFactura newTLf, Collection<TLineaFactura> carrito) throws BBDDReadException {
-		//Recorremos el carrito para ver si ya hay una instancia de la línea factura
-		
-		SAPase saP = FactoriaAbstractaNegocio.getInstance().crearSAPase(); 		
- 		TPase tPase = saP.read(newTLf.getIdPase());
- 		
- 		if (tPase != null) {
- 			
- 			boolean estaba = false;
-			for(TLineaFactura tLf : carrito) {
-				if (tLf.getIdPase() == newTLf.getIdPase()) {
-					tLf.setCantidad(tLf.getCantidad() + newTLf.getCantidad());
-					estaba = true;
-					break;
-				}
-			}
-			if (!estaba) carrito.add(newTLf);
-			return true;
-		}
- 		else return false;
-	}
-	
-	@Override
-	public boolean quitarPaseDeVenta(TLineaFactura tLfAQuitar, Collection<TLineaFactura> carrito) {
-		ArrayList<TLineaFactura> carr = (ArrayList<TLineaFactura>) AbrirVenta.getCarrito();
-			
-		boolean estaba = false;
-		for(int i = 0; i < carr.size(); ++i) {
-			TLineaFactura tLf = carr.get(i);
-			if (tLf.getIdPase() == tLfAQuitar.getIdPase()) {
-				tLf.setCantidad(tLf.getCantidad() - tLfAQuitar.getCantidad());
-				if (carr.get(i).getCantidad() <= 0) carr.remove(i);
-				estaba = true;
-				break;
-			}
-		}
-		return estaba;
-	}
-	
 	public int crearFactura(TDatosVenta tDv) throws UnknownClienteException, UnknownTaquilleroException, BBDDReadException, BBDDWriteException  {
 		int idFacNueva = -1;
 		

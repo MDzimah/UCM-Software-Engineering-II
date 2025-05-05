@@ -1,5 +1,5 @@
 package presentacion;
 
 public interface IGUI {
-	public void actualizar(Evento evento, Object datos);
+	public default void actualizar(Evento evento, Object datos) {}
 }

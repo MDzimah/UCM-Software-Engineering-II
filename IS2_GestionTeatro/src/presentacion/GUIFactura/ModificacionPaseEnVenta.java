@@ -5,10 +5,8 @@ import javax.swing.*;
 
 import misc.*;
 import negocio.factura.*;
-import presentacion.Evento;
 import presentacion.ViewUtils;
 import presentacion.VistaDefault;
-import presentacion.controlador.Controlador;
 
 @SuppressWarnings("serial")
 public abstract class ModificacionPaseEnVenta extends VistaDefault {
@@ -42,7 +40,7 @@ public abstract class ModificacionPaseEnVenta extends VistaDefault {
 		super.initComps(labeledComponents, ok, cancel);
 	}
 	
-	void okAndCancelListener(Evento evento) {
+	void okAndCancelListener() {
 		ok.addActionListener(e->{
 			try {
 				//Id pase
@@ -58,9 +56,9 @@ public abstract class ModificacionPaseEnVenta extends VistaDefault {
 				//Cantidad
 				sCtdad.commitEdit();
 				int ctdad = (Integer)sCtdad.getValue(); 
-			
+				
 				TLineaFactura tLf = new TLineaFactura(idPase, ctdad);
-				SwingUtilities.invokeLater(()->{Controlador.getInstance().accion(evento, tLf);});
+				this.accion(tLf);
 				dispose();
 			}
 			catch(Exception ex) {
@@ -71,4 +69,6 @@ public abstract class ModificacionPaseEnVenta extends VistaDefault {
 		
 		cancel.addActionListener(e->{dispose();});
 	}
+	
+	abstract void accion(TLineaFactura tLineaFactura);
 }

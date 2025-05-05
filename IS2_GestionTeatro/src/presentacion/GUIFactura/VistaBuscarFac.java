@@ -6,14 +6,10 @@ import java.util.ArrayList;
 import javax.swing.*;
 
 import exceptions.BBDDReadException;
-import misc.Constants;
 import misc.Messages;
 import misc.Pair;
 import negocio.factura.TFactura;
-import presentacion.Evento;
-import presentacion.ViewUtils;
-import presentacion.TablaDefault;
-import presentacion.VistaDefault;
+import presentacion.*;
 import presentacion.controlador.Controlador;
 
 @SuppressWarnings("serial")

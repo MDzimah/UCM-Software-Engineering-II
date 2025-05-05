@@ -48,4 +48,8 @@ public class VistaMostrarFacs extends VistaDefault {
 			ViewUtils.createErrorDialogMessage(Messages.X_MOSTRAR_FACTURAS + ' ' + Messages.MOTIVO.formatted(error));
 		}
 	}
+	
+	public static void main(String[] args) {
+		VistaMostrarFacs f = new VistaMostrarFacs();
+	}
 }
