@@ -10,7 +10,6 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-import misc.Constants;
 import misc.Messages;
 import misc.Pair;
 import negocio.factura.TFactura;
@@ -57,7 +56,7 @@ public class VistaBajaPase extends VistaDefault {
 			ViewUtils.createDialogMessage(Messages.EX_PASE_ELIMINADO);
 		}
 		else if(evento==Evento.RES_KO) {
-			ViewUtils.createErrorDialogMessage(Messages.X_PASE_CREADO + ' ' + Messages.MOTIVO.formatted((String)datos));
+			ViewUtils.createErrorDialogMessage(Messages.X_PASE_CREADO + ' ' + Messages.MOTIVO.formatted(((Exception)datos).getMessage()));
 		}
 	}
 

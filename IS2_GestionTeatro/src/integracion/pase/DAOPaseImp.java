@@ -21,8 +21,13 @@ public class DAOPaseImp implements DAOPase {
 
 	@Override
 	public int create(TPase tPase) throws BBDDReadException, BBDDWriteException {
-		JSONObject bdPase = OpsBBDD.read(Messages.BDPase);
-		JSONArray pases = new JSONArray(bdPase.get(Messages.KEY_pases));
+		JSONObject bdPase = new JSONObject();
+		if (OpsBBDD.isEmpty(Messages.BDFac)) {
+			bdPase.put(Messages.KEY_lastId, 0);
+			bdPase.put(Messages.KEY_pases, new JSONObject());
+		}
+		else bdPase = OpsBBDD.read(Messages.BDPase);
+		JSONObject pases = bdPase.getJSONObject(Messages.KEY_pases);
 		int newID = bdPase.getInt(Messages.KEY_lastId) + 1;
 		bdPase.put(Messages.KEY_lastId, newID);
 		JSONObject nuevoPase = new JSONObject();
@@ -33,7 +38,7 @@ public class DAOPaseImp implements DAOPase {
 		nuevoPase.put(Messages.KEY_fecha, tPase.getFecha().toString());
 		nuevoPase.put(Messages.KEY_stock, tPase.getStock());
 		nuevoPase.put(Messages.KEY_precioPase, tPase.getPrecio());
-		pases.put(nuevoPase);
+		pases.put(Integer.toString(newID), nuevoPase);
 		bdPase.put(Messages.KEY_pases, pases);
 		OpsBBDD.write(bdPase, Messages.BDPase);
 		return newID;
@@ -67,19 +72,22 @@ public class DAOPaseImp implements DAOPase {
 
 	@Override
 	public ArrayList<TPase> readAll() throws BBDDReadException {
-		JSONObject bdPase = OpsBBDD.read(Messages.BDPase);
-		JSONObject pases = new JSONObject(bdPase.getJSONArray(Messages.KEY_pases));
-		ArrayList<TPase> pasesADevolver = new ArrayList<>();
-		Set<String> idSetPases = pases.keySet();
-		for (String idPase : idSetPases) {
-			JSONObject pase = pases.getJSONObject(idPase);
-			if (pase.getBoolean(Messages.KEY_act)) {
-				TPase tPase = read(pase);
-				tPase.setIdPase(Integer.valueOf(idPase));
-				pasesADevolver.add(tPase);
+		if (!OpsBBDD.isEmpty(Messages.BDFac)) {
+			JSONObject bdPase = OpsBBDD.read(Messages.BDPase);
+			JSONObject pases = new JSONObject(bdPase.getJSONArray(Messages.KEY_pases));
+			ArrayList<TPase> pasesADevolver = new ArrayList<>();
+			Set<String> idSetPases = pases.keySet();
+			for (String idPase : idSetPases) {
+				JSONObject pase = pases.getJSONObject(idPase);
+				if (pase.getBoolean(Messages.KEY_act)) {
+					TPase tPase = read(pase);
+					tPase.setIdPase(Integer.valueOf(idPase));
+					pasesADevolver.add(tPase);
+				}
 			}
+			return pasesADevolver;
 		}
-		return pasesADevolver;
+		else return null;
 	}
 
 	@Override
