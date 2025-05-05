@@ -3,12 +3,14 @@ package negocio.pase;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 import exceptions.BBDDReadException;
 import exceptions.BBDDWriteException;
 import exceptions.UnknownClienteException;
 import exceptions.UnknownCompTeaException;
 import exceptions.UnknownObraException;
+import exceptions.UnknownPaseException;
 import exceptions.UnknownTaquilleroException;
 import integracion.factoria.FactoriaAbstractaIntegracion;
 import integracion.obra.DAOObra;
@@ -42,33 +44,42 @@ public class SAPaseImp implements SAPase {
 	}
 
 	@Override
-	public TPase read(int id) throws BBDDReadException {
+	public TPase read(int id) throws BBDDReadException, UnknownPaseException {
 		DAOPase daoPas = FactoriaAbstractaIntegracion.getInstance().crearDAOPase();
-		return daoPas.read(id);
+		TPase tPase = daoPas.read(id);
+		if(tPase == null) throw new UnknownPaseException();
+		else return tPase;
 	}
 
 	@Override
-	public int update(TPase tPase) throws BBDDReadException, BBDDWriteException {
+	public int update(TPase tPase) throws BBDDReadException, BBDDWriteException, UnknownPaseException {
 		DAOPase daoPas = FactoriaAbstractaIntegracion.getInstance().crearDAOPase();
-		return daoPas.update(tPase);
+		int idPase = daoPas.update(tPase);
+		if(idPase < 0) throw new UnknownPaseException();
+		else return idPase;
 	}
 
 	@Override
-	public int delete(int id) throws BBDDReadException, BBDDWriteException {
+	public int delete(int id) throws BBDDReadException, BBDDWriteException, UnknownPaseException {
 		DAOPase daoPas = FactoriaAbstractaIntegracion.getInstance().crearDAOPase();
-		return daoPas.delete(id);
+		int idPase = daoPas.delete(id);
+		if(idPase < 0) throw new UnknownPaseException();
+		else return idPase;
 	}
 
 	@Override
-	public ArrayList<TPase> readAll() throws BBDDReadException {
+	public ArrayList<TPase> readAll() throws BBDDReadException, UnknownPaseException {
 		DAOPase daoPas = FactoriaAbstractaIntegracion.getInstance().crearDAOPase();
-		return daoPas.readAll();
+		ArrayList<TPase> lista = daoPas.readAll();
+		if(lista==null || lista.isEmpty()) throw new UnknownPaseException();
+		else return lista;
 	}
 
 	@Override
-	public int comprar(int idPase, int cantidad) throws BBDDReadException, BBDDWriteException {
+	public int comprar(int idPase, int cantidad) throws BBDDReadException, BBDDWriteException, UnknownPaseException {
 		DAOPase daoPas = FactoriaAbstractaIntegracion.getInstance().crearDAOPase();
 		TPase tPase = daoPas.read(idPase);
+		if(tPase == null) throw new UnknownPaseException();
 		int stock = tPase.getStock();
 		int cantidadReal;
 		if (stock - cantidad < 0) cantidadReal = stock;
@@ -79,13 +90,21 @@ public class SAPaseImp implements SAPase {
 	}
 
 	@Override
-	public void deletePorObra(int idObra) throws BBDDReadException, BBDDWriteException {
+	public void deletePorObra(int idObra) throws BBDDReadException, BBDDWriteException, UnknownObraException {
+		DAOObra daoObra = FactoriaAbstractaIntegracion.getInstance().crearDAOObra();
+		TObra tObra = daoObra.read(idObra);
+		if (tObra == null) throw new UnknownObraException();
+		
 		DAOPase daoPas = FactoriaAbstractaIntegracion.getInstance().crearDAOPase();
 		daoPas.deletePorObra(idObra);
 	}
 	
 	@Override
-	public ArrayList<TPase> allPasesPorObra(int idObra) throws BBDDReadException {
+	public ArrayList<TPase> allPasesPorObra(int idObra) throws BBDDReadException, UnknownObraException {
+		DAOObra daoObra = FactoriaAbstractaIntegracion.getInstance().crearDAOObra();
+		TObra tObra = daoObra.read(idObra);
+		if (tObra == null) throw new UnknownObraException();
+		
 		DAOPase daoPase = FactoriaAbstractaIntegracion.getInstance().crearDAOPase();
 		ArrayList<TPase> pases = (ArrayList<TPase>)daoPase.readAll();
 
