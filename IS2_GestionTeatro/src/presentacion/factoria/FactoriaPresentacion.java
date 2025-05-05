@@ -24,7 +24,7 @@ public class FactoriaPresentacion extends FactoriaAbstractaPresentacion {
 		case ANYADIR_PASE_A_VENTA: return new VistaAnyadirPaseAVenta();
 		case BUSCAR_FACTURA: return new VistaBuscarFactura();
 		case CERRAR_VENTA: return new VistaCerrarVenta();
-		case MOSTRAR_FACTURAS: return new VistaMostrarFacs();
+		case MOSTRAR_FACTURAS: return new VistaMostrarFacturas();
 		case QUITAR_PASE_DE_VENTA: return new VistaQuitarPaseDeVenta();
 		
 		//Cliente

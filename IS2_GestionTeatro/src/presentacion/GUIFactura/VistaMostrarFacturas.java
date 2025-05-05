@@ -15,11 +15,11 @@ import presentacion.controlador.Controlador;
 
 
 @SuppressWarnings("serial")
-public class VistaMostrarFacs extends VistaDefault {
+public class VistaMostrarFacturas extends VistaDefault {
 	private JButton mostrar;
 	private JButton cancel;
 	
-	public VistaMostrarFacs() {
+	public VistaMostrarFacturas() {
 		this.setTitle("Mostrar facturas");
 		this.mostrar = new JButton("Mostrar");
 		this.cancel = new JButton("Cancelar");
