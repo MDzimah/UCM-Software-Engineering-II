@@ -157,12 +157,10 @@ public class MainWindow extends JFrame {
         subsFactura.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-            	JDialog subsFactura= new JDialog(MainWindow.this,"Subsistema factura", true);
+            	JDialog subsFactura= new JDialog(MainWindow.this,"Subsistema Factura", true);
             	subsFactura.setLayout(new FlowLayout());
             	
             	JButton abrirVenta, anyPV, quitarPV, cerrarVenta, buscar, mostrar;
-
-            	AbrirVenta ventaActiva = new AbrirVenta();
             	
             	abrirVenta = new JButton("Abrir venta");
             	anyPV = new JButton("Añadir pase a venta");
@@ -181,7 +179,7 @@ public class MainWindow extends JFrame {
             		quitarPV.setEnabled(true);
             		cerrarVenta.setEnabled(true);
             		abrirVenta.setEnabled(false);
-            		ventaActiva.resetCarrito();
+            		AbrirVenta.resetCarrito();
         		});
         		
         		// AÑADIR PASE VENTA
@@ -200,7 +198,6 @@ public class MainWindow extends JFrame {
         			anyPV.setEnabled(false);
             		quitarPV.setEnabled(false);
             		cerrarVenta.setEnabled(false);
-            		abrirVenta.setEnabled(true);
         		});		
         		buscar.addActionListener((ev)->{
         			FactoriaAbstractaPresentacion.getInstance().createVista(Evento.BUSCAR_FACTURA);
@@ -232,7 +229,7 @@ public class MainWindow extends JFrame {
         subsPase.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-            	JDialog subsPase= new JDialog(MainWindow.this,"Subsistema pase", true);
+            	JDialog subsPase= new JDialog(MainWindow.this,"Subsistema Pase", true);
             	subsPase.setLayout(new FlowLayout());
             	
             	JButton actualizar, alta, baja, buscar, mostrar, mostrar_por_obra;
@@ -344,7 +341,7 @@ public class MainWindow extends JFrame {
             	JDialog menuObra= new JDialog(MainWindow.this,"Menú obras", true);
             	menuObra.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);            
                 menuObra.setLayout(new FlowLayout());
-            	JDialog subsObra= new JDialog(MainWindow.this,"Subsistema obras", true);
+            	JDialog subsObra= new JDialog(MainWindow.this,"Subsistema Obras", true);
             	subsObra.setLayout(new FlowLayout());
             	
             	JButton actualizar, alta, baja, buscar, consultar, mostrar;

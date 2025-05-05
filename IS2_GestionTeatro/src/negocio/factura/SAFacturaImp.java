@@ -35,6 +35,7 @@ public class SAFacturaImp implements SAFactura {
  		TPase tPase = saP.read(newTLf.getIdPase());
  		
  		if (tPase != null) {
+ 			
  			boolean estaba = false;
 			for(TLineaFactura tLf : carrito) {
 				if (tLf.getIdPase() == newTLf.getIdPase()) {
@@ -50,7 +51,7 @@ public class SAFacturaImp implements SAFactura {
 	}
 	
 	@Override
-	public boolean quitarPaseDeVenta(TLineaFactura tLfAQuitar, Collection<TLineaFactura> carrito) throws BBDDReadException {
+	public boolean quitarPaseDeVenta(TLineaFactura tLfAQuitar, Collection<TLineaFactura> carrito) {
 		ArrayList<TLineaFactura> carr = (ArrayList<TLineaFactura>) AbrirVenta.getCarrito();
 			
 		boolean estaba = false;
