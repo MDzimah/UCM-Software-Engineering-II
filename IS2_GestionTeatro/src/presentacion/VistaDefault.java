@@ -86,5 +86,4 @@ public abstract class VistaDefault extends JFrame implements IGUI {
        if (button2 != null) pair.add(button2);
        return pair;
    }
-	
 }

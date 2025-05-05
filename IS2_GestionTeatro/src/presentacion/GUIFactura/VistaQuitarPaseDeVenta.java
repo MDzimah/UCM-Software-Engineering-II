@@ -1,9 +1,6 @@
 package presentacion.GUIFactura;
 
-import exceptions.BBDDReadException;
-import misc.Messages;
-import presentacion.Evento;
-import presentacion.ViewUtils;
+import negocio.factura.TLineaFactura;
 
 @SuppressWarnings("serial")
 public class VistaQuitarPaseDeVenta extends ModificacionPaseEnVenta {
@@ -13,20 +10,20 @@ public class VistaQuitarPaseDeVenta extends ModificacionPaseEnVenta {
 		
 		super.initComps();
 		
-		super.okAndCancelListener(Evento.QUITAR_PASE_DE_VENTA);
+		super.okAndCancelListener();
 		
 		this.setVisible(true);
 		this.setLocationRelativeTo(null);
 	}
 	
 	@Override
-	public void actualizar(Evento evento, Object datos) {
-		if (evento == Evento.RES_OK) ViewUtils.createDialogMessage(Messages.EX_PASE_QUITADO_DE_VENTA.formatted((int)datos));
-		else if(evento == Evento.RES_KO) {
-			String error;
-			if (datos instanceof BBDDReadException) error = ((BBDDReadException)datos).getMessage();
-			else error = Messages.NO_EN_CARRITO; 
-			ViewUtils.createErrorDialogMessage(Messages.X_QUITAR_PASE_DE_VENTA + ' ' + Messages.MOTIVO.formatted(error));
+	void accion(TLineaFactura tLineaFactura) {
+		for (TLineaFactura tLf : AbrirVenta.getCarrito()) {
+			if (tLf.getIdPase() == tLineaFactura.getIdPase()) {
+				tLf.setCantidad(tLf.getCantidad() - tLineaFactura.getCantidad());
+				if (tLf.getCantidad() <= 0) AbrirVenta.getCarrito().remove(tLf);
+				break;
+			}
 		}
 	}
 }

@@ -22,7 +22,6 @@ import negocio.taquillero.SATaquillero;
 import negocio.taquillero.TTaquillero;
 import presentacion.Evento;
 import presentacion.GUICompTea.VistaActualizarCompania1;
-import presentacion.GUIFactura.AbrirVenta;
 import presentacion.GUIMiemCompTea.VistaActualizarMiembroCompania_1;
 import presentacion.GUIObra.VistaActualizarObra_1;
 import presentacion.GUIPase.VistaActualizarPaseDescarga;
@@ -33,35 +32,16 @@ public class ControladorImp extends Controlador {
 	@Override
 	public void accion(Evento evento, Object datos) {
 		switch(evento) {
-		
-		//Factura
-		case ANYADIR_PASE_A_VENTA: {
+		case CERRAR_VENTA: {
+			SAFactura saFac = FactoriaAbstractaNegocio.getInstance().crearSAFactura();
+			TDatosVenta tDV = (TDatosVenta)datos;
 			try {
-				TLineaFactura newTLf = (TLineaFactura)datos;
-				SAFactura saFac = FactoriaAbstractaNegocio.getInstance().crearSAFactura();
-				boolean res = saFac.anyadirPaseAVenta(newTLf, AbrirVenta.getCarrito());
-				
-				if (res) FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_OK, newTLf.getIdPase());
-				else FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_KO, null);
+				saFac.crearFactura(tDV);
 			}
-			catch(BBDDReadException e) {
-				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_KO, e);
+			catch (BBDDReadException | BBDDWriteException | UnknownClienteException | UnknownTaquilleroException e) {
+				 FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_KO, e);
 			}
-			break;
-		}
-		case QUITAR_PASE_DE_VENTA: {
-			try {
-				TLineaFactura tLfAQuitar = (TLineaFactura)datos;
-				SAFactura saFac = FactoriaAbstractaNegocio.getInstance().crearSAFactura();
-				boolean res = saFac.quitarPaseDeVenta(tLfAQuitar, AbrirVenta.getCarrito());
-						
-				if (res) FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_OK, tLfAQuitar.getIdPase());
-				else FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_KO, tLfAQuitar.getIdPase());
-			}
-			catch(BBDDReadException e) {
-				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_KO, e);
-			}
-			break;
+			
 		}
 		case BUSCAR_FACTURA: {
 			try {
@@ -77,17 +57,6 @@ public class ControladorImp extends Controlador {
 			}
 			
 			break;
-		}
-		case CERRAR_VENTA: {
-			SAFactura saFac = FactoriaAbstractaNegocio.getInstance().crearSAFactura();
-			TDatosVenta tDV = (TDatosVenta)datos;
-			try {
-				saFac.crearFactura(tDV);
-			}
-			catch (BBDDReadException | BBDDWriteException | UnknownClienteException | UnknownTaquilleroException e) {
-				 FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_KO, e);
-			}
-			
 		}
 		case MOSTRAR_FACTURAS: {
 			try {
@@ -413,6 +382,7 @@ public class ControladorImp extends Controlador {
 			catch(Exception e) {
 				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_KO, "Error: " +e.getMessage());
 			}
+			break;
 		}
 		case BAJA_COMPANIA_TEATRAL:
 		{
@@ -430,6 +400,7 @@ public class ControladorImp extends Controlador {
 			catch(Exception e) {
 				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_KO, "Error: " +e.getMessage());
 			}
+			break;
 		}
 		case ALTA_COMPANIA_TEATRAL:
 		{
@@ -445,6 +416,7 @@ public class ControladorImp extends Controlador {
 			catch(Exception e) {
 				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_KO, "Error: " +e.getMessage());
 			}
+			break;
 		}
 		case MOSTRAR_COMPANIA_TEATRAL:
 		{
@@ -463,6 +435,7 @@ public class ControladorImp extends Controlador {
 			catch(Exception e) {
 				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_KO, "Error: "+ e.getMessage());
 			}
+			break;
 		}
 		
 		//MiemCompTea

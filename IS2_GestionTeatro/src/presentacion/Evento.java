@@ -4,7 +4,7 @@ public enum Evento {
 	/*--VENTANAS DE CU--*/
 	
 	//Factura
-	ANYADIR_PASE_A_VENTA, 
+	ANYADIR_PASE_A_VENTA,
 	QUITAR_PASE_DE_VENTA,
 	CERRAR_VENTA, 
 	BUSCAR_FACTURA,
@@ -62,8 +62,5 @@ public enum Evento {
 	
 	/*--RESPUESTAS--*/
 	RES_OK, //si
-	RES_KO, //no
-	TABLA_ACTUALIZAR,
-	TABLA_BUSCAR,
-	TABLA_MOSTRAR
+	RES_KO //no
 }

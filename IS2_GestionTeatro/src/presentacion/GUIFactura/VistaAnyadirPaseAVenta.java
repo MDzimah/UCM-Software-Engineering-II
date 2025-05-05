@@ -1,9 +1,6 @@
 package presentacion.GUIFactura;
 
-import exceptions.BBDDReadException;
-import misc.Messages;
-import presentacion.Evento;
-import presentacion.ViewUtils;
+import negocio.factura.TLineaFactura;
 
 @SuppressWarnings("serial")
 public class VistaAnyadirPaseAVenta extends ModificacionPaseEnVenta {
@@ -13,20 +10,22 @@ public class VistaAnyadirPaseAVenta extends ModificacionPaseEnVenta {
 		
 		super.initComps();
 		
-		super.okAndCancelListener(Evento.ANYADIR_PASE_A_VENTA);
+		super.okAndCancelListener();
 		
 		this.setVisible(true);
 		this.setLocationRelativeTo(null);
 	}
-	
+
 	@Override
-	public void actualizar(Evento evento, Object datos) {
-		if (evento == Evento.RES_OK) ViewUtils.createDialogMessage(Messages.EX_PASE_ANYADIDO_A_VENTA.formatted((int)datos));
-		else if(evento == Evento.RES_KO) { 
-			String error;
-			if (datos instanceof BBDDReadException) error = ((BBDDReadException)datos).getMessage();
-			else error = Messages.ID_NO_ENCONTRADO.formatted((int)datos);
-			ViewUtils.createErrorDialogMessage(Messages.X_ANYADIR_PASE_A_VENTA + ' ' + Messages.MOTIVO.formatted(error));
+	void accion(TLineaFactura tLineaFactura) {
+		boolean estaba = false;
+		for(TLineaFactura tLf : AbrirVenta.getCarrito()) {
+			if (tLf.getIdPase() == tLineaFactura.getIdPase()) {
+				tLf.setCantidad(tLf.getCantidad() + tLineaFactura.getCantidad());
+				estaba = true;
+				break;
+			}
 		}
+		if (!estaba) AbrirVenta.getCarrito().add(tLineaFactura);
 	}
 }
