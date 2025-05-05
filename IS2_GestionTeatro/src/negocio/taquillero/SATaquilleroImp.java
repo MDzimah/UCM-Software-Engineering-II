@@ -1,6 +1,7 @@
 package negocio.taquillero;
 
 import java.util.Collection;
+import java.util.Iterator;
 
 import exceptions.BBDDReadException;
 import exceptions.BBDDWriteException;
@@ -9,42 +10,73 @@ import integracion.taquillero.DAOTaquillero;
 
 public class SATaquilleroImp implements SATaquillero {
 
+	/**
+	 * Crea un nuevo taquillero a partir del transfer
+	 */
 	@Override
 	public int create(TTaquillero tTaquillero) throws BBDDReadException, BBDDWriteException {
 		DAOTaquillero daoTaquillero = FactoriaAbstractaIntegracion.getInstance().crearDAOTaquillero();
 		return daoTaquillero.create(tTaquillero);
 	}
 
+	/**
+	 * Lee un taquillero a partir del idTaquillero
+	 */
 	@Override
 	public TTaquillero read(int id) throws BBDDReadException {
 		DAOTaquillero daoTaquillero = FactoriaAbstractaIntegracion.getInstance().crearDAOTaquillero();
 		return daoTaquillero.read(id);
 	}
 
+	/**
+	 * Actualiza los datos de un taquillero a partir de un transfer
+	 */
 	@Override
 	public int update(TTaquillero tTaquillero) throws BBDDReadException, BBDDWriteException {
 		DAOTaquillero daoTaquillero = FactoriaAbstractaIntegracion.getInstance().crearDAOTaquillero();
 		return daoTaquillero.update(tTaquillero);
 	}
 
+	/**
+	 * Elimina un taquillero a partir de su idTaquillero (borrado lógico)
+	 */
 	@Override
 	public int delete(int id) throws BBDDReadException, BBDDWriteException {
 		DAOTaquillero daoTaquillero = FactoriaAbstractaIntegracion.getInstance().crearDAOTaquillero();
 		return daoTaquillero.delete(id);
 	}
 
+	/**
+	 * Devuelve una colección de todos los taquilleros (activos)
+	 */
 	@Override
 	public Collection<TTaquillero> readAll() throws BBDDReadException {
 		DAOTaquillero daoTaquillero = FactoriaAbstractaIntegracion.getInstance().crearDAOTaquillero();
 		return daoTaquillero.readAll();
 	}
 
+	/**
+	 * Lee un taquillero a partir del DNI del taquillero
+	 */
 	@Override
-	public TTaquillero readByDNI() throws BBDDReadException {
+	public TTaquillero readByDNI(String DNI) throws BBDDReadException {
+		DAOTaquillero daoTaquillero = FactoriaAbstractaIntegracion.getInstance().crearDAOTaquillero();
+		Collection<TTaquillero> listaTaqs = daoTaquillero.readAll();
 		
-		return null;
+		Iterator<TTaquillero> it  = listaTaqs.iterator();
+		boolean encontrado = false;
+		TTaquillero tTaq = null;
+		while(it.hasNext() && !encontrado) {
+			tTaq = it.next();
+			if(tTaq.getDNI() == DNI) encontrado = true; 
+		}
+		if(encontrado) return tTaq;
+		else return null;
 	}
 
+	/**
+	 * Aumenta la venta del taquillero en 1
+	 */
 	@Override
 	public int aumentarVenta(int id) throws BBDDReadException, BBDDWriteException {
 		DAOTaquillero daoTaquillero = FactoriaAbstractaIntegracion.getInstance().crearDAOTaquillero();

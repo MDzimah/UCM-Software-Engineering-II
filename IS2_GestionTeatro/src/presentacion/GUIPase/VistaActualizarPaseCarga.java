@@ -54,7 +54,7 @@ public class VistaActualizarPaseCarga extends VistaDefault {
 	@Override
 	public void actualizar(Evento evento, Object datos) {
 		if(evento==Evento.RES_KO) {
-			ViewUtils.createErrorDialogMessage(Messages.X_PASE_ACTUALIZADO + ' ' + Messages.MOTIVO.formatted((String)datos));
+			ViewUtils.createErrorDialogMessage(Messages.X_PASE_ACTUALIZADO + ' ' + Messages.MOTIVO.formatted(((Exception)datos).getMessage()));
 		}
 	}
 }

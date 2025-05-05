@@ -71,7 +71,7 @@ public class VistaAltaPase extends VistaDefault {
 			ViewUtils.createDialogMessage(Messages.EX_PASE_CREADO);
 		}
 		else if(evento == Evento.RES_KO) {
-			ViewUtils.createErrorDialogMessage(Messages.X_PASE_CREADO + ' ' + Messages.MOTIVO.formatted((String)datos));
+			ViewUtils.createErrorDialogMessage(Messages.X_PASE_CREADO + ' ' + Messages.MOTIVO.formatted(((Exception)datos).getMessage()));
 		}
 	}
 
