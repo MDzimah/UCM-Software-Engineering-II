@@ -12,5 +12,4 @@ public interface DAOCliente {
 	public TCliente read(int id) throws BBDDReadException, BBDDWriteException;
 	public Collection<TCliente> readAll() throws BBDDReadException, BBDDWriteException;
 	public int update(TCliente tCliente) throws BBDDReadException, BBDDWriteException;
-	public TCliente readByDNI(String dni) throws BBDDReadException, BBDDWriteException;
 }

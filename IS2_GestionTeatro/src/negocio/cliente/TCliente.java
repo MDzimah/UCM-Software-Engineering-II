@@ -13,7 +13,6 @@ public class TCliente {
 	protected String apellido;
 	protected boolean activo;
 	protected String cuentaBancaria;
-	protected Collection<TFactura> facturas;
 	
 	public TCliente () {}
 	
@@ -90,9 +89,6 @@ public class TCliente {
 	    this.cuentaBancaria = cuentaBancaria;
 	}
 
-	public void setFacturas(Collection<TFactura> facturas) {
-	    this.facturas = facturas;
-    }
 	
 	
 }
