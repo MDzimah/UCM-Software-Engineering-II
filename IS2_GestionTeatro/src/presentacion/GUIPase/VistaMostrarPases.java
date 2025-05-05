@@ -29,6 +29,7 @@ public class VistaMostrarPases extends VistaDefault {
 		this.setVisible(true);
 		mostrar.addActionListener(e->{
 			Controlador.getInstance().accion(Evento.MOSTRAR_PASES, null);
+			this.setVisible(false);
 			dispose();
 		});
 		
@@ -45,7 +46,7 @@ public class VistaMostrarPases extends VistaDefault {
 			new TablaDefault<TPase>("PASES", Messages.colNomsPase, (ArrayList<TPase>)datos, false).setVisible(true);
 		}
 		else if(evento == Evento.RES_KO) {
-			ViewUtils.createErrorDialogMessage(Messages.X_PASE_CREADO + ' ' + Messages.MOTIVO.formatted((String)datos));
+			ViewUtils.createErrorDialogMessage(Messages.X_PASE_CREADO + ' ' + Messages.MOTIVO.formatted(((Exception)datos).getMessage()));
 		}
 	}
 

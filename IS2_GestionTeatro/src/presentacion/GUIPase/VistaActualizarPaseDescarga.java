@@ -31,7 +31,7 @@ public class VistaActualizarPaseDescarga implements IGUI {
 			ViewUtils.createDialogMessage(Messages.EX_PASE_ACTUALIZADO);
 		}
 		else if (evento==Evento.RES_OK) {
-			ViewUtils.createErrorDialogMessage(Messages.X_PASE_ACTUALIZADO + ' ' + Messages.MOTIVO.formatted((String)datos));
+			ViewUtils.createErrorDialogMessage(Messages.X_PASE_ACTUALIZADO + ' ' + Messages.MOTIVO.formatted(((Exception)datos).getMessage()));
 		}
 	}
 

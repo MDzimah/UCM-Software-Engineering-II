@@ -72,19 +72,22 @@ public class DAOPaseImp implements DAOPase {
 
 	@Override
 	public ArrayList<TPase> readAll() throws BBDDReadException {
-		JSONObject bdPase = OpsBBDD.read(Messages.BDPase);
-		JSONObject pases = new JSONObject(bdPase.getJSONArray(Messages.KEY_pases));
-		ArrayList<TPase> pasesADevolver = new ArrayList<>();
-		Set<String> idSetPases = pases.keySet();
-		for (String idPase : idSetPases) {
-			JSONObject pase = pases.getJSONObject(idPase);
-			if (pase.getBoolean(Messages.KEY_act)) {
-				TPase tPase = read(pase);
-				tPase.setIdPase(Integer.valueOf(idPase));
-				pasesADevolver.add(tPase);
+		if (!OpsBBDD.isEmpty(Messages.BDFac)) {
+			JSONObject bdPase = OpsBBDD.read(Messages.BDPase);
+			JSONObject pases = new JSONObject(bdPase.getJSONArray(Messages.KEY_pases));
+			ArrayList<TPase> pasesADevolver = new ArrayList<>();
+			Set<String> idSetPases = pases.keySet();
+			for (String idPase : idSetPases) {
+				JSONObject pase = pases.getJSONObject(idPase);
+				if (pase.getBoolean(Messages.KEY_act)) {
+					TPase tPase = read(pase);
+					tPase.setIdPase(Integer.valueOf(idPase));
+					pasesADevolver.add(tPase);
+				}
 			}
+			return pasesADevolver;
 		}
-		return pasesADevolver;
+		else return null;
 	}
 
 	@Override

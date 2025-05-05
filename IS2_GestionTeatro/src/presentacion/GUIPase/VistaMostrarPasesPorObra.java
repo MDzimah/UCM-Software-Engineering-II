@@ -52,7 +52,7 @@ public class VistaMostrarPasesPorObra extends VistaDefault {
 			new TablaDefault<TPase>("PASES", Messages.colNomsPase, (ArrayList<TPase>)datos, false).setVisible(true);
 		}
 		else if(evento==Evento.RES_KO) {
-			ViewUtils.createErrorDialogMessage(Messages.X_PASE_BUSCADO + ' ' + Messages.MOTIVO.formatted((String)datos));
+			ViewUtils.createErrorDialogMessage(Messages.X_PASE_BUSCADO + ' ' + Messages.MOTIVO.formatted(((Exception)datos).getMessage()));
 		}
 	}
 
