@@ -38,8 +38,6 @@ public class SAFacturaImp implements SAFactura {
 		if (leidoTaquillero == null) {
 			throw new UnknownTaquilleroException();
 		}
-		
-		DAOPase daoPase = FactoriaAbstractaIntegracion.getInstance().crearDAOPase();
 
 		//Calculamos el importe final de la factura (si el carrito tiene lineas de factura)
 		if (carritoFinal.size() > 0) {
