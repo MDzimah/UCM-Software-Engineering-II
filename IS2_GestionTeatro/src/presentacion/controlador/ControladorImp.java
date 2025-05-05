@@ -313,13 +313,9 @@ public class ControladorImp extends Controlador {
 		}
 		case BAJA_OBRA:{
 			try {
-				Integer i = Integer.valueOf((String)datos);
 				SAObra saObra = FactoriaAbstractaNegocio.getInstance().crearSAObra();
-				saObra.delete(i);
+				saObra.delete((int)datos);
 				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_OK, (int)datos);
-			}
-			catch(NumberFormatException e) {
-				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_KO, new InvalidFields());
 			}
 			catch(Exception e) {
 				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_KO, e);
@@ -329,9 +325,8 @@ public class ControladorImp extends Controlador {
 		case ACTUALIZAR_OBRA_0:
 		{
 			try {
-				Integer i = Integer.valueOf((String)datos);
 				SAObra saObra = FactoriaAbstractaNegocio.getInstance().crearSAObra();
-				TObra obra = saObra.read(i);
+				TObra obra = saObra.read((int) datos);
 				VistaActualizarObra_1 vista= (VistaActualizarObra_1) FactoriaAbstractaPresentacion.getInstance().createVista(Evento.ACTUALIZAR_OBRA_1);
 				vista.setDatos(obra);
 			}
@@ -358,13 +353,9 @@ public class ControladorImp extends Controlador {
 		case CONSULTAR_OBRA:
 		{
 			try {
-				Integer i = Integer.valueOf((String)datos);
 				SAObra saObra = FactoriaAbstractaNegocio.getInstance().crearSAObra();
-				TObra obra = saObra.read(i);
+				TObra obra = saObra.read((int) datos);
 				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_OK, obra);
-			}
-			catch(NumberFormatException e) {
-				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_KO, new InvalidFields());
 			}
 			catch(Exception e) {
 				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_KO, e);

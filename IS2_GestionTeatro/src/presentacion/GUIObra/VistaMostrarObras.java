@@ -51,7 +51,7 @@ public class VistaMostrarObras extends VistaDefault implements IGUI{
             tabla.setVisible(true);
 		}
 		else if(evento==Evento.RES_KO) {
-			ViewUtils.createErrorDialogMessage("No se han podido mostrar las obras.\n" + "Error: " +((Exception) datos).getMessage());
+			ViewUtils.createErrorDialogMessage(Messages.EX_OBRA_MOSTRAR_ERROR + '\n' + Messages.ERROR.formatted(((Exception) datos).getMessage()));
 		}
 	}
 }

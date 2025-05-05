@@ -7,6 +7,7 @@ import java.util.LinkedList;
 import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JLabel;
+import javax.swing.JSpinner;
 import javax.swing.JTextField;
 import javax.swing.SwingUtilities;
 
@@ -21,9 +22,9 @@ import presentacion.controlador.Controlador;
 import presentacion.factoria.FactoriaAbstractaPresentacion;
 
 public class VistaConsultarObra extends VistaDefault implements IGUI{
-	private JButton consultar, cancelar;
 	
-	private JTextField id;
+	private JButton consultar, cancelar;
+	private JSpinner id;
 
 	//Constructor
 	public VistaConsultarObra() {
@@ -37,7 +38,8 @@ public class VistaConsultarObra extends VistaDefault implements IGUI{
 		consultar = new JButton("Consultar");
 		cancelar = new JButton("Cancelar");
 		JLabel id1 = new JLabel("Id");
-		id = new JTextField();
+		id = ViewUtils.integerSpinner(0, 0, Integer.MAX_VALUE, 1);
+
 		
 		ArrayList<Pair<JComponent, JComponent>> campos = new ArrayList<>();
 		campos.add(new Pair<>(id1, id));
@@ -47,9 +49,16 @@ public class VistaConsultarObra extends VistaDefault implements IGUI{
 		
 		//Declaramos los listeners
 		consultar.addActionListener(e ->{
-			String id2 = id.getText();	
-			SwingUtilities.invokeLater(()->{Controlador.getInstance().accion(Evento.CONSULTAR_OBRA, id2);});
-			VistaConsultarObra.this.dispose();
+			try {
+				id.commitEdit();
+				int idObra = (int)id.getValue();
+				SwingUtilities.invokeLater(()->{Controlador.getInstance().accion(Evento.CONSULTAR_OBRA, idObra);});
+				VistaConsultarObra.this.dispose();
+			}
+			catch(Exception ex) {
+				ViewUtils.createInvalidFieldsPanel();
+				id.updateUI();
+			}
 		});
 		
 		cancelar.addActionListener(e ->{
@@ -67,7 +76,7 @@ public class VistaConsultarObra extends VistaDefault implements IGUI{
             tabla.setVisible(true);
 		}
 		else if(evento==Evento.RES_KO) {
-			ViewUtils.createErrorDialogMessage("No se han podido acceder a la obra.\n" + "Error: " +((Exception) datos).getMessage());
+			ViewUtils.createErrorDialogMessage(Messages.EX_OBRA_CONSULTAR_ERROR + '\n' + Messages.ERROR.formatted(((Exception) datos).getMessage()));
 		}
 	}
 }

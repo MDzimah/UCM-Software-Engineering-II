@@ -13,6 +13,8 @@ import integracion.factoria.FactoriaAbstractaIntegracion;
 import integracion.obra.DAOObra;
 import integracion.pase.DAOPase;
 import misc.Messages;
+import negocio.factoria.FactoriaAbstractaNegocio;
+import negocio.pase.SAPase;
 
 public class SAObraImp implements SAObra {
 
@@ -45,8 +47,8 @@ public class SAObraImp implements SAObra {
 	@Override
 	public int delete(int id) throws BBDDReadException, BBDDWriteException, UnknownObraException {
 		 DAOObra daoObra = FactoriaAbstractaIntegracion.getInstance().crearDAOObra();
-		 DAOPase daoPase = FactoriaAbstractaIntegracion.getInstance().crearDAOPase();
-		 daoPase.deletePorObra(id);
+		 SAPase saPase = FactoriaAbstractaNegocio.getInstance().crearSAPase();
+		 saPase.deletePorObra(id);
 		 int salida = daoObra.delete(id);
 		if(salida<=0)
 			throw new UnknownObraException();
