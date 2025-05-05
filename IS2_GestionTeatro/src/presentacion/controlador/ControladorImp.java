@@ -96,12 +96,37 @@ public class ControladorImp extends Controlador {
 			break;
 		}
 		case BUSCAR_CLIENTE: {
+			try {
+				SACliente sa = FactoriaAbstractaNegocio.getInstance().crearSACliente();
+				TCliente tCliente = sa.read((int)datos);
+				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_OK, tCliente);
+			}
+			catch (Exception e){
+				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_KO, e);
+			}
 			break;
 		}
 		case BAJA_CLIENTE: {
+			try {
+				SACliente sa = FactoriaAbstractaNegocio.getInstance().crearSACliente();
+				int id = sa.delete((int)datos);
+				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_OK, id);
+			}
+			catch (Exception e){
+				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_KO, e);
+			}
+			
 			break;
 		}
 		case MOSTRAR_CLIENTES: {
+			try {
+				SACliente sa = FactoriaAbstractaNegocio.getInstance().crearSACliente();
+				ArrayList<TCliente> cl = (ArrayList<TCliente>) sa.readAll();
+				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_OK, cl);
+			}
+			catch (Exception e){
+				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_KO, e);
+			}
 			break;
 		}
 		case ACTUALIZAR_CLIENTE: {
