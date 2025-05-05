@@ -11,20 +11,21 @@ import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.SwingUtilities;
 
-import misc.JSwingUtils;
 import misc.Messages;
 import misc.Pair;
 import presentacion.Evento;
 import presentacion.IGUI;
+import presentacion.ViewUtils;
 import presentacion.TablaDefault;
 import presentacion.controlador.Controlador;
+import presentacion.factoria.FactoriaAbstractaPresentacion;
 import presentacion.VistaDefault;
 import negocio.compTea.TCompTea;
 
-public class VistaActualizarCompania extends VistaDefault implements IGUI{
+public class VistaActualizarCompania0 extends VistaDefault implements IGUI{
 	
 	
-	public VistaActualizarCompania() {
+	public VistaActualizarCompania0() {
 		initGUI();
 		this.setVisible(true);
 	}
@@ -43,14 +44,14 @@ public class VistaActualizarCompania extends VistaDefault implements IGUI{
 		anyadir.addActionListener(e ->{
 			Integer id = Integer.valueOf((IdField.getText())); 
 			SwingUtilities.invokeLater(()->Controlador.getInstance().accion(Evento.	ACTUALIZAR0_COMPANIA_TEATRAL, id));
-			this.dispose();	//Igual cambio algo de aqui porque el problema es que como esta ahora se ejecuta el controller antes de cerrar la ventana
+			this.dispose();	
 		});
 		cancelar.addActionListener(e ->{
 			this.dispose();
 		});
 		
 
-		initComps(campos, anyadir, cancelar);//no se si tiene que ser fullscreen...
+		initComps(campos, anyadir, cancelar);
 	
 	}
 	
@@ -58,27 +59,14 @@ public class VistaActualizarCompania extends VistaDefault implements IGUI{
 	@Override
 	public void actualizar(Evento evento, Object datos) {
 		if(evento==Evento.RES_OK) {
-			if(datos instanceof TCompTea) {
-			
-			TablaDefault j= new TablaDefault("COMPAÑÍA", Messages.colNomsCompTea, (Collection<TCompTea>)datos, true, true);
-			JButton b =j.getOkButton();
-			 b.addActionListener(e->{
-				List<TCompTea> list =j.<TCompTea>getTransfersFromTable();
-				TCompTea element1= list.get(0);
-				SwingUtilities.invokeLater(()->Controlador.getInstance().accion(Evento.ACTUALIZAR1_COMPANIA_TEATRAL, (TCompTea)element1));
-			 });
-			}
-			 else {
-				JSwingUtils.createDialogMessage(Messages.COMPANIA_ACTUALIZADA); 
-			 }
-			}
+			FactoriaAbstractaPresentacion.getInstance().createVista(Evento.ACTUALIZAR1_COMPANIA_TEATRAL);
+		}
 		else if(evento==Evento.RES_KO) {
-			if(datos instanceof Exception) {
-			JSwingUtils.createErrorDialogMessage( ((Exception) datos).getMessage());
-			}
-			else {
-				JSwingUtils.createErrorDialogMessage("NO EXISTEN COMPANIAS CON ID: "+(int) datos);
-			}
+			
+			ViewUtils.createErrorDialogMessage("NO EXISTEN COMPANIAS CON ID: "+(int) datos);
+			
 		}
 		
 	}
+
+}

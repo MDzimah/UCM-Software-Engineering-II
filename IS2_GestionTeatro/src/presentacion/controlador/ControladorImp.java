@@ -21,6 +21,7 @@ import negocio.pase.TPase;
 import negocio.taquillero.SATaquillero;
 import negocio.taquillero.TTaquillero;
 import presentacion.Evento;
+import presentacion.GUICompTea.VistaActualizarCompania1;
 import presentacion.GUIFactura.AbrirVenta;
 import presentacion.GUIMiemCompTea.VistaActualizarMiembroCompania_1;
 import presentacion.GUIObra.VistaActualizarObra_1;
@@ -367,10 +368,12 @@ public class ControladorImp extends Controlador {
 				Integer id =(Integer)datos;
 				TCompTea newComp= saCompTea.read(id);
 				if(newComp!=null) {
-				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_OK, newComp);//TODO no se si hay que mostrar aqui
+				/*FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_OK, newComp);*///TODO no se si hay que mostrar aqui
+					VistaActualizarCompania1 vista= (VistaActualizarCompania1) FactoriaAbstractaPresentacion.getInstance().createVista(Evento.ACTUALIZAR_OBRA_1);
+					vista.cargar(newComp);
 				}
 				else {
-					FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_KO, id);
+					throw new InvalidFields();
 				}
 				}
 			catch(Exception e) {
@@ -379,15 +382,16 @@ public class ControladorImp extends Controlador {
 		}
 		case ACTUALIZAR1_COMPANIA_TEATRAL:
 		{
-			TCompTea tCompTea =(TCompTea)datos;
+			
 			try {
+				TCompTea tCompTea =(TCompTea)datos;
 				SACompTea saCompTea=FactoriaAbstractaNegocio.getInstance().crearSACompTea();
 				int id= saCompTea.update(tCompTea);
 				if(id!=-1) {
 				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_OK, id);//TODO no se si hay que mostrar aqui
 				}
 				else {
-					FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_KO, id);
+					throw new Exception("no se pudo actualizar la compania con id: "+id);
 				}
 				}
 			catch(Exception e) {
@@ -443,8 +447,9 @@ public class ControladorImp extends Controlador {
 			try {
 				SACompTea saCompTea=FactoriaAbstractaNegocio.getInstance().crearSACompTea();
 				Collection<TCompTea> tCompsTeas =saCompTea.readAll();
+				ArrayList<TCompTea> p= new ArrayList<>(tCompsTeas);
 				if(tCompsTeas!=null) {
-				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_OK, tCompsTeas);
+				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_OK, p);
 				}
 				else {
 				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_KO, "Error: no hay companias que mostrar");

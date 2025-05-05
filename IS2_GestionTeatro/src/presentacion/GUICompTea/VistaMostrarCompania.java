@@ -52,7 +52,7 @@ public class VistaMostrarCompania extends VistaDefault implements IGUI{
 	@Override
 	public void actualizar(Evento evento, Object datos) {
 		if(evento==Evento.RES_OK) {
-			TablaDefault t= new TablaDefault("CONSULTAR OBRA", Messages.colNomsCompTea, (Collection<TCompTea>)datos, false,false);	
+			TablaDefault t= new TablaDefault("CONSULTAR OBRA", Messages.colNomsCompTea, (ArrayList<TCompTea>)datos, false);	
 		}
 		else if(evento==Evento.RES_KO) {
 			ViewUtils.createErrorDialogMessage("NO SE PUDO LISTAR LAS COMPANIAS TEATRALES");

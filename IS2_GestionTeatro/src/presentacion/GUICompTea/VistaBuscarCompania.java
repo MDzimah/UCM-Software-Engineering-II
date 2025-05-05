@@ -69,9 +69,10 @@ public class VistaBuscarCompania extends VistaDefault implements IGUI{
 	@Override
 	public void actualizar(Evento evento, Object datos) {
 		if(evento==Evento.RES_OK) {
-			TablaDefault j= new TablaDefault("COMPAÑÍA", Messages.colNomsCompTea, (Collection<TCompTea>)datos, true, false);
+			ArrayList<TCompTea> p=new ArrayList<>();
+			p.add((TCompTea) datos);
 			
-			JTable t= j.getTable();
+			TablaDefault j= new TablaDefault("COMPAÑÍA", Messages.colNomsCompTea, p, false);
 			JButton b =j.getOkButton();
 			 b.addActionListener(e->{
 				 j.dispose();
