@@ -42,6 +42,7 @@ public class DAOObraImp implements DAOObra {
 		nuevaObra.put(Messages.KEY_autor, tObra.getAutor());
 		nuevaObra.put(Messages.KEY_generoObra, tObra.getGenero());
 		nuevaObra.put(Messages.KEY_sinopsis, tObra.getSinopsis());
+		nuevaObra.put(Messages.KEY_act, tObra.getActivo());
 		tObra.setIdObra(lastPos+1);
 		
 		bdObras.put(String.valueOf(lastPos+1), nuevaObra);
@@ -65,9 +66,13 @@ public class DAOObraImp implements DAOObra {
 
 			JSONObject bdObras = OpsBBDD.read(Messages.BDOb);
 			if(bdObras.has(String.valueOf(id))) {
-				TObra obra = readJSON(bdObras.getJSONObject(String.valueOf(id)));
+				JSONObject json = bdObras.getJSONObject(String.valueOf(id));
+				if(!Boolean.valueOf(json.getString(Messages.KEY_act)))
+					return -1;
+				else
+					json.put(Messages.KEY_act, false);
 				
-				bdObras.remove(String.valueOf(id));
+				bdObras.put(json.getString(Messages.KEY_idObra), json);
 				OpsBBDD.write(bdObras, Messages.BDOb);
 				return 1;
 			}
@@ -87,7 +92,7 @@ public class DAOObraImp implements DAOObra {
 		if (!OpsBBDD.isEmpty(Messages.BDOb)) {
 
 		JSONObject bdObras = OpsBBDD.read(Messages.BDOb);
-		if(bdObras.has(String.valueOf(id))){
+		if(bdObras.has(String.valueOf(id)) && bdObras.getJSONObject(String.valueOf(id)).getBoolean(Messages.KEY_act)){
 			return readJSON(bdObras.getJSONObject(String.valueOf(id)));
 		}
 		else
@@ -106,7 +111,7 @@ public class DAOObraImp implements DAOObra {
 	public int update(TObra tObra) throws BBDDReadException, BBDDWriteException {
 		if (!OpsBBDD.isEmpty(Messages.BDOb)) {
 		JSONObject bdObras = OpsBBDD.read(Messages.BDOb);
-		if(bdObras.has(String.valueOf(tObra.getIdObra()))) {
+		if(bdObras.has(String.valueOf(tObra.getIdObra())) && bdObras.getJSONObject(String.valueOf(tObra.getIdObra())).getBoolean(Messages.KEY_act)) {
 			
 			JSONObject nuevaObra = new JSONObject();
 			
@@ -136,7 +141,7 @@ public class DAOObraImp implements DAOObra {
 		Iterator<String> claves = bdObras.keys();
         while (claves.hasNext()) {
         	String clave = claves.next();
-            if (!clave.equals("LastKey")) {
+            if (!clave.equals("LastKey") && bdObras.getJSONObject(clave).getBoolean(Messages.KEY_act)) {
                 IdObras.add(readJSON(bdObras.getJSONObject(clave)));
             }
         }
@@ -149,6 +154,6 @@ public class DAOObraImp implements DAOObra {
 	
 	private TObra readJSON(JSONObject obra) {
 		
-		return new TObra(obra.getInt(Messages.KEY_idObra), obra.getString(Messages.KEY_titulo), obra.getString(Messages.KEY_autor), obra.getString(Messages.KEY_generoObra), obra.getString(Messages.KEY_sinopsis));	
+		return new TObra(obra.getInt(Messages.KEY_idObra), obra.getString(Messages.KEY_titulo), obra.getString(Messages.KEY_autor), obra.getString(Messages.KEY_generoObra), obra.getString(Messages.KEY_sinopsis), Boolean.valueOf(obra.getString(Messages.KEY_act)));	
 	}
 }

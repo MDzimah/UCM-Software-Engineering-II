@@ -18,18 +18,20 @@ public class TObra implements Convertable<TObra>{
 	private String autor;
 	private String genero;
 	private String sinopsis;
+	private boolean activo;
 	
 	//Constructores
-	public TObra (int idObra, String titulo, String autor, String genero, String sinopsis) {
+	public TObra (int idObra, String titulo, String autor, String genero, String sinopsis, boolean active) {
 		this.idObra = idObra;
 		this.titulo = titulo;
 		this.autor = autor;
 		this.genero = genero;
 		this.sinopsis = sinopsis;
+		this.activo=active;
 	}
 	public TObra (String titulo, String autor, String genero, String sinopsis) 
 	{
-		this(-1, titulo, autor, genero, sinopsis);
+		this(-1, titulo, autor, genero, sinopsis, true);
 	}
 
 	//Getters
@@ -53,6 +55,10 @@ public class TObra implements Convertable<TObra>{
 		return sinopsis;
 	}
 	
+	public boolean getActivo() {
+		return activo;
+	}
+	
 	public Object genericGetter(String key) {
 		switch(key) {
 		case Messages.KEY_idObra:
@@ -65,6 +71,8 @@ public class TObra implements Convertable<TObra>{
 			return genero;
 		case Messages.KEY_sinopsis:
 			return sinopsis;
+		case Messages.KEY_act:
+			return activo;
 		}
 		return null;
 	}
@@ -87,6 +95,10 @@ public class TObra implements Convertable<TObra>{
 
 	public void setSinopsis(String sinopsis) {
 		this.sinopsis = sinopsis;
+	}
+	
+	public void setActivo(boolean active) {
+		this.activo = active;
 	}
 	
 	//Metodos de Convertable para la tabla
