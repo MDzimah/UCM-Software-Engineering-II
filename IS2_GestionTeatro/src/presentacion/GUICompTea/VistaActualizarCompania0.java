@@ -2,10 +2,12 @@ package presentacion.GUICompTea;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JLabel;
+import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.SwingUtilities;
 
@@ -20,31 +22,36 @@ import presentacion.factoria.FactoriaAbstractaPresentacion;
 import presentacion.VistaDefault;
 import negocio.compTea.TCompTea;
 
-public class VistaMostrarCompania extends VistaDefault implements IGUI{
+public class VistaActualizarCompania0 extends VistaDefault implements IGUI{
 	
 	
-	public VistaMostrarCompania() {
+	public VistaActualizarCompania0() {
 		initGUI();
 		this.setVisible(true);
 	}
 	
 	private void initGUI() {
 		
-		this.setTitle("Mostrar Compañia Teatral");//no se si dan problemas la verdad
-		JButton anyadir= new JButton("Mostrar");
+		this.setTitle("Añadir Compañia Teatral");//no se si dan problemas la verdad
+		JButton anyadir= new JButton("Añadir");
 		JButton cancelar = new JButton("Cancelar");
+		JLabel Idlabel= new JLabel("Id Compania Teatral");
+		
+		JTextField IdField = new JTextField();
+		
 		ArrayList<Pair<JComponent, JComponent>> campos = new ArrayList<>();
-		campos.add(null);//TODO otra vista la verdad
+		campos.add(new Pair<>(Idlabel, IdField));
 		anyadir.addActionListener(e ->{
-			SwingUtilities.invokeLater(()->Controlador.getInstance().accion(Evento.MOSTRAR_COMPANIA_TEATRAL, null));
-			this.dispose();	//Igual cambio algo de aqui porque el problema es que como esta ahora se ejecuta el controller antes de cerrar la ventana
+			Integer id = Integer.valueOf((IdField.getText())); 
+			SwingUtilities.invokeLater(()->Controlador.getInstance().accion(Evento.	ACTUALIZAR0_COMPANIA_TEATRAL, id));
+			this.dispose();	
 		});
 		cancelar.addActionListener(e ->{
 			this.dispose();
 		});
 		
 
-		initComps(campos, anyadir, cancelar);//no se si tiene que ser fullscreen...
+		initComps(campos, anyadir, cancelar);
 	
 	}
 	
@@ -52,11 +59,14 @@ public class VistaMostrarCompania extends VistaDefault implements IGUI{
 	@Override
 	public void actualizar(Evento evento, Object datos) {
 		if(evento==Evento.RES_OK) {
-			TablaDefault t= new TablaDefault("CONSULTAR OBRA", Messages.colNomsCompTea, (ArrayList<TCompTea>)datos, false);	
+			FactoriaAbstractaPresentacion.getInstance().createVista(Evento.ACTUALIZAR1_COMPANIA_TEATRAL);
 		}
 		else if(evento==Evento.RES_KO) {
-			ViewUtils.createErrorDialogMessage("NO SE PUDO LISTAR LAS COMPANIAS TEATRALES");
+			
+			ViewUtils.createErrorDialogMessage("NO EXISTEN COMPANIAS CON ID: "+(int) datos);
+			
 		}
+		
 	}
 
 }

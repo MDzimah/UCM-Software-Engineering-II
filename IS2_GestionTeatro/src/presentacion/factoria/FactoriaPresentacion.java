@@ -53,7 +53,8 @@ public class FactoriaPresentacion extends FactoriaAbstractaPresentacion {
 		
 		//CompTea
 		case ALTA_COMPANIA_TEATRAL:  return new VistaAltaCompania();
-		case ACTUALIZAR0_COMPANIA_TEATRAL: return new VistaActualizarCompania(); // actualizar0 O actualizar1
+		case ACTUALIZAR0_COMPANIA_TEATRAL: return new VistaActualizarCompania0(); // actualizar0 O actualizar1
+		case ACTUALIZAR1_COMPANIA_TEATRAL: return new VistaActualizarCompania1();
 		case BUSCAR_COMPANIA_TEATRAL: return new VistaBuscarCompania();
 		case BAJA_COMPANIA_TEATRAL: return new VistaBajaCompTea();
 		case MOSTRAR_COMPANIA_TEATRAL: return new VistaMostrarCompania();

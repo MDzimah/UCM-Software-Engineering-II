@@ -22,9 +22,15 @@ import presentacion.VistaDefault;
 import negocio.compTea.TCompTea;
 
 public class VistaActualizarCompania extends VistaDefault implements IGUI{
+
+	@Override
+	public void actualizar(Evento evento, Object datos) {
+		// TODO Auto-generated method stub
+		
+	}
 	
 	
-	public VistaActualizarCompania() {
+	/*public VistaActualizarCompania() {
 		initGUI();
 		this.setVisible(true);
 	}
@@ -59,9 +65,8 @@ public class VistaActualizarCompania extends VistaDefault implements IGUI{
 	public void actualizar(Evento evento, Object datos) {
 		if(evento==Evento.RES_OK) {
 			if(datos instanceof TCompTea) {
-			TablaDefault j= new TablaDefault("COMPAÑÍA", Messages.colNomsCompTea, (Collection<TCompTea>)datos, true, true);
 			
-			JTable t= j.getTable();
+			TablaDefault j= new TablaDefault("COMPAÑÍA", Messages.colNomsCompTea, (Collection<TCompTea>)datos, true, true);
 			JButton b =j.getOkButton();
 			 b.addActionListener(e->{
 				List<TCompTea> list =j.<TCompTea>getTransfersFromTable();
@@ -82,6 +87,6 @@ public class VistaActualizarCompania extends VistaDefault implements IGUI{
 			}
 		}
 		
-	}
+	}*/
 
 }
