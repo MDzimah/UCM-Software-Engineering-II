@@ -10,7 +10,7 @@ public class VistaBajaCl extends JFrame implements IGUI{
 
 	@Override
 	public void actualizar(Evento evento, Object datos) {
-		// TODO Auto-generated method stub
+		// TODO Auto-generated method stu
 		
 	}
 
