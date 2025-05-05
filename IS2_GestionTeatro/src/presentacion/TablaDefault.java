@@ -16,28 +16,6 @@ import com.formdev.flatlaf.themes.FlatMacLightLaf;
 import misc.*;
 import negocio.factura.TFactura;
 
-/**
- * {@code TablaDefault} is a generic Swing-based window for displaying and optionally editing a list of
- * domain objects in a tabular format.
- *
- * <p>This class extends {@code JFrame} and embeds a {@code JTable} whose contents are automatically derived
- * from objects implementing the {@link Convertable} interface. It supports both read-only ("consultar") and editable modes.</p>
- *
- * <p>Key features include:</p>
- * <ul>
- *   <li>Automatic mapping of domain object fields to table cells via {@code getColumnValue} and {@code setColumnValue} methods.</li>
- *   <li>Support for multiple domain types such as {@code TFactura}, {@code TObra}, {@code TCliente}, etc.</li>
- *   <li>Editable mode with a built-in "Aceptar" button to confirm changes made to table cells.</li>
- *   <li>Consultation mode with a more compact, non-resizable layout for viewing single-record tables.</li>
- *   <li>Optional support (currently commented out) for multi-line cell rendering to display arrays or collections inside cells.</li>
- *   <li>Consistent UI styling using centralized font and layout constants from the {@code Constants} class.</li>
- * </ul>
- *
- * <p>Note: This class uses an internal {@code DefaultTableModel} implementation to bind data and column headers
- * to the {@code JTable}, and relies on the domain objects conforming to the {@code Convertable<T>} interface.</p>
- *
- * @param <T> the type of domain objects to display in the table; must implement {@link Convertable}
- */
 
 @SuppressWarnings("serial")
 public class TablaDefault<T extends Convertable<T>> extends JFrame {
@@ -154,33 +132,6 @@ public class TablaDefault<T extends Convertable<T>> extends JFrame {
     }
     */
 
-
-    /**
-     * Constructs a {@code TablaDefault} window configured to display a list of domain objects in a table format.
-     *
-     * <p>This constructor creates a Swing {@code JFrame} that displays the provided data using a {@code JTable}.
-     * It supports both consultation (read-only) and editable modes. In editable mode, an "Aceptar" button is displayed
-     * to confirm edits made to the table.</p>
-     *
-     * <p>In this constructor, the column header widths are dynamically calculated based on the width of each column name.
-     * The width is determined by calculating the pixel width of the text in the header using {@code FontMetrics}, and a
-     * buffer of 120 pixels is added to ensure proper display of the headers in the window.</p>
-     *
-     * <p>If the table is in editable mode, only a single row will be displayed for editing. If the table contains more than one row
-     * and editable mode is selected, an {@code IllegalArgumentException} will be thrown.</p>
-     *
-     * @param nombreTabla the title to be shown on the window's title bar
-     * @param columnNames an array of column header names (each corresponding to a property of the domain object)
-     * @param data a list of domain objects (implementing {@link Convertable}) to be displayed in the table
-     * @param CUActualizar if {@code true}, enables editable mode and shows an "Aceptar" button for confirming table edits
-     * 
-     * <p>Behavior notes:</p>
-     * <ul>
-     *   <li>If {@code data} is not {@code null}, each row in the table corresponds to an instance of the domain object.</li>
-     *   <li>In editable mode, only one row will be available for editing, assuming the table's data size is 1.</li>
-     *   <li>Column values are dynamically extracted and updated using the {@code getColumnValue} and {@code setColumnValue} methods from {@code Convertable}.</li>
-     * </ul>
-     */
 	public TablaDefault(String nombreTabla,  String[] columnNames, ArrayList<T> data, boolean CUActualizar) {
 		this.setTitle(nombreTabla);
         this.setLayout(new BorderLayout());

@@ -27,7 +27,7 @@ public class VistaBuscarFac extends VistaDefault {
 		this.setTitle("Buscar factura");
 		ViewUtils.setAppIcon(this);
 		JPanel mainPanel = new JPanel(new BorderLayout());
-		mainPanel.setSize(Constants.getScaledScreenDimension(2, 2));
+		mainPanel.setSize(ViewUtils.getScaledScreenDimension(2, 2));
 		this.lIdFac = new JLabel("Id factura:");
 		SpinnerNumberModel spinnerModel = new SpinnerNumberModel(0, 0, Integer.MAX_VALUE, 1);
 		this.sIdFac = new JSpinner(spinnerModel);

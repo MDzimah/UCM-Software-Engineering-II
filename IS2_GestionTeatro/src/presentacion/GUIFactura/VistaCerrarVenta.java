@@ -33,14 +33,9 @@ public class VistaCerrarVenta extends VistaDefault {
 	private JButton aceptar;
 	private JButton cancelar;
 
-	private Collection<TLineaFactura> carrito;
-
-	public VistaCerrarVenta() {}
-
 	public VistaCerrarVenta() {
 		this.setTitle("Cerrar venta");
 		ViewUtils.setAppIcon(this);
-		this.carrito = Collections.unmodifiableCollection(AbrirVenta.getCarrito());
 		
 		this.labelCliente = new JLabel("DNI del cliente:");
 		this.tfCliente = new JTextField(20);
@@ -55,7 +50,7 @@ public class VistaCerrarVenta extends VistaDefault {
 		labeledComponents.add(new Pair<>(labelCliente, tfCliente));
 		labeledComponents.add(new Pair<>(labelTaquillero, tfTaquillero));
 
-		super.initComps(labeledComponents, aceptar, cancelar, false);
+		super.initComps(labeledComponents, aceptar, cancelar);
 		
 		aceptar.addActionListener(new ActionListener() {
 			@Override
@@ -63,7 +58,7 @@ public class VistaCerrarVenta extends VistaDefault {
 				try {
 					int cliente = Integer.valueOf(tfCliente.getText());
 					int taquillero = Integer.valueOf(tfTaquillero.getText());
-					TDatosVenta tDv = new TDatosVenta(cliente, taquillero, carrito);
+					TDatosVenta tDv = new TDatosVenta(cliente, taquillero, AbrirVenta.getCarrito());
 					Controlador.getInstance().accion(Evento.CERRAR_VENTA, tDv);
 				}
 				catch(ArithmeticException ex) {
@@ -88,5 +83,8 @@ public class VistaCerrarVenta extends VistaDefault {
 		} else if (evento == Evento.RES_CERRAR_VENTA_KO) {
 			FactoriaAbstractaPresentacion.getInstance().createDialogMessage(Messages.X_VENTA_CERRADA);
 		}
+		
+		AbrirVenta.enableButton();
+		AbrirVenta.resetCarrito();
 	}
 }
