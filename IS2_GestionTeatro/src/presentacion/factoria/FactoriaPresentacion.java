@@ -22,7 +22,7 @@ public class FactoriaPresentacion extends FactoriaAbstractaPresentacion {
 		switch(e) {
 		//Factura
 		case ANYADIR_PASE_A_VENTA: return new VistaAnyadirPaseAVenta();
-		case BUSCAR_FACTURA: return new VistaBuscarFac();
+		case BUSCAR_FACTURA: return new VistaBuscarFactura();
 		case CERRAR_VENTA: return new VistaCerrarVenta();
 		case MOSTRAR_FACTURAS: return new VistaMostrarFacs();
 		case QUITAR_PASE_DE_VENTA: return new VistaQuitarPaseDeVenta();

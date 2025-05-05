@@ -13,20 +13,19 @@ import presentacion.*;
 import presentacion.controlador.Controlador;
 
 @SuppressWarnings("serial")
-public class VistaBuscarFac extends VistaDefault {
+public class VistaBuscarFactura extends VistaDefault {
 	private JLabel lIdFac;
 	private JSpinner sIdFac;
 	private JButton buscar;
 	private JButton cancel;
 	
-	public VistaBuscarFac() {
+	public VistaBuscarFactura() {
 		this.setTitle("Buscar factura");
 		ViewUtils.setAppIcon(this);
 		JPanel mainPanel = new JPanel(new BorderLayout());
 		mainPanel.setSize(ViewUtils.getScaledScreenDimension(2, 2));
 		this.lIdFac = new JLabel("Id factura:");
-		SpinnerNumberModel spinnerModel = new SpinnerNumberModel(0, 0, Integer.MAX_VALUE, 1);
-		this.sIdFac = new JSpinner(spinnerModel);
+		this.sIdFac = ViewUtils.integerSpinner(0, 0, Integer.MAX_VALUE, 1);
 		this.buscar = new JButton("Buscar");
 		this.cancel = new JButton("Cancelar");
 		
@@ -37,7 +36,7 @@ public class VistaBuscarFac extends VistaDefault {
 		buscar.addActionListener(e->{
 			try {
 				sIdFac.commitEdit();
-				Integer idFac = (Integer)sIdFac.getValue();
+				int idFac = (int)sIdFac.getValue();
 				SwingUtilities.invokeLater(()->{Controlador.getInstance().accion(Evento.BUSCAR_FACTURA, idFac);});
 				dispose();
 			}

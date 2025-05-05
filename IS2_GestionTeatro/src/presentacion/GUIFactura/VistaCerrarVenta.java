@@ -24,13 +24,11 @@ public class VistaCerrarVenta extends VistaDefault {
 	public VistaCerrarVenta() {
 		this.setTitle("Cerrar venta");
 		
-		SpinnerNumberModel spinnerModel = new SpinnerNumberModel(0, 0, Integer.MAX_VALUE, 1);
-
 		this.labelCliente = new JLabel("Id del cliente:");
-		this.sCliente = new JSpinner(spinnerModel);
+		this.sCliente = ViewUtils.integerSpinner(0, 0, Integer.MAX_VALUE, 1);
 
 		this.labelTaquillero = new JLabel("Id del taquillero:");
-		this.sTaquillero = new JSpinner(spinnerModel);
+		this.sTaquillero = ViewUtils.integerSpinner(0, 0, Integer.MAX_VALUE, 1);
 
 		this.aceptar = new JButton("Aceptar");
 		this.cancelar = new JButton("Cancelar");
@@ -45,8 +43,8 @@ public class VistaCerrarVenta extends VistaDefault {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				try {
-					int cliente = (Integer) sCliente.getValue();
-					int taquillero = (Integer) sTaquillero.getValue();
+					int cliente = (int) sCliente.getValue();
+					int taquillero = (int) sTaquillero.getValue();
 					TDatosVenta tDv = new TDatosVenta(cliente, taquillero, AbrirVenta.getCarrito());
 					Controlador.getInstance().accion(Evento.CERRAR_VENTA, tDv);
 				}

@@ -1,6 +1,11 @@
 package presentacion.GUIPase;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.Properties;
+
+import org.jdatepicker.impl.*;
 
 import javax.swing.JButton;
 import javax.swing.JComponent;
@@ -26,8 +31,8 @@ public class VistaAltaPase extends VistaDefault {
 	private JTextField idCompTeaText;
 	private JLabel idObraLabel;
 	private JTextField idObraText;
-	private JLabel fechaText;
-	private JTextField fechaLabel;
+	private JLabel fecha;
+	private JDatePickerImpl datePicker;
 	private JLabel cantidadStockLabel;
 	private JTextField cantidadStockText;
 	private JLabel precioLabel;
@@ -37,12 +42,20 @@ public class VistaAltaPase extends VistaDefault {
 		this.setTitle("CREAR PASE");
 		ok = new JButton("Aceptar");
 		cancelar = new JButton("cancelar:");
+		
+		fecha = new JLabel("Fecha:");
+		Properties p = new Properties();
+        p.put("text.today", "Hoy");
+        p.put("text.month", "Mes");
+        p.put("text.year", "Año");
+		UtilDateModel model = new UtilDateModel();
+        JDatePanelImpl datePanel = new JDatePanelImpl(model, p);
+        datePicker = new JDatePickerImpl(datePanel, new DateComponentFormatter());
+        
 		idCompTeaLabel = new JLabel("id de la companya teatral:");
 		idCompTeaText = new JTextField(20);
 		idObraLabel = new JLabel("id de la obra:");
 		idObraText = new JTextField(20);
-		fechaText = new JLabel("Fecha:");
-		fechaLabel = new JTextField(20);
 		cantidadStockLabel = new JLabel("stock:");
 		cantidadStockText = new JTextField(20);
 		precioLabel = new JLabel("precio de compra:");
@@ -50,6 +63,7 @@ public class VistaAltaPase extends VistaDefault {
 		ArrayList<Pair<JComponent, JComponent>> componentesEtiquetados = new ArrayList<>();
 		componentesEtiquetados.add(new Pair<>(idCompTeaLabel,idCompTeaText));
 		componentesEtiquetados.add(new Pair<>(idObraLabel,idObraText));
+		componentesEtiquetados.add(new Pair<>(fecha,datePicker));
 		componentesEtiquetados.add(new Pair<>(cantidadStockLabel,cantidadStockText));
 		componentesEtiquetados.add(new Pair<>(precioLabel,precioText));
 		super.initComps(componentesEtiquetados, ok, cancelar);
@@ -59,7 +73,8 @@ public class VistaAltaPase extends VistaDefault {
 			int idObra = Integer.valueOf(idObraText.getText());
 			int stock = Integer.valueOf(cantidadStockText.getText());
 			int precio = Integer.valueOf(precioText.getText());
-			TPase tPase = new TPase(-1, idCompTea, idObra, true, null, stock, precio); //Buscar forma de hacer la fecha
+			LocalDateTime selectedDate = (LocalDateTime) datePicker.getModel().getValue();
+			TPase tPase = new TPase(-1, idCompTea, idObra, true, selectedDate, stock, precio);
 			Controlador.getInstance().accion(Evento.ALTA_PASE, tPase);
 			this.dispose();
 		});

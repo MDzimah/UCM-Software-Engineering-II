@@ -1,0 +1,12 @@
+{
+    "pases": {"1": {
+        "idCompTea": 2,
+        "precioPase": 3,
+        "fecha": "Mon May 12 17:24:14 CEST 2025",
+        "IdObra": 2,
+        "stock": 23,
+        "idPase": 1,
+        "activo": true
+    }},
+    "lastId": 1
+}
