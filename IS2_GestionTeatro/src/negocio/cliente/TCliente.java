@@ -87,8 +87,9 @@ public class TCliente implements Convertable<TCliente> {
 
 	@Override
 	public Object getColumnValue(int columnIndex) {
-		// TODO Auto-generated method stub
-		return null;
+		switch (columnIndex) {
+		default: return this.nombre;
+		}
 	}
 
 	@Override

@@ -55,10 +55,10 @@ private JButton mostrar, cancelar;
 			ArrayList<TCliente> cln = new ArrayList<>();
 			
 			for(TCliente tCliente : cls) {
-				if (tCliente.getTipo() == "VIP") {
+				if (tCliente.getTipo().equals("VIP")) {
 					clv.add((TClienteVIP)tCliente);
 				}
-				else if (tCliente.getTipo() == "Normal") {
+				else if (tCliente.getTipo().equals("Normal")) {
 					cln.add((TClienteNormal)tCliente);
 				}
 			}

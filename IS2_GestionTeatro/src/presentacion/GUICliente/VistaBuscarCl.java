@@ -72,12 +72,12 @@ public class VistaBuscarCl extends VistaDefault implements IGUI {
 	public void actualizar(Evento evento, Object datos) {
 		if(evento == Evento.RES_OK) {
 			TCliente cliente = (TCliente)datos;
-			if (cliente.getTipo() == "VIP") {
+			if (cliente.getTipo().equals("VIP")) {
 				ArrayList<TCliente> cl = new ArrayList<TCliente>();
 				cl.add((TCliente)datos);
 				new TablaDefault<TCliente>("Cliente", new ArrayList<>(Collections.singletonList(Messages.colNomsClienteVIP)),new ArrayList<>(Collections.singletonList(cl)), false).setVisible(true);
 			}
-			else if (cliente.getTipo() == "Normal") {
+			else if (cliente.getTipo().equals("Normal")) {
 				ArrayList<TCliente> cl = new ArrayList<TCliente>();
 				cl.add((TCliente)datos);
 				new TablaDefault<TCliente>("Cliente", new ArrayList<>(Collections.singletonList(Messages.colNomsClienteVIP)),new ArrayList<>(Collections.singletonList(cl)), false).setVisible(true);

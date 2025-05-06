@@ -5,7 +5,7 @@ import java.util.Collection;
 import negocio.factura.TFactura;
 import presentacion.Convertable;
 
-public class TClienteVIP extends TCliente /*implements Convertable<TClienteVIP>*/{
+public class TClienteVIP extends TCliente implements Convertable<TCliente>{
 	private float costeMensualSuscripcion;
 	private VIPEnum nivelVIP;
 	

@@ -57,9 +57,9 @@ public class DAOClienteImp implements DAOCliente {
 		tCliente.setIdCliente(newId);
 		
 		//cliente normal
-		if (tCliente.getTipo() == "Normal") return createNormal(tCliente,bdc,newId);
+		if (tCliente.getTipo().equals("Normal")) return createNormal(tCliente,bdc,newId);
 		//cliente VIP
-		else if (tCliente.getTipo() == "VIP") return createVIP(tCliente,bdc,newId);
+		else if (tCliente.getTipo().equals("VIP")) return createVIP(tCliente,bdc,newId);
 		else return -1;
 	}
 
