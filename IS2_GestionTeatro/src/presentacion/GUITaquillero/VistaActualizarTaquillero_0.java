@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JLabel;
+import javax.swing.JSpinner;
 import javax.swing.JTextField;
 import javax.swing.SwingUtilities;
 
@@ -17,7 +18,7 @@ import presentacion.controlador.Controlador;
 public class VistaActualizarTaquillero_0 extends VistaDefault {
 
 	private JLabel l_id;
-	private JTextField id;
+	private JSpinner id;
 	private JButton aceptar, cancelar;
 	
 	public VistaActualizarTaquillero_0() {
@@ -29,7 +30,7 @@ public class VistaActualizarTaquillero_0 extends VistaDefault {
 		//iniciar componentes
 		this.setTitle("Actualizar Taquillero");
 		l_id = new JLabel("ID:");
-		id = new JTextField();
+		id = ViewUtils.integerSpinner(1, 1, Integer.MAX_VALUE, 1);
 		aceptar = new JButton("Aceptar");
 		cancelar = new JButton("Cancelar");
 		
@@ -40,15 +41,13 @@ public class VistaActualizarTaquillero_0 extends VistaDefault {
 		
 		//oyentes
 		aceptar.addActionListener((e) -> {
-			if(id.getText() != "") {
-				try {
-					int _id = Integer.parseInt(id.getText());
-					SwingUtilities.invokeLater(()-> {Controlador.getInstance().accion(Evento.ACTUALIZAR_TAQUILLERO_0, _id); });
-					VistaActualizarTaquillero_0.this.dispose();
-				} catch (NumberFormatException ex) {
-					ViewUtils.createErrorDialogMessage("El ID debe ser un número entero.");
-					VistaActualizarTaquillero_0.this.dispose();
-				}
+			try {
+				int _id = (int) id.getValue();
+				SwingUtilities.invokeLater(()-> {Controlador.getInstance().accion(Evento.ACTUALIZAR_TAQUILLERO_0, _id); });
+				VistaActualizarTaquillero_0.this.dispose();
+			} catch (NumberFormatException ex) {
+				ViewUtils.createErrorDialogMessage("El ID debe ser un número entero.");
+				VistaActualizarTaquillero_0.this.dispose();
 			}
 		});
 				

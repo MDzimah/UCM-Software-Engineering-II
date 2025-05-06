@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JLabel;
+import javax.swing.JSpinner;
 import javax.swing.JTextField;
 import javax.swing.SwingUtilities;
 
@@ -17,7 +18,7 @@ import presentacion.controlador.Controlador;
 public class VistaDespedirTaquillero extends VistaDefault {
 
 	private JLabel l_id;
-	private JTextField id;
+	private JSpinner id;
 	private JButton aceptar, cancelar;
 	
 	public VistaDespedirTaquillero() {
@@ -29,7 +30,7 @@ public class VistaDespedirTaquillero extends VistaDefault {
 		//iniciar componentes
 		this.setTitle("Baja taquillero");
 		l_id = new JLabel("Id: ");
-		id = new JTextField();
+		id = ViewUtils.integerSpinner(1, 1, Integer.MAX_VALUE, 1);
 		aceptar = new JButton("Aceptar");
 		cancelar = new JButton("Cancelar");
 		
@@ -41,14 +42,12 @@ public class VistaDespedirTaquillero extends VistaDefault {
 		
 		//oyentes
 		aceptar.addActionListener((e) -> {
-			if(id.getText() != "") {
-				try {
-					int _id = Integer.parseInt(id.getText());
-					SwingUtilities.invokeLater(()-> {Controlador.getInstance().accion(Evento.BAJA_TAQUILLERO, _id); });
-					VistaDespedirTaquillero.this.dispose();
-				} catch (NumberFormatException ex) {
-					VistaDespedirTaquillero.this.dispose();
-				}
+			try {
+				int _id = (int) id.getValue();
+				SwingUtilities.invokeLater(()-> {Controlador.getInstance().accion(Evento.BAJA_TAQUILLERO, _id); });
+				VistaDespedirTaquillero.this.dispose();
+			} catch (NumberFormatException ex) {
+				VistaDespedirTaquillero.this.dispose();
 			}
 		});
 				

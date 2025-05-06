@@ -250,7 +250,6 @@ public class ControladorImp extends Controlador {
 				VistaActualizarTaquillero_1 vistaActTaq = (VistaActualizarTaquillero_1) FactoriaAbstractaPresentacion.getInstance().createVista(Evento.ACTUALIZAR_TAQUILLERO_1);
 				vistaActTaq.cargarTaquillero(tTaq);
 				vistaActTaq.setVisible(true);
-				//FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_OK, tTaq);
 			} catch (Exception e) {
 				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_KO, e);
 			}
