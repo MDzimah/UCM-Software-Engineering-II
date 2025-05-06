@@ -65,8 +65,6 @@ public class VistaAltaCl extends VistaDefault implements IGUI {
 		
 		alta.addActionListener(e -> {
 			
-			
-			VistaAltaCl.this.dispose();
 		});
 		
 		cancelar.addActionListener(e -> {
@@ -88,7 +86,12 @@ public class VistaAltaCl extends VistaDefault implements IGUI {
 	private String[] valuesTipoCliente() {
 		String[] lista = new String[TipoCliente.values().length +1];
 		lista[0] = "---";
-		System.arraycopy(TipoCliente.values(), 0, lista, 1, TipoCliente.values().length);
+		TipoCliente[] tipos = TipoCliente.values();
+		String[] tiposstring = new String[tipos.length];
+		for (int i = 0;i<tipos.length;++i) {
+			tiposstring[i] = tipos[i].toString();
+		}
+		System.arraycopy(tiposstring, 0, lista, 1, TipoCliente.values().length);
 		return lista;
 	}
 
@@ -119,6 +122,8 @@ public class VistaAltaCl extends VistaDefault implements IGUI {
 		campos.add(new Pair<>(costeMensuall, costeMensual));
 		campos.add(new Pair<>(nivelVIPl, nivelVIP));
 		super.initComps(campos, cancelar, alta);
+		super.revalidate();
+		super.repaint();
 		
 		alta.addActionListener(e -> {
 			for (ActionListener al : alta.getActionListeners()) {
@@ -145,6 +150,8 @@ public class VistaAltaCl extends VistaDefault implements IGUI {
 		campos.add(new Pair<>(tipol, tipo));
 		campos.add(new Pair<>(puntosAcuml, puntosAcum));
 		super.initComps(campos, cancelar, alta);
+		super.revalidate();
+		super.repaint();
 		
 		alta.addActionListener(e -> {
 			for (ActionListener al : alta.getActionListeners()) {
