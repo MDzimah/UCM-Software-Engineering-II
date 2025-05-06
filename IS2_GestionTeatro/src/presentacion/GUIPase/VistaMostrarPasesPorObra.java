@@ -6,6 +6,7 @@ import java.util.Collection;
 import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JLabel;
+import javax.swing.JSpinner;
 import javax.swing.JTextField;
 
 import misc.Messages;
@@ -18,27 +19,26 @@ import presentacion.VistaDefault;
 import presentacion.controlador.Controlador;
 
 public class VistaMostrarPasesPorObra extends VistaDefault {
-	private JLabel IDObraL;
-	private JTextField IDObraT;
+	private JSpinner idObra;
 	private JButton buscar;
 	private JButton cancelar;
 	
 	public VistaMostrarPasesPorObra() {
 		this.setTitle("MOSTRAR PASES POR OBRA");
-		this.IDObraL = new JLabel("Id Obra:");
-		this.IDObraT = new JTextField(20);
 		this.buscar = new JButton("Aceptar");
 		this.cancelar = new JButton("Cancelar");
+		JLabel id1 = new JLabel("Id obra:");
+		idObra = ViewUtils.integerSpinner(1, 0, Integer.MAX_VALUE, 1);
 		
 		ArrayList<Pair<JComponent, JComponent>> pairComponents = new ArrayList<>();
-		pairComponents.add(new Pair<>(IDObraL, IDObraT));
+		pairComponents.add(new Pair<>(id1, idObra));
 		
 		super.initComps(pairComponents, buscar, cancelar);
 		
 		this.setVisible(true);
 		
 		buscar.addActionListener(e->{
-			Controlador.getInstance().accion(Evento.MOSTRAR_PASES_POR_OBRA, Integer.valueOf(IDObraT.getText()));
+			Controlador.getInstance().accion(Evento.MOSTRAR_PASES_POR_OBRA, Integer.valueOf((int)idObra.getValue()));
 			dispose();
 		});
 		

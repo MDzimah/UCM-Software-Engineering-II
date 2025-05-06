@@ -16,7 +16,7 @@
             "IdObra": 2,
             "stock": 1000,
             "idPase": 1,
-            "activo": true
+            "activo": false
         },
         "3": {
             "idCompTea": 3,
@@ -53,7 +53,25 @@
             "stock": 6,
             "idPase": 6,
             "activo": true
+        },
+        "7": {
+            "idCompTea": 6,
+            "precioPase": 4,
+            "fecha": "2025-05-21T17:06:36.223",
+            "IdObra": 6,
+            "stock": 77,
+            "idPase": 7,
+            "activo": true
+        },
+        "8": {
+            "idCompTea": 2,
+            "precioPase": 3,
+            "fecha": "2025-05-18T17:07:25.406",
+            "IdObra": 2,
+            "stock": 45,
+            "idPase": 8,
+            "activo": false
         }
     },
-    "lastId": 6
+    "lastId": 8
 }
