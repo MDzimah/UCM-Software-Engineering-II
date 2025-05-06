@@ -1,11 +1,6 @@
 package presentacion.GUIFactura;
 
-import java.time.LocalDateTime;
-import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
-import java.util.Arrays;
-
-import javax.swing.*;
 
 import exceptions.BBDDReadException;
 import misc.*;
@@ -14,11 +9,9 @@ import presentacion.Evento;
 import presentacion.IGUI;
 import presentacion.ViewUtils;
 import presentacion.TablaDefault;
-import presentacion.VistaDefault;
 import presentacion.controlador.Controlador;
 
 
-@SuppressWarnings("serial")
 public class VistaMostrarFacturas implements IGUI {
 	private static boolean mostrado = false;
 	public VistaMostrarFacturas() {

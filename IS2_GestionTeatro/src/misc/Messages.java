@@ -5,8 +5,6 @@ public class Messages {
 	private static final String SHP = "Se ha %s correctamente.";
 		//Factura
 	public static final String EX_VENTA_CERRADA = Messages.SHP.formatted("cerrado la venta con id \"%s\"");
-	public static final String EX_PASE_ANYADIDO_A_VENTA = Messages.SHP.formatted("añadido al carrito el pase con id \"%s\"");
-	public static final String EX_PASE_QUITADO_DE_VENTA = Messages.SHP.formatted("quitado del carrito el pase con id \"%s\"");
 
 		//Pase
 	public static final String EX_PASE_CREADO = Messages.SHP.formatted("creado el pase");
@@ -36,9 +34,7 @@ public class Messages {
 	//Ops. fracasadas
 	private static final String NSHP = "No se ha podido %s";
 		//Factura
-	public static final String X_ANYADIR_PASE_A_VENTA = Messages.NSHP.formatted("añadir el pase al carrito.");
 	public static final String X_VENTA_CERRADA = Messages.NSHP.formatted("realizar la venta.");
-	public static final String X_QUITAR_PASE_DE_VENTA = Messages.NSHP.formatted("quitar el pase del carrito.");
 	public static final String X_BUSCAR_FACTURA = Messages.NSHP.formatted("encotrar la factura.");
 	public static final String X_MOSTRAR_FACTURAS = Messages.NSHP.formatted("mostrar las facturas.");
 	//CompTea

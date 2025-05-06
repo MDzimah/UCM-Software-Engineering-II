@@ -42,8 +42,7 @@ public abstract class ModificacionPaseEnVenta extends VistaDefault {
 				int ctdad = (int)sCtdad.getValue(); 
 				
 				TLineaFactura tLf = new TLineaFactura(idPase, ctdad);
-				this.accion(tLf);
-				dispose();
+				if(this.accion(tLf)) dispose();
 			}
 			catch(Exception ex) {
 				sCtdad.updateUI();
@@ -54,5 +53,5 @@ public abstract class ModificacionPaseEnVenta extends VistaDefault {
 		cancel.addActionListener(e->{dispose();});
 	}
 	
-	abstract void accion(TLineaFactura tLineaFactura);
+	abstract boolean accion(TLineaFactura tLineaFactura);
 }

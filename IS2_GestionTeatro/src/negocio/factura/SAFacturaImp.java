@@ -106,8 +106,10 @@ public class SAFacturaImp implements SAFactura {
 		ArrayList<TFactura> allFacs = (ArrayList<TFactura>)this.allFacturas();
 		ArrayList<TFactura> facsPorCli = new ArrayList<TFactura>();
 		
-		for (TFactura tFac : allFacs) {
-			if (tFac.getIdCliente() == idCliente) facsPorCli.add(tFac);
+		if (allFacs != null) {
+			for (TFactura tFac : allFacs) {
+				if (tFac.getIdCliente() == idCliente) facsPorCli.add(tFac);
+			}
 		}
 		
 		return facsPorCli;

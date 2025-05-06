@@ -80,6 +80,7 @@ public abstract class VistaDefault extends JFrame implements IGUI {
 		this.repaint();
 		this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		this.setLocationRelativeTo(null);
+		this.setVisible(true);
 	}
 	
 	 

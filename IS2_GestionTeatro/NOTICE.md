@@ -4,4 +4,4 @@ https://www.apache.org/licenses/LICENSE-2.0
 
 # Credit to images used
 - Theater main window icon (inspired) (https://www.flaticon.com/authors/superarticons)
-- Ticket (https://www.flaticon.com/authors/freepik)
+- Shopping cart (https://www.flaticon.com/authors/redempticon)
