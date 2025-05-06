@@ -182,8 +182,9 @@ public class TablaDefault<T extends Convertable<T>> extends JFrame {
 			        }
 			        table.setPreferredScrollableViewportSize(table.getPreferredSize());
 		        }
+        		++tableInd;
         	}
-        	++tableInd;
+        	 this.add(tablesPanel, BorderLayout.CENTER);
         }
         
         if (this.editable) {
