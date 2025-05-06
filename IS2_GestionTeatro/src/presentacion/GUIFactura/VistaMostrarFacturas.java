@@ -30,7 +30,6 @@ public class VistaMostrarFacturas implements IGUI {
 	
 	@Override
 	public void actualizar(Evento evento, Object datos) {
-		evento = Evento.RES_OK;
 		if (evento == Evento.RES_OK) {
 			
 			ArrayList<String[]> colNames = new ArrayList<>();
