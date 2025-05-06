@@ -1,5 +1,7 @@
 package presentacion.GUIFactura;
 
+import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 
 import javax.swing.*;
@@ -8,6 +10,7 @@ import exceptions.BBDDReadException;
 import misc.*;
 import negocio.factura.TFactura;
 import presentacion.Evento;
+import presentacion.IGUI;
 import presentacion.ViewUtils;
 import presentacion.TablaDefault;
 import presentacion.VistaDefault;
@@ -15,30 +18,20 @@ import presentacion.controlador.Controlador;
 
 
 @SuppressWarnings("serial")
-public class VistaMostrarFacturas extends VistaDefault {
-	private JButton mostrar;
-	private JButton cancel;
-	
+public class VistaMostrarFacturas extends TablaDefault<TFactura> implements IGUI {
+	private static boolean mostrado = false;
 	public VistaMostrarFacturas() {
-		this.setTitle("Mostrar facturas");
-		this.mostrar = new JButton("Mostrar");
-		this.cancel = new JButton("Cancelar");
-		this.initComps(null, mostrar, cancel);
-		
-		mostrar.addActionListener(e->{
-			SwingUtilities.invokeLater(()->{Controlador.getInstance().accion(Evento.MOSTRAR_FACTURAS, null);});
-			dispose();
-		});
-		
-		cancel.addActionListener(e->{dispose();});
-		
-		this.setVisible(true);
+		if (mostrado == false) {
+			mostrado = true;
+			Controlador.getInstance().accion(Evento.MOSTRAR_FACTURAS, null);
+		}
 	}
 	
 	@Override
 	public void actualizar(Evento evento, Object datos) {
+		evento = Evento.RES_OK;
 		if (evento == Evento.RES_OK) {
-			new TablaDefault<TFactura>("FACTURAS", Messages.colNomsFactura, (ArrayList<TFactura>)datos, false).setVisible(true);;
+			this.createTable("FACTURAS", Messages.colNomsFactura, (ArrayList<TFactura>)datos, false);
 		}
 		else if(evento == Evento.RES_KO) {
 			String error;
@@ -46,5 +39,6 @@ public class VistaMostrarFacturas extends VistaDefault {
 			else error = Messages.NO_HAY_DATOS;
 			ViewUtils.createErrorDialogMessage(Messages.X_MOSTRAR_FACTURAS + ' ' + Messages.MOTIVO.formatted(error));
 		}
+		mostrado = false;
 	}
 }
