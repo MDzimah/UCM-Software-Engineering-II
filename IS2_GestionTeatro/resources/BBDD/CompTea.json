@@ -20,5 +20,26 @@
         "coste": 1,
         "activo": false
     },
-    "lastId": 3
+    "4": {
+        "idCompTea": 4,
+        "compania teatral": "Hola",
+        "direccion": "nose",
+        "coste": 1,
+        "activo": false
+    },
+    "5": {
+        "idCompTea": 5,
+        "compania teatral": "jaime",
+        "direccion": "no se",
+        "coste": 20,
+        "activo": false
+    },
+    "6": {
+        "idCompTea": 6,
+        "compania teatral": "hola",
+        "direccion": "lolo",
+        "coste": 1,
+        "activo": true
+    },
+    "lastId": 6
 }

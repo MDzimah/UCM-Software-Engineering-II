@@ -38,12 +38,11 @@ public class VistaActualizarCompania1 implements IGUI{
 		String[] nomCols = Messages.colNomsCompTea;
 		ArrayList<String[]>listaColumnas= new ArrayList<String[]>();
 		listaColumnas.add(nomCols);
-		TablaDefault<TCompTea> tabla = new TablaDefault("BUSCAR PASE", listaColumnas, t, true);
+		TablaDefault<TCompTea> tabla = new TablaDefault<TCompTea>("BUSCAR COMPAÑIA TEATRAL", listaColumnas, t, true);
 		tabla.getOkButton().addActionListener(e -> {
 
 			ArrayList<TCompTea> listTCompTea= tabla.getEdiciones();
 			TCompTea tCompTea2=listTCompTea.get(0);
-
 			Controlador.getInstance().accion(Evento.ACTUALIZAR1_COMPANIA_TEATRAL, tCompTea2);
 		});
 	}

@@ -436,7 +436,7 @@ public class ControladorImp extends Controlador {
 				TCompTea newComp= saCompTea.read(id);
 				if(newComp!=null) {
 				/*FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_OK, newComp);*///TODO no se si hay que mostrar aqui
-					VistaActualizarCompania1 vista= (VistaActualizarCompania1) FactoriaAbstractaPresentacion.getInstance().createVista(Evento.ACTUALIZAR_OBRA_1);
+					VistaActualizarCompania1 vista= (VistaActualizarCompania1) FactoriaAbstractaPresentacion.getInstance().createVista(Evento.ACTUALIZAR1_COMPANIA_TEATRAL);
 					vista.cargar(newComp);
 				}
 				else {
@@ -497,7 +497,7 @@ public class ControladorImp extends Controlador {
 				}
 				}
 			catch(Exception e) {
-				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_KO, "Error: " +e.getMessage());
+				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_KO, e);
 			}
 			break;
 		}

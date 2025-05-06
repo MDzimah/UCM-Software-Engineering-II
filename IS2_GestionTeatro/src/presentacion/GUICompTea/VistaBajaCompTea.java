@@ -9,6 +9,7 @@ import javax.swing.JTextField;
 import javax.swing.SwingUtilities;
 
 import integracion.factoria.FactoriaAbstractaIntegracion;
+import misc.Messages;
 import misc.Pair;
 import presentacion.Evento;
 import presentacion.IGUI;
@@ -68,7 +69,14 @@ public class VistaBajaCompTea extends VistaDefault implements IGUI{
 	
 	@Override
 	public void actualizar(Evento evento, Object datos) {
-		// TODO Auto-generated method stub
+		if(evento==Evento.RES_OK) {
+			ViewUtils.createDialogMessage(Messages.COMPANIA_ELIMINADA + '\n' + " Id: "+ (int)datos);
+
+		}
+		else if(evento==Evento.RES_KO) {
+			ViewUtils.createErrorDialogMessage(Messages.X_ELIMINAR_COMPANIA+ '\n' + Messages.ERROR.formatted(((Exception) datos).getMessage()));
+		}
+		
 		
 	}
 

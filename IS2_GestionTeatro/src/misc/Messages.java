@@ -21,11 +21,11 @@ public class Messages {
 	public static final String EX_MIEMBRO_DESPEDIDO = Messages.SHP.formatted("despedido al miembro");
 	public static final String EX_MIEMBROS_LISTADOS = Messages.SHP.formatted("listado los miembros");
        //Compania Teatral
-	public static final String COMPANIA_ACTUALIZADA = Messages.SHP.formatted("compania actualizada");
-	public static final String COMPANIA_ENCONTRADA = Messages.SHP.formatted("compania encontrada");
-	public static final String COMPANIA_CREADA = Messages.SHP.formatted("compania creada");
-	public static final String COMPANIA_BUSCADA = Messages.SHP.formatted("compania buscada");
-	public static final String COMPANIA_MOSTRADA = Messages.SHP.formatted("compania mostrada");
+	public static final String COMPANIA_ACTUALIZADA = Messages.SHP.formatted("actualizar compania");
+	public static final String COMPANIA_ENCONTRADA = Messages.SHP.formatted("encontrar compania");
+	public static final String COMPANIA_CREADA = Messages.SHP.formatted("crear compania");
+	public static final String COMPANIA_ELIMINADA = Messages.SHP.formatted("borrar compania");
+	public static final String COMPANIA_MOSTRADA = Messages.SHP.formatted("mostrar compania");
 		
 	//Obra
 	public static final String EX_OBRA_ANYADIDA_CORRECT = Messages.SHP.formatted("registrado la obra ");
