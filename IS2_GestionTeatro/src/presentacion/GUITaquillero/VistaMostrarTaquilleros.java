@@ -34,7 +34,7 @@ public class VistaMostrarTaquilleros implements IGUI {
 		} else if (evento == Evento.RES_KO) {
 			String error = (datos instanceof BBDDReadException) ? ((BBDDReadException) datos).getMessage() : Messages.NO_HAY_DATOS;
 			ViewUtils.createErrorDialogMessage("No se han podido mostrar los taquilleros.\n" + Messages.MOTIVO.formatted(error));
-			//El mensjae va en Messages
+			//El mensaje va en Messages
 		}
 		mostrado = false;
 	}

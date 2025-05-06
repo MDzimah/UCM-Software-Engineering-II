@@ -11,6 +11,6 @@ public interface SATaquillero {
 	public int update(TTaquillero emp) throws BBDDReadException, BBDDWriteException;
 	public int delete (int id) throws BBDDReadException, BBDDWriteException;
 	public Collection<TTaquillero> readAll() throws BBDDReadException;
-	public TTaquillero readByDNI(String DNI) throws BBDDReadException;
+	public TTaquillero readByDNI(String dni) throws BBDDReadException;
 	public int aumentarVenta(int id) throws BBDDReadException, BBDDWriteException;
 }

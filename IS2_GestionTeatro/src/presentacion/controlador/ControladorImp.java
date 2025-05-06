@@ -218,6 +218,18 @@ public class ControladorImp extends Controlador {
 			
 			break;
 		}
+		case BUSCAR_DNI_TAQUILLERO: {
+			try {
+				SATaquillero saTaq = FactoriaAbstractaNegocio.getInstance().crearSATaquillero();
+				String dniBuscar = (String) datos;
+				TTaquillero tTaq = saTaq.readByDNI(dniBuscar);
+				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_OK, tTaq);
+			} catch (Exception e) {
+				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_KO, e);
+			}
+			
+			break;
+		}
 		case MOSTRAR_TAQUILLEROS: {
 			try {
 				SATaquillero saTaq = FactoriaAbstractaNegocio.getInstance().crearSATaquillero();

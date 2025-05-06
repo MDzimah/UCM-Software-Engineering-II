@@ -373,19 +373,15 @@ public class MainWindow extends JFrame {
                 JDialog subTaquillero = new JDialog(MainWindow.this, "Subsistema Taquillero", true);
                 subTaquillero.setLayout(new FlowLayout());
                 
-                JButton actualizar, alta, baja, buscar, mostrar;
+                JButton alta, baja, actualizar, buscar, buscarDNI, mostrar;
                 
-                actualizar = new JButton("Actualizar taquillero");
             	alta = new JButton("Alta taquillero");
             	baja = new JButton("Baja taquillero");
+            	actualizar = new JButton("Actualizar taquillero");
         		buscar = new JButton("Buscar taquillero");
+        		buscarDNI = new JButton("Buscar taquillero por DNI");
         		mostrar = new JButton("Mostrar taquilleros");
                 
-        		//ACTUALIZAR TAQUILLERO
-        		actualizar.addActionListener((ev)->{
-        			//FactoriaAbstractaPresentacion.getInstance().createVista(Evento.ACTUALIZAR_TAQUILLERO);
-        		});
-        		
         		//ALTA TAQUILLERO
         		alta.addActionListener((ev)->{
         			FactoriaAbstractaPresentacion.getInstance().createVista(Evento.ALTA_TAQUILLERO);
@@ -394,22 +390,34 @@ public class MainWindow extends JFrame {
         		//BAJA TAQUILLERO
         		baja.addActionListener((ev)->{
         			FactoriaAbstractaPresentacion.getInstance().createVista(Evento.BAJA_TAQUILLERO);
-        		});		
+        		});	
         		
-        		//BUSCAR TAQUILLERO
+        		//ACTUALIZAR TAQUILLERO
+        		actualizar.addActionListener((ev)->{
+        			FactoriaAbstractaPresentacion.getInstance().createVista(Evento.ACTUALIZAR_TAQUILLERO_0);
+        		});
+        		
+        		//BUSCAR TAQUILLERO POR ID
         		buscar.addActionListener((ev)->{
         			FactoriaAbstractaPresentacion.getInstance().createVista(Evento.BUSCAR_TAQUILLERO);
         		});	
+        		
+        		//BUSCAR TAQUILLERO POR DNI
+        		buscarDNI.addActionListener((ev)->{
+        			FactoriaAbstractaPresentacion.getInstance().createVista(Evento.BUSCAR_DNI_TAQUILLERO);
+        		});
         		
         		//MOSTRAR TAQUILLEROS
         		mostrar.addActionListener((ev)->{
         			FactoriaAbstractaPresentacion.getInstance().createVista(Evento.MOSTRAR_TAQUILLEROS);
         		});
         		
-        		subTaquillero.add(actualizar);        		
+        		
         		subTaquillero.add(alta);
         		subTaquillero.add(baja);
+        		subTaquillero.add(actualizar);
         		subTaquillero.add(buscar);
+        		subTaquillero.add(buscarDNI);
         		subTaquillero.add(mostrar);
         		subTaquillero.setModal(false);  
         		subTaquillero.pack();

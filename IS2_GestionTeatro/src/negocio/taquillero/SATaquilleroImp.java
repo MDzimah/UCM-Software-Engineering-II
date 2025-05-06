@@ -12,11 +12,18 @@ public class SATaquilleroImp implements SATaquillero {
 
 	/**
 	 * Crea un nuevo taquillero a partir del transfer
+	 * @return devuelve el id si se crea correctamente, -1 en caso contrario
 	 */
 	@Override
 	public int create(TTaquillero tTaquillero) throws BBDDReadException, BBDDWriteException {
 		DAOTaquillero daoTaquillero = FactoriaAbstractaIntegracion.getInstance().crearDAOTaquillero();
-		return daoTaquillero.create(tTaquillero);
+		
+		TTaquillero tTaqExistente = readByDNI(tTaquillero.getDNI()); //busca un taquillero por su DNI
+		if(tTaqExistente == null) { //nuevo taquillero
+			return daoTaquillero.create(tTaquillero);
+		} else {
+			return -1;
+		}
 	}
 
 	/**
@@ -56,24 +63,14 @@ public class SATaquilleroImp implements SATaquillero {
 	}
 
 	/**
-	 * Lee un taquillero a partir del DNI del taquillero
+	 * Lee un taquillero a partir del dni
 	 */
 	@Override
-	public TTaquillero readByDNI(String DNI) throws BBDDReadException {
+	public TTaquillero readByDNI(String dni) throws BBDDReadException {
 		DAOTaquillero daoTaquillero = FactoriaAbstractaIntegracion.getInstance().crearDAOTaquillero();
-		Collection<TTaquillero> listaTaqs = daoTaquillero.readAll();
-		
-		Iterator<TTaquillero> it  = listaTaqs.iterator();
-		boolean encontrado = false;
-		TTaquillero tTaq = null;
-		while(it.hasNext() && !encontrado) {
-			tTaq = it.next();
-			if(tTaq.getDNI() == DNI) encontrado = true; 
-		}
-		if(encontrado) return tTaq;
-		else return null;
+		return daoTaquillero.readByDNI(dni);
 	}
-
+	
 	/**
 	 * Aumenta la venta del taquillero en 1
 	 */
@@ -85,5 +82,27 @@ public class SATaquilleroImp implements SATaquillero {
 		tTaq.setNumVentas(nuevoNumVentas);
 		return daoTaquillero.update(tTaq);
 	}
+	
+	/**
+	 * Lee un taquillero a partir del DNI del taquillero
+	 *//*
+	@Override
+	public TTaquillero readByDNI(String DNI) throws BBDDReadException {
+		DAOTaquillero daoTaquillero = FactoriaAbstractaIntegracion.getInstance().crearDAOTaquillero();
+		Collection<TTaquillero> listaTaqs = daoTaquillero.readAll();
+		
+		if(listaTaqs != null) {
+			Iterator<TTaquillero> it  = listaTaqs.iterator();
+			boolean encontrado = false;
+			TTaquillero tTaq = null;
+			while(it.hasNext() && !encontrado) {
+				tTaq = it.next();
+				if(tTaq.getDNI() == DNI) encontrado = true; 
+			}
+			if(encontrado) return tTaq;
+			else return null;
+		}
+		return null;
+	}*/
 
 }
