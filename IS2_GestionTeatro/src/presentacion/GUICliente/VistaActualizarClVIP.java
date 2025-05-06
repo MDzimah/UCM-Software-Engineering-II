@@ -66,7 +66,8 @@ public class VistaActualizarClVIP extends VistaDefault implements IGUI {
 		
 		alta.addActionListener(e -> {
 			String dni = DNI.getText(), nom = nombre.getText(), ap = apellido.getText(), cuenta = cuentaBancaria.getText(), nivel = nivelVIP.getValue().toString();
-			float coste = (float) costeMensual.getValue();
+			Long cost = (Long) costeMensual.getValue();
+			float coste = cost.floatValue();
 			TClienteVIP tCliente = new TClienteVIP(-1,dni,nom,ap,true,cuenta,VIPEnum.valueOf(nivel),coste);
 			SwingUtilities.invokeLater(()->{Controlador.getInstance().accion(Evento.ACTUALIZAR_CLIENTE_VIP, tCliente);});
 			
