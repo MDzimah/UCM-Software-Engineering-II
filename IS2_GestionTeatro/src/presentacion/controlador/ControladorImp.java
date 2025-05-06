@@ -339,14 +339,16 @@ public class ControladorImp extends Controlador {
 		//Obra
 		case ALTA_OBRA:{
 			try{
-				SAObra saObra = FactoriaAbstractaNegocio.getInstance().crearSAObra();
+				/*SAObra saObra = FactoriaAbstractaNegocio.getInstance().crearSAObra();
 				int val = saObra.create((TObra)datos);
 				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_OK, val);
+				*/
 			}
 			catch(Exception e) {
 				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_KO, e);
 			}
 			break;
+			
 		}
 		case BAJA_OBRA:{
 			try {
@@ -467,7 +469,7 @@ public class ControladorImp extends Controlador {
 		{
 			try {
 				SACompTea saCompTea=FactoriaAbstractaNegocio.getInstance().crearSACompTea();
-				Integer id =(Integer)datos;
+				int id =(int)datos;
 				TCompTea newComp= saCompTea.read(id);
 				if(newComp!= null) {
 				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_OK, newComp);

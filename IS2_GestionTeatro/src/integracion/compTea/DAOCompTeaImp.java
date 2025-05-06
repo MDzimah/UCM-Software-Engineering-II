@@ -67,7 +67,7 @@ public class DAOCompTeaImp implements DAOCompTea {
 		JSONObject bdCompania = OpsBBDD.read(Messages.BDCT);
 		JSONObject compania = bdCompania.getJSONObject(Integer.toString(id));
         
-		if (compania.has(Integer.toString(id))) {
+		if (compania.getBoolean(Messages.KEY_act)) {
 	        compania.put(Messages.KEY_act, false);
 	        OpsBBDD.write(bdCompania, Messages.BDCT);
 	        return id;
@@ -83,8 +83,10 @@ public class DAOCompTeaImp implements DAOCompTea {
 		JSONObject bdCompania= OpsBBDD.read(Messages.BDCT);
 		if (bdCompania.has(Integer.toString(id))) {
 			JSONObject compania = bdCompania.getJSONObject(Integer.toString(id));
+			if(compania.getBoolean(Messages.KEY_act)) {
 			tCompTea = new TCompTea(id, compania.getString(Messages.KEY_compTea), compania.getString(Messages.KEY_direccion),compania.getBoolean(Messages.KEY_act), compania.getFloat(Messages.KEY_coste));
-		}
+			}
+			}
 		}
 		
 		return tCompTea;
@@ -109,6 +111,7 @@ public class DAOCompTeaImp implements DAOCompTea {
 
 			
 			}
+			if(companias.isEmpty())return null;
 			return companias;
 		}
 		else return null;

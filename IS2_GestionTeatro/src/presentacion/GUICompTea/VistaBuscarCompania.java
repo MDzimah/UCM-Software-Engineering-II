@@ -43,7 +43,7 @@ public class VistaBuscarCompania extends VistaDefault implements IGUI{
 		this.setTitle("Buscar Compañia Teatral");//no se si dan problemas la verdad
 		JButton anyadir= new JButton("Buscar");
 		JButton cancelar = new JButton("Cancelar");
-		JLabel pregunta= new JLabel("Nombre de la compania para buscar");
+		JLabel pregunta= new JLabel("id de la compania para buscar");
 		
 		JSpinner IdField = ViewUtils.integerSpinner(0, 0, Integer.MAX_VALUE, 1);
 		
@@ -57,7 +57,7 @@ public class VistaBuscarCompania extends VistaDefault implements IGUI{
 			try {
 				IdField.commitEdit();
 				int id = (int)IdField.getValue();
-				SwingUtilities.invokeLater(()->{Controlador.getInstance().accion(Evento.BUSCAR_COMPANIA_TEATRAL, IdField);});
+				SwingUtilities.invokeLater(()->{Controlador.getInstance().accion(Evento.BUSCAR_COMPANIA_TEATRAL, id);});
 				dispose();
 			}
 			catch(Exception ex) {
@@ -91,7 +91,7 @@ public class VistaBuscarCompania extends VistaDefault implements IGUI{
 		}
 		else if (evento == Evento.RES_KO) {
 			//ERRORES VAN EN MESSAGES Y NO SE ENVÍAN STRING A TRAVÉS EN OBJECT
-			ViewUtils.createErrorDialogMessage("NO EXISTEN LAS COMPAÑÍAS:.\n" + (String) datos);
+			ViewUtils.createErrorDialogMessage("NO EXISTEN LAS COMPAÑÍAS:.\n" + ((Exception)datos).getMessage());
 		}
 	}
 

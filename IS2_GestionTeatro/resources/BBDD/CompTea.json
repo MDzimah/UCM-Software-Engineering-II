@@ -4,7 +4,21 @@
         "compania teatral": "jaja",
         "direccion": "hola",
         "coste": 2,
-        "activo": true
+        "activo": false
     },
-    "lastId": 1
+    "2": {
+        "idCompTea": 2,
+        "compania teatral": "dios santo",
+        "direccion": "creo que funciona",
+        "coste": 45,
+        "activo": false
+    },
+    "3": {
+        "idCompTea": 3,
+        "compania teatral": "1",
+        "direccion": "2",
+        "coste": 1,
+        "activo": false
+    },
+    "lastId": 3
 }

@@ -34,7 +34,7 @@ public class VistaBajaCompTea extends VistaDefault implements IGUI{
 	private void initGUI() {
 		
 		this.setTitle("Baja Compañia Teatral");//no se si dan problemas la verdad
-		JButton anyadir= new JButton("Añadir");
+		JButton anyadir= new JButton("Aceptar");
 		JButton cancelar = new JButton("Cancelar");
 		JLabel pregunta= new JLabel("Id de la compania para borrar");
 		
