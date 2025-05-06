@@ -9,6 +9,7 @@ import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JSpinner;
 import javax.swing.JTextField;
 
 import misc.Messages;
@@ -24,27 +25,26 @@ import presentacion.controlador.Controlador;
 import presentacion.factoria.FactoriaAbstractaPresentacion;
 
 public class VistaBuscarPase extends VistaDefault {
-	private JLabel IDPaseL;
-	private JTextField IDPaseT;
+	private JSpinner id;
 	private JButton buscar;
 	private JButton cancelar;
 	
 	public VistaBuscarPase() {
 		this.setTitle("BUSCAR PASE");
-		this.IDPaseL = new JLabel("Id Pase:");
-		this.IDPaseT = new JTextField(20);
 		this.buscar = new JButton("Aceptar");
 		this.cancelar = new JButton("Cancelar");
+		JLabel id1 = new JLabel("Id");
+		id = ViewUtils.integerSpinner(1, 0, Integer.MAX_VALUE, 1);
 		
 		ArrayList<Pair<JComponent, JComponent>> pairComponents = new ArrayList<>();
-		pairComponents.add(new Pair<>(IDPaseL, IDPaseT));
+		pairComponents.add(new Pair<>(id1, id));
 		
 		super.initComps(pairComponents, buscar, cancelar);
 		
 		this.setVisible(true);
 		
 		buscar.addActionListener(e->{
-			Controlador.getInstance().accion(Evento.BUSCAR_PASE, Integer.valueOf(IDPaseT.getText()));
+			Controlador.getInstance().accion(Evento.BUSCAR_PASE, Integer.valueOf((int)id.getValue()));
 			dispose();
 		});
 		

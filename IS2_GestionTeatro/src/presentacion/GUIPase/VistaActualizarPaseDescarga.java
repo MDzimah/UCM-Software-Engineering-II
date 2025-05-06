@@ -27,7 +27,7 @@ public class VistaActualizarPaseDescarga implements IGUI {
 		TablaDefault<TPase> tabla = new TablaDefault<TPase>("PASES", colNames, data, true);
 		tabla.setVisible(true);
 		tabla.getOkButton().addActionListener(e -> {
-			TPase tPaseNuevo = (TPase) (tabla.getEdicion()).get(0);
+			TPase tPaseNuevo = (TPase) (tabla.getEdiciones()).get(0);
 			Controlador.getInstance().accion(Evento.ACTUALIZAR_PASE_DESCARGA, tPaseNuevo);
 			tabla.setVisible(false);
 		});

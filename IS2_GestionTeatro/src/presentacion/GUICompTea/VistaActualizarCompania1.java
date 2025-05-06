@@ -40,8 +40,12 @@ public class VistaActualizarCompania1 implements IGUI{
 		listaColumnas.add(nomCols);
 		TablaDefault<TCompTea> tabla = new TablaDefault("BUSCAR PASE", listaColumnas, t, true);
 		tabla.getOkButton().addActionListener(e -> {
+<<<<<<< HEAD
 			ArrayList<TCompTea> listTCompTea= tabla.getEdicion();
 			TCompTea tCompTea2=listTCompTea.get(0);
+=======
+			TCompTea tCompTea2 = tabla.getEdiciones();
+>>>>>>> branch 'main' of https://github.com/MDzimah/UCM-Software-Engineering-II.git
 			Controlador.getInstance().accion(Evento.ACTUALIZAR1_COMPANIA_TEATRAL, tCompTea2);
 		});
 	}
