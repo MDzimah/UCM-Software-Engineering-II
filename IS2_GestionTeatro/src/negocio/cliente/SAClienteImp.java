@@ -18,7 +18,7 @@ public class SAClienteImp implements SACliente {
 	public int create(TCliente cl) throws BBDDReadException, BBDDWriteException {
 		DAOCliente dao = FactoriaAbstractaIntegracion.getInstance().crearDAOCliente();
 		//no se si excepcion
-		if (dao.read(cl.getIdCliente()) == null) return -1;
+		if (dao.read(cl.getIdCliente()) != null) return -1;
 		return dao.create(cl);
 	}
 

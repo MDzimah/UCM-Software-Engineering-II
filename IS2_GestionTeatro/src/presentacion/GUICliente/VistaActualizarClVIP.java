@@ -29,6 +29,7 @@ public class VistaActualizarClVIP extends VistaDefault implements IGUI {
 	private JLabel DNIl, nombrel, apellidol, cuentaBancarial, nivelVIPl, costeMensuall;
 	private JSpinner nivelVIP;
 	private JButton alta, cancelar;
+	private int id;
 	
 	public VistaActualizarClVIP() {
 		initGUI();
@@ -65,9 +66,16 @@ public class VistaActualizarClVIP extends VistaDefault implements IGUI {
 		super.initComps(campos, alta, cancelar);
 		
 		alta.addActionListener(e -> {
+			
 			String dni = DNI.getText(), nom = nombre.getText(), ap = apellido.getText(), cuenta = cuentaBancaria.getText(), nivel = nivelVIP.getValue().toString();
-			float coste = (float) costeMensual.getValue();
-			TClienteVIP tCliente = new TClienteVIP(-1,dni,nom,ap,true,cuenta,VIPEnum.valueOf(nivel),coste);
+			float coste = 0;
+			try {
+				Long cost = (Long) costeMensual.getValue();
+				coste = cost.floatValue();
+			}
+			catch (ClassCastException ex) {}
+			
+			TClienteVIP tCliente = new TClienteVIP(id,dni,nom,ap,true,cuenta,VIPEnum.valueOf(nivel),coste);
 			SwingUtilities.invokeLater(()->{Controlador.getInstance().accion(Evento.ACTUALIZAR_CLIENTE_VIP, tCliente);});
 			
 			VistaActualizarClVIP.this.dispose();
@@ -80,7 +88,8 @@ public class VistaActualizarClVIP extends VistaDefault implements IGUI {
 		
 	}
 	
-	public void cargarCliente(TClienteVIP tCliente) {
+	public void cargarCliente(TClienteVIP tCliente, int idCl) {
+		id = idCl;
 		nombre.setText(tCliente.getNombre());
 		apellido.setText(tCliente.getApellido());
 		DNI.setText(tCliente.getDNI());

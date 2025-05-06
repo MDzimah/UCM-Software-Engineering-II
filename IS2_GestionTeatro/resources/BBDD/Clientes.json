@@ -1,0 +1,34 @@
+{
+    "lastId": 3,
+    "clientes": {
+        "1": {
+            "idCliente": 1,
+            "apellido": "hyhy",
+            "cuenta": "6789",
+            "mensualidad": 56753,
+            "nombre": "gt",
+            "nivel": "PLATINO",
+            "DNI": "44",
+            "activo": true
+        },
+        "2": {
+            "idCliente": 2,
+            "apellido": "luis",
+            "cuenta": "luiss",
+            "mensualidad": 3323,
+            "nombre": "luiss",
+            "nivel": "PLATINO",
+            "DNI": "53424",
+            "activo": true
+        },
+        "3": {
+            "idCliente": 3,
+            "apellido": "aaaa",
+            "cuenta": "32343",
+            "puntos": 1,
+            "nombre": "rrrr",
+            "DNI": "32",
+            "activo": true
+        }
+    }
+}

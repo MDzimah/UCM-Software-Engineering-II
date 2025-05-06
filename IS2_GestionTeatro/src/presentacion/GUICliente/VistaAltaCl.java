@@ -101,7 +101,7 @@ public class VistaAltaCl extends VistaDefault implements IGUI {
 			ViewUtils.createDialogMessage("Se ha añadido correctamente el cliente: " + (int)datos);
 		}
 		else if (evento == Evento.RES_KO) {
-			ViewUtils.createDialogMessage("No se ha podido añadir la obra.\nError: " +((Exception) datos).getMessage());
+			ViewUtils.createDialogMessage("No se ha podido añadir el cliente.\nError: " +((Exception) datos).getMessage());
 		}
 		
 	}
@@ -130,7 +130,8 @@ public class VistaAltaCl extends VistaDefault implements IGUI {
 			    alta.removeActionListener(al);
 			}
 			String dni = DNI.getText(), nom = nombre.getText(), ap = apellido.getText(), cuenta = cuentaBancaria.getText(), nivel = nivelVIP.getValue().toString();
-			float coste = (float) costeMensual.getValue();
+			Long cost = (Long) costeMensual.getValue();
+			float coste = cost.floatValue();
 			TClienteVIP tCliente = new TClienteVIP(-1,dni,nom,ap,true,cuenta,VIPEnum.valueOf(nivel),coste);
 			SwingUtilities.invokeLater(()->{Controlador.getInstance().accion(Evento.ALTA_CLIENTE, tCliente);});
 			VistaAltaCl.this.dispose();
