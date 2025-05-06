@@ -197,7 +197,7 @@ public class DAOClienteImp implements DAOCliente {
 		tClienteV.setNombre(clientev.getString(Messages.KEY_nombre));
 		tClienteV.setDNI(clientev.getString(Messages.KEY_DNI));
 		tClienteV.setTipo("VIP");
-		tClienteV.setNivelVIP((VIPEnum) clientev.get(Messages.KEY_nivelVIP));
+		tClienteV.setNivelVIP(VIPEnum.valueOf(clientev.getString(Messages.KEY_nivelVIP)));
 		tClienteV.setCosteMensual(clientev.getFloat(Messages.KEY_costeMensual));
 		return tClienteV;
 	}
