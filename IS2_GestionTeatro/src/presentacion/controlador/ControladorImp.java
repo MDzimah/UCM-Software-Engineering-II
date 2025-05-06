@@ -507,7 +507,7 @@ public class ControladorImp extends Controlador {
 				int id2= saCompTea.create(tCompTea);
 				if(id2!=-1) FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_OK, (int)id2);
 				else {
-					throw new Exception(Integer.toString((int)id2));
+					throw new Exception("Ya existe la Compania con ese nombre");
 				}
 			}
 			catch(Exception e) {

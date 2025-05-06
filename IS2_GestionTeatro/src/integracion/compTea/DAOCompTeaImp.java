@@ -33,7 +33,17 @@ public class DAOCompTeaImp implements DAOCompTea {
 		}
 		else {
 			bdCompania = OpsBBDD.read(Messages.BDCT);
-		}
+			Set<String> idCompanias = bdCompania.keySet();
+			for(String id: idCompanias) {
+				if(!id.equals(Messages.KEY_lastId)){//hay una clave que guarda lastid
+					JSONObject JSONcompania = bdCompania.getJSONObject(id);
+					if (JSONcompania.getString(Messages.KEY_compTea).equals(tCompTea.getNombre())) {
+						return -1;
+					}
+					}
+			}
+			}
+		    
 			int lastPos = bdCompania.getInt(Messages.KEY_lastId);
 			JSONObject nuevaCompania = new JSONObject();
 			
@@ -48,6 +58,7 @@ public class DAOCompTeaImp implements DAOCompTea {
 			OpsBBDD.write(bdCompania, Messages.BDCT);
 			
 			return lastPos+1;
+		
 	}
 
 	@Override
