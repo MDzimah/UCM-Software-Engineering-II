@@ -59,5 +59,8 @@ public class VistaActualizarCompania1 implements IGUI{
 			
 			
 		}
-		
+	}
 }
+		
+
+

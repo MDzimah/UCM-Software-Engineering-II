@@ -1,0 +1,10 @@
+{
+    "1": {
+        "idCompTea": 1,
+        "compania teatral": "jaja",
+        "direccion": "hola",
+        "coste": 2,
+        "activo": true
+    },
+    "lastId": 1
+}
