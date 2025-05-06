@@ -1,5 +1,6 @@
 package negocio.obra;
 
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.LinkedList;
 import java.util.List;
@@ -8,6 +9,7 @@ import org.json.JSONObject;
 
 import exceptions.BBDDReadException;
 import exceptions.BBDDWriteException;
+import exceptions.DuplicateElementException;
 import exceptions.UnknownObraException;
 import integracion.factoria.FactoriaAbstractaIntegracion;
 import integracion.obra.DAOObra;
@@ -19,9 +21,17 @@ import negocio.pase.SAPase;
 public class SAObraImp implements SAObra {
 
 	@Override
-	public int create(TObra o) throws BBDDReadException, BBDDWriteException {
+	public int create(TObra o) throws BBDDReadException, BBDDWriteException, DuplicateElementException {
 		DAOObra daoObra = FactoriaAbstractaIntegracion.getInstance().crearDAOObra();
-		return daoObra.create(o);
+		
+		//Se mira si esta añadiendo una obra ya existente
+		try {
+			search(new LinkedList<String>(Arrays.asList(o.getTitulo(), o.getAutor(), "")));
+		} 
+		catch (UnknownObraException e) {
+			return daoObra.create(o);
+		}
+		throw new DuplicateElementException();
 	}
 
 	@Override
@@ -91,12 +101,14 @@ public class SAObraImp implements SAObra {
 	//Metodo auxiliares
 	
 	private void busquedaLineal(String criterio, List<TObra> obras, Object clave ) {
-		int i =0;
-		while(i<obras.size()) {
-			if(!obras.get(i).genericGetter(criterio).equals(clave))
-				obras.remove(i);
-			else
-				++i;
+		if(obras!=null) {
+			int i =0;
+			while(i<obras.size()) {
+				if(!obras.get(i).genericGetter(criterio).equals(clave))
+					obras.remove(i);
+				else
+					++i;
+			}
 		}
 	}
 }
