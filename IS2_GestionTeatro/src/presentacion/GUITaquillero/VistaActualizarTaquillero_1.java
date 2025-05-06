@@ -90,7 +90,7 @@ public class VistaActualizarTaquillero_1 extends VistaDefault {
 	@Override
 	public void actualizar(Evento evento, Object datos) {
 		if(evento == Evento.RES_OK) {
-			ViewUtils.createDialogMessage("Se ha actualizado correctamente el taquillero: " + ((int)datos));
+			ViewUtils.createDialogMessage("Se ha actualizado correctamente el taquillero: " + ((int) datos));
 		} else if(evento == Evento.RES_KO) {
 			ViewUtils.createErrorDialogMessage("No se ha podido actualizar el taquillero.\n" + "Error: " +((Exception) datos).getMessage());
 		}

@@ -1,7 +1,6 @@
 package presentacion.GUITaquillero;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JComponent;
@@ -10,7 +9,6 @@ import javax.swing.JSpinner;
 import javax.swing.JTextField;
 import javax.swing.SwingUtilities;
 
-import misc.Genero;
 import misc.Messages;
 import misc.Pair;
 import negocio.taquillero.TTaquillero;
@@ -20,13 +18,13 @@ import presentacion.ViewUtils;
 import presentacion.VistaDefault;
 import presentacion.controlador.Controlador;
 
-public class VistaBuscarTaquillero extends VistaDefault {
+public class VistaBuscarDNITaquillero extends VistaDefault {
 
-	private JLabel l_id;
-	private JSpinner id;
+	private JLabel l_dni;
+	private JTextField dni;
 	private JButton aceptar, cancelar;
 	
-	public VistaBuscarTaquillero() {
+	public VistaBuscarDNITaquillero() {
 		initGUI();
 		this.setVisible(true);
 	}
@@ -34,31 +32,25 @@ public class VistaBuscarTaquillero extends VistaDefault {
 	private void initGUI() {
 		//iniciar componentes
 		this.setTitle("Buscar Taquillero");
-		l_id = new JLabel("Id:");
-		id = ViewUtils.integerSpinner(1, 1, Integer.MAX_VALUE, 1);
+		l_dni = new JLabel("DNI:");
+		dni = new JTextField();
 		aceptar = new JButton("Aceptar");
 		cancelar = new JButton("Cancelar");
 		
 		//lista de parejas para initComps de VistaDefault
 		ArrayList<Pair<JComponent, JComponent>> componentes = new ArrayList<>();
-		componentes.add(new Pair<>(l_id, id));
+		componentes.add(new Pair<>(l_dni, dni));
 		super.initComps(componentes, aceptar, cancelar);
 		
 		//oyentes
 		aceptar.addActionListener((e) -> {
-			try {
-				int _id = (int) id.getValue();
-				SwingUtilities.invokeLater(()-> {Controlador.getInstance().accion(Evento.BUSCAR_TAQUILLERO, _id); });
-				VistaBuscarTaquillero.this.dispose();
-			} catch (NumberFormatException ex) {
-				//HAY PANEL DE CAMPOS INCORRECTOS
-				ViewUtils.createErrorDialogMessage("El ID debe ser un número entero.");
-				VistaBuscarTaquillero.this.dispose();
-			}
+			String _dni = dni.getText();
+			SwingUtilities.invokeLater(()-> {Controlador.getInstance().accion(Evento.BUSCAR_DNI_TAQUILLERO, _dni); });
+			VistaBuscarDNITaquillero.this.dispose();
 		});
 		
 		cancelar.addActionListener((e) -> {
-			VistaBuscarTaquillero.this.dispose();
+			VistaBuscarDNITaquillero.this.dispose();
 		});
 	}
 

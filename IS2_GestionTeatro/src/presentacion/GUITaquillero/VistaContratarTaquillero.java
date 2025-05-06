@@ -3,6 +3,7 @@ package presentacion.GUITaquillero;
 import java.util.ArrayList;
 
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JComponent;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
@@ -19,8 +20,9 @@ import presentacion.controlador.Controlador;
 public class VistaContratarTaquillero extends VistaDefault {
 
 	private JButton aceptar, cancelar;
-	private JTextField nombre, apellido, dni, sueldo, edad, genero;
+	private JTextField nombre, apellido, dni, sueldo, edad;
 	private JLabel l_nombre, l_apellido, l_DNI, l_sueldo, l_edad, l_genero;
+	private JComboBox<Genero> genero;
 	
 	public VistaContratarTaquillero() {
 		initGUI();
@@ -41,9 +43,10 @@ public class VistaContratarTaquillero extends VistaDefault {
 		dni = new JTextField();
 		sueldo = new JTextField();
 		edad = new JTextField();
-		genero = new JTextField();
+		genero = new JComboBox<>(Genero.values());
 		aceptar = new JButton("Aceptar");
 		cancelar = new JButton("Cancelar");
+		
 		
 		//lista de parejas para initComps de VistaDefault
 		ArrayList<Pair<JComponent, JComponent>> componentes = new ArrayList<>();
@@ -53,7 +56,6 @@ public class VistaContratarTaquillero extends VistaDefault {
 		componentes.add(new Pair<>(l_sueldo, sueldo));
 		componentes.add(new Pair<>(l_edad, edad));
 		componentes.add(new Pair<>(l_genero, genero));
-		
 		super.initComps(componentes, aceptar, cancelar);
 		
 		//oyentes
@@ -63,7 +65,7 @@ public class VistaContratarTaquillero extends VistaDefault {
 			String _DNI = dni.getText();
 			float _sueldo = Float.valueOf(sueldo.getText());
 			int _edad = Integer.valueOf(edad.getText());
-			Genero _genero = Genero.valueOf(genero.getText());
+			Genero _genero = (Genero) genero.getSelectedItem();
 			TTaquillero tTaq = new TTaquillero(true, _DNI, _nombre, _apellido, 0, _sueldo, _edad, _genero);
 			
 			SwingUtilities.invokeLater(()-> {Controlador.getInstance().accion(Evento.ALTA_TAQUILLERO, tTaq); });

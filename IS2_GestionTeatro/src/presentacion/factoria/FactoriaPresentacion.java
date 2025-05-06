@@ -42,8 +42,10 @@ public class FactoriaPresentacion extends FactoriaAbstractaPresentacion {
 		case ALTA_TAQUILLERO: return new VistaContratarTaquillero();
 		case BAJA_TAQUILLERO: return new VistaDespedirTaquillero();
 		case BUSCAR_TAQUILLERO: return new VistaBuscarTaquillero();
+		case BUSCAR_DNI_TAQUILLERO: return new VistaBuscarDNITaquillero();
 		case MOSTRAR_TAQUILLEROS: return new VistaMostrarTaquilleros();
-	//	case ACTUALIZAR_TAQUILLERO: return new VistaActualizarTaquillero_0();
+		case ACTUALIZAR_TAQUILLERO_0: return new VistaActualizarTaquillero_0();
+		case ACTUALIZAR_TAQUILLERO_1: return new VistaActualizarTaquillero_1();
 		
 		//Pase
 		case ALTA_PASE: return new VistaAltaPase();
