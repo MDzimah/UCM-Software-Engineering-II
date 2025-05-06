@@ -25,6 +25,7 @@ public class DAOClienteImp implements DAOCliente {
 		JSONObject clientes = (JSONObject) bdc.get(Messages.KEY_cliNorms);
 		
 		clientes.put(Integer.toString(newId), newClienteNormal((TClienteNormal) tCliente));
+		bdc.put(Messages.KEY_cliNorms, clientes);
 		OpsBBDD.write(bdc, Messages.BDCli);
 		
 		return newId;
@@ -34,6 +35,7 @@ public class DAOClienteImp implements DAOCliente {
 		JSONObject clientes = (JSONObject) bdc.get(Messages.KEY_cliVIPs);
 		
 		clientes.put(Integer.toString(newId), newClienteVIP((TClienteVIP) tCliente));
+		bdc.put(Messages.KEY_cliVIPs, clientes);
 		OpsBBDD.write(bdc, Messages.BDCli);
 		
 		return newId;
@@ -68,14 +70,14 @@ public class DAOClienteImp implements DAOCliente {
 		if (OpsBBDD.isEmpty(Messages.BDCli)) return -1;
 		JSONObject bdc = OpsBBDD.read(Messages.BDCli);
 		JSONObject clientes = (JSONObject) bdc.get(Messages.KEY_cliNorms);
-		if (clientes.get(Integer.toString(id)) != null) {
+		if (clientes.has(Integer.toString(id)) && clientes.getJSONObject(Integer.toString(id)).getBoolean(Messages.KEY_act)) {
 			JSONObject cliente = (JSONObject) clientes.get(Integer.toString(id));
 			cliente.put(Messages.KEY_act, false);
 			OpsBBDD.write(bdc, Messages.BDCli);
 			return id;
 		}
 		JSONObject clientesv = (JSONObject) bdc.get(Messages.KEY_cliVIPs);
-		if (clientesv.get(Integer.toString(id)) != null) {
+		if (clientesv.has(Integer.toString(id)) && clientesv.getJSONObject(Integer.toString(id)).getBoolean(Messages.KEY_act)) {
 			JSONObject clientev = (JSONObject) clientesv.get(Integer.toString(id));
 			clientev.put(Messages.KEY_act, false);
 			OpsBBDD.write(bdc, Messages.BDCli);
@@ -91,34 +93,19 @@ public class DAOClienteImp implements DAOCliente {
 		JSONObject bdc = OpsBBDD.read(Messages.BDCli);
 		JSONObject clientes = (JSONObject) bdc.get(Messages.KEY_cliNorms);
 		//cliente normal
-		if (clientes.get(Integer.toString(id)) != null) {
-			JSONObject cliente = (JSONObject) clientes.get(Integer.toString(id));
-			TClienteNormal tClienteN = new TClienteNormal();
-			tClienteN.setActivo(cliente.getBoolean(Messages.KEY_act));
-			tClienteN.setApellido(cliente.getString(Messages.KEY_apellido));
-			tClienteN.setCuentaBancaria(cliente.getString(Messages.KEY_cuentaBancaria));
-			tClienteN.setIdCliente(cliente.getInt(Messages.KEY_idCli));
-			tClienteN.setNombre(cliente.getString(Messages.KEY_nombre));
-			tClienteN.setDNI(cliente.getString(Messages.KEY_DNI));
-			tClienteN.setTipo("Normal");
-			tClienteN.setPuntosAcumulados(cliente.getInt(Messages.KEY_ptosAcum));
-			return tClienteN;
+		if (clientes.has(Integer.toString(id))) {
+			TCliente cln = toTClienteNormal((JSONObject) clientes.get(Integer.toString(id)));
+			if (cln.getActivo()) return cln;
+			return null;
+			
 		}
 		//cliente VIP
 		JSONObject clientesv = (JSONObject) bdc.get(Messages.KEY_cliVIPs);
-		if (clientesv.get(Integer.toString(id)) != null) {
-			JSONObject clientev = (JSONObject) clientesv.get(Integer.toString(id));
-			TClienteVIP tClienteV = new TClienteVIP();
-			tClienteV.setActivo(clientev.getBoolean(Messages.KEY_act));
-			tClienteV.setApellido(clientev.getString(Messages.KEY_apellido));
-			tClienteV.setCuentaBancaria(clientev.getString(Messages.KEY_cuentaBancaria));
-			tClienteV.setIdCliente(clientev.getInt(Messages.KEY_idCli));
-			tClienteV.setNombre(clientev.getString(Messages.KEY_nombre));
-			tClienteV.setDNI(clientev.getString(Messages.KEY_DNI));
-			tClienteV.setTipo("VIP");
-			tClienteV.setNivelVIP((VIPEnum) clientev.get(Messages.KEY_nivelVIP));
-			tClienteV.setCosteMensual(clientev.getFloat(Messages.KEY_costeMensual));
-			return tClienteV;
+		if (clientesv.has(Integer.toString(id))) {
+			TCliente clv = toTClienteVIP((JSONObject) clientesv.get(Integer.toString(id)));
+			if (clv.getActivo()) return clv;
+			return null;
+			
 		}
 		else return null;
 	}
@@ -135,10 +122,12 @@ public class DAOClienteImp implements DAOCliente {
 		Set<String> sclv = clientesv.keySet();
 		//añadimos todos los clientes
 		for (String s: scln) {//lista de clientes normales
-			clist.addLast((TCliente) clientes.get(s));
+			TCliente cln = toTClienteNormal((JSONObject) clientes.get(s));
+			if (cln.getActivo()) clist.addLast(cln);
 		}
 		for (String s: sclv) {//lista de clientes vip
-			clist.addLast((TCliente) clientesv.get(s));
+			TCliente clv = toTClienteVIP((JSONObject) clientesv.get(s));
+			if (clv.getActivo()) clist.addLast(clv);
 		}
 		return clist;
 	}
@@ -148,18 +137,28 @@ public class DAOClienteImp implements DAOCliente {
 		if (OpsBBDD.isEmpty(Messages.BDCli)) return -1;
 		JSONObject bdc = OpsBBDD.read(Messages.BDCli);
 		JSONObject clientes = (JSONObject) bdc.get(Messages.KEY_cliNorms);
-		if (clientes.get(Integer.toString(tCliente.getIdCliente())) != null) {
-			clientes.put(Integer.toString(tCliente.getIdCliente()), newClienteNormal((TClienteNormal) tCliente));
-			//bdc.put(Messages.KEY_cliNorms, clientes);
-			OpsBBDD.write(bdc, Messages.BDCli);
-			return tCliente.getIdCliente();
+		if (clientes.has(Integer.toString(tCliente.getIdCliente()))) {
+			JSONObject c = (JSONObject) clientes.getJSONObject(Integer.toString(tCliente.getIdCliente()));
+			if (c.getBoolean(Messages.KEY_act)) {
+				clientes.put(Integer.toString(tCliente.getIdCliente()), newClienteNormal((TClienteNormal) tCliente));
+				bdc.put(Messages.KEY_cliNorms, clientes);
+				OpsBBDD.write(bdc, Messages.BDCli);
+				return tCliente.getIdCliente();
+			}
+			else return -1;
+			
 		}
 		JSONObject clientesv = (JSONObject) bdc.get(Messages.KEY_cliVIPs);
-		if (clientesv.get(Integer.toString(tCliente.getIdCliente())) != null) {
-			clientes.put(Integer.toString(tCliente.getIdCliente()), newClienteVIP((TClienteVIP) tCliente));
-			//bdc.put(Messages.KEY_cliVIPs, clientesv);
-			OpsBBDD.write(bdc, Messages.BDCli);
-			return tCliente.getIdCliente();
+		if (clientesv.has(Integer.toString(tCliente.getIdCliente()))) {
+			JSONObject cv = (JSONObject) clientesv.getJSONObject(Integer.toString(tCliente.getIdCliente()));
+			if (cv.getBoolean(Messages.KEY_act)) {
+				clientes.put(Integer.toString(tCliente.getIdCliente()), newClienteVIP((TClienteVIP) tCliente));
+				bdc.put(Messages.KEY_cliVIPs, clientesv);
+				OpsBBDD.write(bdc, Messages.BDCli);
+				return tCliente.getIdCliente();
+			}
+			else return -1;
+			
 		}
 		else return -1;
 	}
@@ -187,6 +186,33 @@ public class DAOClienteImp implements DAOCliente {
 		nCliente.put(Messages.KEY_DNI, tCliente.getDNI());
 		nCliente.put(Messages.KEY_nivelVIP, tCliente.getNivelVIP());
 		return nCliente;
+	}
+	
+	private TCliente toTClienteVIP(JSONObject clientev) {
+		TClienteVIP tClienteV = new TClienteVIP();
+		tClienteV.setActivo(clientev.getBoolean(Messages.KEY_act));
+		tClienteV.setApellido(clientev.getString(Messages.KEY_apellido));
+		tClienteV.setCuentaBancaria(clientev.getString(Messages.KEY_cuentaBancaria));
+		tClienteV.setIdCliente(clientev.getInt(Messages.KEY_idCli));
+		tClienteV.setNombre(clientev.getString(Messages.KEY_nombre));
+		tClienteV.setDNI(clientev.getString(Messages.KEY_DNI));
+		tClienteV.setTipo("VIP");
+		tClienteV.setNivelVIP((VIPEnum) clientev.get(Messages.KEY_nivelVIP));
+		tClienteV.setCosteMensual(clientev.getFloat(Messages.KEY_costeMensual));
+		return tClienteV;
+	}
+	
+	private TCliente toTClienteNormal (JSONObject cliente) {
+		TClienteNormal tClienteN = new TClienteNormal();
+		tClienteN.setActivo(cliente.getBoolean(Messages.KEY_act));
+		tClienteN.setApellido(cliente.getString(Messages.KEY_apellido));
+		tClienteN.setCuentaBancaria(cliente.getString(Messages.KEY_cuentaBancaria));
+		tClienteN.setIdCliente(cliente.getInt(Messages.KEY_idCli));
+		tClienteN.setNombre(cliente.getString(Messages.KEY_nombre));
+		tClienteN.setDNI(cliente.getString(Messages.KEY_DNI));
+		tClienteN.setTipo("Normal");
+		tClienteN.setPuntosAcumulados(cliente.getInt(Messages.KEY_ptosAcum));
+		return tClienteN;
 	}
 
 }
