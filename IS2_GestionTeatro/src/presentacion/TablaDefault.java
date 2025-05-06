@@ -1,27 +1,21 @@
 package presentacion;
 
-
 import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.time.LocalDateTime;
-import java.time.temporal.ChronoUnit;
 import java.util.*;
 
 import javax.swing.*;
 import javax.swing.event.*;
 import javax.swing.table.*;
 
-import com.formdev.flatlaf.themes.FlatMacLightLaf;
-
 import misc.*;
-import negocio.factura.TFactura;
 
 
 @SuppressWarnings("serial")
 public class TablaDefault<T extends Convertable<T>> extends JFrame {
 	//Solo para los modos de actualizacion
 	private JButton aceptar; 
-	private T edicion;
+	private ArrayList<T> edicionDeCadaTabla;
 	private boolean editable;
 	
     private class DefaultTableModel extends AbstractTableModel {
@@ -132,69 +126,79 @@ public class TablaDefault<T extends Convertable<T>> extends JFrame {
     }
     */
 
-	public TablaDefault(String nombreTabla,  String[] columnNames, ArrayList<T> data, boolean CUActualizar) {
-		this.setTitle(nombreTabla);
+	public TablaDefault(String nombreVista,  String[][] columnNamesDeCadaTabla, ArrayList<ArrayList<T>> datosDeCadaTabla, boolean CUActualizar) {
+		this.setTitle(nombreVista);
         this.setLayout(new BorderLayout());
         ViewUtils.setAppIcon(this);
         
         this.editable = CUActualizar;
 
-        if (data != null && !data.isEmpty()) {
-        	DefaultTableModel model = new DefaultTableModel(columnNames, data);
-        	JTable table = new JTable(model);
-	        table.setFont(ViewUtils.fontTablaDefaultCuerpo());
-	        
-	        //Cambiar apariencia del header de la tabla
-	        	//Font
-	        JTableHeader header = table.getTableHeader();
-	        header.setFont(ViewUtils.fontTablaDefaultCabecera());
-	        header.setReorderingAllowed(false);
-	        
-	        	//Header
-	        TableColumnModel cm = table.getColumnModel();
-	        
-	        Graphics2D temp = new BufferedImage(1, 1, BufferedImage.TYPE_INT_ARGB).createGraphics();
-	        temp.setFont(ViewUtils.fontTablaDefaultCabecera());
-	        
-	        FontMetrics metrics = temp.getFontMetrics();
-	        for (int i = 0; i < columnNames.length; ++i) {
-	            int headerWidth = metrics.stringWidth(columnNames[i]) + 120;
-	            cm.getColumn(i).setPreferredWidth(headerWidth);
-	        }
-	        temp.dispose();
-
-	        this.add(new JScrollPane(table), BorderLayout.CENTER);
-	        
-	        //Solo se edita la tabla en los CU de actualizar, luego consultar tiene que ser true también
-	        if (this.editable) {
-	        	//En el modo consultar la tabla tiene una única fila
-	        	if (data.size() > 1) throw new IllegalArgumentException(Messages.EXC_EVENTO_TABLA);  
-	        	
-	        	this.aceptar = new JButton("Aceptar");
-	        	this.add(this.aceptar, BorderLayout.SOUTH);
-	        	
-	        	//Lo inicializo a lo que vale el array de datos en su única posición no nula
-	        	this.edicion = data.get(0);
-	        	
-		        table.getModel().addTableModelListener(new TableModelListener() {
-		            @Override
-		            public void tableChanged(TableModelEvent e) {
-		                if (e.getType() == TableModelEvent.UPDATE) edicion = data.get(0);
-		            }
-		        });
-	        }
-	        table.setPreferredScrollableViewportSize(table.getPreferredSize());
+        if (datosDeCadaTabla != null && !datosDeCadaTabla.isEmpty()) {
+        	this.edicionDeCadaTabla = new ArrayList<T>();
+        	JPanel tablesPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
+        	
+        	int tableInd = 0;
+        	for (ArrayList<T> datosTabla : datosDeCadaTabla) {
+        		if (datosTabla != null && !datosTabla.isEmpty()) {
+		        	DefaultTableModel model = new DefaultTableModel(columnNamesDeCadaTabla[tableInd], datosTabla);
+		        	JTable table = new JTable(model);
+			        table.setFont(ViewUtils.fontTablaDefaultCuerpo());
+			        
+			        //Cambiar apariencia del header de la tabla
+			        	//Font
+			        JTableHeader header = table.getTableHeader();
+			        header.setFont(ViewUtils.fontTablaDefaultCabecera());
+			        header.setReorderingAllowed(false);
+			        
+			        	//Header
+			        TableColumnModel cm = table.getColumnModel();
+			        
+			        Graphics2D temp = new BufferedImage(1, 1, BufferedImage.TYPE_INT_ARGB).createGraphics();
+			        temp.setFont(ViewUtils.fontTablaDefaultCabecera());
+			        
+			        FontMetrics metrics = temp.getFontMetrics();
+			        for (int i = 0; i < columnNamesDeCadaTabla.length; ++i) {
+			            int headerWidth = metrics.stringWidth(columnNamesDeCadaTabla[tableInd][i]) + 120;
+			            cm.getColumn(i).setPreferredWidth(headerWidth);
+			        }
+			        temp.dispose();
+		
+			        tablesPanel.add(new JScrollPane(table));
+			        
+			        //Solo se edita la tabla en los CU de actualizar, luego consultar tiene que ser true también
+			        if (this.editable) {
+			        	//En el modo consultar la tabla tiene una única fila
+			        	if (datosTabla.size() > 1) throw new IllegalArgumentException(Messages.EXC_EVENTO_TABLA);
+			        	
+			        	//Lo inicializo a lo que vale el array de datos en su única posición no nula
+			        	this.edicionDeCadaTabla.add(datosTabla.get(0));
+			        	
+				        table.getModel().addTableModelListener(new TableModelListener() {
+				            @Override
+				            public void tableChanged(TableModelEvent e) {
+				                if (e.getType() == TableModelEvent.UPDATE) edicionDeCadaTabla.set(edicionDeCadaTabla.size()-1, datosTabla.get(0));
+				            }
+				        });
+			        }
+			        table.setPreferredScrollableViewportSize(table.getPreferredSize());
+		        }
+        	}
+        	++tableInd;
         }
         
+        if (this.editable) {
+        	this.aceptar = new JButton("Aceptar");
+        	this.add(this.aceptar, BorderLayout.SOUTH);
+        }
         this.pack();
         this.setResizable(true);
         this.setLocationRelativeTo(null);
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        this.setVisible(true);
     }
 	
-	
-	public T getEdicion() { 
-		if(this.editable) return this.edicion; 
+	public ArrayList<T> getEdicion() { 
+		if(this.editable) return this.edicionDeCadaTabla; 
 		else throw new IllegalArgumentException(Messages.EXC_EVENTO_TABLA); 
 	}
 	
@@ -206,6 +210,7 @@ public class TablaDefault<T extends Convertable<T>> extends JFrame {
 
   //PRUEBA DE LA TABLA
 	
+	/*
 	public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> {
         	try {
@@ -219,10 +224,10 @@ public class TablaDefault<T extends Convertable<T>> extends JFrame {
             facturas.add(new TFactura(102, 202, true, LocalDateTime.now().minusDays(1).truncatedTo(ChronoUnit.SECONDS), 95.0f, 80.0f));
 
             // If you want to test update mode on a single row, set consultar=true, editable=true
-            TablaDefault<TFactura> tabla = new TablaDefault<>("Tabla de Facturas", Messages.colNomsFactura, facturas, false);
+            TablaDefault<TFactura> tabla = new TablaDefault<>("Tabla de Facturas", Messages.colNomsFactura, , false);
             tabla.setVisible(true);
         });
     }
-	
+	*/
 
 }
