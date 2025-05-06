@@ -20,31 +20,31 @@ import presentacion.ViewUtils;
 import presentacion.VistaDefault;
 import presentacion.controlador.Controlador;
 
-public class VistaBuscarFacturaPorCliente extends VistaDefault {
+public class VistaMostrarFacturasPorCliente extends VistaDefault {
 	private JLabel lIdCliente;
 	private JSpinner sIdCliente;
-	private JButton buscar;
+	private JButton mostrar;
 	private JButton cancel;
 	
-	public VistaBuscarFacturaPorCliente() {
-		this.setTitle("Buscar factura por cliente");
+	public VistaMostrarFacturasPorCliente() {
+		this.setTitle("Mostrar facturas por cliente");
 		ViewUtils.setAppIcon(this);
 		JPanel mainPanel = new JPanel(new BorderLayout());
 		mainPanel.setSize(ViewUtils.getScaledScreenDimension(2, 2));
 		this.lIdCliente = new JLabel("Id cliente:");
 		this.sIdCliente = ViewUtils.integerSpinner(0, 0, Integer.MAX_VALUE, 1);
-		this.buscar = new JButton("Buscar");
+		this.mostrar = new JButton("Mostrar");
 		this.cancel = new JButton("Cancelar");
 		
 		ArrayList<Pair<JComponent, JComponent>> labeledComponents = new ArrayList<>();
 		labeledComponents.add(new Pair<>(lIdCliente, sIdCliente));
-		super.initComps(labeledComponents, buscar, cancel);
+		super.initComps(labeledComponents, mostrar, cancel);
 		
-		buscar.addActionListener(e->{
+		mostrar.addActionListener(e->{
 			try {
 				sIdCliente.commitEdit();
 				int idFac = (int)sIdCliente.getValue();
-				SwingUtilities.invokeLater(()->{Controlador.getInstance().accion(Evento.BUSCAR_FACTURA_POR_CLIENTE, idFac);});
+				SwingUtilities.invokeLater(()->{Controlador.getInstance().accion(Evento.MOSTRAR_FACTURAS_POR_CLIENTE, idFac);});
 				dispose();
 			}
 			catch(Exception ex) {
@@ -70,13 +70,13 @@ public class VistaBuscarFacturaPorCliente extends VistaDefault {
 			ArrayList<ArrayList<TFactura>> data = new ArrayList<>();
 			data.add(singleFactura);
 
-			new TablaDefault<>("Factura por cliente", colNames, data, false);
+			new TablaDefault<>("Facturas por cliente", colNames, data, false);
 		}
 		else if (evento == Evento.RES_KO) {
 			String error;
 			if (datos instanceof BBDDReadException) error = ((BBDDReadException)datos).getMessage();
-			else error = Messages.ID_NO_ENCONTRADO.formatted((int) datos);
-			ViewUtils.createErrorDialogMessage(Messages.X_BUSCAR_FACTURA + ' ' + Messages.MOTIVO.formatted(error));
+			else error =  Messages.NO_HAY_FACS_CLI.formatted((int) datos);
+			ViewUtils.createErrorDialogMessage(Messages.X_MOSTRAR_FACTURAS + ' ' + Messages.MOTIVO.formatted(error));
 		}
 	}
 
