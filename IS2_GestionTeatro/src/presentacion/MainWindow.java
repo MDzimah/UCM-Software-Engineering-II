@@ -223,7 +223,7 @@ public class MainWindow extends JFrame {
         		
         		// BUSCAR FACTURA POR CLIENTE
         		buscarCliente.addActionListener((ev)->{
-        			FactoriaAbstractaPresentacion.getInstance().createVista(Evento.BUSCAR_FACTURA_POR_CLIENTE);
+        			FactoriaAbstractaPresentacion.getInstance().createVista(Evento.MOSTRAR_FACTURAS_POR_CLIENTE);
         		});
         		
         		// MOSTRAR_FACTURAS

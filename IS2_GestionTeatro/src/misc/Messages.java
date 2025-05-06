@@ -69,6 +69,7 @@ public class Messages {
 	public static final String MOTIVO = "Motivo: \"%s\".";
 	public static final String ID_NO_ENCONTRADO = "El id \"%s\" no se ha encontrado";
 	public static final String NO_HAY_DATOS = "No hay datos para mostrar";
+	public static final String NO_HAY_FACS_CLI = "No hay facturas para el id \"%s\" de cliente";
 	public static final String NO_EN_CARRITO = "El pase no se encuentra en el carrito";	
 	public static final String CARRITO_VACIO = "Carrito vacío";
 	public static final String ERROR_EDICION_TABLA = "Error al editar el valor en la tabla. Verifica el formato del dato ingresado.";

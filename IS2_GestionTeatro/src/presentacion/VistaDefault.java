@@ -34,7 +34,7 @@ public abstract class VistaDefault extends JFrame implements IGUI {
 		boolean validInfoPanel = pairComponents != null && !pairComponents.isEmpty();
 		if (validInfoPanel) {
 			JPanel infoPanel = new JPanel();
-			infoPanel.setBorder(BorderFactory.createEmptyBorder(10, 40, 0, 40));
+			infoPanel.setBorder(BorderFactory.createEmptyBorder(10, 55, 0, 55));
 			GroupLayout gL = new GroupLayout(infoPanel);
 			infoPanel.setLayout(gL);
 			gL.setAutoCreateGaps(true);

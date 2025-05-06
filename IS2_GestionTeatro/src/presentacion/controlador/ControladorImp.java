@@ -86,7 +86,7 @@ public class ControladorImp extends Controlador {
 				Collection<TFactura> allFacturasPorCliente = saFac.allFacturasPorCliente((int) datos);
 				
 				if (allFacturasPorCliente != null && !allFacturasPorCliente.isEmpty()) FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_OK, allFacturasPorCliente);
-				else FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_KO, null);
+				else FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_KO, (int)datos);
 			}
 			catch(BBDDReadException e) {
 				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_KO, e);
