@@ -116,7 +116,7 @@ public class MainWindow extends JFrame {
     private void estiloBoton(JButton button) {
 	    button.setBackground(new Color(160, 0, 0));
 	    button.setForeground(new Color(255, 215, 0));
-	    button.setFont(new Font("Georgia", Font.BOLD, 30));
+	    button.setFont(ViewUtils.fontBotonesSubs());
 	    button.setFocusPainted(false);
 	
 	    //Para la apariencia 3d del botón. Lo de "lowered" pone el efecto abajo a la derecha
@@ -170,21 +170,24 @@ public class MainWindow extends JFrame {
         		buscar = new JButton("Buscar factura");
         		buscarCliente = new JButton("Buscar factura por cliente");
         		mostrar = new JButton("Mostrar facturas");
-        		/*
-        		carr = new JButton();
-        		carr.setIcon(new ImageIcon(ViewUtils.img_ticket()));
-        		carr.setPreferredSize(new Dimension(100, 50));
-        		carr.setText(String.valueOf(AbrirVenta.getCarrito().size()));
-        		*/
         		
         		carr = new JButton();
-        		ImageIcon originalIcon = new ImageIcon(ViewUtils.img_ticket());
-        		Image originalImage = originalIcon.getImage();
-        		Image scaledImage = originalImage.getScaledInstance(70, 50, Image.SCALE_SMOOTH);
-        		ImageIcon scaledIcon = new ImageIcon(scaledImage);
-        		carr.setIcon(scaledIcon);
-        		carr.setPreferredSize(new Dimension(70, 50));
+        		ImageIcon ic = new ImageIcon(ViewUtils.img_carrito().getScaledInstance(50, 50, Image.SCALE_SMOOTH));
+        		carr.setIcon(ic);
+        		carr.setContentAreaFilled(false);
 
+        		AbrirVenta.setAbrirVentaButton(abrirVenta);
+        		AbrirVenta.setCarritoButton(carr);
+        		AbrirVenta.updateCarritoCountButton();
+        		carr.setFont(ViewUtils.fontCountCarrito());
+        		
+        		//Centrar texto debajo del icono
+        		carr.setHorizontalTextPosition(SwingConstants.CENTER);
+        		carr.setVerticalTextPosition(SwingConstants.BOTTOM); 
+        		
+        		//Centrar icono y texto
+        		carr.setHorizontalAlignment(SwingConstants.CENTER); 
+        		carr.setVerticalAlignment(SwingConstants.CENTER);  
         		
         		anyPV.setEnabled(false);
         		quitarPV.setEnabled(false);
@@ -211,9 +214,6 @@ public class MainWindow extends JFrame {
         		// CERRAR VENTA
         		cerrarVenta.addActionListener((ev)->{
         			FactoriaAbstractaPresentacion.getInstance().createVista(Evento.CERRAR_VENTA);
-        			anyPV.setEnabled(false);
-            		quitarPV.setEnabled(false);
-            		cerrarVenta.setEnabled(false);
         		});		
         		
         		// BUSCAR FACTURA
@@ -233,23 +233,30 @@ public class MainWindow extends JFrame {
         		
         		// CARRITO
         		carr.addActionListener((ev)->{
-        			JDialog carritoView = new JDialog();
-        			carritoView.setTitle("Carrito");
-        			carritoView.setModal(true);
-        			//carritoView.setLayout(new BoxLayout(BoxLayout.Y_AXIS));
-        			for (TLineaFactura tLf : AbrirVenta.getCarrito()) {
-        				carritoView.add(new JLabel(tLf.toString()));
-        			}
-        			carritoView.pack();
-        			carritoView.setVisible(true);
+        			  JDialog carritoView = new JDialog();
+        			    carritoView.setTitle("Carrito");
+        			    
+        			    JPanel p = new JPanel();
+        			    p.setLayout(new BoxLayout(p, BoxLayout.Y_AXIS));
+        			    p.setBorder(new EmptyBorder(20, 20, 20, 20));
+
+        			    for (TLineaFactura tLf : AbrirVenta.getCarrito()) {
+        			        p.add(new JLabel(tLf.toString()));
+        			    }
+
+        			    carritoView.setContentPane(p);
+        			    carritoView.pack();
+        			    carritoView.setLocationRelativeTo(null);
+        			    carritoView.setModal(true);
+        			    carritoView.setVisible(true);
         		});
         		
         		subsFactura.add(abrirVenta);        		
         		subsFactura.add(anyPV);
         		subsFactura.add(quitarPV);
+        		subsFactura.add(cerrarVenta);
         		subsFactura.add(buscar);
         		subsFactura.add(buscarCliente);
-        		subsFactura.add(cerrarVenta);
         		subsFactura.add(mostrar);
         		subsFactura.add(carr);
         		subsFactura.pack();

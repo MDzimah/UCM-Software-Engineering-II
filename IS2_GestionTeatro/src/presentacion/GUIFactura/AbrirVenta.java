@@ -8,7 +8,7 @@ import javax.swing.JButton;
 import negocio.factura.TLineaFactura;
 
 public class AbrirVenta {
-	private static Collection<TLineaFactura> carrito =  new ArrayList<TLineaFactura>();;
+	private static Collection<TLineaFactura> carrito =  new ArrayList<TLineaFactura>();
 	private static JButton bCarr;
 	private static JButton bAbVenta;
 
@@ -20,5 +20,7 @@ public class AbrirVenta {
 	public static Collection<TLineaFactura> getCarrito() { return carrito; } 
 	public static void resetCarrito() {	carrito.clear(); }
 	public static void setCarritoButton(JButton button) { bCarr = button; }
-	public static void updateCarritoCountButton() { bCarr.setText(String.valueOf(carrito.size())); }
+	public static void updateCarritoCountButton() { 
+		bCarr.setText(String.valueOf(carrito.size())); 
+	}
 }

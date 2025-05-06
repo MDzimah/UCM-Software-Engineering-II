@@ -26,7 +26,7 @@ public class DAOPaseImp implements DAOPase {
 	public int create(TPase tPase) throws BBDDReadException, BBDDWriteException {
 		JSONObject bdPase = new JSONObject();
 		if (OpsBBDD.isEmpty(Messages.BDPase)) {
-			bdPase.put(Messages.KEY_lastId, 0);
+			bdPase.put(Messages.KEY_lastId, -1);
 			bdPase.put(Messages.KEY_pases, new JSONObject());
 		}
 		else bdPase = OpsBBDD.read(Messages.BDPase);

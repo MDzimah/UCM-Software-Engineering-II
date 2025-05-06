@@ -33,16 +33,15 @@ public class ViewUtils {
 	//Imagenes
 	public static Image img_logoTeatret() { return new ImageIcon("resources/imagenes/teatretLogo.png").getImage(); }
 	public static Image img_marcoOro() { return new ImageIcon("resources/imagenes/marcoOro.png").getImage(); }
-	public static Image img_ticket() { return new ImageIcon("resources/imagenes/ticket.png").getImage(); }
+	public static Image img_carrito() { return new ImageIcon("resources/imagenes/cart.png").getImage(); }
+	public static void setAppIcon(JFrame window) { window.setIconImage(img_logoTeatret()); } 
 	
 	//Fonts
+	public static Font fontCountCarrito() { return new Font("SansSerif", Font.BOLD, 15); }
+	public static Font fontBotonesSubs() { return new Font("Georgia", Font.BOLD, 30); }
 	public static Font fontTablaDefaultCabecera() { return new Font("SansSerif", Font.BOLD, 16); }
+	public static Font fontTablaDefaultCuerpo() { return new Font("SansSerif", Font.PLAIN, 15); }
 	
-	public static Font fontTablaDefaultCuerpo () { return new Font("SansSerif", Font.PLAIN, 15); }
-	
-	public static void setAppIcon(JFrame window) {
-		window.setIconImage(img_logoTeatret());
-	} 
 	
 	//Diálogos
 	public static void createErrorDialogMessage(String message) {

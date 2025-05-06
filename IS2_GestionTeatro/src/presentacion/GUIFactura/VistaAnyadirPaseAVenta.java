@@ -17,7 +17,7 @@ public class VistaAnyadirPaseAVenta extends ModificacionPaseEnVenta {
 	}
 
 	@Override
-	void accion(TLineaFactura tLineaFactura) {
+	boolean accion(TLineaFactura tLineaFactura) {
 		boolean estaba = false;
 		for(TLineaFactura tLf : AbrirVenta.getCarrito()) {
 			if (tLf.getIdPase() == tLineaFactura.getIdPase()) {
@@ -29,5 +29,7 @@ public class VistaAnyadirPaseAVenta extends ModificacionPaseEnVenta {
 		if (!estaba) AbrirVenta.getCarrito().add(tLineaFactura);
 		
 		AbrirVenta.updateCarritoCountButton();
+		
+		return true;
 	}
 }
