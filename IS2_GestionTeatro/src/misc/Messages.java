@@ -98,7 +98,8 @@ public class Messages {
 	public static final String EXC_UNKNOWN_OBRA = "Obra desconocida";
 	public static final String EXC_UNKNOWN_PASE = "Pase desconocido";
 	public static final String EXC_EVENTO_TABLA = "Tipo de tabla incompatible con la operacion o con los datos";
-	
+	public static final String EXC_ELEM_DUPLICADO = "Elemento duplicado";
+
 	//BBDD
 	public static final String PATH_TO_BBDD = "resources/BBDD/%s";
 	

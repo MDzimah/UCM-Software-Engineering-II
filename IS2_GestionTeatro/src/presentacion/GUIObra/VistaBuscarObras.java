@@ -76,6 +76,7 @@ public class VistaBuscarObras extends VistaDefault implements IGUI{
 				}
 
 				ArrayList<ArrayList<TObra>> data = new ArrayList<>();
+				obras.sort((p1, p2) -> Integer.compare(p1.getIdObra(), p2.getIdObra()));
 				data.add(obras);
 
 				TablaDefault<TObra> tabla = new TablaDefault<>("OBRAS", colNames, data, false);

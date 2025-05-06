@@ -29,7 +29,7 @@ public class DAOObraImp implements DAOObra {
 		
 		if (OpsBBDD.isEmpty(Messages.BDOb)) {
 			JSONObject bdObra = new JSONObject();
-			bdObra.put("LastKey", 0);
+			bdObra.put("LastKey", -1);
 			OpsBBDD.write(bdObra, Messages.BDOb);
 		}
 		
@@ -72,7 +72,7 @@ public class DAOObraImp implements DAOObra {
 				else
 					json.put(Messages.KEY_act, false);
 				
-				bdObras.put(json.getString(Messages.KEY_idObra), json);
+				bdObras.put(String.valueOf(id), json);
 				OpsBBDD.write(bdObras, Messages.BDOb);
 				return 1;
 			}
