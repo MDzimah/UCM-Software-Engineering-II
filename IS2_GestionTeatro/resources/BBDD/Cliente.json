@@ -1,0 +1,22 @@
+{
+    "clientesNormal": {"2": {
+        "idCliente": 2,
+        "apellido": "fok",
+        "cuenta": "34",
+        "puntos": 2,
+        "nombre": "aaaf",
+        "DNI": "78789",
+        "activo": true
+    }},
+    "lastId": 2,
+    "clientesVIP": {"1": {
+        "idCliente": 1,
+        "apellido": "kkk",
+        "cuenta": "8",
+        "mensualidad": 0,
+        "nombre": "kk",
+        "nivel": "PLATINO",
+        "DNI": "kk",
+        "activo": true
+    }}
+}

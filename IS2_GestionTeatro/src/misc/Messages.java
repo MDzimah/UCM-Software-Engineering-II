@@ -103,7 +103,7 @@ public class Messages {
 	public static final String PATH_TO_BBDD = "resources/BBDD/%s";
 	
 		//Nombres
-	public static final String BDCli = "Clientes.json";
+	public static final String BDCli = "Cliente.json";
 	public static final String BDCT = "CompTea.json";
 	public static final String BDMCT = "MiemCompTea.json";
 	public static final String BDOb = "Obra.json";
@@ -133,8 +133,8 @@ public class Messages {
 	public static final String KEY_linFacs = "lineas";
 	public static final String KEY_miembCompTea = "miembros de la compania teatral";
 	public static final String KEY_compTea = "compania teatral";
-	public static final String KEY_cliNorms = "clientes";
-	public static final String KEY_cliVIPs = "clientes";
+	public static final String KEY_cliNorms = "clientesNormal";
+	public static final String KEY_cliVIPs = "clientesVIP";
 	public static final String KEY_pases = "pases";
 	public static final String KEY_miembros = "miembros";
 	public static final String KEY_taquilleros = "taquilleros";
