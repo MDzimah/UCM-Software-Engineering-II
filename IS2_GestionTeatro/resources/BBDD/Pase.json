@@ -1,77 +1,12 @@
 {
-    "pases": {
-        "1": {
-            "idCompTea": 2,
-            "precioPase": 3,
-            "fecha": "2025-05-28T23:38:07.782",
-            "IdObra": 2,
-            "stock": 1000,
-            "idPase": 1,
-            "activo": false
-        },
-        "2": {
-            "idCompTea": 2,
-            "precioPase": 3,
-            "fecha": "2025-05-28T23:38:07.782",
-            "IdObra": 2,
-            "stock": 1000,
-            "idPase": 1,
-            "activo": false
-        },
-        "3": {
-            "idCompTea": 3,
-            "precioPase": 4,
-            "fecha": "2025-05-15T23:39:03.412",
-            "IdObra": 3,
-            "stock": 4,
-            "idPase": 3,
-            "activo": true
-        },
-        "4": {
-            "idCompTea": 4,
-            "precioPase": 4,
-            "fecha": "2025-05-15T23:41:15.255",
-            "IdObra": 4,
-            "stock": 4,
-            "idPase": 4,
-            "activo": true
-        },
-        "5": {
-            "idCompTea": 6,
-            "precioPase": 6,
-            "fecha": "2025-05-13T23:42:37.359",
-            "IdObra": 6,
-            "stock": 6,
-            "idPase": 5,
-            "activo": true
-        },
-        "6": {
-            "idCompTea": 5,
-            "precioPase": 6,
-            "fecha": "2025-05-14T23:47:30.679",
-            "IdObra": 5,
-            "stock": 6,
-            "idPase": 6,
-            "activo": true
-        },
-        "7": {
-            "idCompTea": 6,
-            "precioPase": 4,
-            "fecha": "2025-05-21T17:06:36.223",
-            "IdObra": 6,
-            "stock": 77,
-            "idPase": 7,
-            "activo": true
-        },
-        "8": {
-            "idCompTea": 2,
-            "precioPase": 3,
-            "fecha": "2025-05-18T17:07:25.406",
-            "IdObra": 2,
-            "stock": 45,
-            "idPase": 8,
-            "activo": false
-        }
-    },
-    "lastId": 8
+    "pases": {"0": {
+        "idCompTea": 2,
+        "precioPase": 3,
+        "fecha": "2025-05-06T23:37:28.620",
+        "IdObra": 2,
+        "stock": 65,
+        "idPase": 0,
+        "activo": true
+    }},
+    "lastId": 0
 }

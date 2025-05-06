@@ -56,7 +56,7 @@ public class SAPaseImp implements SAPase {
 	public int update(TPase tPase) throws BBDDReadException, BBDDWriteException, UnknownPaseException {
 		DAOPase daoPas = FactoriaAbstractaIntegracion.getInstance().crearDAOPase();
 		int idPase = daoPas.update(tPase);
-		if(idPase < 0) throw new UnknownPaseException();
+		if(idPase < 0) return -1;
 		else return idPase;
 	}
 
@@ -64,7 +64,7 @@ public class SAPaseImp implements SAPase {
 	public int delete(int id) throws BBDDReadException, BBDDWriteException, UnknownPaseException {
 		DAOPase daoPas = FactoriaAbstractaIntegracion.getInstance().crearDAOPase();
 		int idPase = daoPas.delete(id);
-		if(idPase < 0) throw new UnknownPaseException();
+		if(idPase < 0) return -1;
 		else return idPase;
 	}
 
@@ -72,7 +72,7 @@ public class SAPaseImp implements SAPase {
 	public ArrayList<TPase> readAll() throws BBDDReadException, UnknownPaseException {
 		DAOPase daoPas = FactoriaAbstractaIntegracion.getInstance().crearDAOPase();
 		ArrayList<TPase> lista = daoPas.readAll();
-		if(lista==null || lista.isEmpty()) throw new UnknownPaseException();
+		if(lista==null || lista.isEmpty()) return null;
 		else return lista;
 	}
 
@@ -94,20 +94,21 @@ public class SAPaseImp implements SAPase {
 	}
 
 	@Override
-	public void deletePorObra(int idObra) throws BBDDReadException, BBDDWriteException, UnknownObraException {
+	public int deletePorObra(int idObra) throws BBDDReadException, BBDDWriteException, UnknownObraException {
 		SAObra saObra = FactoriaAbstractaNegocio.getInstance().crearSAObra();
 		TObra tObra = saObra.read(idObra);
-		if (tObra == null) throw new UnknownObraException();
+		if (tObra == null) return -1;
 		
 		DAOPase daoPas = FactoriaAbstractaIntegracion.getInstance().crearDAOPase();
 		daoPas.deletePorObra(idObra);
+		return idObra;
 	}
 	
 	@Override
 	public ArrayList<TPase> allPasesPorObra(int idObra) throws BBDDReadException, UnknownObraException {
 		SAObra saObra = FactoriaAbstractaNegocio.getInstance().crearSAObra();
 		TObra tObra = saObra.read(idObra);
-		if (tObra == null) throw new UnknownObraException();
+		if (tObra == null) return null;
 		
 		DAOPase daoPase = FactoriaAbstractaIntegracion.getInstance().crearDAOPase();
 		ArrayList<TPase> pases = (ArrayList<TPase>)daoPase.readAll();

@@ -16,8 +16,8 @@ public interface SAPase {
 	public int delete (int id) throws BBDDReadException, BBDDWriteException, UnknownPaseException;
 	public ArrayList<TPase> readAll() throws BBDDReadException, UnknownPaseException;
 	public int comprar(int idPaseValido, int cantidad) throws BBDDReadException, BBDDWriteException;  //Devuelve el stock comprado del pase con idPase. 
-												   												//Si cantidad > stock, entonces da todo lo que tenga (lo dijo Vicky)
-																								//Además, actualiza en la BD el pase con dicho id
-	public void deletePorObra(int idObra) throws BBDDReadException, BBDDWriteException, UnknownObraException; //Devuelve si existe algun pase con el id de la obra pasada por parametro
+												   													  //Si cantidad > stock, entonces da todo lo que tenga (lo dijo Vicky)
+																									  //Además, actualiza en la BD el pase con dicho id
+	public int deletePorObra(int idObra) throws BBDDReadException, BBDDWriteException, UnknownObraException; //Devuelve si existe algun pase con el id de la obra pasada por parametro
 	ArrayList<TPase> allPasesPorObra(int idObra) throws BBDDReadException, UnknownObraException;
 }
