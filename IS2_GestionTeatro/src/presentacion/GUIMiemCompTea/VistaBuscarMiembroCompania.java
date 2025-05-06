@@ -61,20 +61,25 @@ public class VistaBuscarMiembroCompania extends VistaDefault{
         }
     }
 
-	@Override
-	public void actualizar(Evento evento, Object datos) {
-		if (evento == Evento.RES_OK) {
-			ArrayList<TMiemCompTea> miemComp = new ArrayList<TMiemCompTea>();
-			miemComp.add((TMiemCompTea)datos);
-			
-			new TablaDefault<TMiemCompTea>("MIEMBRO DE LA COMPANIA", Messages.colNomsMiemCompTea, miemComp, false).setVisible(true);
-			dispose();
-		}
-		else if(evento == Evento.RES_KO) {
-			String error;
-			if (datos instanceof String) error = (String) datos;
-			else error = Messages.ID_NO_ENCONTRADO.formatted(String.valueOf(((int)datos)));
-			ViewUtils.createErrorDialogMessage(Messages.X_MIEMBRO_ENCONTRADO + ' ' + Messages.MOTIVO.formatted(error));
-		}
-	}
+    @Override
+    public void actualizar(Evento evento, Object datos) {
+    	if (evento == Evento.RES_OK) {
+    		ArrayList<String[]> colNames = new ArrayList<>();
+    		colNames.add(Messages.colNomsMiemCompTea);
+
+    		ArrayList<TMiemCompTea> miemComp = new ArrayList<>();
+    		miemComp.add((TMiemCompTea) datos);
+    		ArrayList<ArrayList<TMiemCompTea>> data = new ArrayList<>();
+    		data.add(miemComp);
+
+    		new TablaDefault<>("MIEMBRO DE LA COMPANIA", colNames, data, false).setVisible(true);
+    		dispose();
+    	}
+    	else if (evento == Evento.RES_KO) {
+    		String error;
+    		if (datos instanceof String) error = (String) datos;
+    		else error = Messages.ID_NO_ENCONTRADO.formatted(String.valueOf(((int) datos)));
+    		ViewUtils.createErrorDialogMessage(Messages.X_MIEMBRO_ENCONTRADO + ' ' + Messages.MOTIVO.formatted(error));
+    	}
+    }
 }

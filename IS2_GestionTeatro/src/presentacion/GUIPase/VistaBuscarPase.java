@@ -51,19 +51,24 @@ public class VistaBuscarPase extends VistaDefault {
 		cancelar.addActionListener(e->{this.setVisible(false); dispose();});
 	}
 	
-	@SuppressWarnings("unchecked")
 	@Override
 	public void actualizar(Evento evento, Object datos) {
-		if(evento==Evento.RES_OK) {
-			ArrayList<TPase> p = new ArrayList<TPase>();
-			p.add((TPase)datos);
-			//FactoriaAbstractaPresentacion.getInstance().createDialogMessage(Messages.EX_PASE_BUSCADO);
-			new TablaDefault<TPase>("PASES", Messages.colNomsPase, p, false).setVisible(true); //se crea una tabla con una sola linea que contiene
-																	  		 											   //la info del transfer del pase buscado
-		}
-		else if(evento==Evento.RES_KO) {
-			ViewUtils.createErrorDialogMessage(Messages.X_PASE_BUSCADO + ' ' + Messages.MOTIVO.formatted(((Exception)datos).getMessage()));
+		if (evento == Evento.RES_OK) {
+
+			ArrayList<String[]> colNames = new ArrayList<>();
+			colNames.add(Messages.colNomsPase);
+
+			ArrayList<TPase> pases = new ArrayList<>();
+			pases.add((TPase) datos);
+
+			ArrayList<ArrayList<TPase>> data = new ArrayList<>();
+			data.add(pases);
+
+			// Create and display the table with the pase data
+			TablaDefault<TPase> tabla = new TablaDefault<>("PASES", colNames, data, false);
+			tabla.setVisible(true);
+		} else if (evento == Evento.RES_KO) {
+			ViewUtils.createErrorDialogMessage(Messages.X_PASE_BUSCADO + ' ' + Messages.MOTIVO.formatted(((Exception) datos).getMessage()));
 		}
 	}
-
 }

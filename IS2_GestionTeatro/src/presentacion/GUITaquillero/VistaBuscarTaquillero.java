@@ -64,21 +64,23 @@ public class VistaBuscarTaquillero extends VistaDefault {
 
 	@Override
 	public void actualizar(Evento evento, Object datos) {
-		if(evento == Evento.RES_OK) {
-			ArrayList<TTaquillero> taqs = new ArrayList<>();
-			
-			for(TTaquillero tTaq : (List<TTaquillero>) datos) {
-				taqs.add(tTaq);
-			}
-			
-			//creamos la tabla
-			TablaDefault<TTaquillero> tabla = new TablaDefault<TTaquillero>("Taquilleros", Messages.colNomsTaquillero, taqs, false);
-			tabla.setVisible(true);
-			
-		} else if(evento == Evento.RES_KO){
-			ViewUtils.createErrorDialogMessage("No se han encontrado taquilleros.\n" + "Error: " +((Exception) datos).getMessage());
-		}
-		
-	}
+	    if (evento == Evento.RES_OK) {
 
+	        ArrayList<String[]> colNames = new ArrayList<>();
+	        colNames.add(Messages.colNomsTaquillero);
+
+	        ArrayList<TTaquillero> taquilleros = new ArrayList<>();
+	        taquilleros.addAll((List<TTaquillero>) datos);
+
+	        ArrayList<ArrayList<TTaquillero>> data = new ArrayList<>();
+	        data.add(taquilleros);
+
+	        TablaDefault<TTaquillero> tabla = new TablaDefault<>("Taquillero", colNames, data, false);
+	        tabla.setVisible(true);
+
+	    } else if (evento == Evento.RES_KO) {
+	    	//Errores van en messages
+	        ViewUtils.createErrorDialogMessage("No se han encontrado taquilleros.\n" + "Error: " + ((Exception) datos).getMessage());
+	    }
+	}
 }

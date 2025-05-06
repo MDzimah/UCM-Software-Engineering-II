@@ -45,15 +45,23 @@ public class VistaMostrarPasesPorObra extends VistaDefault {
 		cancelar.addActionListener(e->{this.setVisible(false); dispose();});
 	}
 	
-	@SuppressWarnings("unchecked")
 	@Override
 	public void actualizar(Evento evento, Object datos) {
-		if(evento==Evento.RES_OK) {
-			new TablaDefault<TPase>("PASES", Messages.colNomsPase, (ArrayList<TPase>)datos, false).setVisible(true);
-		}
-		else if(evento==Evento.RES_KO) {
-			ViewUtils.createErrorDialogMessage(Messages.X_MOSTRAR_PASES + ' ' + Messages.MOTIVO.formatted(((Exception)datos).getMessage()));
-		}
-	}
+	    if (evento == Evento.RES_OK) {
+	        ArrayList<String[]> colNames = new ArrayList<>();
+	        colNames.add(Messages.colNomsPase);
 
+	        ArrayList<TPase> pases = new ArrayList<>();
+	        pases.addAll((ArrayList<TPase>) datos);
+
+	        ArrayList<ArrayList<TPase>> data = new ArrayList<>();
+	        data.add(pases);
+
+	        TablaDefault<TPase> tabla = new TablaDefault<>("PASES", colNames, data, false);
+	        tabla.setVisible(true);
+
+	    } else if (evento == Evento.RES_KO) {
+	        ViewUtils.createErrorDialogMessage(Messages.X_MOSTRAR_PASES + ' ' + Messages.MOTIVO.formatted(((Exception) datos).getMessage()));
+	    }
+	}
 }

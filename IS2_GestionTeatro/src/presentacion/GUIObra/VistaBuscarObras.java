@@ -1,7 +1,6 @@
 package presentacion.GUIObra;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -13,7 +12,6 @@ import javax.swing.SwingUtilities;
 
 import misc.Messages;
 import misc.Pair;
-import negocio.factura.TFactura;
 import negocio.obra.TObra;
 import presentacion.Evento;
 import presentacion.IGUI;
@@ -21,7 +19,6 @@ import presentacion.ViewUtils;
 import presentacion.TablaDefault;
 import presentacion.VistaDefault;
 import presentacion.controlador.Controlador;
-import presentacion.factoria.FactoriaAbstractaPresentacion;
 
 public class VistaBuscarObras extends VistaDefault implements IGUI{
 	//Atributos
@@ -68,18 +65,23 @@ public class VistaBuscarObras extends VistaDefault implements IGUI{
 
 		@Override
 		public void actualizar(presentacion.Evento evento, Object datos) {
-			if(evento==Evento.RES_OK) {				
-				
-				ArrayList<TObra> obras = new ArrayList<TObra>();
-				for(TObra o : (List<TObra>)datos)
+			if (evento == Evento.RES_OK) {
+
+				ArrayList<String[]> colNames = new ArrayList<>();
+				colNames.add(Messages.colNomsObra);
+
+				ArrayList<TObra> obras = new ArrayList<>();
+				for (TObra o : (List<TObra>) datos) {
 					obras.add(o);
-				
-	            TablaDefault<TObra> tabla = new TablaDefault<>("OBRAS", Messages.colNomsObra, obras, false);
-	            tabla.setVisible(true);
-			}
-			else if(evento==Evento.RES_KO) {
+				}
+
+				ArrayList<ArrayList<TObra>> data = new ArrayList<>();
+				data.add(obras);
+
+				TablaDefault<TObra> tabla = new TablaDefault<>("OBRAS", colNames, data, false);
+				tabla.setVisible(true);
+			} else if (evento == Evento.RES_KO) {
 				ViewUtils.createErrorDialogMessage(Messages.EX_OBRA_BUSCAR_ERROR + '\n' + Messages.ERROR.formatted(((Exception) datos).getMessage()));
 			}
 		}
-
 }
