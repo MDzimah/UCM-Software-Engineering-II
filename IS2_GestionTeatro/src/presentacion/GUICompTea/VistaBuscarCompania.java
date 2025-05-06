@@ -69,15 +69,15 @@ public class VistaBuscarCompania extends VistaDefault implements IGUI{
 	@Override
 	public void actualizar(Evento evento, Object datos) {
 		if (evento == Evento.RES_OK) {
-			ArrayList<String[]> colNames = new ArrayList<>();
-			colNames.add(Messages.colNomsCompTea);
-
+			String[] nomCols = Messages.colNomsCompTea;
+			ArrayList<String[]>listaColumnas= new ArrayList<String[]>();
+			listaColumnas.add(nomCols);
 			ArrayList<TCompTea> compania = new ArrayList<>();
 			compania.add((TCompTea) datos);
 			ArrayList<ArrayList<TCompTea>> data = new ArrayList<>();
 			data.add(compania);
 
-			new TablaDefault<>("Compañía", colNames, data, false).setVisible(true);
+			new TablaDefault("Compañía", listaColumnas, data, false).setVisible(true);
 		}
 		else if (evento == Evento.RES_KO) {
 			//ERRORES VAN EN MESSAGES Y NO SE ENVÍAN STRING A TRAVÉS EN OBJECT

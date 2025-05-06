@@ -456,7 +456,7 @@ public class ControladorImp extends Controlador {
 				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_OK, id);//TODO no se si hay que mostrar aqui
 				}
 				else {
-					throw new Exception("no se pudo actualizar la compania con id: "+id);
+					throw new Exception(Messages.X_ACTUALIZAR_COMPANIA+" id:  " +id);
 				}
 				}
 			catch(Exception e) {
@@ -469,10 +469,15 @@ public class ControladorImp extends Controlador {
 				SACompTea saCompTea=FactoriaAbstractaNegocio.getInstance().crearSACompTea();
 				Integer id =(Integer)datos;
 				TCompTea newComp= saCompTea.read(id);
+				if(newComp!= null) {
 				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_OK, newComp);
+				}
+				else {
+					throw new Exception(Messages.X_BUSCAR_COMPANIA+" id:"+Integer.toString(id));
+				}
 			}
 			catch(Exception e) {
-				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_KO, "Error: " +e.getMessage());
+				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_KO, e);
 			}
 			break;
 		}

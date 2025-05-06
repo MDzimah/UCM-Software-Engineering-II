@@ -17,6 +17,7 @@ import misc.Pair;
 import presentacion.Evento;
 import presentacion.IGUI;
 import presentacion.TablaDefault;
+import presentacion.ViewUtils;
 import presentacion.controlador.Controlador;
 import presentacion.VistaDefault;
 import negocio.compTea.TCompTea;
@@ -30,12 +31,17 @@ public class VistaActualizarCompania1 implements IGUI{
 	
 	public void cargar(TCompTea tCompTea) {
 		
-		ArrayList<Object> p = new ArrayList<Object>();
+		ArrayList<TCompTea> p = new ArrayList<TCompTea>();
 		p.add(tCompTea);
-		String[] nomCols = {"ID","NOMBRE COMPANIA", "DIRECCION", "COSTE"};
-		TablaDefault<TCompTea> tabla = new TablaDefault("BUSCAR PASE", nomCols, p, true);
+		ArrayList<ArrayList<TCompTea>>t= new ArrayList<ArrayList<TCompTea>>();
+		t.add(p);
+		String[] nomCols = Messages.colNomsCompTea;
+		ArrayList<String[]>listaColumnas= new ArrayList<String[]>();
+		listaColumnas.add(nomCols);
+		TablaDefault<TCompTea> tabla = new TablaDefault("BUSCAR PASE", listaColumnas, t, true);
 		tabla.getOkButton().addActionListener(e -> {
-			TCompTea tCompTea2 = tabla.getEdicion();
+			ArrayList<TCompTea> listTCompTea= tabla.getEdicion();
+			TCompTea tCompTea2=listTCompTea.get(0);
 			Controlador.getInstance().accion(Evento.ACTUALIZAR1_COMPANIA_TEATRAL, tCompTea2);
 		});
 	}
@@ -43,17 +49,15 @@ public class VistaActualizarCompania1 implements IGUI{
 	
 	@Override
 	public void actualizar(Evento evento, Object datos) {
-		/*if(evento==Evento.RES_OK) {
-			 cargar();
-			 }
+		if(evento==Evento.RES_OK) {
+			
+			 
 			}
 		else if(evento==Evento.RES_KO) {
-			if(datos instanceof Exception) {
-			JSwingUtils.createErrorDialogMessage( ((Exception) datos).getMessage());
-			}
-			else {
-				JSwingUtils.createErrorDialogMessage("NO EXISTEN COMPANIAS CON ID: "+(int) datos);
-			}*/
+			
+			ViewUtils.createErrorDialogMessage( ((Exception) datos).getMessage());
+			
+			
 		}
 		
 }

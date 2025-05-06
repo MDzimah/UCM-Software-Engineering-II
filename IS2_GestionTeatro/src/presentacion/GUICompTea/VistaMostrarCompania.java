@@ -24,13 +24,13 @@ public class VistaMostrarCompania implements IGUI {
 	@Override
 	public void actualizar(Evento evento, Object datos) {
 		if (evento == Evento.RES_OK) {
-			ArrayList<String[]> colNames = new ArrayList<>();
-			colNames.add(Messages.colNomsCompTea);
-
+			String[] nomCols = Messages.colNomsCompTea;
+			ArrayList<String[]>listaColumnas= new ArrayList<String[]>();
+			listaColumnas.add(nomCols);
 			ArrayList<ArrayList<TCompTea>> data = new ArrayList<>();
 			data.add((ArrayList<TCompTea>) datos);
 
-			new TablaDefault<>("Compañías teatrales", colNames, data, false);
+			new TablaDefault("Compañías teatrales", listaColumnas, data, false);
 		} else if (evento == Evento.RES_KO) {
 			String error = (datos instanceof BBDDReadException) ? ((BBDDReadException) datos).getMessage() : Messages.NO_HAY_DATOS;
 			ViewUtils.createErrorDialogMessage(Messages.X_MOSTRAR_COMPANIAS + ' ' + Messages.MOTIVO.formatted(error));
