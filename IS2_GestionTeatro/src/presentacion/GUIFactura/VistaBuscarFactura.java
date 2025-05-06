@@ -12,7 +12,6 @@ import negocio.factura.TFactura;
 import presentacion.*;
 import presentacion.controlador.Controlador;
 
-@SuppressWarnings("serial")
 public class VistaBuscarFactura extends VistaDefault {
 	private JLabel lIdFac;
 	private JSpinner sIdFac;
