@@ -57,7 +57,7 @@ public class VistaMostrarPasesPorObra extends VistaDefault {
 	        ArrayList<ArrayList<TPase>> data = new ArrayList<>();
 	        data.add(pases);
 
-	        TablaDefault<TPase> tabla = new TablaDefault<>("PASES", colNames, data, false);
+	        TablaDefault<TPase> tabla = new TablaDefault<>("Pases", colNames, data, false);
 	        tabla.setVisible(true);
 
 	    } else if (evento == Evento.RES_KO) {

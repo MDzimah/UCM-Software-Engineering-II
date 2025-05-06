@@ -30,7 +30,7 @@ public class VistaMostrarPases implements IGUI {
 			ArrayList<ArrayList<TPase>> data = new ArrayList<>();
 			data.add((ArrayList<TPase>) datos);
 
-			new TablaDefault<>("PASES", colNames, data, false);
+			new TablaDefault<>("Pases", colNames, data, false);
 		} else if (evento == Evento.RES_KO) {
 			String error = (datos instanceof BBDDReadException) ? ((BBDDReadException) datos).getMessage() : Messages.NO_HAY_DATOS;
 			ViewUtils.createErrorDialogMessage(Messages.X_MOSTRAR_PASES + ' ' + Messages.MOTIVO.formatted(error));

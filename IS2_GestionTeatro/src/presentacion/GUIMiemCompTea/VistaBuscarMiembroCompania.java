@@ -72,7 +72,7 @@ public class VistaBuscarMiembroCompania extends VistaDefault{
     		ArrayList<ArrayList<TMiemCompTea>> data = new ArrayList<>();
     		data.add(miemComp);
 
-    		new TablaDefault<>("MIEMBRO DE LA COMPANIA", colNames, data, false).setVisible(true);
+    		new TablaDefault<>("Miembro de la compañía teatral", colNames, data, false).setVisible(true);
     		dispose();
     	}
     	else if (evento == Evento.RES_KO) {

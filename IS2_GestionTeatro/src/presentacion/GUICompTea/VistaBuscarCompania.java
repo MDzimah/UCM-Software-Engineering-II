@@ -77,9 +77,10 @@ public class VistaBuscarCompania extends VistaDefault implements IGUI{
 			ArrayList<ArrayList<TCompTea>> data = new ArrayList<>();
 			data.add(compania);
 
-			new TablaDefault<>("COMPAÑÍA", colNames, data, false).setVisible(true);
+			new TablaDefault<>("Compañía", colNames, data, false).setVisible(true);
 		}
 		else if (evento == Evento.RES_KO) {
+			//ERRORES VAN EN MESSAGES Y NO SE ENVÍAN STRING A TRAVÉS EN OBJECT
 			ViewUtils.createErrorDialogMessage("NO EXISTEN LAS COMPAÑÍAS:.\n" + (String) datos);
 		}
 	}

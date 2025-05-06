@@ -65,7 +65,7 @@ public class VistaBuscarPase extends VistaDefault {
 			data.add(pases);
 
 			// Create and display the table with the pase data
-			TablaDefault<TPase> tabla = new TablaDefault<>("PASES", colNames, data, false);
+			TablaDefault<TPase> tabla = new TablaDefault<>("Pase", colNames, data, false);
 			tabla.setVisible(true);
 		} else if (evento == Evento.RES_KO) {
 			ViewUtils.createErrorDialogMessage(Messages.X_PASE_BUSCADO + ' ' + Messages.MOTIVO.formatted(((Exception) datos).getMessage()));

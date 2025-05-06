@@ -51,6 +51,7 @@ public class VistaBuscarTaquillero extends VistaDefault {
 					SwingUtilities.invokeLater(()-> {Controlador.getInstance().accion(Evento.BUSCAR_TAQUILLERO, _id); });
 					VistaBuscarTaquillero.this.dispose();
 				} catch (NumberFormatException ex) {
+					//HAY PANEL DE CAMPOS INCORRECTOS
 					ViewUtils.createErrorDialogMessage("El ID debe ser un número entero.");
 					VistaBuscarTaquillero.this.dispose();
 				}
@@ -79,7 +80,7 @@ public class VistaBuscarTaquillero extends VistaDefault {
 	        tabla.setVisible(true);
 
 	    } else if (evento == Evento.RES_KO) {
-	    	//Errores van en messages
+	    	//VA EN MESSAGES LO DE "No se han encontrado taquilleros"
 	        ViewUtils.createErrorDialogMessage("No se han encontrado taquilleros.\n" + "Error: " + ((Exception) datos).getMessage());
 	    }
 	}
