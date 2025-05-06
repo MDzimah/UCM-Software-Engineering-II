@@ -161,17 +161,30 @@ public class MainWindow extends JFrame {
             	JDialog subsFactura= new JDialog(MainWindow.this,"Subsistema Factura", false);
             	subsFactura.setLayout(new FlowLayout());
             	
-            	JButton abrirVenta, anyPV, quitarPV, cerrarVenta, buscar, mostrar, carr;
+            	JButton abrirVenta, anyPV, quitarPV, cerrarVenta, buscar, buscarCliente, mostrar, carr;
             	
             	abrirVenta = new JButton("Abrir venta");
             	anyPV = new JButton("Añadir pase a venta");
             	quitarPV = new JButton("Quitar pase de venta");
             	cerrarVenta = new JButton("Cerrar venta");
         		buscar = new JButton("Buscar factura");
+        		buscarCliente = new JButton("Buscar factura por cliente");
         		mostrar = new JButton("Mostrar facturas");
+        		/*
         		carr = new JButton();
         		carr.setIcon(new ImageIcon(ViewUtils.img_ticket()));
+        		carr.setPreferredSize(new Dimension(100, 50));
         		carr.setText(String.valueOf(AbrirVenta.getCarrito().size()));
+        		*/
+        		
+        		carr = new JButton();
+        		ImageIcon originalIcon = new ImageIcon(ViewUtils.img_ticket());
+        		Image originalImage = originalIcon.getImage();
+        		Image scaledImage = originalImage.getScaledInstance(70, 50, Image.SCALE_SMOOTH);
+        		ImageIcon scaledIcon = new ImageIcon(scaledImage);
+        		carr.setIcon(scaledIcon);
+        		carr.setPreferredSize(new Dimension(70, 50));
+
         		
         		anyPV.setEnabled(false);
         		quitarPV.setEnabled(false);
@@ -202,12 +215,23 @@ public class MainWindow extends JFrame {
             		quitarPV.setEnabled(false);
             		cerrarVenta.setEnabled(false);
         		});		
+        		
+        		// BUSCAR FACTURA
         		buscar.addActionListener((ev)->{
         			FactoriaAbstractaPresentacion.getInstance().createVista(Evento.BUSCAR_FACTURA);
         		});	
+        		
+        		// BUSCAR FACTURA POR CLIENTE
+        		buscarCliente.addActionListener((ev)->{
+        			FactoriaAbstractaPresentacion.getInstance().createVista(Evento.BUSCAR_FACTURA_POR_CLIENTE);
+        		});
+        		
+        		// MOSTRAR_FACTURAS
         		mostrar.addActionListener((ev)->{
         			FactoriaAbstractaPresentacion.getInstance().createVista(Evento.MOSTRAR_FACTURAS);
         		});
+        		
+        		// CARRITO
         		carr.addActionListener((ev)->{
         			JDialog carritoView = new JDialog();
         			carritoView.setTitle("Carrito");
@@ -224,6 +248,7 @@ public class MainWindow extends JFrame {
         		subsFactura.add(anyPV);
         		subsFactura.add(quitarPV);
         		subsFactura.add(buscar);
+        		subsFactura.add(buscarCliente);
         		subsFactura.add(cerrarVenta);
         		subsFactura.add(mostrar);
         		subsFactura.add(carr);

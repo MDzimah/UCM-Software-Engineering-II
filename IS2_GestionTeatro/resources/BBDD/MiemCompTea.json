@@ -1,114 +1,24 @@
 {
-    "lastId": 11,
+    "lastId": 2,
     "miembros de la compania teatral": {
-        "11": {
-            "idMiemComp": 11,
-            "apellido": "",
-            "genero": "HOMBRE",
-            "nombre": "",
-            "edad": 0,
-            "DNI": "g",
-            "email": "",
-            "activo": true
-        },
         "1": {
             "idMiemComp": 1,
-            "apellido": "mor",
-            "genero": "HOMBRE",
-            "nombre": "mo",
-            "edad": 40,
-            "DNI": "a",
-            "email": "mor",
+            "apellido": "martin",
+            "genero": "MUJER",
+            "nombre": "luis",
+            "edad": 18,
+            "DNI": "snsns",
+            "email": "jssbd",
             "activo": true
         },
         "2": {
             "idMiemComp": 2,
-            "apellido": "mer",
+            "apellido": "perez",
             "genero": "HOMBRE",
-            "nombre": "mer",
-            "edad": 20,
-            "DNI": "b",
-            "email": "mer",
-            "activo": true
-        },
-        "3": {
-            "idMiemComp": 3,
-            "apellido": "",
-            "genero": "HOMBRE",
-            "nombre": "",
-            "edad": 0,
-            "DNI": "",
-            "email": "",
-            "activo": true
-        },
-        "4": {
-            "idMiemComp": 4,
-            "apellido": "",
-            "genero": "HOMBRE",
-            "nombre": "",
-            "edad": 0,
-            "DNI": "r",
-            "email": "",
-            "activo": true
-        },
-        "5": {
-            "idMiemComp": 5,
-            "apellido": "",
-            "genero": "HOMBRE",
-            "nombre": "",
-            "edad": 0,
-            "DNI": "5",
-            "email": "",
-            "activo": true
-        },
-        "6": {
-            "idMiemComp": 6,
-            "apellido": "",
-            "genero": "HOMBRE",
-            "nombre": "",
-            "edad": 0,
-            "DNI": "6",
-            "email": "",
-            "activo": true
-        },
-        "7": {
-            "idMiemComp": 7,
-            "apellido": "",
-            "genero": "HOMBRE",
-            "nombre": "",
-            "edad": 0,
-            "DNI": "7",
-            "email": "",
-            "activo": true
-        },
-        "8": {
-            "idMiemComp": 8,
-            "apellido": "",
-            "genero": "HOMBRE",
-            "nombre": "",
-            "edad": 0,
-            "DNI": "8",
-            "email": "",
-            "activo": true
-        },
-        "9": {
-            "idMiemComp": 9,
-            "apellido": "",
-            "genero": "HOMBRE",
-            "nombre": "",
-            "edad": 0,
-            "DNI": "9",
-            "email": "",
-            "activo": true
-        },
-        "10": {
-            "idMiemComp": 10,
-            "apellido": "",
-            "genero": "HOMBRE",
-            "nombre": "",
-            "edad": 0,
-            "DNI": "10",
-            "email": "",
+            "nombre": "jsimr",
+            "edad": 7,
+            "DNI": "skc",
+            "email": "ksjccj",
             "activo": true
         }
     }

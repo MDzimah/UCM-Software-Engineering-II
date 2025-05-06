@@ -79,6 +79,18 @@ public class ControladorImp extends Controlador {
 			}
 			break;
 		}
+		case MOSTRAR_FACTURAS_POR_CLIENTE: {
+			try {
+				SAFactura saFac = FactoriaAbstractaNegocio.getInstance().crearSAFactura();
+				Collection<TFactura> allFacturasPorCliente = saFac.allFacturasPorCliente((int) datos);
+				
+				if (allFacturasPorCliente != null && !allFacturasPorCliente.isEmpty()) FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_OK, allFacturasPorCliente);
+				else FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_KO, null);
+			}
+			catch(BBDDReadException e) {
+				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_KO, e);
+			}
+		}
 		
 		
 		
