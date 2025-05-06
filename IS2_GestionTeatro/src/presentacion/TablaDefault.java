@@ -54,7 +54,7 @@ public class TablaDefault<T extends Convertable<T>> extends JFrame {
         
         @Override
         public boolean isCellEditable(int row, int column) {
-            return editable;
+            return column != 0 && editable;
         }
     }
 
