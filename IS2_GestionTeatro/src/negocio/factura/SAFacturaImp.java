@@ -45,7 +45,7 @@ public class SAFacturaImp implements SAFactura {
 			for (TLineaFactura tLinea : tDv.getCarrito()) {
 				SAPase saPase = FactoriaAbstractaNegocio.getInstance().crearSAPase();
 				TPase tPase = saPase.read(tLinea.getIdPase()); //HE HECHO CAMBIOS AQUÍ
-				if (tPase != null) {					
+				if (tPase != null) {
 					int cantidadVendida = saPase.comprar(tPase.getIdPase(), tLinea.getCantidad());
 					if (cantidadVendida > 0) {
 						tLinea.setCantidad(cantidadVendida);
