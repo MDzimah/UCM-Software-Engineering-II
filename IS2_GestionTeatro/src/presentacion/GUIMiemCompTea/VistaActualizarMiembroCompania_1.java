@@ -31,7 +31,7 @@ public class VistaActualizarMiembroCompania_1 extends VistaDefault {
 		TablaDefault<TMiemCompTea> tabla = new TablaDefault<TMiemCompTea>("Miembro de la compania", Messages.colNomsMiemCompTea, miembro, true);
 		tabla.setVisible(true);
 		tabla.getOkButton().addActionListener(e -> {
-			TMiemCompTea tMiemComp = (TMiemCompTea) tabla.getEdicion();
+			TMiemCompTea tMiemComp = (TMiemCompTea) tabla.getEdiciones();
 			Controlador.getInstance().accion(Evento.ACTUALIZAR_MIEMBRO_COMPANIA_1, tMiemComp);
 			dispose();
 		});

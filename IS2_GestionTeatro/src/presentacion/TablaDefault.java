@@ -198,7 +198,7 @@ public class TablaDefault<T extends Convertable<T>> extends JFrame {
         this.setVisible(true);
     }
 	
-	public ArrayList<T> getEdicion() { 
+	public ArrayList<T> getEdiciones() { 
 		if(this.editable) return this.edicionDeCadaTabla; 
 		else throw new IllegalArgumentException(Messages.EXC_EVENTO_TABLA); 
 	}
