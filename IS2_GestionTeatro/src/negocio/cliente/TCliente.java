@@ -88,9 +88,16 @@ public class TCliente implements Convertable<TCliente> {
 	@Override
 	public Object getColumnValue(int columnIndex) {
 		switch (columnIndex) {
-		default: return this.nombre;
+			case 0: return idCliente;
+			case 1: return DNI;
+			case 2: return nombre;
+			case 3: return apellido;
+			case 4: return activo;
+			case 5: return cuentaBancaria;
+			default: return null;
 		}
 	}
+
 
 	@Override
 	public void setColumnValue(int col, String value) throws Exception {
