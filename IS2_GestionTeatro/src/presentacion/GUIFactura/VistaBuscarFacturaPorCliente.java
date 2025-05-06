@@ -70,7 +70,7 @@ public class VistaBuscarFacturaPorCliente extends VistaDefault {
 			ArrayList<ArrayList<TFactura>> data = new ArrayList<>();
 			data.add(singleFactura);
 
-			new TablaDefault<>("Factura por cliente", colNames, data, false).setVisible(true);
+			new TablaDefault<>("Factura por cliente", colNames, data, false);
 		}
 		else if (evento == Evento.RES_KO) {
 			String error;

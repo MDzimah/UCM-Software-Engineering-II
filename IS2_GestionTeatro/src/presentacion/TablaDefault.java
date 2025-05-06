@@ -27,7 +27,7 @@ public class TablaDefault<T extends Convertable<T>> extends JFrame {
 		public DefaultTableModel(String[] nomCols, ArrayList<T> datos, HashMap<Integer, Boolean> editableCols) {
 			this.nomCols = nomCols;
 			this.datos = datos;
-			this.editableCols =  editableCols;
+			this.editableCols = editableCols;
 		}
 
 		@Override
@@ -37,7 +37,9 @@ public class TablaDefault<T extends Convertable<T>> extends JFrame {
 		public int getColumnCount() { return nomCols.length; }
 
 		@Override
-		public Object getValueAt(int rowIndex, int columnIndex) { return this.datos.get(rowIndex).getColumnValue(columnIndex); }
+		public Object getValueAt(int rowIndex, int columnIndex) {
+			return this.datos.get(rowIndex).getColumnValue(columnIndex);
+		}
 
 		@Override
 		public String getColumnName(int columnIndex) { return nomCols[columnIndex]; }
@@ -47,12 +49,11 @@ public class TablaDefault<T extends Convertable<T>> extends JFrame {
 			try {
 				this.datos.get(row).setColumnValue(col, (String) value);
 			} catch (Exception e) {
-				ViewUtils.createErrorDialogMessage(Messages.EDICION_INVALIDA_TABLA);
+				ViewUtils.createErrorDialogMessage(Messages.ERROR_EDICION_TABLA);
 			}
 			fireTableCellUpdated(row, col);
 		}
 
-		//Por defecto, si editableCols es null, la columna 0 es la única no editable
 		@Override
 		public boolean isCellEditable(int row, int column) {
 			if (this.editableCols == null) return column != 0 && actualizar;
@@ -63,12 +64,24 @@ public class TablaDefault<T extends Convertable<T>> extends JFrame {
 		}
 	}
 
-	public TablaDefault(String nombreVista, ArrayList<String[]> columnNamesDeCadaTabla, ArrayList<ArrayList<T>> datosDeCadaTabla, 
-			ArrayList<HashMap<Integer, Boolean>> editableColsDeCadaTabla, boolean CUActualizar) {
+	//Para tablas con edición por defecto (solo la columna 0 no es editable)
+	public TablaDefault(String nombreVista, ArrayList<String[]> columnNamesDeCadaTabla, ArrayList<ArrayList<T>> datosDeCadaTabla, boolean CUActualizar) {
+		new TablaDefault<T>(nombreVista, columnNamesDeCadaTabla, datosDeCadaTabla, null, CUActualizar);
+	}
+
+	public TablaDefault(String nombreVista, ArrayList<String[]> columnNamesDeCadaTabla, ArrayList<ArrayList<T>> datosDeCadaTabla,
+						ArrayList<HashMap<Integer, Boolean>> editableColsDeCadaTabla, boolean CUActualizar) {
 		this.setTitle(nombreVista);
 		this.setLayout(new BorderLayout());
 		ViewUtils.setAppIcon(this);
-		
+
+		if (columnNamesDeCadaTabla.size() != datosDeCadaTabla.size()) {
+			throw new IllegalArgumentException(Messages.ERROR_MISMATCH_COLUMNAS_DATOS);
+		}
+		if (editableColsDeCadaTabla != null && editableColsDeCadaTabla.size() != datosDeCadaTabla.size()) {
+			throw new IllegalArgumentException(Messages.ERROR_MISMATCH_EDITABLES_DATOS);
+		}
+
 		this.actualizar = CUActualizar;
 
 		if (datosDeCadaTabla != null && !datosDeCadaTabla.isEmpty()) {
@@ -80,8 +93,9 @@ public class TablaDefault<T extends Convertable<T>> extends JFrame {
 			int tableInd = 0;
 			for (ArrayList<T> datosTabla : datosDeCadaTabla) {
 				if (datosTabla != null && !datosTabla.isEmpty()) {
-					
-					DefaultTableModel model = new DefaultTableModel(columnNamesDeCadaTabla.get(tableInd), datosTabla, editableColsDeCadaTabla == null ? null : editableColsDeCadaTabla.get(tableInd));
+
+					DefaultTableModel model = new DefaultTableModel(columnNamesDeCadaTabla.get(tableInd), datosTabla,
+							editableColsDeCadaTabla == null ? null : editableColsDeCadaTabla.get(tableInd));
 					JTable table = new JTable(model);
 					table.setFont(ViewUtils.fontTablaDefaultCuerpo());
 
@@ -101,7 +115,9 @@ public class TablaDefault<T extends Convertable<T>> extends JFrame {
 					temp.dispose();
 
 					if (actualizar) {
-						if (datosTabla.size() > 1) throw new IllegalArgumentException(Messages.EXC_EVENTO_TABLA);
+						if (datosTabla.size() > 1) {
+							throw new IllegalArgumentException(Messages.ERROR_SOLO_UNA_FILA_PARA_EDICION);
+						}
 						this.edicionDeCadaTabla.add(datosTabla.get(0));
 
 						table.getModel().addTableModelListener(e -> {
@@ -142,6 +158,8 @@ public class TablaDefault<T extends Convertable<T>> extends JFrame {
 				navPanel.add(next);
 				this.add(navPanel, BorderLayout.NORTH);
 			}
+		} else {
+			ViewUtils.createErrorDialogMessage(Messages.ERROR_DATOS_INVALIDOS);
 		}
 
 		if (actualizar) {
@@ -158,35 +176,11 @@ public class TablaDefault<T extends Convertable<T>> extends JFrame {
 
 	public ArrayList<T> getEdiciones() {
 		if (this.actualizar) return this.edicionDeCadaTabla;
-		else throw new IllegalArgumentException(Messages.EXC_EVENTO_TABLA);
+		else throw new IllegalArgumentException(Messages.ERROR_ACCION_NO_PERMITIDA);
 	}
 
 	public JButton getOkButton() {
 		if (this.actualizar) return this.aceptar;
-		else throw new IllegalArgumentException(Messages.EXC_EVENTO_TABLA);
+		else throw new IllegalArgumentException(Messages.ERROR_ACCION_NO_PERMITIDA);
 	}
 }
-
-
-
-  //PRUEBA DE LA TABLA
-	
-	/*
-	public static void main(String[] args) {
-        SwingUtilities.invokeLater(() -> {
-        	try {
-				UIManager.setLookAndFeel(new FlatMacLightLaf());
-			} catch (UnsupportedLookAndFeelException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-            ArrayList<TFactura> facturas = new ArrayList<>();
-            facturas.add(new TFactura(101, 201, true, LocalDateTime.now().truncatedTo(ChronoUnit.SECONDS), 120.5f, 100.0f));
-            facturas.add(new TFactura(102, 202, true, LocalDateTime.now().minusDays(1).truncatedTo(ChronoUnit.SECONDS), 95.0f, 80.0f));
-
-            // If you want to test update mode on a single row, set consultar=true, editable=true
-            TablaDefault<TFactura> tabla = new TablaDefault<>("Tabla de Facturas", Messages.colNomsFactura, , false);
-            tabla.setVisible(true);
-        });
-    }
-	*/
