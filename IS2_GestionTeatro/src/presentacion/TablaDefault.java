@@ -16,27 +16,28 @@ public class TablaDefault<T extends Convertable<T>> extends JFrame {
 	private JButton aceptar;
 	private ArrayList<T> edicionDeCadaTabla;
 	private boolean actualizar;
-	private HashMap<Integer, Boolean> editableCols;
 
 	private int currentCardIndex = 0;
 
 	private class DefaultTableModel extends AbstractTableModel {
+		private final HashMap<Integer, Boolean> editableCols;
 		private final String[] nomCols;
 		private final ArrayList<T> datos;
 
-		public DefaultTableModel(String[] nomCols, ArrayList<T> datos) {
+		public DefaultTableModel(String[] nomCols, ArrayList<T> datos, HashMap<Integer, Boolean> editableCols) {
 			this.nomCols = nomCols;
 			this.datos = datos;
+			this.editableCols =  editableCols;
 		}
 
 		@Override
-		public int getRowCount() { return datos.size(); }
+		public int getRowCount() { return this.datos.size(); }
 
 		@Override
 		public int getColumnCount() { return nomCols.length; }
 
 		@Override
-		public Object getValueAt(int rowIndex, int columnIndex) { return datos.get(rowIndex).getColumnValue(columnIndex); }
+		public Object getValueAt(int rowIndex, int columnIndex) { return this.datos.get(rowIndex).getColumnValue(columnIndex); }
 
 		@Override
 		public String getColumnName(int columnIndex) { return nomCols[columnIndex]; }
@@ -44,29 +45,30 @@ public class TablaDefault<T extends Convertable<T>> extends JFrame {
 		@Override
 		public void setValueAt(Object value, int row, int col) {
 			try {
-				datos.get(row).setColumnValue(col, (String) value);
+				this.datos.get(row).setColumnValue(col, (String) value);
 			} catch (Exception e) {
 				ViewUtils.createErrorDialogMessage(Messages.EDICION_INVALIDA_TABLA);
 			}
 			fireTableCellUpdated(row, col);
 		}
 
+		//Por defecto, si editableCols es null, la columna 0 es la única no editable
 		@Override
 		public boolean isCellEditable(int row, int column) {
-			if (editableCols == null) return column != 0 && actualizar;
+			if (this.editableCols == null) return column != 0 && actualizar;
 			else {
-				if (editableCols.containsKey(column)) return editableCols.get(column) && actualizar;
+				if (this.editableCols.containsKey(column)) return this.editableCols.get(column) && actualizar;
 				else return actualizar;
 			}
 		}
 	}
 
-	public TablaDefault(String nombreVista, ArrayList<String[]> columnNamesDeCadaTabla, ArrayList<ArrayList<T>> datosDeCadaTabla, HashMap<Integer, Boolean> editableCols, boolean CUActualizar) {
+	public TablaDefault(String nombreVista, ArrayList<String[]> columnNamesDeCadaTabla, ArrayList<ArrayList<T>> datosDeCadaTabla, 
+			ArrayList<HashMap<Integer, Boolean>> editableColsDeCadaTabla, boolean CUActualizar) {
 		this.setTitle(nombreVista);
 		this.setLayout(new BorderLayout());
 		ViewUtils.setAppIcon(this);
 		
-		this.editableCols = editableCols;
 		this.actualizar = CUActualizar;
 
 		if (datosDeCadaTabla != null && !datosDeCadaTabla.isEmpty()) {
@@ -78,7 +80,8 @@ public class TablaDefault<T extends Convertable<T>> extends JFrame {
 			int tableInd = 0;
 			for (ArrayList<T> datosTabla : datosDeCadaTabla) {
 				if (datosTabla != null && !datosTabla.isEmpty()) {
-					DefaultTableModel model = new DefaultTableModel(columnNamesDeCadaTabla.get(tableInd), datosTabla);
+					
+					DefaultTableModel model = new DefaultTableModel(columnNamesDeCadaTabla.get(tableInd), datosTabla, editableColsDeCadaTabla == null ? null : editableColsDeCadaTabla.get(tableInd));
 					JTable table = new JTable(model);
 					table.setFont(ViewUtils.fontTablaDefaultCuerpo());
 
