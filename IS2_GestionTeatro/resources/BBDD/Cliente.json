@@ -1,22 +1,34 @@
 {
     "clientesNormal": {"2": {
         "idCliente": 2,
-        "apellido": "fok",
+        "apellido": "foka",
         "cuenta": "34",
         "puntos": 2,
         "nombre": "aaaf",
         "DNI": "78789",
         "activo": true
     }},
-    "lastId": 2,
-    "clientesVIP": {"1": {
-        "idCliente": 1,
-        "apellido": "kkk",
-        "cuenta": "8",
-        "mensualidad": 0,
-        "nombre": "kk",
-        "nivel": "PLATINO",
-        "DNI": "kk",
-        "activo": true
-    }}
+    "lastId": 3,
+    "clientesVIP": {
+        "1": {
+            "idCliente": 1,
+            "apellido": "kkk",
+            "cuenta": "80",
+            "mensualidad": 0,
+            "nombre": "kk",
+            "nivel": "PLATINO",
+            "DNI": "kk",
+            "activo": true
+        },
+        "3": {
+            "idCliente": 3,
+            "apellido": "lol",
+            "cuenta": "0",
+            "mensualidad": 0,
+            "nombre": "lll",
+            "nivel": "ORO",
+            "DNI": "3232",
+            "activo": true
+        }
+    }
 }

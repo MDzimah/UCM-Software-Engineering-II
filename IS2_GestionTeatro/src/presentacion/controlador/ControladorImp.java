@@ -148,11 +148,11 @@ public class ControladorImp extends Controlador {
 				TCliente tCliente = sa.read(id);
 				if (tCliente.getTipo() == "Normal") {
 					VistaActualizarClNormal vistaAct = (VistaActualizarClNormal) FactoriaAbstractaPresentacion.getInstance().createVista(Evento.ACTUALIZAR_CLIENTE_NORMAL);
-					vistaAct.cargarCliente((TClienteNormal) tCliente);
+					vistaAct.cargarCliente((TClienteNormal) tCliente,id);
 				}
 				else if (tCliente.getTipo() == "VIP") {
 					VistaActualizarClVIP vistaAct = (VistaActualizarClVIP) FactoriaAbstractaPresentacion.getInstance().createVista(Evento.ACTUALIZAR_CLIENTE_VIP);
-					vistaAct.cargarCliente((TClienteVIP) tCliente);
+					vistaAct.cargarCliente((TClienteVIP) tCliente,id);
 				}
 			}
 			catch (Exception e) {

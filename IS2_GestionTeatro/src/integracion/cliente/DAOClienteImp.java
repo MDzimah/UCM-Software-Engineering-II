@@ -57,9 +57,9 @@ public class DAOClienteImp implements DAOCliente {
 		tCliente.setIdCliente(newId);
 		
 		//cliente normal
-		if (tCliente.getTipo() == "Normal") return createNormal(tCliente,bdc,newId);
+		if (tCliente.getTipo().equals("Normal")) return createNormal(tCliente,bdc,newId);
 		//cliente VIP
-		else if (tCliente.getTipo() == "VIP") return createVIP(tCliente,bdc,newId);
+		else if (tCliente.getTipo().equals("VIP")) return createVIP(tCliente,bdc,newId);
 		else return -1;
 	}
 
@@ -152,7 +152,7 @@ public class DAOClienteImp implements DAOCliente {
 		if (clientesv.has(Integer.toString(tCliente.getIdCliente()))) {
 			JSONObject cv = (JSONObject) clientesv.getJSONObject(Integer.toString(tCliente.getIdCliente()));
 			if (cv.getBoolean(Messages.KEY_act)) {
-				clientes.put(Integer.toString(tCliente.getIdCliente()), newClienteVIP((TClienteVIP) tCliente));
+				clientesv.put(Integer.toString(tCliente.getIdCliente()), newClienteVIP((TClienteVIP) tCliente));
 				bdc.put(Messages.KEY_cliVIPs, clientesv);
 				OpsBBDD.write(bdc, Messages.BDCli);
 				return tCliente.getIdCliente();
