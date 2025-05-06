@@ -13,6 +13,7 @@ import misc.*;
 
 @SuppressWarnings("serial")
 public class TablaDefault<T extends Convertable<T>> extends JFrame {
+	private JTable table;
 	private JButton aceptar;
 	private ArrayList<T> edicionDeCadaTabla;
 	private boolean actualizar;
@@ -37,9 +38,7 @@ public class TablaDefault<T extends Convertable<T>> extends JFrame {
 		public int getColumnCount() { return nomCols.length; }
 
 		@Override
-		public Object getValueAt(int rowIndex, int columnIndex) {
-			return this.datos.get(rowIndex).getColumnValue(columnIndex);
-		}
+		public Object getValueAt(int rowIndex, int columnIndex) { return this.datos.get(rowIndex).getColumnValue(columnIndex); }
 
 		@Override
 		public String getColumnName(int columnIndex) { return nomCols[columnIndex]; }
@@ -64,9 +63,76 @@ public class TablaDefault<T extends Convertable<T>> extends JFrame {
 		}
 	}
 
+	  //POR SI HUBIERA QUE MOSTRAR EN LA TABLA ARRAYS/COLLECTIONS EN CELDAS
+    //MultiLineTableCellRenderer inspirado por Channa Jayamuni en Stack Overflow
+    //https://stackoverflow.com/questions/9955595/how-to-display-multiple-lines-in-a-jtable-cell
+    /*
+    private class MultiLineTableCellRenderer extends JList<String> implements TableCellRenderer {
+    	
+    	//Para una apariencia más vistosa de la tabla
+    	public MultiLineTableCellRenderer() {
+    	    setOpaque(true);
+    	    setFont(Constants.FontTablaDefaultCuerpo());
+    	    setFixedCellHeight(-1); //Para ajuste dinámico del tamaño de las células
+    	    setBorder(BorderFactory.createEmptyBorder(2, 5, 2, 5));
+    	}
+    	
+        @Override
+        public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
+            
+        	//Solo se va a hacer un renderizado multilínea si el valor del objeto es una Collection o un Array
+        	//En caso contrario renderizamos la casilla con el toString() del Objeto
+            if (value == null) this.setListData(new String[] {""});
+            else {
+                if (!(value instanceof Collection) && !value.getClass().isArray()) setListData(new String[] { value.toString() });
+                else {
+                	Object[] paramData;
+                	if (value.getClass().isArray()) paramData = (Object[]) value;
+                	else paramData = ((Collection<?>) value).toArray();
+                	
+                	String[] data = new String[paramData.length];
+                	for (int i = 0; i < data.length; ++i) {
+                		data[i] = paramData[i].toString();
+                	}
+                    this.setListData(data);
+                }
+            }
+
+            //Para la interacción con las celdas
+            if (isSelected) {
+                setBackground(table.getSelectionBackground());
+                setForeground(table.getSelectionForeground());
+            } else {
+                setBackground(table.getBackground());
+                setForeground(table.getForeground());
+            }
+
+            return this;
+        }
+    }
+    
+     private void setRender(JTable table, int numCols) {
+        //Las celdas de la tabla pueden contener listas, luego para mostrar los elementos uno debajo del otro, hace falta
+        //cambiar la forma de renderizarlas
+        MultiLineTableCellRenderer renderer = new MultiLineTableCellRenderer(); 
+        table.setDefaultRenderer(String[].class, renderer);
+        for (int i = 0; i < numCols; ++i) {
+        	table.getColumnModel().getColumn(i).setCellRenderer(renderer);
+        }
+        
+        for (int row = 0; row < table.getRowCount(); row++) {
+            int maxHeight = table.getRowHeight();
+            for (int col = 0; col < table.getColumnCount(); col++) {
+                Component comp = table.prepareRenderer(renderer, row, col);
+                maxHeight = Math.max(maxHeight, comp.getPreferredSize().height);
+            }
+            table.setRowHeight(row, maxHeight);
+        }
+    }
+    */
 	//Para tablas con edición por defecto (solo la columna 0 no es editable)
 	public TablaDefault(String nombreVista, ArrayList<String[]> columnNamesDeCadaTabla, ArrayList<ArrayList<T>> datosDeCadaTabla, boolean CUActualizar) {
-		new TablaDefault<T>(nombreVista, columnNamesDeCadaTabla, datosDeCadaTabla, null, CUActualizar);
+		this(nombreVista, columnNamesDeCadaTabla, datosDeCadaTabla, null, CUActualizar);
 	}
 
 	public TablaDefault(String nombreVista, ArrayList<String[]> columnNamesDeCadaTabla, ArrayList<ArrayList<T>> datosDeCadaTabla,
@@ -96,8 +162,9 @@ public class TablaDefault<T extends Convertable<T>> extends JFrame {
 
 					DefaultTableModel model = new DefaultTableModel(columnNamesDeCadaTabla.get(tableInd), datosTabla,
 							editableColsDeCadaTabla == null ? null : editableColsDeCadaTabla.get(tableInd));
-					JTable table = new JTable(model);
+					table = new JTable(model);
 					table.setFont(ViewUtils.fontTablaDefaultCuerpo());
+					table.setIntercellSpacing(new Dimension(10,0));
 
 					JTableHeader header = table.getTableHeader();
 					header.setFont(ViewUtils.fontTablaDefaultCabecera());
@@ -128,12 +195,17 @@ public class TablaDefault<T extends Convertable<T>> extends JFrame {
 					}
 
 					JScrollPane scrollPane = new JScrollPane(table);
+					Dimension preferredSize = table.getPreferredSize();
+					preferredSize.height += table.getTableHeader().getPreferredSize().height + 20;
+					table.setPreferredScrollableViewportSize(preferredSize);
+					scrollPane.setPreferredSize(preferredSize);
 					tablesPanel.add(scrollPane, "card" + tableInd);
 				}
 				tableInd++;
 			}
-
+			
 			this.add(tablesPanel, BorderLayout.CENTER);
+			cardLayout.show(tablesPanel, "card0");
 
 			if (datosDeCadaTabla.size() > 1) {
 				JPanel navPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
@@ -163,8 +235,11 @@ public class TablaDefault<T extends Convertable<T>> extends JFrame {
 		}
 
 		if (actualizar) {
+			JPanel res = new JPanel(new FlowLayout(FlowLayout.CENTER));
 			this.aceptar = new JButton("Aceptar");
-			this.add(this.aceptar, BorderLayout.SOUTH);
+			res.setBorder(BorderFactory.createEmptyBorder(10, -1, 10, -1));
+			res.add(this.aceptar);
+			this.add(res, BorderLayout.SOUTH);
 		}
 
 		this.pack();
@@ -175,7 +250,13 @@ public class TablaDefault<T extends Convertable<T>> extends JFrame {
 	}
 
 	public ArrayList<T> getEdiciones() {
-		if (this.actualizar) return this.edicionDeCadaTabla;
+		if (this.actualizar) {
+			//Similar al commitEdit de un JSpinner
+			if (table.isEditing()) {
+	            table.getCellEditor().stopCellEditing();
+	        }
+			return this.edicionDeCadaTabla;
+		}
 		else throw new IllegalArgumentException(Messages.ERROR_ACCION_NO_PERMITIDA);
 	}
 

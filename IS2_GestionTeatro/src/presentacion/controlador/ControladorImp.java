@@ -50,6 +50,7 @@ public class ControladorImp extends Controlador {
 			catch (BBDDReadException | BBDDWriteException | UnknownClienteException | UnknownTaquilleroException e) {
 				 FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_KO, e);
 			}
+			break;
 		}
 		case BUSCAR_FACTURA: {
 			try {
@@ -90,6 +91,7 @@ public class ControladorImp extends Controlador {
 			catch(BBDDReadException e) {
 				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_KO, e);
 			}
+			break;
 		}
 		
 		
@@ -218,6 +220,18 @@ public class ControladorImp extends Controlador {
 			
 			break;
 		}
+		case BUSCAR_DNI_TAQUILLERO: {
+			try {
+				SATaquillero saTaq = FactoriaAbstractaNegocio.getInstance().crearSATaquillero();
+				String dniBuscar = (String) datos;
+				TTaquillero tTaq = saTaq.readByDNI(dniBuscar);
+				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_OK, tTaq);
+			} catch (Exception e) {
+				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_KO, e);
+			}
+			
+			break;
+		}
 		case MOSTRAR_TAQUILLEROS: {
 			try {
 				SATaquillero saTaq = FactoriaAbstractaNegocio.getInstance().crearSATaquillero();
@@ -238,7 +252,6 @@ public class ControladorImp extends Controlador {
 				VistaActualizarTaquillero_1 vistaActTaq = (VistaActualizarTaquillero_1) FactoriaAbstractaPresentacion.getInstance().createVista(Evento.ACTUALIZAR_TAQUILLERO_1);
 				vistaActTaq.cargarTaquillero(tTaq);
 				vistaActTaq.setVisible(true);
-				//FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_OK, tTaq);
 			} catch (Exception e) {
 				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_KO, e);
 			}
@@ -446,6 +459,7 @@ public class ControladorImp extends Controlador {
 			catch(Exception e) {
 				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_KO, e);
 			}
+			break;
 		}
 		case ACTUALIZAR1_COMPANIA_TEATRAL:
 		{
@@ -464,6 +478,7 @@ public class ControladorImp extends Controlador {
 			catch(Exception e) {
 				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_KO, e);
 			}
+			break;
 		}
 		case BUSCAR_COMPANIA_TEATRAL:
 		{
@@ -610,7 +625,7 @@ public class ControladorImp extends Controlador {
 			}
 			break;
 		}
-		case MOSTRAR_MIEMBROS_COMPANIA:
+		default:
 		{
 			try {
 				SAMiemCompTea saMiemComp = FactoriaAbstractaNegocio.getInstance().crearSAMiemCompTea();
@@ -622,10 +637,7 @@ public class ControladorImp extends Controlador {
 				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_KO, e.getMessage());
 			}
 			break;
-		}
-		
-		//Todas las ventanas que abren a otras (las que no sean de CU)
-		default: break;
+		}	
 	}
 	}
 

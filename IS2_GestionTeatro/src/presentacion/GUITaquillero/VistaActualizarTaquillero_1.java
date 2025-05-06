@@ -3,6 +3,7 @@ package presentacion.GUITaquillero;
 import java.util.ArrayList;
 
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JComponent;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
@@ -19,8 +20,9 @@ import presentacion.controlador.Controlador;
 public class VistaActualizarTaquillero_1 extends VistaDefault {
 
 	private JButton aceptar, cancelar;
-	private JTextField nombre, apellido, dni, sueldo, edad, genero;
+	private JTextField nombre, apellido, dni, sueldo, edad;
 	private JLabel l_nombre, l_apellido, l_DNI, l_sueldo, l_edad, l_genero;
+	private JComboBox<Genero> genero;
 	
 	public VistaActualizarTaquillero_1() {
 		initGUI();
@@ -41,7 +43,7 @@ public class VistaActualizarTaquillero_1 extends VistaDefault {
 		dni = new JTextField();
 		sueldo = new JTextField();
 		edad = new JTextField();
-		genero = new JTextField();
+		genero = new JComboBox<Genero>(Genero.values());
 		aceptar = new JButton("Aceptar");
 		cancelar = new JButton("Cancelar");
 		
@@ -63,7 +65,7 @@ public class VistaActualizarTaquillero_1 extends VistaDefault {
 			String _DNI = dni.getText();
 			float _sueldo = Float.valueOf(sueldo.getText());
 			int _edad = Integer.valueOf(edad.getText());
-			Genero _genero = Genero.valueOf(genero.getText());
+			Genero _genero = (Genero) genero.getSelectedItem();
 			TTaquillero tTaq = new TTaquillero(true, _DNI, _nombre, _apellido, 0, _sueldo, _edad, _genero);
 			
 			SwingUtilities.invokeLater(()-> {Controlador.getInstance().accion(Evento.ACTUALIZAR_TAQUILLERO_1, tTaq); });
@@ -84,7 +86,7 @@ public class VistaActualizarTaquillero_1 extends VistaDefault {
 		dni.setText(tTaq.getDNI());
 		sueldo.setText(Float.toString(tTaq.getSueldo()));
 		edad.setText(Integer.toString(tTaq.getEdad()));
-		genero.setText(tTaq.getGenero().toString());
+		genero.setSelectedItem(tTaq.getGenero());
 	}
 
 	@Override

@@ -67,7 +67,7 @@ public class VistaBuscarFactura extends VistaDefault {
 		else if (evento == Evento.RES_KO) {
 			String error;
 			if (datos instanceof BBDDReadException) error = ((BBDDReadException)datos).getMessage();
-			else error = Messages.ID_NO_ENCONTRADO.formatted(String.valueOf((int) datos));
+			else error = Messages.ID_NO_ENCONTRADO.formatted((int) datos);
 			ViewUtils.createErrorDialogMessage(Messages.X_BUSCAR_FACTURA + ' ' + Messages.MOTIVO.formatted(error));
 		}
 	}

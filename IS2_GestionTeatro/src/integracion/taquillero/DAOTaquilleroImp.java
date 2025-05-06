@@ -2,6 +2,7 @@ package integracion.taquillero;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Iterator;
 import java.util.Set;
 
 import org.json.JSONObject;
@@ -27,21 +28,12 @@ public class DAOTaquilleroImp implements DAOTaquillero {
 		}
 		
 		JSONObject taquilleros = bdTaq.getJSONObject(Messages.KEY_taquilleros); 
+		//nuevo id
 		int newId = bdTaq.getInt(Messages.KEY_lastId) + 1;
 		bdTaq.put(Messages.KEY_lastId, newId);
 		
 		//creamos nuevo taquillero
-		JSONObject nuevoTaq = new JSONObject();
-		nuevoTaq.put(Messages.KEY_idTaq, newId);
-		nuevoTaq.put(Messages.KEY_nombre, tTaquillero.getNombre());
-		nuevoTaq.put(Messages.KEY_apellido, tTaquillero.getApellido());
-		nuevoTaq.put(Messages.KEY_DNI, tTaquillero.getDNI());
-		nuevoTaq.put(Messages.KEY_numVentas, tTaquillero.getNumVentas());
-		nuevoTaq.put(Messages.KEY_sueldo, tTaquillero.getSueldo());
-		nuevoTaq.put(Messages.KEY_edad, tTaquillero.getEdad());
-		nuevoTaq.put(Messages.KEY_genero, tTaquillero.getGenero().toString());
-		nuevoTaq.put(Messages.KEY_act, tTaquillero.getActivo());
-		
+		JSONObject nuevoTaq = createJSONTaq(tTaquillero);
 		taquilleros.put(Integer.toString(newId), nuevoTaq);
 		OpsBBDD.write(bdTaq, Messages.BDTaq);
 		
@@ -82,6 +74,28 @@ public class DAOTaquilleroImp implements DAOTaquillero {
 		return null;
 	}
 	
+	@Override
+	public TTaquillero readByDNI(String dni) throws BBDDReadException {
+		if(!OpsBBDD.isEmpty(Messages.BDTaq)) {
+			JSONObject bdTaq = OpsBBDD.read(Messages.BDTaq);
+			JSONObject taquilleros = bdTaq.getJSONObject(Messages.KEY_taquilleros);
+			
+			Set<String> allIds = taquilleros.keySet(); //conjunto de ids
+			
+			//recorremos comprobando el DNI
+			Iterator<String> it = allIds.iterator();
+			boolean encontrado = false;
+			JSONObject taq = null;
+			while(it.hasNext() && !encontrado) {
+				String _id = it.next();
+				taq = taquilleros.getJSONObject(_id);
+				if(taq.get(Messages.KEY_DNI).equals(dni)) encontrado = true;
+			}
+			if(encontrado) return createTTaq(taq);
+			else return null;
+		}
+		return null;
+	}
 	
 	@Override
 	public int update(TTaquillero tTaquillero) throws BBDDReadException, BBDDWriteException {
@@ -145,19 +159,11 @@ public class DAOTaquilleroImp implements DAOTaquillero {
 		return -1; //no se ha encontrado o no existe
 	}*/
 
-	//Método adicional
-	@Override
-	public TTaquillero readByDNI() throws BBDDReadException {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
 	/*
 	 * Crea un JSONObject a partir del Transfer Taquillero
 	 */
 	private JSONObject createJSONTaq(TTaquillero tTaquillero) {
 		JSONObject nuevoTaq = new JSONObject();
-		nuevoTaq.put(Messages.KEY_idTaq, tTaquillero.getIdTaquillero());
 		nuevoTaq.put(Messages.KEY_nombre, tTaquillero.getNombre());
 		nuevoTaq.put(Messages.KEY_apellido, tTaquillero.getApellido());
 		nuevoTaq.put(Messages.KEY_DNI, tTaquillero.getDNI());
@@ -184,6 +190,7 @@ public class DAOTaquilleroImp implements DAOTaquillero {
 				Genero.valueOf(taq.getString(Messages.KEY_genero))
 				);
 	}
+	
 }
 
 
