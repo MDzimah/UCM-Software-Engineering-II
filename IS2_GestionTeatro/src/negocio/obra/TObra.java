@@ -108,9 +108,9 @@ public class TObra implements Convertable<TObra>{
 		case 0:
 			return idObra;
 		case 1:
-			return autor;
-		case 2:
 			return titulo;
+		case 2:
+			return autor;
 		case 3:
 			return genero;
 		case 4:
@@ -125,9 +125,9 @@ public class TObra implements Convertable<TObra>{
 		case 0:
 			idObra=Integer.valueOf(value);
 		case 1:
-			autor= value; break;
+			titulo= value; break;
 		case 2:
-			titulo=value; break;
+			autor=value; break;
 		case 3:
 			genero=value; break;
 		case 4:

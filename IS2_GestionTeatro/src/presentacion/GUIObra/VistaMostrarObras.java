@@ -1,6 +1,8 @@
 package presentacion.GUIObra;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 import exceptions.BBDDReadException;
 import misc.Messages;
@@ -28,7 +30,13 @@ public class VistaMostrarObras implements IGUI {
 			colNames.add(Messages.colNomsObra);
 
 			ArrayList<ArrayList<TObra>> data = new ArrayList<>();
-			data.add((ArrayList<TObra>) datos);
+			
+			ArrayList<TObra> info= new ArrayList<TObra>();
+			for(int i =0 ; i<((List<TObra>) datos).size();++i)
+				info.add(((List<TObra>) datos).get(i));
+			
+			info.sort((p1, p2) -> Integer.compare(p1.getIdObra(), p2.getIdObra()));
+			data.add(info);
 
 			new TablaDefault<>("OBRAS", colNames, data, false);
 		} else if (evento == Evento.RES_KO) {
