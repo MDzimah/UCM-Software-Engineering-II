@@ -18,7 +18,7 @@ import presentacion.controlador.Controlador;
 
 
 @SuppressWarnings("serial")
-public class VistaMostrarFacturas extends TablaDefault<TFactura> implements IGUI {
+public class VistaMostrarFacturas implements IGUI {
 	private static boolean mostrado = false;
 	public VistaMostrarFacturas() {
 		if (mostrado == false) {
@@ -31,6 +31,8 @@ public class VistaMostrarFacturas extends TablaDefault<TFactura> implements IGUI
 	public void actualizar(Evento evento, Object datos) {
 		evento = Evento.RES_OK;
 		if (evento == Evento.RES_OK) {
+			String[][String[]] colNames = new String[1][1]; 
+			colNames[1][1] = Messages.colNomsFactura;
 			this.createTable("FACTURAS", Messages.colNomsFactura, (ArrayList<TFactura>)datos, false);
 		}
 		else if(evento == Evento.RES_KO) {

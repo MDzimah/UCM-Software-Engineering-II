@@ -126,7 +126,7 @@ public class TablaDefault<T extends Convertable<T>> extends JFrame {
     }
     */
 
-	public TablaDefault(String nombreVista,  String[][] columnNamesDeCadaTabla, ArrayList<ArrayList<T>> datosDeCadaTabla, boolean CUActualizar) {
+	public TablaDefault(String nombreVista,  ArrayList<String[]> columnNamesDeCadaTabla, ArrayList<ArrayList<T>> datosDeCadaTabla, boolean CUActualizar) {
 		this.setTitle(nombreVista);
         this.setLayout(new BorderLayout());
         ViewUtils.setAppIcon(this);
@@ -140,7 +140,7 @@ public class TablaDefault<T extends Convertable<T>> extends JFrame {
         	int tableInd = 0;
         	for (ArrayList<T> datosTabla : datosDeCadaTabla) {
         		if (datosTabla != null && !datosTabla.isEmpty()) {
-		        	DefaultTableModel model = new DefaultTableModel(columnNamesDeCadaTabla[tableInd], datosTabla);
+		        	DefaultTableModel model = new DefaultTableModel(columnNamesDeCadaTabla.get(tableInd), datosTabla);
 		        	JTable table = new JTable(model);
 			        table.setFont(ViewUtils.fontTablaDefaultCuerpo());
 			        
@@ -157,8 +157,8 @@ public class TablaDefault<T extends Convertable<T>> extends JFrame {
 			        temp.setFont(ViewUtils.fontTablaDefaultCabecera());
 			        
 			        FontMetrics metrics = temp.getFontMetrics();
-			        for (int i = 0; i < columnNamesDeCadaTabla.length; ++i) {
-			            int headerWidth = metrics.stringWidth(columnNamesDeCadaTabla[tableInd][i]) + 120;
+			        for (int i = 0; i < columnNamesDeCadaTabla.get(tableInd).length; ++i) {
+			            int headerWidth = metrics.stringWidth(columnNamesDeCadaTabla.get(tableInd)[i]) + 120;
 			            cm.getColumn(i).setPreferredWidth(headerWidth);
 			        }
 			        temp.dispose();
