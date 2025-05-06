@@ -3,6 +3,7 @@ package presentacion.GUIFactura;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 import javax.swing.*;
 
@@ -31,9 +32,11 @@ public class VistaMostrarFacturas implements IGUI {
 	public void actualizar(Evento evento, Object datos) {
 		evento = Evento.RES_OK;
 		if (evento == Evento.RES_OK) {
-			String[][String[]] colNames = new String[1][1]; 
-			colNames[1][1] = Messages.colNomsFactura;
-			this.createTable("FACTURAS", Messages.colNomsFactura, (ArrayList<TFactura>)datos, false);
+			ArrayList<String[]> colNames = new ArrayList<>();
+			colNames.add(Messages.colNomsFactura);
+			ArrayList<ArrayList<TFactura>> data = new ArrayList<>();
+			data.add((ArrayList<TFactura>)datos);
+			new TablaDefault("Facturas", colNames, data, false);
 		}
 		else if(evento == Evento.RES_KO) {
 			String error;

@@ -1,54 +1,40 @@
 package presentacion.GUIMiemCompTea;
 
 import java.util.ArrayList;
-import java.util.Collection;
 
-import javax.swing.JButton;
-
+import exceptions.BBDDReadException;
 import misc.Messages;
 import negocio.miemCompTea.TMiemCompTea;
 import presentacion.Evento;
-import presentacion.ViewUtils;
+import presentacion.IGUI;
 import presentacion.TablaDefault;
-import presentacion.VistaDefault;
+import presentacion.ViewUtils;
 import presentacion.controlador.Controlador;
-import presentacion.factoria.FactoriaAbstractaPresentacion;
 
-public class VistaMostrarMiembrosCompania extends VistaDefault{
-	
+public class VistaMostrarMiembrosCompania implements IGUI {
+	private static boolean mostrado = false;
+
 	public VistaMostrarMiembrosCompania() {
-		super();
-		
-		JButton mostrar = new JButton("Mostrar");
-		JButton cancel = new JButton("Cancelar");
-		
-		super.initComps(null, mostrar, cancel);
-		
-		mostrar.addActionListener(e->{
+		if (!mostrado) {
+			mostrado = true;
 			Controlador.getInstance().accion(Evento.MOSTRAR_MIEMBROS_COMPANIA, null);
-			dispose();
-		});
-		
-		cancel.addActionListener(e->dispose());
-		
-		this.setTitle("Mostrar miembros compania");
-		this.setVisible(true);
+		}
 	}
 
-	@SuppressWarnings("unchecked")
 	@Override
 	public void actualizar(Evento evento, Object datos) {
 		if (evento == Evento.RES_OK) {
-			new TablaDefault<TMiemCompTea>("MIEMBROS DE LA COMPANIA", Messages.colNomsMiemCompTea, (ArrayList<TMiemCompTea>)datos, false).setVisible(true);
-			dispose();
-		}
-		else if (evento == Evento.RES_KO) {
-			String error;
-			if (datos instanceof String) error = (String) datos;
-			else error = Messages.NO_HAY_DATOS;
+			ArrayList<String[]> colNames = new ArrayList<>();
+			colNames.add(Messages.colNomsMiemCompTea);
+
+			ArrayList<ArrayList<TMiemCompTea>> data = new ArrayList<>();
+			data.add((ArrayList<TMiemCompTea>) datos);
+
+			new TablaDefault<>("Miembros de la compañía teatral", colNames, data, false);
+		} else if (evento == Evento.RES_KO) {
+			String error = (datos instanceof BBDDReadException) ? ((BBDDReadException) datos).getMessage() : Messages.NO_HAY_DATOS;
 			ViewUtils.createErrorDialogMessage(Messages.X_MIEMBROS_LISTADOS + ' ' + Messages.MOTIVO.formatted(error));
 		}
-		
+		mostrado = false;
 	}
-	
 }

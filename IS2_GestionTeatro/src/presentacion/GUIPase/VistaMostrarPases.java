@@ -1,53 +1,40 @@
 package presentacion.GUIPase;
 
 import java.util.ArrayList;
-import java.util.Collection;
 
-import javax.swing.JButton;
-import javax.swing.JPanel;
-
+import exceptions.BBDDReadException;
 import misc.Messages;
-import negocio.factura.TFactura;
 import negocio.pase.TPase;
 import presentacion.Evento;
 import presentacion.IGUI;
-import presentacion.ViewUtils;
 import presentacion.TablaDefault;
-import presentacion.VistaDefault;
+import presentacion.ViewUtils;
 import presentacion.controlador.Controlador;
-import presentacion.factoria.FactoriaAbstractaPresentacion;
 
-public class VistaMostrarPases extends VistaDefault {
-	private JButton mostrar;
-	private JButton cancel;
-	
+public class VistaMostrarPases implements IGUI {
+	private static boolean mostrado = false;
+
 	public VistaMostrarPases() {
-		this.setTitle("mostrar pases");
-		this.mostrar = new JButton("Mostrar");
-		this.cancel = new JButton("Cancelar");
-		super.initComps(null, mostrar, cancel);
-		this.setVisible(true);
-		mostrar.addActionListener(e->{
+		if (!mostrado) {
+			mostrado = true;
 			Controlador.getInstance().accion(Evento.MOSTRAR_PASES, null);
-			this.setVisible(false);
-			dispose();
-		});
-		
-		cancel.addActionListener(e->{
-			this.setVisible(false);
-			dispose();
-		});
+		}
 	}
-	
-	@SuppressWarnings("unchecked")
+
 	@Override
 	public void actualizar(Evento evento, Object datos) {
 		if (evento == Evento.RES_OK) {
-			new TablaDefault<TPase>("PASES", Messages.colNomsPase, (ArrayList<TPase>)datos, false).setVisible(true);
-		}
-		else if(evento == Evento.RES_KO) {
-			ViewUtils.createErrorDialogMessage(Messages.X_MOSTRAR_PASES + ' ' + Messages.MOTIVO.formatted(((Exception)datos).getMessage()));
-		}
-	}
+			ArrayList<String[]> colNames = new ArrayList<>();
+			colNames.add(Messages.colNomsPase);
 
+			ArrayList<ArrayList<TPase>> data = new ArrayList<>();
+			data.add((ArrayList<TPase>) datos);
+
+			new TablaDefault<>("PASES", colNames, data, false);
+		} else if (evento == Evento.RES_KO) {
+			String error = (datos instanceof BBDDReadException) ? ((BBDDReadException) datos).getMessage() : Messages.NO_HAY_DATOS;
+			ViewUtils.createErrorDialogMessage(Messages.X_MOSTRAR_PASES + ' ' + Messages.MOTIVO.formatted(error));
+		}
+		mostrado = false;
+	}
 }
