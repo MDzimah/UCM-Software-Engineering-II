@@ -51,8 +51,8 @@ private JButton mostrar, cancelar;
 	public void actualizar(Evento evento, Object datos) {
 		if(evento == Evento.RES_OK) {
 			ArrayList<TCliente> cls = (ArrayList<TCliente>) datos;
-			ArrayList<TClienteVIP> clv = new ArrayList<>();
-			ArrayList<TClienteNormal> cln = new ArrayList<>();
+			ArrayList<TCliente> clv = new ArrayList<>();
+			ArrayList<TCliente> cln = new ArrayList<>();
 			
 			for(TCliente tCliente : cls) {
 				if (tCliente.getTipo() == "VIP") {
@@ -64,14 +64,16 @@ private JButton mostrar, cancelar;
 			}
 			
 			//creamos la tabla
-			TablaDefault<TClienteVIP> tabla1 = new TablaDefault<TClienteVIP>("Clientes VIP", Messages.colNomsClienteVIP, clv, false);
-			TablaDefault<TClienteNormal> tabla2 = new TablaDefault<TClienteNormal>("Clientes Normales", Messages.colNomsClienteNormal, cln, false);
-			JFrame frame = new JFrame();
-			frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-			frame.setLayout(new GridLayout(1,2));
-			frame.add(tabla1);
-			frame.add(tabla2);
-			frame.setVisible(true);
+			ArrayList<String[]> list = new ArrayList<String[]>(2);
+			list.add(Messages.colNomsClienteVIP);
+			list.add(Messages.colNomsClienteNormal);
+			ArrayList<ArrayList<TCliente>> cl = new ArrayList<ArrayList<TCliente>>(2);
+			cl.add(clv);
+			cl.add(cln);
+			TablaDefault<TCliente> tabla = new TablaDefault<TCliente>("Clientes",list,cl,false);
+			//TablaDefault<TClienteVIP> tabla1 = new TablaDefault<TClienteVIP>("Clientes VIP", Messages.colNomsClienteVIP, clv, false);
+			//TablaDefault<TClienteNormal> tabla2 = new TablaDefault<TClienteNormal>("Clientes Normales", Messages.colNomsClienteNormal, cln, false);
+			tabla.setVisible(true);
 			
 		} else if (evento == Evento.RES_KO) {
 			ViewUtils.createErrorDialogMessage("No se han podido mostrar los taquilleros.\n" + "Error: " +((Exception) datos).getMessage());

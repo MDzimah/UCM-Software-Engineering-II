@@ -5,7 +5,7 @@ import java.util.Collection;
 import negocio.factura.TFactura;
 import presentacion.Convertable;
 
-public class TClienteNormal extends TCliente implements Convertable<TClienteNormal>{
+public class TClienteNormal extends TCliente/* implements Convertable<TClienteNormal>*/{
 	private int PuntosAcumulados;
 	
 	public TClienteNormal() {

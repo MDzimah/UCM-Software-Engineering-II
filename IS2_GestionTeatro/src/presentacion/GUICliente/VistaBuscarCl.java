@@ -1,6 +1,7 @@
 package presentacion.GUICliente;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 import javax.swing.JButton;
 import javax.swing.JComponent;
@@ -72,14 +73,14 @@ public class VistaBuscarCl extends VistaDefault implements IGUI {
 		if(evento == Evento.RES_OK) {
 			TCliente cliente = (TCliente)datos;
 			if (cliente.getTipo() == "VIP") {
-				ArrayList<TClienteVIP> cl = new ArrayList<TClienteVIP>();
-				cl.add((TClienteVIP)datos);
-				new TablaDefault<TClienteVIP>("Cliente", Messages.colNomsClienteVIP, cl, false).setVisible(true);
+				ArrayList<TCliente> cl = new ArrayList<TCliente>();
+				cl.add((TCliente)datos);
+				new TablaDefault<TCliente>("Cliente", new ArrayList<>(Collections.singletonList(Messages.colNomsClienteVIP)),new ArrayList<>(Collections.singletonList(cl)), false).setVisible(true);
 			}
 			else if (cliente.getTipo() == "Normal") {
-				ArrayList<TClienteNormal> cl = new ArrayList<TClienteNormal>();
-				cl.add((TClienteNormal)datos);
-				new TablaDefault<TClienteNormal>("Cliente", Messages.colNomsClienteNormal, cl, false).setVisible(true);
+				ArrayList<TCliente> cl = new ArrayList<TCliente>();
+				cl.add((TCliente)datos);
+				new TablaDefault<TCliente>("Cliente", new ArrayList<>(Collections.singletonList(Messages.colNomsClienteVIP)),new ArrayList<>(Collections.singletonList(cl)), false).setVisible(true);
 			}
 			
 		} else if(evento == Evento.RES_KO) {

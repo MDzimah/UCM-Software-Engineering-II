@@ -28,6 +28,7 @@ public class VistaActualizarClNormal extends VistaDefault implements IGUI {
 	private JTextField DNI, nombre, apellido, cuentaBancaria, puntosAcum;
 	private JLabel DNIl, nombrel, apellidol, cuentaBancarial, puntosAcuml;
 	private JButton alta, cancelar;
+	private int id;
 	
 	
 	public VistaActualizarClNormal() {
@@ -66,7 +67,7 @@ public class VistaActualizarClNormal extends VistaDefault implements IGUI {
 			String dni = DNI.getText();
 			String cuenta = cuentaBancaria.getText();
 			int ptos = Integer.parseInt(puntosAcum.getText());
-			TClienteNormal tCliente = new TClienteNormal(-1,dni,nom,ap,true,cuenta, ptos);
+			TClienteNormal tCliente = new TClienteNormal(id,dni,nom,ap,true,cuenta, ptos);
 			
 			
 			SwingUtilities.invokeLater(()-> {Controlador.getInstance().accion(Evento.ACTUALIZAR_CLIENTE_NORMAL, tCliente); });
@@ -81,7 +82,8 @@ public class VistaActualizarClNormal extends VistaDefault implements IGUI {
 		
 	}
 	
-	public void cargarCliente(TClienteNormal tCliente) {
+	public void cargarCliente(TClienteNormal tCliente, int idCl) {
+		id = idCl;
 		nombre.setText(tCliente.getNombre());
 		apellido.setText(tCliente.getApellido());
 		DNI.setText(tCliente.getDNI());

@@ -4,8 +4,9 @@ import java.util.Collection;
 import java.util.Collections;
 
 import negocio.factura.TFactura;
+import presentacion.Convertable;
 
-public class TCliente {
+public class TCliente implements Convertable<TCliente> {
 	protected String tipo;
 	protected int idCliente;
 	protected String DNI;
@@ -82,6 +83,18 @@ public class TCliente {
 
 	public void setCuentaBancaria(String cuentaBancaria) {
 	    this.cuentaBancaria = cuentaBancaria;
+	}
+
+	@Override
+	public Object getColumnValue(int columnIndex) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setColumnValue(int col, String value) throws Exception {
+		// TODO Auto-generated method stub
+		
 	}
 
 	
