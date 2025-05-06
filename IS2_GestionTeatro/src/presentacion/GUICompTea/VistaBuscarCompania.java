@@ -7,6 +7,7 @@ import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JSpinner;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.SwingUtilities;
@@ -44,16 +45,25 @@ public class VistaBuscarCompania extends VistaDefault implements IGUI{
 		JButton cancelar = new JButton("Cancelar");
 		JLabel pregunta= new JLabel("Nombre de la compania para buscar");
 		
-		JTextField respuesta = new JTextField();
+		JSpinner IdField = ViewUtils.integerSpinner(0, 0, Integer.MAX_VALUE, 1);
+		
 		
 		
 		ArrayList<Pair<JComponent, JComponent>> campos = new ArrayList<>();
-		campos.add(new Pair<>(pregunta, respuesta));
+		campos.add(new Pair<>(pregunta, IdField));
 		anyadir.addActionListener(e ->{
-			String nombreString = respuesta.getText(); 
-			FactoriaAbstractaIntegracion.getInstance().crearDAOCompTea();
 			
-			SwingUtilities.invokeLater(()->Controlador.getInstance().accion(Evento.BUSCAR_COMPANIA_TEATRAL, nombreString));
+			
+			try {
+				IdField.commitEdit();
+				int id = (int)IdField.getValue();
+				SwingUtilities.invokeLater(()->{Controlador.getInstance().accion(Evento.BUSCAR_COMPANIA_TEATRAL, IdField);});
+				dispose();
+			}
+			catch(Exception ex) {
+				ViewUtils.createInvalidFieldsPanel();
+				IdField.updateUI();
+			}
 			this.dispose();	
 		});
 		cancelar.addActionListener(e ->{
