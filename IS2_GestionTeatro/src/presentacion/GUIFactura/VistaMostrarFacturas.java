@@ -1,14 +1,15 @@
 package presentacion.GUIFactura;
 
+//import java.time.LocalDateTime;
+//import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
-
 import exceptions.BBDDReadException;
 import misc.*;
 import negocio.factura.TFactura;
 import presentacion.Evento;
 import presentacion.IGUI;
 import presentacion.ViewUtils;
-import presentacion.TablaDefault;
+//import presentacion.TablaDefault;
 import presentacion.controlador.Controlador;
 
 
@@ -23,20 +24,25 @@ public class VistaMostrarFacturas implements IGUI {
 	
 	@Override
 	public void actualizar(Evento evento, Object datos) {
+//		evento = Evento.RES_OK;
 		if (evento == Evento.RES_OK) {
 			ArrayList<String[]> colNames = new ArrayList<>();
 			colNames.add(Messages.colNomsFactura);
 			ArrayList<ArrayList<TFactura>> data = new ArrayList<>();
 			data.add((ArrayList<TFactura>)datos);
-			
 			/*
 			 ArrayList<TFactura> facturas = new ArrayList<>();
-	            facturas.add(new TFactura(101, 201, true, LocalDateTime.now().truncatedTo(ChronoUnit.SECONDS), 120.5f, 100.0f));
 	            facturas.add(new TFactura(102, 202, true, LocalDateTime.now().minusDays(1).truncatedTo(ChronoUnit.SECONDS), 95.0f, 80.0f));
 			ArrayList<ArrayList<TFactura>> data = new ArrayList<>();
 			data.add(facturas);
+			TablaDefault<TFactura> t = new TablaDefault<TFactura>("Facturas", colNames, data, true);
+			
+			
+			t.getOkButton().addActionListener(e->{
+				TFactura tfac = t.getEdiciones().get(0);
+				t.dispose();
+			});;
 			*/
-			new TablaDefault<TFactura>("Facturas", colNames, data, false);
 		}
 		else if(evento == Evento.RES_KO) {
 			String error;
