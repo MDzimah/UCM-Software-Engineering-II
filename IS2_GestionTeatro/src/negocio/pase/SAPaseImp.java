@@ -47,11 +47,9 @@ public class SAPaseImp implements SAPase {
 	}
 
 	@Override
-	public TPase read(int id) throws BBDDReadException, UnknownPaseException {
+	public TPase read(int id) throws BBDDReadException {
 		DAOPase daoPas = FactoriaAbstractaIntegracion.getInstance().crearDAOPase();
-		TPase tPase = daoPas.read(id);
-		if(tPase == null) throw new UnknownPaseException();
-		else return tPase;
+		return daoPas.read(id);
 	}
 
 	@Override
@@ -79,17 +77,20 @@ public class SAPaseImp implements SAPase {
 	}
 
 	@Override
-	public int comprar(int idPase, int cantidad) throws BBDDReadException, BBDDWriteException, UnknownPaseException {
+	public int comprar(int id, int cantidad) throws BBDDReadException, BBDDWriteException {
 		DAOPase daoPas = FactoriaAbstractaIntegracion.getInstance().crearDAOPase();
-		TPase tPase = daoPas.read(idPase);
-		if(tPase == null) throw new UnknownPaseException();
-		int stock = tPase.getStock();
-		int cantidadReal;
-		if (stock - cantidad < 0) cantidadReal = stock;
-		else cantidadReal = cantidad;
-		tPase.setStock(cantidadReal);
-		daoPas.update(tPase);
-		return cantidadReal;
+		TPase tPase = daoPas.read(id);
+		
+		if (tPase != null) {
+			int stock = tPase.getStock();
+			int cantidadReal;
+			if (stock - cantidad < 0) cantidadReal = stock;
+			else cantidadReal = cantidad;
+			tPase.setStock(cantidadReal);
+			daoPas.update(tPase);
+			return cantidadReal;
+		}
+		else return -1;
 	}
 
 	@Override

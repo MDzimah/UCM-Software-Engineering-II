@@ -68,15 +68,23 @@ public class VistaConsultarObra extends VistaDefault implements IGUI{
 	
 	@Override
 	public void actualizar(presentacion.Evento evento, Object datos) {
-		if(evento==Evento.RES_OK) {
-			ArrayList<TObra> obra= new ArrayList<TObra>();
-			obra.add((TObra) datos);
-			
-            TablaDefault<TObra> tabla = new TablaDefault<>("OBRA", Messages.colNomsObra, obra, false);
-            tabla.setVisible(true);
-		}
-		else if(evento==Evento.RES_KO) {
-			ViewUtils.createErrorDialogMessage(Messages.EX_OBRA_CONSULTAR_ERROR + '\n' + Messages.ERROR.formatted(((Exception) datos).getMessage()));
-		}
+	    if (evento == Evento.RES_OK) {
+	        TObra obra = (TObra) datos;
+
+	        ArrayList<String[]> colNames = new ArrayList<>();
+	        colNames.add(Messages.colNomsObra);  // Assuming Messages.colNomsObra contains column names like ["Title", "Author", ...]
+
+	        ArrayList<TObra> obras = new ArrayList<>();
+	        obras.add(obra);
+
+	        ArrayList<ArrayList<TObra>> data = new ArrayList<>();
+	        data.add(obras);
+
+	        new TablaDefault<>("Obras por filtro", colNames, data, false);
+	    } else if (evento == Evento.RES_KO) {
+	        String errorMessage = Messages.EX_OBRA_CONSULTAR_ERROR + '\n' + Messages.ERROR.formatted(((Exception) datos).getMessage());
+	        ViewUtils.createErrorDialogMessage(errorMessage);
+	    }
 	}
+
 }

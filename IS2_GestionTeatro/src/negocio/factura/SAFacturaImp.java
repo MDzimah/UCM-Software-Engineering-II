@@ -8,8 +8,6 @@ import exceptions.*;
 import integracion.factoria.FactoriaAbstractaIntegracion;
 import integracion.factura.DAOFactura;
 import integracion.factura.DAOLineaFactura;
-import integracion.pase.DAOPase;
-import integracion.taquillero.DAOTaquillero;
 import negocio.cliente.SACliente;
 import negocio.cliente.TCliente;
 import negocio.factoria.FactoriaAbstractaNegocio;
@@ -40,22 +38,22 @@ public class SAFacturaImp implements SAFactura {
 		}
 
 		//Calculamos el importe final de la factura (si el carrito tiene lineas de factura)
-		if (carritoFinal.size() > 0) {
-			float importeFinal = 0;
-			for (TLineaFactura tLinea : tDv.getCarrito()) {
-				SAPase saPase = FactoriaAbstractaNegocio.getInstance().crearSAPase();
-				TPase tPase = saPase.read(tLinea.getIdPase()); //HE HECHO CAMBIOS AQUÍ
-				if (tPase != null) {
-					int cantidadVendida = saPase.comprar(tPase.getIdPase(), tLinea.getCantidad());
-					if (cantidadVendida > 0) {
-						tLinea.setCantidad(cantidadVendida);
-						tLinea.setPrecioVenta(tPase.getPrecio()*cantidadVendida);
-						importeFinal += tLinea.getPrecioVenta();
-						carritoFinal.add(tLinea);
-					}
+		float importeFinal = 0;
+		for (TLineaFactura tLinea : tDv.getCarrito()) {
+			SAPase saPase = FactoriaAbstractaNegocio.getInstance().crearSAPase();
+			TPase tPase = saPase.read(tLinea.getIdPase());
+			if (tPase != null) {
+				int cantidadVendida = saPase.comprar(tPase.getIdPase(), tLinea.getCantidad());
+				if (cantidadVendida > 0) {
+					tLinea.setCantidad(cantidadVendida);
+					tLinea.setPrecioVenta(tPase.getPrecio()*cantidadVendida);
+					importeFinal += tLinea.getPrecioVenta();
+					carritoFinal.add(tLinea);
 				}
 			}
-		
+		}
+			
+		if (carritoFinal.size() > 0) {
 			//Aplicamos descuento
 			float subTotal = saCl.aplicarDescuento(tDv.getIdCliente(), importeFinal); 
 			

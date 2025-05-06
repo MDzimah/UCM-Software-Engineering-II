@@ -8,6 +8,7 @@ import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JSpinner;
 import javax.swing.JTextField;
 
 import exceptions.BBDDReadException;
@@ -24,27 +25,26 @@ import presentacion.controlador.Controlador;
 
 public class VistaActualizarPaseCarga extends VistaDefault {
 	
-	private JLabel IDPaseL;
-	private JTextField IDPaseT;
+	private JSpinner id;
 	private JButton actualizar;
 	private JButton cancelar;
 	
 	public VistaActualizarPaseCarga() {
 		this.setTitle("ACTUALIZAR PASE");
-		this.IDPaseL = new JLabel("Id Pase:");
-		this.IDPaseT = new JTextField(20);
 		this.actualizar = new JButton("Aceptar");
 		this.cancelar = new JButton("Cancelar");
+		JLabel id1 = new JLabel("Id");
+		id = ViewUtils.integerSpinner(1, 0, Integer.MAX_VALUE, 1);
 		
 		ArrayList<Pair<JComponent, JComponent>> pairComponents = new ArrayList<>();
-		pairComponents.add(new Pair<>(IDPaseL, IDPaseT));
+		pairComponents.add(new Pair<>(id1, id));
 		
 		super.initComps(pairComponents, actualizar, cancelar);
 		
 		this.setVisible(true);
 		
 		actualizar.addActionListener(e->{
-			Controlador.getInstance().accion(Evento.ACTUALIZAR_PASE_CARGA, Integer.valueOf(IDPaseT.getText()));
+			Controlador.getInstance().accion(Evento.ACTUALIZAR_PASE_CARGA, Integer.valueOf((int)id.getValue()));
 			dispose();
 		});
 		

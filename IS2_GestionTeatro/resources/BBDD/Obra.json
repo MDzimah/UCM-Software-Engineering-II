@@ -1,19 +1,19 @@
 {
+    "0": {
+        "IdObra": 0,
+        "genero": "Drama",
+        "titulo": "Mi primer triplete en el Bernavel",
+        "autor": "Paquita Salas",
+        "sinopsis": "Los extreaterrestres llegan a Pamplona",
+        "activo": true
+    },
     "1": {
         "IdObra": 1,
-        "genero": "gfd",
-        "titulo": "dsf",
-        "autor": "fds",
-        "sinopsis": "ads",
+        "genero": "Musical",
+        "titulo": "West Side Story",
+        "autor": "Ni idea",
+        "sinopsis": "",
         "activo": true
     },
-    "2": {
-        "IdObra": 2,
-        "genero": "fdvs",
-        "titulo": "fsdgfd",
-        "autor": "fd",
-        "sinopsis": "ht",
-        "activo": true
-    },
-    "LastKey": 2
+    "LastKey": 1
 }

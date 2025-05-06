@@ -73,10 +73,14 @@ public class Messages {
 	public static final String MOTIVO = "Motivo: \"%s\".";
 	public static final String ID_NO_ENCONTRADO = "El id \"%s\" no se ha encontrado";
 	public static final String NO_HAY_DATOS = "No hay datos para mostrar";
-	public static final String NO_EN_CARRITO = "El pase no se encuentra en el carrito";
-	public static final String EDICION_INVALIDA_TABLA = "Datos inválidos";
+	public static final String NO_EN_CARRITO = "El pase no se encuentra en el carrito";	
 	public static final String CARRITO_VACIO = "Carrito vacío";
-
+	public static final String ERROR_EDICION_TABLA = "Error al editar el valor en la tabla. Verifica el formato del dato ingresado.";
+    public static final String ERROR_DATOS_INVALIDOS = "No se han proporcionado datos válidos para mostrar en la tabla.";
+    public static final String ERROR_MISMATCH_COLUMNAS_DATOS = "El número de definiciones de columnas no coincide con el número de conjuntos de datos.";
+    public static final String ERROR_MISMATCH_EDITABLES_DATOS = "El número de definiciones de columnas editables no coincide con el número de conjuntos de datos.";
+    public static final String ERROR_SOLO_UNA_FILA_PARA_EDICION = "Sólo se permite la edición cuando hay una única fila en la tabla.";
+    public static final String ERROR_ACCION_NO_PERMITIDA = "Esta acción no está permitida en el modo actual.";
 
 
 	//Columnas de las tablas
@@ -98,7 +102,8 @@ public class Messages {
 	public static final String EXC_UNKNOWN_OBRA = "Obra desconocida";
 	public static final String EXC_UNKNOWN_PASE = "Pase desconocido";
 	public static final String EXC_EVENTO_TABLA = "Tipo de tabla incompatible con la operacion o con los datos";
-	
+	public static final String EXC_ELEM_DUPLICADO = "Elemento duplicado";
+
 	//BBDD
 	public static final String PATH_TO_BBDD = "resources/BBDD/%s";
 	

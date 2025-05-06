@@ -1,60 +1,40 @@
 package presentacion.GUICompTea;
 
 import java.util.ArrayList;
-import java.util.Collection;
 
-import javax.swing.JButton;
-import javax.swing.JComponent;
-import javax.swing.JLabel;
-import javax.swing.JTextField;
-import javax.swing.SwingUtilities;
-
+import exceptions.BBDDReadException;
 import misc.Messages;
-import misc.Pair;
+import negocio.compTea.TCompTea;
 import presentacion.Evento;
 import presentacion.IGUI;
-import presentacion.ViewUtils;
 import presentacion.TablaDefault;
+import presentacion.ViewUtils;
 import presentacion.controlador.Controlador;
-import presentacion.factoria.FactoriaAbstractaPresentacion;
-import presentacion.VistaDefault;
-import negocio.compTea.TCompTea;
 
-public class VistaMostrarCompania extends VistaDefault implements IGUI{
-	
-	
+public class VistaMostrarCompania implements IGUI {
+	private static boolean mostrado = false;
+
 	public VistaMostrarCompania() {
-		initGUI();
-		this.setVisible(true);
+		if (!mostrado) {
+			mostrado = true;
+			Controlador.getInstance().accion(Evento.MOSTRAR_COMPANIA_TEATRAL, null);
+		}
 	}
-	
-	private void initGUI() {
-		
-		this.setTitle("Mostrar Compañia Teatral");//no se si dan problemas la verdad
-		JButton anyadir= new JButton("Mostrar");
-		JButton cancelar = new JButton("Cancelar");
-		initComps(null,anyadir,cancelar);
-		anyadir.addActionListener(e ->{
-			SwingUtilities.invokeLater(()->Controlador.getInstance().accion(Evento.MOSTRAR_COMPANIA_TEATRAL, null));
-			this.dispose();	//Igual cambio algo de aqui porque el problema es que como esta ahora se ejecuta el controller antes de cerrar la ventana
-		});
-		cancelar.addActionListener(e ->{
-			this.dispose();
-		});
-		
-		this.setVisible(true);
-	}
-	
-	
+
 	@Override
 	public void actualizar(Evento evento, Object datos) {
-		if(evento==Evento.RES_OK) {
-			TablaDefault<TCompTea> t= new TablaDefault("CONSULTAR OBRA", Messages.colNomsCompTea, (ArrayList<TCompTea>)datos, false);	
-		    t.setVisible(true);
-		}
-		else if(evento==Evento.RES_KO) {
-			ViewUtils.createErrorDialogMessage(Messages.X_MOSTRAR_COMPANIAS);
-		}
-	}
+		if (evento == Evento.RES_OK) {
+			ArrayList<String[]> colNames = new ArrayList<>();
+			colNames.add(Messages.colNomsCompTea);
 
+			ArrayList<ArrayList<TCompTea>> data = new ArrayList<>();
+			data.add((ArrayList<TCompTea>) datos);
+
+			new TablaDefault<>("Compañías teatrales", colNames, data, false);
+		} else if (evento == Evento.RES_KO) {
+			String error = (datos instanceof BBDDReadException) ? ((BBDDReadException) datos).getMessage() : Messages.NO_HAY_DATOS;
+			ViewUtils.createErrorDialogMessage(Messages.X_MOSTRAR_COMPANIAS + ' ' + Messages.MOTIVO.formatted(error));
+		}
+		mostrado = false;
+	}
 }

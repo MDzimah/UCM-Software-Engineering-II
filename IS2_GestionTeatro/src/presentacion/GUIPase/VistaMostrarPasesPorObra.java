@@ -6,6 +6,7 @@ import java.util.Collection;
 import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JLabel;
+import javax.swing.JSpinner;
 import javax.swing.JTextField;
 
 import misc.Messages;
@@ -18,42 +19,49 @@ import presentacion.VistaDefault;
 import presentacion.controlador.Controlador;
 
 public class VistaMostrarPasesPorObra extends VistaDefault {
-	private JLabel IDObraL;
-	private JTextField IDObraT;
+	private JSpinner idObra;
 	private JButton buscar;
 	private JButton cancelar;
 	
 	public VistaMostrarPasesPorObra() {
 		this.setTitle("MOSTRAR PASES POR OBRA");
-		this.IDObraL = new JLabel("Id Obra:");
-		this.IDObraT = new JTextField(20);
 		this.buscar = new JButton("Aceptar");
 		this.cancelar = new JButton("Cancelar");
+		JLabel id1 = new JLabel("Id obra:");
+		idObra = ViewUtils.integerSpinner(1, 0, Integer.MAX_VALUE, 1);
 		
 		ArrayList<Pair<JComponent, JComponent>> pairComponents = new ArrayList<>();
-		pairComponents.add(new Pair<>(IDObraL, IDObraT));
+		pairComponents.add(new Pair<>(id1, idObra));
 		
 		super.initComps(pairComponents, buscar, cancelar);
 		
 		this.setVisible(true);
 		
 		buscar.addActionListener(e->{
-			Controlador.getInstance().accion(Evento.MOSTRAR_PASES_POR_OBRA, Integer.valueOf(IDObraT.getText()));
+			Controlador.getInstance().accion(Evento.MOSTRAR_PASES_POR_OBRA, Integer.valueOf((int)idObra.getValue()));
 			dispose();
 		});
 		
 		cancelar.addActionListener(e->{this.setVisible(false); dispose();});
 	}
 	
-	@SuppressWarnings("unchecked")
 	@Override
 	public void actualizar(Evento evento, Object datos) {
-		if(evento==Evento.RES_OK) {
-			new TablaDefault<TPase>("PASES", Messages.colNomsPase, (ArrayList<TPase>)datos, false).setVisible(true);
-		}
-		else if(evento==Evento.RES_KO) {
-			ViewUtils.createErrorDialogMessage(Messages.X_MOSTRAR_PASES + ' ' + Messages.MOTIVO.formatted(((Exception)datos).getMessage()));
-		}
-	}
+	    if (evento == Evento.RES_OK) {
+	        ArrayList<String[]> colNames = new ArrayList<>();
+	        colNames.add(Messages.colNomsPase);
 
+	        ArrayList<TPase> pases = new ArrayList<>();
+	        pases.addAll((ArrayList<TPase>) datos);
+
+	        ArrayList<ArrayList<TPase>> data = new ArrayList<>();
+	        data.add(pases);
+
+	        TablaDefault<TPase> tabla = new TablaDefault<>("Pases", colNames, data, false);
+	        tabla.setVisible(true);
+
+	    } else if (evento == Evento.RES_KO) {
+	        ViewUtils.createErrorDialogMessage(Messages.X_MOSTRAR_PASES + ' ' + Messages.MOTIVO.formatted(((Exception) datos).getMessage()));
+	    }
+	}
 }

@@ -11,6 +11,7 @@ import misc.Messages;
 import negocio.cliente.TCliente;
 import negocio.cliente.TClienteNormal;
 import negocio.cliente.TClienteVIP;
+import negocio.cliente.VIPEnum;
 import negocio.taquillero.TTaquillero;
 import presentacion.Evento;
 import presentacion.IGUI;
@@ -49,7 +50,9 @@ private JButton mostrar, cancelar;
 
 	@Override
 	public void actualizar(Evento evento, Object datos) {
+		evento = Evento.RES_OK;
 		if(evento == Evento.RES_OK) {
+			
 			ArrayList<TCliente> cls = (ArrayList<TCliente>) datos;
 			ArrayList<TClienteVIP> clv = new ArrayList<>();
 			ArrayList<TClienteNormal> cln = new ArrayList<>();
@@ -63,6 +66,7 @@ private JButton mostrar, cancelar;
 				}
 			}
 			
+
 			//creamos la tabla
 			TablaDefault<TClienteVIP> tabla1 = new TablaDefault<TClienteVIP>("Clientes VIP", Messages.colNomsClienteVIP, clv, false);
 			TablaDefault<TClienteNormal> tabla2 = new TablaDefault<TClienteNormal>("Clientes Normales", Messages.colNomsClienteNormal, cln, false);
@@ -78,5 +82,4 @@ private JButton mostrar, cancelar;
 		}
 		
 	}
-
 }

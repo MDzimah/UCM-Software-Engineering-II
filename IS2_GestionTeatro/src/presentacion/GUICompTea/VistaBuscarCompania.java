@@ -68,21 +68,21 @@ public class VistaBuscarCompania extends VistaDefault implements IGUI{
 	
 	@Override
 	public void actualizar(Evento evento, Object datos) {
-		if(evento==Evento.RES_OK) {
-			ArrayList<TCompTea> p=new ArrayList<>();
-			p.add((TCompTea) datos);
-			
-			TablaDefault j= new TablaDefault("COMPAÑÍA", Messages.colNomsCompTea, p, false);
-			JButton b =j.getOkButton();
-			 b.addActionListener(e->{
-				 j.dispose();
-			 });
-			
+		if (evento == Evento.RES_OK) {
+			ArrayList<String[]> colNames = new ArrayList<>();
+			colNames.add(Messages.colNomsCompTea);
+
+			ArrayList<TCompTea> compania = new ArrayList<>();
+			compania.add((TCompTea) datos);
+			ArrayList<ArrayList<TCompTea>> data = new ArrayList<>();
+			data.add(compania);
+
+			new TablaDefault<>("Compañía", colNames, data, false).setVisible(true);
 		}
-		else if(evento==Evento.RES_KO) {
-			ViewUtils.createErrorDialogMessage("NO EXISTEN LAS COMPAÑÍAS:.\n" +(String)datos);
+		else if (evento == Evento.RES_KO) {
+			//ERRORES VAN EN MESSAGES Y NO SE ENVÍAN STRING A TRAVÉS EN OBJECT
+			ViewUtils.createErrorDialogMessage("NO EXISTEN LAS COMPAÑÍAS:.\n" + (String) datos);
 		}
-		
 	}
 
 }

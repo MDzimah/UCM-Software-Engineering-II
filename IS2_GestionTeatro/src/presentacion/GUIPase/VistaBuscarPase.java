@@ -9,6 +9,7 @@ import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JSpinner;
 import javax.swing.JTextField;
 
 import misc.Messages;
@@ -24,46 +25,50 @@ import presentacion.controlador.Controlador;
 import presentacion.factoria.FactoriaAbstractaPresentacion;
 
 public class VistaBuscarPase extends VistaDefault {
-	private JLabel IDPaseL;
-	private JTextField IDPaseT;
+	private JSpinner id;
 	private JButton buscar;
 	private JButton cancelar;
 	
 	public VistaBuscarPase() {
 		this.setTitle("BUSCAR PASE");
-		this.IDPaseL = new JLabel("Id Pase:");
-		this.IDPaseT = new JTextField(20);
 		this.buscar = new JButton("Aceptar");
 		this.cancelar = new JButton("Cancelar");
+		JLabel id1 = new JLabel("Id");
+		id = ViewUtils.integerSpinner(1, 0, Integer.MAX_VALUE, 1);
 		
 		ArrayList<Pair<JComponent, JComponent>> pairComponents = new ArrayList<>();
-		pairComponents.add(new Pair<>(IDPaseL, IDPaseT));
+		pairComponents.add(new Pair<>(id1, id));
 		
 		super.initComps(pairComponents, buscar, cancelar);
 		
 		this.setVisible(true);
 		
 		buscar.addActionListener(e->{
-			Controlador.getInstance().accion(Evento.BUSCAR_PASE, Integer.valueOf(IDPaseT.getText()));
+			Controlador.getInstance().accion(Evento.BUSCAR_PASE, Integer.valueOf((int)id.getValue()));
 			dispose();
 		});
 		
 		cancelar.addActionListener(e->{this.setVisible(false); dispose();});
 	}
 	
-	@SuppressWarnings("unchecked")
 	@Override
 	public void actualizar(Evento evento, Object datos) {
-		if(evento==Evento.RES_OK) {
-			ArrayList<TPase> p = new ArrayList<TPase>();
-			p.add((TPase)datos);
-			//FactoriaAbstractaPresentacion.getInstance().createDialogMessage(Messages.EX_PASE_BUSCADO);
-			new TablaDefault<TPase>("PASES", Messages.colNomsPase, p, false).setVisible(true); //se crea una tabla con una sola linea que contiene
-																	  		 											   //la info del transfer del pase buscado
-		}
-		else if(evento==Evento.RES_KO) {
-			ViewUtils.createErrorDialogMessage(Messages.X_PASE_BUSCADO + ' ' + Messages.MOTIVO.formatted(((Exception)datos).getMessage()));
+		if (evento == Evento.RES_OK) {
+
+			ArrayList<String[]> colNames = new ArrayList<>();
+			colNames.add(Messages.colNomsPase);
+
+			ArrayList<TPase> pases = new ArrayList<>();
+			pases.add((TPase) datos);
+
+			ArrayList<ArrayList<TPase>> data = new ArrayList<>();
+			data.add(pases);
+
+			// Create and display the table with the pase data
+			TablaDefault<TPase> tabla = new TablaDefault<>("Pase", colNames, data, false);
+			tabla.setVisible(true);
+		} else if (evento == Evento.RES_KO) {
+			ViewUtils.createErrorDialogMessage(Messages.X_PASE_BUSCADO + ' ' + Messages.MOTIVO.formatted(((Exception) datos).getMessage()));
 		}
 	}
-
 }

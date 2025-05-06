@@ -35,7 +35,7 @@ public class VistaActualizarCompania1 implements IGUI{
 		String[] nomCols = {"ID","NOMBRE COMPANIA", "DIRECCION", "COSTE"};
 		TablaDefault<TCompTea> tabla = new TablaDefault("BUSCAR PASE", nomCols, p, true);
 		tabla.getOkButton().addActionListener(e -> {
-			TCompTea tCompTea2 = tabla.getEdicion();
+			TCompTea tCompTea2 = tabla.getEdiciones();
 			Controlador.getInstance().accion(Evento.ACTUALIZAR1_COMPANIA_TEATRAL, tCompTea2);
 		});
 	}
