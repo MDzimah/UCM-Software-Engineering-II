@@ -280,19 +280,20 @@ public class ControladorImp extends Controlador {
 		case ALTA_PASE: {
 			try {
 				SAPase saPase = FactoriaAbstractaNegocio.getInstance().crearSAPase();
-				int idPase = saPase.create((TPase) datos);
-				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_OK, idPase);
+				int idCreado = saPase.create((TPase) datos);
+				if (idCreado != -1) FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_OK, idCreado);
+				else FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_KO, null);
 			} catch(Exception e) {
-				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_KO, e);
+				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_KO, e); //Esto comprende errores de BD, de que no exista la obra o que no exista la companya teatral
 			}
 			break;
 		}
 		case BAJA_PASE: {
 			try {
 				SAPase saPase = FactoriaAbstractaNegocio.getInstance().crearSAPase();
-				int idBuscado = (int) datos;
-				saPase.delete(idBuscado);
-				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_OK, null);
+				int idEliminado = saPase.delete((int) datos);
+				if (idEliminado != -1) FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_OK, idEliminado);
+				else FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_KO, null); //No se ha encontrado el pase
 			} catch(Exception e) {
 				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_KO, e);
 			}
@@ -301,9 +302,9 @@ public class ControladorImp extends Controlador {
 		case BUSCAR_PASE: {
 			try {
 				SAPase saPase = FactoriaAbstractaNegocio.getInstance().crearSAPase();
-				int idBuscado = (int) datos;
-				TPase tPaseBuscado = saPase.read(idBuscado);
-				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_OK, tPaseBuscado); //le paso el transfer para que lo muestre
+				TPase tPaseBuscado = saPase.read((int) datos);
+				if (tPaseBuscado != null) FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_OK, tPaseBuscado); //le paso el transfer para que lo muestre
+				else FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_KO, null);
 			} catch(Exception e) {
 				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_KO, e);
 			}
@@ -313,7 +314,8 @@ public class ControladorImp extends Controlador {
 			try {
 				SAPase saPase = FactoriaAbstractaNegocio.getInstance().crearSAPase();
 				Collection<TPase> pases = saPase.readAll();
-				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_OK, pases); //le paso el transfer para que lo muestre
+				if (pases != null && !pases.isEmpty()) FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_OK, pases); //le paso el transfer para que lo muestre
+				else FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_KO, null);
 			} catch(Exception e) {
 				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_KO, e);
 			}
@@ -322,10 +324,12 @@ public class ControladorImp extends Controlador {
 		case ACTUALIZAR_PASE_CARGA:{
 			try {
 				SAPase saPase = FactoriaAbstractaNegocio.getInstance().crearSAPase();
-				int idBuscado = (int)datos;
-				TPase tPaseActualizar = saPase.read(idBuscado);
-				VistaActualizarPaseDescarga vista = (VistaActualizarPaseDescarga) FactoriaAbstractaPresentacion.getInstance().createVista(Evento.ACTUALIZAR_PASE_DESCARGA);
-				vista.cargarPase(tPaseActualizar);
+				TPase tPaseActualizar = saPase.read((int)datos);
+				if (tPaseActualizar != null) {
+					VistaActualizarPaseDescarga vista = (VistaActualizarPaseDescarga) FactoriaAbstractaPresentacion.getInstance().createVista(Evento.ACTUALIZAR_PASE_DESCARGA);
+					vista.cargarPase(tPaseActualizar);
+				}
+				else FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_KO, null);
 			} catch(Exception e) {
 				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_KO, e);
 			}
@@ -334,8 +338,9 @@ public class ControladorImp extends Controlador {
 		case ACTUALIZAR_PASE_DESCARGA:{
 			try {
 				SAPase saPase = FactoriaAbstractaNegocio.getInstance().crearSAPase();
-				saPase.update((TPase) datos);
-				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_OK, null);
+				int operacion = saPase.update((TPase) datos);
+				if (operacion != -1) FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_OK, null);
+				else FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_KO, null);
 			}
 			catch(Exception e) {
 				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_KO, e);
@@ -345,9 +350,9 @@ public class ControladorImp extends Controlador {
 		case MOSTRAR_PASES_POR_OBRA:{
 			try {
 				SAPase saPase = FactoriaAbstractaNegocio.getInstance().crearSAPase();
-				int idObra = (int) datos;
-				ArrayList<TPase> pasesPorObra = saPase.allPasesPorObra(idObra);
-				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_OK, pasesPorObra);
+				ArrayList<TPase> pasesPorObra = saPase.allPasesPorObra((int) datos);
+				if (pasesPorObra != null && !pasesPorObra.isEmpty()) FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_OK, pasesPorObra);
+				else FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_KO, null);
 			} catch(Exception e) {
 				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_KO, e);
 			}

@@ -32,7 +32,6 @@ public class SAPaseImp implements SAPase {
 		TObra lecturaObra = saObra.read(tPase.getIdObra());
 		SACompTea saCompTea = FactoriaAbstractaNegocio.getInstance().crearSACompTea();
 		TCompTea lecturaCompTea = saCompTea.read(tPase.getIdCompanyaTeatral());
-		
 		if (lecturaObra == null) {
 			throw new UnknownObraException();
 		}
@@ -40,8 +39,11 @@ public class SAPaseImp implements SAPase {
 			throw new UnknownCompTeaException();
 		}
 		*/
-		DAOPase daoPas = FactoriaAbstractaIntegracion.getInstance().crearDAOPase();
-		id = daoPas.create(tPase);
+		
+		if (tPase.getStock() > 0 && tPase.getPrecio() >= 0) { //sino devolvere -1
+			DAOPase daoPas = FactoriaAbstractaIntegracion.getInstance().crearDAOPase();
+			id = daoPas.create(tPase);
+		}
 		
 		return id;
 	}
@@ -53,7 +55,8 @@ public class SAPaseImp implements SAPase {
 	}
 
 	@Override
-	public int update(TPase tPase) throws BBDDReadException, BBDDWriteException, UnknownPaseException {
+	public int update(TPase tPase) throws BBDDReadException, BBDDWriteException {
+		if (tPase.getStock() < 0 || tPase.getPrecio() < 0) return -1;
 		DAOPase daoPas = FactoriaAbstractaIntegracion.getInstance().crearDAOPase();
 		int idPase = daoPas.update(tPase);
 		if(idPase < 0) return -1;
@@ -61,7 +64,7 @@ public class SAPaseImp implements SAPase {
 	}
 
 	@Override
-	public int delete(int id) throws BBDDReadException, BBDDWriteException, UnknownPaseException {
+	public int delete(int id) throws BBDDReadException, BBDDWriteException {
 		DAOPase daoPas = FactoriaAbstractaIntegracion.getInstance().crearDAOPase();
 		int idPase = daoPas.delete(id);
 		if(idPase < 0) return -1;
@@ -69,7 +72,7 @@ public class SAPaseImp implements SAPase {
 	}
 
 	@Override
-	public ArrayList<TPase> readAll() throws BBDDReadException, UnknownPaseException {
+	public ArrayList<TPase> readAll() throws BBDDReadException {
 		DAOPase daoPas = FactoriaAbstractaIntegracion.getInstance().crearDAOPase();
 		ArrayList<TPase> lista = daoPas.readAll();
 		if(lista==null || lista.isEmpty()) return null;
@@ -94,7 +97,7 @@ public class SAPaseImp implements SAPase {
 	}
 
 	@Override
-	public int deletePorObra(int idObra) throws BBDDReadException, BBDDWriteException, UnknownObraException {
+	public int deletePorObra(int idObra) throws BBDDReadException, BBDDWriteException {
 		SAObra saObra = FactoriaAbstractaNegocio.getInstance().crearSAObra();
 		TObra tObra = saObra.read(idObra);
 		if (tObra == null) return -1;
@@ -105,7 +108,7 @@ public class SAPaseImp implements SAPase {
 	}
 	
 	@Override
-	public ArrayList<TPase> allPasesPorObra(int idObra) throws BBDDReadException, UnknownObraException {
+	public ArrayList<TPase> allPasesPorObra(int idObra) throws BBDDReadException {
 		SAObra saObra = FactoriaAbstractaNegocio.getInstance().crearSAObra();
 		TObra tObra = saObra.read(idObra);
 		if (tObra == null) return null;
@@ -120,5 +123,16 @@ public class SAPaseImp implements SAPase {
 		}
 		
 		return pasesPorObra;
+	}
+
+	@Override
+	public int deletePorCompTea(int idCompTea) throws BBDDReadException, BBDDWriteException {
+		SACompTea saCompTea = FactoriaAbstractaNegocio.getInstance().crearSACompTea();
+		TCompTea tCompTea = saCompTea.read(idCompTea);
+		if (tCompTea == null) return -1;
+		
+		DAOPase daoPas = FactoriaAbstractaIntegracion.getInstance().crearDAOPase();
+		daoPas.deletePorCompTea(idCompTea);
+		return idCompTea;
 	}
 }

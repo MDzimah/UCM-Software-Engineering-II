@@ -28,7 +28,7 @@ public class VistaMostrarPasesPorObra extends VistaDefault {
 		this.buscar = new JButton("Aceptar");
 		this.cancelar = new JButton("Cancelar");
 		JLabel id1 = new JLabel("Id obra:");
-		idObra = ViewUtils.integerSpinner(1, 0, Integer.MAX_VALUE, 1);
+		idObra = ViewUtils.integerSpinner(0, 0, Integer.MAX_VALUE, 1);
 		
 		ArrayList<Pair<JComponent, JComponent>> pairComponents = new ArrayList<>();
 		pairComponents.add(new Pair<>(id1, idObra));
@@ -42,7 +42,10 @@ public class VistaMostrarPasesPorObra extends VistaDefault {
 			dispose();
 		});
 		
-		cancelar.addActionListener(e->{this.setVisible(false); dispose();});
+		cancelar.addActionListener(e->{dispose();});
+		
+		this.setVisible(true);
+		this.setLocationRelativeTo(null);
 	}
 	
 	@Override
@@ -61,7 +64,10 @@ public class VistaMostrarPasesPorObra extends VistaDefault {
 	        tabla.setVisible(true);
 
 	    } else if (evento == Evento.RES_KO) {
-	        ViewUtils.createErrorDialogMessage(Messages.X_MOSTRAR_PASES + ' ' + Messages.MOTIVO.formatted(((Exception) datos).getMessage()));
+	    	String error;
+	    	if (datos instanceof Exception) error = ((Exception) datos).getMessage();
+			else error = Messages.NO_HAY_DATOS;
+	        ViewUtils.createErrorDialogMessage(Messages.X_MOSTRAR_PASES + ' ' + Messages.MOTIVO.formatted(error));
 	    }
 	}
 }
