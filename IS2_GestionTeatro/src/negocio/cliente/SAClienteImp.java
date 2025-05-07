@@ -47,7 +47,7 @@ public class SAClienteImp implements SACliente {
 			Collection<TFactura> c = sa.allFacturasPorCliente(nid);
 			if (c != null) {
 				for (TFactura fac : c) {
-					if (fac.getIdCliente() == nid) sa.delete(fac.getIdFactura());
+					sa.delete(fac.getIdFactura());
 				}
 			}
 			
