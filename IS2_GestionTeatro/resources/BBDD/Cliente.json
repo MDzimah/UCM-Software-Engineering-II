@@ -1,33 +1,44 @@
 {
-    "clientesNormal": {"2": {
-        "idCliente": 2,
-        "apellido": "foka",
-        "cuenta": "34",
-        "puntos": 2,
-        "nombre": "aaaf",
-        "DNI": "78789",
-        "activo": true
-    }},
-    "lastId": 3,
-    "clientesVIP": {
+    "clientesNormal": {
         "1": {
             "idCliente": 1,
-            "apellido": "kkk",
-            "cuenta": "80",
-            "mensualidad": 0,
-            "nombre": "kk",
-            "nivel": "PLATINO",
-            "DNI": "kk",
-            "activo": true
+            "apellido": "dos",
+            "cuenta": "3445",
+            "puntos": 9,
+            "nombre": "tres",
+            "DNI": "77777777",
+            "activo": false
         },
         "3": {
             "idCliente": 3,
-            "apellido": "lol",
-            "cuenta": "0",
+            "apellido": "eds",
+            "cuenta": "2323",
+            "puntos": 3443,
+            "nombre": "saasas",
+            "DNI": "111111111",
+            "activo": true
+        }
+    },
+    "lastId": 3,
+    "clientesVIP": {
+        "0": {
+            "idCliente": 0,
+            "apellido": "tres",
+            "cuenta": "34",
+            "mensualidad": 222,
+            "nombre": "dos",
+            "nivel": "CHALLENGER",
+            "DNI": "34",
+            "activo": true
+        },
+        "2": {
+            "idCliente": 2,
+            "apellido": "1",
+            "cuenta": "1",
             "mensualidad": 0,
-            "nombre": "lll",
-            "nivel": "ORO",
-            "DNI": "3232",
+            "nombre": "1",
+            "nivel": "PLATINO",
+            "DNI": "343456",
             "activo": true
         }
     }
