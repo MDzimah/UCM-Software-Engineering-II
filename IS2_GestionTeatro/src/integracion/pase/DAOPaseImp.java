@@ -155,10 +155,31 @@ public class DAOPaseImp implements DAOPase {
 			for (String idPase : pases.keySet()) {
 				JSONObject pase = pases.getJSONObject(idPase);
 				int idObraPase = pase.getInt(Messages.KEY_idObra);
-				if (idObra == idObraPase) clavesEliminar.add(idPase);
+				if (idObra == idObraPase && pase.getBoolean(Messages.KEY_act)) clavesEliminar.add(idPase);
 			}
 			for (String key: clavesEliminar) {
 				//bdPases.remove(key); no hago borrado fisico
+				JSONObject pase = pases.getJSONObject(key);
+				pase.put(Messages.KEY_act, false);
+				pases.put(key, pase);
+				bdPases.put(Messages.KEY_pases, pases);
+			}
+			OpsBBDD.write(bdPases, Messages.BDPase);
+		}
+	}
+
+	@Override
+	public void deletePorCompTea(int idCompTea) throws BBDDReadException, BBDDWriteException {
+		if (!OpsBBDD.isEmpty(Messages.BDPase)) {
+			JSONObject bdPases = OpsBBDD.read(Messages.BDPase);
+			JSONObject pases = bdPases.getJSONObject(Messages.KEY_pases);
+			List<String> clavesEliminar = new LinkedList<>();
+			for (String idPase : pases.keySet()) {
+				JSONObject pase = pases.getJSONObject(idPase);
+				int idCompTeaPase = pase.getInt(Messages.KEY_idCompTea);
+				if (idCompTea == idCompTeaPase && pase.getBoolean(Messages.KEY_act)) clavesEliminar.add(idPase);
+			}
+			for (String key: clavesEliminar) {
 				JSONObject pase = pases.getJSONObject(key);
 				pase.put(Messages.KEY_act, false);
 				pases.put(key, pase);

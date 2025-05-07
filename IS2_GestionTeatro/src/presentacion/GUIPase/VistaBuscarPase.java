@@ -34,7 +34,7 @@ public class VistaBuscarPase extends VistaDefault {
 		this.buscar = new JButton("Aceptar");
 		this.cancelar = new JButton("Cancelar");
 		JLabel id1 = new JLabel("Id");
-		id = ViewUtils.integerSpinner(1, 0, Integer.MAX_VALUE, 1);
+		id = ViewUtils.integerSpinner(0, 0, Integer.MAX_VALUE, 1);
 		
 		ArrayList<Pair<JComponent, JComponent>> pairComponents = new ArrayList<>();
 		pairComponents.add(new Pair<>(id1, id));
