@@ -40,8 +40,10 @@ public class SAPaseImp implements SAPase {
 		}
 		*/
 		
-		DAOPase daoPas = FactoriaAbstractaIntegracion.getInstance().crearDAOPase();
-		id = daoPas.create(tPase);
+		if (tPase.getStock() > 0 && tPase.getPrecio() >= 0) { //sino devolvere -1
+			DAOPase daoPas = FactoriaAbstractaIntegracion.getInstance().crearDAOPase();
+			id = daoPas.create(tPase);
+		}
 		
 		return id;
 	}
@@ -54,6 +56,7 @@ public class SAPaseImp implements SAPase {
 
 	@Override
 	public int update(TPase tPase) throws BBDDReadException, BBDDWriteException, UnknownPaseException {
+		if (tPase.getStock() < 0 && tPase.getPrecio() < 0) return -1;
 		DAOPase daoPas = FactoriaAbstractaIntegracion.getInstance().crearDAOPase();
 		int idPase = daoPas.update(tPase);
 		if(idPase < 0) return -1;

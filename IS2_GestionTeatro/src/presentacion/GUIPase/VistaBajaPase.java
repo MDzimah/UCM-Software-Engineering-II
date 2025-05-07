@@ -56,7 +56,10 @@ public class VistaBajaPase extends VistaDefault {
 			ViewUtils.createDialogMessage(Messages.EX_PASE_ELIMINADO);
 		}
 		else if(evento==Evento.RES_KO) {
-			ViewUtils.createErrorDialogMessage(Messages.X_PASE_CREADO + ' ' + Messages.MOTIVO.formatted(((Exception)datos).getMessage()));
+			String error;
+			if (datos instanceof Exception) error = ((Exception)datos).getMessage();
+			else error = Messages.EXC_UNKNOWN_PASE;
+			ViewUtils.createErrorDialogMessage(Messages.X_PASE_ELIMINADO + ' ' + Messages.MOTIVO.formatted(error));
 		}
 	}
 
