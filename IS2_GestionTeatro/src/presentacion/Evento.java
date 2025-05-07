@@ -1,7 +1,7 @@
 package presentacion;
 
 public enum Evento {
-	/*--VENTANAS DE CU--*/
+	/*--CUs de cada subs--*/
 	
 	//Factura
 	ANYADIR_PASE_A_VENTA,

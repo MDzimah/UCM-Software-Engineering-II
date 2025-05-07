@@ -38,6 +38,7 @@ public class ControladorImp extends Controlador {
 	@Override
 	public void accion(Evento evento, Object datos) {
 		switch(evento) {
+		//Factura
 		case CERRAR_VENTA: {
 			SAFactura saFac = FactoriaAbstractaNegocio.getInstance().crearSAFactura();
 			TDatosVenta tDV = (TDatosVenta)datos;
@@ -93,9 +94,6 @@ public class ControladorImp extends Controlador {
 			}
 			break;
 		}
-		
-		
-		
 		
 		//Cliente
 		case ALTA_CLIENTE: {

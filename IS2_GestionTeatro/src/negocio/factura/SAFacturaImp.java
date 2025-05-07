@@ -22,7 +22,6 @@ public class SAFacturaImp implements SAFactura {
 		
 		Collection<TLineaFactura> carritoFinal = new ArrayList<TLineaFactura>();
 		
-		//El SA FActura NO puede acceder al DAO, tiene q acceder a ellos a traves del SA de otros subs
 		SACliente saCl = FactoriaAbstractaNegocio.getInstance().crearSACliente();
 		SATaquillero saTaq = FactoriaAbstractaNegocio.getInstance().crearSATaquillero();
 		
@@ -37,7 +36,7 @@ public class SAFacturaImp implements SAFactura {
 			throw new UnknownTaquilleroException();
 		}
 
-		//Calculamos el importe final de la factura (si el carrito tiene lineas de factura)
+		//Calculamos el importe final de la factura, previamente validando las líneas
 		float importeFinal = 0;
 		for (TLineaFactura tLinea : tDv.getCarrito()) {
 			SAPase saPase = FactoriaAbstractaNegocio.getInstance().crearSAPase();
@@ -52,7 +51,8 @@ public class SAFacturaImp implements SAFactura {
 				}
 			}
 		}
-			
+		
+		//Si hay alguna linea de factura válida, procedemos a crear la factura
 		if (carritoFinal.size() > 0) {
 			//Aplicamos descuento
 			float subTotal = saCl.aplicarDescuento(tDv.getIdCliente(), importeFinal); 

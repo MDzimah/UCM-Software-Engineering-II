@@ -30,11 +30,13 @@ public class ViewUtils {
         return spinner;
     }
 	
+	
 	//Imagenes
 	public static Image img_logoTeatret() { return new ImageIcon("resources/imagenes/teatretLogo.png").getImage(); }
 	public static Image img_marcoOro() { return new ImageIcon("resources/imagenes/marcoOro.png").getImage(); }
 	public static Image img_carrito() { return new ImageIcon("resources/imagenes/cart.png").getImage(); }
 	public static void setAppIcon(JFrame window) { window.setIconImage(img_logoTeatret()); } 
+	
 	
 	//Fonts
 	public static Font fontCountCarrito() { return new Font("SansSerif", Font.BOLD, 15); }

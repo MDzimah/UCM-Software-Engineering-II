@@ -1,6 +1,5 @@
 package presentacion.GUIFactura;
 
-import java.awt.*;
 import java.util.ArrayList;
 
 import javax.swing.*;
@@ -12,6 +11,7 @@ import negocio.factura.TFactura;
 import presentacion.*;
 import presentacion.controlador.Controlador;
 
+@SuppressWarnings("serial")
 public class VistaBuscarFactura extends VistaDefault {
 	private JLabel lIdFac;
 	private JSpinner sIdFac;
@@ -21,8 +21,6 @@ public class VistaBuscarFactura extends VistaDefault {
 	public VistaBuscarFactura() {
 		this.setTitle("Buscar factura");
 		ViewUtils.setAppIcon(this);
-		JPanel mainPanel = new JPanel(new BorderLayout());
-		mainPanel.setSize(ViewUtils.getScaledScreenDimension(2, 2));
 		this.lIdFac = new JLabel("Id factura:");
 		this.sIdFac = ViewUtils.integerSpinner(0, 0, Integer.MAX_VALUE, 1);
 		this.buscar = new JButton("Buscar");

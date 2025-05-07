@@ -56,6 +56,7 @@ public class TLineaFactura {
 	
 	public void setPrecioVenta(float importe) {	this.precioVenta = importe;	}
 	
+	//Para la ventana del carrito en proceso de realizar una venta
 	@Override
 	public String toString() {
 		return "Id pase: " + Integer.toString(this.idPase) + " Cantidad: " + Integer.toString(this.cantidad);
