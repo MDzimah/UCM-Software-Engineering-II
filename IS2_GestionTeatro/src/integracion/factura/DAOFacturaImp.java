@@ -71,9 +71,8 @@ public class DAOFacturaImp implements DAOFactura {
 			TFactura tFacRead = null;
 			String _id = Integer.toString(id);
 			
-			boolean c = facs.has(_id);
-			//Aseguramos que el id está en las facturas y que 
-			if (c && facs.getJSONObject(_id).getBoolean(Messages.KEY_act)) {
+			//Aseguramos que el id está en las facturas y que está activa
+			if (facs.has(_id) && facs.getJSONObject(_id).getBoolean(Messages.KEY_act)) {
 				tFacRead = readAux(facs.getJSONObject(_id));
 				tFacRead.setIdFactura(id);
 			}

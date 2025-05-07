@@ -20,7 +20,7 @@ public abstract class VistaDefault extends JFrame implements IGUI {
 	   |                        ...                        |
 	   |       [Componente nA]     [Componente nB]         |
 	   |                                                   |
-	   |       [Positive Button]   [Negative Button]       |
+	   |      [Positive Button]   [Negative Button]        |
 	   +---------------------------------------------------+
 	*/
 	public void initComps(ArrayList<Pair<JComponent, JComponent>> pairComponents,
