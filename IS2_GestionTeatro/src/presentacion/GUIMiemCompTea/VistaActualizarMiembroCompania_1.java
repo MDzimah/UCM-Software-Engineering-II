@@ -54,7 +54,7 @@ public class VistaActualizarMiembroCompania_1 extends VistaDefault {
 			dispose();
 		}
 		else if (evento==Evento.RES_KO) {
-			ViewUtils.createErrorDialogMessage(Messages.X_MIEMBRO_ACTUALIZADO + ' ' + Messages.MOTIVO.formatted((String)datos));
+			ViewUtils.createErrorDialogMessage(Messages.X_MIEMBRO_ACTUALIZADO + ' ' + Messages.MOTIVO.formatted(((Exception) datos).getMessage()));
 		}
 	}
 }

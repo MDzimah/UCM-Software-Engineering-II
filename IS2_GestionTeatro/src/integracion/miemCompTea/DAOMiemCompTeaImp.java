@@ -145,7 +145,7 @@ public class DAOMiemCompTeaImp implements DAOMiemCompTea {
 			for (String id: allIds) {
 				JSONObject miembroComp = miembrosComp.getJSONObject(id);
 				
-				if (miembroComp.getString(Messages.KEY_DNI).equals(dni)) {
+				if (miembroComp.getString(Messages.KEY_DNI).equals(dni) && miembroComp.getBoolean(Messages.KEY_act)) {
 					return createTMiemCompTea(miembroComp);
 				}
 			}

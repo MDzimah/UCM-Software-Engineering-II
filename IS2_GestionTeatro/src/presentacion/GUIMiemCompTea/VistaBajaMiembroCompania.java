@@ -50,7 +50,7 @@ public class VistaBajaMiembroCompania extends VistaDefault {
              dispose();
              Controlador.getInstance().accion(Evento.BAJA_MIEMBRO_COMPANIA, id);
          } catch (java.text.ParseException ex) {
-             ViewUtils.createErrorDialogMessage("El ID ingresado no es válido.");
+             ViewUtils.createErrorDialogMessage(Messages.EXC_CAMPOS_INCORRECTOS);
          }
     }
 
@@ -62,7 +62,7 @@ public class VistaBajaMiembroCompania extends VistaDefault {
 		}
 		else if (evento == Evento.RES_KO) {
 			String error;
-			if (datos instanceof String) error = (String) datos;
+			if(datos instanceof Exception) error = ((Exception) datos).getMessage();
 			else error = Messages.ID_NO_ENCONTRADO.formatted(String.valueOf(((int)datos)));
 			ViewUtils.createErrorDialogMessage(Messages.X_MIEMBRO_BAJA + ' ' + Messages.MOTIVO.formatted(error));
 		}

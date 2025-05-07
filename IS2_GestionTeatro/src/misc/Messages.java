@@ -78,6 +78,7 @@ public class Messages {
     public static final String ERROR_MISMATCH_EDITABLES_DATOS = "El número de definiciones de columnas editables no coincide con el número de conjuntos de datos.";
     public static final String ERROR_SOLO_UNA_FILA_PARA_EDICION = "Sólo se permite la edición cuando hay una única fila en la tabla.";
     public static final String ERROR_ACCION_NO_PERMITIDA = "Esta acción no está permitida en el modo actual.";
+    public static final String ERROR_DNI_MIEMBRO_REPETIDO = "Ya hay un miembro activo con id: \"%s\" con el mismo dni";
 
 
 	//Columnas de las tablas
