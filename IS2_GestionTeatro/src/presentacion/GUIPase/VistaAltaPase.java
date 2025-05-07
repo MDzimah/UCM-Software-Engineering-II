@@ -85,9 +85,11 @@ public class VistaAltaPase extends VistaDefault {
 			this.dispose();
 		});
 		cancelar.addActionListener(e ->{
-			this.setVisible(false);
 			this.dispose();
 		});
+		
+		this.setVisible(true);
+		this.setLocationRelativeTo(null);
 	}
 	
 	@Override

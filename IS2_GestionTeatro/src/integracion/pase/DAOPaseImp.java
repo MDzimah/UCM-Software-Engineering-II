@@ -54,6 +54,7 @@ public class DAOPaseImp implements DAOPase {
 			JSONObject pases = bdPase.getJSONObject(Messages.KEY_pases);
 			if (pases.has(Integer.toString(id))) {
 				JSONObject pase = pases.getJSONObject(Integer.toString(id));
+				if (pase.getBoolean(Messages.KEY_act) == false) return -1;
 		        pase.put(Messages.KEY_act, false);
 		        OpsBBDD.write(bdPase, Messages.BDPase);
 		        return id;

@@ -42,7 +42,10 @@ public class VistaMostrarPasesPorObra extends VistaDefault {
 			dispose();
 		});
 		
-		cancelar.addActionListener(e->{this.setVisible(false); dispose();});
+		cancelar.addActionListener(e->{dispose();});
+		
+		this.setVisible(true);
+		this.setLocationRelativeTo(null);
 	}
 	
 	@Override

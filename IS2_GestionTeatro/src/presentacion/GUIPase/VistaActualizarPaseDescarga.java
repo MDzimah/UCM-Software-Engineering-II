@@ -29,7 +29,7 @@ public class VistaActualizarPaseDescarga implements IGUI {
 		tabla.getOkButton().addActionListener(e -> {
 			TPase tPaseNuevo = (TPase) (tabla.getEdiciones()).get(0);
 			Controlador.getInstance().accion(Evento.ACTUALIZAR_PASE_DESCARGA, tPaseNuevo);
-			tabla.setVisible(false);
+			tabla.dispose();
 		});
 	}
 	
@@ -38,7 +38,7 @@ public class VistaActualizarPaseDescarga implements IGUI {
 		if(evento==Evento.RES_OK) {
 			ViewUtils.createDialogMessage(Messages.EX_PASE_ACTUALIZADO);
 		}
-		else if (evento==Evento.RES_OK) {
+		else if (evento==Evento.RES_KO) {
 			String error;
 			if (datos instanceof Exception) error = ((Exception) datos).getMessage();
 			else error = Messages.EXC_CAMPOS_INCORRECTOS;

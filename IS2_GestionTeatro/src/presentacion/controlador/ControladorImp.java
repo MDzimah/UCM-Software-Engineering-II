@@ -282,7 +282,7 @@ public class ControladorImp extends Controlador {
 				SAPase saPase = FactoriaAbstractaNegocio.getInstance().crearSAPase();
 				int idCreado = saPase.create((TPase) datos);
 				if (idCreado != -1) FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_OK, idCreado);
-				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_KO, null);
+				else FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_KO, null);
 			} catch(Exception e) {
 				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_KO, e); //Esto comprende errores de BD, de que no exista la obra o que no exista la companya teatral
 			}
