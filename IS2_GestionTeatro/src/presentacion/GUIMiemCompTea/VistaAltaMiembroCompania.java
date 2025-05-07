@@ -12,7 +12,7 @@ import misc.Pair;
 import negocio.miemCompTea.TMiemCompTea;
 import negocio.miemCompTea.TMiemCompTea.Genero;
 
-public class VistaContratarMiembroCompania extends VistaDefault{
+public class VistaAltaMiembroCompania extends VistaDefault{
 	
 	private JTextField nombreField;
     private JTextField apellidoField;
@@ -21,7 +21,7 @@ public class VistaContratarMiembroCompania extends VistaDefault{
     private JTextField emailField;    
     private JComboBox<String> generoField;
 
-    public VistaContratarMiembroCompania() {
+    public VistaAltaMiembroCompania() {
         super();
 
         nombreField = new JTextField();
@@ -43,14 +43,14 @@ public class VistaContratarMiembroCompania extends VistaDefault{
         componentes.add(new Pair<>(new JLabel("Genero:"), generoField));
         
 
-        JButton btnContratar = new JButton("Contratar");
+        JButton btnAceptar = new JButton("Aceptar");
         JButton btnCancelar = new JButton("Cancelar");
 
-        btnContratar.addActionListener(e -> contratarMiembro());
+        btnAceptar.addActionListener(e -> contratarMiembro());
         btnCancelar.addActionListener(e -> dispose());
 
-        this.initComps(componentes, btnContratar, btnCancelar);
-        this.setTitle("Contratar Miembro");
+        this.initComps(componentes, btnAceptar, btnCancelar);
+        this.setTitle("Dar de alta miembro");
         this.setVisible(true);
         this.setLocationRelativeTo(null);
     }
@@ -66,7 +66,7 @@ public class VistaContratarMiembroCompania extends VistaDefault{
             String genero = (String) generoField.getSelectedItem();
             Genero generoEnum = "Hombre".equals(genero) ? Genero.HOMBRE : Genero.MUJER;
             TMiemCompTea tMiem = new TMiemCompTea(dni, nombre, apellido, email, edad, true, generoEnum);
-            Controlador.getInstance().accion(Evento.CONTRATAR_MIEMBRO_COMPANIA, tMiem);
+            Controlador.getInstance().accion(Evento.ALTA_MIEMBRO_COMPANIA, tMiem);
             dispose();
         } catch (java.text.ParseException ex) {
             ViewUtils.createErrorDialogMessage("El ID ingresado no es válido.");
@@ -76,14 +76,14 @@ public class VistaContratarMiembroCompania extends VistaDefault{
     @Override
 	public void actualizar(Evento evento, Object datos) {
 		if (evento == Evento.RES_OK) {
-			ViewUtils.createDialogMessage(Messages.EX_MIEMBRO_CONTRATADO);
+			ViewUtils.createDialogMessage(Messages.EX_MIEMBRO_ALTA);
 			dispose();
 		}
 		else if (evento == Evento.RES_KO) {
 			String error;
 			if(datos instanceof String) error = (String) datos;
 			else error = "Ya hay un miembro activo con id: \"" + (int) datos + "\" activo";
-			ViewUtils.createErrorDialogMessage(Messages.X_MIEMBRO_CONTRATADO + ' ' + Messages.MOTIVO.formatted(error));
+			ViewUtils.createErrorDialogMessage(Messages.X_MIEMBRO_ALTA + ' ' + Messages.MOTIVO.formatted(error));
 		}
 	}
 }

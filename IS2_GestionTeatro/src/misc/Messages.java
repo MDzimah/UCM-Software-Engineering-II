@@ -13,10 +13,10 @@ public class Messages {
 	public static final String EX_PASE_ACTUALIZADO = Messages.SHP.formatted("actualizado el pase");
 
 		//Miembros
-	public static final String EX_MIEMBRO_CONTRATADO = Messages.SHP.formatted("contratado al nuevo miembro");
+	public static final String EX_MIEMBRO_ALTA = Messages.SHP.formatted("dado de alta al nuevo miembro");
 	public static final String EX_MIEMBRO_ENCONTRADO = Messages.SHP.formatted("encontrado el miembro");
 	public static final String EX_MIEMBRO_ACTUALIZADO = Messages.SHP.formatted("actualizado el miembro");
-	public static final String EX_MIEMBRO_DESPEDIDO = Messages.SHP.formatted("despedido al miembro");
+	public static final String EX_MIEMBRO_BAJA = Messages.SHP.formatted("dado de baja al miembro");
 	public static final String EX_MIEMBROS_LISTADOS = Messages.SHP.formatted("listado los miembros");
        //Compania Teatral
 	public static final String COMPANIA_ACTUALIZADA = Messages.SHP.formatted("compania actualizada");
@@ -51,10 +51,10 @@ public class Messages {
 	public static final String X_PASE_ACTUALIZADO = Messages.NSHP.formatted("actualizar el pase solicitado.");
 
 	//Miembros de la comp. tea.
-	public static final String X_MIEMBRO_CONTRATADO = Messages.NSHP.formatted("contratar al nuevo miembro.");
+	public static final String X_MIEMBRO_ALTA = Messages.NSHP.formatted("dar de alta al nuevo miembro.");
 	public static final String X_MIEMBRO_ENCONTRADO = Messages.NSHP.formatted("encontrar el miembro solicitado.");
 	public static final String X_MIEMBRO_ACTUALIZADO = Messages.NSHP.formatted("actualizar el miembro solicitado.");
-	public static final String X_MIEMBRO_DESPEDIDO = Messages.NSHP.formatted("despedir al miembro solicitado.");
+	public static final String X_MIEMBRO_BAJA = Messages.NSHP.formatted("dar de baja al miembro solicitado.");
 	public static final String X_MIEMBROS_LISTADOS = Messages.NSHP.formatted("mostrar a los miembros.");
 	//Obras
 	public static final String EX_OBRA_ANYADIDA_ERROR = Messages.NSHP.formatted("registrar la obra.");
@@ -115,7 +115,7 @@ public class Messages {
 	public static final String BDLinFac = "LineaFactura.json";
 	public static final String BDPase = "Pase.json";
 	public static final String BDTaq = "Taquillero.json";
-	public static final String BDCT_MCT = "CompTea_MiemCompTea.json";	
+	public static final String BDCT_MCT = "CompT_MiemCompT.json";	
 	
 		//Claves
 	

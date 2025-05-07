@@ -548,18 +548,18 @@ public class MainWindow extends JFrame {
             	
             	JButton contratarMiem, despedirMiem, buscarMiem, mostrarMiembros, actualizarMiem;
             	
-            	contratarMiem = new JButton("Contratar miembro");
-            	despedirMiem = new JButton("Despedir miembro");
+            	contratarMiem = new JButton("Dar de alta a miembro");
+            	despedirMiem = new JButton("Dar de baja a miembro");
             	buscarMiem = new JButton("Buscar miembro");
             	mostrarMiembros = new JButton("Mostrar miembros de la compañía");
             	actualizarMiem = new JButton("Actualizar miembro");
 
             	contratarMiem.addActionListener((ev)->{
-        			FactoriaAbstractaPresentacion.getInstance().createVista(Evento.CONTRATAR_MIEMBRO_COMPANIA);
+        			FactoriaAbstractaPresentacion.getInstance().createVista(Evento.ALTA_MIEMBRO_COMPANIA);
         		});
 
             	despedirMiem.addActionListener((ev)->{
-        			FactoriaAbstractaPresentacion.getInstance().createVista(Evento.DESPEDIR_MIEMBRO_COMPANIA);
+        			FactoriaAbstractaPresentacion.getInstance().createVista(Evento.BAJA_MIEMBRO_COMPANIA);
         		});	
 
             	buscarMiem.addActionListener((ev)->{

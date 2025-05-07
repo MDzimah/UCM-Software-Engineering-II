@@ -604,7 +604,7 @@ public class ControladorImp extends Controlador {
 			
 			break;
 		}
-		case CONTRATAR_MIEMBRO_COMPANIA:
+		case ALTA_MIEMBRO_COMPANIA:
 		{
 			try {
 				SAMiemCompTea saMiemComp = FactoriaAbstractaNegocio.getInstance().crearSAMiemCompTea();
@@ -617,7 +617,7 @@ public class ControladorImp extends Controlador {
 			}
 			break;
 		}
-		case DESPEDIR_MIEMBRO_COMPANIA:
+		case BAJA_MIEMBRO_COMPANIA:
 		{
 			try {
 				SAMiemCompTea saMiemComp = FactoriaAbstractaNegocio.getInstance().crearSAMiemCompTea();

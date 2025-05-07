@@ -18,10 +18,10 @@ import presentacion.VistaDefault;
 import presentacion.controlador.Controlador;
 import presentacion.factoria.FactoriaAbstractaPresentacion;
 
-public class VistaDespedirMiembroCompania extends VistaDefault {
+public class VistaBajaMiembroCompania extends VistaDefault {
 	private JSpinner idField;
 
-    public VistaDespedirMiembroCompania(){
+    public VistaBajaMiembroCompania(){
         super();
         
         SpinnerNumberModel spinnerModel = new SpinnerNumberModel(0, 0, Integer.MAX_VALUE, 1);
@@ -31,14 +31,14 @@ public class VistaDespedirMiembroCompania extends VistaDefault {
         ArrayList<Pair<JComponent, JComponent>> componentes = new ArrayList<>();
         componentes.add(new Pair<>(new JLabel("Id:"), idField));
 
-        JButton btnDespedir = new JButton("Despedir");
+        JButton btnAceptar = new JButton("Aceptar");
         JButton btnCancelar = new JButton("Cancelar");
 
-        btnDespedir.addActionListener(e -> despedirMiembro());
+        btnAceptar.addActionListener(e -> despedirMiembro());
         btnCancelar.addActionListener(e -> dispose());
 
-        this.initComps(componentes, btnDespedir, btnCancelar);
-        this.setTitle("Despedir Miembro");
+        this.initComps(componentes, btnAceptar, btnCancelar);
+        this.setTitle("Dar de baja a miembro");
         this.setVisible(true);
         this.setLocationRelativeTo(null);
     }
@@ -48,7 +48,7 @@ public class VistaDespedirMiembroCompania extends VistaDefault {
              idField.commitEdit();
              int id = (Integer) idField.getValue(); 
              dispose();
-             Controlador.getInstance().accion(Evento.DESPEDIR_MIEMBRO_COMPANIA, id);
+             Controlador.getInstance().accion(Evento.BAJA_MIEMBRO_COMPANIA, id);
          } catch (java.text.ParseException ex) {
              ViewUtils.createErrorDialogMessage("El ID ingresado no es válido.");
          }
@@ -57,14 +57,14 @@ public class VistaDespedirMiembroCompania extends VistaDefault {
 	@Override
 	public void actualizar(Evento evento, Object datos) {
 		if (evento == Evento.RES_OK) {
-			ViewUtils.createDialogMessage(Messages.EX_MIEMBRO_DESPEDIDO);
+			ViewUtils.createDialogMessage(Messages.EX_MIEMBRO_BAJA);
 			dispose();
 		}
 		else if (evento == Evento.RES_KO) {
 			String error;
 			if (datos instanceof String) error = (String) datos;
 			else error = Messages.ID_NO_ENCONTRADO.formatted(String.valueOf(((int)datos)));
-			ViewUtils.createErrorDialogMessage(Messages.X_MIEMBRO_DESPEDIDO + ' ' + Messages.MOTIVO.formatted(error));
+			ViewUtils.createErrorDialogMessage(Messages.X_MIEMBRO_BAJA + ' ' + Messages.MOTIVO.formatted(error));
 		}
 	}
 }

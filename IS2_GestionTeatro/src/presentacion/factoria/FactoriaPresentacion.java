@@ -77,8 +77,8 @@ public class FactoriaPresentacion extends FactoriaAbstractaPresentacion {
 		case ACTUALIZAR_MIEMBRO_COMPANIA_0: return new VistaActualizarMiembroCompania_0();
 		case ACTUALIZAR_MIEMBRO_COMPANIA_1: return new VistaActualizarMiembroCompania_1();
 		case BUSCAR_MIEMBRO_COMPANIA: return new VistaBuscarMiembroCompania();
-		case CONTRATAR_MIEMBRO_COMPANIA: return new VistaContratarMiembroCompania();
-		case DESPEDIR_MIEMBRO_COMPANIA: return new VistaDespedirMiembroCompania();
+		case ALTA_MIEMBRO_COMPANIA: return new VistaAltaMiembroCompania();
+		case BAJA_MIEMBRO_COMPANIA: return new VistaBajaMiembroCompania();
 		case MOSTRAR_MIEMBROS_COMPANIA: return new VistaMostrarMiembrosCompania();
 		
 		default: return null;
