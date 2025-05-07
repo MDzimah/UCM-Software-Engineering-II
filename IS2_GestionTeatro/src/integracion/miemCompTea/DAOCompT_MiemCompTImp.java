@@ -9,6 +9,7 @@ import org.json.JSONObject;
 
 import exceptions.BBDDReadException;
 import exceptions.BBDDWriteException;
+import integracion.factoria.FactoriaAbstractaIntegracion;
 import misc.Messages;
 import misc.OpsBBDD;
 import negocio.miemCompTea.TCompT_MiemCompT;
@@ -33,6 +34,22 @@ public class DAOCompT_MiemCompTImp implements DAOCompT_MiemCompT{
 		OpsBBDD.write(BDRel, Messages.BDCT_MCT);
 		
 		return newId;
+	}
+	
+	@Override
+	public int delete(int id_rel) throws BBDDReadException, BBDDWriteException {
+		if (!OpsBBDD.isEmpty(Messages.BDCT_MCT)) {
+			JSONObject BDRel = OpsBBDD.read(Messages.BDCT_MCT);
+			JSONObject relCom_Miem = BDRel.getJSONObject(Messages.KEY_relComp_Miem);
+			
+			String _id = Integer.toString(id_rel);
+			if (relCom_Miem.has(_id)) {
+				relCom_Miem.remove(_id); 
+				OpsBBDD.write(BDRel, Messages.BDCT_MCT);
+		        return id_rel;
+			}
+		}        
+        return -1;
 	}
 	
 	@Override
