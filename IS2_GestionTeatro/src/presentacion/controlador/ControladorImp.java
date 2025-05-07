@@ -463,7 +463,7 @@ public class ControladorImp extends Controlador {
 					vista.cargar(newComp);
 				}
 				else {
-					throw new InvalidFields();
+					throw new Exception(""+id);
 				}
 				}
 			catch(Exception e) {
@@ -482,7 +482,7 @@ public class ControladorImp extends Controlador {
 				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_OK, id);//TODO no se si hay que mostrar aqui
 				}
 				else {
-					throw new Exception(Messages.X_ACTUALIZAR_COMPANIA+" id:  " +id);
+					throw new Exception("" +id);
 				}
 				}
 			catch(Exception e) {

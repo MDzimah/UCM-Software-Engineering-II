@@ -43,9 +43,9 @@ public class VistaBorrarMiembrodeCompaniaTeatral extends VistaDefault implements
 		anyadir.addActionListener(e ->{
 			try {
 				id.commitEdit();
-				int costint = (int)id.getValue();
+				int intid = (int)id.getValue();
 				
-				SwingUtilities.invokeLater(()->{Controlador.getInstance().accion(Evento.BORRAR_MIEMBRO_COMPANIA_TEATRAL, id);});
+				SwingUtilities.invokeLater(()->{Controlador.getInstance().accion(Evento.BORRAR_MIEMBRO_COMPANIA_TEATRAL, intid);});
 			}
 			catch(Exception ex) {
 				ViewUtils.createInvalidFieldsPanel();

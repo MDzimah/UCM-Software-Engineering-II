@@ -73,7 +73,7 @@ public class VistaActualizarCompania_0 extends VistaDefault implements IGUI{
 		}
 		else if(evento==Evento.RES_KO) {
 			
-			ViewUtils.createErrorDialogMessage("NO EXISTEN COMPANIAS CON ID: "+(int) datos);
+			ViewUtils.createErrorDialogMessage("No existen compañias con id: "+((Exception) datos).getMessage());
 			
 		}
 		

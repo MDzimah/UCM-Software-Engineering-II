@@ -19,13 +19,13 @@ public class Messages {
 	public static final String EX_MIEMBRO_BAJA = Messages.SHP.formatted("dado de baja al miembro");
 	public static final String EX_MIEMBROS_LISTADOS = Messages.SHP.formatted("listado los miembros");
        //Compania Teatral
-	public static final String COMPANIA_ACTUALIZADA = Messages.SHP.formatted("actualizar compania");
-	public static final String COMPANIA_ENCONTRADA = Messages.SHP.formatted("encontrar compania");
-	public static final String COMPANIA_CREADA = Messages.SHP.formatted("crear compania");
-	public static final String COMPANIA_ELIMINADA = Messages.SHP.formatted("borrar compania");
-	public static final String COMPANIA_MOSTRADA = Messages.SHP.formatted("mostrar compania");
-	public static final String COMPANIA_MIEMBRO_BORRADO = Messages.SHP.formatted("desvincular la compañia y el miembro");
-	public static final String COMPANIA_MIEMBRO_ANYADIDO = Messages.SHP.formatted("vincular la compañia y el miembro");
+	public static final String COMPANIA_ACTUALIZADA = Messages.SHP.formatted("actualizado compania");
+	public static final String COMPANIA_ENCONTRADA = Messages.SHP.formatted("encontrado compania");
+	public static final String COMPANIA_CREADA = Messages.SHP.formatted("creado compania");
+	public static final String COMPANIA_ELIMINADA = Messages.SHP.formatted("borrado compania");
+	public static final String COMPANIA_MOSTRADA = Messages.SHP.formatted("mostrado compania");
+	public static final String COMPANIA_MIEMBRO_BORRADO = Messages.SHP.formatted("desvinculado la compañia y el miembro");
+	public static final String COMPANIA_MIEMBRO_ANYADIDO = Messages.SHP.formatted("vinculado la compañia y el miembro");
 		
 	//Obra
 	public static final String EX_OBRA_ANYADIDA_CORRECT = Messages.SHP.formatted("registrado la obra ");
