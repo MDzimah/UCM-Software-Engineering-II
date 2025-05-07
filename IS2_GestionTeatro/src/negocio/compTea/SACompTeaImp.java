@@ -17,8 +17,7 @@ import negocio.compTea.TCompTea;
 public class SACompTeaImp implements SACompTea {
 
 	@Override
-	public int create(TCompTea ct) throws BBDDReadException, BBDDWriteException, UnknownCompTeaException  {
-		if(ct==null)throw new UnknownCompTeaException();
+	public int create(TCompTea ct) throws BBDDReadException, BBDDWriteException {
 		DAOCompTea daoCT=FactoriaAbstractaIntegracion.getInstance().crearDAOCompTea();
 		return daoCT.create(ct);
 	}
