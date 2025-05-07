@@ -51,16 +51,9 @@ public class VistaBuscarCl extends VistaDefault implements IGUI {
 		
 		//oyentes
 		aceptar.addActionListener((e) -> {
-				try {
-					int idCl = (int) id.getValue();
-					SwingUtilities.invokeLater(()-> {Controlador.getInstance().accion(Evento.BUSCAR_CLIENTE, idCl); });
-				} 
-				catch (NumberFormatException ex) {
-					
-				}
-				finally {
-					VistaBuscarCl.this.dispose();
-				}
+				int idCl = (int) id.getValue();
+				SwingUtilities.invokeLater(()-> {Controlador.getInstance().accion(Evento.BUSCAR_CLIENTE, idCl); });
+				VistaBuscarCl.this.dispose();
 		});
 				
 		cancelar.addActionListener((e) -> {

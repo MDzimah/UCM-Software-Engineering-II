@@ -45,16 +45,10 @@ public class VistaActualizarCl extends VistaDefault implements IGUI {
 		
 		//oyentes
 		aceptar.addActionListener((e) -> {
-				try {
-					int _id = (int) id.getValue();
-					SwingUtilities.invokeLater(()-> {Controlador.getInstance().accion(Evento.ACTUALIZAR_CLIENTE, _id); });
-					
-				} catch (NumberFormatException ex) {
-					ViewUtils.createErrorDialogMessage("El ID debe ser un número entero.");
-				}
-				finally {
-					VistaActualizarCl.this.dispose();
-				}
+				int _id = (int) id.getValue();
+				SwingUtilities.invokeLater(()-> {Controlador.getInstance().accion(Evento.ACTUALIZAR_CLIENTE, _id); });
+				
+				VistaActualizarCl.this.dispose();
 		});
 				
 		cancelar.addActionListener((e) -> {

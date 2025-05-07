@@ -15,6 +15,7 @@ import javax.swing.JTextField;
 import javax.swing.SpinnerListModel;
 import javax.swing.SwingUtilities;
 
+import exceptions.InvalidFields;
 import misc.Pair;
 import negocio.cliente.TClienteNormal;
 import negocio.cliente.TClienteVIP;
@@ -137,7 +138,7 @@ public class VistaAltaCl extends VistaDefault implements IGUI {
 				SwingUtilities.invokeLater(()->{Controlador.getInstance().accion(Evento.ALTA_CLIENTE, tCliente);});
 			}
 			catch (Exception ex) {
-				this.actualizar(Evento.RES_KO, new Exception("Campos incorrectos"));
+				this.actualizar(Evento.RES_KO, new InvalidFields());
 			}
 			
 			finally {
@@ -173,7 +174,7 @@ public class VistaAltaCl extends VistaDefault implements IGUI {
 				SwingUtilities.invokeLater(()->{Controlador.getInstance().accion(Evento.ALTA_CLIENTE, tCliente);});
 			}
 			catch (Exception ex) {
-				this.actualizar(Evento.RES_KO, new Exception("Campos incorrectos"));
+				this.actualizar(Evento.RES_KO, new InvalidFields());
 			}
 			
 			finally {

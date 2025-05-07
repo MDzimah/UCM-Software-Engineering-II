@@ -12,6 +12,7 @@ import javax.swing.JTextField;
 import javax.swing.SpinnerListModel;
 import javax.swing.SwingUtilities;
 
+import exceptions.InvalidFields;
 import misc.Pair;
 import negocio.cliente.TClienteNormal;
 import negocio.cliente.TClienteVIP;
@@ -79,7 +80,7 @@ public class VistaActualizarClVIP extends VistaDefault implements IGUI {
 				SwingUtilities.invokeLater(()->{Controlador.getInstance().accion(Evento.ACTUALIZAR_CLIENTE_VIP, tCliente);});
 			}
 			catch (Exception ex) {
-				this.actualizar(Evento.RES_KO, new Exception("Campos incorrectos"));
+				this.actualizar(Evento.RES_KO, new InvalidFields());
 			}
 			finally {
 				VistaActualizarClVIP.this.dispose();

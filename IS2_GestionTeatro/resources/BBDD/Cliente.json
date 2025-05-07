@@ -7,7 +7,7 @@
             "puntos": 9,
             "nombre": "tres",
             "DNI": "77777777",
-            "activo": false
+            "activo": true
         },
         "3": {
             "idCliente": 3,
@@ -29,7 +29,7 @@
             "nombre": "dos",
             "nivel": "CHALLENGER",
             "DNI": "34",
-            "activo": true
+            "activo": false
         },
         "2": {
             "idCliente": 2,

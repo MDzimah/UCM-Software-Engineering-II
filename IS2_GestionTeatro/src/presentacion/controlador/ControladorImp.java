@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
+import exceptions.AlreadyClienteException;
 import exceptions.BBDDReadException;
 import exceptions.BBDDWriteException;
 import exceptions.InvalidFields;
@@ -102,7 +103,7 @@ public class ControladorImp extends Controlador {
 			try {
 				SACliente sa = FactoriaAbstractaNegocio.getInstance().crearSACliente();
 				int id = sa.create((TCliente) datos);
-				if (id == -1) throw new Exception("El cliente ya existe");
+				if (id == -1) throw new AlreadyClienteException();
 				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_OK, id);
 			}
 			catch (Exception e) {
@@ -114,7 +115,7 @@ public class ControladorImp extends Controlador {
 			try {
 				SACliente sa = FactoriaAbstractaNegocio.getInstance().crearSACliente();
 				TCliente tCliente = sa.read((int)datos);
-				if (tCliente == null) throw new Exception("No existe cliente con id " + (int)datos);
+				if (tCliente == null) throw new UnknownClienteException();
 				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_OK, tCliente);
 			}
 			catch (Exception e){
@@ -126,7 +127,7 @@ public class ControladorImp extends Controlador {
 			try {
 				SACliente sa = FactoriaAbstractaNegocio.getInstance().crearSACliente();
 				int id = sa.delete((int)datos);
-				if (id == -1) throw new Exception("El cliente no existe");
+				if (id == -1) throw new UnknownClienteException();
 				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_OK, id);
 			}
 			catch (Exception e){
@@ -151,7 +152,7 @@ public class ControladorImp extends Controlador {
 				SACliente sa = FactoriaAbstractaNegocio.getInstance().crearSACliente();
 				int id = (int) datos;
 				TCliente tCliente = sa.read(id);
-				if (tCliente == null) throw new Exception("No existe cliente con id " + (int)datos);
+				if (tCliente == null) throw new UnknownClienteException();
 				if (tCliente.getTipo() == "Normal") {
 					VistaActualizarClNormal vistaAct = (VistaActualizarClNormal) FactoriaAbstractaPresentacion.getInstance().createVista(Evento.ACTUALIZAR_CLIENTE_NORMAL);
 					vistaAct.cargarCliente((TClienteNormal) tCliente,id);

@@ -17,7 +17,11 @@ public class SAClienteImp implements SACliente {
 	@Override
 	public int create(TCliente cl) throws BBDDReadException, BBDDWriteException {
 		DAOCliente dao = FactoriaAbstractaIntegracion.getInstance().crearDAOCliente();
-		if (dao.read(cl.getIdCliente()) != null) return -1;
+		Collection<TCliente> cls = dao.readAll();
+		//Comprueba que el cliente no este ya registrado comparando los DNIs, que lo identifican univocamente
+		for (TCliente c : cls) {
+			if (c.getDNI().equals(cl.getDNI())) return -1;
+		}
 		return dao.create(cl);
 	}
 

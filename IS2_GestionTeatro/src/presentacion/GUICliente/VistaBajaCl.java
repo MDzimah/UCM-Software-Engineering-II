@@ -46,16 +46,9 @@ public class VistaBajaCl extends VistaDefault implements IGUI{
 		
 		//oyentes
 		aceptar.addActionListener((e) -> {
-				try {
-					int idCl = (int) id.getValue();
-					SwingUtilities.invokeLater(()-> {Controlador.getInstance().accion(Evento.BAJA_CLIENTE, idCl); });
-				} 
-				catch (NumberFormatException ex) {
-					
-				}
-				finally {
-					VistaBajaCl.this.dispose();
-				}
+				int idCl = (int) id.getValue();
+				SwingUtilities.invokeLater(()-> {Controlador.getInstance().accion(Evento.BAJA_CLIENTE, idCl); });
+				VistaBajaCl.this.dispose();
 		});
 				
 		cancelar.addActionListener((e) -> {

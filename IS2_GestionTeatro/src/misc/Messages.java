@@ -96,10 +96,12 @@ public class Messages {
 	public static final String EXC_ESCRITURA_BBDD = "Error al escribr en la BBDD de %s";
 	public static final String EXC_CAMPOS_INCORRECTOS = "Campos incorrectos";
 	public static final String EXC_UNKNOWN_TAQ = "Taquillero desconocido";
+	public static final String EXC_UNKNOWN_CLI = "Cliente desconocido";
 	public static final String EXC_UNKNOWN_OBRA = "Obra desconocida";
 	public static final String EXC_UNKNOWN_PASE = "Pase desconocido";
 	public static final String EXC_EVENTO_TABLA = "Tipo de tabla incompatible con la operacion o con los datos";
 	public static final String EXC_ELEM_DUPLICADO = "Elemento duplicado";
+	public static final String EXC_ALR_CLI = "El cliente ya existe";
 
 	//BBDD
 	public static final String PATH_TO_BBDD = "resources/BBDD/%s";
