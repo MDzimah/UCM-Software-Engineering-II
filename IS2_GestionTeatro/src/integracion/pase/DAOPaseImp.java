@@ -115,7 +115,7 @@ public class DAOPaseImp implements DAOPase {
 					nuevoPase.put(Messages.KEY_idCompTea, tPase.getIdCompanyaTeatral());
 					nuevoPase.put(Messages.KEY_idObra, tPase.getIdObra());
 					//if (tPase.getStock() <= 0) nuevoPase.put(Messages.KEY_act, false);
-					else nuevoPase.put(Messages.KEY_act, tPase.isActivo());
+					nuevoPase.put(Messages.KEY_act, tPase.isActivo());
 					nuevoPase.put(Messages.KEY_fecha, tPase.getFecha().toString());
 					nuevoPase.put(Messages.KEY_stock, tPase.getStock());
 					nuevoPase.put(Messages.KEY_precioPase, tPase.getPrecio());
