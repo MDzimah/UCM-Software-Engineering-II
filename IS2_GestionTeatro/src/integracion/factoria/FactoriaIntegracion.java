@@ -34,4 +34,7 @@ public class FactoriaIntegracion extends FactoriaAbstractaIntegracion {
 	@Override
 	public DAOMiemCompTea crearDAOMiemCompTea() { return new DAOMiemCompTeaImp(); }
 
+	@Override
+	public DAOCompT_MiemCompTImp crearDAOCompTea_MiemCompTea() { return new DAOCompT_MiemCompTImp(); }
+
 }

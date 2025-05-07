@@ -1,0 +1,45 @@
+{
+    "clientesNormal": {
+        "1": {
+            "idCliente": 1,
+            "apellido": "dos",
+            "cuenta": "3445",
+            "puntos": 9,
+            "nombre": "tres",
+            "DNI": "77777777",
+            "activo": false
+        },
+        "3": {
+            "idCliente": 3,
+            "apellido": "eds",
+            "cuenta": "2323",
+            "puntos": 3443,
+            "nombre": "saasas",
+            "DNI": "111111111",
+            "activo": true
+        }
+    },
+    "lastId": 3,
+    "clientesVIP": {
+        "0": {
+            "idCliente": 0,
+            "apellido": "tres",
+            "cuenta": "34",
+            "mensualidad": 222,
+            "nombre": "dos",
+            "nivel": "CHALLENGER",
+            "DNI": "34",
+            "activo": true
+        },
+        "2": {
+            "idCliente": 2,
+            "apellido": "1",
+            "cuenta": "1",
+            "mensualidad": 0,
+            "nombre": "1",
+            "nivel": "PLATINO",
+            "DNI": "343456",
+            "activo": true
+        }
+    }
+}
