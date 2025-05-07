@@ -71,6 +71,8 @@ public class FactoriaPresentacion extends FactoriaAbstractaPresentacion {
 		case BUSCAR_COMPANIA_TEATRAL: return new VistaBuscarCompania();
 		case BAJA_COMPANIA_TEATRAL: return new VistaBajaCompTea();
 		case MOSTRAR_COMPANIA_TEATRAL: return new VistaMostrarCompania();
+		case 	ANYADIR_MIEMBRO_COMPANIA_TEATRAL: return new VistaAnyadirMiembroCompaniaTeatral();
+		case BORRAR_MIEMBRO_COMPANIA_TEATRAL: return new VistaBorrarMiembrodeCompaniaTeatral();
 		
 		//MiemCompTea
 		case ACTUALIZAR_MIEMBRO_COMPANIA_0: return new VistaActualizarMiembroCompania_0();

@@ -8,6 +8,7 @@ import javax.swing.JSpinner;
 import javax.swing.JTextField;
 import javax.swing.SwingUtilities;
 
+import exceptions.InvalidFields;
 import misc.Messages;
 import misc.Pair;
 import presentacion.Evento;
@@ -50,8 +51,10 @@ public class VistaAltaCompania extends VistaDefault implements IGUI{
 		anyadir.addActionListener(e ->{
 			String nombreString = nombre.getText(); 
 			String direccionString = direccion.getText();
+			
 		
 			try {
+				if(nombreString==null||direccionString==null||nombreString.isBlank()||direccionString.isBlank()) throw new Exception();
 				cost.commitEdit();
 				int costint = (int)cost.getValue();
 				TCompTea tCompTea= new TCompTea(-1,nombreString,direccionString,true,costint);

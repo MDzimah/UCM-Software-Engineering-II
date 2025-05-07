@@ -51,7 +51,7 @@ public class VistaAnyadirMiembroCompaniaTeatral extends VistaDefault implements 
 				int idCompInt = (int)idComp.getValue();
 				int idMiemInt = (int)idMiem.getValue();
 				TCompT_MiemCompT Tcmc = new TCompT_MiemCompT(idCompInt,idMiemInt); 
-				SwingUtilities.invokeLater(()->{Controlador.getInstance().accion(Evento.ALTA_COMPANIA_TEATRAL, Tcmc);});
+				SwingUtilities.invokeLater(()->{Controlador.getInstance().accion(Evento.ANYADIR_MIEMBRO_COMPANIA_TEATRAL, Tcmc);});
 			}
 			catch(Exception ex) {
 				ViewUtils.createInvalidFieldsPanel();

@@ -45,7 +45,7 @@ public class VistaBorrarMiembrodeCompaniaTeatral extends VistaDefault implements
 				id.commitEdit();
 				int costint = (int)id.getValue();
 				
-				SwingUtilities.invokeLater(()->{Controlador.getInstance().accion(Evento.ALTA_COMPANIA_TEATRAL, id);});
+				SwingUtilities.invokeLater(()->{Controlador.getInstance().accion(Evento.BORRAR_MIEMBRO_COMPANIA_TEATRAL, id);});
 			}
 			catch(Exception ex) {
 				ViewUtils.createInvalidFieldsPanel();
