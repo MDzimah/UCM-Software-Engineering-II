@@ -115,7 +115,7 @@ public class Messages {
 	public static final String BDLinFac = "LineaFactura.json";
 	public static final String BDPase = "Pase.json";
 	public static final String BDTaq = "Taquillero.json";
-	public static final String BDCT_MCT = "Taquillero.json";	
+	public static final String BDCT_MCT = "CompTea_MiemCompTea.json";	
 	
 		//Claves
 	

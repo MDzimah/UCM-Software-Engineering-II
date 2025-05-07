@@ -8,6 +8,7 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import exceptions.*;
+import integracion.factoria.FactoriaAbstractaIntegracion;
 import misc.Messages;
 import misc.OpsBBDD;
 import negocio.miemCompTea.TCompT_MiemCompT;
@@ -58,7 +59,7 @@ public class DAOMiemCompTeaImp implements DAOMiemCompTea {
 			
 			String _id = Integer.toString(id);
 			if (miembrosComp.has(_id) && miembrosComp.getJSONObject(_id).getBoolean(Messages.KEY_act)) {
-				DAOCompT_MiemCompTImp relMiem_Comp = new DAOCompT_MiemCompTImp();
+				DAOCompT_MiemCompTImp relMiem_Comp = FactoriaAbstractaIntegracion.getInstance().crearDAOCompTea_MiemCompTea();
 				relMiem_Comp.delete_miembro(id);
 				miembrosComp.getJSONObject(Integer.toString(id)).put(Messages.KEY_act, false);
 		        OpsBBDD.write(BDMiemComp, Messages.BDMCT);

@@ -12,6 +12,7 @@ import javax.swing.SpinnerNumberModel;
 
 import misc.Messages;
 import misc.Pair;
+import negocio.compTea.TCompTea;
 import negocio.miemCompTea.TMiemCompTea;
 import negocio.miemCompTea.TMiemCompTea.Genero;
 import negocio.obra.TObra;
@@ -26,12 +27,21 @@ import presentacion.factoria.FactoriaAbstractaPresentacion;
 public class VistaActualizarMiembroCompania_1 extends VistaDefault {
 	
 	public void cargarMiembro(TMiemCompTea datos) {
-		ArrayList<TMiemCompTea> miembro = new ArrayList<TMiemCompTea>();
-		miembro.add(datos);
-		TablaDefault<TMiemCompTea> tabla = new TablaDefault<TMiemCompTea>("Miembro de la compania", Messages.colNomsMiemCompTea, miembro, true);
+		ArrayList<TMiemCompTea> array = new ArrayList<TMiemCompTea>();
+		array.add(datos);
+		ArrayList<ArrayList<TMiemCompTea>> miembro= new ArrayList<ArrayList<TMiemCompTea>>();
+		miembro.add(array);
+		
+		String[] nomCols = Messages.colNomsMiemCompTea;
+		ArrayList<String[]>listaColumnas= new ArrayList<String[]>();
+		listaColumnas.add(nomCols);
+		
+		TablaDefault<TMiemCompTea> tabla = new TablaDefault<TMiemCompTea>("Miembro de la compania", listaColumnas, miembro, true);
 		tabla.setVisible(true);
+		
 		tabla.getOkButton().addActionListener(e -> {
-			TMiemCompTea tMiemComp = (TMiemCompTea) tabla.getEdiciones();
+			ArrayList<TMiemCompTea> listTMiem = tabla.getEdiciones();
+			TMiemCompTea tMiemComp = listTMiem.get(0);
 			Controlador.getInstance().accion(Evento.ACTUALIZAR_MIEMBRO_COMPANIA_1, tMiemComp);
 			dispose();
 		});
