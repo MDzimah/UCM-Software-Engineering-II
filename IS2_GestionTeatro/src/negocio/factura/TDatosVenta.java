@@ -23,7 +23,7 @@ public class TDatosVenta {
 	
 	public int getIdTaquillero() {	return this.idTaquillero; }
 	
-	public Collection<TLineaFactura> getCarrito() { return Collections.unmodifiableCollection(carrito); }
+	public Collection<TLineaFactura> getCarrito() { return this.carrito; }
 	
 	
 	/*--SETTERS--*/
@@ -32,5 +32,6 @@ public class TDatosVenta {
 	
 	public void setIdTaquillero(int idTaquillero) {	this.idTaquillero = idTaquillero; }
 	
-	public void setIdPase(Collection<TLineaFactura> carrito) { this.carrito = carrito; }
+	//Evitamos ligar el carrito que recibe a otros lugares del código
+	public void setIdPase(Collection<TLineaFactura> carrito) { this.carrito = Collections.unmodifiableCollection(carrito); }
 }

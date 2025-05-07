@@ -28,7 +28,6 @@ public class FactoriaPresentacion extends FactoriaAbstractaPresentacion {
 		case QUITAR_PASE_DE_VENTA: return new VistaQuitarPaseDeVenta();
 		case MOSTRAR_FACTURAS_POR_CLIENTE: return new VistaMostrarFacturasPorCliente();
 		
-		
 		//Cliente
 		case ALTA_CLIENTE: return new VistaAltaCl();
 		case BUSCAR_CLIENTE: return new VistaBuscarCl();
@@ -39,8 +38,8 @@ public class FactoriaPresentacion extends FactoriaAbstractaPresentacion {
 		case ACTUALIZAR_CLIENTE_NORMAL:  return new VistaActualizarClNormal();
 		
 		//Taquillero
-		case ALTA_TAQUILLERO: return new VistaContratarTaquillero();
-		case BAJA_TAQUILLERO: return new VistaDespedirTaquillero();
+		case ALTA_TAQUILLERO: return new VistaAltaTaquillero();
+		case BAJA_TAQUILLERO: return new VistaBajaTaquillero();
 		case BUSCAR_TAQUILLERO: return new VistaBuscarTaquillero();
 		case BUSCAR_DNI_TAQUILLERO: return new VistaBuscarDNITaquillero();
 		case MOSTRAR_TAQUILLEROS: return new VistaMostrarTaquilleros();
@@ -52,8 +51,8 @@ public class FactoriaPresentacion extends FactoriaAbstractaPresentacion {
 		case BAJA_PASE: return new VistaBajaPase();
 		case BUSCAR_PASE: return new VistaBuscarPase();
 		case MOSTRAR_PASES: return new VistaMostrarPases();
-		case ACTUALIZAR_PASE_CARGA: return new VistaActualizarPaseCarga();
-		case ACTUALIZAR_PASE_DESCARGA: return new VistaActualizarPaseDescarga();
+		case ACTUALIZAR_PASE_0: return new VistaActualizarPase_0();
+		case ACTUALIZAR_PASE_1: return new VistaActualizarPase_1();
 		case MOSTRAR_PASES_POR_OBRA: return new VistaMostrarPasesPorObra();
 
 		//Obra
@@ -67,8 +66,8 @@ public class FactoriaPresentacion extends FactoriaAbstractaPresentacion {
 		
 		//CompTea
 		case ALTA_COMPANIA_TEATRAL:  return new VistaAltaCompania();
-		case ACTUALIZAR0_COMPANIA_TEATRAL: return new VistaActualizarCompania0(); // actualizar0 O actualizar1
-		case ACTUALIZAR1_COMPANIA_TEATRAL: return new VistaActualizarCompania1();
+		case ACTUALIZAR_COMPANIA_TEATRAL_0: return new VistaActualizarCompania_0();
+		case ACTUALIZAR_COMPANIA_TEATRAL_1: return new VistaActualizarCompania_1();
 		case BUSCAR_COMPANIA_TEATRAL: return new VistaBuscarCompania();
 		case BAJA_COMPANIA_TEATRAL: return new VistaBajaCompTea();
 		case MOSTRAR_COMPANIA_TEATRAL: return new VistaMostrarCompania();

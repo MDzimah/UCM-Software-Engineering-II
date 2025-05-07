@@ -161,14 +161,14 @@ public class MainWindow extends JFrame {
             	JDialog subsFactura= new JDialog(MainWindow.this,"Subsistema Factura", false);
             	subsFactura.setLayout(new FlowLayout());
             	
-            	JButton abrirVenta, anyPV, quitarPV, cerrarVenta, buscar, buscarCliente, mostrar, carr;
+            	JButton abrirVenta, anyPV, quitarPV, cerrarVenta, buscar, mosFacsXCli, mostrar, carr;
             	
             	abrirVenta = new JButton("Abrir venta");
             	anyPV = new JButton("Añadir pase a venta");
             	quitarPV = new JButton("Quitar pase de venta");
             	cerrarVenta = new JButton("Cerrar venta");
         		buscar = new JButton("Buscar factura");
-        		buscarCliente = new JButton("Buscar factura por cliente");
+        		mosFacsXCli = new JButton("Mostrar facturas por cliente");
         		mostrar = new JButton("Mostrar facturas");
         		
         		carr = new JButton();
@@ -222,7 +222,7 @@ public class MainWindow extends JFrame {
         		});	
         		
         		// BUSCAR FACTURA POR CLIENTE
-        		buscarCliente.addActionListener((ev)->{
+        		mosFacsXCli.addActionListener((ev)->{
         			FactoriaAbstractaPresentacion.getInstance().createVista(Evento.MOSTRAR_FACTURAS_POR_CLIENTE);
         		});
         		
@@ -233,22 +233,22 @@ public class MainWindow extends JFrame {
         		
         		// CARRITO
         		carr.addActionListener((ev)->{
-        			  JDialog carritoView = new JDialog();
-        			    carritoView.setTitle("Carrito");
-        			    
-        			    JPanel p = new JPanel();
-        			    p.setLayout(new BoxLayout(p, BoxLayout.Y_AXIS));
-        			    p.setBorder(new EmptyBorder(20, 20, 20, 20));
-
-        			    for (TLineaFactura tLf : AbrirVenta.getCarrito()) {
-        			        p.add(new JLabel(tLf.toString()));
-        			    }
-
-        			    carritoView.setContentPane(p);
-        			    carritoView.pack();
-        			    carritoView.setLocationRelativeTo(null);
-        			    carritoView.setModal(true);
-        			    carritoView.setVisible(true);
+					JDialog carritoView = new JDialog();
+					carritoView.setTitle("Carrito");
+					
+					JPanel p = new JPanel();
+					p.setLayout(new BoxLayout(p, BoxLayout.Y_AXIS));
+					p.setBorder(new EmptyBorder(20, 20, 20, 20));
+					
+					for (TLineaFactura tLf : AbrirVenta.getCarrito()) {
+					    p.add(new JLabel(tLf.toString()));
+					}
+					
+					carritoView.setContentPane(p);
+					carritoView.pack();
+					carritoView.setLocationRelativeTo(null);
+					carritoView.setModal(true);
+					carritoView.setVisible(true);
         		});
         		
         		subsFactura.add(abrirVenta);        		
@@ -256,7 +256,7 @@ public class MainWindow extends JFrame {
         		subsFactura.add(quitarPV);
         		subsFactura.add(cerrarVenta);
         		subsFactura.add(buscar);
-        		subsFactura.add(buscarCliente);
+        		subsFactura.add(mosFacsXCli);
         		subsFactura.add(mostrar);
         		subsFactura.add(carr);
         		subsFactura.pack();
@@ -333,7 +333,7 @@ public class MainWindow extends JFrame {
         		
         		//ACTUALIZAR PASE
         		actualizar.addActionListener((ev)->{
-        			FactoriaAbstractaPresentacion.getInstance().createVista(Evento.ACTUALIZAR_PASE_CARGA);
+        			FactoriaAbstractaPresentacion.getInstance().createVista(Evento.ACTUALIZAR_PASE_0);
         		});
         		
         		//ALTA PASE
@@ -499,7 +499,7 @@ public class MainWindow extends JFrame {
             		
             	//actualizarCompania
             		actualizar.addActionListener((ev)->{
-            			FactoriaAbstractaPresentacion.getInstance().createVista(Evento.ACTUALIZAR0_COMPANIA_TEATRAL);
+            			FactoriaAbstractaPresentacion.getInstance().createVista(Evento.ACTUALIZAR_COMPANIA_TEATRAL_0);
             		});
             		
             	//alta compania

@@ -30,7 +30,9 @@ public class VistaQuitarPaseDeVenta extends ModificacionPaseEnVenta {
 			}
 		}
 		if (!estaba) ViewUtils.createErrorDialogMessage(Messages.NO_EN_CARRITO);
+		
 		AbrirVenta.updateCarritoCountButton();
+		
 		return estaba;
 	}
 }

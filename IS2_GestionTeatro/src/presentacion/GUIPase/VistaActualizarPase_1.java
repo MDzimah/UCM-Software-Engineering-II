@@ -12,7 +12,7 @@ import presentacion.ViewUtils;
 import presentacion.TablaDefault;
 import presentacion.controlador.Controlador;
 
-public class VistaActualizarPaseDescarga implements IGUI {
+public class VistaActualizarPase_1 implements IGUI {
 	
 	public void cargarPase(TPase datos) {
 		ArrayList<String[]> colNames = new ArrayList<>();
@@ -28,7 +28,7 @@ public class VistaActualizarPaseDescarga implements IGUI {
 		tabla.setVisible(true);
 		tabla.getOkButton().addActionListener(e -> {
 			TPase tPaseNuevo = (TPase) (tabla.getEdiciones()).get(0);
-			Controlador.getInstance().accion(Evento.ACTUALIZAR_PASE_DESCARGA, tPaseNuevo);
+			Controlador.getInstance().accion(Evento.ACTUALIZAR_PASE_1, tPaseNuevo);
 			tabla.dispose();
 		});
 	}

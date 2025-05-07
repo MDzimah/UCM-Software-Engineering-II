@@ -15,13 +15,13 @@ import presentacion.ViewUtils;
 import presentacion.VistaDefault;
 import presentacion.controlador.Controlador;
 
-public class VistaDespedirTaquillero extends VistaDefault {
+public class VistaBajaTaquillero extends VistaDefault {
 
 	private JLabel l_id;
 	private JSpinner id;
 	private JButton aceptar, cancelar;
 	
-	public VistaDespedirTaquillero() {
+	public VistaBajaTaquillero() {
 		initGUI();
 		this.setVisible(true);
 	}
@@ -45,14 +45,14 @@ public class VistaDespedirTaquillero extends VistaDefault {
 			try {
 				int _id = (int) id.getValue();
 				SwingUtilities.invokeLater(()-> {Controlador.getInstance().accion(Evento.BAJA_TAQUILLERO, _id); });
-				VistaDespedirTaquillero.this.dispose();
+				VistaBajaTaquillero.this.dispose();
 			} catch (NumberFormatException ex) {
-				VistaDespedirTaquillero.this.dispose();
+				VistaBajaTaquillero.this.dispose();
 			}
 		});
 				
 		cancelar.addActionListener((e) -> {
-			VistaDespedirTaquillero.this.dispose();
+			VistaBajaTaquillero.this.dispose();
 		});
 	}
 

@@ -28,10 +28,10 @@ import negocio.taquillero.TTaquillero;
 import presentacion.Evento;
 import presentacion.GUICliente.VistaActualizarClNormal;
 import presentacion.GUICliente.VistaActualizarClVIP;
-import presentacion.GUICompTea.VistaActualizarCompania1;
+import presentacion.GUICompTea.VistaActualizarCompania_1;
 import presentacion.GUIMiemCompTea.VistaActualizarMiembroCompania_1;
 import presentacion.GUIObra.VistaActualizarObra_1;
-import presentacion.GUIPase.VistaActualizarPaseDescarga;
+import presentacion.GUIPase.VistaActualizarPase_1;
 import presentacion.GUITaquillero.VistaActualizarTaquillero_1;
 import presentacion.factoria.FactoriaAbstractaPresentacion;
 
@@ -39,6 +39,7 @@ public class ControladorImp extends Controlador {
 	@Override
 	public void accion(Evento evento, Object datos) {
 		switch(evento) {
+		//Factura
 		case CERRAR_VENTA: {
 			SAFactura saFac = FactoriaAbstractaNegocio.getInstance().crearSAFactura();
 			TDatosVenta tDV = (TDatosVenta)datos;
@@ -94,9 +95,6 @@ public class ControladorImp extends Controlador {
 			}
 			break;
 		}
-		
-		
-		
 		
 		//Cliente
 		case ALTA_CLIENTE: {
@@ -321,12 +319,12 @@ public class ControladorImp extends Controlador {
 			}
 			break;
 		}
-		case ACTUALIZAR_PASE_CARGA:{
+		case ACTUALIZAR_PASE_0:{
 			try {
 				SAPase saPase = FactoriaAbstractaNegocio.getInstance().crearSAPase();
 				TPase tPaseActualizar = saPase.read((int)datos);
 				if (tPaseActualizar != null) {
-					VistaActualizarPaseDescarga vista = (VistaActualizarPaseDescarga) FactoriaAbstractaPresentacion.getInstance().createVista(Evento.ACTUALIZAR_PASE_DESCARGA);
+					VistaActualizarPase_1 vista = (VistaActualizarPase_1) FactoriaAbstractaPresentacion.getInstance().createVista(Evento.ACTUALIZAR_PASE_1);
 					vista.cargarPase(tPaseActualizar);
 				}
 				else FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_KO, null);
@@ -335,7 +333,7 @@ public class ControladorImp extends Controlador {
 			}
 			break;
 		}
-		case ACTUALIZAR_PASE_DESCARGA:{
+		case ACTUALIZAR_PASE_1:{
 			try {
 				SAPase saPase = FactoriaAbstractaNegocio.getInstance().crearSAPase();
 				int operacion = saPase.update((TPase) datos);
@@ -451,7 +449,7 @@ public class ControladorImp extends Controlador {
 		}
 		
 		//CompTea
-		case ACTUALIZAR0_COMPANIA_TEATRAL:
+		case ACTUALIZAR_COMPANIA_TEATRAL_0:
 		{
 			
 			try {
@@ -460,7 +458,7 @@ public class ControladorImp extends Controlador {
 				TCompTea newComp= saCompTea.read(id);
 				if(newComp!=null) {
 				/*FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_OK, newComp);*///TODO no se si hay que mostrar aqui
-					VistaActualizarCompania1 vista= (VistaActualizarCompania1) FactoriaAbstractaPresentacion.getInstance().createVista(Evento.ACTUALIZAR_OBRA_1);
+					VistaActualizarCompania_1 vista= (VistaActualizarCompania_1) FactoriaAbstractaPresentacion.getInstance().createVista(Evento.ACTUALIZAR_OBRA_1);
 					vista.cargar(newComp);
 				}
 				else {
@@ -472,7 +470,7 @@ public class ControladorImp extends Controlador {
 			}
 			break;
 		}
-		case ACTUALIZAR1_COMPANIA_TEATRAL:
+		case ACTUALIZAR_COMPANIA_TEATRAL_1:
 		{
 			
 			try {
@@ -636,7 +634,7 @@ public class ControladorImp extends Controlador {
 			}
 			break;
 		}
-		default:
+		case MOSTRAR_MIEMBROS_COMPANIA:
 		{
 			try {
 				SAMiemCompTea saMiemComp = FactoriaAbstractaNegocio.getInstance().crearSAMiemCompTea();
@@ -648,7 +646,8 @@ public class ControladorImp extends Controlador {
 				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_KO, e);
 			}
 			break;
-		}	
+		}
+		default: break;
 	}
 	}
 

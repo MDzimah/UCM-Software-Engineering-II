@@ -23,10 +23,10 @@ import presentacion.VistaDefault;
 import negocio.compTea.TCompTea;
 import negocio.pase.TPase;
 
-public class VistaActualizarCompania1 implements IGUI{
+public class VistaActualizarCompania_1 implements IGUI{
 	
 	
-	public VistaActualizarCompania1() {
+	public VistaActualizarCompania_1() {
 	}
 	
 	public void cargar(TCompTea tCompTea) {
@@ -44,7 +44,7 @@ public class VistaActualizarCompania1 implements IGUI{
 			ArrayList<TCompTea> listTCompTea= tabla.getEdiciones();
 			TCompTea tCompTea2=listTCompTea.get(0);
 
-			Controlador.getInstance().accion(Evento.ACTUALIZAR1_COMPANIA_TEATRAL, tCompTea2);
+			Controlador.getInstance().accion(Evento.ACTUALIZAR_COMPANIA_TEATRAL_1, tCompTea2);
 		});
 	}
 	

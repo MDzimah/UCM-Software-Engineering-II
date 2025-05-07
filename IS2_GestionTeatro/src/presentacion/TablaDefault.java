@@ -17,7 +17,6 @@ public class TablaDefault<T extends Convertable<T>> extends JFrame {
 	private JButton aceptar;
 	private ArrayList<T> edicionDeCadaTabla;
 	private boolean actualizar;
-
 	private int currentCardIndex = 0;
 
 	private class DefaultTableModel extends AbstractTableModel {
@@ -63,73 +62,6 @@ public class TablaDefault<T extends Convertable<T>> extends JFrame {
 		}
 	}
 
-	  //POR SI HUBIERA QUE MOSTRAR EN LA TABLA ARRAYS/COLLECTIONS EN CELDAS
-    //MultiLineTableCellRenderer inspirado por Channa Jayamuni en Stack Overflow
-    //https://stackoverflow.com/questions/9955595/how-to-display-multiple-lines-in-a-jtable-cell
-    /*
-    private class MultiLineTableCellRenderer extends JList<String> implements TableCellRenderer {
-    	
-    	//Para una apariencia más vistosa de la tabla
-    	public MultiLineTableCellRenderer() {
-    	    setOpaque(true);
-    	    setFont(Constants.FontTablaDefaultCuerpo());
-    	    setFixedCellHeight(-1); //Para ajuste dinámico del tamaño de las células
-    	    setBorder(BorderFactory.createEmptyBorder(2, 5, 2, 5));
-    	}
-    	
-        @Override
-        public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
-            
-        	//Solo se va a hacer un renderizado multilínea si el valor del objeto es una Collection o un Array
-        	//En caso contrario renderizamos la casilla con el toString() del Objeto
-            if (value == null) this.setListData(new String[] {""});
-            else {
-                if (!(value instanceof Collection) && !value.getClass().isArray()) setListData(new String[] { value.toString() });
-                else {
-                	Object[] paramData;
-                	if (value.getClass().isArray()) paramData = (Object[]) value;
-                	else paramData = ((Collection<?>) value).toArray();
-                	
-                	String[] data = new String[paramData.length];
-                	for (int i = 0; i < data.length; ++i) {
-                		data[i] = paramData[i].toString();
-                	}
-                    this.setListData(data);
-                }
-            }
-
-            //Para la interacción con las celdas
-            if (isSelected) {
-                setBackground(table.getSelectionBackground());
-                setForeground(table.getSelectionForeground());
-            } else {
-                setBackground(table.getBackground());
-                setForeground(table.getForeground());
-            }
-
-            return this;
-        }
-    }
-    
-     private void setRender(JTable table, int numCols) {
-        //Las celdas de la tabla pueden contener listas, luego para mostrar los elementos uno debajo del otro, hace falta
-        //cambiar la forma de renderizarlas
-        MultiLineTableCellRenderer renderer = new MultiLineTableCellRenderer(); 
-        table.setDefaultRenderer(String[].class, renderer);
-        for (int i = 0; i < numCols; ++i) {
-        	table.getColumnModel().getColumn(i).setCellRenderer(renderer);
-        }
-        
-        for (int row = 0; row < table.getRowCount(); row++) {
-            int maxHeight = table.getRowHeight();
-            for (int col = 0; col < table.getColumnCount(); col++) {
-                Component comp = table.prepareRenderer(renderer, row, col);
-                maxHeight = Math.max(maxHeight, comp.getPreferredSize().height);
-            }
-            table.setRowHeight(row, maxHeight);
-        }
-    }
-    */
 	//Para tablas con edición por defecto (solo la columna 0 no es editable)
 	public TablaDefault(String nombreVista, ArrayList<String[]> columnNamesDeCadaTabla, ArrayList<ArrayList<T>> datosDeCadaTabla, boolean CUActualizar) {
 		this(nombreVista, columnNamesDeCadaTabla, datosDeCadaTabla, null, CUActualizar);
@@ -252,9 +184,7 @@ public class TablaDefault<T extends Convertable<T>> extends JFrame {
 	public ArrayList<T> getEdiciones() {
 		if (this.actualizar) {
 			//Similar al commitEdit de un JSpinner
-			if (table.isEditing()) {
-	            table.getCellEditor().stopCellEditing();
-	        }
+			if (table.isEditing()) table.getCellEditor().stopCellEditing();
 			return this.edicionDeCadaTabla;
 		}
 		else throw new IllegalArgumentException(Messages.ERROR_ACCION_NO_PERMITIDA);

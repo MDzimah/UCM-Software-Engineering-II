@@ -17,14 +17,14 @@ import presentacion.ViewUtils;
 import presentacion.VistaDefault;
 import presentacion.controlador.Controlador;
 
-public class VistaContratarTaquillero extends VistaDefault {
+public class VistaAltaTaquillero extends VistaDefault {
 
 	private JButton aceptar, cancelar;
 	private JTextField nombre, apellido, dni, sueldo, edad;
 	private JLabel l_nombre, l_apellido, l_DNI, l_sueldo, l_edad, l_genero;
 	private JComboBox<Genero> genero;
 	
-	public VistaContratarTaquillero() {
+	public VistaAltaTaquillero() {
 		initGUI();
 		this.setVisible(true);
 	}
@@ -69,11 +69,11 @@ public class VistaContratarTaquillero extends VistaDefault {
 			TTaquillero tTaq = new TTaquillero(true, _DNI, _nombre, _apellido, 0, _sueldo, _edad, _genero);
 			
 			SwingUtilities.invokeLater(()-> {Controlador.getInstance().accion(Evento.ALTA_TAQUILLERO, tTaq); });
-			VistaContratarTaquillero.this.dispose();
+			VistaAltaTaquillero.this.dispose();
 		});
 		
 		cancelar.addActionListener((e) -> {
-			VistaContratarTaquillero.this.dispose();
+			VistaAltaTaquillero.this.dispose();
 		});
 	}
 	
