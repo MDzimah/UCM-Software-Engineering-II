@@ -52,7 +52,7 @@ public class VistaActualizarCompania_1 implements IGUI{
 	@Override
 	public void actualizar(Evento evento, Object datos) {
 		if(evento==Evento.RES_OK) {
-			
+			ViewUtils.createDialogMessage(Messages.COMPANIA_ACTUALIZADA+ (int)datos);
 			 
 			}
 		else if(evento==Evento.RES_KO) {
@@ -61,8 +61,9 @@ public class VistaActualizarCompania_1 implements IGUI{
 			
 			
 		}
-	}
+		}
 }
+
 		
 
 

@@ -15,5 +15,5 @@ public interface SACompTea {
 	public int delete (int id) throws BBDDReadException, BBDDWriteException;
 	public Collection<TCompTea> readAll() throws BBDDReadException;
 	public int addMember(TCompT_MiemCompT cmt) throws BBDDReadException, BBDDWriteException;
-	public int removeMember(TCompT_MiemCompT cmt) throws BBDDReadException, BBDDWriteException;
+	public int removeMember(int cmt) throws BBDDReadException, BBDDWriteException;
 }

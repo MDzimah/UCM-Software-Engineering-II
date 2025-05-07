@@ -16,9 +16,8 @@ import presentacion.ViewUtils;
 import presentacion.controlador.Controlador;
 import presentacion.VistaDefault;
 import negocio.compTea.TCompTea;
-import negocio.miemCompTea.TCompT_MiemCompT;
 
-public class VistaAnyadirMiembroCompaniaTeatral extends VistaDefault implements IGUI{
+public class VistaBorrarMiembrodeCompaniaTeatral extends VistaDefault implements IGUI{
 	
 	
 	/**
@@ -27,7 +26,7 @@ public class VistaAnyadirMiembroCompaniaTeatral extends VistaDefault implements 
 	private static final long serialVersionUID = 1L;
 
 
-	public  VistaAnyadirMiembroCompaniaTeatral () {
+	public VistaBorrarMiembrodeCompaniaTeatral () {
 		initGUI();
 		this.setVisible(true);
 	}
@@ -35,28 +34,22 @@ public class VistaAnyadirMiembroCompaniaTeatral extends VistaDefault implements 
 	private void initGUI() {
 		
 		this.setTitle("Vista BorrarMiembrodeCompaniaTeatral");//no se si dan problemas la verdad
-		JButton anyadir= new JButton("Añadir");
+		JButton anyadir= new JButton("Borrar");
 		JButton cancelar = new JButton("Cancelar");
-		JLabel idCompLabel= new JLabel("id compania :");
-		JLabel idMiemLabel= new JLabel("id miembro:");
-		JSpinner idComp= ViewUtils.integerSpinner(0, 0, Integer.MAX_VALUE, 1);
-		JSpinner idMiem= ViewUtils.integerSpinner(0, 0, Integer.MAX_VALUE, 1);
+		JLabel costeContratacionLabel= new JLabel("id:");
+		JSpinner id= ViewUtils.integerSpinner(0, 0, Integer.MAX_VALUE, 1);
 		ArrayList<Pair<JComponent, JComponent>> campos = new ArrayList<>();
-		campos.add(new Pair<>(idCompLabel, idComp));
-		campos.add(new Pair<>(idMiemLabel, idMiem));
+		campos.add(new Pair<>(costeContratacionLabel, id));
 		anyadir.addActionListener(e ->{
 			try {
-				idComp.commitEdit();
-				idMiem.commitEdit();
-				int idCompInt = (int)idComp.getValue();
-				int idMiemInt = (int)idMiem.getValue();
-				TCompT_MiemCompT Tcmc = new TCompT_MiemCompT(idCompInt,idMiemInt); 
-				SwingUtilities.invokeLater(()->{Controlador.getInstance().accion(Evento.ALTA_COMPANIA_TEATRAL, Tcmc);});
+				id.commitEdit();
+				int costint = (int)id.getValue();
+				
+				SwingUtilities.invokeLater(()->{Controlador.getInstance().accion(Evento.ALTA_COMPANIA_TEATRAL, id);});
 			}
 			catch(Exception ex) {
 				ViewUtils.createInvalidFieldsPanel();
-				idComp.updateUI();
-				idMiem.updateUI();
+				id.updateUI();
 			}
 			this.dispose();	//Igual cambio algo de aqui porque el problema es que como esta ahora se ejecuta el controller antes de cerrar la ventana
 		});
@@ -73,11 +66,11 @@ public class VistaAnyadirMiembroCompaniaTeatral extends VistaDefault implements 
 	@Override
 	public void actualizar(Evento evento, Object datos) {
 		if(evento==Evento.RES_OK) {
-			ViewUtils.createDialogMessage(Messages.COMPANIA_MIEMBRO_ANYADIDO + '\n' + " Id: "+ (int)datos);
+			ViewUtils.createDialogMessage(Messages.COMPANIA_MIEMBRO_BORRADO + '\n' + " Id: "+ (int)datos);
 
 		}
 		else if(evento==Evento.RES_KO) {
-			ViewUtils.createErrorDialogMessage(Messages.X_ANYADIR_COMPANIA_MIEMBRO+ '\n' + Messages.ERROR.formatted(((Exception) datos).getMessage()));
+			ViewUtils.createErrorDialogMessage(Messages.X_BORRAR_COMPANIA_MIEMBRO+ '\n' + Messages.ERROR.formatted(((Exception) datos).getMessage()));
 		}
 		
 	}

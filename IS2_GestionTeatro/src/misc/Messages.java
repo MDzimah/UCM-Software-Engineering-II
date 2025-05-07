@@ -24,6 +24,8 @@ public class Messages {
 	public static final String COMPANIA_CREADA = Messages.SHP.formatted("crear compania");
 	public static final String COMPANIA_ELIMINADA = Messages.SHP.formatted("borrar compania");
 	public static final String COMPANIA_MOSTRADA = Messages.SHP.formatted("mostrar compania");
+	public static final String COMPANIA_MIEMBRO_BORRADO = Messages.SHP.formatted("desvincular la compañia y el miembro");
+	public static final String COMPANIA_MIEMBRO_ANYADIDO = Messages.SHP.formatted("vincular la compañia y el miembro");
 		
 	//Obra
 	public static final String EX_OBRA_ANYADIDA_CORRECT = Messages.SHP.formatted("registrado la obra ");
@@ -43,6 +45,8 @@ public class Messages {
 	public static final String X_ELIMINAR_COMPANIA = Messages.NSHP.formatted("dar de baja compania.");
 	public static final String X_BUSCAR_COMPANIA= Messages.NSHP.formatted("buscar compania.");
 	public static final String X_ACTUALIZAR_COMPANIA = Messages.NSHP.formatted("actualizar compania.");
+	public static final String X_BORRAR_COMPANIA_MIEMBRO = Messages.NSHP.formatted("desvincular la compania y el miembro");
+	public static final String X_ANYADIR_COMPANIA_MIEMBRO = Messages.NSHP.formatted("vincular la compania y el miembro");
 	//Pase
 	public static final String X_MOSTRAR_PASES = Messages.NSHP.formatted("mostrar los pases.");
 	public static final String X_PASE_CREADO = Messages.NSHP.formatted("crear el pase.");

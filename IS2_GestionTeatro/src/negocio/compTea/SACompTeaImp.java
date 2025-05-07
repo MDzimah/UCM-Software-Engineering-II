@@ -47,9 +47,9 @@ public class SACompTeaImp implements SACompTea {
 		return daoCT.readAll();
 	}
 	@Override
-	public int removeMember(TCompT_MiemCompT cmt) throws BBDDReadException, BBDDWriteException {
+	public int removeMember(int cmt) throws BBDDReadException, BBDDWriteException {
 		DAOCompT_MiemCompT daoCT=FactoriaAbstractaIntegracion.getInstance().crearDAOCompTea_MiemCompTea();
-		return daoCT.create(cmt);
+		return daoCT.delete(cmt);
 	}
 	@Override
 	public int addMember(TCompT_MiemCompT cmt) throws BBDDReadException, BBDDWriteException {

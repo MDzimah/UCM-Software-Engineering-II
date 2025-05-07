@@ -457,12 +457,9 @@ public class ControladorImp extends Controlador {
 				Integer id =(Integer)datos;
 				TCompTea newComp= saCompTea.read(id);
 				if(newComp!=null) {
-				/*FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_OK, newComp);*///TODO no se si hay que mostrar aqui
-<<<<<<< HEAD
-					VistaActualizarCompania1 vista= (VistaActualizarCompania1) FactoriaAbstractaPresentacion.getInstance().createVista(Evento.ACTUALIZAR1_COMPANIA_TEATRAL);
-=======
-					VistaActualizarCompania_1 vista= (VistaActualizarCompania_1) FactoriaAbstractaPresentacion.getInstance().createVista(Evento.ACTUALIZAR_OBRA_1);
->>>>>>> branch 'main' of https://github.com/MDzimah/UCM-Software-Engineering-II.git
+
+					VistaActualizarCompania_1 vista= (VistaActualizarCompania_1) FactoriaAbstractaPresentacion.getInstance().createVista(Evento.ACTUALIZAR_COMPANIA_TEATRAL_1);
+
 					vista.cargar(newComp);
 				}
 				else {
@@ -553,7 +550,7 @@ public class ControladorImp extends Controlador {
 				int id2= saCompTea.addMember(tCM);
 				if(id2!=-1) FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_OK, (int)id2);
 				else {
-					throw new Exception("No se puede añadir el miembro a la compañia");
+					throw new Exception(""+id2);
 				}
 			}
 			catch(Exception e) {
@@ -565,11 +562,11 @@ public class ControladorImp extends Controlador {
 		{
 			try {
 				SACompTea saCompTea=FactoriaAbstractaNegocio.getInstance().crearSACompTea();
-				TCompT_MiemCompT tCM =(TCompT_MiemCompT)datos;
-				int id2= saCompTea.removeMember(tCM);
+				int id =(int)datos;
+				int id2= saCompTea.removeMember(id);
 				if(id2!=-1) FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_OK, (int)id2);
 				else {
-					throw new Exception("No se puede borrar el miembro a la compañia");
+					throw new Exception("");
 				}
 			}
 			catch(Exception e) {
