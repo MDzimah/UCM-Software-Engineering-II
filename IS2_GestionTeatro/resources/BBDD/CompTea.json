@@ -39,7 +39,21 @@
         "compania teatral": "hola",
         "direccion": "lolo",
         "coste": 1,
+        "activo": false
+    },
+    "7": {
+        "idCompTea": 7,
+        "compania teatral": "kak",
+        "direccion": "kaka",
+        "coste": 7,
         "activo": true
     },
-    "lastId": 6
+    "8": {
+        "idCompTea": 8,
+        "compania teatral": "no se ",
+        "direccion": "kaka",
+        "coste": 1,
+        "activo": true
+    },
+    "lastId": 8
 }
