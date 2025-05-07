@@ -62,17 +62,26 @@ public class VistaActualizarClNormal extends VistaDefault implements IGUI {
 		super.initComps(campos, alta, cancelar);
 		
 		alta.addActionListener(e -> {
-			String nom = nombre.getText();
-			String ap = apellido.getText();
-			String dni = DNI.getText();
-			String cuenta = cuentaBancaria.getText();
-			int ptos = Integer.parseInt(puntosAcum.getText());
-			TClienteNormal tCliente = new TClienteNormal(id,dni,nom,ap,true,cuenta, ptos);
+			try {
+				String nom = nombre.getText();
+				String ap = apellido.getText();
+				String dni = DNI.getText();
+				String cuenta = cuentaBancaria.getText();
+				int ptos = Integer.parseInt(puntosAcum.getText());
+				TClienteNormal tCliente = new TClienteNormal(id,dni,nom,ap,true,cuenta, ptos);
+				
+				
+				SwingUtilities.invokeLater(()-> {Controlador.getInstance().accion(Evento.ACTUALIZAR_CLIENTE_NORMAL, tCliente); });
+			}
+			catch (Exception ex) {
+				this.actualizar(Evento.RES_KO, new Exception("Campos incorrectos"));
+			}
+			
+			finally {
+				VistaActualizarClNormal.this.dispose();
+			}
 			
 			
-			SwingUtilities.invokeLater(()-> {Controlador.getInstance().accion(Evento.ACTUALIZAR_CLIENTE_NORMAL, tCliente); });
-			
-			VistaActualizarClNormal.this.dispose();
 		});
 		
 		cancelar.addActionListener(e -> {

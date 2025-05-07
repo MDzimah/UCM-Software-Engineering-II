@@ -75,8 +75,6 @@ private JButton mostrar, cancelar;
 			cl.add(clv);
 			cl.add(cln);
 			TablaDefault<TCliente> tabla = new TablaDefault<TCliente>("Clientes",list,cl,false);
-			//TablaDefault<TClienteVIP> tabla1 = new TablaDefault<TClienteVIP>("Clientes VIP", Messages.colNomsClienteVIP, clv, false);
-			//TablaDefault<TClienteNormal> tabla2 = new TablaDefault<TClienteNormal>("Clientes Normales", Messages.colNomsClienteNormal, cln, false);
 			tabla.setVisible(true);
 			
 		} else if (evento == Evento.RES_KO) {

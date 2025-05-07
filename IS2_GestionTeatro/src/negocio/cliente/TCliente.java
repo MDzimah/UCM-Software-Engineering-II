@@ -7,13 +7,13 @@ import negocio.factura.TFactura;
 import presentacion.Convertable;
 
 public class TCliente implements Convertable<TCliente> {
-	protected String tipo;
-	protected int idCliente;
-	protected String DNI;
-	protected String nombre;
-	protected String apellido;
-	protected boolean activo;
-	protected String cuentaBancaria;
+	private String tipo;
+	private int idCliente;
+	private String DNI;
+	private String nombre;
+	private String apellido;
+	private boolean activo;
+	private String cuentaBancaria;
 	
 	public TCliente () {}
 	

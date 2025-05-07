@@ -102,6 +102,7 @@ public class ControladorImp extends Controlador {
 			try {
 				SACliente sa = FactoriaAbstractaNegocio.getInstance().crearSACliente();
 				int id = sa.create((TCliente) datos);
+				if (id == -1) throw new Exception("El cliente ya existe");
 				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_OK, id);
 			}
 			catch (Exception e) {
@@ -113,6 +114,7 @@ public class ControladorImp extends Controlador {
 			try {
 				SACliente sa = FactoriaAbstractaNegocio.getInstance().crearSACliente();
 				TCliente tCliente = sa.read((int)datos);
+				if (tCliente == null) throw new Exception("No existe cliente con id " + (int)datos);
 				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_OK, tCliente);
 			}
 			catch (Exception e){
@@ -124,6 +126,7 @@ public class ControladorImp extends Controlador {
 			try {
 				SACliente sa = FactoriaAbstractaNegocio.getInstance().crearSACliente();
 				int id = sa.delete((int)datos);
+				if (id == -1) throw new Exception("El cliente no existe");
 				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_OK, id);
 			}
 			catch (Exception e){
@@ -148,6 +151,7 @@ public class ControladorImp extends Controlador {
 				SACliente sa = FactoriaAbstractaNegocio.getInstance().crearSACliente();
 				int id = (int) datos;
 				TCliente tCliente = sa.read(id);
+				if (tCliente == null) throw new Exception("No existe cliente con id " + (int)datos);
 				if (tCliente.getTipo() == "Normal") {
 					VistaActualizarClNormal vistaAct = (VistaActualizarClNormal) FactoriaAbstractaPresentacion.getInstance().createVista(Evento.ACTUALIZAR_CLIENTE_NORMAL);
 					vistaAct.cargarCliente((TClienteNormal) tCliente,id);
@@ -356,6 +360,7 @@ public class ControladorImp extends Controlador {
 				int val = saObra.create((TObra)datos);
 				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_OK, val);
 				*/
+				SAObra saObra = FactoriaAbstractaNegocio.getInstance().crearSAObra();
 			}
 			catch(Exception e) {
 				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_KO, e);

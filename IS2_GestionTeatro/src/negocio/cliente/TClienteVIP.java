@@ -15,7 +15,7 @@ public class TClienteVIP extends TCliente implements Convertable<TCliente>{
 	
 	public TClienteVIP (int idCliente, String DNI,String nombre, String apellido, boolean activo, String cuentaBancaria, VIPEnum nivelVIP, float coste) {
 		super(idCliente,DNI,nombre,apellido,activo,cuentaBancaria);
-		tipo = "VIP";
+		super.setTipo("VIP");;
 		this.nivelVIP = nivelVIP;
 		this.costeMensualSuscripcion = coste;
 	}
@@ -43,12 +43,12 @@ public class TClienteVIP extends TCliente implements Convertable<TCliente>{
 	@Override
 	public Object getColumnValue(int columnIndex) {
 		switch(columnIndex) {
-		case 0: return this.tipo;
-		case 1: return this.idCliente;
-		case 2: return this.nombre;
-		case 3: return this.apellido;
-		case 4: return this.DNI;
-		case 5: return this.cuentaBancaria;
+		case 0: return this.getTipo();
+		case 1: return this.getIdCliente();
+		case 2: return this.getNombre();
+		case 3: return this.getApellido();
+		case 4: return this.getDNI();
+		case 5: return this.getCuentaBancaria();
 		case 6: return this.nivelVIP;
 		default: return this.costeMensualSuscripcion;
 		}

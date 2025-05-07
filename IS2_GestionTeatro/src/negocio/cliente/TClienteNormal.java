@@ -14,7 +14,7 @@ public class TClienteNormal extends TCliente implements Convertable<TCliente>{
 	
 	public TClienteNormal (int idCliente,String DNI, String nombre, String apellido, boolean activo, String cuentaBancaria, int puntos) {
 		super(idCliente,DNI,nombre,apellido,activo,cuentaBancaria);
-		tipo = "Normal";
+		super.setTipo("Normal"); 
 		this.PuntosAcumulados = puntos;
 	}
 	
@@ -31,12 +31,12 @@ public class TClienteNormal extends TCliente implements Convertable<TCliente>{
 	@Override
 	public Object getColumnValue(int columnIndex) {
 		switch(columnIndex) {
-		case 0: return this.tipo;
-		case 1: return this.idCliente;
-		case 2: return this.nombre;
-		case 3: return this.apellido;
-		case 4: return this.DNI;
-		case 5: return this.cuentaBancaria;
+		case 0: return this.getTipo();
+		case 1: return this.getIdCliente();
+		case 2: return this.getNombre();
+		case 3: return this.getApellido();
+		case 4: return this.getDNI();
+		case 5: return this.getCuentaBancaria();
 		default: return this.PuntosAcumulados;
 		}
 	}

@@ -17,7 +17,6 @@ public class SAClienteImp implements SACliente {
 	@Override
 	public int create(TCliente cl) throws BBDDReadException, BBDDWriteException {
 		DAOCliente dao = FactoriaAbstractaIntegracion.getInstance().crearDAOCliente();
-		//no se si excepcion
 		if (dao.read(cl.getIdCliente()) != null) return -1;
 		return dao.create(cl);
 	}
@@ -42,9 +41,12 @@ public class SAClienteImp implements SACliente {
 			//eliminamos todas las facturas asociadas al cliente eliminado
 			SAFactura sa = FactoriaAbstractaNegocio.getInstance().crearSAFactura();
 			Collection<TFactura> c = sa.allFacturasPorCliente(nid);
-			for (TFactura fac : c) {
-				if (fac.getIdCliente() == nid) sa.delete(fac.getIdFactura());
+			if (c != null) {
+				for (TFactura fac : c) {
+					if (fac.getIdCliente() == nid) sa.delete(fac.getIdFactura());
+				}
 			}
+			
 		}
 		return nid;
 	}
