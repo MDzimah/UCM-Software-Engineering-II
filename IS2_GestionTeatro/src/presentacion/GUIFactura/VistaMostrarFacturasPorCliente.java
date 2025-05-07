@@ -20,6 +20,7 @@ import presentacion.ViewUtils;
 import presentacion.VistaDefault;
 import presentacion.controlador.Controlador;
 
+@SuppressWarnings("serial")
 public class VistaMostrarFacturasPorCliente extends VistaDefault {
 	private JLabel lIdCliente;
 	private JSpinner sIdCliente;

@@ -42,7 +42,7 @@ public class VistaActualizarMiembroCompania_0 extends VistaDefault{
                 Controlador.getInstance().accion(Evento.ACTUALIZAR_MIEMBRO_COMPANIA_0, id);
                 dispose();
             } catch (java.text.ParseException ex) {
-                ViewUtils.createErrorDialogMessage("El ID ingresado no es válido.");
+                ViewUtils.createErrorDialogMessage(Messages.EXC_CAMPOS_INCORRECTOS);
             }
 		});
 		
@@ -55,7 +55,7 @@ public class VistaActualizarMiembroCompania_0 extends VistaDefault{
 	public void actualizar(Evento evento, Object datos) {
 		if(evento==Evento.RES_KO) {
 			String error;
-			if(datos instanceof String) error = (String) datos;
+			if(datos instanceof Exception) error = ((Exception) datos).getMessage();
 			else error = Messages.ID_NO_ENCONTRADO.formatted(String.valueOf(((int)datos)));
 			ViewUtils.createErrorDialogMessage(Messages.X_MIEMBRO_ACTUALIZADO + ' ' + Messages.MOTIVO.formatted(error));
 		}		

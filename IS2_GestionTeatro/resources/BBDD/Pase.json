@@ -1,12 +1,62 @@
+<<<<<<< HEAD
+=======
 {
-    "pases": {"0": {
-        "idCompTea": 2,
-        "precioPase": 3,
-        "fecha": "2025-05-06T23:37:28.620",
-        "IdObra": 2,
-        "stock": 65,
-        "idPase": 0,
-        "activo": true
-    }},
-    "lastId": 0
+    "pases": {
+        "0": {
+            "idCompTea": 2,
+            "precioPase": 3,
+            "fecha": "2025-05-06T23:37:28.620",
+            "IdObra": 2,
+            "stock": 65,
+            "idPase": 0,
+            "activo": false
+        },
+        "1": {
+            "idCompTea": 4,
+            "precioPase": 5,
+            "fecha": "2025-05-15T18:04:59.424",
+            "IdObra": 4,
+            "stock": 44,
+            "idPase": 1,
+            "activo": false
+        },
+        "2": {
+            "idCompTea": 4,
+            "precioPase": 4,
+            "fecha": "2025-05-13T18:06:14.902",
+            "IdObra": 4,
+            "stock": 44,
+            "idPase": 2,
+            "activo": true
+        },
+        "3": {
+            "idCompTea": 4,
+            "precioPase": 4,
+            "fecha": "2025-05-22T18:07:41.724",
+            "IdObra": 0,
+            "stock": 44,
+            "idPase": 3,
+            "activo": true
+        },
+        "4": {
+            "idCompTea": 5,
+            "precioPase": 6,
+            "fecha": "2025-05-22T18:24:48.208",
+            "IdObra": 5,
+            "stock": 66,
+            "idPase": 4,
+            "activo": true
+        },
+        "5": {
+            "idCompTea": 5,
+            "precioPase": 5,
+            "fecha": "2025-05-21T18:25:51.361",
+            "IdObra": 5,
+            "stock": 55,
+            "idPase": 5,
+            "activo": true
+        }
+    },
+    "lastId": 5
 }
+>>>>>>> refs/heads/Jorge-Pase-Debug_excepciones_y_metodos_que_faltan

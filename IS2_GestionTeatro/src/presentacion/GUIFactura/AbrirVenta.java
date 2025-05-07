@@ -16,11 +16,11 @@ public class AbrirVenta {
 	public static void setAbrirVentaButton(JButton button) { bAbVenta = button; }
 	public static void enableButton() { bAbVenta.setEnabled(true); }
 	
-	//Botón carrito y el carrito en sí
-	public static Collection<TLineaFactura> getCarrito() { return carrito; } 
-	public static void resetCarrito() {	carrito.clear(); }
+	//Botón carrito y el carrito en sí de la venta activa
 	public static void setCarritoButton(JButton button) { bCarr = button; }
 	public static void updateCarritoCountButton() { 
 		bCarr.setText(String.valueOf(carrito.size())); 
 	}
+	public static Collection<TLineaFactura> getCarrito() { return carrito; } 
+	public static void resetCarrito() {	carrito.clear(); }
 }

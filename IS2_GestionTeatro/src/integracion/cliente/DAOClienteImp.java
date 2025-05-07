@@ -112,7 +112,7 @@ public class DAOClienteImp implements DAOCliente {
 
 	@Override
 	public Collection<TCliente> readAll() throws BBDDReadException, BBDDWriteException {
-		if (OpsBBDD.isEmpty(Messages.BDCli)) return null;
+		if (OpsBBDD.isEmpty(Messages.BDCli)) return new ArrayList<>();
 		JSONObject bdc = OpsBBDD.read(Messages.BDCli);
 		JSONObject clientes = (JSONObject) bdc.get(Messages.KEY_cliNorms);
 		JSONObject clientesv = (JSONObject) bdc.get(Messages.KEY_cliVIPs);

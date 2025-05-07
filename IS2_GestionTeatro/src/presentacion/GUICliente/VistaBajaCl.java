@@ -15,7 +15,7 @@ import presentacion.Evento;
 import presentacion.IGUI;
 import presentacion.ViewUtils;
 import presentacion.VistaDefault;
-import presentacion.GUITaquillero.VistaDespedirTaquillero;
+import presentacion.GUITaquillero.VistaBajaTaquillero;
 import presentacion.controlador.Controlador;
 
 @SuppressWarnings("serial")

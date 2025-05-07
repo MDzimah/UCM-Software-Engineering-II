@@ -12,7 +12,7 @@ import presentacion.ViewUtils;
 import presentacion.TablaDefault;
 import presentacion.controlador.Controlador;
 
-public class VistaActualizarPaseDescarga implements IGUI {
+public class VistaActualizarPase_1 implements IGUI {
 	
 	public void cargarPase(TPase datos) {
 		ArrayList<String[]> colNames = new ArrayList<>();
@@ -28,8 +28,8 @@ public class VistaActualizarPaseDescarga implements IGUI {
 		tabla.setVisible(true);
 		tabla.getOkButton().addActionListener(e -> {
 			TPase tPaseNuevo = (TPase) (tabla.getEdiciones()).get(0);
-			Controlador.getInstance().accion(Evento.ACTUALIZAR_PASE_DESCARGA, tPaseNuevo);
-			tabla.setVisible(false);
+			Controlador.getInstance().accion(Evento.ACTUALIZAR_PASE_1, tPaseNuevo);
+			tabla.dispose();
 		});
 	}
 	
@@ -38,8 +38,11 @@ public class VistaActualizarPaseDescarga implements IGUI {
 		if(evento==Evento.RES_OK) {
 			ViewUtils.createDialogMessage(Messages.EX_PASE_ACTUALIZADO);
 		}
-		else if (evento==Evento.RES_OK) {
-			ViewUtils.createErrorDialogMessage(Messages.X_PASE_ACTUALIZADO + ' ' + Messages.MOTIVO.formatted(((Exception)datos).getMessage()));
+		else if (evento==Evento.RES_KO) {
+			String error;
+			if (datos instanceof Exception) error = ((Exception) datos).getMessage();
+			else error = Messages.EXC_CAMPOS_INCORRECTOS;
+			ViewUtils.createErrorDialogMessage(Messages.X_PASE_ACTUALIZADO + ' ' + Messages.MOTIVO.formatted(error));
 		}
 	}
 

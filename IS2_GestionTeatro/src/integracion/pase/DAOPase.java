@@ -14,4 +14,5 @@ public interface DAOPase {
 	public ArrayList<TPase> readAll() throws BBDDReadException;
 	public int update(TPase tPase) throws BBDDReadException, BBDDWriteException;
 	public void deletePorObra(int idObra) throws BBDDReadException, BBDDWriteException;
+	public void deletePorCompTea(int idCompTea) throws BBDDReadException, BBDDWriteException;
 }

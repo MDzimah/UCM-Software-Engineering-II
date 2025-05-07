@@ -5,11 +5,13 @@ import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JFormattedTextField;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JRadioButton;
 import javax.swing.JSpinner;
 import javax.swing.JTextField;
 import javax.swing.SpinnerListModel;
@@ -32,7 +34,7 @@ public class VistaAltaCl extends VistaDefault implements IGUI {
 	
 	private JTextField DNI, nombre, apellido, cuentaBancaria;
 	private JLabel DNIl, nombrel, apellidol, cuentaBancarial, tipol;
-	private JSpinner tipo;
+	private JRadioButton VIP, Normal;
 	private JButton alta, cancelar;
 	
 	public VistaAltaCl() {
@@ -53,14 +55,19 @@ public class VistaAltaCl extends VistaDefault implements IGUI {
 		nombre = new JTextField(20); 
 		apellido = new JTextField(20); 
 		cuentaBancaria = new JTextField(20);
-		tipo = new JSpinner(new SpinnerListModel(valuesTipoCliente()));
+		ButtonGroup bg = new ButtonGroup();
+		VIP = new JRadioButton(TipoCliente.VIP.toString());
+		bg.add(VIP);
+		Normal = new JRadioButton(TipoCliente.Normal.toString());
+		bg.add(Normal);
 		
 		ArrayList<Pair<JComponent, JComponent>> campos = new ArrayList<>();
 		campos.add(new Pair<>(DNIl, DNI));
 		campos.add(new Pair<>(nombrel, nombre));
 		campos.add(new Pair<>(apellidol, apellido));
 		campos.add(new Pair<>(cuentaBancarial, cuentaBancaria));
-		campos.add(new Pair<>(tipol, tipo));
+		campos.add(new Pair<>(new JLabel(), tipol));
+		campos.add(new Pair<>(VIP, Normal));
 		
 		super.initComps(campos, alta, cancelar);
 		
@@ -72,14 +79,17 @@ public class VistaAltaCl extends VistaDefault implements IGUI {
 			VistaAltaCl.this.dispose();
 		});
 		
-		tipo.addChangeListener(e -> {
-			String s = tipo.getValue().toString();
-			if (s == "VIP") {
-				camposVIP();
+		VIP.addActionListener(e -> {
+			for (ActionListener al : alta.getActionListeners()) {
+			    alta.removeActionListener(al);
 			}
-			else if (s == "Normal") {
-				camposNormal();
+			camposVIP();
+		});
+		Normal.addActionListener(e -> {
+			for (ActionListener al : alta.getActionListeners()) {
+			    alta.removeActionListener(al);
 			}
+			camposNormal();
 		});
 		
 	}
@@ -119,7 +129,8 @@ public class VistaAltaCl extends VistaDefault implements IGUI {
 		campos.add(new Pair<>(nombrel, nombre));
 		campos.add(new Pair<>(apellidol, apellido));
 		campos.add(new Pair<>(cuentaBancarial, cuentaBancaria));
-		campos.add(new Pair<>(tipol, tipo));
+		campos.add(new Pair<>(new JLabel(), tipol));
+		campos.add(new Pair<>(VIP, Normal));
 		campos.add(new Pair<>(costeMensuall, costeMensual));
 		campos.add(new Pair<>(nivelVIPl, nivelVIP));
 		super.initComps(campos, cancelar, alta);
@@ -127,9 +138,6 @@ public class VistaAltaCl extends VistaDefault implements IGUI {
 		super.repaint();
 		
 		alta.addActionListener(e -> {
-			for (ActionListener al : alta.getActionListeners()) {
-			    alta.removeActionListener(al);
-			}
 			try {
 				String dni = DNI.getText(), nom = nombre.getText(), ap = apellido.getText(), cuenta = cuentaBancaria.getText(), nivel = nivelVIP.getValue().toString();
 				Long cost = (Long) costeMensual.getValue();
@@ -157,7 +165,8 @@ public class VistaAltaCl extends VistaDefault implements IGUI {
 		campos.add(new Pair<>(nombrel, nombre));
 		campos.add(new Pair<>(apellidol, apellido));
 		campos.add(new Pair<>(cuentaBancarial, cuentaBancaria));
-		campos.add(new Pair<>(tipol, tipo));
+		campos.add(new Pair<>(new JLabel(), tipol));
+		campos.add(new Pair<>(VIP, Normal));
 		campos.add(new Pair<>(puntosAcuml, puntosAcum));
 		super.initComps(campos, cancelar, alta);
 		super.revalidate();

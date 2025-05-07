@@ -32,7 +32,9 @@ public class VistaMostrarMiembrosCompania implements IGUI {
 
 			new TablaDefault<>("Miembros de la compañía teatral", colNames, data, false);
 		} else if (evento == Evento.RES_KO) {
-			String error = (datos instanceof BBDDReadException) ? ((BBDDReadException) datos).getMessage() : Messages.NO_HAY_DATOS;
+			String error;
+			if(datos instanceof Exception) error = ((Exception) datos).getMessage();
+			else error = Messages.NO_HAY_DATOS;
 			ViewUtils.createErrorDialogMessage(Messages.X_MIEMBROS_LISTADOS + ' ' + Messages.MOTIVO.formatted(error));
 		}
 		mostrado = false;

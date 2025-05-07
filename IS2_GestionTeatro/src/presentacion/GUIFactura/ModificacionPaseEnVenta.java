@@ -21,7 +21,7 @@ public abstract class ModificacionPaseEnVenta extends VistaDefault {
 		lIdPase = new JLabel("Id pase:");
 		sIdPase = ViewUtils.integerSpinner(0, 0, Integer.MAX_VALUE, 1);
 		lCtdad = new JLabel("Cantidad:");
-	    sCtdad = ViewUtils.integerSpinner(1, 1, 100, 1);
+	    sCtdad = ViewUtils.integerSpinner(1, 1, Integer.MAX_VALUE, 1);
 		ok = new JButton("Aceptar");
 		cancel = new JButton("Cancelar");
 		

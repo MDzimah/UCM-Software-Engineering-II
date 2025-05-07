@@ -54,6 +54,7 @@ public class DAOPaseImp implements DAOPase {
 			JSONObject pases = bdPase.getJSONObject(Messages.KEY_pases);
 			if (pases.has(Integer.toString(id))) {
 				JSONObject pase = pases.getJSONObject(Integer.toString(id));
+				if (pase.getBoolean(Messages.KEY_act) == false) return -1;
 		        pase.put(Messages.KEY_act, false);
 		        OpsBBDD.write(bdPase, Messages.BDPase);
 		        return id;
@@ -102,7 +103,7 @@ public class DAOPaseImp implements DAOPase {
 	}
 
 	@Override
-	public int update(TPase tPase) throws BBDDReadException, BBDDWriteException {
+	public int update(TPase tPase) throws BBDDReadException, BBDDWriteException {		
 		if (!OpsBBDD.isEmpty(Messages.BDPase)) {
 			JSONObject bdPase = OpsBBDD.read(Messages.BDPase);
 			JSONObject pases = bdPase.getJSONObject(Messages.KEY_pases);
@@ -113,6 +114,7 @@ public class DAOPaseImp implements DAOPase {
 					nuevoPase.put(Messages.KEY_idPase, tPase.getIdPase());
 					nuevoPase.put(Messages.KEY_idCompTea, tPase.getIdCompanyaTeatral());
 					nuevoPase.put(Messages.KEY_idObra, tPase.getIdObra());
+					//if (tPase.getStock() <= 0) nuevoPase.put(Messages.KEY_act, false);
 					nuevoPase.put(Messages.KEY_act, tPase.isActivo());
 					nuevoPase.put(Messages.KEY_fecha, tPase.getFecha().toString());
 					nuevoPase.put(Messages.KEY_stock, tPase.getStock());
@@ -155,10 +157,31 @@ public class DAOPaseImp implements DAOPase {
 			for (String idPase : pases.keySet()) {
 				JSONObject pase = pases.getJSONObject(idPase);
 				int idObraPase = pase.getInt(Messages.KEY_idObra);
-				if (idObra == idObraPase) clavesEliminar.add(idPase);
+				if (idObra == idObraPase && pase.getBoolean(Messages.KEY_act)) clavesEliminar.add(idPase);
 			}
 			for (String key: clavesEliminar) {
 				//bdPases.remove(key); no hago borrado fisico
+				JSONObject pase = pases.getJSONObject(key);
+				pase.put(Messages.KEY_act, false);
+				pases.put(key, pase);
+				bdPases.put(Messages.KEY_pases, pases);
+			}
+			OpsBBDD.write(bdPases, Messages.BDPase);
+		}
+	}
+
+	@Override
+	public void deletePorCompTea(int idCompTea) throws BBDDReadException, BBDDWriteException {
+		if (!OpsBBDD.isEmpty(Messages.BDPase)) {
+			JSONObject bdPases = OpsBBDD.read(Messages.BDPase);
+			JSONObject pases = bdPases.getJSONObject(Messages.KEY_pases);
+			List<String> clavesEliminar = new LinkedList<>();
+			for (String idPase : pases.keySet()) {
+				JSONObject pase = pases.getJSONObject(idPase);
+				int idCompTeaPase = pase.getInt(Messages.KEY_idCompTea);
+				if (idCompTea == idCompTeaPase && pase.getBoolean(Messages.KEY_act)) clavesEliminar.add(idPase);
+			}
+			for (String key: clavesEliminar) {
 				JSONObject pase = pases.getJSONObject(key);
 				pase.put(Messages.KEY_act, false);
 				pases.put(key, pase);

@@ -15,11 +15,7 @@ public class SAMiemCompTeaImp implements SAMiemCompTea {
 		DAOMiemCompTea daoMiem = FactoriaAbstractaIntegracion.getInstance().crearDAOMiemCompTea();
 		TMiemCompTea tMiemComp = daoMiem.readByDNI(tMieCT.getDNI());
 		if(tMiemComp == null) return daoMiem.create(tMieCT);
-		else if(tMiemComp.getActivo()) return -tMiemComp.getIdMiembComp();
-		else {
-			tMieCT.setIdMiembComp(tMiemComp.getIdMiembComp());
-			return daoMiem.update(tMieCT);
-		}
+		else return -tMiemComp.getIdMiembComp();
 	}
 
 	@Override

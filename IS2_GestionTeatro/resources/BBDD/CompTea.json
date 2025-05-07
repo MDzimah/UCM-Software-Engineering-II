@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 {
     "1": {
         "idCompTea": 1,
@@ -56,4 +57,6 @@
         "activo": true
     },
     "lastId": 8
+=======
+>>>>>>> branch 'main' of https://github.com/MDzimah/UCM-Software-Engineering-II.git
 }
