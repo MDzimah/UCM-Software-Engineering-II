@@ -538,6 +538,38 @@ public class ControladorImp extends Controlador {
 			}
 			break;
 		}
+		case ANYADIR_MIEMBRO_COMPANIA_TEATRAL:
+		{
+			try {
+				SACompTea saCompTea=FactoriaAbstractaNegocio.getInstance().crearSACompTea();
+				TCompT_MiemCompT tCM =(TCompT_MiemCompT)datos;
+				int id2= saCompTea.addMember(tCM);
+				if(id2!=-1) FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_OK, (int)id2);
+				else {
+					throw new Exception("No se puede añadir el miembro a la compañia");
+				}
+			}
+			catch(Exception e) {
+				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_KO, e);
+			}
+			break;
+		}
+		case BORRAR_MIEMBRO_COMPANIA_TEATRAL:
+		{
+			try {
+				SACompTea saCompTea=FactoriaAbstractaNegocio.getInstance().crearSACompTea();
+				TCompT_MiemCompT tCM =(TCompT_MiemCompT)datos;
+				int id2= saCompTea.removeMember(tCM);
+				if(id2!=-1) FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_OK, (int)id2);
+				else {
+					throw new Exception("No se puede borrar el miembro a la compañia");
+				}
+			}
+			catch(Exception e) {
+				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_KO, e);
+			}
+			break;
+		}
 		case MOSTRAR_COMPANIA_TEATRAL:
 		{
 			try {

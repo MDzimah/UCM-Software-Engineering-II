@@ -9,6 +9,8 @@ import exceptions.UnknownMiemCompTeaException;
 import integracion.compTea.DAOCompTea;
 import integracion.factoria.FactoriaAbstractaIntegracion;
 import integracion.miemCompTea.DAOMiemCompTea;
+import negocio.miemCompTea.TCompT_MiemCompT;
+import integracion.miemCompTea.DAOCompT_MiemCompT;
 import negocio.miemCompTea.TMiemCompTea;
 import negocio.compTea.TCompTea;
 
@@ -43,6 +45,16 @@ public class SACompTeaImp implements SACompTea {
 	public Collection<TCompTea> readAll() throws BBDDReadException {
 		DAOCompTea daoCT=FactoriaAbstractaIntegracion.getInstance().crearDAOCompTea();
 		return daoCT.readAll();
+	}
+	@Override
+	public int removeMember(TCompT_MiemCompT cmt) throws BBDDReadException, BBDDWriteException {
+		DAOCompT_MiemCompT daoCT=FactoriaAbstractaIntegracion.getInstance().crearDAOCompTea_MiemCompTea();
+		return daoCT.create(cmt);
+	}
+	@Override
+	public int addMember(TCompT_MiemCompT cmt) throws BBDDReadException, BBDDWriteException {
+		DAOCompT_MiemCompT daoCT=FactoriaAbstractaIntegracion.getInstance().crearDAOCompTea_MiemCompTea();
+		return daoCT.create(cmt);
 	}
 
 }
