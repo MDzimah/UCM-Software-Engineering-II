@@ -9,11 +9,11 @@ import org.json.JSONObject;
 
 import exceptions.*;
 import integracion.factoria.FactoriaAbstractaIntegracion;
+import misc.Genero;
 import misc.Messages;
 import misc.OpsBBDD;
 import negocio.miemCompTea.TCompT_MiemCompT;
 import negocio.miemCompTea.TMiemCompTea;
-import negocio.miemCompTea.TMiemCompTea.Genero;
 
 public class DAOMiemCompTeaImp implements DAOMiemCompTea {
 

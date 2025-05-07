@@ -14,7 +14,6 @@ import misc.Messages;
 import misc.Pair;
 import negocio.compTea.TCompTea;
 import negocio.miemCompTea.TMiemCompTea;
-import negocio.miemCompTea.TMiemCompTea.Genero;
 import negocio.obra.TObra;
 import negocio.pase.TPase;
 import presentacion.Evento;

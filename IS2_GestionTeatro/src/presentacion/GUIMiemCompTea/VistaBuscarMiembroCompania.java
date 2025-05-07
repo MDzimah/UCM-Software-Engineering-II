@@ -16,7 +16,6 @@ import misc.Messages;
 import misc.Pair;
 import negocio.factura.TFactura;
 import negocio.miemCompTea.TMiemCompTea;
-import negocio.miemCompTea.TMiemCompTea.Genero;
 import presentacion.Evento;
 import presentacion.ViewUtils;
 import presentacion.TablaDefault;

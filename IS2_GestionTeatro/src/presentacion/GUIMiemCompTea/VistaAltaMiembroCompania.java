@@ -1,5 +1,6 @@
 package presentacion.GUIMiemCompTea;
 
+import misc.Genero;
 import misc.Messages;
 import presentacion.Evento;
 import presentacion.ViewUtils;
@@ -10,7 +11,6 @@ import javax.swing.*;
 import java.util.ArrayList;
 import misc.Pair;
 import negocio.miemCompTea.TMiemCompTea;
-import negocio.miemCompTea.TMiemCompTea.Genero;
 
 public class VistaAltaMiembroCompania extends VistaDefault{
 	
