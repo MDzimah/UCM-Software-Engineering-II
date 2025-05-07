@@ -69,6 +69,7 @@ public class Messages {
 	public static final String MOTIVO = "Motivo: \"%s\".";
 	public static final String ID_NO_ENCONTRADO = "El id \"%s\" no se ha encontrado";
 	public static final String NO_HAY_DATOS = "No hay datos para mostrar";
+	public static final String NO_HAY_FACS_CLI = "No hay facturas para el id \"%s\" de cliente";
 	public static final String NO_EN_CARRITO = "El pase no se encuentra en el carrito";	
 	public static final String CARRITO_VACIO = "Carrito vacío";
 	public static final String ERROR_EDICION_TABLA = "Error al editar el valor en la tabla. Verifica el formato del dato ingresado.";
@@ -95,10 +96,12 @@ public class Messages {
 	public static final String EXC_ESCRITURA_BBDD = "Error al escribr en la BBDD de %s";
 	public static final String EXC_CAMPOS_INCORRECTOS = "Campos incorrectos";
 	public static final String EXC_UNKNOWN_TAQ = "Taquillero desconocido";
+	public static final String EXC_UNKNOWN_CLI = "Cliente desconocido";
 	public static final String EXC_UNKNOWN_OBRA = "Obra desconocida";
 	public static final String EXC_UNKNOWN_PASE = "Pase desconocido";
 	public static final String EXC_EVENTO_TABLA = "Tipo de tabla incompatible con la operacion o con los datos";
 	public static final String EXC_ELEM_DUPLICADO = "Elemento duplicado";
+	public static final String EXC_ALR_CLI = "El cliente ya existe";
 
 	//BBDD
 	public static final String PATH_TO_BBDD = "resources/BBDD/%s";
@@ -112,7 +115,7 @@ public class Messages {
 	public static final String BDLinFac = "LineaFactura.json";
 	public static final String BDPase = "Pase.json";
 	public static final String BDTaq = "Taquillero.json";
-	public static final String BDCT_MCT = "Taquillero.json";	
+	public static final String BDCT_MCT = "CompTea_MiemCompTea.json";	
 	
 		//Claves
 	

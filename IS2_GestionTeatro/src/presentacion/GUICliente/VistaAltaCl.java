@@ -15,6 +15,7 @@ import javax.swing.JTextField;
 import javax.swing.SpinnerListModel;
 import javax.swing.SwingUtilities;
 
+import exceptions.InvalidFields;
 import misc.Pair;
 import negocio.cliente.TClienteNormal;
 import negocio.cliente.TClienteVIP;
@@ -129,12 +130,20 @@ public class VistaAltaCl extends VistaDefault implements IGUI {
 			for (ActionListener al : alta.getActionListeners()) {
 			    alta.removeActionListener(al);
 			}
-			String dni = DNI.getText(), nom = nombre.getText(), ap = apellido.getText(), cuenta = cuentaBancaria.getText(), nivel = nivelVIP.getValue().toString();
-			Long cost = (Long) costeMensual.getValue();
-			float coste = cost.floatValue();
-			TClienteVIP tCliente = new TClienteVIP(-1,dni,nom,ap,true,cuenta,VIPEnum.valueOf(nivel),coste);
-			SwingUtilities.invokeLater(()->{Controlador.getInstance().accion(Evento.ALTA_CLIENTE, tCliente);});
-			VistaAltaCl.this.dispose();
+			try {
+				String dni = DNI.getText(), nom = nombre.getText(), ap = apellido.getText(), cuenta = cuentaBancaria.getText(), nivel = nivelVIP.getValue().toString();
+				Long cost = (Long) costeMensual.getValue();
+				float coste = cost.floatValue();
+				TClienteVIP tCliente = new TClienteVIP(-1,dni,nom,ap,true,cuenta,VIPEnum.valueOf(nivel),coste);
+				SwingUtilities.invokeLater(()->{Controlador.getInstance().accion(Evento.ALTA_CLIENTE, tCliente);});
+			}
+			catch (Exception ex) {
+				this.actualizar(Evento.RES_KO, new InvalidFields());
+			}
+			
+			finally {
+				VistaAltaCl.this.dispose();
+			}
 		});
 		
 	}
@@ -158,11 +167,19 @@ public class VistaAltaCl extends VistaDefault implements IGUI {
 			for (ActionListener al : alta.getActionListeners()) {
 			    alta.removeActionListener(al);
 			}
-			String dni = DNI.getText(), nom = nombre.getText(), ap = apellido.getText(), cuenta = cuentaBancaria.getText();
-			int ptos = Integer.parseInt(puntosAcum.getText());
-			TClienteNormal tCliente = new TClienteNormal(-1,dni,nom,ap,true,cuenta, ptos);
-			SwingUtilities.invokeLater(()->{Controlador.getInstance().accion(Evento.ALTA_CLIENTE, tCliente);});
-			VistaAltaCl.this.dispose();
+			try {
+				String dni = DNI.getText(), nom = nombre.getText(), ap = apellido.getText(), cuenta = cuentaBancaria.getText();
+				int ptos = Integer.parseInt(puntosAcum.getText());
+				TClienteNormal tCliente = new TClienteNormal(-1,dni,nom,ap,true,cuenta, ptos);
+				SwingUtilities.invokeLater(()->{Controlador.getInstance().accion(Evento.ALTA_CLIENTE, tCliente);});
+			}
+			catch (Exception ex) {
+				this.actualizar(Evento.RES_KO, new InvalidFields());
+			}
+			
+			finally {
+				VistaAltaCl.this.dispose();
+			}
 		});
 	}
 

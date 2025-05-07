@@ -12,6 +12,7 @@ import javax.swing.JTextField;
 import javax.swing.SpinnerListModel;
 import javax.swing.SwingUtilities;
 
+import exceptions.InvalidFields;
 import misc.Pair;
 import negocio.cliente.TClienteNormal;
 import negocio.cliente.TClienteVIP;
@@ -66,19 +67,25 @@ public class VistaActualizarClVIP extends VistaDefault implements IGUI {
 		super.initComps(campos, alta, cancelar);
 		
 		alta.addActionListener(e -> {
-			
-			String dni = DNI.getText(), nom = nombre.getText(), ap = apellido.getText(), cuenta = cuentaBancaria.getText(), nivel = nivelVIP.getValue().toString();
-			float coste = 0;
 			try {
-				Long cost = (Long) costeMensual.getValue();
-				coste = cost.floatValue();
+				String dni = DNI.getText(), nom = nombre.getText(), ap = apellido.getText(), cuenta = cuentaBancaria.getText(), nivel = nivelVIP.getValue().toString();
+				float coste = 0;
+				try {
+					Long cost = (Long) costeMensual.getValue();
+					coste = cost.floatValue();
+				}
+				catch (ClassCastException ex) {}
+				
+				TClienteVIP tCliente = new TClienteVIP(id,dni,nom,ap,true,cuenta,VIPEnum.valueOf(nivel),coste);
+				SwingUtilities.invokeLater(()->{Controlador.getInstance().accion(Evento.ACTUALIZAR_CLIENTE_VIP, tCliente);});
 			}
-			catch (ClassCastException ex) {}
+			catch (Exception ex) {
+				this.actualizar(Evento.RES_KO, new InvalidFields());
+			}
+			finally {
+				VistaActualizarClVIP.this.dispose();
+			}
 			
-			TClienteVIP tCliente = new TClienteVIP(id,dni,nom,ap,true,cuenta,VIPEnum.valueOf(nivel),coste);
-			SwingUtilities.invokeLater(()->{Controlador.getInstance().accion(Evento.ACTUALIZAR_CLIENTE_VIP, tCliente);});
-			
-			VistaActualizarClVIP.this.dispose();
 		});
 		
 		cancelar.addActionListener(e -> {

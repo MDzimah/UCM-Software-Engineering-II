@@ -46,7 +46,7 @@ public class DAOClienteImp implements DAOCliente {
 		JSONObject bdc = new JSONObject();
 		
 		if (OpsBBDD.isEmpty(Messages.BDCli)) {
-			bdc.put(Messages.KEY_lastId,0);
+			bdc.put(Messages.KEY_lastId,-1);
 			bdc.put(Messages.KEY_cliVIPs, new JSONObject());
 			bdc.put(Messages.KEY_cliNorms, new JSONObject());
 		}
