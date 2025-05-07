@@ -333,7 +333,7 @@ public class MainWindow extends JFrame {
         		
         		//ACTUALIZAR PASE
         		actualizar.addActionListener((ev)->{
-        			FactoriaAbstractaPresentacion.getInstance().createVista(Evento.ACTUALIZAR_PASE_CARGA);
+        			FactoriaAbstractaPresentacion.getInstance().createVista(Evento.ACTUALIZAR_PASE_0);
         		});
         		
         		//ALTA PASE
@@ -499,7 +499,7 @@ public class MainWindow extends JFrame {
             		
             	//actualizarCompania
             		actualizar.addActionListener((ev)->{
-            			FactoriaAbstractaPresentacion.getInstance().createVista(Evento.ACTUALIZAR0_COMPANIA_TEATRAL);
+            			FactoriaAbstractaPresentacion.getInstance().createVista(Evento.ACTUALIZAR_COMPANIA_TEATRAL_0);
             		});
             		
             	//alta compania
