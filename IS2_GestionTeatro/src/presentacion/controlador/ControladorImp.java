@@ -562,8 +562,8 @@ public class ControladorImp extends Controlador {
 		{
 			try {
 				SACompTea saCompTea=FactoriaAbstractaNegocio.getInstance().crearSACompTea();
-				int id =(int)datos;
-				int id2= saCompTea.removeMember(id);
+				TCompT_MiemCompT tCompMiem =(TCompT_MiemCompT)datos;
+				int id2= saCompTea.removeMember(tCompMiem.getIdCompania(),tCompMiem.getIdMiembroComp());
 				if(id2!=-1) FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_OK, (int)id2);
 				else {
 					throw new Exception("");
