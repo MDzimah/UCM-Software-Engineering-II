@@ -75,7 +75,7 @@ public class DAOPaseImp implements DAOPase {
 				tPase = read(pase);
 				tPase.setIdPase(id);
 			}
-			else return null;
+			return tPase;
 		}
 		return null;
 	}
