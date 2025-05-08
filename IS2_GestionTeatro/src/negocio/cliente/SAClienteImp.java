@@ -1,4 +1,4 @@
-	package negocio.cliente;
+package negocio.cliente;
 
 import java.util.Collection;
 
@@ -7,7 +7,6 @@ import exceptions.BBDDWriteException;
 import exceptions.UnknownClienteException;
 import integracion.cliente.DAOCliente;
 import integracion.factoria.FactoriaAbstractaIntegracion;
-import integracion.factura.DAOFactura;
 import negocio.factoria.FactoriaAbstractaNegocio;
 import negocio.factura.SAFactura;
 import negocio.factura.TFactura;
@@ -47,7 +46,7 @@ public class SAClienteImp implements SACliente {
 			Collection<TFactura> c = sa.allFacturasPorCliente(nid);
 			if (c != null) {
 				for (TFactura fac : c) {
-					if (fac.getIdCliente() == nid) sa.delete(fac.getIdFactura());
+					sa.delete(fac.getIdFactura());
 				}
 			}
 			
