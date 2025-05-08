@@ -13,5 +13,12 @@
         "coste": 20,
         "activo": true
     },
-    "lastId": 1
+    "2": {
+        "idCompTea": 2,
+        "compania teatral": "a",
+        "direccion": "a",
+        "coste": 3,
+        "activo": true
+    },
+    "lastId": 2
 }
