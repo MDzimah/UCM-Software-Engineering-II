@@ -31,8 +31,8 @@ public class DAOMiemCompTeaImp implements DAOMiemCompTea {
 		
 		JSONObject miembrosComp = BDMiemComp.getJSONObject(Messages.KEY_miembCompTea);
 		
-		int newId = BDMiemComp.getInt(Messages.KEY_lastId) + 1;
-		BDMiemComp.put(Messages.KEY_lastId, newId);
+		int newId = BDMiemComp.getInt(Messages.KEY_lastId);
+		BDMiemComp.put(Messages.KEY_lastId, newId + 1);
 		
 		JSONObject nuevoMiemComp = new JSONObject();			
 		nuevoMiemComp.put(Messages.KEY_idMiemComp, newId);
@@ -59,7 +59,7 @@ public class DAOMiemCompTeaImp implements DAOMiemCompTea {
 			
 			String _id = Integer.toString(id);
 			if (miembrosComp.has(_id) && miembrosComp.getJSONObject(_id).getBoolean(Messages.KEY_act)) {
-				DAOCompT_MiemCompTImp relMiem_Comp = FactoriaAbstractaIntegracion.getInstance().crearDAOCompTea_MiemCompTea();
+				DAOCompT_MiemCompT relMiem_Comp = FactoriaAbstractaIntegracion.getInstance().crearDAOCompTea_MiemCompTea();
 				relMiem_Comp.delete_miembro(id);
 				miembrosComp.getJSONObject(Integer.toString(id)).put(Messages.KEY_act, false);
 		        OpsBBDD.write(BDMiemComp, Messages.BDMCT);

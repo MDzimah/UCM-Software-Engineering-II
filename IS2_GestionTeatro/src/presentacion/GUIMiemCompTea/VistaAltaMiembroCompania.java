@@ -81,7 +81,7 @@ public class VistaAltaMiembroCompania extends VistaDefault{
     @Override
 	public void actualizar(Evento evento, Object datos) {
 		if (evento == Evento.RES_OK) {
-			ViewUtils.createDialogMessage(Messages.EX_MIEMBRO_ALTA);
+			ViewUtils.createDialogMessage(Messages.EX_MIEMBRO_ALTA + '\n' + " Id: "+ (int)datos);;
 			dispose();
 		}
 		else if (evento == Evento.RES_KO) {
