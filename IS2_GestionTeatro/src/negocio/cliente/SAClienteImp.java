@@ -57,7 +57,7 @@ public class SAClienteImp implements SACliente {
 			if (cl == null) throw new Exception();
 			if (cl.getTipo() == "Normal") {
 				TClienteNormal cln = (TClienteNormal) cl;
-				if (cln.getPuntosAcumulados() != 0) return (float) ((float)importe*(0.5 + 1/cln.getPuntosAcumulados()));
+				if (cln.getPuntosAcumulados() != 0) return (float) ((float)importe*(0.5 + 1/(cln.getPuntosAcumulados()+1)));
 				else return importe;
 			}
 			if (cl.getTipo() == "VIP") {
