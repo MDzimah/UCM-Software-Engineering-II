@@ -10,6 +10,7 @@ import javax.swing.JTextField;
 import javax.swing.SwingUtilities;
 
 import misc.Genero;
+import misc.Messages;
 import misc.Pair;
 import negocio.taquillero.TTaquillero;
 import presentacion.Evento;
@@ -80,10 +81,10 @@ public class VistaAltaTaquillero extends VistaDefault {
 	@Override
 	public void actualizar(Evento evento, Object datos) {
 		if(evento == Evento.RES_OK) {
-			ViewUtils.createDialogMessage("Se ha añadido correctamente el taquillero: " + (int)datos);
+			ViewUtils.createDialogMessage(Messages.EX_TAQUILLERO_ANYADIDO_CORRECT + '\n' + " Id: "+ (int)datos);
 		}
 		else if(evento == Evento.RES_KO) {
-			ViewUtils.createErrorDialogMessage("No se ha podido añadir el taquillero.\n" +"Error: " +((Exception) datos).getMessage());
+			ViewUtils.createErrorDialogMessage(Messages.EX_TAQUILLERO_ANYADIDO_ERROR + '\n' + Messages.ERROR.formatted(((Exception) datos).getMessage()));
 		}
 	}
 

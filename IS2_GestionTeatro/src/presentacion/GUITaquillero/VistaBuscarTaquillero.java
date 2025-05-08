@@ -80,8 +80,7 @@ public class VistaBuscarTaquillero extends VistaDefault {
 	        tabla.setVisible(true);
 
 	    } else if (evento == Evento.RES_KO) {
-	    	//VA EN MESSAGES LO DE "No se han encontrado taquilleros"
-	        ViewUtils.createErrorDialogMessage("No se han encontrado taquilleros.\n" + "Error: " + ((Exception) datos).getMessage());
+	        ViewUtils.createErrorDialogMessage(Messages.EX_TAQUILLERO_BUSCAR_ERROR + "\n" + Messages.ERROR.formatted(((Exception) datos).getMessage()));
 	    }
 	}
 }

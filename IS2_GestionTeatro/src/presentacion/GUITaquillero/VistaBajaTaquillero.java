@@ -9,6 +9,7 @@ import javax.swing.JSpinner;
 import javax.swing.JTextField;
 import javax.swing.SwingUtilities;
 
+import misc.Messages;
 import misc.Pair;
 import presentacion.Evento;
 import presentacion.ViewUtils;
@@ -59,9 +60,9 @@ public class VistaBajaTaquillero extends VistaDefault {
 	@Override
 	public void actualizar(Evento evento, Object datos) {
 		if(evento == Evento.RES_OK) {
-			ViewUtils.createDialogMessage("Se ha eliminado correctamente el taquillero: " + (int)datos);
+			ViewUtils.createDialogMessage(Messages.EX_TAQUILLERO_BORRADO_CORRECT + '\n' + "Id: "+(int)datos);
 		} else if(evento == Evento.RES_KO) {
-			ViewUtils.createErrorDialogMessage("No se ha podido eliminar el taquillero.\n" + "Error: " +((Exception) datos).getMessage());
+			ViewUtils.createErrorDialogMessage(Messages.EX_TAQUILLERO_BORRADO_ERROR + '\n' + Messages.ERROR.formatted(((Exception) datos).getMessage()));
 		}
 		
 	}

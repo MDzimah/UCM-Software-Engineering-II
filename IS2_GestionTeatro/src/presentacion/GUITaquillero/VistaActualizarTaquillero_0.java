@@ -9,6 +9,7 @@ import javax.swing.JSpinner;
 import javax.swing.JTextField;
 import javax.swing.SwingUtilities;
 
+import misc.Messages;
 import misc.Pair;
 import presentacion.Evento;
 import presentacion.ViewUtils;
@@ -59,7 +60,7 @@ public class VistaActualizarTaquillero_0 extends VistaDefault {
 	@Override
 	public void actualizar(Evento evento, Object datos) {
 		if(evento == Evento.RES_KO) {
-			ViewUtils.createErrorDialogMessage("No se ha podido actualizar el taquillero.\n" + "Error: " +((Exception) datos).getMessage());
+			ViewUtils.createErrorDialogMessage(Messages.EX_TAQUILLERO_ACTUALIZADO_ERROR + '\n' + Messages.ERROR.formatted(((Exception) datos).getMessage()));
 		}
 		
 	}
