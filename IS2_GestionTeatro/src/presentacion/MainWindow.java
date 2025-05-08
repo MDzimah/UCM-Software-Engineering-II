@@ -160,6 +160,12 @@ public class MainWindow extends JFrame {
             public void actionPerformed(ActionEvent e) {
             	JDialog subsFactura= new JDialog(MainWindow.this,"Subsistema Factura", false);
             	subsFactura.setLayout(new FlowLayout());
+            	subsFactura.addWindowListener(new WindowAdapter() {
+                    @Override
+                    public void windowClosing(WindowEvent e) {
+                       AbrirVenta.resetCarrito();
+                    }
+                } );
             	
             	JButton abrirVenta, anyPV, quitarPV, cerrarVenta, buscar, mosFacsXCli, mostrar, carr;
             	

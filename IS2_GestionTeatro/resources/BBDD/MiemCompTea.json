@@ -1,5 +1,5 @@
 {
-    "lastId": 2,
+    "lastId": 3,
     "miembros de la compania teatral": {
         "0": {
             "idMiemComp": 0,
@@ -15,10 +15,20 @@
             "idMiemComp": 1,
             "apellido": "E",
             "genero": "HOMBRE",
-            "nombre": "E",
+            "nombre": "aaaa3",
             "edad": 0,
             "DNI": "E",
             "email": "E",
+            "activo": true
+        },
+        "2": {
+            "idMiemComp": 2,
+            "apellido": "a",
+            "genero": "HOMBRE",
+            "nombre": "a",
+            "edad": 24,
+            "DNI": "a",
+            "email": "e",
             "activo": true
         }
     }

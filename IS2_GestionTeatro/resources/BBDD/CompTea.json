@@ -1,0 +1,17 @@
+{
+    "0": {
+        "idCompTea": 0,
+        "compania teatral": "fe",
+        "direccion": "er",
+        "coste": 30,
+        "activo": true
+    },
+    "1": {
+        "idCompTea": 1,
+        "compania teatral": "ew",
+        "direccion": "ew",
+        "coste": 20,
+        "activo": true
+    },
+    "lastId": 1
+}

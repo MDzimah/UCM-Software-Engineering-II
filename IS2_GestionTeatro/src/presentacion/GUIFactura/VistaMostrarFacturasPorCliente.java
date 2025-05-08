@@ -54,12 +54,6 @@ public class VistaMostrarFacturasPorCliente extends VistaDefault {
 		
 		this.setVisible(true);
 		this.setLocationRelativeTo(null);
-		this.addWindowListener(new WindowAdapter() {
-            @Override
-            public void windowClosing(WindowEvent e) {
-               AbrirVenta.resetCarrito();
-            }
-        } );
 	}
 	
 	@Override
