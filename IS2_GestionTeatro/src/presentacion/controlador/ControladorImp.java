@@ -12,6 +12,7 @@ import exceptions.InvalidFields;
 import exceptions.UnknownClienteException;
 import exceptions.UnknownMiemCompTeaException;
 import exceptions.UnknownObraException;
+import exceptions.UnknownPaseException;
 import exceptions.UnknownTaquilleroException;
 import misc.Messages;
 import negocio.cliente.SACliente;
@@ -283,7 +284,7 @@ public class ControladorImp extends Controlador {
 				SAPase saPase = FactoriaAbstractaNegocio.getInstance().crearSAPase();
 				int idCreado = saPase.create((TPase) datos);
 				if (idCreado != -1) FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_OK, idCreado);
-				else FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_KO, null);
+				else FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_KO, new DuplicateElementException());
 			} catch(Exception e) {
 				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_KO, e); //Esto comprende errores de BD, de que no exista la obra o que no exista la companya teatral
 			}
@@ -294,7 +295,7 @@ public class ControladorImp extends Controlador {
 				SAPase saPase = FactoriaAbstractaNegocio.getInstance().crearSAPase();
 				int idEliminado = saPase.delete((int) datos);
 				if (idEliminado != -1) FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_OK, idEliminado);
-				else FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_KO, null); //No se ha encontrado el pase
+				else FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_KO, new UnknownPaseException()); //No se ha encontrado el pase
 			} catch(Exception e) {
 				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_KO, e);
 			}
@@ -305,7 +306,7 @@ public class ControladorImp extends Controlador {
 				SAPase saPase = FactoriaAbstractaNegocio.getInstance().crearSAPase();
 				TPase tPaseBuscado = saPase.read((int) datos);
 				if (tPaseBuscado != null) FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_OK, tPaseBuscado); //le paso el transfer para que lo muestre
-				else FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_KO, null);
+				else FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_KO, new UnknownPaseException());
 			} catch(Exception e) {
 				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_KO, e);
 			}
@@ -316,7 +317,7 @@ public class ControladorImp extends Controlador {
 				SAPase saPase = FactoriaAbstractaNegocio.getInstance().crearSAPase();
 				Collection<TPase> pases = saPase.readAll();
 				if (pases != null && !pases.isEmpty()) FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_OK, pases); //le paso el transfer para que lo muestre
-				else FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_KO, null);
+				else FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_KO, new UnknownPaseException());
 			} catch(Exception e) {
 				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_KO, e);
 			}
@@ -330,7 +331,7 @@ public class ControladorImp extends Controlador {
 					VistaActualizarPase_1 vista = (VistaActualizarPase_1) FactoriaAbstractaPresentacion.getInstance().createVista(Evento.ACTUALIZAR_PASE_1);
 					vista.cargarPase(tPaseActualizar);
 				}
-				else FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_KO, null);
+				else FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_KO,  new UnknownPaseException());
 			} catch(Exception e) {
 				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_KO, e);
 			}
@@ -341,7 +342,7 @@ public class ControladorImp extends Controlador {
 				SAPase saPase = FactoriaAbstractaNegocio.getInstance().crearSAPase();
 				int operacion = saPase.update((TPase) datos);
 				if (operacion != -1) FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_OK, null);
-				else FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_KO, null);
+				else FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_KO, new InvalidFields()); //Excepcion que notifica que los campos de actualizacion son incorrectos
 			}
 			catch(Exception e) {
 				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_KO, e);
@@ -353,7 +354,7 @@ public class ControladorImp extends Controlador {
 				SAPase saPase = FactoriaAbstractaNegocio.getInstance().crearSAPase();
 				ArrayList<TPase> pasesPorObra = saPase.allPasesPorObra((int) datos);
 				if (pasesPorObra != null && !pasesPorObra.isEmpty()) FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_OK, pasesPorObra);
-				else FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_KO, null);
+				else FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_KO, new UnknownObraException());
 			} catch(Exception e) {
 				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_KO, e);
 			}

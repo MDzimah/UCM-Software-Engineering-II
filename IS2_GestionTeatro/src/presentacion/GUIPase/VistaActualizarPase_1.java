@@ -39,10 +39,7 @@ public class VistaActualizarPase_1 implements IGUI {
 			ViewUtils.createDialogMessage(Messages.EX_PASE_ACTUALIZADO);
 		}
 		else if (evento==Evento.RES_KO) {
-			String error;
-			if (datos instanceof Exception) error = ((Exception) datos).getMessage();
-			else error = Messages.EXC_CAMPOS_INCORRECTOS;
-			ViewUtils.createErrorDialogMessage(Messages.X_PASE_ACTUALIZADO + ' ' + Messages.MOTIVO.formatted(error));
+			ViewUtils.createErrorDialogMessage(Messages.X_PASE_ACTUALIZADO + ' ' + Messages.MOTIVO.formatted(((Exception) datos).getMessage()));
 		}
 	}
 
