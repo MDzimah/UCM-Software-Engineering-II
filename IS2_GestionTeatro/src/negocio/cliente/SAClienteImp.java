@@ -1,4 +1,4 @@
-	package negocio.cliente;
+package negocio.cliente;
 
 import java.util.Collection;
 
@@ -7,10 +7,6 @@ import exceptions.BBDDWriteException;
 import exceptions.UnknownClienteException;
 import integracion.cliente.DAOCliente;
 import integracion.factoria.FactoriaAbstractaIntegracion;
-import integracion.factura.DAOFactura;
-import negocio.factoria.FactoriaAbstractaNegocio;
-import negocio.factura.SAFactura;
-import negocio.factura.TFactura;
 
 public class SAClienteImp implements SACliente {
 
@@ -40,19 +36,7 @@ public class SAClienteImp implements SACliente {
 	@Override
 	public int delete(int id) throws BBDDReadException, BBDDWriteException {
 		DAOCliente dao = FactoriaAbstractaIntegracion.getInstance().crearDAOCliente();
-		int nid = dao.delete(id);
-		if (nid != -1) {
-			//eliminamos todas las facturas asociadas al cliente eliminado
-			SAFactura sa = FactoriaAbstractaNegocio.getInstance().crearSAFactura();
-			Collection<TFactura> c = sa.allFacturasPorCliente(nid);
-			if (c != null) {
-				for (TFactura fac : c) {
-					if (fac.getIdCliente() == nid) sa.delete(fac.getIdFactura());
-				}
-			}
-			
-		}
-		return nid;
+		return dao.delete(id);
 	}
 
 	@Override
