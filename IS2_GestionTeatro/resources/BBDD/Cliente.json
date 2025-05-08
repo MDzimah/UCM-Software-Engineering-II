@@ -1,0 +1,22 @@
+{
+    "clientesNormal": {"0": {
+        "idCliente": 0,
+        "apellido": "aaaaaa",
+        "cuenta": "4352734",
+        "puntos": 1,
+        "nombre": "tum tum tum",
+        "DNI": "700",
+        "activo": false
+    }},
+    "lastId": 1,
+    "clientesVIP": {"1": {
+        "idCliente": 1,
+        "apellido": "34",
+        "cuenta": "34",
+        "mensualidad": 0,
+        "nombre": "3243",
+        "nivel": "ORO",
+        "DNI": "35325352",
+        "activo": true
+    }}
+}

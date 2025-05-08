@@ -123,11 +123,11 @@ public class DAOClienteImp implements DAOCliente {
 		//añadimos todos los clientes
 		for (String s: scln) {//lista de clientes normales
 			TCliente cln = toTClienteNormal((JSONObject) clientes.get(s));
-			if (cln.getActivo()) clist.addLast(cln);
+			if (cln.getActivo()) clist.add(cln);
 		}
 		for (String s: sclv) {//lista de clientes vip
 			TCliente clv = toTClienteVIP((JSONObject) clientesv.get(s));
-			if (clv.getActivo()) clist.addLast(clv);
+			if (clv.getActivo()) clist.add(clv);
 		}
 		return clist;
 	}
