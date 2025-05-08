@@ -1,14 +1,10 @@
 package presentacion.GUIFactura;
 
-import java.awt.BorderLayout;
+import java.awt.*;
+import java.awt.event.*;
 import java.util.ArrayList;
 
-import javax.swing.JButton;
-import javax.swing.JComponent;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JSpinner;
-import javax.swing.SwingUtilities;
+import javax.swing.*;
 
 import exceptions.BBDDReadException;
 import misc.Messages;
@@ -66,8 +62,7 @@ public class VistaMostrarFacturasPorCliente extends VistaDefault {
 			ArrayList<String[]> colNames = new ArrayList<>();
 			colNames.add(Messages.colNomsFactura);
 
-			ArrayList<TFactura> singleFactura = new ArrayList<>();
-			singleFactura.add((TFactura) datos);
+			ArrayList<TFactura> singleFactura = (ArrayList<TFactura>) datos;
 			ArrayList<ArrayList<TFactura>> data = new ArrayList<>();
 			data.add(singleFactura);
 

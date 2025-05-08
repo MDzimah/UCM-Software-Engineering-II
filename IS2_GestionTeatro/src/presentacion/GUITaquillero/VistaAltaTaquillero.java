@@ -10,6 +10,7 @@ import javax.swing.JTextField;
 import javax.swing.SwingUtilities;
 
 import misc.Genero;
+import misc.Messages;
 import misc.Pair;
 import negocio.taquillero.TTaquillero;
 import presentacion.Evento;
@@ -17,14 +18,14 @@ import presentacion.ViewUtils;
 import presentacion.VistaDefault;
 import presentacion.controlador.Controlador;
 
-public class VistaContratarTaquillero extends VistaDefault {
+public class VistaAltaTaquillero extends VistaDefault {
 
 	private JButton aceptar, cancelar;
 	private JTextField nombre, apellido, dni, sueldo, edad;
 	private JLabel l_nombre, l_apellido, l_DNI, l_sueldo, l_edad, l_genero;
 	private JComboBox<Genero> genero;
 	
-	public VistaContratarTaquillero() {
+	public VistaAltaTaquillero() {
 		initGUI();
 		this.setVisible(true);
 	}
@@ -69,21 +70,21 @@ public class VistaContratarTaquillero extends VistaDefault {
 			TTaquillero tTaq = new TTaquillero(true, _DNI, _nombre, _apellido, 0, _sueldo, _edad, _genero);
 			
 			SwingUtilities.invokeLater(()-> {Controlador.getInstance().accion(Evento.ALTA_TAQUILLERO, tTaq); });
-			VistaContratarTaquillero.this.dispose();
+			VistaAltaTaquillero.this.dispose();
 		});
 		
 		cancelar.addActionListener((e) -> {
-			VistaContratarTaquillero.this.dispose();
+			VistaAltaTaquillero.this.dispose();
 		});
 	}
 	
 	@Override
 	public void actualizar(Evento evento, Object datos) {
 		if(evento == Evento.RES_OK) {
-			ViewUtils.createDialogMessage("Se ha añadido correctamente el taquillero: " + (int)datos);
+			ViewUtils.createDialogMessage(Messages.EX_TAQUILLERO_ANYADIDO_CORRECT + '\n' + " Id: "+ (int)datos);
 		}
 		else if(evento == Evento.RES_KO) {
-			ViewUtils.createErrorDialogMessage("No se ha podido añadir el taquillero.\n" +"Error: " +((Exception) datos).getMessage());
+			ViewUtils.createErrorDialogMessage(Messages.EX_TAQUILLERO_ANYADIDO_ERROR + '\n' + Messages.ERROR.formatted(((Exception) datos).getMessage()));
 		}
 	}
 

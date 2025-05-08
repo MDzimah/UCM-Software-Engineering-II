@@ -21,7 +21,7 @@ public class DAOTaquilleroImp implements DAOTaquillero {
 		JSONObject bdTaq = new JSONObject();
 		
 		if(OpsBBDD.isEmpty(Messages.BDTaq)) { //base de datos vacía
-			bdTaq.put(Messages.KEY_lastId, 0); 
+			bdTaq.put(Messages.KEY_lastId, -1); 
 			bdTaq.put(Messages.KEY_taquilleros, new JSONObject()); //no hay taquilleros
 		} else {
 			bdTaq = OpsBBDD.read(Messages.BDTaq);

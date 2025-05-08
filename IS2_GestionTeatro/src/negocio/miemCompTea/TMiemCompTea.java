@@ -1,5 +1,6 @@
 package negocio.miemCompTea;
 
+import misc.Genero;
 import presentacion.Convertable;
 
 public class TMiemCompTea implements Convertable<TMiemCompTea> {
@@ -12,8 +13,6 @@ public class TMiemCompTea implements Convertable<TMiemCompTea> {
 	private String email;
 	private int edad;
 	private boolean activo;
-	
-	public enum Genero {HOMBRE,MUJER};
 	private Genero genero;
 	
 	public TMiemCompTea(String dni, String nom, String apell, String mail, int ed, boolean act, Genero gen) {

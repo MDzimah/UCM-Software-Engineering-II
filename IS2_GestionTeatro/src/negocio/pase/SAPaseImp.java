@@ -2,7 +2,9 @@ package negocio.pase;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
+import java.util.LinkedList;
 import java.util.List;
 
 import exceptions.BBDDReadException;
@@ -16,6 +18,7 @@ import integracion.factoria.FactoriaAbstractaIntegracion;
 import integracion.obra.DAOObra;
 import integracion.compTea.*;
 import integracion.pase.DAOPase;
+import misc.Messages;
 import negocio.compTea.SACompTea;
 import negocio.compTea.TCompTea;
 import negocio.factoria.FactoriaAbstractaNegocio;
@@ -39,12 +42,11 @@ public class SAPaseImp implements SAPase {
 			throw new UnknownCompTeaException();
 		}
 		
-		if (tPase.getStock() > 0 && tPase.getPrecio() >= 0) { //sino devolvere -1
-			DAOPase daoPas = FactoriaAbstractaIntegracion.getInstance().crearDAOPase();
-			id = daoPas.create(tPase);
-		}
+		DAOPase daoPas = FactoriaAbstractaIntegracion.getInstance().crearDAOPase();
 		
-		return id;
+		Collection<TPase> pases = search(tPase);
+		if(pases==null || pases.isEmpty())return daoPas.create(tPase); //Si eciste otro pase con la misma fecha da error
+		else return -1;
 	}
 
 	@Override
@@ -55,7 +57,6 @@ public class SAPaseImp implements SAPase {
 
 	@Override
 	public int update(TPase tPase) throws BBDDReadException, BBDDWriteException {
-		if (tPase.getStock() < 0 || tPase.getPrecio() < 0) return -1;
 		DAOPase daoPas = FactoriaAbstractaIntegracion.getInstance().crearDAOPase();
 		int idPase = daoPas.update(tPase);
 		if(idPase < 0) return -1;
@@ -134,4 +135,23 @@ public class SAPaseImp implements SAPase {
 		daoPas.deletePorCompTea(idCompTea);
 		return idCompTea;
 	}
+	
+	private Collection<TPase> search(TPase tPase) throws BBDDReadException{
+		DAOPase daoPase = FactoriaAbstractaIntegracion.getInstance().crearDAOPase();
+		
+		List<TPase> pases = daoPase.readAll();
+
+		if(pases!=null) {
+			int i =0;
+			while(i<pases.size()) {
+				if(!(pases.get(i).getFecha().getDayOfYear() == (tPase.getFecha().getDayOfYear())))
+					pases.remove(i);
+				else
+					++i;
+			}
+		}					
+		
+		return pases;
+	}
+
 }

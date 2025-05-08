@@ -47,6 +47,7 @@ public class VistaCerrarVenta extends VistaDefault {
 					int taquillero = (int) sTaquillero.getValue();
 					TDatosVenta tDv = new TDatosVenta(cliente, taquillero, AbrirVenta.getCarrito());
 					Controlador.getInstance().accion(Evento.CERRAR_VENTA, tDv);
+					dispose();
 				}
 				catch(ArithmeticException ex) {
 					ViewUtils.createInvalidFieldsPanel();
@@ -76,6 +77,5 @@ public class VistaCerrarVenta extends VistaDefault {
 		}
 		
 		AbrirVenta.enableButton();
-		AbrirVenta.resetCarrito();
 	}
 }

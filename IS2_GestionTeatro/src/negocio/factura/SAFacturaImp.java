@@ -15,6 +15,7 @@ import negocio.pase.SAPase;
 import negocio.pase.TPase;
 import negocio.taquillero.SATaquillero;
 import negocio.taquillero.TTaquillero;
+import presentacion.GUIFactura.AbrirVenta;
 
 public class SAFacturaImp implements SAFactura {
 	public int crearFactura(TDatosVenta tDv) throws UnknownClienteException, UnknownTaquilleroException, BBDDReadException, BBDDWriteException  {
@@ -78,6 +79,7 @@ public class SAFacturaImp implements SAFactura {
 			//Actualizamos al taquillero encargado de la factura
 			saTaq.aumentarVenta(tFacFinal.getIdTaquillero());
 		}
+		AbrirVenta.resetCarrito();
 		
 		return idFacNueva;
 	}

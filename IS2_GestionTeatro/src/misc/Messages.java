@@ -6,34 +6,37 @@ public class Messages {
 		//Factura
 	public static final String EX_VENTA_CERRADA = Messages.SHP.formatted("cerrado la venta con id \"%s\"");
 
-		//Pase
+	//Pase
 	public static final String EX_PASE_CREADO = Messages.SHP.formatted("creado el pase");
 	public static final String EX_PASE_BUSCADO = Messages.SHP.formatted("encontrado el pase");
 	public static final String EX_PASE_ELIMINADO = Messages.SHP.formatted("eliminado el pase");
 	public static final String EX_PASE_ACTUALIZADO = Messages.SHP.formatted("actualizado el pase");
-
-		//Miembros
+	//Miembros
 	public static final String EX_MIEMBRO_ALTA = Messages.SHP.formatted("dado de alta al nuevo miembro");
 	public static final String EX_MIEMBRO_ENCONTRADO = Messages.SHP.formatted("encontrado el miembro");
 	public static final String EX_MIEMBRO_ACTUALIZADO = Messages.SHP.formatted("actualizado el miembro");
 	public static final String EX_MIEMBRO_BAJA = Messages.SHP.formatted("dado de baja al miembro");
 	public static final String EX_MIEMBROS_LISTADOS = Messages.SHP.formatted("listado los miembros");
-       //Compania Teatral
-	public static final String COMPANIA_ACTUALIZADA = Messages.SHP.formatted("compania actualizada");
-	public static final String COMPANIA_ENCONTRADA = Messages.SHP.formatted("compania encontrada");
-	public static final String COMPANIA_CREADA = Messages.SHP.formatted("compania creada");
-	public static final String COMPANIA_BUSCADA = Messages.SHP.formatted("compania buscada");
-	public static final String COMPANIA_MOSTRADA = Messages.SHP.formatted("compania mostrada");
-		
+    //Compania Teatral
+	public static final String COMPANIA_ACTUALIZADA = Messages.SHP.formatted("actualizado compania");
+	public static final String COMPANIA_ENCONTRADA = Messages.SHP.formatted("encontrado compania");
+	public static final String COMPANIA_CREADA = Messages.SHP.formatted("creado compania");
+	public static final String COMPANIA_ELIMINADA = Messages.SHP.formatted("borrado compania");
+	public static final String COMPANIA_MOSTRADA = Messages.SHP.formatted("mostrado compania");
+	public static final String COMPANIA_MIEMBRO_BORRADO = Messages.SHP.formatted("desvinculado la compañia y el miembro");
+	public static final String COMPANIA_MIEMBRO_ANYADIDO = Messages.SHP.formatted("vinculado la compañia y el miembro");
 	//Obra
 	public static final String EX_OBRA_ANYADIDA_CORRECT = Messages.SHP.formatted("registrado la obra ");
 	public static final String EX_OBRA_BORRADA_CORRECT = Messages.SHP.formatted("borrado la obra ");
 	public static final String EX_OBRA_ACTUALIZADA_CORRECT = Messages.SHP.formatted("actualizado la obra ");
-	
+	//Taquillero
+	public static final String EX_TAQUILLERO_ANYADIDO_CORRECT = Messages.SHP.formatted("registrado el taquillero ");
+	public static final String EX_TAQUILLERO_BORRADO_CORRECT = Messages.SHP.formatted("borrado el taquillero ");
+	public static final String EX_TAQUILLERO_ACTUALIZADO_CORRECT = Messages.SHP.formatted("actualizado el taquillero ");
 	
 	//Ops. fracasadas
 	private static final String NSHP = "No se ha podido %s";
-		//Factura
+	//Factura
 	public static final String X_VENTA_CERRADA = Messages.NSHP.formatted("realizar la venta.");
 	public static final String X_BUSCAR_FACTURA = Messages.NSHP.formatted("encotrar la factura.");
 	public static final String X_MOSTRAR_FACTURAS = Messages.NSHP.formatted("mostrar las facturas.");
@@ -43,13 +46,14 @@ public class Messages {
 	public static final String X_ELIMINAR_COMPANIA = Messages.NSHP.formatted("dar de baja compania.");
 	public static final String X_BUSCAR_COMPANIA= Messages.NSHP.formatted("buscar compania.");
 	public static final String X_ACTUALIZAR_COMPANIA = Messages.NSHP.formatted("actualizar compania.");
+	public static final String X_BORRAR_COMPANIA_MIEMBRO = Messages.NSHP.formatted("desvincular la compania y el miembro");
+	public static final String X_ANYADIR_COMPANIA_MIEMBRO = Messages.NSHP.formatted("vincular la compania y el miembro");
 	//Pase
 	public static final String X_MOSTRAR_PASES = Messages.NSHP.formatted("mostrar los pases.");
 	public static final String X_PASE_CREADO = Messages.NSHP.formatted("crear el pase.");
 	public static final String X_PASE_BUSCADO = Messages.NSHP.formatted("encontrar el pase solicitado.");
 	public static final String X_PASE_ELIMINADO = Messages.NSHP.formatted("eliminar el pase solicitado.");
 	public static final String X_PASE_ACTUALIZADO = Messages.NSHP.formatted("actualizar el pase solicitado.");
-
 	//Miembros de la comp. tea.
 	public static final String X_MIEMBRO_ALTA = Messages.NSHP.formatted("dar de alta al nuevo miembro.");
 	public static final String X_MIEMBRO_ENCONTRADO = Messages.NSHP.formatted("encontrar el miembro solicitado.");
@@ -63,7 +67,13 @@ public class Messages {
 	public static final String EX_OBRA_BUSCAR_ERROR = Messages.NSHP.formatted("encontrar obras.");
 	public static final String EX_OBRA_MOSTRAR_ERROR = Messages.NSHP.formatted("mostrar las obras.");
 	public static final String EX_OBRA_CONSULTAR_ERROR = Messages.NSHP.formatted("acceder a la obra.");
-
+	//Taquillero
+	public static final String EX_TAQUILLERO_ANYADIDO_ERROR = Messages.NSHP.formatted("registrar el taquillero.");
+	public static final String EX_TAQUILLERO_BORRADO_ERROR = Messages.NSHP.formatted("borrar el taquillero.");
+	public static final String EX_TAQUILLERO_ACTUALIZADO_ERROR = Messages.NSHP.formatted("actualizar el taquillero.");
+	public static final String EX_TAQUILLERO_BUSCAR_ERROR = Messages.NSHP.formatted("encontrar taquilleros.");
+	public static final String EX_TAQUILLERO_MOSTRAR_ERROR = Messages.NSHP.formatted("mostrar los taquilleros.");
+	public static final String EX_TAQUILLERO_CONSULTAR_ERROR = Messages.NSHP.formatted("acceder al taquillero.");
 	
 		//Motivos por ops fracasadas
 	public static final String MOTIVO = "Motivo: \"%s\".";
@@ -79,6 +89,8 @@ public class Messages {
     public static final String ERROR_SOLO_UNA_FILA_PARA_EDICION = "Sólo se permite la edición cuando hay una única fila en la tabla.";
     public static final String ERROR_ACCION_NO_PERMITIDA = "Esta acción no está permitida en el modo actual.";
     public static final String ERROR_DNI_MIEMBRO_REPETIDO = "Ya hay un miembro activo con id: \"%s\" con el mismo dni";
+    public static final String NOEXISTEMIEMOCOMP = "no existe miembro o compania";
+    public static final String NOEXISTERELACION = "no existe relacion entre miembro y compania";
 
 
 	//Columnas de las tablas
@@ -100,6 +112,7 @@ public class Messages {
 	public static final String EXC_UNKNOWN_CLI = "Cliente desconocido";
 	public static final String EXC_UNKNOWN_OBRA = "Obra desconocida";
 	public static final String EXC_UNKNOWN_PASE = "Pase desconocido";
+	public static final String EXC_UNKNOWN_MIEM_COMP = "Miembro de compañía desconocido";
 	public static final String EXC_EVENTO_TABLA = "Tipo de tabla incompatible con la operacion o con los datos";
 	public static final String EXC_ELEM_DUPLICADO = "Elemento duplicado";
 	public static final String EXC_ALR_CLI = "El cliente ya existe";

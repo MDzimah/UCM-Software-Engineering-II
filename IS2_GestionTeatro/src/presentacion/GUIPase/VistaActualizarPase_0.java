@@ -23,13 +23,13 @@ import presentacion.ViewUtils;
 import presentacion.VistaDefault;
 import presentacion.controlador.Controlador;
 
-public class VistaActualizarPaseCarga extends VistaDefault {
+public class VistaActualizarPase_0 extends VistaDefault {
 	
 	private JSpinner id;
 	private JButton actualizar;
 	private JButton cancelar;
 	
-	public VistaActualizarPaseCarga() {
+	public VistaActualizarPase_0() {
 		this.setTitle("ACTUALIZAR PASE");
 		this.actualizar = new JButton("Aceptar");
 		this.cancelar = new JButton("Cancelar");
@@ -44,7 +44,7 @@ public class VistaActualizarPaseCarga extends VistaDefault {
 		this.setVisible(true);
 		
 		actualizar.addActionListener(e->{
-			Controlador.getInstance().accion(Evento.ACTUALIZAR_PASE_CARGA, Integer.valueOf((int)id.getValue()));
+			Controlador.getInstance().accion(Evento.ACTUALIZAR_PASE_0, Integer.valueOf((int)id.getValue()));
 			dispose();
 		});
 		
@@ -57,10 +57,7 @@ public class VistaActualizarPaseCarga extends VistaDefault {
 	@Override
 	public void actualizar(Evento evento, Object datos) {
 		if(evento==Evento.RES_KO) {
-			String error;
-			if (datos instanceof Exception) error = ((Exception) datos).getMessage();
-			else error = Messages.EXC_UNKNOWN_PASE;
-			ViewUtils.createErrorDialogMessage(Messages.X_PASE_ACTUALIZADO + ' ' + Messages.MOTIVO.formatted(error));
+			ViewUtils.createErrorDialogMessage(Messages.X_PASE_ACTUALIZADO + ' ' + Messages.MOTIVO.formatted(((Exception) datos).getMessage()));
 		}
 	}
 }

@@ -3,7 +3,11 @@
         "idCliente": 0,
         "apellido": "a",
         "cuenta": "a",
+<<<<<<< HEAD
         "puntos": 1,
+=======
+        "puntos": 3,
+>>>>>>> branch 'main' of https://github.com/MDzimah/UCM-Software-Engineering-II.git
         "nombre": "a",
         "DNI": "a",
         "activo": true

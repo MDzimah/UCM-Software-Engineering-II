@@ -17,6 +17,7 @@ import integracion.pase.DAOPase;
 import misc.Messages;
 import misc.OpsBBDD;
 import negocio.compTea.TCompTea;
+import negocio.factoria.FactoriaAbstractaNegocio;
 import negocio.factura.TFactura;
 import negocio.factura.TLineaFactura;
 import negocio.miemCompTea.TMiemCompTea;
@@ -29,7 +30,7 @@ public class DAOCompTeaImp implements DAOCompTea {
 	public int create(TCompTea tCompTea) throws BBDDReadException, BBDDWriteException  {
 		JSONObject bdCompania= new JSONObject();
 		if (OpsBBDD.isEmpty(Messages.BDCT)) {
-			bdCompania.put(Messages.KEY_lastId, 0);
+			bdCompania.put(Messages.KEY_lastId, -1);
 		}
 		else {
 			bdCompania = OpsBBDD.read(Messages.BDCT);
@@ -69,6 +70,8 @@ public class DAOCompTeaImp implements DAOCompTea {
         
 		if (compania.getBoolean(Messages.KEY_act)) {
 	        compania.put(Messages.KEY_act, false);
+	        FactoriaAbstractaNegocio.getInstance().crearSAPase().deletePorCompTea(id);
+	        FactoriaAbstractaIntegracion.getInstance().crearDAOCompTea_MiemCompTea().delete_compania(id);
 	        OpsBBDD.write(bdCompania, Messages.BDCT);
 	        return id;
 		}
@@ -79,7 +82,7 @@ public class DAOCompTeaImp implements DAOCompTea {
 	@Override
 	public TCompTea read(int id) throws BBDDReadException {
 		TCompTea tCompTea = null;
-		if (!OpsBBDD.isEmpty(Messages.BDMCT)) {//si esta vacio logicamente no habra nada que devolver (null)
+		if (!OpsBBDD.isEmpty(Messages.BDCT)) {//si esta vacio logicamente no habra nada que devolver (null)
 		JSONObject bdCompania= OpsBBDD.read(Messages.BDCT);
 		if (bdCompania.has(Integer.toString(id))) {
 			JSONObject compania = bdCompania.getJSONObject(Integer.toString(id));
@@ -136,7 +139,7 @@ public class DAOCompTeaImp implements DAOCompTea {
 	    			Compania.put(Messages.KEY_coste, tCompTea.getCosteContratacion());
 	    			Compania.put(Messages.KEY_act, tCompTea.isActivo());
 	            	
-	            	OpsBBDD.write(BDCompania, Messages.BDFac);
+	            	OpsBBDD.write(BDCompania, Messages.BDCT);
 	                return Integer.valueOf(idCompania);
 	            }
 	            }

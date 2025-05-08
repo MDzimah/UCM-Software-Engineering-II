@@ -64,10 +64,7 @@ public class VistaMostrarPasesPorObra extends VistaDefault {
 	        tabla.setVisible(true);
 
 	    } else if (evento == Evento.RES_KO) {
-	    	String error;
-	    	if (datos instanceof Exception) error = ((Exception) datos).getMessage();
-			else error = Messages.NO_HAY_DATOS;
-	        ViewUtils.createErrorDialogMessage(Messages.X_MOSTRAR_PASES + ' ' + Messages.MOTIVO.formatted(error));
+	        ViewUtils.createErrorDialogMessage(Messages.X_MOSTRAR_PASES + ' ' + Messages.MOTIVO.formatted(((Exception) datos).getMessage()));
 	    }
 	}
 }

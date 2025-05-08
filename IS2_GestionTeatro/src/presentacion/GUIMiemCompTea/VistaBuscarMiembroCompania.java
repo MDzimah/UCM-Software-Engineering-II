@@ -16,7 +16,6 @@ import misc.Messages;
 import misc.Pair;
 import negocio.factura.TFactura;
 import negocio.miemCompTea.TMiemCompTea;
-import negocio.miemCompTea.TMiemCompTea.Genero;
 import presentacion.Evento;
 import presentacion.ViewUtils;
 import presentacion.TablaDefault;
@@ -76,10 +75,7 @@ public class VistaBuscarMiembroCompania extends VistaDefault{
     		dispose();
     	}
     	else if (evento == Evento.RES_KO) {
-    		String error;
-    		if(datos instanceof Exception) error = ((Exception) datos).getMessage();
-    		else error = Messages.ID_NO_ENCONTRADO.formatted(String.valueOf(((int) datos)));
-    		ViewUtils.createErrorDialogMessage(Messages.X_MIEMBRO_ENCONTRADO + ' ' + Messages.MOTIVO.formatted(error));
+    		ViewUtils.createErrorDialogMessage(Messages.X_MIEMBRO_ENCONTRADO + ' ' + Messages.MOTIVO.formatted(((Exception) datos).getMessage()));
     	}
     }
 }

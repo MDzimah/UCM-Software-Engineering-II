@@ -19,7 +19,7 @@ public class DAOFacturaImp implements DAOFactura {
 		
 		//Inicializo la BD si no está ya inicializada
 		if (OpsBBDD.isEmpty(Messages.BDFac)) {
-			bdFac.put(Messages.KEY_lastId, 0);
+			bdFac.put(Messages.KEY_lastId, -1);
 			bdFac.put(Messages.KEY_facs, new JSONObject());
 		}
 		else bdFac = OpsBBDD.read(Messages.BDFac);

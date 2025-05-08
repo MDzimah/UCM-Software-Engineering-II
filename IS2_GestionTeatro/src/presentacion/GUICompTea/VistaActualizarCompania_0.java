@@ -23,10 +23,10 @@ import presentacion.factoria.FactoriaAbstractaPresentacion;
 import presentacion.VistaDefault;
 import negocio.compTea.TCompTea;
 
-public class VistaActualizarCompania0 extends VistaDefault implements IGUI{
+public class VistaActualizarCompania_0 extends VistaDefault implements IGUI{
 	
 	
-	public VistaActualizarCompania0() {
+	public VistaActualizarCompania_0() {
 		initGUI();
 		this.setVisible(true);
 	}
@@ -47,7 +47,7 @@ public class VistaActualizarCompania0 extends VistaDefault implements IGUI{
 			try {
 				IdField.commitEdit();
 				int id = (int)IdField.getValue();
-				SwingUtilities.invokeLater(()->{Controlador.getInstance().accion(Evento.	ACTUALIZAR0_COMPANIA_TEATRAL, id);});
+				SwingUtilities.invokeLater(()->{Controlador.getInstance().accion(Evento.ACTUALIZAR_COMPANIA_TEATRAL_0, id);});
 				dispose();
 			}
 			catch(Exception ex) {
@@ -69,11 +69,11 @@ public class VistaActualizarCompania0 extends VistaDefault implements IGUI{
 	@Override
 	public void actualizar(Evento evento, Object datos) {
 		if(evento==Evento.RES_OK) {
-			FactoriaAbstractaPresentacion.getInstance().createVista(Evento.ACTUALIZAR1_COMPANIA_TEATRAL);
+			FactoriaAbstractaPresentacion.getInstance().createVista(Evento.ACTUALIZAR_COMPANIA_TEATRAL_1);
 		}
 		else if(evento==Evento.RES_KO) {
 			
-			ViewUtils.createErrorDialogMessage("NO EXISTEN COMPANIAS CON ID: "+(int) datos);
+			ViewUtils.createErrorDialogMessage("No existen compañias con id: "+((Exception) datos).getMessage());
 			
 		}
 		

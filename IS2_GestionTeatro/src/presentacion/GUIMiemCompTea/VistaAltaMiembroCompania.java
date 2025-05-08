@@ -1,5 +1,6 @@
 package presentacion.GUIMiemCompTea;
 
+import misc.Genero;
 import misc.Messages;
 import presentacion.Evento;
 import presentacion.ViewUtils;
@@ -10,7 +11,6 @@ import javax.swing.*;
 import java.util.ArrayList;
 import misc.Pair;
 import negocio.miemCompTea.TMiemCompTea;
-import negocio.miemCompTea.TMiemCompTea.Genero;
 
 public class VistaAltaMiembroCompania extends VistaDefault{
 	
@@ -81,14 +81,11 @@ public class VistaAltaMiembroCompania extends VistaDefault{
     @Override
 	public void actualizar(Evento evento, Object datos) {
 		if (evento == Evento.RES_OK) {
-			ViewUtils.createDialogMessage(Messages.EX_MIEMBRO_ALTA);
+			ViewUtils.createDialogMessage(Messages.EX_MIEMBRO_ALTA + '\n' + " Id: "+ (int)datos);;
 			dispose();
 		}
 		else if (evento == Evento.RES_KO) {
-			String error;
-			if(datos instanceof Exception) error = ((Exception) datos).getMessage();
-			else error = Messages.ERROR_DNI_MIEMBRO_REPETIDO.formatted((int) datos);
-			ViewUtils.createErrorDialogMessage(Messages.X_MIEMBRO_ALTA + ' ' + Messages.MOTIVO.formatted(error));
+			ViewUtils.createErrorDialogMessage(Messages.X_MIEMBRO_ALTA + ' ' + Messages.MOTIVO.formatted(((Exception) datos).getMessage()));
 		}
 	}
 }

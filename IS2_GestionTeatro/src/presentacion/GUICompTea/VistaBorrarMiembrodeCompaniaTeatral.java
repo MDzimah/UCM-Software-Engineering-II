@@ -8,7 +8,6 @@ import javax.swing.JSpinner;
 import javax.swing.JTextField;
 import javax.swing.SwingUtilities;
 
-import integracion.factoria.FactoriaAbstractaIntegracion;
 import misc.Messages;
 import misc.Pair;
 import presentacion.Evento;
@@ -17,8 +16,9 @@ import presentacion.ViewUtils;
 import presentacion.controlador.Controlador;
 import presentacion.VistaDefault;
 import negocio.compTea.TCompTea;
+import negocio.miemCompTea.TCompT_MiemCompT;
 
-public class VistaBajaCompTea extends VistaDefault implements IGUI{
+public class VistaBorrarMiembrodeCompaniaTeatral extends VistaDefault implements IGUI{
 	
 	
 	/**
@@ -27,33 +27,35 @@ public class VistaBajaCompTea extends VistaDefault implements IGUI{
 	private static final long serialVersionUID = 1L;
 
 
-	public VistaBajaCompTea() {
+	public VistaBorrarMiembrodeCompaniaTeatral () {
 		initGUI();
 		this.setVisible(true);
 	}
 	
 	private void initGUI() {
 		
-		this.setTitle("Baja Compañia Teatral");//no se si dan problemas la verdad
-		JButton anyadir= new JButton("Aceptar");
+		this.setTitle("Vista Borrar Miembro de Compania Teatral");//no se si dan problemas la verdad
+		JButton anyadir= new JButton("Borrar");
 		JButton cancelar = new JButton("Cancelar");
-		JLabel pregunta= new JLabel("Id de la compania para borrar");
-		
-		JSpinner IdField = ViewUtils.integerSpinner(0, 0, Integer.MAX_VALUE, 1);
-		
-		
+		JLabel idcomp= new JLabel("id compania:");
+		JLabel idmiem= new JLabel("id miembro:");
+		JSpinner idcompSpin= ViewUtils.integerSpinner(0, 0, Integer.MAX_VALUE, 1);
+		JSpinner idmiemSpin=ViewUtils.integerSpinner(0, 0, Integer.MAX_VALUE, 1);
 		ArrayList<Pair<JComponent, JComponent>> campos = new ArrayList<>();
-		campos.add(new Pair<>(pregunta, IdField));
+		campos.add(new Pair<>(idcomp,idcompSpin));
+		campos.add(new Pair<>(idmiem,idmiemSpin));
 		anyadir.addActionListener(e ->{
 			try {
-				IdField.commitEdit();
-				int id = (int)IdField.getValue();
-				SwingUtilities.invokeLater(()->{Controlador.getInstance().accion(Evento.BAJA_COMPANIA_TEATRAL, id);});
-				dispose();
+				idcompSpin.commitEdit();
+				idmiemSpin.commitEdit();
+				int intidcomp = (int)idcompSpin.getValue();
+				int intidmiem = (int)idmiemSpin.getValue();
+				TCompT_MiemCompT tcompmiem= new TCompT_MiemCompT (intidcomp,intidmiem);
+				SwingUtilities.invokeLater(()->{Controlador.getInstance().accion(Evento.BORRAR_MIEMBRO_COMPANIA_TEATRAL, tcompmiem);});
 			}
 			catch(Exception ex) {
 				ViewUtils.createInvalidFieldsPanel();
-				IdField.updateUI();
+				idcompSpin.updateUI();
 			}
 			this.dispose();	//Igual cambio algo de aqui porque el problema es que como esta ahora se ejecuta el controller antes de cerrar la ventana
 		});
@@ -70,13 +72,12 @@ public class VistaBajaCompTea extends VistaDefault implements IGUI{
 	@Override
 	public void actualizar(Evento evento, Object datos) {
 		if(evento==Evento.RES_OK) {
-			ViewUtils.createDialogMessage(Messages.COMPANIA_ELIMINADA + '\n' + " Id: "+ (int)datos);
+			ViewUtils.createDialogMessage(Messages.COMPANIA_MIEMBRO_BORRADO + '\n' + " Id: "+ (int)datos);
 
 		}
 		else if(evento==Evento.RES_KO) {
-			ViewUtils.createErrorDialogMessage(Messages.X_ELIMINAR_COMPANIA+ '\n' + Messages.ERROR.formatted(((Exception) datos).getMessage()));
+			ViewUtils.createErrorDialogMessage(Messages.X_BORRAR_COMPANIA_MIEMBRO+ '\n' + Messages.ERROR.formatted(((Exception) datos).getMessage()));
 		}
-		
 		
 	}
 

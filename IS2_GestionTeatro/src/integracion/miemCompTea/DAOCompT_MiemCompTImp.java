@@ -20,10 +20,15 @@ public class DAOCompT_MiemCompTImp implements DAOCompT_MiemCompT{
 		JSONObject BDRel = new JSONObject(); 
 		
 		if (OpsBBDD.isEmpty(Messages.BDCT_MCT)) {
-			BDRel.put(Messages.KEY_lastId, 0);
+			BDRel.put(Messages.KEY_lastId, -1);
 			BDRel.put(Messages.KEY_relComp_Miem, new JSONObject());
 		}
-		else BDRel = OpsBBDD.read(Messages.BDCT_MCT);
+		else {
+			if(existeRelacion(tCompT_MieCT.getIdCompania(),tCompT_MieCT.getIdMiembroComp()) != -1) {
+				return -1; //si ya existe esa relacion se devuelve -1
+			}
+			BDRel = OpsBBDD.read(Messages.BDCT_MCT);
+		}
 		
 		JSONObject relCom_Miem = BDRel.getJSONObject(Messages.KEY_relComp_Miem);
 		
@@ -37,23 +42,23 @@ public class DAOCompT_MiemCompTImp implements DAOCompT_MiemCompT{
 	}
 	
 	@Override
-	public int delete(int id_rel) throws BBDDReadException, BBDDWriteException {
+	public int delete_relacion(int idComp, int idMiem) throws BBDDReadException, BBDDWriteException {
 		if (!OpsBBDD.isEmpty(Messages.BDCT_MCT)) {
 			JSONObject BDRel = OpsBBDD.read(Messages.BDCT_MCT);
 			JSONObject relCom_Miem = BDRel.getJSONObject(Messages.KEY_relComp_Miem);
 			
-			String _id = Integer.toString(id_rel);
-			if (relCom_Miem.has(_id)) {
-				relCom_Miem.remove(_id); 
+			int idRel = this.existeRelacion(idComp,idMiem);
+			if(idRel != -1) {
+				relCom_Miem.remove(Integer.toString(idRel));
 				OpsBBDD.write(BDRel, Messages.BDCT_MCT);
-		        return id_rel;
+				return idRel;
 			}
 		}        
         return -1;
 	}
 	
 	@Override
-	public int delete_compania(int id_comp) throws BBDDReadException, BBDDWriteException {
+	public int delete_compania(int idComp) throws BBDDReadException, BBDDWriteException {
 		if (!OpsBBDD.isEmpty(Messages.BDCT_MCT)) {
 			JSONObject BDRel = OpsBBDD.read(Messages.BDCT_MCT);
 			JSONObject relCom_Miem = BDRel.getJSONObject(Messages.KEY_relComp_Miem);
@@ -64,7 +69,7 @@ public class DAOCompT_MiemCompTImp implements DAOCompT_MiemCompT{
 			
 			for (String id : allIds) {
 			    JSONObject rel = relCom_Miem.getJSONObject(id);
-			    if (rel.getInt(Messages.KEY_idCompTea) == id_comp) {
+			    if (rel.getInt(Messages.KEY_idCompTea) == idComp) {
 			        toRemove.add(id);
 			    }
 			}
@@ -75,14 +80,14 @@ public class DAOCompT_MiemCompTImp implements DAOCompT_MiemCompT{
 			
 			if(encontrado) {
 				OpsBBDD.write(BDRel, Messages.BDCT_MCT);
-				return id_comp;
+				return idComp;
 			}
 		}
         return -1;
 	}
 
 	@Override
-	public int delete_miembro(int id_miem) throws BBDDReadException, BBDDWriteException {
+	public int delete_miembro(int idMiem) throws BBDDReadException, BBDDWriteException {
 		if (!OpsBBDD.isEmpty(Messages.BDCT_MCT)) {
 			JSONObject BDRel = OpsBBDD.read(Messages.BDCT_MCT);
 			JSONObject relCom_Miem = BDRel.getJSONObject(Messages.KEY_relComp_Miem);
@@ -93,7 +98,7 @@ public class DAOCompT_MiemCompTImp implements DAOCompT_MiemCompT{
 			
 			for (String id : allIds) {
 			    JSONObject rel = relCom_Miem.getJSONObject(id);
-			    if (rel.getInt(Messages.KEY_idMiemComp) == id_miem) {
+			    if (rel.getInt(Messages.KEY_idMiemComp) == idMiem) {
 			        toRemove.add(id);
 			    }
 			}
@@ -104,14 +109,14 @@ public class DAOCompT_MiemCompTImp implements DAOCompT_MiemCompT{
 
 			if(encontrado) {
 				OpsBBDD.write(BDRel, Messages.BDCT_MCT);
-				return id_miem;
+				return idMiem;
 			}
 		}
         return -1;
 	}
 
 	@Override
-	public Collection<TCompT_MiemCompT> read_compania(int id_comp) throws BBDDReadException {
+	public Collection<TCompT_MiemCompT> read_compania(int idComp) throws BBDDReadException {
 		if (!OpsBBDD.isEmpty(Messages.BDCT_MCT)) {
 			JSONObject BDRel = OpsBBDD.read(Messages.BDCT_MCT);
 			
@@ -123,7 +128,7 @@ public class DAOCompT_MiemCompTImp implements DAOCompT_MiemCompT{
 			for (String id : allIds) {
 				JSONObject rel = relCom_Miem.getJSONObject(id);
 				
-				if(rel.getInt(Messages.KEY_idCompTea) == id_comp) {
+				if(rel.getInt(Messages.KEY_idCompTea) == idComp) {
 					TCompT_MiemCompT tRel = this.createTCT_MCT(rel);
 					tRel.setIdRelacionMiemComp(Integer.valueOf(id));
 					relaciones.add(tRel);
@@ -137,7 +142,7 @@ public class DAOCompT_MiemCompTImp implements DAOCompT_MiemCompT{
 	}
 
 	@Override
-	public Collection<TCompT_MiemCompT> read_miembro(int id_miem) throws BBDDReadException {
+	public Collection<TCompT_MiemCompT> read_miembro(int idMiem) throws BBDDReadException {
 		if (!OpsBBDD.isEmpty(Messages.BDCT_MCT)) {
 			JSONObject BDRel = OpsBBDD.read(Messages.BDCT_MCT);
 			
@@ -149,7 +154,7 @@ public class DAOCompT_MiemCompTImp implements DAOCompT_MiemCompT{
 			for (String id : allIds) {
 				JSONObject rel = relCom_Miem.getJSONObject(id);
 				
-				if(rel.getInt(Messages.KEY_idMiemComp) == id_miem) {
+				if(rel.getInt(Messages.KEY_idMiemComp) == idMiem) {
 					TCompT_MiemCompT tRel = this.createTCT_MCT(rel);
 					tRel.setIdRelacionMiemComp(Integer.valueOf(id));
 					relaciones.add(tRel);
@@ -213,5 +218,22 @@ public class DAOCompT_MiemCompTImp implements DAOCompT_MiemCompT{
 		relC_M.put(Messages.KEY_idCompTea, tRel.getIdCompania());
 		relC_M.put(Messages.KEY_idMiemComp, tRel.getIdMiembroComp());
 		return relC_M;
+	}
+	
+	private int existeRelacion(int idComp, int idMiem) throws BBDDReadException {
+		if (!OpsBBDD.isEmpty(Messages.BDCT_MCT)) {
+			JSONObject BDRel = OpsBBDD.read(Messages.BDCT_MCT);
+			JSONObject relCom_Miem = BDRel.getJSONObject(Messages.KEY_relComp_Miem);
+			
+			Set<String> allIds = relCom_Miem.keySet();
+			
+			for (String id : allIds) {
+			    JSONObject rel = relCom_Miem.getJSONObject(id);
+			    if (rel.getInt(Messages.KEY_idCompTea) == idComp && rel.getInt(Messages.KEY_idMiemComp) == idMiem) {
+			    	return Integer.valueOf(id);
+			    }
+			}
+		} 
+		return -1;
 	}
 }
