@@ -19,11 +19,13 @@ public class Messages {
 	public static final String EX_MIEMBRO_BAJA = Messages.SHP.formatted("dado de baja al miembro");
 	public static final String EX_MIEMBROS_LISTADOS = Messages.SHP.formatted("listado los miembros");
        //Compania Teatral
-	public static final String COMPANIA_ACTUALIZADA = Messages.SHP.formatted("compania actualizada");
-	public static final String COMPANIA_ENCONTRADA = Messages.SHP.formatted("compania encontrada");
-	public static final String COMPANIA_CREADA = Messages.SHP.formatted("compania creada");
-	public static final String COMPANIA_BUSCADA = Messages.SHP.formatted("compania buscada");
-	public static final String COMPANIA_MOSTRADA = Messages.SHP.formatted("compania mostrada");
+	public static final String COMPANIA_ACTUALIZADA = Messages.SHP.formatted("actualizado compania");
+	public static final String COMPANIA_ENCONTRADA = Messages.SHP.formatted("encontrado compania");
+	public static final String COMPANIA_CREADA = Messages.SHP.formatted("creado compania");
+	public static final String COMPANIA_ELIMINADA = Messages.SHP.formatted("borrado compania");
+	public static final String COMPANIA_MOSTRADA = Messages.SHP.formatted("mostrado compania");
+	public static final String COMPANIA_MIEMBRO_BORRADO = Messages.SHP.formatted("desvinculado la compañia y el miembro");
+	public static final String COMPANIA_MIEMBRO_ANYADIDO = Messages.SHP.formatted("vinculado la compañia y el miembro");
 		
 	//Obra
 	public static final String EX_OBRA_ANYADIDA_CORRECT = Messages.SHP.formatted("registrado la obra ");
@@ -43,6 +45,8 @@ public class Messages {
 	public static final String X_ELIMINAR_COMPANIA = Messages.NSHP.formatted("dar de baja compania.");
 	public static final String X_BUSCAR_COMPANIA= Messages.NSHP.formatted("buscar compania.");
 	public static final String X_ACTUALIZAR_COMPANIA = Messages.NSHP.formatted("actualizar compania.");
+	public static final String X_BORRAR_COMPANIA_MIEMBRO = Messages.NSHP.formatted("desvincular la compania y el miembro");
+	public static final String X_ANYADIR_COMPANIA_MIEMBRO = Messages.NSHP.formatted("vincular la compania y el miembro");
 	//Pase
 	public static final String X_MOSTRAR_PASES = Messages.NSHP.formatted("mostrar los pases.");
 	public static final String X_PASE_CREADO = Messages.NSHP.formatted("crear el pase.");

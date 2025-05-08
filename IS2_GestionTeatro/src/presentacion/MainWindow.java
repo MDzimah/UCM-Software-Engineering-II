@@ -489,13 +489,16 @@ public class MainWindow extends JFrame {
                 	JDialog subsCompTea= new JDialog(MainWindow.this,"Subsistema Compañia Teatral", true);
                 	subsCompTea.setLayout(new FlowLayout());
                 	
-                	JButton actualizar, alta, baja, buscar, mostrar;
+                	JButton actualizar, alta, baja, buscar, mostrar,quitarmiembro,anyadirmiembro;
                 
                 	actualizar = new JButton("Actualizar compañia");
                 	alta = new JButton("Alta compañia");
                 	baja = new JButton("Baja compañia");
             		buscar = new JButton("Buscar compañia");
-            		mostrar = new JButton("mostrar compañias");
+            		mostrar = new JButton("Mostrar compañias");
+            		quitarmiembro = new JButton("Quitar miembro de compañia");
+            		anyadirmiembro= new JButton("Añadir miembro a compañia");
+            		
             		
             	//actualizarCompania
             		actualizar.addActionListener((ev)->{
@@ -522,7 +525,16 @@ public class MainWindow extends JFrame {
             			FactoriaAbstractaPresentacion.getInstance().createVista(Evento.MOSTRAR_COMPANIA_TEATRAL);
             		});
             		
-            	//
+            		quitarmiembro .addActionListener((ev)->{
+        			FactoriaAbstractaPresentacion.getInstance().createVista(Evento.BORRAR_MIEMBRO_COMPANIA_TEATRAL);
+        		});
+            		anyadirmiembro .addActionListener((ev)->{
+            			FactoriaAbstractaPresentacion.getInstance().createVista(Evento.ANYADIR_MIEMBRO_COMPANIA_TEATRAL);
+            		});
+            		
+        		
+    	  
+		
     
             		
             		subsCompTea.add(actualizar);        		
@@ -530,6 +542,8 @@ public class MainWindow extends JFrame {
             		subsCompTea.add(baja);
             		subsCompTea.add(buscar);
             		subsCompTea.add(mostrar);
+            		subsCompTea.add(anyadirmiembro);
+            		subsCompTea.add(quitarmiembro);
             		subsCompTea.setModal(false);  
             		subsCompTea.pack();
             		subsCompTea.setLocationRelativeTo(null);
