@@ -8,12 +8,14 @@ import exceptions.AlreadyClienteException;
 import exceptions.BBDDReadException;
 import exceptions.BBDDWriteException;
 import exceptions.DuplicateElementException;
+import exceptions.InvalidFacturaException;
 import exceptions.InvalidFields;
 import exceptions.UnknownClienteException;
 import exceptions.UnknownMiemCompTeaException;
 import exceptions.UnknownObraException;
 import exceptions.UnknownPaseException;
 import exceptions.UnknownTaquilleroException;
+import exceptions.VoidFacturaException;
 import misc.Messages;
 import negocio.cliente.SACliente;
 import negocio.cliente.TCliente;
@@ -51,7 +53,7 @@ public class ControladorImp extends Controlador {
 				int idFac = saFac.crearFactura(tDV);
 				
 				if (idFac != -1) FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_OK, idFac);
-				else FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_KO, null);
+				else FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_KO, new InvalidFacturaException());
 			}
 			catch (BBDDReadException | BBDDWriteException | UnknownClienteException | UnknownTaquilleroException e) {
 				 FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_KO, e);
@@ -79,7 +81,7 @@ public class ControladorImp extends Controlador {
 				Collection<TFactura> allFacturas = saFac.allFacturas();
 				
 				if (allFacturas != null && !allFacturas.isEmpty()) FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_OK, allFacturas); 
-				else FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_KO, null); 
+				else FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_KO, new VoidFacturaException()); 
 			}
 			catch(BBDDReadException e) {
 				 FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_KO, e);
@@ -92,7 +94,7 @@ public class ControladorImp extends Controlador {
 				Collection<TFactura> allFacturasPorCliente = saFac.allFacturasPorCliente((int) datos);
 				
 				if (allFacturasPorCliente != null && !allFacturasPorCliente.isEmpty()) FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_OK, allFacturasPorCliente);
-				else FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_KO, (int)datos);
+				else FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_KO, new VoidFacturaException());
 			}
 			catch(BBDDReadException e) {
 				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_KO, e);

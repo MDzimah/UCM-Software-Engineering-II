@@ -116,6 +116,8 @@ public class Messages {
 	public static final String EXC_EVENTO_TABLA = "Tipo de tabla incompatible con la operacion o con los datos";
 	public static final String EXC_ELEM_DUPLICADO = "Elemento duplicado";
 	public static final String EXC_ALR_CLI = "El cliente ya existe";
+	public static final String EXC_INVALID_FACTURA = "Ningun pase es valido";
+	public static final String EXC_VOID_FACTURA = "No existen facturas para mostrar";
 
 	//BBDD
 	public static final String PATH_TO_BBDD = "resources/BBDD/%s";

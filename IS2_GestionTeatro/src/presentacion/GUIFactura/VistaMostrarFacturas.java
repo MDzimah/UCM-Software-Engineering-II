@@ -33,9 +33,11 @@ public class VistaMostrarFacturas implements IGUI {
 			new TablaDefault<TFactura>("Facturas", colNames, data, false);
 		}
 		else if(evento == Evento.RES_KO) {
-			String error;
+			String error = ((Exception)datos).getMessage();
+			/*
 			if (datos instanceof BBDDReadException) error = ((BBDDReadException)datos).getMessage();
 			else error = Messages.NO_HAY_DATOS;
+			*/
 			ViewUtils.createErrorDialogMessage(Messages.X_MOSTRAR_FACTURAS + ' ' + Messages.MOTIVO.formatted(error));
 		}
 		mostrado = false;
