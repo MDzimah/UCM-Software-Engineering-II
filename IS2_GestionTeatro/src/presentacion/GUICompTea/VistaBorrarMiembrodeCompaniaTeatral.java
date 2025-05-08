@@ -16,6 +16,7 @@ import presentacion.ViewUtils;
 import presentacion.controlador.Controlador;
 import presentacion.VistaDefault;
 import negocio.compTea.TCompTea;
+import negocio.miemCompTea.TCompT_MiemCompT;
 
 public class VistaBorrarMiembrodeCompaniaTeatral extends VistaDefault implements IGUI{
 	
@@ -33,23 +34,28 @@ public class VistaBorrarMiembrodeCompaniaTeatral extends VistaDefault implements
 	
 	private void initGUI() {
 		
-		this.setTitle("Vista BorrarMiembrodeCompaniaTeatral");//no se si dan problemas la verdad
+		this.setTitle("Vista Borrar Miembro de Compania Teatral");//no se si dan problemas la verdad
 		JButton anyadir= new JButton("Borrar");
 		JButton cancelar = new JButton("Cancelar");
-		JLabel costeContratacionLabel= new JLabel("id:");
-		JSpinner id= ViewUtils.integerSpinner(0, 0, Integer.MAX_VALUE, 1);
+		JLabel idcomp= new JLabel("id compania:");
+		JLabel idmiem= new JLabel("id miembro:");
+		JSpinner idcompSpin= ViewUtils.integerSpinner(0, 0, Integer.MAX_VALUE, 1);
+		JSpinner idmiemSpin=ViewUtils.integerSpinner(0, 0, Integer.MAX_VALUE, 1);
 		ArrayList<Pair<JComponent, JComponent>> campos = new ArrayList<>();
-		campos.add(new Pair<>(costeContratacionLabel, id));
+		campos.add(new Pair<>(idcomp,idcompSpin));
+		campos.add(new Pair<>(idmiem,idmiemSpin));
 		anyadir.addActionListener(e ->{
 			try {
-				id.commitEdit();
-				int intid = (int)id.getValue();
-				
-				SwingUtilities.invokeLater(()->{Controlador.getInstance().accion(Evento.BORRAR_MIEMBRO_COMPANIA_TEATRAL, intid);});
+				idcompSpin.commitEdit();
+				idmiemSpin.commitEdit();
+				int intidcomp = (int)idcompSpin.getValue();
+				int intidmiem = (int)idmiemSpin.getValue();
+				TCompT_MiemCompT tcompmiem= new TCompT_MiemCompT (intidcomp,intidmiem);
+				SwingUtilities.invokeLater(()->{Controlador.getInstance().accion(Evento.BORRAR_MIEMBRO_COMPANIA_TEATRAL, tcompmiem);});
 			}
 			catch(Exception ex) {
 				ViewUtils.createInvalidFieldsPanel();
-				id.updateUI();
+				idcompSpin.updateUI();
 			}
 			this.dispose();	//Igual cambio algo de aqui porque el problema es que como esta ahora se ejecuta el controller antes de cerrar la ventana
 		});
