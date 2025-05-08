@@ -550,7 +550,7 @@ public class ControladorImp extends Controlador {
 				int id2= saCompTea.addMember(tCM);
 				if(id2!=-1) FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_OK, (int)id2);
 				else {
-					throw new Exception(""+id2);
+					throw new Exception(Messages.NOEXISTEMIEMOCOMP);
 				}
 			}
 			catch(Exception e) {
@@ -566,7 +566,7 @@ public class ControladorImp extends Controlador {
 				int id2= saCompTea.removeMember(tCompMiem.getIdCompania(),tCompMiem.getIdMiembroComp());
 				if(id2!=-1) FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_OK, (int)id2);
 				else {
-					throw new Exception();
+					throw new Exception(Messages.NOEXISTERELACION);
 				}
 			}
 			catch(Exception e) {
