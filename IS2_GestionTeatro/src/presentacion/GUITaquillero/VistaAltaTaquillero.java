@@ -61,16 +61,21 @@ public class VistaAltaTaquillero extends VistaDefault {
 		
 		//oyentes
 		aceptar.addActionListener((e) -> {
-			String _nombre = nombre.getText();
-			String _apellido = apellido.getText();
-			String _DNI = dni.getText();
-			float _sueldo = Float.valueOf(sueldo.getText());
-			int _edad = Integer.valueOf(edad.getText());
-			Genero _genero = (Genero) genero.getSelectedItem();
-			TTaquillero tTaq = new TTaquillero(true, _DNI, _nombre, _apellido, 0, _sueldo, _edad, _genero);
-			
-			SwingUtilities.invokeLater(()-> {Controlador.getInstance().accion(Evento.ALTA_TAQUILLERO, tTaq); });
-			VistaAltaTaquillero.this.dispose();
+			try {
+				String _nombre = nombre.getText();
+				String _apellido = apellido.getText();
+				String _DNI = dni.getText();
+				float _sueldo = Float.valueOf(sueldo.getText());
+				int _edad = Integer.valueOf(edad.getText());
+				Genero _genero = (Genero) genero.getSelectedItem();
+				TTaquillero tTaq = new TTaquillero(true, _DNI, _nombre, _apellido, 0, _sueldo, _edad, _genero);
+				
+				SwingUtilities.invokeLater(()-> {Controlador.getInstance().accion(Evento.ALTA_TAQUILLERO, tTaq); });
+			} catch (Exception ex) {
+				this.actualizar(Evento.RES_KO, ex);
+			} finally {
+				VistaAltaTaquillero.this.dispose();
+			}
 		});
 		
 		cancelar.addActionListener((e) -> {

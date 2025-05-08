@@ -65,18 +65,23 @@ public class VistaActualizarTaquillero_1 extends VistaDefault {
 		
 		//oyentes
 		aceptar.addActionListener((e) -> {
-			int _id = Integer.valueOf(id.getText());
-			String _nombre = nombre.getText();
-			String _apellido = apellido.getText();
-			String _DNI = dni.getText();
-			float _sueldo = Float.valueOf(sueldo.getText());
-			int _edad = Integer.valueOf(edad.getText());
-			Genero _genero = (Genero) genero.getSelectedItem();
-			TTaquillero tTaq = new TTaquillero(true, _DNI, _nombre, _apellido, 0, _sueldo, _edad, _genero);
-			tTaq.setIdTaquillero(_id);
-			
-			SwingUtilities.invokeLater(()-> {Controlador.getInstance().accion(Evento.ACTUALIZAR_TAQUILLERO_1, tTaq); });
-			VistaActualizarTaquillero_1.this.dispose();
+			try {
+				int _id = Integer.valueOf(id.getText());
+				String _nombre = nombre.getText();
+				String _apellido = apellido.getText();
+				String _DNI = dni.getText();
+				float _sueldo = Float.valueOf(sueldo.getText());
+				int _edad = Integer.valueOf(edad.getText());
+				Genero _genero = (Genero) genero.getSelectedItem();
+				TTaquillero tTaq = new TTaquillero(true, _DNI, _nombre, _apellido, 0, _sueldo, _edad, _genero);
+				tTaq.setIdTaquillero(_id);
+				
+				SwingUtilities.invokeLater(()-> {Controlador.getInstance().accion(Evento.ACTUALIZAR_TAQUILLERO_1, tTaq); });
+			} catch (Exception ex) {
+				this.actualizar(Evento.RES_KO, ex);
+			} finally {
+				VistaActualizarTaquillero_1.this.dispose();
+			}
 		});
 		
 		cancelar.addActionListener((e) -> {

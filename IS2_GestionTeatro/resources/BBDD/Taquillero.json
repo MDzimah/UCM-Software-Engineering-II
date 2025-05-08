@@ -12,12 +12,12 @@
         },
         "1": {
             "numero de ventas": 0,
-            "apellido": "a",
+            "apellido": "q",
             "genero": "HOMBRE",
-            "sueldo": 10,
-            "nombre": "a",
+            "sueldo": 200,
+            "nombre": "q",
             "edad": 10,
-            "DNI": "1",
+            "DNI": "2",
             "activo": true
         },
         "2": {
@@ -29,7 +29,27 @@
             "edad": 2,
             "DNI": "b",
             "activo": true
+        },
+        "3": {
+            "numero de ventas": 0,
+            "apellido": "w",
+            "genero": "HOMBRE",
+            "sueldo": 2,
+            "nombre": "w",
+            "edad": 5,
+            "DNI": "4456",
+            "activo": true
+        },
+        "4": {
+            "numero de ventas": 0,
+            "apellido": "p",
+            "genero": "HOMBRE",
+            "sueldo": 7,
+            "nombre": "p",
+            "edad": 7,
+            "DNI": "p",
+            "activo": true
         }
     },
-    "lastId": 2
+    "lastId": 4
 }
