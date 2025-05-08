@@ -1,0 +1,45 @@
+{
+    "lastId": 4,
+    "miembros de la compania teatral": {
+        "1": {
+            "idMiemComp": 1,
+            "apellido": "P",
+            "genero": "HOMBRE",
+            "nombre": "Jaime",
+            "edad": 15,
+            "DNI": "1",
+            "email": "e",
+            "activo": false
+        },
+        "2": {
+            "idMiemComp": 2,
+            "apellido": "we",
+            "genero": "HOMBRE",
+            "nombre": "we",
+            "edad": 20,
+            "DNI": "2",
+            "email": "",
+            "activo": true
+        },
+        "3": {
+            "idMiemComp": 3,
+            "apellido": "ewe",
+            "genero": "HOMBRE",
+            "nombre": "we",
+            "edad": 20,
+            "DNI": "3",
+            "email": "",
+            "activo": false
+        },
+        "4": {
+            "idMiemComp": 4,
+            "apellido": "3",
+            "genero": "HOMBRE",
+            "nombre": "23",
+            "edad": 20,
+            "DNI": "1",
+            "email": "",
+            "activo": true
+        }
+    }
+}
