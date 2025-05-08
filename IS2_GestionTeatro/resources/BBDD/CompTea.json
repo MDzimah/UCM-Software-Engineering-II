@@ -15,9 +15,15 @@
     },
     "2": {
         "idCompTea": 2,
+<<<<<<< HEAD
         "compania teatral": "fdfs",
         "direccion": "dfsfdsdfs",
         "coste": 5,
+=======
+        "compania teatral": "a",
+        "direccion": "a",
+        "coste": 3,
+>>>>>>> refs/heads/Factura
         "activo": true
     },
     "lastId": 2

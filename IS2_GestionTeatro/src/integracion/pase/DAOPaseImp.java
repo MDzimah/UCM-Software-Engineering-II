@@ -74,6 +74,7 @@ public class DAOPaseImp implements DAOPase {
 				JSONObject pase = pases.getJSONObject(Integer.toString(id));
 				tPase = read(pase);
 				tPase.setIdPase(id);
+				return tPase;
 			}
 			return tPase;
 		}

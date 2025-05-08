@@ -20,7 +20,21 @@
             "precioVenta": 33,
             "idPase": 0,
             "activo": false
+        },
+        "4": {
+            "idFactura": 1,
+            "cantidad": 1,
+            "precioVenta": 8,
+            "idPase": 0,
+            "activo": false
+        },
+        "5": {
+            "idFactura": 2,
+            "cantidad": 1,
+            "precioVenta": 8,
+            "idPase": 0,
+            "activo": false
         }
     },
-    "lastId": 3
+    "lastId": 5
 }
