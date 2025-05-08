@@ -89,6 +89,8 @@ public class Messages {
     public static final String ERROR_SOLO_UNA_FILA_PARA_EDICION = "Sólo se permite la edición cuando hay una única fila en la tabla.";
     public static final String ERROR_ACCION_NO_PERMITIDA = "Esta acción no está permitida en el modo actual.";
     public static final String ERROR_DNI_MIEMBRO_REPETIDO = "Ya hay un miembro activo con id: \"%s\" con el mismo dni";
+    public static final String NOEXISTEMIEMOCOMP = "no existe miembro o compania";
+    public static final String NOEXISTERELACION = "no existe relacion entre miembro y compania";
 
 
 	//Columnas de las tablas

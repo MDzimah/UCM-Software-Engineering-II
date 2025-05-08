@@ -9,10 +9,12 @@ import exceptions.UnknownMiemCompTeaException;
 import integracion.compTea.DAOCompTea;
 import integracion.factoria.FactoriaAbstractaIntegracion;
 import integracion.miemCompTea.DAOMiemCompTea;
+import negocio.miemCompTea.SAMiemCompTea;
 import negocio.miemCompTea.TCompT_MiemCompT;
 import integracion.miemCompTea.DAOCompT_MiemCompT;
 import negocio.miemCompTea.TMiemCompTea;
 import negocio.compTea.TCompTea;
+import negocio.factoria.FactoriaAbstractaNegocio;
 
 public class SACompTeaImp implements SACompTea {
 
@@ -46,14 +48,18 @@ public class SACompTeaImp implements SACompTea {
 		return daoCT.readAll();
 	}
 	@Override
-	public int removeMember(int cmt) throws BBDDReadException, BBDDWriteException {
+	public int removeMember(int idcomp, int idmiem) throws BBDDReadException, BBDDWriteException {
 		DAOCompT_MiemCompT daoCT=FactoriaAbstractaIntegracion.getInstance().crearDAOCompTea_MiemCompTea();
-		return daoCT.delete(cmt);
+		return daoCT.delete_relacion(idcomp,idmiem);
 	}
 	@Override
 	public int addMember(TCompT_MiemCompT cmt) throws BBDDReadException, BBDDWriteException {
+		SAMiemCompTea saMiemCompTea= FactoriaAbstractaNegocio.getInstance().crearSAMiemCompTea();
+		if(saMiemCompTea.read(cmt.getIdMiembroComp())!=null&&this.read(cmt.getIdCompania())!=null) {
 		DAOCompT_MiemCompT daoCT=FactoriaAbstractaIntegracion.getInstance().crearDAOCompTea_MiemCompTea();
 		return daoCT.create(cmt);
+		}
+		else return -1;
 	}
 
 }
