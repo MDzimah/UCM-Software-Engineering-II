@@ -23,7 +23,39 @@
             "idTaquillero": 0,
             "importe": 4,
             "activo": true
+        },
+        "3": {
+            "fecha": "2025-05-08T20:51:17",
+            "idCliente": 0,
+            "subtotal": 6,
+            "idTaquillero": 0,
+            "importe": 3,
+            "activo": true
+        },
+        "4": {
+            "fecha": "2025-05-08T20:52:16",
+            "idCliente": 0,
+            "subtotal": 3,
+            "idTaquillero": 0,
+            "importe": 1.5,
+            "activo": true
+        },
+        "5": {
+            "fecha": "2025-05-08T20:56:44",
+            "idCliente": 0,
+            "subtotal": 3,
+            "idTaquillero": 0,
+            "importe": 1.5,
+            "activo": true
+        },
+        "6": {
+            "fecha": "2025-05-08T20:56:58",
+            "idCliente": 0,
+            "subtotal": 3,
+            "idTaquillero": 0,
+            "importe": 1.5,
+            "activo": true
         }
     },
-    "lastId": 2
+    "lastId": 6
 }

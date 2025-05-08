@@ -1,19 +1,11 @@
 {
     "0": {
         "IdObra": 0,
-        "genero": "g",
-        "titulo": "ta",
+        "genero": "a",
+        "titulo": "a",
         "autor": "a",
-        "sinopsis": "",
-        "activo": false
-    },
-    "1": {
-        "IdObra": 1,
-        "genero": "as",
-        "titulo": "ass",
-        "autor": "aas",
-        "sinopsis": "",
+        "sinopsis": "a",
         "activo": true
     },
-    "LastKey": 1
+    "LastKey": 0
 }

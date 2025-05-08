@@ -34,7 +34,35 @@
             "precioVenta": 8,
             "idPase": 0,
             "activo": false
+        },
+        "6": {
+            "idFactura": 3,
+            "cantidad": 2,
+            "precioVenta": 6,
+            "idPase": 0,
+            "activo": false
+        },
+        "7": {
+            "idFactura": 4,
+            "cantidad": 1,
+            "precioVenta": 3,
+            "idPase": 0,
+            "activo": false
+        },
+        "8": {
+            "idFactura": 5,
+            "cantidad": 1,
+            "precioVenta": 3,
+            "idPase": 0,
+            "activo": false
+        },
+        "9": {
+            "idFactura": 6,
+            "cantidad": 1,
+            "precioVenta": 3,
+            "idPase": 0,
+            "activo": false
         }
     },
-    "lastId": 5
+    "lastId": 9
 }
