@@ -11,11 +11,11 @@ import negocio.pase.TPase;
 
 public interface SAObra {
 	//De casos de uso
-	public int create(TObra o) throws BBDDReadException, BBDDWriteException, DuplicateElementException;
-	public TObra read(int id) throws BBDDReadException, UnknownObraException;
-	public int update(TObra o) throws BBDDReadException, BBDDWriteException, UnknownObraException;
-	public int delete (int id) throws BBDDReadException, BBDDWriteException, UnknownObraException;
-	public Collection<TObra> readAll() throws BBDDReadException, UnknownObraException;
+	public int create(TObra o) throws BBDDReadException, BBDDWriteException;
+	public TObra read(int id) throws BBDDReadException;
+	public int update(TObra o) throws BBDDReadException, BBDDWriteException;
+	public int delete (int id) throws BBDDReadException, BBDDWriteException;
+	public Collection<TObra> readAll() throws BBDDReadException;
 	/**
 	 * 
 	 * @param params - params - String titulo, String autor, String genero

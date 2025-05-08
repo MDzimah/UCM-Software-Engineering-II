@@ -21,66 +21,58 @@ import negocio.pase.SAPase;
 public class SAObraImp implements SAObra {
 
 	@Override
-	public int create(TObra o) throws BBDDReadException, BBDDWriteException, DuplicateElementException {
+	public int create(TObra o) throws BBDDReadException, BBDDWriteException {
 		DAOObra daoObra = FactoriaAbstractaIntegracion.getInstance().crearDAOObra();
 		
 		//Se mira si esta añadiendo una obra ya existente
-		try {
-			search(new LinkedList<String>(Arrays.asList(o.getTitulo(), o.getAutor(), "")));
-		} 
-		catch (UnknownObraException e) {
+		Collection<TObra> obras = search(new LinkedList<String>(Arrays.asList(o.getTitulo(), o.getAutor(), "")));
+		if(obras==null || obras.isEmpty())
 			return daoObra.create(o);
-		}
-		throw new DuplicateElementException();
+		else
+			return -1;
 	}
 
 	@Override
-	public TObra read(int id) throws BBDDReadException, UnknownObraException {
+	public TObra read(int id) throws BBDDReadException {
 		DAOObra daoObra = FactoriaAbstractaIntegracion.getInstance().crearDAOObra();
 		TObra obra = daoObra.read(id);
-		if(obra==null)
-			throw new UnknownObraException();
-		else
-			return obra;
+		return obra;
 	}
 
 	@Override
-	public int update(TObra o) throws BBDDReadException, BBDDWriteException, UnknownObraException {
+	public int update(TObra o) throws BBDDReadException, BBDDWriteException {
 		DAOObra daoObra = FactoriaAbstractaIntegracion.getInstance().crearDAOObra();
 		int salida = daoObra.update(o);
 		if(salida<=0)
-			throw new UnknownObraException();
+			return -1;
 		else
 			return salida;
 	}
 
 	@Override
-	public int delete(int id) throws BBDDReadException, BBDDWriteException, UnknownObraException {
+	public int delete(int id) throws BBDDReadException, BBDDWriteException {
 		 DAOObra daoObra = FactoriaAbstractaIntegracion.getInstance().crearDAOObra();
 		 SAPase saPase = FactoriaAbstractaNegocio.getInstance().crearSAPase();
 		 saPase.deletePorObra(id);
 		 int salida = daoObra.delete(id);
 		if(salida<=0)
-			throw new UnknownObraException();
+			return -1;
 		else
 			return salida;			
 	}
 
 	@Override
-	public Collection<TObra> readAll() throws BBDDReadException, UnknownObraException {
+	public Collection<TObra> readAll() throws BBDDReadException {
 		DAOObra daoObra = FactoriaAbstractaIntegracion.getInstance().crearDAOObra();
 		
 		List<TObra> lista = daoObra.getAll();
-		if(lista==null || lista.isEmpty())
-			throw new UnknownObraException();
-		else
-			return lista;
+		return lista;
 	}
 
 	/** Busca por prioridad de criterios de izquierda a derecha, con null si no quieres ese criterio
 	 *  @param params - String titulo, String autor, String genero
 	 */
-	public Collection<TObra> search(List<String> params) throws BBDDReadException, UnknownObraException{
+	public Collection<TObra> search(List<String> params) throws BBDDReadException{
 		DAOObra daoObra = FactoriaAbstractaIntegracion.getInstance().crearDAOObra();
 		
 		List<TObra> obras = daoObra.getAll();		
@@ -92,10 +84,7 @@ public class SAObraImp implements SAObra {
 		if(!params.get(2).equals(""))
 			busquedaLineal(Messages.KEY_generoObra, obras, params.get(2));							
 		
-		if(obras==null || obras.isEmpty())
-			throw new UnknownObraException();
-		else
-			return obras;
+		return obras;
 	}
 
 	//Metodo auxiliares

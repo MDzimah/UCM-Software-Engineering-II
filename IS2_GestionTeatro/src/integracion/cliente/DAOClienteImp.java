@@ -5,7 +5,6 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Set;
 
-import org.json.JSONArray;
 import org.json.JSONObject;
 
 import exceptions.BBDDReadException;
@@ -16,7 +15,6 @@ import negocio.cliente.TCliente;
 import negocio.cliente.TClienteNormal;
 import negocio.cliente.TClienteVIP;
 import negocio.cliente.VIPEnum;
-import negocio.factura.TFactura;
 
 public class DAOClienteImp implements DAOCliente {
 	

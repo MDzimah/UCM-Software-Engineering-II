@@ -4,6 +4,7 @@ import integracion.cliente.DAOCliente;
 import integracion.compTea.DAOCompTea;
 import integracion.factura.DAOFactura;
 import integracion.factura.DAOLineaFactura;
+import integracion.miemCompTea.DAOCompT_MiemCompT;
 import integracion.miemCompTea.DAOCompT_MiemCompTImp;
 import integracion.miemCompTea.DAOMiemCompTea;
 import integracion.obra.DAOObra;
@@ -26,6 +27,6 @@ public abstract class FactoriaAbstractaIntegracion {
 	public abstract DAOObra crearDAOObra();
 	public abstract DAOCompTea crearDAOCompTea();
 	public abstract DAOMiemCompTea crearDAOMiemCompTea();
-	public abstract DAOCompT_MiemCompTImp crearDAOCompTea_MiemCompTea();
+	public abstract DAOCompT_MiemCompT crearDAOCompTea_MiemCompTea();
 
 }
