@@ -76,6 +76,5 @@ public class VistaCerrarVenta extends VistaDefault {
 		}
 		
 		AbrirVenta.enableButton();
-		AbrirVenta.resetCarrito();
 	}
 }
