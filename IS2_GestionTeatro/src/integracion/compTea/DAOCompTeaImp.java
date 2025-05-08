@@ -30,7 +30,7 @@ public class DAOCompTeaImp implements DAOCompTea {
 	public int create(TCompTea tCompTea) throws BBDDReadException, BBDDWriteException  {
 		JSONObject bdCompania= new JSONObject();
 		if (OpsBBDD.isEmpty(Messages.BDCT)) {
-			bdCompania.put(Messages.KEY_lastId, 0);
+			bdCompania.put(Messages.KEY_lastId, -1);
 		}
 		else {
 			bdCompania = OpsBBDD.read(Messages.BDCT);
