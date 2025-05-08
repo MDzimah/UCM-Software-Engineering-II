@@ -72,19 +72,25 @@ public class VistaAltaPase extends VistaDefault {
 		super.initComps(componentesEtiquetados, ok, cancelar);
 		this.setVisible(true);
 		ok.addActionListener(e -> {
-			int idCompTea = Integer.valueOf((int)idCompTeaText.getValue());
-			int idObra = Integer.valueOf((int)idObraText.getValue());
-			int stock = Integer.valueOf(cantidadStockText.getText());
-			int precio = Integer.valueOf(precioText.getText());
-			Date selectedDate = (Date) datePicker.getModel().getValue();
-			Instant instant = selectedDate.toInstant();
-			ZoneId zoneId = ZoneId.systemDefault(); // o la zona horaria que desees
-			LocalDateTime localDateTime = instant.atZone(zoneId).toLocalDateTime();
-			//LocalDateTime selectedDate = (LocalDateTime) datePicker.getModel().getValue();
-			if (stock < 0 || precio < 0) ViewUtils.createErrorDialogMessage(Messages.EXC_CAMPOS_INCORRECTOS);
-			else {
-				TPase tPase = new TPase(-1, idCompTea, idObra, true, localDateTime, stock, precio);
-				Controlador.getInstance().accion(Evento.ALTA_PASE, tPase);
+			int idCompTea, idObra, stock, precio;
+			LocalDateTime localDateTime;
+			try {
+				idCompTea = Integer.valueOf((int)idCompTeaText.getValue());
+				idObra = Integer.valueOf((int)idObraText.getValue());
+				stock = Integer.valueOf(cantidadStockText.getText());
+				precio = Integer.valueOf(precioText.getText());
+				//LocalDateTime selectedDate = (LocalDateTime) datePicker.getModel().getValue();
+				Date selectedDate = (Date) datePicker.getModel().getValue();
+				Instant instant = selectedDate.toInstant();
+				ZoneId zoneId = ZoneId.systemDefault(); 
+				localDateTime = instant.atZone(zoneId).toLocalDateTime();
+				if (stock < 0 || precio < 0) ViewUtils.createErrorDialogMessage(Messages.EXC_CAMPOS_INCORRECTOS);
+				else {
+					TPase tPase = new TPase(-1, idCompTea, idObra, true, localDateTime, stock, precio);
+					Controlador.getInstance().accion(Evento.ALTA_PASE, tPase);
+				}
+			} catch (Exception ex) {
+				ViewUtils.createErrorDialogMessage(Messages.EXC_CAMPOS_INCORRECTOS);
 			}
 			this.dispose();
 		});
