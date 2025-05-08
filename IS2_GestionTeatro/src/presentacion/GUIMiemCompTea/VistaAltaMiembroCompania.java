@@ -85,10 +85,7 @@ public class VistaAltaMiembroCompania extends VistaDefault{
 			dispose();
 		}
 		else if (evento == Evento.RES_KO) {
-			String error;
-			if(datos instanceof Exception) error = ((Exception) datos).getMessage();
-			else error = Messages.ERROR_DNI_MIEMBRO_REPETIDO.formatted((int) datos);
-			ViewUtils.createErrorDialogMessage(Messages.X_MIEMBRO_ALTA + ' ' + Messages.MOTIVO.formatted(error));
+			ViewUtils.createErrorDialogMessage(Messages.X_MIEMBRO_ALTA + ' ' + Messages.MOTIVO.formatted(((Exception) datos).getMessage()));
 		}
 	}
 }

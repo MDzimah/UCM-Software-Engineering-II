@@ -10,6 +10,7 @@ import exceptions.BBDDWriteException;
 import exceptions.DuplicateElementException;
 import exceptions.InvalidFields;
 import exceptions.UnknownClienteException;
+import exceptions.UnknownMiemCompTeaException;
 import exceptions.UnknownObraException;
 import exceptions.UnknownTaquilleroException;
 import misc.Messages;
@@ -620,7 +621,7 @@ public class ControladorImp extends Controlador {
 					vista.cargarMiembro(tMiemComp);
 				}
 				else {
-					FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_KO, (int) datos);
+					FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_KO, new UnknownMiemCompTeaException());
 				}
 			}
 			catch(Exception e) {
@@ -647,7 +648,7 @@ public class ControladorImp extends Controlador {
 				TMiemCompTea tMiemComp = saMiemComp.read((int)datos);
 			
 				if(tMiemComp != null)	FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_OK, tMiemComp);
-				else FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_KO, (int)datos);
+				else FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_KO, new UnknownMiemCompTeaException());
 			}
 			catch(Exception e) {
 				 FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_KO, e);
@@ -661,7 +662,7 @@ public class ControladorImp extends Controlador {
 				SAMiemCompTea saMiemComp = FactoriaAbstractaNegocio.getInstance().crearSAMiemCompTea();
 				int id = saMiemComp.create((TMiemCompTea) datos);
 				if(id >= 0) FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_OK, id);
-				else FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_KO, -id);
+				else FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_KO, new DuplicateElementException());
 			}
 			catch(Exception e) {
 				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_KO, e);
@@ -675,7 +676,7 @@ public class ControladorImp extends Controlador {
 				int id = saMiemComp.delete((int)datos);
 				
 				if(id != -1) FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_OK, (int)datos);
-				else FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_KO, (int)datos);
+				else FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_KO, new UnknownMiemCompTeaException());
 			}
 			catch(Exception e) {
 				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_KO, e);
@@ -688,7 +689,7 @@ public class ControladorImp extends Controlador {
 				SAMiemCompTea saMiemComp = FactoriaAbstractaNegocio.getInstance().crearSAMiemCompTea();
 				Collection<TMiemCompTea> miembros = saMiemComp.readAll();
 				if(miembros != null) FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_OK, miembros);
-				else FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_KO, null);
+				else FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_KO, new UnknownMiemCompTeaException());
 			}
 			catch(Exception e) {
 				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_KO, e);
