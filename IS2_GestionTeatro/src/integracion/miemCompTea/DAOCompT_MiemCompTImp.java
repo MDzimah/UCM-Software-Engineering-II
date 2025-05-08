@@ -50,6 +50,7 @@ public class DAOCompT_MiemCompTImp implements DAOCompT_MiemCompT{
 			int idRel = this.existeRelacion(idComp,idMiem);
 			if(idRel != -1) {
 				relCom_Miem.remove(Integer.toString(idRel));
+				OpsBBDD.write(BDRel, Messages.BDCT_MCT);
 				return idRel;
 			}
 		}        
