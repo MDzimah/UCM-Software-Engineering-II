@@ -1,55 +1,13 @@
 {
-    "taquilleros": {
-        "0": {
-            "numero de ventas": 0,
-            "apellido": "garcia",
-            "genero": "HOMBRE",
-            "sueldo": 1000,
-            "nombre": "adrian",
-            "edad": 19,
-            "DNI": "2223",
-            "activo": false
-        },
-        "1": {
-            "numero de ventas": 0,
-            "apellido": "q",
-            "genero": "HOMBRE",
-            "sueldo": 200,
-            "nombre": "q",
-            "edad": 10,
-            "DNI": "2",
-            "activo": true
-        },
-        "2": {
-            "numero de ventas": 0,
-            "apellido": "b",
-            "genero": "MUJER",
-            "sueldo": 2,
-            "nombre": "b",
-            "edad": 2,
-            "DNI": "b",
-            "activo": true
-        },
-        "3": {
-            "numero de ventas": 0,
-            "apellido": "w",
-            "genero": "HOMBRE",
-            "sueldo": 2,
-            "nombre": "w",
-            "edad": 5,
-            "DNI": "4456",
-            "activo": true
-        },
-        "4": {
-            "numero de ventas": 0,
-            "apellido": "p",
-            "genero": "HOMBRE",
-            "sueldo": 7,
-            "nombre": "p",
-            "edad": 7,
-            "DNI": "p",
-            "activo": true
-        }
-    },
-    "lastId": 4
+    "taquilleros": {"0": {
+        "numero de ventas": 0,
+        "apellido": "garcia ",
+        "genero": "HOMBRE",
+        "sueldo": 2000,
+        "nombre": "adri",
+        "edad": 20,
+        "DNI": "dni",
+        "activo": true
+    }},
+    "lastId": 0
 }
