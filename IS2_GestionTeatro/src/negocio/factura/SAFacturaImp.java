@@ -78,9 +78,8 @@ public class SAFacturaImp implements SAFactura {
 			
 			//Actualizamos al taquillero encargado de la factura
 			saTaq.aumentarVenta(tFacFinal.getIdTaquillero());
-			
-			AbrirVenta.resetCarrito();
 		}
+		AbrirVenta.resetCarrito();
 		
 		return idFacNueva;
 	}

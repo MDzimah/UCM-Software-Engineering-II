@@ -1,0 +1,36 @@
+{
+<<<<<<< HEAD
+    "pases": {
+        "0": {
+            "idCompTea": 3,
+            "precioPase": 33,
+            "fecha": "2025-05-20T17:11:28.556",
+            "IdObra": 0,
+            "stock": 1,
+            "idPase": 0,
+            "activo": true
+        },
+        "1": {
+            "idCompTea": 1,
+            "precioPase": 4,
+            "fecha": "2025-05-09T17:56:03.745",
+            "IdObra": 1,
+            "stock": 4,
+            "idPase": 1,
+            "activo": false
+        }
+    },
+    "lastId": 1
+=======
+    "pases": {"0": {
+        "idCompTea": 0,
+        "precioPase": 8,
+        "fecha": "2025-05-07T17:57:54.624",
+        "IdObra": 0,
+        "stock": 1,
+        "idPase": 0,
+        "activo": true
+    }},
+    "lastId": 0
+>>>>>>> refs/heads/Factura
+}
