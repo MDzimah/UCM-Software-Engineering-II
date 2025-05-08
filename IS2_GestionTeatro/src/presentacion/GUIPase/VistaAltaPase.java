@@ -81,8 +81,11 @@ public class VistaAltaPase extends VistaDefault {
 			ZoneId zoneId = ZoneId.systemDefault(); // o la zona horaria que desees
 			LocalDateTime localDateTime = instant.atZone(zoneId).toLocalDateTime();
 			//LocalDateTime selectedDate = (LocalDateTime) datePicker.getModel().getValue();
-			TPase tPase = new TPase(-1, idCompTea, idObra, true, localDateTime, stock, precio);
-			Controlador.getInstance().accion(Evento.ALTA_PASE, tPase);
+			if (stock < 0 || precio < 0) ViewUtils.createErrorDialogMessage(Messages.EXC_CAMPOS_INCORRECTOS);
+			else {
+				TPase tPase = new TPase(-1, idCompTea, idObra, true, localDateTime, stock, precio);
+				Controlador.getInstance().accion(Evento.ALTA_PASE, tPase);
+			}
 			this.dispose();
 		});
 		cancelar.addActionListener(e ->{
