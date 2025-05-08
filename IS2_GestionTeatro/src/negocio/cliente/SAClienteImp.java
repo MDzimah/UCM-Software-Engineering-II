@@ -7,7 +7,6 @@ import exceptions.BBDDWriteException;
 import exceptions.UnknownClienteException;
 import integracion.cliente.DAOCliente;
 import integracion.factoria.FactoriaAbstractaIntegracion;
-import integracion.factura.DAOFactura;
 import negocio.factoria.FactoriaAbstractaNegocio;
 import negocio.factura.SAFactura;
 import negocio.factura.TFactura;

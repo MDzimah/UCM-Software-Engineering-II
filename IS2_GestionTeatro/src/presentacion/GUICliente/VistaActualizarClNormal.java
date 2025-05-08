@@ -5,20 +5,13 @@ import java.util.ArrayList;
 
 import javax.swing.JButton;
 import javax.swing.JComponent;
-import javax.swing.JFormattedTextField;
 import javax.swing.JLabel;
-import javax.swing.JSpinner;
 import javax.swing.JTextField;
-import javax.swing.SpinnerListModel;
 import javax.swing.SwingUtilities;
 
 import exceptions.InvalidFields;
-import misc.Genero;
 import misc.Pair;
 import negocio.cliente.TClienteNormal;
-import negocio.cliente.TipoCliente;
-import negocio.cliente.VIPEnum;
-import negocio.taquillero.TTaquillero;
 import presentacion.Evento;
 import presentacion.IGUI;
 import presentacion.ViewUtils;

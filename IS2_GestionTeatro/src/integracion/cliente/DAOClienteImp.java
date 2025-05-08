@@ -5,7 +5,6 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Set;
 
-import org.json.JSONArray;
 import org.json.JSONObject;
 
 import exceptions.BBDDReadException;
@@ -16,7 +15,6 @@ import negocio.cliente.TCliente;
 import negocio.cliente.TClienteNormal;
 import negocio.cliente.TClienteVIP;
 import negocio.cliente.VIPEnum;
-import negocio.factura.TFactura;
 
 public class DAOClienteImp implements DAOCliente {
 	
@@ -62,8 +60,6 @@ public class DAOClienteImp implements DAOCliente {
 		else if (tCliente.getTipo().equals("VIP")) return createVIP(tCliente,bdc,newId);
 		else return -1;
 	}
-
-	
 
 	@Override
 	public int delete(int id) throws BBDDReadException, BBDDWriteException {
@@ -123,11 +119,11 @@ public class DAOClienteImp implements DAOCliente {
 		//añadimos todos los clientes
 		for (String s: scln) {//lista de clientes normales
 			TCliente cln = toTClienteNormal((JSONObject) clientes.get(s));
-			if (cln.getActivo()) clist.addLast(cln);
+			if (cln.getActivo()) clist.add(cln);
 		}
 		for (String s: sclv) {//lista de clientes vip
 			TCliente clv = toTClienteVIP((JSONObject) clientesv.get(s));
-			if (clv.getActivo()) clist.addLast(clv);
+			if (clv.getActivo()) clist.add(clv);
 		}
 		return clist;
 	}

@@ -1,0 +1,13 @@
+{
+    "clientesNormal": {"0": {
+        "idCliente": 0,
+        "apellido": "a",
+        "cuenta": "a",
+        "puntos": 1,
+        "nombre": "a",
+        "DNI": "a",
+        "activo": true
+    }},
+    "lastId": 0,
+    "clientesVIP": {}
+}
