@@ -88,4 +88,5 @@ public class TPase implements Convertable<TPase> {
 	        default: this.precio = Float.parseFloat(value); break;
 	    }
 	}
+	
 }
