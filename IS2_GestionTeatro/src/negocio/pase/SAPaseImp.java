@@ -28,7 +28,7 @@ public class SAPaseImp implements SAPase {
 	public int create(TPase tPase) throws UnknownObraException, UnknownCompTeaException, BBDDReadException, BBDDWriteException {
 		int id = -1;
 		
-		SAObra saObra = FactoriaAbstractaNegocio.getInstance().crearSAObra();
+		/*SAObra saObra = FactoriaAbstractaNegocio.getInstance().crearSAObra();
 		TObra lecturaObra = saObra.read(tPase.getIdObra());
 		SACompTea saCompTea = FactoriaAbstractaNegocio.getInstance().crearSACompTea();
 		TCompTea lecturaCompTea = saCompTea.read(tPase.getIdCompanyaTeatral());
@@ -38,7 +38,7 @@ public class SAPaseImp implements SAPase {
 		if (lecturaCompTea == null) {
 			throw new UnknownCompTeaException();
 		}
-		
+		*/
 		if (tPase.getStock() > 0 && tPase.getPrecio() >= 0) { //sino devolvere -1
 			DAOPase daoPas = FactoriaAbstractaIntegracion.getInstance().crearDAOPase();
 			id = daoPas.create(tPase);

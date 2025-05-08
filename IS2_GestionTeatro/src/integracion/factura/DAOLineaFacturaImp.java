@@ -20,7 +20,7 @@ public class DAOLineaFacturaImp implements DAOLineaFactura {
 		
 		//Inicializo la BD si no está ya inicializada
 		if (OpsBBDD.isEmpty(Messages.BDLinFac)) {
-			bdLinFac.put(Messages.KEY_lastId, 0);
+			bdLinFac.put(Messages.KEY_lastId, -1);
 			bdLinFac.put(Messages.KEY_linFacs, new JSONObject());
 		}
 		else bdLinFac = OpsBBDD.read(Messages.BDLinFac);

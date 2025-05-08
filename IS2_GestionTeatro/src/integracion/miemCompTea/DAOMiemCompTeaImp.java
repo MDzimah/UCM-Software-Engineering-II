@@ -22,7 +22,7 @@ public class DAOMiemCompTeaImp implements DAOMiemCompTea {
 		JSONObject BDMiemComp = new JSONObject();
 		
 		if (OpsBBDD.isEmpty(Messages.BDMCT)) {
-			BDMiemComp.put(Messages.KEY_lastId, 0);
+			BDMiemComp.put(Messages.KEY_lastId, -1);
 			BDMiemComp.put(Messages.KEY_miembCompTea, new JSONObject());
 		}
 		else {

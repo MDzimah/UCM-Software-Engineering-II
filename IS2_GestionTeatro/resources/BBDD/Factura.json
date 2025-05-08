@@ -1,0 +1,11 @@
+{
+    "facturas": {"0": {
+        "fecha": "2025-05-08T17:30:41",
+        "idCliente": 1,
+        "subtotal": 33,
+        "idTaquillero": 1,
+        "importe": 16.5,
+        "activo": true
+    }},
+    "lastId": 0
+}
