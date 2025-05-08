@@ -26,13 +26,13 @@ public class Messages {
 	public static final String COMPANIA_MIEMBRO_BORRADO = Messages.SHP.formatted("desvinculado la compañia y el miembro");
 	public static final String COMPANIA_MIEMBRO_ANYADIDO = Messages.SHP.formatted("vinculado la compañia y el miembro");
 	//Obra
-	public static final String EX_OBRA_ANYADIDA_CORRECT = Messages.SHP.formatted("registrado la obra ");
-	public static final String EX_OBRA_BORRADA_CORRECT = Messages.SHP.formatted("borrado la obra ");
-	public static final String EX_OBRA_ACTUALIZADA_CORRECT = Messages.SHP.formatted("actualizado la obra ");
+	public static final String EX_OBRA_ANYADIDA_CORRECT = Messages.SHP.formatted("registrado la obra");
+	public static final String EX_OBRA_BORRADA_CORRECT = Messages.SHP.formatted("borrado la obra");
+	public static final String EX_OBRA_ACTUALIZADA_CORRECT = Messages.SHP.formatted("actualizado la obra");
 	//Taquillero
-	public static final String EX_TAQUILLERO_ANYADIDO_CORRECT = Messages.SHP.formatted("registrado el taquillero ");
-	public static final String EX_TAQUILLERO_BORRADO_CORRECT = Messages.SHP.formatted("borrado el taquillero ");
-	public static final String EX_TAQUILLERO_ACTUALIZADO_CORRECT = Messages.SHP.formatted("actualizado el taquillero ");
+	public static final String EX_TAQUILLERO_ANYADIDO_CORRECT = Messages.SHP.formatted("registrado el taquillero");
+	public static final String EX_TAQUILLERO_BORRADO_CORRECT = Messages.SHP.formatted("borrado el taquillero");
+	public static final String EX_TAQUILLERO_ACTUALIZADO_CORRECT = Messages.SHP.formatted("actualizado el taquillero");
 	
 	//Ops. fracasadas
 	private static final String NSHP = "No se ha podido %s";

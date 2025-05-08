@@ -31,7 +31,7 @@ public class VistaActualizarTaquillero_0 extends VistaDefault {
 		//iniciar componentes
 		this.setTitle("Actualizar Taquillero");
 		l_id = new JLabel("ID:");
-		id = ViewUtils.integerSpinner(1, 1, Integer.MAX_VALUE, 1);
+		id = ViewUtils.integerSpinner(0, 0, Integer.MAX_VALUE, 1);
 		aceptar = new JButton("Aceptar");
 		cancelar = new JButton("Cancelar");
 		

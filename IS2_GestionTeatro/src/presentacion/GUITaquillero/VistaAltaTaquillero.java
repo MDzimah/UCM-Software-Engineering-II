@@ -81,7 +81,7 @@ public class VistaAltaTaquillero extends VistaDefault {
 	@Override
 	public void actualizar(Evento evento, Object datos) {
 		if(evento == Evento.RES_OK) {
-			ViewUtils.createDialogMessage(Messages.EX_TAQUILLERO_ANYADIDO_CORRECT + '\n' + " Id: "+ (int)datos);
+			ViewUtils.createDialogMessage(Messages.EX_TAQUILLERO_ANYADIDO_CORRECT + '\n' + "Id: "+ (int)datos);
 		}
 		else if(evento == Evento.RES_KO) {
 			ViewUtils.createErrorDialogMessage(Messages.EX_TAQUILLERO_ANYADIDO_ERROR + '\n' + Messages.ERROR.formatted(((Exception) datos).getMessage()));

@@ -1,13 +1,35 @@
 {
-    "taquilleros": {"0": {
-        "numero de ventas": 2,
-        "apellido": "a",
-        "genero": "HOMBRE",
-        "sueldo": 1,
-        "nombre": "a",
-        "edad": 1,
-        "DNI": "a",
-        "activo": true
-    }},
-    "lastId": 0
+    "taquilleros": {
+        "0": {
+            "numero de ventas": 0,
+            "apellido": "garcia",
+            "genero": "HOMBRE",
+            "sueldo": 1000,
+            "nombre": "adrian",
+            "edad": 19,
+            "DNI": "2223",
+            "activo": false
+        },
+        "1": {
+            "numero de ventas": 0,
+            "apellido": "a",
+            "genero": "HOMBRE",
+            "sueldo": 10,
+            "nombre": "a",
+            "edad": 10,
+            "DNI": "1",
+            "activo": true
+        },
+        "2": {
+            "numero de ventas": 0,
+            "apellido": "b",
+            "genero": "MUJER",
+            "sueldo": 2,
+            "nombre": "b",
+            "edad": 2,
+            "DNI": "b",
+            "activo": true
+        }
+    },
+    "lastId": 2
 }

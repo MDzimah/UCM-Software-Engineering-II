@@ -82,27 +82,5 @@ public class SATaquilleroImp implements SATaquillero {
 		tTaq.setNumVentas(nuevoNumVentas);
 		return daoTaquillero.update(tTaq);
 	}
-	
-	/**
-	 * Lee un taquillero a partir del DNI del taquillero
-	 *//*
-	@Override
-	public TTaquillero readByDNI(String DNI) throws BBDDReadException {
-		DAOTaquillero daoTaquillero = FactoriaAbstractaIntegracion.getInstance().crearDAOTaquillero();
-		Collection<TTaquillero> listaTaqs = daoTaquillero.readAll();
-		
-		if(listaTaqs != null) {
-			Iterator<TTaquillero> it  = listaTaqs.iterator();
-			boolean encontrado = false;
-			TTaquillero tTaq = null;
-			while(it.hasNext() && !encontrado) {
-				tTaq = it.next();
-				if(tTaq.getDNI() == DNI) encontrado = true; 
-			}
-			if(encontrado) return tTaq;
-			else return null;
-		}
-		return null;
-	}*/
 
 }
