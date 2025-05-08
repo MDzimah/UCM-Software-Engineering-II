@@ -55,14 +55,18 @@ public class SAClienteImp implements SACliente {
 		try {
 			TCliente cl = dao.read(idCliente);
 			if (cl == null) throw new Exception();
-			if (cl.getTipo() == "Normal") {
+			if (cl.getTipo().equals("Normal")) {
 				TClienteNormal cln = (TClienteNormal) cl;
 				if (cln.getPuntosAcumulados() != 0) return (float) ((float)importe*(0.5 + 1/(cln.getPuntosAcumulados()+1)));
 				else return importe;
 			}
-			if (cl.getTipo() == "VIP") {
+			if (cl.getTipo().equals("VIP")) {
 				TClienteVIP clv = (TClienteVIP) cl;
-				return (float) (importe*0.25);
+				VIPEnum[] niveles = VIPEnum.values();
+				for (int i=0;i<niveles.length;++i) {
+					if (clv.getNivelVIP() == niveles[i]) return (float) (importe*(0.5-Math.atan((double) i)/4));
+				}
+				return importe;
 			}
 			throw new Exception();
 		}
