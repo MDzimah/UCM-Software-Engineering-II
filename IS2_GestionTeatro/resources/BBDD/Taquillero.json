@@ -1,0 +1,13 @@
+{
+    "taquilleros": {"1": {
+        "numero de ventas": 3,
+        "apellido": "fds",
+        "genero": "HOMBRE",
+        "sueldo": 453,
+        "nombre": "dfs",
+        "edad": 23,
+        "DNI": "453",
+        "activo": true
+    }},
+    "lastId": 1
+}

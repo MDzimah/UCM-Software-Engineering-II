@@ -1,14 +1,25 @@
 {
-    "clientesNormal": {"0": {
-        "idCliente": 0,
-        "apellido": "aaaaaa",
-        "cuenta": "4352734",
-        "puntos": 1,
-        "nombre": "tum tum tum",
-        "DNI": "700",
-        "activo": false
-    }},
-    "lastId": 1,
+    "clientesNormal": {
+        "0": {
+            "idCliente": 0,
+            "apellido": "aaaaaa",
+            "cuenta": "4352734",
+            "puntos": 1,
+            "nombre": "tum tum tum",
+            "DNI": "700",
+            "activo": false
+        },
+        "2": {
+            "idCliente": 2,
+            "apellido": "dsd",
+            "cuenta": "3234",
+            "puntos": 0,
+            "nombre": "jdsd",
+            "DNI": "323278",
+            "activo": true
+        }
+    },
+    "lastId": 2,
     "clientesVIP": {"1": {
         "idCliente": 1,
         "apellido": "34",

@@ -20,7 +20,7 @@ public class DAOCompT_MiemCompTImp implements DAOCompT_MiemCompT{
 		JSONObject BDRel = new JSONObject(); 
 		
 		if (OpsBBDD.isEmpty(Messages.BDCT_MCT)) {
-			BDRel.put(Messages.KEY_lastId, 0);
+			BDRel.put(Messages.KEY_lastId, -1);
 			BDRel.put(Messages.KEY_relComp_Miem, new JSONObject());
 		}
 		else {

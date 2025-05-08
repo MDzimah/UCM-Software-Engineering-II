@@ -22,5 +22,8 @@ public class AbrirVenta {
 		bCarr.setText(String.valueOf(carrito.size())); 
 	}
 	public static Collection<TLineaFactura> getCarrito() { return carrito; } 
-	public static void resetCarrito() {	carrito.clear(); }
+	public static void resetCarrito() {	
+		carrito.clear(); 
+		updateCarritoCountButton();
+	}
 }

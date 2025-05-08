@@ -70,13 +70,11 @@ public class DAOPaseImp implements DAOPase {
 			JSONObject bdPase = OpsBBDD.read(Messages.BDPase);
 			JSONObject pases = bdPase.getJSONObject(Messages.KEY_pases);
 			TPase tPase = null;
-			if (pases.has(Integer.toString(id))) {
+			if (pases.has(Integer.toString(id)) && pases.getJSONObject(Integer.toString(id)).getBoolean(Messages.KEY_act)) {
 				JSONObject pase = pases.getJSONObject(Integer.toString(id));
 				tPase = read(pase);
 				tPase.setIdPase(id);
 			}
-			if (tPase.isActivo())
-			return tPase;	
 			else return null;
 		}
 		return null;
