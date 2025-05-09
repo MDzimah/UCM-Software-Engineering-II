@@ -10,10 +10,18 @@
     "1": {
         "IdObra": 1,
         "genero": "as",
-        "titulo": "ass",
+        "titulo": "b",
         "autor": "aas",
         "sinopsis": "",
         "activo": true
     },
-    "LastKey": 1
+    "2": {
+        "IdObra": 2,
+        "genero": "a",
+        "titulo": "a",
+        "autor": "a",
+        "sinopsis": "a",
+        "activo": true
+    },
+    "LastKey": 2
 }
