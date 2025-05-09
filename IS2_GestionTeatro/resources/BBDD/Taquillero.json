@@ -1,0 +1,105 @@
+{
+    "taquilleros": {
+        "0": {
+            "numero de ventas": 2,
+            "apellido": "González",
+            "genero": "MUJER",
+            "sueldo": 1250,
+            "nombre": "Laura",
+            "edad": 28,
+            "DNI": "47382916F",
+            "activo": true
+        },
+        "1": {
+            "numero de ventas": 0,
+            "apellido": "Pérez",
+            "genero": "HOMBRE",
+            "sueldo": 1320,
+            "nombre": "Marcos",
+            "edad": 35,
+            "DNI": "50917382L",
+            "activo": true
+        },
+        "2": {
+            "numero de ventas": 0,
+            "apellido": "Torres",
+            "genero": "MUJER",
+            "sueldo": 1180,
+            "nombre": "Lucía",
+            "edad": 24,
+            "DNI": "71839425Z",
+            "activo": true
+        },
+        "3": {
+            "numero de ventas": 0,
+            "apellido": "Morales",
+            "genero": "HOMBRE",
+            "sueldo": 1400,
+            "nombre": "David",
+            "edad": 42,
+            "DNI": "60392847T",
+            "activo": true
+        },
+        "4": {
+            "numero de ventas": 0,
+            "apellido": "Navarro",
+            "genero": "MUJER",
+            "sueldo": 1270,
+            "nombre": "Sara",
+            "edad": 30,
+            "DNI": "28491736P",
+            "activo": true
+        },
+        "5": {
+            "numero de ventas": 3,
+            "apellido": "Ramírez",
+            "genero": "HOMBRE",
+            "sueldo": 1320,
+            "nombre": "Javier\t",
+            "edad": 39,
+            "DNI": "19837265K",
+            "activo": true
+        },
+        "6": {
+            "numero de ventas": 0,
+            "apellido": "Castillo",
+            "genero": "MUJER",
+            "sueldo": 1220,
+            "nombre": "Nuria",
+            "edad": 26,
+            "DNI": "84719362M",
+            "activo": true
+        },
+        "7": {
+            "numero de ventas": 3,
+            "apellido": "Vidal",
+            "genero": "HOMBRE",
+            "sueldo": 1290,
+            "nombre": "Andrés",
+            "edad": 33,
+            "DNI": "72649385D",
+            "activo": true
+        },
+        "8": {
+            "numero de ventas": 0,
+            "apellido": "Iglesias",
+            "genero": "MUJER",
+            "sueldo": 1310,
+            "nombre": "Patricia",
+            "edad": 31,
+            "DNI": "51928374N",
+            "activo": true
+        },
+        "9": {
+            "numero de ventas": 2,
+            "apellido": "Herrero",
+            "genero": "HOMBRE",
+            "sueldo": 1260,
+            "nombre": "Carlos",
+            "edad": 29,
+            "DNI": "39482751Y",
+            "activo": true
+        }
+    },
+    "lastId": 9
+}
