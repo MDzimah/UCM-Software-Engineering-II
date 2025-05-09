@@ -1,0 +1,102 @@
+{
+    "clientesNormal": {
+        "2": {
+            "idCliente": 2,
+            "apellido": "Cervantes",
+            "cuenta": "cd5454g",
+            "puntos": 0,
+            "nombre": "Miguelde",
+            "DNI": "11634693W",
+            "activo": true
+        },
+        "3": {
+            "idCliente": 3,
+            "apellido": "Elmayor",
+            "cuenta": "",
+            "puntos": 45,
+            "nombre": "Santiago",
+            "DNI": "60316913Z",
+            "activo": true
+        },
+        "4": {
+            "idCliente": 4,
+            "apellido": "El Perro",
+            "cuenta": "gfh565",
+            "puntos": 33,
+            "nombre": "Jake",
+            "DNI": "51022467B",
+            "activo": true
+        },
+        "6": {
+            "idCliente": 6,
+            "apellido": "Zambrano",
+            "cuenta": "6996a",
+            "puntos": 73,
+            "nombre": "Maria",
+            "DNI": "84768856N",
+            "activo": true
+        },
+        "9": {
+            "idCliente": 9,
+            "apellido": "Alvaro",
+            "cuenta": "rmvekw",
+            "puntos": 2,
+            "nombre": "Zurullete ",
+            "DNI": "14705709G",
+            "activo": true
+        }
+    },
+    "lastId": 9,
+    "clientesVIP": {
+        "0": {
+            "idCliente": 0,
+            "apellido": "McLovin",
+            "cuenta": "fgh5y5544",
+            "mensualidad": 1000,
+            "nombre": "Mohamed",
+            "nivel": "ORO",
+            "DNI": "81640842J",
+            "activo": true
+        },
+        "1": {
+            "idCliente": 1,
+            "apellido": "Leibniz",
+            "cuenta": "3fvr4r",
+            "mensualidad": 1,
+            "nombre": "Godofredo",
+            "nivel": "CHALLENGER",
+            "DNI": "28302160P",
+            "activo": true
+        },
+        "5": {
+            "idCliente": 5,
+            "apellido": "PantalonesCuadrados",
+            "cuenta": "4bftrtvcb",
+            "mensualidad": 1945,
+            "nombre": "BobEsponja",
+            "nivel": "PLATINO",
+            "DNI": "37123762B",
+            "activo": true
+        },
+        "7": {
+            "idCliente": 7,
+            "apellido": "Jaramillo",
+            "cuenta": "hgfj76",
+            "mensualidad": 9,
+            "nombre": "Julio",
+            "nivel": "PLATINO",
+            "DNI": "82387551Y",
+            "activo": true
+        },
+        "8": {
+            "idCliente": 8,
+            "apellido": "Momoa",
+            "cuenta": "233345678",
+            "mensualidad": 10000,
+            "nombre": "JSON",
+            "nivel": "CHALLENGER",
+            "DNI": "83299965N",
+            "activo": true
+        }
+    }
+}
