@@ -4,10 +4,8 @@ import java.util.ArrayList;
 
 import javax.swing.JButton;
 import javax.swing.JComponent;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JSpinner;
-import javax.swing.JTextField;
 import javax.swing.SwingUtilities;
 
 import misc.Pair;
@@ -15,7 +13,6 @@ import presentacion.Evento;
 import presentacion.IGUI;
 import presentacion.ViewUtils;
 import presentacion.VistaDefault;
-import presentacion.GUITaquillero.VistaActualizarTaquillero_0;
 import presentacion.controlador.Controlador;
 
 @SuppressWarnings("serial")

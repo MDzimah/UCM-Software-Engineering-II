@@ -21,8 +21,8 @@ import presentacion.controlador.Controlador;
 public class VistaActualizarTaquillero_1 extends VistaDefault {
 
 	private JButton aceptar, cancelar;
-	private JTextField nombre, apellido, dni, sueldo, edad;
-	private JLabel l_nombre, l_apellido, l_DNI, l_sueldo, l_edad, l_genero;
+	private JTextField  id, nombre, apellido, dni, sueldo, edad;
+	private JLabel l_id, l_nombre, l_apellido, l_DNI, l_sueldo, l_edad, l_genero;
 	private JComboBox<Genero> genero;
 	
 	public VistaActualizarTaquillero_1() {
@@ -33,12 +33,15 @@ public class VistaActualizarTaquillero_1 extends VistaDefault {
 	private void initGUI() {
 		//iniciar componentes
 		this.setTitle("Actualizar taquillero");
+		l_id = new JLabel("Id: ");
 		l_nombre = new JLabel("Nombre: ");
 		l_apellido = new JLabel("Apellido: ");
 		l_DNI = new JLabel("DNI: ");
 		l_sueldo = new JLabel("Sueldo: ");
 		l_edad = new JLabel("Edad: ");
 		l_genero = new JLabel("Genero: ");
+		id = new JTextField();
+		id.setEditable(false);
 		nombre = new JTextField();
 		apellido = new JTextField();
 		dni = new JTextField();
@@ -50,6 +53,7 @@ public class VistaActualizarTaquillero_1 extends VistaDefault {
 		
 		//lista de parejas para initComps de VistaDefault
 		ArrayList<Pair<JComponent, JComponent>> componentes = new ArrayList<>();
+		componentes.add(new Pair<>(l_id, id));
 		componentes.add(new Pair<>(l_nombre, nombre));
 		componentes.add(new Pair<>(l_apellido, apellido));
 		componentes.add(new Pair<>(l_DNI, dni));
@@ -61,16 +65,23 @@ public class VistaActualizarTaquillero_1 extends VistaDefault {
 		
 		//oyentes
 		aceptar.addActionListener((e) -> {
-			String _nombre = nombre.getText();
-			String _apellido = apellido.getText();
-			String _DNI = dni.getText();
-			float _sueldo = Float.valueOf(sueldo.getText());
-			int _edad = Integer.valueOf(edad.getText());
-			Genero _genero = (Genero) genero.getSelectedItem();
-			TTaquillero tTaq = new TTaquillero(true, _DNI, _nombre, _apellido, 0, _sueldo, _edad, _genero);
-			
-			SwingUtilities.invokeLater(()-> {Controlador.getInstance().accion(Evento.ACTUALIZAR_TAQUILLERO_1, tTaq); });
-			VistaActualizarTaquillero_1.this.dispose();
+			try {
+				int _id = Integer.valueOf(id.getText());
+				String _nombre = nombre.getText();
+				String _apellido = apellido.getText();
+				String _DNI = dni.getText();
+				float _sueldo = Float.valueOf(sueldo.getText());
+				int _edad = Integer.valueOf(edad.getText());
+				Genero _genero = (Genero) genero.getSelectedItem();
+				TTaquillero tTaq = new TTaquillero(true, _DNI, _nombre, _apellido, 0, _sueldo, _edad, _genero);
+				tTaq.setIdTaquillero(_id);
+				
+				SwingUtilities.invokeLater(()-> {Controlador.getInstance().accion(Evento.ACTUALIZAR_TAQUILLERO_1, tTaq); });
+			} catch (Exception ex) {
+				this.actualizar(Evento.RES_KO, ex);
+			} finally {
+				VistaActualizarTaquillero_1.this.dispose();
+			}
 		});
 		
 		cancelar.addActionListener((e) -> {
@@ -82,6 +93,7 @@ public class VistaActualizarTaquillero_1 extends VistaDefault {
 	 * Carga los datos del taquillero en los JTextField para actualizarlos
 	 */
 	public void cargarTaquillero(TTaquillero tTaq) {
+		id.setText(Integer.toString(tTaq.getIdTaquillero()));
 		nombre.setText(tTaq.getNombre());
 		apellido.setText(tTaq.getApellido());
 		dni.setText(tTaq.getDNI());

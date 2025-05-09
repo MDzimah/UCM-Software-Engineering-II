@@ -61,8 +61,6 @@ public class DAOClienteImp implements DAOCliente {
 		else return -1;
 	}
 
-	
-
 	@Override
 	public int delete(int id) throws BBDDReadException, BBDDWriteException {
 		if (OpsBBDD.isEmpty(Messages.BDCli)) return -1;

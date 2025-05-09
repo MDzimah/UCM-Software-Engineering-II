@@ -69,9 +69,7 @@ public class VistaMostrarFacturasPorCliente extends VistaDefault {
 			new TablaDefault<>("Facturas por cliente", colNames, data, false);
 		}
 		else if (evento == Evento.RES_KO) {
-			String error;
-			if (datos instanceof BBDDReadException) error = ((BBDDReadException)datos).getMessage();
-			else error =  Messages.NO_HAY_FACS_CLI.formatted((int) datos);
+			String error = ((Exception) datos).getMessage();
 			ViewUtils.createErrorDialogMessage(Messages.X_MOSTRAR_FACTURAS + ' ' + Messages.MOTIVO.formatted(error));
 		}
 	}

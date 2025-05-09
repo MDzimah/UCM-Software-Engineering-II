@@ -61,16 +61,21 @@ public class VistaAltaTaquillero extends VistaDefault {
 		
 		//oyentes
 		aceptar.addActionListener((e) -> {
-			String _nombre = nombre.getText();
-			String _apellido = apellido.getText();
-			String _DNI = dni.getText();
-			float _sueldo = Float.valueOf(sueldo.getText());
-			int _edad = Integer.valueOf(edad.getText());
-			Genero _genero = (Genero) genero.getSelectedItem();
-			TTaquillero tTaq = new TTaquillero(true, _DNI, _nombre, _apellido, 0, _sueldo, _edad, _genero);
-			
-			SwingUtilities.invokeLater(()-> {Controlador.getInstance().accion(Evento.ALTA_TAQUILLERO, tTaq); });
-			VistaAltaTaquillero.this.dispose();
+			try {
+				String _nombre = nombre.getText();
+				String _apellido = apellido.getText();
+				String _DNI = dni.getText();
+				float _sueldo = Float.valueOf(sueldo.getText());
+				int _edad = Integer.valueOf(edad.getText());
+				Genero _genero = (Genero) genero.getSelectedItem();
+				TTaquillero tTaq = new TTaquillero(true, _DNI, _nombre, _apellido, 0, _sueldo, _edad, _genero);
+				
+				SwingUtilities.invokeLater(()-> {Controlador.getInstance().accion(Evento.ALTA_TAQUILLERO, tTaq); });
+			} catch (Exception ex) {
+				this.actualizar(Evento.RES_KO, ex);
+			} finally {
+				VistaAltaTaquillero.this.dispose();
+			}
 		});
 		
 		cancelar.addActionListener((e) -> {
@@ -81,7 +86,7 @@ public class VistaAltaTaquillero extends VistaDefault {
 	@Override
 	public void actualizar(Evento evento, Object datos) {
 		if(evento == Evento.RES_OK) {
-			ViewUtils.createDialogMessage(Messages.EX_TAQUILLERO_ANYADIDO_CORRECT + '\n' + " Id: "+ (int)datos);
+			ViewUtils.createDialogMessage(Messages.EX_TAQUILLERO_ANYADIDO_CORRECT + '\n' + "Id: "+ (int)datos);
 		}
 		else if(evento == Evento.RES_KO) {
 			ViewUtils.createErrorDialogMessage(Messages.EX_TAQUILLERO_ANYADIDO_ERROR + '\n' + Messages.ERROR.formatted(((Exception) datos).getMessage()));

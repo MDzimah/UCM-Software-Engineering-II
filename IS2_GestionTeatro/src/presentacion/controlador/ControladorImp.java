@@ -8,12 +8,14 @@ import exceptions.AlreadyClienteException;
 import exceptions.BBDDReadException;
 import exceptions.BBDDWriteException;
 import exceptions.DuplicateElementException;
+import exceptions.InvalidFacturaException;
 import exceptions.InvalidFields;
 import exceptions.UnknownClienteException;
 import exceptions.UnknownMiemCompTeaException;
 import exceptions.UnknownObraException;
 import exceptions.UnknownPaseException;
 import exceptions.UnknownTaquilleroException;
+import exceptions.VoidFacturaException;
 import misc.Messages;
 import negocio.cliente.SACliente;
 import negocio.cliente.TCliente;
@@ -51,7 +53,7 @@ public class ControladorImp extends Controlador {
 				int idFac = saFac.crearFactura(tDV);
 				
 				if (idFac != -1) FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_OK, idFac);
-				else FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_KO, null);
+				else FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_KO, new InvalidFacturaException());
 			}
 			catch (BBDDReadException | BBDDWriteException | UnknownClienteException | UnknownTaquilleroException e) {
 				 FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_KO, e);
@@ -79,7 +81,7 @@ public class ControladorImp extends Controlador {
 				Collection<TFactura> allFacturas = saFac.allFacturas();
 				
 				if (allFacturas != null && !allFacturas.isEmpty()) FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_OK, allFacturas); 
-				else FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_KO, null); 
+				else FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_KO, new VoidFacturaException()); 
 			}
 			catch(BBDDReadException e) {
 				 FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_KO, e);
@@ -92,7 +94,7 @@ public class ControladorImp extends Controlador {
 				Collection<TFactura> allFacturasPorCliente = saFac.allFacturasPorCliente((int) datos);
 				
 				if (allFacturasPorCliente != null && !allFacturasPorCliente.isEmpty()) FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_OK, allFacturasPorCliente);
-				else FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_KO, (int)datos);
+				else FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_KO, new VoidFacturaException());
 			}
 			catch(BBDDReadException e) {
 				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_KO, e);
@@ -197,30 +199,32 @@ public class ControladorImp extends Controlador {
 			try {
 				SATaquillero saTaq = FactoriaAbstractaNegocio.getInstance().crearSATaquillero();
 				int idTaq = saTaq.create((TTaquillero) datos);
-				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_OK, idTaq);
-			} catch (Exception e) {
-				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_KO, e);
-			}
-			break;
-		}
-		case BAJA_TAQUILLERO: {
-			try {
-				SATaquillero saTaq = FactoriaAbstractaNegocio.getInstance().crearSATaquillero();
-				int idDelete = (int) datos;
-				int idTaq = saTaq.delete(idDelete);
-				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_OK, idTaq);
+				if(idTaq >= 0) FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_OK, idTaq);
+				else FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_KO, new DuplicateElementException());
 			} catch (Exception e) {
 				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_KO, e);
 			}
 			
 			break;
 		}
+		case BAJA_TAQUILLERO: {
+			try {
+				SATaquillero saTaq = FactoriaAbstractaNegocio.getInstance().crearSATaquillero();
+				int idTaq = saTaq.delete((int)datos);
+				if(idTaq >= 0) FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_OK, idTaq);
+				else FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_KO, new UnknownTaquilleroException());
+			} catch (Exception e) {
+				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_KO, e);
+			}
+	
+			break;
+		}
 		case BUSCAR_TAQUILLERO: {
 			try {
 				SATaquillero saTaq = FactoriaAbstractaNegocio.getInstance().crearSATaquillero();
-				int idBuscar = (int) datos;
-				TTaquillero tTaq = saTaq.read(idBuscar);
-				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_OK, tTaq);
+				TTaquillero tTaq = saTaq.read((int)datos);
+				if(tTaq != null) FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_OK, tTaq);
+				else FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_KO, new UnknownTaquilleroException());
 			} catch (Exception e) {
 				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_KO, e);
 			}
@@ -232,7 +236,8 @@ public class ControladorImp extends Controlador {
 				SATaquillero saTaq = FactoriaAbstractaNegocio.getInstance().crearSATaquillero();
 				String dniBuscar = (String) datos;
 				TTaquillero tTaq = saTaq.readByDNI(dniBuscar);
-				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_OK, tTaq);
+				if(tTaq != null) FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_OK, tTaq);
+				else FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_KO, new UnknownTaquilleroException());
 			} catch (Exception e) {
 				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_KO, e);
 			}
@@ -243,8 +248,9 @@ public class ControladorImp extends Controlador {
 			try {
 				SATaquillero saTaq = FactoriaAbstractaNegocio.getInstance().crearSATaquillero();
 				Collection<TTaquillero> listaTaq = saTaq.readAll();
-				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_OK, listaTaq);
-				
+				if(!(listaTaq == null || listaTaq.isEmpty()))
+					FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_OK, listaTaq);
+				else FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_KO, new UnknownTaquilleroException());
 			} catch (Exception e) {
 				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_KO, e);
 			}
@@ -256,6 +262,7 @@ public class ControladorImp extends Controlador {
 				SATaquillero saTaq = FactoriaAbstractaNegocio.getInstance().crearSATaquillero();
 				int idBuscar = (int) datos;
 				TTaquillero tTaq = saTaq.read(idBuscar);
+				if(tTaq == null) throw new UnknownTaquilleroException();
 				VistaActualizarTaquillero_1 vistaActTaq = (VistaActualizarTaquillero_1) FactoriaAbstractaPresentacion.getInstance().createVista(Evento.ACTUALIZAR_TAQUILLERO_1);
 				vistaActTaq.cargarTaquillero(tTaq);
 				vistaActTaq.setVisible(true);
@@ -270,7 +277,8 @@ public class ControladorImp extends Controlador {
 				SATaquillero saTaq = FactoriaAbstractaNegocio.getInstance().crearSATaquillero();
 				TTaquillero tTaq = (TTaquillero) datos;
 				int idTaq = saTaq.update(tTaq);
-				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_OK, idTaq);
+				if(idTaq >= 0) FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_OK, idTaq);
+				else FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_KO, new UnknownTaquilleroException());
 			} catch (Exception e) {
 				FactoriaAbstractaPresentacion.getInstance().createVista(evento).actualizar(Evento.RES_KO, e);
 			}

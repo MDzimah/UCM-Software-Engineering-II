@@ -14,9 +14,7 @@ import javax.swing.SwingUtilities;
 
 import exceptions.InvalidFields;
 import misc.Pair;
-import negocio.cliente.TClienteNormal;
 import negocio.cliente.TClienteVIP;
-import negocio.cliente.TipoCliente;
 import negocio.cliente.VIPEnum;
 import presentacion.Evento;
 import presentacion.IGUI;

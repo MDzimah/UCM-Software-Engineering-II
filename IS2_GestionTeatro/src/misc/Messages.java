@@ -26,13 +26,13 @@ public class Messages {
 	public static final String COMPANIA_MIEMBRO_BORRADO = Messages.SHP.formatted("desvinculado la compañia y el miembro");
 	public static final String COMPANIA_MIEMBRO_ANYADIDO = Messages.SHP.formatted("vinculado la compañia y el miembro");
 	//Obra
-	public static final String EX_OBRA_ANYADIDA_CORRECT = Messages.SHP.formatted("registrado la obra ");
-	public static final String EX_OBRA_BORRADA_CORRECT = Messages.SHP.formatted("borrado la obra ");
-	public static final String EX_OBRA_ACTUALIZADA_CORRECT = Messages.SHP.formatted("actualizado la obra ");
+	public static final String EX_OBRA_ANYADIDA_CORRECT = Messages.SHP.formatted("registrado la obra");
+	public static final String EX_OBRA_BORRADA_CORRECT = Messages.SHP.formatted("borrado la obra");
+	public static final String EX_OBRA_ACTUALIZADA_CORRECT = Messages.SHP.formatted("actualizado la obra");
 	//Taquillero
-	public static final String EX_TAQUILLERO_ANYADIDO_CORRECT = Messages.SHP.formatted("registrado el taquillero ");
-	public static final String EX_TAQUILLERO_BORRADO_CORRECT = Messages.SHP.formatted("borrado el taquillero ");
-	public static final String EX_TAQUILLERO_ACTUALIZADO_CORRECT = Messages.SHP.formatted("actualizado el taquillero ");
+	public static final String EX_TAQUILLERO_ANYADIDO_CORRECT = Messages.SHP.formatted("registrado el taquillero");
+	public static final String EX_TAQUILLERO_BORRADO_CORRECT = Messages.SHP.formatted("borrado el taquillero");
+	public static final String EX_TAQUILLERO_ACTUALIZADO_CORRECT = Messages.SHP.formatted("actualizado el taquillero");
 	
 	//Ops. fracasadas
 	private static final String NSHP = "No se ha podido %s";
@@ -116,6 +116,8 @@ public class Messages {
 	public static final String EXC_EVENTO_TABLA = "Tipo de tabla incompatible con la operacion o con los datos";
 	public static final String EXC_ELEM_DUPLICADO = "Elemento duplicado";
 	public static final String EXC_ALR_CLI = "El cliente ya existe";
+	public static final String EXC_INVALID_FACTURA = "Ningun pase es valido";
+	public static final String EXC_VOID_FACTURA = "No existen facturas para mostrar";
 
 	//BBDD
 	public static final String PATH_TO_BBDD = "resources/BBDD/%s";

@@ -31,7 +31,7 @@ public class VistaBajaTaquillero extends VistaDefault {
 		//iniciar componentes
 		this.setTitle("Baja taquillero");
 		l_id = new JLabel("Id: ");
-		id = ViewUtils.integerSpinner(1, 1, Integer.MAX_VALUE, 1);
+		id = ViewUtils.integerSpinner(0, 0, Integer.MAX_VALUE, 1);
 		aceptar = new JButton("Aceptar");
 		cancelar = new JButton("Cancelar");
 		
