@@ -62,5 +62,12 @@
         "coste": 320,
         "activo": true
     },
-    "lastId": 8
+    "lastId": 9,
+    "9": {
+        "idCompTea": 9,
+        "compania teatral": "LosEstadisticosSuficientes",
+        "direccion": "parametro theta",
+        "coste": 10,
+        "activo": true
+    }
 }
