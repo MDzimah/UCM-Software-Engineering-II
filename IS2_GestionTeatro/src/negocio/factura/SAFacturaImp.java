@@ -63,8 +63,8 @@ public class SAFacturaImp implements SAFactura {
 					tDv.getIdTaquillero(), 
 					true, 
 					LocalDateTime.now(),
-					subTotal,
-					importeFinal);
+					importeFinal,
+					subTotal);
 			DAOFactura daoFac = FactoriaAbstractaIntegracion.getInstance().crearDAOFactura();
 			//La guardamos en la BD
 			idFacNueva = daoFac.create(tFacFinal); 
