@@ -1,40 +1,222 @@
 {
-    "lineas": {
-        "1": {
-            "idFactura": 1,
-            "cantidad": 15,
-            "precioVenta": 495,
-            "idPase": 0,
-            "activo": false
-        },
-        "2": {
-            "idFactura": 2,
-            "cantidad": 1,
-            "precioVenta": 33,
-            "idPase": 0,
-            "activo": false
-        },
-        "3": {
-            "idFactura": 0,
-            "cantidad": 1,
-            "precioVenta": 33,
-            "idPase": 0,
-            "activo": false
-        },
-        "4": {
-            "idFactura": 1,
-            "cantidad": 1,
-            "precioVenta": 8,
-            "idPase": 0,
-            "activo": false
-        },
-        "5": {
-            "idFactura": 2,
-            "cantidad": 1,
-            "precioVenta": 8,
-            "idPase": 0,
-            "activo": false
-        }
+  "lastId": 30,
+  "lineas": {
+    "0": {
+      "idFactura": 0,
+      "idPase": 7,
+      "cantidad": 5,
+      "precioVenta": 80,
+      "activo": true
     },
-    "lastId": 5
+    "1": {
+      "idFactura": 0,
+      "idPase": 4,
+      "cantidad": 5,
+      "precioVenta": 50,
+      "activo": true
+    },
+    "2": {
+      "idFactura": 0,
+      "idPase": 2,
+      "cantidad": 1,
+      "precioVenta": 30,
+      "activo": true
+    },
+    "3": {
+      "idFactura": 1,
+      "idPase": 6,
+      "cantidad": 3,
+      "precioVenta": 70,
+      "activo": true
+    },
+    "4": {
+      "idFactura": 1,
+      "idPase": 6,
+      "cantidad": 2,
+      "precioVenta": 70,
+      "activo": true
+    },
+    "5": {
+      "idFactura": 2,
+      "idPase": 1,
+      "cantidad": 4,
+      "precioVenta": 20,
+      "activo": true
+    },
+    "6": {
+      "idFactura": 2,
+      "idPase": 2,
+      "cantidad": 5,
+      "precioVenta": 30,
+      "activo": true
+    },
+    "7": {
+      "idFactura": 3,
+      "idPase": 1,
+      "cantidad": 4,
+      "precioVenta": 20,
+      "activo": true
+    },
+    "8": {
+      "idFactura": 3,
+      "idPase": 2,
+      "cantidad": 1,
+      "precioVenta": 30,
+      "activo": true
+    },
+    "9": {
+      "idFactura": 3,
+      "idPase": 7,
+      "cantidad": 1,
+      "precioVenta": 80,
+      "activo": true
+    },
+    "10": {
+      "idFactura": 4,
+      "idPase": 0,
+      "cantidad": 2,
+      "precioVenta": 10,
+      "activo": true
+    },
+    "11": {
+      "idFactura": 4,
+      "idPase": 9,
+      "cantidad": 2,
+      "precioVenta": 100,
+      "activo": true
+    },
+    "12": {
+      "idFactura": 4,
+      "idPase": 9,
+      "cantidad": 4,
+      "precioVenta": 100,
+      "activo": true
+    },
+    "13": {
+      "idFactura": 5,
+      "idPase": 6,
+      "cantidad": 1,
+      "precioVenta": 70,
+      "activo": true
+    },
+    "14": {
+      "idFactura": 5,
+      "idPase": 3,
+      "cantidad": 5,
+      "precioVenta": 40,
+      "activo": true
+    },
+    "15": {
+      "idFactura": 5,
+      "idPase": 9,
+      "cantidad": 5,
+      "precioVenta": 100,
+      "activo": true
+    },
+    "16": {
+      "idFactura": 5,
+      "idPase": 7,
+      "cantidad": 1,
+      "precioVenta": 80,
+      "activo": true
+    },
+    "17": {
+      "idFactura": 6,
+      "idPase": 5,
+      "cantidad": 2,
+      "precioVenta": 60,
+      "activo": true
+    },
+    "18": {
+      "idFactura": 6,
+      "idPase": 0,
+      "cantidad": 3,
+      "precioVenta": 10,
+      "activo": true
+    },
+    "19": {
+      "idFactura": 6,
+      "idPase": 7,
+      "cantidad": 2,
+      "precioVenta": 80,
+      "activo": true
+    },
+    "20": {
+      "idFactura": 7,
+      "idPase": 7,
+      "cantidad": 5,
+      "precioVenta": 80,
+      "activo": true
+    },
+    "21": {
+      "idFactura": 7,
+      "idPase": 3,
+      "cantidad": 1,
+      "precioVenta": 40,
+      "activo": true
+    },
+    "22": {
+      "idFactura": 7,
+      "idPase": 0,
+      "cantidad": 5,
+      "precioVenta": 10,
+      "activo": true
+    },
+    "23": {
+      "idFactura": 8,
+      "idPase": 4,
+      "cantidad": 5,
+      "precioVenta": 50,
+      "activo": true
+    },
+    "24": {
+      "idFactura": 8,
+      "idPase": 2,
+      "cantidad": 3,
+      "precioVenta": 30,
+      "activo": true
+    },
+    "25": {
+      "idFactura": 8,
+      "idPase": 0,
+      "cantidad": 2,
+      "precioVenta": 10,
+      "activo": true
+    },
+    "26": {
+      "idFactura": 8,
+      "idPase": 1,
+      "cantidad": 5,
+      "precioVenta": 20,
+      "activo": true
+    },
+    "27": {
+      "idFactura": 9,
+      "idPase": 3,
+      "cantidad": 4,
+      "precioVenta": 40,
+      "activo": true
+    },
+    "28": {
+      "idFactura": 9,
+      "idPase": 2,
+      "cantidad": 3,
+      "precioVenta": 30,
+      "activo": true
+    },
+    "29": {
+      "idFactura": 9,
+      "idPase": 3,
+      "cantidad": 1,
+      "precioVenta": 40,
+      "activo": true
+    },
+    "30": {
+      "idFactura": 9,
+      "idPase": 2,
+      "cantidad": 1,
+      "precioVenta": 30,
+      "activo": true
+    }
+  }
 }

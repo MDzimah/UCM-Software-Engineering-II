@@ -1,27 +1,84 @@
+
 {
     "0": {
         "IdObra": 0,
-        "genero": "g",
-        "titulo": "ta",
-        "autor": "a",
-        "sinopsis": "",
-        "activo": false
+        "genero": "Drama",
+        "titulo": "La casa de Bernarda Alba",
+        "autor": "Federico García Lorca",
+        "sinopsis": "Represión, autoridad y libertad femenina",
+        "activo": true
     },
     "1": {
         "IdObra": 1,
-        "genero": "as",
-        "titulo": "b",
-        "autor": "aas",
-        "sinopsis": "",
+        "genero": "Tragedia",
+        "titulo": "Romeo y Julieta",
+        "autor": "William Shakespeare",
+        "sinopsis": "Amor imposible y conflicto entre familias",
         "activo": true
     },
     "2": {
         "IdObra": 2,
-        "genero": "a",
-        "titulo": "a",
-        "autor": "a",
-        "sinopsis": "a",
+        "genero": "Tragedia",
+        "titulo": "Hamlet",
+        "autor": "William Shakespeare",
+        "sinopsis": "Venganza, traición y locura",
         "activo": true
     },
-    "LastKey": 2
+    "LastKey": 9,
+    "3": {
+        "IdObra": 3,
+        "genero": "Tragedia",
+        "titulo": "Bodas de sangre",
+        "autor": "Federico García Lorca",
+        "sinopsis": "Amor, destino y muerte",
+        "activo": true
+    },
+    "4": {
+        "IdObra": 4,
+        "genero": "Teatro del absurdo",
+        "titulo": "Esperando a Godot",
+        "autor": "Samuel Beckett",
+        "sinopsis": "La espera, el vacío existencial, la rutina",
+        "activo": true
+    },
+    "5": {
+        "IdObra": 5,
+        "genero": "Tragedia griega",
+        "titulo": "Edipo Rey",
+        "autor": "Sófocles",
+        "sinopsis": "Destino inevitable y búsqueda de la verdad",
+        "activo": true
+    },
+    "6": {
+        "IdObra": 6,
+        "genero": "Tragedia griega",
+        "titulo": "Antígona",
+        "autor": "Sófocles",
+        "sinopsis": "Conflicto entre ley divina y ley humana",
+        "activo": true
+    },
+    "7": {
+        "IdObra": 7,
+        "genero": "Comedia neoclásica",
+        "titulo": "El sí de las niñas",
+        "autor": "Leandro Fernández de Moratín",
+        "sinopsis": "Libertad de elección en el matrimonio",
+        "activo": true
+    },
+    "8": {
+        "IdObra": 8,
+        "genero": "Drama social",
+        "titulo": "Un enemigo del pueblo",
+        "autor": "Henrik Ibsen",
+        "sinopsis": "La verdad contra la mayoría y la corrupción",
+        "activo": true
+    },
+    "9": {
+        "IdObra": 9,
+        "genero": "Drama psicológico",
+        "titulo": "El zoo de cristal",
+        "autor": "Tennessee Williams",
+        "sinopsis": "Fragilidad humana, memoria y frustración familiar",
+        "activo": true
+    }
 }

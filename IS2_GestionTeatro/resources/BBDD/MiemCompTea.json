@@ -1,64 +1,104 @@
 {
-<<<<<<< HEAD
-    "lastId": 5,
-=======
-    "lastId": 3,
->>>>>>> branch 'main' of https://github.com/MDzimah/UCM-Software-Engineering-II.git
+    "lastId": 9,
     "miembros de la compania teatral": {
         "0": {
             "idMiemComp": 0,
-            "apellido": "w",
+            "apellido": "Martin",
             "genero": "HOMBRE",
-            "nombre": "w",
-            "edad": 0,
-            "DNI": "w",
-            "email": "w",
+            "nombre": "Marcos",
+            "edad": 23,
+            "DNI": "00",
+            "email": "23",
             "activo": true
         },
         "1": {
             "idMiemComp": 1,
-            "apellido": "E",
-            "genero": "HOMBRE",
-            "nombre": "aaaa3",
-            "edad": 0,
-            "DNI": "E",
-            "email": "E",
+            "apellido": "Fernandez",
+            "genero": "MUJER",
+            "nombre": "Maria",
+            "edad": 59,
+            "DNI": "01",
+            "email": "ert",
             "activo": true
         },
         "2": {
             "idMiemComp": 2,
-            "apellido": "a",
-            "genero": "HOMBRE",
-            "nombre": "a",
-<<<<<<< HEAD
-            "edad": 0,
-            "DNI": "a",
-            "email": "",
-            "activo": false
+            "apellido": "Perez",
+            "genero": "MUJER",
+            "nombre": "Laura",
+            "edad": 34,
+            "DNI": "02",
+            "email": "ret",
+            "activo": true
         },
         "3": {
             "idMiemComp": 3,
-            "apellido": "a",
+            "apellido": "Ortega",
             "genero": "HOMBRE",
-            "nombre": "a",
-            "edad": 0,
-            "DNI": "d",
-            "email": "a",
-            "activo": false
+            "nombre": "Mario",
+            "edad": 61,
+            "DNI": "03",
+            "email": "43",
+            "activo": true
         },
         "4": {
             "idMiemComp": 4,
-            "apellido": "a",
+            "apellido": "Barbero",
             "genero": "HOMBRE",
-            "nombre": "a",
-            "edad": 0,
-            "DNI": "a",
-            "email": "a",
-=======
-            "edad": 24,
-            "DNI": "a",
-            "email": "e",
->>>>>>> branch 'main' of https://github.com/MDzimah/UCM-Software-Engineering-II.git
+            "nombre": "Mateo",
+            "edad": 30,
+            "DNI": "04",
+            "email": "er",
+            "activo": true
+        },
+        "5": {
+            "idMiemComp": 5,
+            "apellido": "Cabello",
+            "genero": "MUJER",
+            "nombre": "Lucia",
+            "edad": 17,
+            "DNI": "05",
+            "email": "ret",
+            "activo": true
+        },
+        "6": {
+            "idMiemComp": 6,
+            "apellido": "Martinez",
+            "genero": "MUJER",
+            "nombre": "Andrea",
+            "edad": 49,
+            "DNI": "06",
+            "email": "ret",
+            "activo": true
+        },
+        "7": {
+            "idMiemComp": 7,
+            "apellido": "Rodriguez",
+            "genero": "HOMBRE",
+            "nombre": "Ivan",
+            "edad": 14,
+            "DNI": "07",
+            "email": "trty",
+            "activo": true
+        },
+        "8": {
+            "idMiemComp": 8,
+            "apellido": "Salazar",
+            "genero": "HOMBRE",
+            "nombre": "Jorge",
+            "edad": 38,
+            "DNI": "08",
+            "email": "re",
+            "activo": true
+        },
+        "9": {
+            "idMiemComp": 9,
+            "apellido": "Carbonero",
+            "genero": "HOMBRE",
+            "nombre": "Rodrigo",
+            "edad": 56,
+            "DNI": "09",
+            "email": "ret",
             "activo": true
         }
     }

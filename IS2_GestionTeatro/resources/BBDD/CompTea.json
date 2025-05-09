@@ -1,30 +1,73 @@
 {
     "0": {
         "idCompTea": 0,
-        "compania teatral": "fe",
-        "direccion": "er",
-        "coste": 30,
+        "compania teatral": "LosChicletsPro",
+        "direccion": "Avda de America 2",
+        "coste": 32121,
         "activo": true
     },
     "1": {
         "idCompTea": 1,
-        "compania teatral": "ew",
-        "direccion": "ew",
-        "coste": 20,
+        "compania teatral": "LosMiserables",
+        "direccion": "Calle Alcalá2",
+        "coste": 10000,
         "activo": true
     },
     "2": {
         "idCompTea": 2,
-<<<<<<< HEAD
-        "compania teatral": "fdfs",
-        "direccion": "dfsfdsdfs",
-        "coste": 5,
-=======
-        "compania teatral": "a",
-        "direccion": "a",
-        "coste": 3,
->>>>>>> refs/heads/Factura
+        "compania teatral": "TitanFall",
+        "direccion": "Avda Guadarrama 3",
+        "coste": 200,
         "activo": true
     },
-    "lastId": 2
+    "3": {
+        "idCompTea": 3,
+        "compania teatral": "LosWicked",
+        "direccion": "Algun lugar de Oz",
+        "coste": 10000,
+        "activo": true
+    },
+    "4": {
+        "idCompTea": 4,
+        "compania teatral": "Los Buñuel",
+        "direccion": "Paseo del Prado 5",
+        "coste": 1000,
+        "activo": true
+    },
+    "5": {
+        "idCompTea": 5,
+        "compania teatral": "LosCatalanets",
+        "direccion": "Passeig de Gracia 36",
+        "coste": 20000,
+        "activo": true
+    },
+    "6": {
+        "idCompTea": 6,
+        "compania teatral": "Capcom",
+        "direccion": "Bakers Street 24",
+        "coste": 23130,
+        "activo": true
+    },
+    "7": {
+        "idCompTea": 7,
+        "compania teatral": "Los Misteriosos",
+        "direccion": "desconocida",
+        "coste": 13210,
+        "activo": true
+    },
+    "8": {
+        "idCompTea": 8,
+        "compania teatral": "LosCastizos",
+        "direccion": "Calle Alcala 25",
+        "coste": 320,
+        "activo": true
+    },
+    "lastId": 9,
+    "9": {
+        "idCompTea": 9,
+        "compania teatral": "LosEstadisticosSuficientes",
+        "direccion": "parametro theta",
+        "coste": 10,
+        "activo": true
+    }
 }

@@ -1,29 +1,85 @@
 {
-    "facturas": {
-        "0": {
-            "fecha": "2025-05-08T17:30:41",
-            "idCliente": 1,
-            "subtotal": 33,
-            "idTaquillero": 1,
-            "importe": 16.5,
-            "activo": true
-        },
-        "1": {
-            "fecha": "2025-05-08T18:04:32",
-            "idCliente": 0,
-            "subtotal": 8,
-            "idTaquillero": 0,
-            "importe": 4,
-            "activo": true
-        },
-        "2": {
-            "fecha": "2025-05-08T18:06:42",
-            "idCliente": 0,
-            "subtotal": 8,
-            "idTaquillero": 0,
-            "importe": 4,
-            "activo": true
-        }
+  "lastId": 9,
+  "facturas": {
+    "0": {
+      "idCliente": 7,
+      "idTaquillero": 0,
+      "activo": true,
+      "fecha": "2023-02-25T00:11:40",
+      "importe": 680,
+      "subtotal": 206.48
     },
-    "lastId": 2
+    "1": {
+      "idCliente": 6,
+      "idTaquillero": 0,
+      "activo": true,
+      "fecha": "2023-10-19T11:00:16",
+      "importe": 350,
+      "subtotal": 106.28
+    },
+    "2": {
+      "idCliente": 4,
+      "idTaquillero": 5,
+      "activo": true,
+      "fecha": "2024-01-24T06:20:38",
+      "importe": 230,
+      "subtotal": 230.0
+    },
+    "3": {
+      "idCliente": 0,
+      "idTaquillero": 5,
+      "activo": true,
+      "fecha": "2023-01-16T05:46:15",
+      "importe": 190,
+      "subtotal": 190.0
+    },
+    "4": {
+      "idCliente": 3,
+      "idTaquillero": 5,
+      "activo": true,
+      "fecha": "2025-03-01T10:26:32",
+      "importe": 620,
+      "subtotal": 366.36
+    },
+    "5": {
+      "idCliente": 1,
+      "idTaquillero": 7,
+      "activo": true,
+      "fecha": "2020-11-14T12:06:32",
+      "importe": 850,
+      "subtotal": 566.67
+    },
+    "6": {
+      "idCliente": 9,
+      "idTaquillero": 7,
+      "activo": true,
+      "fecha": "2020-07-12T07:02:39",
+      "importe": 310,
+      "subtotal": 155.0
+    },
+    "7": {
+      "idCliente": 2,
+      "idTaquillero": 7,
+      "activo": true,
+      "fecha": "2020-05-26T20:12:59",
+      "importe": 490,
+      "subtotal": 408.33
+    },
+    "8": {
+      "idCliente": 8,
+      "idTaquillero": 9,
+      "activo": true,
+      "fecha": "2020-07-04T20:35:11",
+      "importe": 460,
+      "subtotal": 102.68
+    },
+    "9": {
+      "idCliente": 5,
+      "idTaquillero": 9,
+      "activo": true,
+      "fecha": "2021-07-13T17:25:53",
+      "importe": 320,
+      "subtotal": 160.0
+    }
+  }
 }

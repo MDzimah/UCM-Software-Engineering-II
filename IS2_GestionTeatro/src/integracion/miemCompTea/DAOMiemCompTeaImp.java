@@ -31,8 +31,8 @@ public class DAOMiemCompTeaImp implements DAOMiemCompTea {
 		
 		JSONObject miembrosComp = BDMiemComp.getJSONObject(Messages.KEY_miembCompTea);
 		
-		int newId = BDMiemComp.getInt(Messages.KEY_lastId);
-		BDMiemComp.put(Messages.KEY_lastId, newId + 1);
+		int newId = BDMiemComp.getInt(Messages.KEY_lastId) + 1;
+		BDMiemComp.put(Messages.KEY_lastId, newId);
 		
 		JSONObject nuevoMiemComp = new JSONObject();			
 		nuevoMiemComp.put(Messages.KEY_idMiemComp, newId);
