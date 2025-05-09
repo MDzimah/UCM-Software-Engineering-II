@@ -42,12 +42,12 @@ public class DAOCompT_MiemCompTImp implements DAOCompT_MiemCompT{
 	}
 	
 	@Override
-	public int delete_relacion(int idComp, int idMiem) throws BBDDReadException, BBDDWriteException {
+	public int delete_relacion(TCompT_MiemCompT tCompT_MieCT) throws BBDDReadException, BBDDWriteException {
 		if (!OpsBBDD.isEmpty(Messages.BDCT_MCT)) {
 			JSONObject BDRel = OpsBBDD.read(Messages.BDCT_MCT);
 			JSONObject relCom_Miem = BDRel.getJSONObject(Messages.KEY_relComp_Miem);
 			
-			int idRel = this.existeRelacion(idComp,idMiem);
+			int idRel = this.existeRelacion(tCompT_MieCT.getIdCompania(), tCompT_MieCT.getIdMiembroComp());
 			if(idRel != -1) {
 				relCom_Miem.remove(Integer.toString(idRel));
 				OpsBBDD.write(BDRel, Messages.BDCT_MCT);

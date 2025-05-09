@@ -8,7 +8,7 @@ import negocio.miemCompTea.TCompT_MiemCompT;
 
 public interface DAOCompT_MiemCompT {
 	public int create(TCompT_MiemCompT tCompT_MieCT) throws BBDDReadException, BBDDWriteException;
-	public int delete_relacion(int idComp, int idMiem) throws BBDDReadException, BBDDWriteException;
+	public int delete_relacion(TCompT_MiemCompT tCompT_MieCT) throws BBDDReadException, BBDDWriteException;
 	public int delete_compania(int idComp) throws BBDDReadException, BBDDWriteException;
 	public int delete_miembro(int idMiem) throws BBDDReadException, BBDDWriteException;
 	public Collection<TCompT_MiemCompT> read_compania(int idComp) throws BBDDReadException;
