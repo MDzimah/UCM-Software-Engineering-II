@@ -84,7 +84,7 @@ public class VistaAltaPase extends VistaDefault {
 				Instant instant = selectedDate.toInstant();
 				ZoneId zoneId = ZoneId.systemDefault(); 
 				localDateTime = instant.atZone(zoneId).toLocalDateTime();
-				if (stock < 0 || precio < 0) ViewUtils.createErrorDialogMessage(Messages.EXC_CAMPOS_INCORRECTOS);
+				if (stock <= 0 || precio < 0) ViewUtils.createErrorDialogMessage(Messages.EXC_CAMPOS_INCORRECTOS);
 				else {
 					TPase tPase = new TPase(-1, idCompTea, idObra, true, localDateTime, stock, precio);
 					Controlador.getInstance().accion(Evento.ALTA_PASE, tPase);

@@ -1,0 +1,95 @@
+{
+    "pases": {
+        "0": {
+            "idCompTea": 0,
+            "precioPase": 10,
+            "fecha": "2025-05-10T17:26:07.325",
+            "IdObra": 0,
+            "stock": 10,
+            "idPase": 0,
+            "activo": true
+        },
+        "1": {
+            "idCompTea": 1,
+            "precioPase": 20,
+            "fecha": "2025-05-11T17:27:18.195",
+            "IdObra": 1,
+            "stock": 20,
+            "idPase": 1,
+            "activo": true
+        },
+        "2": {
+            "idCompTea": 2,
+            "precioPase": 30,
+            "fecha": "2025-05-12T17:28:35.711",
+            "IdObra": 2,
+            "stock": 30,
+            "idPase": 2,
+            "activo": true
+        },
+        "3": {
+            "idCompTea": 3,
+            "precioPase": 40,
+            "fecha": "2025-05-13T17:28:49.021",
+            "IdObra": 3,
+            "stock": 40,
+            "idPase": 3,
+            "activo": true
+        },
+        "4": {
+            "idCompTea": 4,
+            "precioPase": 50,
+            "fecha": "2025-05-15T17:29:09.590",
+            "IdObra": 4,
+            "stock": 50,
+            "idPase": 4,
+            "activo": true
+        },
+        "5": {
+            "idCompTea": 5,
+            "precioPase": 60,
+            "fecha": "2025-05-16T17:29:25.071",
+            "IdObra": 5,
+            "stock": 60,
+            "idPase": 5,
+            "activo": true
+        },
+        "6": {
+            "idCompTea": 6,
+            "precioPase": 70,
+            "fecha": "2025-05-17T17:29:39.340",
+            "IdObra": 6,
+            "stock": 70,
+            "idPase": 6,
+            "activo": true
+        },
+        "7": {
+            "idCompTea": 7,
+            "precioPase": 80,
+            "fecha": "2025-05-18T17:29:53.943",
+            "IdObra": 7,
+            "stock": 80,
+            "idPase": 7,
+            "activo": true
+        },
+        "8": {
+            "idCompTea": 8,
+            "precioPase": 90,
+            "fecha": "2025-05-19T17:30:11.158",
+            "IdObra": 8,
+            "stock": 90,
+            "idPase": 8,
+            "activo": true
+        },
+        "9": {
+            "idCompTea": 4,
+            "precioPase": 100,
+            "fecha": "2025-05-28T17:30:25.063",
+            "IdObra": 4,
+            "stock": 100,
+            "idPase": 9,
+            "activo": true
+        }
+    },
+    "lastId": 9
+}
