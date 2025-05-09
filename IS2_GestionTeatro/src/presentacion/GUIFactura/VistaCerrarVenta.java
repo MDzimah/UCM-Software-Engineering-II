@@ -75,7 +75,5 @@ public class VistaCerrarVenta extends VistaDefault {
 			else error = Messages.CARRITO_VACIO;
 			ViewUtils.createErrorDialogMessage(Messages.X_VENTA_CERRADA + ' ' + Messages.MOTIVO.formatted(error));
 		}
-		
-		AbrirVenta.enableButton();
 	}
 }

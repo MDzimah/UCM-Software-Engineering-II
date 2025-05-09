@@ -182,7 +182,6 @@ public class MainWindow extends JFrame {
         		carr.setIcon(ic);
         		carr.setContentAreaFilled(false);
 
-        		AbrirVenta.setAbrirVentaButton(abrirVenta);
         		AbrirVenta.setCarritoButton(carr);
         		AbrirVenta.updateCarritoCountButton();
         		carr.setFont(ViewUtils.fontCountCarrito());
