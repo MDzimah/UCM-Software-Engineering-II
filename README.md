@@ -1,5 +1,7 @@
 # SWE 2 Project: Theatre Management Application
 
+![Teatret Opening Screen](IS2_GestionTeatro/resources/imagenes/TeatretOpeningScreen.png)
+
 ## Project Description
 A desktop application for managing theatre operations, including patron records, show scheduling, ticket sales, and staff management. The system is implemented using a strict 3-layer architecture, demonstrating key object-oriented and architectural design principles.
 
